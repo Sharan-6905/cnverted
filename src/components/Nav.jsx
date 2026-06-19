@@ -31,7 +31,7 @@ export default function Nav() {
       }}>CNVRTED</span>
 
       <div style={{ display: 'flex', gap: 36, fontSize: 14, fontWeight: 500 }}>
-        {[['Product', '#'], ['Signals', '#'], ['Pricing', '/pricing.html'], ['About', '/about.html']].map(([item, href]) => (
+        {[['Pricing', '/pricing.html'], ['About', '/about.html']].map(([item, href]) => (
           <a
             key={item}
             href={href}

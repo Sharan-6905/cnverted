@@ -1,6 +1,5 @@
 import Nav from './components/Nav'
 import Hero from './components/Hero'
-import TrustBar from './components/TrustBar'
 import ScrollStory from './components/ScrollStory'
 import Comparison from './components/Comparison'
 import LiveFeed from './components/LiveFeed'
@@ -16,7 +15,6 @@ export default function App() {
       <Nav />
       <main style={{ paddingTop: 56 }}>
         <Hero />
-        <TrustBar />
         <ScrollStory />
         <Comparison />
         <LiveFeed />

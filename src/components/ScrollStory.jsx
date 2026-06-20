@@ -337,15 +337,6 @@ export default function ScrollStory() {
             </div>
           ))}
         </div>
-        <button style={{
-          background: 'var(--text)',
-          color: 'var(--bg)',
-          fontSize: 14,
-          fontWeight: 500,
-          padding: '14px 36px',
-          borderRadius: 0,
-          letterSpacing: '0.01em',
-        }}>Book Demo</button>
       </motion.div>
     </section>
   )

@@ -190,7 +190,7 @@ export default function Hero() {
 
           {/* CTA */}
           <div>
-            <a href="https://app.cnvrted.com" style={{
+            <a href="https://app.cnvrted.com/" target="_blank" rel="noopener noreferrer" style={{
               background: 'var(--text)',
               color: 'var(--bg)',
               fontSize: 14,

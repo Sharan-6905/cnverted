@@ -190,7 +190,7 @@ export default function Hero() {
 
           {/* CTA */}
           <div>
-            <button style={{
+            <a href="https://app.cnvrted.com" style={{
               background: 'var(--text)',
               color: 'var(--bg)',
               fontSize: 14,
@@ -198,9 +198,11 @@ export default function Hero() {
               padding: '13px 28px',
               borderRadius: 0,
               letterSpacing: '0.01em',
+              textDecoration: 'none',
+              display: 'inline-block',
             }}>
               Watch Live Signals
-            </button>
+            </a>
           </div>
 
           {/* Stats */}

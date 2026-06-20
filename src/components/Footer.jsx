@@ -9,7 +9,7 @@ export default function Footer() {
         justifyContent: 'space-between',
         alignItems: 'center',
       }}>
-        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', fontFamily: 'var(--font)' }}>© 2025 CNVRTED. AI Revenue Intelligence.</p>
+        <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', fontFamily: 'var(--font)' }}>© 2025 CNVRTED.</p>
         <div style={{ display: 'flex', gap: 28, fontSize: 12, color: 'rgba(255,255,255,0.35)', fontWeight: 500 }}>
           {['Privacy', 'Terms', 'Contact'].map(item => (
             <a key={item} href="#"

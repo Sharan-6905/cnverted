@@ -5,22 +5,21 @@
 }
 
 :root {
-  --bg: #F5F5F0;
-  --bg-card: #EFEFEA;
+  --bg: #FFFFFF;
+  --bg-off: #F9F9F9;
+  --bg-card: #F4F4F4;
   --bg-dark: #0A0A0A;
   --text: #0A0A0A;
-  --text-muted: #555550;
-  --text-subtle: #888880;
-  --border: rgba(10, 10, 10, 0.1);
-  --border-strong: rgba(10, 10, 10, 0.2);
-  --green: #1A7A3C;
+  --text-muted: #525252;
+  --text-subtle: #9B9B9B;
+  --border: rgba(0, 0, 0, 0.07);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --green: #16A34A;
   --green-light: #22C55E;
   --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
   background: var(--bg);
@@ -33,19 +32,72 @@ body {
   overflow-x: hidden;
 }
 
-#root {
-  min-height: 100vh;
-  width: 100%;
+#root { min-height: 100vh; width: 100%; }
+
+button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+a { text-decoration: none; color: inherit; }
+
+/* ─── Hero responsive ─── */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 58fr 42fr;
+}
+.hero-cards-panel {
+  display: flex;
+}
+.hero-nav {
+  padding: 0 48px;
 }
 
-button {
-  font-family: var(--font);
-  cursor: pointer;
-  border: none;
-  background: none;
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    height: auto !important;
+  }
+  .hero-cards-panel {
+    display: none;
+  }
+  .hero-left {
+    padding: 48px 24px 64px !important;
+    border-right: none !important;
+  }
+  .hero-nav {
+    padding: 0 24px !important;
+  }
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* ─── ScrollStory responsive ─── */
+@media (max-width: 768px) {
+  .story-sticky {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    position: relative !important;
+    top: 0 !important;
+  }
+  .story-visual-panel {
+    display: none;
+  }
+  .story-text-panel {
+    padding: 48px 24px !important;
+    border-right: none !important;
+  }
+}
+
+/* ─── Comparison responsive ─── */
+@media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  .comparison-inner {
+    padding: 64px 24px !important;
+  }
+}
+
+/* ─── Nav responsive ─── */
+@media (max-width: 768px) {
+  .nav-links { display: none !important; }
+  .nav-sign-in { display: none !important; }
+  .nav-wrap { padding: 0 24px !important; }
+  .hero-left { padding: 40px 24px 48px !important; }
 }

@@ -1,90 +1,85 @@
 import { motion } from 'framer-motion'
 
-const rows = [
-  ['Static databases updated monthly', 'Real-time intent signals, always on'],
-  ['Contact-first: spray & pray', 'Intent-first: find buyers in motion'],
-  ['Generic templated outreach', 'AI-personalized per signal'],
-  ['Guessing the right timing', 'Perfect timing — catch them now'],
-  ['Manual research for every account', 'Automatic enrichment at detection'],
+const contrasts = [
+  {
+    old: 'Spray a list of 2,000 contacts and pray three reply.',
+    cnvrted: 'Reach the 12 who are actively looking — this morning.',
+  },
+  {
+    old: 'Buy a database updated last quarter.',
+    cnvrted: 'Catch the signal the moment it happens.',
+  },
+  {
+    old: 'Write generic outreach and guess the timing.',
+    cnvrted: 'Send one sentence anchored to what they just said publicly.',
+  },
 ]
 
 export default function Comparison() {
   return (
-    <section style={{ borderBottom: '1px solid var(--border)' }}>
+    <section style={{ background: '#0A0A0A', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', position: 'relative', overflow: 'hidden' }}>
+      {/* Grain overlay */}
       <div style={{
-        padding: '64px 48px 48px',
-        borderBottom: '1px solid var(--border)',
-        textAlign: 'center',
-      }}>
-        <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', color: 'var(--text-subtle)', marginBottom: 20 }}>The Difference</div>
-        <h2 style={{
-          fontFamily: 'var(--font)',
-          fontWeight: 700,
-          fontSize: 'clamp(36px, 4vw, 56px)',
-          lineHeight: 0.96,
-          letterSpacing: '-0.04em',
-          marginBottom: 20,
-        }}>Why traditional databases fail</h2>
-        <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 520, margin: '0 auto' }}>
-          Lead databases were built for a different era. CNVRTED surfaces intent before it becomes a database record.
-        </p>
-      </div>
+        position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 0,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        opacity: 0.025,
+      }} />
 
-      {/* Table */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-        {/* Headers */}
-        <div style={{ padding: '14px 48px', borderBottom: '1px solid var(--border)', borderRight: '1px solid var(--border)', background: 'rgba(10,10,10,0.03)' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: 'var(--text-subtle)' }}>TRADITIONAL TOOLS</span>
-        </div>
-        <div style={{ padding: '14px 48px', borderBottom: '1px solid var(--border)', background: 'var(--text)' }}>
-          <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.1em', color: 'rgba(255,255,255,0.6)' }}>CNVRTED</span>
-        </div>
+      <div className="comparison-inner" style={{ position: 'relative', zIndex: 1, padding: '120px 56px' }}>
+        {/* Editorial statement */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          style={{ marginBottom: 96 }}
+        >
+          <p style={{
+            fontWeight: 800,
+            fontSize: 'clamp(32px, 4.5vw, 68px)',
+            lineHeight: 1.0,
+            letterSpacing: '-0.04em',
+            color: '#fff',
+            maxWidth: 820,
+            margin: 0,
+          }}>
+            Most sales teams are working from a list.{' '}
+            <span style={{ color: 'rgba(255,255,255,0.2)' }}>
+              You'll be working from the moment.
+            </span>
+          </p>
+        </motion.div>
 
-        {rows.map(([before, after], i) => (
-          <>
+        {/* Contrast rows */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+          {contrasts.map((row, i) => (
             <motion.div
-              key={'b' + i}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.07 }}
+              key={i}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="comparison-grid"
               style={{
-                padding: '20px 48px',
-                borderBottom: i < rows.length - 1 ? '1px solid var(--border)' : 'none',
-                borderRight: '1px solid var(--border)',
-                fontSize: 14,
-                color: 'var(--text-muted)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                borderTop: '1px solid rgba(255,255,255,0.06)',
+                paddingTop: 32,
+                paddingBottom: 32,
+                gap: 80,
               }}
             >
-              <span style={{ color: 'rgba(10,10,10,0.2)', fontWeight: 700, fontSize: 13 }}>✕</span>
-              {before}
+              <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                <span style={{ fontSize: 11, fontWeight: 700, color: 'rgba(255,255,255,0.15)', marginTop: 3, flexShrink: 0 }}>✕</span>
+                <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.2)', lineHeight: 1.6, margin: 0, fontWeight: 400, textDecoration: 'line-through', textDecorationColor: 'rgba(255,255,255,0.1)' }}>{row.old}</p>
+              </div>
+              <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+                <span style={{ fontSize: 11, fontWeight: 700, color: '#22C55E', marginTop: 3, flexShrink: 0 }}>→</span>
+                <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.8)', lineHeight: 1.6, margin: 0, fontWeight: 500 }}>{row.cnvrted}</p>
+              </div>
             </motion.div>
-            <motion.div
-              key={'a' + i}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.07 + 0.04 }}
-              style={{
-                padding: '20px 48px',
-                borderBottom: i < rows.length - 1 ? '1px solid rgba(255,255,255,0.06)' : 'none',
-                background: 'var(--bg-dark)',
-                fontSize: 14,
-                fontWeight: 500,
-                color: 'rgba(255,255,255,0.85)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: 12,
-              }}
-            >
-              <span style={{ color: '#22C55E', fontWeight: 700, fontSize: 13 }}>✓</span>
-              {after}
-            </motion.div>
-          </>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   )

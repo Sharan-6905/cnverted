@@ -2,19 +2,19 @@ import { motion } from 'framer-motion'
 
 const testimonials = [
   {
-    quote: "CNVRTED found us three enterprise opportunities we had zero visibility into. The hiring signals alone paid for a year of subscription in week one.",
+    quote: "CNVRTED showed us opportunities hiding in plain sight. The platform surfaced intent signals from accounts we had never considered, and several turned into active sales conversations within weeks.",
     name: "Jordan Lee",
     title: "Co-Founder & CEO",
     company: "Stackline",
   },
   {
-    quote: "We used to spend 40% of our SDR time on research. Now CNVRTED surfaces the right accounts every morning. Our team just executes.",
+    quote: "The biggest win for us was time. Instead of digging through LinkedIn, job boards, and company updates, our team gets a prioritized list of accounts that actually matter.",
     name: "Marcus Webb",
     title: "Head of Revenue",
     company: "Workframe",
   },
   {
-    quote: "The intent scores are scary accurate. We stopped sending generic sequences the day we started using CNVRTED. Pipeline quality went through the roof.",
+    quote: "Most prospecting tools tell you who a company is. CNVRTED tells you what they're actively trying to solve right now. That context completely changed how we approach outbound.",
     name: "Priya Nair",
     title: "Founder",
     company: "Accord Agency",

@@ -55,9 +55,9 @@ function SourceTag({ source }) {
 }
 
 const results = [
-  { company: 'Acme Corp', score: 91, sources: ['LinkedIn', 'Reddit', 'Hiring'], reason: 'Evaluating CRM tools, just funded, SDR hiring', angle: 'Timing-based outreach around funding momentum' },
-  { company: 'Vertex AI', score: 87, sources: ['Funding', 'Hiring'], reason: 'Series A close + 4 new AE roles this week', angle: 'Lead with scale — they\'re building revenue now' },
-  { company: 'Draftbit', score: 78, sources: ['X Post', 'Tech Change'], reason: 'CTO posted about broken outbound stack', angle: 'Technical angle — speak to their pain directly' },
+  { company: 'Acme Corp', score: 91, sources: ['LinkedIn', 'Reddit', 'X Post'], reason: 'Evaluating CRM tools, just funded, SDR hiring', angle: 'Timing-based outreach around funding momentum' },
+  { company: 'Vertex AI', score: 87, sources: ['LinkedIn', 'X Post'], reason: 'Series A close + 4 new AE roles this week', angle: 'Lead with scale — they\'re building revenue now' },
+  { company: 'Draftbit', score: 78, sources: ['X Post', 'Reddit'], reason: 'CTO posted about broken outbound stack', angle: 'Technical angle — speak to their pain directly' },
 ]
 
 export default function AICopilot() {

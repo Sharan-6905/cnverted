@@ -44,8 +44,8 @@ function SignalsVisual() {
   const items = [
     { tag: 'LINKEDIN', company: 'Acme Corp', text: '"Looking for CRM recommendations."' },
     { tag: 'REDDIT', company: 'r/sales', text: '"Need better outbound tools."' },
-    { tag: 'FUNDING', company: 'Vertex AI', text: 'Series A · $8M Closed' },
-    { tag: 'HIRING', company: 'Draftbit', text: 'Building sales team · 6 open roles' },
+    { tag: 'X', company: 'TechFounder', text: '"Evaluating outbound tools for Q3."' },
+    { tag: 'LINKEDIN', company: 'GrowthCo', text: '"Our sales stack needs an upgrade."' },
   ]
   return (
     <div style={{ display: 'flex', flexDirection: 'column', border: '1px solid var(--border)' }}>

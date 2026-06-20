@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — CNVRTED</title>
+  <style>
+    :root {
+      --bg: #F5F5F0;
+      --bg-card: #EFEFEA;
+      --bg-dark: #0A0A0A;
+      --text: #0A0A0A;
+      --text-muted: #555550;
+      --text-subtle: #888880;
+      --border: rgba(10,10,10,0.1);
+      --border-strong: rgba(10,10,10,0.2);
+      --green: #1A7A3C;
+      --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 52px; background: #F5F5F0; border-bottom: 1px solid rgba(10,10,10,0.1); }
+    .nav-logo { font-family: var(--font); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #0A0A0A; }
+    .nav-links { display: flex; gap: 36px; font-size: 14px; font-weight: 500; }
+    .nav-links a { color: #555550; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: #0A0A0A; }
+    .nav-right a { font-size: 14px; font-weight: 500; color: #555550; transition: color .15s; }
+    .nav-right a:hover { color: #0A0A0A; }
+
+    .page { padding-top: 52px; }
+
+    .page-hero { padding: 80px 80px 64px; border-bottom: 1px solid var(--border); }
+    .page-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 20px; }
+    .page-title { font-family: var(--font); font-size: clamp(48px, 8vw, 96px); font-weight: 700; letter-spacing: -0.04em; line-height: 0.92; color: var(--text); margin-bottom: 24px; }
+    .page-meta { font-size: 13px; color: var(--text-subtle); margin-top: 32px; }
+
+    .content { max-width: 760px; margin: 0 auto; padding: 80px; }
+
+    .section { margin-bottom: 64px; }
+    .section-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 12px; }
+    .section-title { font-family: var(--font); font-size: clamp(22px, 2.5vw, 30px); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 20px; color: var(--text); }
+    .section-body { font-size: 16px; line-height: 1.8; color: var(--text-muted); }
+    .section-body p + p { margin-top: 16px; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin-bottom: 64px; }
+
+    ul.clean { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+    ul.clean li { font-size: 16px; color: var(--text-muted); line-height: 1.6; display: flex; gap: 12px; }
+    ul.clean li::before { content: "—"; color: var(--text-subtle); flex-shrink: 0; }
+
+    .highlight-box { background: var(--bg-card); border: 1px solid var(--border); padding: 28px 32px; margin-top: 24px; }
+    .highlight-box p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+
+    .contact-strip { background: var(--bg-dark); padding: 60px 80px; display: flex; justify-content: space-between; align-items: center; }
+    .contact-strip h3 { font-family: var(--font); font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; letter-spacing: -0.03em; color: #fff; }
+    .contact-strip a { font-size: 14px; font-weight: 600; color: #fff; border: 1px solid rgba(255,255,255,0.25); padding: 12px 28px; transition: border-color .15s; }
+    .contact-strip a:hover { border-color: rgba(255,255,255,0.6); }
+
+    .footer { background: var(--bg-dark); border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 80px; display: flex; justify-content: space-between; align-items: center; }
+    .footer p { font-size: 12px; color: rgba(255,255,255,0.25); font-family: var(--font); }
+    .footer-links { display: flex; gap: 28px; font-size: 12px; color: rgba(255,255,255,0.35); font-weight: 500; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .wordmark { overflow: hidden; line-height: 0.85; user-select: none; padding-top: 8px; background: var(--bg-dark); }
+    .wordmark span { font-family: var(--font); font-weight: 700; font-size: clamp(120px, 18vw, 260px); letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,0.28); display: block; white-space: nowrap; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="nav-logo">CNVRTED</a>
+    <div class="nav-links">
+      <a href="/pricing.html">Pricing</a>
+      <a href="/about.html">About</a>
+    </div>
+    <div class="nav-right">
+      <a href="#">Sign in</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-hero">
+      <div class="page-eyebrow">Legal</div>
+      <h1 class="page-title">Terms of<br />Service</h1>
+      <p class="page-meta">Last updated: June 2025</p>
+    </div>
+
+    <div class="content">
+
+      <div class="section">
+        <div class="section-num">01</div>
+        <h2 class="section-title">What CNVRTED Is</h2>
+        <div class="section-body">
+          <p>CNVRTED is a B2B revenue intelligence platform that surfaces buying intent signals from publicly available sources. It is a tool to help sales and go-to-market teams identify and prioritise accounts — not a guarantee of sales outcomes.</p>
+          <p>By using CNVRTED, you agree to these terms. If you're using CNVRTED on behalf of a company, you confirm you have the authority to bind that company to these terms.</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">02</div>
+        <h2 class="section-title">Acceptable Use</h2>
+        <div class="section-body">
+          <p>CNVRTED is built for legitimate outbound sales and go-to-market activity. You agree not to use the platform in ways that are harmful, deceptive, or illegal.</p>
+          <ul class="clean">
+            <li>No spam — do not use CNVRTED signals to send unsolicited bulk messages</li>
+            <li>No misrepresentation — don't impersonate others or falsify your identity in outreach</li>
+            <li>No reselling signal data to third parties without written permission</li>
+            <li>No automated scraping of the CNVRTED platform itself</li>
+            <li>No use of the platform to target individuals for harassment or discrimination</li>
+          </ul>
+          <div class="highlight-box">
+            <p>Violating these terms may result in immediate account suspension. We take signal abuse seriously — it degrades the ecosystem that makes CNVRTED valuable for everyone.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">03</div>
+        <h2 class="section-title">Subscriptions & Billing</h2>
+        <div class="section-body">
+          <p>Paid plans are billed monthly or annually, depending on the plan you choose. All fees are in USD and non-refundable except where required by law.</p>
+          <ul class="clean">
+            <li>Subscriptions auto-renew unless cancelled before the renewal date</li>
+            <li>You can cancel at any time — access continues until the end of your billing period</li>
+            <li>Downgrades take effect at the next billing cycle</li>
+            <li>We reserve the right to change pricing with 30 days notice</li>
+            <li>Enterprise contracts are governed by a separate order form</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">04</div>
+        <h2 class="section-title">Intellectual Property</h2>
+        <div class="section-body">
+          <p>CNVRTED and all associated technology, design, and content is owned by us. Using the platform does not give you ownership of any part of it.</p>
+          <p>The signals and intelligence outputs generated by CNVRTED are licensed to you for use within your organisation. You may not redistribute, resell, or publish CNVRTED-generated intelligence without permission.</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">05</div>
+        <h2 class="section-title">Limitation of Liability</h2>
+        <div class="section-body">
+          <p>CNVRTED surfaces publicly available signals and generates intent scores based on those signals. We do not guarantee the accuracy, completeness, or fitness of any signal for a particular purpose.</p>
+          <p>To the maximum extent permitted by law, CNVRTED's liability to you for any claim arising from use of the platform is limited to the fees you paid in the three months prior to the claim. We are not liable for lost revenue, lost data, or indirect damages of any kind.</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">06</div>
+        <h2 class="section-title">Account Termination</h2>
+        <div class="section-body">
+          <p>You may close your account at any time from your account settings. We may suspend or terminate accounts that violate these terms, engage in abusive behaviour, or remain inactive for extended periods on free plans.</p>
+          <ul class="clean">
+            <li>You'll receive notice before termination where possible</li>
+            <li>Data export is available for 30 days after account closure</li>
+            <li>Billing obligations through the current period remain in effect</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">07</div>
+        <h2 class="section-title">Governing Law</h2>
+        <div class="section-body">
+          <p>These terms are governed by the laws of Delaware, United States. Any disputes will be resolved through binding arbitration, except where prohibited by law. You waive the right to participate in class action lawsuits related to the use of CNVRTED.</p>
+          <p>If any provision of these terms is found to be unenforceable, the remaining provisions remain in full effect.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="contact-strip">
+      <h3>Questions about these terms?</h3>
+      <a href="mailto:legal@cnvrted.com">legal@cnvrted.com</a>
+    </div>
+
+    <div class="footer">
+      <p>© 2025 CNVRTED.</p>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="mailto:hello@cnvrted.com">Contact</a>
+      </div>
+    </div>
+    <div class="wordmark">
+      <span>CNVRTED</span>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -11,8 +11,8 @@ export default function Footer() {
       }}>
         <p style={{ fontSize: 12, color: 'rgba(255,255,255,0.25)', fontFamily: 'var(--font)' }}>© 2025 CNVRTED.</p>
         <div style={{ display: 'flex', gap: 28, fontSize: 12, color: 'rgba(255,255,255,0.35)', fontWeight: 500 }}>
-          {['Privacy', 'Terms', 'Contact'].map(item => (
-            <a key={item} href="#"
+          {[['Privacy', '/privacy.html'], ['Terms', '/terms.html'], ['Contact', 'mailto:hello@cnvrted.com']].map(([item, href]) => (
+            <a key={item} href={href}
               onMouseEnter={e => e.target.style.color = 'rgba(255,255,255,0.8)'}
               onMouseLeave={e => e.target.style.color = 'rgba(255,255,255,0.35)'}
               style={{ transition: 'color 0.15s', fontFamily: 'var(--font)' }}

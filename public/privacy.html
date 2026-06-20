@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — CNVRTED</title>
+  <style>
+    :root {
+      --bg: #F5F5F0;
+      --bg-card: #EFEFEA;
+      --bg-dark: #0A0A0A;
+      --text: #0A0A0A;
+      --text-muted: #555550;
+      --text-subtle: #888880;
+      --border: rgba(10,10,10,0.1);
+      --border-strong: rgba(10,10,10,0.2);
+      --green: #1A7A3C;
+      --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); }
+    body { background: var(--bg); color: var(--text); font-family: var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 48px; height: 52px; background: #F5F5F0; border-bottom: 1px solid rgba(10,10,10,0.1); }
+    .nav-logo { font-family: var(--font); font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #0A0A0A; }
+    .nav-links { display: flex; gap: 36px; font-size: 14px; font-weight: 500; }
+    .nav-links a { color: #555550; transition: color .15s; }
+    .nav-links a:hover, .nav-links a.active { color: #0A0A0A; }
+    .nav-right a { font-size: 14px; font-weight: 500; color: #555550; transition: color .15s; }
+    .nav-right a:hover { color: #0A0A0A; }
+
+    .page { padding-top: 52px; }
+
+    .page-hero { padding: 80px 80px 64px; border-bottom: 1px solid var(--border); }
+    .page-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 20px; }
+    .page-title { font-family: var(--font); font-size: clamp(48px, 8vw, 96px); font-weight: 700; letter-spacing: -0.04em; line-height: 0.92; color: var(--text); margin-bottom: 24px; }
+    .page-meta { font-size: 13px; color: var(--text-subtle); margin-top: 32px; }
+
+    .content { max-width: 760px; margin: 0 auto; padding: 80px; }
+
+    .section { margin-bottom: 64px; }
+    .section-num { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-subtle); margin-bottom: 12px; }
+    .section-title { font-family: var(--font); font-size: clamp(22px, 2.5vw, 30px); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 20px; color: var(--text); }
+    .section-body { font-size: 16px; line-height: 1.8; color: var(--text-muted); }
+    .section-body p + p { margin-top: 16px; }
+
+    .divider { border: none; border-top: 1px solid var(--border); margin-bottom: 64px; }
+
+    ul.clean { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+    ul.clean li { font-size: 16px; color: var(--text-muted); line-height: 1.6; display: flex; gap: 12px; }
+    ul.clean li::before { content: "—"; color: var(--text-subtle); flex-shrink: 0; }
+
+    .highlight-box { background: var(--bg-card); border: 1px solid var(--border); padding: 28px 32px; margin-top: 24px; }
+    .highlight-box p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
+
+    .contact-strip { background: var(--bg-dark); padding: 60px 80px; display: flex; justify-content: space-between; align-items: center; }
+    .contact-strip h3 { font-family: var(--font); font-size: clamp(20px, 2.5vw, 28px); font-weight: 700; letter-spacing: -0.03em; color: #fff; }
+    .contact-strip a { font-size: 14px; font-weight: 600; color: #fff; border: 1px solid rgba(255,255,255,0.25); padding: 12px 28px; transition: border-color .15s; }
+    .contact-strip a:hover { border-color: rgba(255,255,255,0.6); }
+
+    .footer { background: var(--bg-dark); border-top: 1px solid rgba(255,255,255,0.06); padding: 24px 80px; display: flex; justify-content: space-between; align-items: center; }
+    .footer p { font-size: 12px; color: rgba(255,255,255,0.25); font-family: var(--font); }
+    .footer-links { display: flex; gap: 28px; font-size: 12px; color: rgba(255,255,255,0.35); font-weight: 500; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+    .wordmark { overflow: hidden; line-height: 0.85; user-select: none; padding-top: 8px; background: var(--bg-dark); }
+    .wordmark span { font-family: var(--font); font-weight: 700; font-size: clamp(120px, 18vw, 260px); letter-spacing: -0.04em; color: transparent; -webkit-text-stroke: 1.5px rgba(255,255,255,0.28); display: block; white-space: nowrap; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="/" class="nav-logo">CNVRTED</a>
+    <div class="nav-links">
+      <a href="/pricing.html">Pricing</a>
+      <a href="/about.html">About</a>
+    </div>
+    <div class="nav-right">
+      <a href="#">Sign in</a>
+    </div>
+  </nav>
+
+  <div class="page">
+
+    <div class="page-hero">
+      <div class="page-eyebrow">Legal</div>
+      <h1 class="page-title">Privacy<br />Policy</h1>
+      <p class="page-meta">Last updated: June 2025</p>
+    </div>
+
+    <div class="content">
+
+      <div class="section">
+        <div class="section-num">01</div>
+        <h2 class="section-title">What We Collect</h2>
+        <div class="section-body">
+          <p>CNVRTED monitors publicly available signals across the internet — LinkedIn posts, Reddit threads, X (Twitter) posts, job listings, funding announcements, and technology migration indicators. We do not scrape private data, bypass access controls, or collect information from sources that require authentication.</p>
+          <p>When you create an account, we collect your name, email address, and company details. We also collect usage data — which searches you run, which signals you act on, and how you interact with the product.</p>
+          <ul class="clean">
+            <li>Public social posts and discussion threads</li>
+            <li>Job listings and hiring pages (publicly indexed)</li>
+            <li>Funding announcements (Crunchbase, press releases)</li>
+            <li>Technology stack signals (public sources only)</li>
+            <li>Account registration data (name, email, company)</li>
+            <li>Product usage and interaction data</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">02</div>
+        <h2 class="section-title">How We Use Your Data</h2>
+        <div class="section-body">
+          <p>We use the data we collect to operate and improve CNVRTED — to surface relevant signals, generate intent scores, and personalise your experience. We do not sell your data to third parties. We do not use your data to train external AI models without your explicit consent.</p>
+          <ul class="clean">
+            <li>Deliver and improve the CNVRTED product</li>
+            <li>Generate intent scores and outreach recommendations</li>
+            <li>Send product updates, billing notices, and support messages</li>
+            <li>Analyse aggregate usage patterns to improve the platform</li>
+            <li>Comply with legal obligations</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">03</div>
+        <h2 class="section-title">Public Signal Sources</h2>
+        <div class="section-body">
+          <p>The signals CNVRTED surfaces come from publicly accessible content — things people have posted on LinkedIn, Reddit, X, or published via press releases and job boards. We surface this content as intelligence, not as stored personal profiles.</p>
+          <div class="highlight-box">
+            <p>We do not build persistent profiles of private individuals. Signal data is used to identify <strong>company-level buying intent</strong>, not to track or target individual people without legitimate business context.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">04</div>
+        <h2 class="section-title">Data Retention</h2>
+        <div class="section-body">
+          <p>Your account data is retained for as long as your account is active. Signal data is retained for up to 90 days for trend analysis, then aggregated or deleted. If you close your account, we delete your personal data within 30 days.</p>
+          <ul class="clean">
+            <li>Account data: retained while account is active</li>
+            <li>Signal data: up to 90 days, then aggregated</li>
+            <li>Billing records: 7 years (legal requirement)</li>
+            <li>Deleted account data: removed within 30 days</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">05</div>
+        <h2 class="section-title">Your Rights</h2>
+        <div class="section-body">
+          <p>You have the right to access, correct, or delete your personal data at any time. You can export your account data or request full deletion by contacting us. We honour GDPR and CCPA rights regardless of your location.</p>
+          <ul class="clean">
+            <li>Access a copy of your personal data</li>
+            <li>Correct inaccurate information</li>
+            <li>Delete your account and associated data</li>
+            <li>Opt out of non-essential communications</li>
+            <li>Request data portability</li>
+          </ul>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <div class="section">
+        <div class="section-num">06</div>
+        <h2 class="section-title">Cookies & Tracking</h2>
+        <div class="section-body">
+          <p>We use essential cookies to keep you logged in and maintain session state. We use analytics cookies (aggregated, anonymised) to understand how the product is used. We do not use advertising or third-party tracking cookies.</p>
+          <p>You can disable non-essential cookies in your browser at any time without affecting core product functionality.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="contact-strip">
+      <h3>Questions about your data?</h3>
+      <a href="mailto:privacy@cnvrted.com">privacy@cnvrted.com</a>
+    </div>
+
+    <div class="footer">
+      <p>© 2025 CNVRTED.</p>
+      <div class="footer-links">
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a href="mailto:hello@cnvrted.com">Contact</a>
+      </div>
+    </div>
+    <div class="wordmark">
+      <span>CNVRTED</span>
+    </div>
+
+  </div>
+</body>
+</html>

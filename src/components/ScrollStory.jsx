@@ -65,8 +65,7 @@ function SignalsVisual() {
             alignItems: 'center',
           }}
         >
-          <span style={{ display: 'flex', alignItems: 'center', gap: 5, fontSize: 9, fontWeight: 700, letterSpacing: '0.06em', color: 'var(--text-subtle)' }}>
-            {tagIcons[item.tag]}
+          <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.06em', color: 'var(--text-subtle)' }}>
             {item.tag}
           </span>
           <span style={{ fontSize: 12, fontWeight: 600, color: 'var(--text)' }}>{item.company}</span>

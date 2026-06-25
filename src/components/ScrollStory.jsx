@@ -370,10 +370,10 @@ const visualComponents = { signals: SignalsVisual, enrichment: EnrichmentVisual,
 function StepText({ activeIdx }) {
   const step = steps[activeIdx]
   return (
-    <div className="story-text-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px 56px', borderRight: '1px solid var(--border)', height: '100%', overflow: 'hidden', background: '#fff' }}>
+    <div className="story-text-panel" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '64px 56px', borderRight: '1px solid rgba(255,255,255,0.06)', height: '100%', overflow: 'hidden', background: '#0A0A0A' }}>
       <div style={{ display: 'flex', gap: 4, marginBottom: 48 }}>
         {steps.map((_, i) => (
-          <div key={i} style={{ height: 2, flex: 1, background: i <= activeIdx ? '#0A0A0A' : 'rgba(0,0,0,0.08)', transition: 'background 0.4s ease', borderRadius: 2 }} />
+          <div key={i} style={{ height: 2, flex: 1, background: i <= activeIdx ? '#fff' : 'rgba(255,255,255,0.1)', transition: 'background 0.4s ease', borderRadius: 2 }} />
         ))}
       </div>
       <AnimatePresence mode="wait">
@@ -386,16 +386,16 @@ function StepText({ activeIdx }) {
           style={{ display: 'flex', flexDirection: 'column', gap: 24 }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-            <div style={{ width: 28, height: 28, background: '#0A0A0A', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <span style={{ fontSize: 10, fontWeight: 800, color: '#fff' }}>{step.step}</span>
+            <div style={{ width: 28, height: 28, background: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <span style={{ fontSize: 10, fontWeight: 800, color: '#0A0A0A' }}>{step.step}</span>
             </div>
-            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-subtle)', textTransform: 'uppercase' }}>{step.label}</span>
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: 'rgba(255,255,255,0.35)', textTransform: 'uppercase' }}>{step.label}</span>
           </div>
-          <h2 style={{ fontWeight: 800, fontSize: 'clamp(26px, 2.6vw, 42px)', lineHeight: 1.07, letterSpacing: '-0.03em', color: 'var(--text)', margin: 0 }}>{step.headline}</h2>
-          <p style={{ fontSize: 15, color: 'var(--text-muted)', lineHeight: 1.75, maxWidth: 380, margin: 0 }}>{step.sub}</p>
+          <h2 style={{ fontWeight: 800, fontSize: 'clamp(26px, 2.6vw, 42px)', lineHeight: 1.07, letterSpacing: '-0.03em', color: '#fff', margin: 0 }}>{step.headline}</h2>
+          <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.45)', lineHeight: 1.75, maxWidth: 380, margin: 0 }}>{step.sub}</p>
           <div style={{ display: 'flex', gap: 4, flexWrap: 'wrap', marginTop: 8 }}>
             {steps.map((s, si) => (
-              <div key={s.step} style={{ fontSize: 9, fontWeight: 700, padding: '4px 10px', background: si === activeIdx ? '#0A0A0A' : 'transparent', border: `1px solid ${si === activeIdx ? '#0A0A0A' : 'rgba(0,0,0,0.1)'}`, color: si === activeIdx ? '#fff' : 'var(--text-subtle)', letterSpacing: '0.06em', transition: 'all 0.25s ease' }}>{s.label}</div>
+              <div key={s.step} style={{ fontSize: 9, fontWeight: 700, padding: '4px 10px', background: si === activeIdx ? '#fff' : 'transparent', border: `1px solid ${si === activeIdx ? '#fff' : 'rgba(255,255,255,0.12)'}`, color: si === activeIdx ? '#0A0A0A' : 'rgba(255,255,255,0.3)', letterSpacing: '0.06em', transition: 'all 0.25s ease' }}>{s.label}</div>
             ))}
           </div>
         </motion.div>

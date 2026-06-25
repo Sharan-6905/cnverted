@@ -132,7 +132,6 @@ export default function Hero() {
     <section className="hero-grid" style={{
       height: 'calc(100vh - 56px)',
       background: '#0A0A0A',
-      borderBottom: '1px solid rgba(255,255,255,0.06)',
       position: 'relative',
       overflow: 'hidden',
     }}>

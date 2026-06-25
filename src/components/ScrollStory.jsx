@@ -51,15 +51,32 @@ function DarkCard({ children, style = {}, glow }) {
 }
 
 /* ─── STEP 1: Signals ─── */
-const signalRows = [
+const signalPool = [
   { src: 'LI', srcColor: '#0A66C2', tag: 'INTENT', company: 'Sarah Chen', sub: 'VP Sales · Acme Corp', text: '"Looking for CRM alternatives for Q3."', score: 91 },
   { src: 'R/', srcColor: '#FF4500', tag: 'DISCUSSION', company: 'r/sales', sub: '847 upvotes', text: '"Best Apollo alternatives in 2025?"', score: 76 },
   { src: 'X', srcColor: '#E5E7EB', tag: 'PAIN', company: '@markwilson_gtm', sub: '12.4K followers', text: '"Pipeline is anemic. Changing the stack."', score: 79 },
   { src: '$', srcColor: '#16A34A', tag: 'FUNDING', company: 'Anyscale', sub: 'General Catalyst', text: 'Series D · $100M raised this week', score: 92 },
   { src: '↑', srcColor: '#7C3AED', tag: 'HIRING', company: 'Brex', sub: 'San Francisco, CA', text: '8 SDR + 2 AE roles posted today', score: 83 },
+  { src: 'LI', srcColor: '#0A66C2', tag: 'INTENT', company: 'Notion', sub: 'Head of RevOps · Notion', text: '"Evaluating outbound platforms for H2."', score: 85 },
+  { src: '$', srcColor: '#16A34A', tag: 'FUNDING', company: 'Codeium', sub: 'Sequoia · Greenoaks', text: 'Series C · $65M raised', score: 90 },
+  { src: '↑', srcColor: '#7C3AED', tag: 'HIRING', company: 'Linear', sub: 'Remote', text: 'Head of Revenue + 3 AE roles open now', score: 81 },
 ]
 
 function SignalsVisual() {
+  const [cards, setCards] = useState(() =>
+    signalPool.slice(0, 5).map((c, i) => ({ ...c, _key: i }))
+  )
+  const poolIdxRef = useRef(5)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      const next = { ...signalPool[poolIdxRef.current % signalPool.length], _key: Date.now() }
+      poolIdxRef.current += 1
+      setCards(prev => [next, ...prev.slice(0, 4)])
+    }, 2600)
+    return () => clearInterval(id)
+  }, [])
+
   return (
     <div style={{ width: '100%' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
@@ -71,14 +88,17 @@ function SignalsVisual() {
         </div>
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        {signalRows.map((row, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, x: 16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: i * 0.08, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-          >
+      <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', gap: 6 }}>
+        <AnimatePresence initial={false}>
+          {cards.map((row, i) => (
+            <motion.div
+              key={row._key}
+              layout
+              initial={{ opacity: 0, y: -48, scale: 0.96 }}
+              animate={{ opacity: Math.max(1 - i * 0.18, 0.1), y: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 40, scale: 0.95 }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            >
             <DarkCard glow={i === 0} style={{ padding: '12px 14px', display: 'flex', alignItems: 'center', gap: 12 }}>
               <div style={{ width: 30, height: 30, borderRadius: '50%', background: `${row.srcColor}18`, border: `1px solid ${row.srcColor}35`, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                 <span style={{ fontSize: 8, fontWeight: 800, color: row.srcColor }}>{row.src}</span>
@@ -100,8 +120,9 @@ function SignalsVisual() {
                 <div style={{ fontSize: 8, color: 'rgba(255,255,255,0.2)', fontWeight: 600, letterSpacing: '0.06em', marginTop: 2 }}>FIT</div>
               </div>
             </DarkCard>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     </div>
   )

@@ -159,6 +159,13 @@ export default function Hero() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           style={{ display: 'flex', flexDirection: 'column', gap: 36 }}
         >
+          {/* Product badge */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', padding: '6px 14px' }}>
+            <motion.div animate={{ opacity: [1, 0.2, 1] }} transition={{ repeat: Infinity, duration: 1.8 }}
+              style={{ width: 5, height: 5, borderRadius: '50%', background: '#22C55E', boxShadow: '0 0 8px #22C55E', flexShrink: 0 }} />
+            <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: '0.12em', color: '#22C55E', textTransform: 'uppercase' }}>AI Revenue Intelligence · Early Access</span>
+          </div>
+
           {/* Headline */}
           <h1 style={{
             fontWeight: 800,
@@ -181,7 +188,17 @@ export default function Hero() {
           {/* Single bold proof line */}
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 10 }}>
             <span style={{ fontSize: 'clamp(28px, 3vw, 42px)', fontWeight: 800, letterSpacing: '-0.05em', color: '#22C55E', lineHeight: 1, textShadow: '0 0 24px rgba(34,197,94,0.35)' }}>23</span>
-            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)', fontWeight: 400, lineHeight: 1.4 }}>buying signals in the last hour alone.</span>
+            <span style={{ fontSize: 13, color: 'rgba(255,255,255,0.3)', fontWeight: 400, lineHeight: 1.4 }}>buying signals detected in the last hour alone.</span>
+          </div>
+
+          {/* Traction signal */}
+          <div style={{ display: 'flex', gap: 24, paddingTop: 4, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+            {[['12,400+', 'signals processed in early access'], ['340ms', 'avg. signal-to-pipeline time'], ['4.2×', 'reply rate vs. cold outbound']].map(([num, label]) => (
+              <div key={label}>
+                <div style={{ fontSize: 15, fontWeight: 800, color: '#fff', letterSpacing: '-0.03em', lineHeight: 1, marginBottom: 3 }}>{num}</div>
+                <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.28)', lineHeight: 1.4 }}>{label}</div>
+              </div>
+            ))}
           </div>
 
           {/* CTAs */}

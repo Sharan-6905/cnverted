@@ -65,7 +65,7 @@ export default function LiveFeed() {
             fontSize: 'clamp(36px, 4vw, 56px)',
             lineHeight: 0.96,
             letterSpacing: '-0.04em',
-          }}>The feed<br />never stops</h2>
+          }}>Every signal,<br />the moment it happens</h2>
         </div>
         <div style={{ alignSelf: 'end', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 8 }}>
           <motion.div

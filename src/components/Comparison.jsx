@@ -50,6 +50,26 @@ export default function Comparison() {
           </p>
         </motion.div>
 
+        {/* Why now */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          style={{ marginBottom: 72, display: 'flex', gap: 56, alignItems: 'flex-start', flexWrap: 'wrap' }}
+        >
+          {[
+            ['$6B+', 'Revenue intelligence market — Apollo, ZoomInfo, Gong. None surfaces timing.'],
+            ['Zero', 'Existing tools that tell you when a company is in-market. That\'s the gap.'],
+            ['Now', 'LLMs made real-time signal parsing possible at scale for the first time.'],
+          ].map(([num, label]) => (
+            <div key={num} style={{ flex: '1 1 160px' }}>
+              <div style={{ fontSize: 36, fontWeight: 800, color: '#fff', letterSpacing: '-0.05em', lineHeight: 1, marginBottom: 10 }}>{num}</div>
+              <div style={{ fontSize: 13, color: 'rgba(255,255,255,0.35)', lineHeight: 1.65 }}>{label}</div>
+            </div>
+          ))}
+        </motion.div>
+
         {/* Contrast rows */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {contrasts.map((row, i) => (

@@ -93,8 +93,8 @@ export default function AICopilot() {
           letterSpacing: '-0.04em',
           marginBottom: 20,
         }}>Talk to your pipeline</h2>
-        <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 520, margin: '0 auto' }}>
-          Ask CNVRTED anything. Get accounts, signals, and outreach angles — all in natural language.
+        <p style={{ fontSize: 17, color: 'var(--text-muted)', lineHeight: 1.65, maxWidth: 560, margin: '0 auto' }}>
+          Natural language queries across all live signal sources — LinkedIn, Reddit, X, hiring data, and funding rounds. Unlike static databases, CNVRTED surfaces accounts at the exact moment they're ready to buy.
         </p>
       </div>
 

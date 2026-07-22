@@ -13,6 +13,7 @@ const ROWS: { label: string; legacy: string; cnvrted: string }[] = [
 export function Comparison() {
   return (
     <Section
+      id="why"
       centered
       eyebrow="Why us"
       title="Not another lead database."

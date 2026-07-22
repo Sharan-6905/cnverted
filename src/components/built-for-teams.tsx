@@ -25,7 +25,7 @@ interface BuiltForTeamsProps {
 export function BuiltForTeams({ personas }: BuiltForTeamsProps) {
   return (
     <Section
-      id="product"
+      id="teams"
       centered
       eyebrow="Built for modern revenue teams"
       title="One signal layer. Every seat on the floor."

@@ -11,8 +11,8 @@ interface SiteHeaderProps {
 
 const NAV = [
   { label: "Product", href: "#product" },
+  { label: "Signals", href: "#signals" },
   { label: "Why Us", href: "#why" },
-  { label: "How It Works", href: "#how" },
   { label: "Pricing", href: "#pricing" },
 ];
 

@@ -22,14 +22,13 @@ export function Hero({ featuredSignal }: HeroProps) {
             Real-time buying signals
           </span>
 
-          <h1 className="mt-6 max-w-xl font-display text-5xl font-semibold leading-[1.02] tracking-tight text-ink md:text-display-lg">
-            Reach buyers the moment they&apos;re in-market.
+          <h1 className="mt-6 max-w-xl font-display text-6xl font-semibold leading-[0.98] tracking-tight text-ink md:text-display-xl">
+            Buyers, not names.
           </h1>
 
           <p className="mt-5 max-w-md text-lg leading-relaxed text-body">
-            Cnvrted watches the dark funnel — LinkedIn, Reddit, X, and the open
-            web — and scores every account by real buying intent. Stop chasing
-            static lists. Engage at exactly the right time.
+            The complete sales dashboard. Cnvrted finds who&apos;s ready to buy,
+            tells you why, and helps you close — all in one place.
           </p>
 
           {/* CTA buttons — the waitlist form lives at the bottom of the page */}

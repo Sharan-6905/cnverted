@@ -44,8 +44,8 @@ export function Integrations({ integrations }: IntegrationsProps) {
               key={it.id}
               className="flex items-center gap-2.5 opacity-90 smooth-transition transition-opacity hover:opacity-100"
             >
-              {Mark ? <Mark className="h-8 w-8" /> : null}
-              {Mark ? (
+              {Mark !== undefined ? <Mark className="h-8 w-8" /> : null}
+              {Mark !== undefined ? (
                 <span className="font-display text-lg font-semibold tracking-tight text-ink">
                   {it.name}
                 </span>

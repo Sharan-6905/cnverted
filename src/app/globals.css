@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-canvas text-body font-sans;
+  }
+  ::selection {
+    background: #ffb084;
+    color: #0a0a0a;
+  }
+}
+
+@layer components {
+  /* Cream product-mockup card with hairline border */
+  .clay-card {
+    background: theme("colors.canvas");
+    border: 1px solid theme("colors.hairline");
+    border-radius: theme("borderRadius.3xl");
+  }
+}
+
+@layer utilities {
+  .smooth-transition {
+    transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+    transition-duration: 240ms;
+  }
+  .spring-transition {
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-duration: 320ms;
+  }
+  /* Bricolage display: tuned tracking at large sizes */
+  .font-display {
+    font-weight: 600;
+  }
+}

@@ -1,4 +1,7 @@
+"use client";
+
 import Image, { type StaticImageData } from "next/image";
+import { motion } from "framer-motion";
 import { Section } from "@/components/section";
 import stepScan from "../../public/step-scan.png";
 import stepExtract from "../../public/step-extract.png";
@@ -40,9 +43,22 @@ export function HowItWorks() {
       eyebrow="How it works"
       title="From noise to a ready-to-work account in four steps."
     >
-      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-        {STEPS.map((s) => (
-          <div key={s.step} className="text-center md:text-left">
+      <div className="relative grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        {/* Connecting line — sits behind the step cards, only visible at the 4-col breakpoint */}
+        <div
+          aria-hidden
+          className="absolute left-0 right-0 top-16 hidden h-px bg-hairline lg:block"
+          style={{ marginInline: "12.5%" }}
+        />
+        {STEPS.map((s, i) => (
+          <motion.div
+            key={s.step}
+            className="relative text-center md:text-left"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.4, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+          >
             <div className="relative mx-auto h-32 w-32 md:mx-0">
               <Image
                 src={s.img}
@@ -51,11 +67,13 @@ export function HowItWorks() {
               />
             </div>
             <div className="mt-4 flex items-center justify-center gap-2 md:justify-start">
-              <span className="font-mono text-sm text-brand-teal">{s.step}</span>
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-teal/15 font-mono text-xs text-brand-teal">
+                {s.step}
+              </span>
               <h3 className="text-base font-semibold text-ink">{s.title}</h3>
             </div>
             <p className="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
-          </div>
+          </motion.div>
         ))}
       </div>
     </Section>

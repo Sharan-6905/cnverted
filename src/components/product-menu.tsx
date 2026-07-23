@@ -1,0 +1,79 @@
+"use client";
+
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
+import { PRODUCT_GROUPS as GROUPS } from "@/lib/product-features";
+
+export function ProductMenu() {
+  const [open, setOpen] = useState(false);
+  const [activeFeature, setActiveFeature] = useState<string | null>(null);
+
+  return (
+    <div className="relative" onMouseLeave={() => setOpen(false)}>
+      <button
+        onClick={() => setOpen((v) => !v)}
+        onMouseEnter={() => setOpen(true)}
+        className="flex items-center gap-1 text-sm text-muted smooth-transition transition-colors hover:text-ink"
+      >
+        Product
+        <ChevronDown className={cn("h-3.5 w-3.5 smooth-transition transition-transform", open && "rotate-180")} />
+      </button>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 8 }}
+            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            className="absolute left-1/2 top-full z-50 mt-3 w-[90vw] max-w-[560px] -translate-x-1/2 rounded-2xl border border-hairline bg-canvas p-5 shadow-soft"
+          >
+            <div className="grid grid-cols-3 gap-5">
+              {GROUPS.map((group) => (
+                <div key={group.label}>
+                  <p className="mb-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-muted-soft">
+                    {group.label}
+                  </p>
+                  <ul className="space-y-1">
+                    {group.features.map((feature) => (
+                      <li key={feature.title}>
+                        <button
+                          onClick={() =>
+                            setActiveFeature((cur) => (cur === feature.title ? null : feature.title))
+                          }
+                          className="flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-left text-sm text-body smooth-transition transition-colors hover:bg-surface-soft hover:text-ink"
+                        >
+                          {feature.title}
+                          {feature.soon !== false && (
+                            <span className="rounded-full bg-brand-teal/10 px-1.5 py-0.5 font-mono text-[10px] font-medium text-brand-teal">
+                              Soon
+                            </span>
+                          )}
+                        </button>
+                        <AnimatePresence>
+                          {activeFeature === feature.title && (
+                            <motion.p
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: "auto" }}
+                              exit={{ opacity: 0, height: 0 }}
+                              transition={{ duration: 0.18 }}
+                              className="overflow-hidden px-2 pb-1.5 text-xs leading-relaxed text-muted"
+                            >
+                              {feature.description}
+                            </motion.p>
+                          )}
+                        </AnimatePresence>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

@@ -1,6 +1,5 @@
 import { ArrowRight, ShieldCheck } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
-import { Wordmark } from "@/components/brand-logos";
 import { HeroScene } from "@/components/hero-scene";
 import type { Signal } from "@/lib/types";
 
@@ -8,8 +7,6 @@ interface HeroProps {
   /** a single high-intent signal shown floating in the hero */
   featuredSignal: Signal;
 }
-
-const TRUSTED = ["Rippling", "Ramp", "Vanta", "Linear", "Deel"];
 
 export function Hero({ featuredSignal }: HeroProps) {
   return (
@@ -33,30 +30,15 @@ export function Hero({ featuredSignal }: HeroProps) {
 
           {/* CTA buttons — the waitlist form lives at the bottom of the page */}
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href="#pricing" className={buttonVariants({ variant: "primary", size: "lg" })}>
+            <a href="/early-access" className={buttonVariants({ variant: "primary", size: "lg" })}>
               Get early access
               <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="#how" className={buttonVariants({ variant: "secondary", size: "lg" })}>
-              See how it works
             </a>
           </div>
           <p className="mt-4 flex items-center gap-1.5 text-xs text-muted">
             <ShieldCheck className="h-3.5 w-3.5" />
             Be first to access. No signup pressure, no spam — ever.
           </p>
-
-          {/* Trusted by */}
-          <div className="mt-10">
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-soft">
-              Built for revenue teams like
-            </p>
-            <div className="mt-3 flex flex-wrap items-center gap-x-6 gap-y-2">
-              {TRUSTED.map((name) => (
-                <Wordmark key={name} name={name} className="text-body opacity-60" />
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Scroll-driven clay motion scene */}

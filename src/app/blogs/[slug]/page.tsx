@@ -40,7 +40,11 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen flex-col">
+      <div
+        className="bg-grid-page pointer-events-none absolute inset-0 -z-10"
+        aria-hidden="true"
+      />
       <SiteHeader />
       <main className="flex-1">
         <article className="px-6 py-16 md:py-24">

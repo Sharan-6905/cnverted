@@ -16,7 +16,11 @@ export default function BlogsPage() {
   const [featured, ...rest] = BLOG_POSTS;
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen flex-col">
+      <div
+        className="bg-grid-page pointer-events-none absolute inset-0 -z-10"
+        aria-hidden="true"
+      />
       <SiteHeader />
       <main className="flex-1">
         <Section

@@ -20,10 +20,10 @@ export function Comparison() {
       description="Lead databases sell you static contact data. Cnvrted sells you timing — the single thing that decides whether outreach lands."
     >
       <div className="overflow-hidden rounded-2xl border border-hairline">
-        <div className="grid grid-cols-[1.2fr_1fr_1fr] bg-surface-soft text-sm font-medium">
-          <div className="px-5 py-4 text-muted" />
-          <div className="px-5 py-4 text-muted">Traditional lead database</div>
-          <div className="flex items-center gap-2 border-l border-hairline bg-brand-lavender/25 px-5 py-4 text-ink">
+        <div className="grid grid-cols-[1.1fr_1fr_1fr] bg-surface-soft text-xs font-medium sm:text-sm">
+          <div className="px-3 py-3.5 text-muted sm:px-5 sm:py-4" />
+          <div className="px-3 py-3.5 text-muted sm:px-5 sm:py-4">Traditional lead database</div>
+          <div className="flex items-center gap-2 border-l border-hairline bg-brand-lavender/25 px-3 py-3.5 text-ink sm:px-5 sm:py-4">
             Cnvrted
           </div>
         </div>
@@ -31,17 +31,17 @@ export function Comparison() {
           <div
             key={row.label}
             className={cn(
-              "grid grid-cols-[1.2fr_1fr_1fr] text-sm",
+              "grid grid-cols-[1.1fr_1fr_1fr] text-xs sm:text-sm",
               i % 2 === 1 && "bg-surface-soft/50"
             )}
           >
-            <div className="px-5 py-4 font-medium text-ink">{row.label}</div>
-            <div className="flex items-start gap-2 px-5 py-4 text-muted">
-              <X className="mt-0.5 h-4 w-4 shrink-0 text-intent-low" />
+            <div className="px-3 py-3.5 font-medium text-ink sm:px-5 sm:py-4">{row.label}</div>
+            <div className="flex items-start gap-1.5 px-3 py-3.5 text-muted sm:gap-2 sm:px-5 sm:py-4">
+              <X className="mt-0.5 h-3.5 w-3.5 shrink-0 text-intent-low sm:h-4 sm:w-4" />
               <span>{row.legacy}</span>
             </div>
-            <div className="flex items-start gap-2 border-l border-hairline bg-brand-lavender/10 px-5 py-4 text-ink">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-intent-high" />
+            <div className="flex items-start gap-1.5 border-l border-hairline bg-brand-lavender/10 px-3 py-3.5 text-ink sm:gap-2 sm:px-5 sm:py-4">
+              <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-intent-high sm:h-4 sm:w-4" />
               <span>{row.cnvrted}</span>
             </div>
           </div>

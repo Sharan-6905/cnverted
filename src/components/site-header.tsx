@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Slack, Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { buttonVariants } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
+import { SlackLogo } from "@/components/slack-logo";
 import { ProductMenu } from "@/components/product-menu";
 import { PRODUCT_GROUPS } from "@/lib/product-features";
 import { cn } from "@/lib/utils";
@@ -53,7 +54,7 @@ export function SiteHeader() {
               "hidden text-muted hover:text-ink sm:inline-flex"
             )}
           >
-            <Slack className="h-4 w-4" />
+            <SlackLogo className="h-4 w-4" />
             Community
           </a>
           <button
@@ -161,7 +162,7 @@ export function SiteHeader() {
                     "w-full justify-center text-muted hover:text-ink"
                   )}
                 >
-                  <Slack className="h-4 w-4" />
+                  <SlackLogo className="h-4 w-4" />
                   Community
                 </a>
               </div>

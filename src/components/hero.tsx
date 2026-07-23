@@ -20,7 +20,7 @@ export function Hero({ featuredSignal }: HeroProps) {
             Real-time buying signals
           </span>
 
-          <h1 className="mt-6 max-w-xl font-display text-6xl font-semibold leading-[0.98] tracking-tight text-ink md:text-display-xl">
+          <h1 className="mt-6 max-w-xl font-display text-display-xl font-semibold tracking-tight text-ink">
             Buyers, not names.
           </h1>
 

@@ -47,9 +47,10 @@ const config: Config = {
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {
-        "display-xl": ["4.5rem", { lineHeight: "1", letterSpacing: "-0.03em" }],
-        "display-lg": ["3.5rem", { lineHeight: "1.05", letterSpacing: "-0.025em" }],
-        "display-md": ["2.5rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+        // Fluid display sizes — shrink on small screens, cap on desktop.
+        "display-xl": ["clamp(2.75rem, 8.5vw, 4.5rem)", { lineHeight: "1.02", letterSpacing: "-0.03em" }],
+        "display-lg": ["clamp(2.25rem, 7vw, 3.5rem)", { lineHeight: "1.06", letterSpacing: "-0.025em" }],
+        "display-md": ["clamp(2rem, 5.5vw, 2.5rem)", { lineHeight: "1.12", letterSpacing: "-0.02em" }],
       },
       boxShadow: {
         soft: "0 1px 2px rgba(20,16,8,0.04), 0 2px 8px rgba(20,16,8,0.05)",

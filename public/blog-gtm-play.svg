@@ -1,0 +1,155 @@
+<svg viewBox="0 0 1680 944" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cnvrted intent-signal terminal">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B1A30"/>
+      <stop offset="0.55" stop-color="#0A1628"/>
+      <stop offset="1" stop-color="#081120"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#C6F135" stop-opacity="0.55"/>
+      <stop offset="0.35" stop-color="#B6E400" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#B6E400" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.2"/>
+    </filter>
+    <style>
+      .mono { font-family: 'Courier New', ui-monospace, monospace; letter-spacing: 2px; }
+      .dim  { fill: #3f5568; }
+      .lbl  { fill: #5b7488; }
+      .val  { fill: #8aa3b6; }
+      .hdr  { fill: #9fbecb; }
+      .lime { fill: #b6e400; }
+      .trace { fill: none; stroke: #b6e400; stroke-width: 2; }
+      .trace-dim { fill: none; stroke: #b6e400; stroke-width: 2; opacity: 0.35; }
+    </style>
+  </defs>
+
+  <rect width="1680" height="944" fill="url(#bg)"/>
+
+  <!-- registration crosshairs -->
+  <g stroke="#283a4e" stroke-width="1.5">
+    <g id="x"><line x1="-7" y1="0" x2="7" y2="0"/><line x1="0" y1="-7" x2="0" y2="7"/></g>
+    <use href="#x" x="44" y="44"/><use href="#x" x="270" y="38"/><use href="#x" x="510" y="38"/>
+    <use href="#x" x="750" y="38"/><use href="#x" x="970" y="38"/><use href="#x" x="1210" y="38"/>
+    <use href="#x" x="44" y="278"/><use href="#x" x="44" y="520"/><use href="#x" x="44" y="760"/>
+    <use href="#x" x="1210" y="760"/><use href="#x" x="1210" y="520"/>
+  </g>
+
+  <!-- dot grid (the undifferentiated list of names) -->
+  <g fill="#3c4d5f">
+    <!-- generated 15 cols x 8 rows; right columns fade -->
+    <!-- row template repeated; opacity dims toward the right edge -->
+    <g>
+      <!-- rows -->
+      <!-- We place dots via nested loops flattened -->
+    </g>
+  </g>
+
+  <!-- dot grid explicit -->
+  <g fill="#3c4d5f">
+    <!-- row y values: 285 337 389 441 493 545 597 649 -->
+    <!-- col x values: 115..745 step 45 -->
+    <!-- opacity per column: near edge dims -->
+    <g opacity="0.9">
+      <circle cx="115" cy="285" r="7"/><circle cx="160" cy="285" r="7"/><circle cx="205" cy="285" r="7"/><circle cx="250" cy="285" r="7"/><circle cx="295" cy="285" r="7"/><circle cx="340" cy="285" r="7"/><circle cx="385" cy="285" r="7"/><circle cx="430" cy="285" r="7"/><circle cx="475" cy="285" r="7"/><circle cx="520" cy="285" r="7"/><circle cx="565" cy="285" r="7"/><circle cx="610" cy="285" r="7"/><circle cx="655" cy="285" r="7"/><circle cx="700" cy="285" r="7"/><circle cx="745" cy="285" r="7"/>
+      <circle cx="115" cy="337" r="7"/><circle cx="160" cy="337" r="7"/><circle cx="205" cy="337" r="7"/><circle cx="250" cy="337" r="7"/><circle cx="295" cy="337" r="7"/><circle cx="340" cy="337" r="7"/><circle cx="385" cy="337" r="7"/><circle cx="430" cy="337" r="7"/><circle cx="475" cy="337" r="7"/><circle cx="520" cy="337" r="7"/><circle cx="565" cy="337" r="7"/><circle cx="610" cy="337" r="7"/><circle cx="655" cy="337" r="7"/><circle cx="700" cy="337" r="7"/><circle cx="745" cy="337" r="7"/>
+      <circle cx="115" cy="389" r="7"/><circle cx="160" cy="389" r="7"/><circle cx="205" cy="389" r="7"/><circle cx="250" cy="389" r="7"/><circle cx="295" cy="389" r="7"/><circle cx="340" cy="389" r="7"/><circle cx="385" cy="389" r="7"/><circle cx="430" cy="389" r="7"/><circle cx="475" cy="389" r="7"/><circle cx="520" cy="389" r="7"/><circle cx="565" cy="389" r="7"/><circle cx="610" cy="389" r="7"/><circle cx="655" cy="389" r="7"/><circle cx="700" cy="389" r="7"/><circle cx="745" cy="389" r="7"/>
+      <circle cx="115" cy="441" r="7"/><circle cx="160" cy="441" r="7"/><circle cx="205" cy="441" r="7"/><circle cx="250" cy="441" r="7"/><circle cx="295" cy="441" r="7"/><circle cx="340" cy="441" r="7"/><circle cx="385" cy="441" r="7"/><circle cx="430" cy="441" r="7"/><circle cx="475" cy="441" r="7"/><circle cx="520" cy="441" r="7"/><circle cx="565" cy="441" r="7"/><circle cx="610" cy="441" r="7"/><circle cx="655" cy="441" r="7"/><circle cx="700" cy="441" r="7"/><circle cx="745" cy="441" r="7"/>
+      <circle cx="115" cy="493" r="7"/><circle cx="160" cy="493" r="7"/><circle cx="205" cy="493" r="7"/><circle cx="250" cy="493" r="7"/><circle cx="295" cy="493" r="7"/><circle cx="340" cy="493" r="7"/><circle cx="385" cy="493" r="7"/><circle cx="430" cy="493" r="7"/><circle cx="475" cy="493" r="7"/><circle cx="520" cy="493" r="7"/><circle cx="565" cy="493" r="7"/><circle cx="610" cy="493" r="7"/><circle cx="655" cy="493" r="7"/><circle cx="700" cy="493" r="7"/><circle cx="745" cy="493" r="7"/>
+      <circle cx="115" cy="545" r="7"/><circle cx="160" cy="545" r="7"/><circle cx="205" cy="545" r="7"/><circle cx="250" cy="545" r="7"/><circle cx="295" cy="545" r="7"/><circle cx="340" cy="545" r="7"/><circle cx="385" cy="545" r="7"/><circle cx="430" cy="545" r="7"/><circle cx="475" cy="545" r="7"/><circle cx="520" cy="545" r="7"/><circle cx="565" cy="545" r="7"/><circle cx="610" cy="545" r="7"/><circle cx="655" cy="545" r="7"/><circle cx="700" cy="545" r="7"/><circle cx="745" cy="545" r="7"/>
+      <circle cx="115" cy="597" r="7"/><circle cx="160" cy="597" r="7"/><circle cx="205" cy="597" r="7"/><circle cx="250" cy="597" r="7"/><circle cx="295" cy="597" r="7"/><circle cx="340" cy="597" r="7"/><circle cx="385" cy="597" r="7"/><circle cx="430" cy="597" r="7"/><circle cx="475" cy="597" r="7"/><circle cx="520" cy="597" r="7"/><circle cx="565" cy="597" r="7"/><circle cx="610" cy="597" r="7"/><circle cx="655" cy="597" r="7"/><circle cx="700" cy="597" r="7"/><circle cx="745" cy="597" r="7"/>
+      <circle cx="115" cy="649" r="7"/><circle cx="160" cy="649" r="7"/><circle cx="205" cy="649" r="7"/><circle cx="250" cy="649" r="7"/><circle cx="295" cy="649" r="7"/><circle cx="340" cy="649" r="7"/><circle cx="385" cy="649" r="7"/><circle cx="430" cy="649" r="7"/><circle cx="475" cy="649" r="7"/><circle cx="520" cy="649" r="7"/><circle cx="565" cy="649" r="7"/><circle cx="610" cy="649" r="7"/><circle cx="655" cy="649" r="7"/><circle cx="700" cy="649" r="7"/><circle cx="745" cy="649" r="7"/>
+    </g>
+  </g>
+
+  <!-- circuit traces: a few names light up into signals -->
+  <g class="trace" filter="url(#soft)">
+    <polyline points="750,337 928,337 1012,253"/>            <!-- to node A -->
+    <polyline points="750,389 902,389 966,353"/>             <!-- to node B -->
+    <polyline points="750,441 1150,441"/>                    <!-- to node C (straight) -->
+    <polyline points="750,493 998,493 1058,565"/>           <!-- to node D -->
+    <polyline points="750,545 872,545 978,668"/>            <!-- to node E -->
+  </g>
+  <polyline class="trace-dim" points="750,597 832,597 995,742" filter="url(#soft)"/>
+
+  <!-- comet trail continuing past node C -->
+  <g fill="#b6e400">
+    <rect x="1210" y="439.2" width="70" height="3.2" opacity="0.5"/>
+    <rect x="1292" y="439.4" width="34" height="3" opacity="0.38"/>
+    <circle cx="1348" cy="441" r="3.2" opacity="0.32"/>
+    <circle cx="1378" cy="441" r="2.6" opacity="0.24"/>
+    <circle cx="1408" cy="441" r="2.2" opacity="0.17"/>
+    <circle cx="1440" cy="441" r="1.8" opacity="0.11"/>
+  </g>
+
+  <!-- signal nodes with glow rings -->
+  <g>
+    <!-- Node A -->
+    <circle cx="1080" cy="215" r="52" fill="url(#glow)"/>
+    <circle cx="1080" cy="215" r="34" fill="none" stroke="#b6e400" stroke-width="1" opacity="0.28"/>
+    <circle cx="1080" cy="215" r="24" fill="none" stroke="#b6e400" stroke-width="1.3" opacity="0.5"/>
+    <circle cx="1080" cy="215" r="13" fill="#cff23a"/>
+    <!-- Node B -->
+    <circle cx="992" cy="342" r="38" fill="url(#glow)"/>
+    <circle cx="992" cy="342" r="18" fill="none" stroke="#b6e400" stroke-width="1.2" opacity="0.45"/>
+    <circle cx="992" cy="342" r="9" fill="#cff23a"/>
+    <!-- Node C -->
+    <circle cx="1165" cy="441" r="58" fill="url(#glow)"/>
+    <circle cx="1165" cy="441" r="38" fill="none" stroke="#b6e400" stroke-width="1" opacity="0.26"/>
+    <circle cx="1165" cy="441" r="26" fill="none" stroke="#b6e400" stroke-width="1.3" opacity="0.5"/>
+    <circle cx="1165" cy="441" r="15" fill="#cff23a"/>
+    <!-- Node D -->
+    <circle cx="1225" cy="577" r="54" fill="url(#glow)"/>
+    <circle cx="1225" cy="577" r="34" fill="none" stroke="#b6e400" stroke-width="1" opacity="0.26"/>
+    <circle cx="1225" cy="577" r="23" fill="none" stroke="#b6e400" stroke-width="1.3" opacity="0.5"/>
+    <circle cx="1225" cy="577" r="14" fill="#cff23a"/>
+    <!-- Node E -->
+    <circle cx="1085" cy="680" r="44" fill="url(#glow)"/>
+    <circle cx="1085" cy="680" r="22" fill="none" stroke="#b6e400" stroke-width="1.2" opacity="0.42"/>
+    <circle cx="1085" cy="680" r="12" fill="#cff23a"/>
+    <!-- faint terminal dot -->
+    <circle cx="995" cy="742" r="4" fill="#b6e400" opacity="0.7"/>
+  </g>
+
+  <!-- ===== terminal panels ===== -->
+  <!-- INTENT SIGNALS -->
+  <g class="mono">
+    <text x="1250" y="86" class="hdr" font-size="15">CNVR   INTENT SIGNALS</text>
+    <text x="1636" y="86" class="lbl" font-size="15" text-anchor="end">11:47:23</text>
+    <line x1="1250" y1="104" x2="1636" y2="104" stroke="#233648" stroke-width="1"/>
+
+    <text x="1250" y="144" class="lime" font-size="14" opacity="0.85">NEW INTENT DETECTED</text>
+
+    <text x="1250" y="182" class="dim" font-size="13">TIME</text>
+    <text x="1372" y="182" class="dim" font-size="13">TICKER</text>
+    <text x="1510" y="182" class="dim" font-size="13">SIGNAL STRENGTH</text>
+
+    <text x="1250" y="208" class="val" font-size="13">11:47:21</text><text x="1372" y="208" class="val" font-size="13">ACME US</text><text x="1510" y="208" class="lime" font-size="13">98.7</text>
+    <text x="1250" y="230" class="val" font-size="13">11:47:19</text><text x="1372" y="230" class="val" font-size="13">BETA US</text><text x="1510" y="230" class="lime" font-size="13">94.2</text>
+    <text x="1250" y="252" class="val" font-size="13">11:47:16</text><text x="1372" y="252" class="val" font-size="13">CRNX US</text><text x="1510" y="252" class="lime" font-size="13">91.6</text>
+    <text x="1250" y="274" class="val" font-size="13">11:47:15</text><text x="1372" y="274" class="val" font-size="13">DVLT US</text><text x="1510" y="274" class="lime" font-size="13">89.3</text>
+  </g>
+
+  <!-- MARKET CONTEXT -->
+  <g class="mono">
+    <text x="1352" y="566" class="hdr" font-size="14">MARKET CONTEXT</text>
+    <text x="1352" y="596" class="dim" font-size="13">INDEX</text>
+    <text x="1470" y="596" class="dim" font-size="13">VALUE</text>
+    <text x="1580" y="596" class="dim" font-size="13">% CHANGE</text>
+
+    <text x="1352" y="622" class="val" font-size="13">SPX</text><text x="1470" y="622" class="val" font-size="13">5,278.40</text><text x="1580" y="622" class="lime" font-size="13">+0.48%</text>
+    <text x="1352" y="646" class="val" font-size="13">NDX</text><text x="1470" y="646" class="val" font-size="13">18,320.63</text><text x="1580" y="646" class="lime" font-size="13">+0.63%</text>
+    <text x="1352" y="670" class="val" font-size="13">VIX</text><text x="1470" y="670" class="val" font-size="13">12.41</text><text x="1580" y="670" class="val" font-size="13">-0.32%</text>
+    <text x="1352" y="694" class="val" font-size="13">DXY</text><text x="1470" y="694" class="val" font-size="13">104.21</text><text x="1580" y="694" class="val" font-size="13">-0.15%</text>
+  </g>
+
+  <!-- NEWSFEED -->
+  <g class="mono">
+    <text x="1250" y="786" class="hdr" font-size="14">NEWSFEED</text>
+    <text x="1250" y="814" class="lbl" font-size="13">11:46:54</text><text x="1368" y="814" class="val" font-size="13">Global markets rally...</text>
+    <text x="1250" y="836" class="lbl" font-size="13">11:46:31</text><text x="1368" y="836" class="val" font-size="13">Fed minutes signal...</text>
+    <text x="1250" y="858" class="lbl" font-size="13">11:45:02</text><text x="1368" y="858" class="val" font-size="13">Tech earnings beat...</text>
+    <text x="1250" y="880" class="lbl" font-size="13">11:44:11</text><text x="1368" y="880" class="val" font-size="13">Oil prices dip on...</text>
+  </g>
+</svg>

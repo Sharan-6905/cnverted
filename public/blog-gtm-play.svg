@@ -1,4 +1,4 @@
-<svg viewBox="0 0 1680 944" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cnvrted intent-signal terminal">
+<svg viewBox="0 0 1680 945" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cnvrted intent-signal terminal">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0B1A30"/>
@@ -25,7 +25,7 @@
     </style>
   </defs>
 
-  <rect width="1680" height="944" fill="url(#bg)"/>
+  <rect width="1680" height="945" fill="url(#bg)"/>
 
   <!-- registration crosshairs -->
   <g stroke="#283a4e" stroke-width="1.5">
@@ -133,15 +133,15 @@
 
   <!-- MARKET CONTEXT -->
   <g class="mono">
-    <text x="1352" y="566" class="hdr" font-size="14">MARKET CONTEXT</text>
-    <text x="1352" y="596" class="dim" font-size="13">INDEX</text>
-    <text x="1470" y="596" class="dim" font-size="13">VALUE</text>
-    <text x="1580" y="596" class="dim" font-size="13">% CHANGE</text>
+    <text x="1352" y="470" class="hdr" font-size="14">MARKET CONTEXT</text>
+    <text x="1352" y="500" class="dim" font-size="13">INDEX</text>
+    <text x="1470" y="500" class="dim" font-size="13">VALUE</text>
+    <text x="1580" y="500" class="dim" font-size="13">% CHANGE</text>
 
-    <text x="1352" y="622" class="val" font-size="13">SPX</text><text x="1470" y="622" class="val" font-size="13">5,278.40</text><text x="1580" y="622" class="lime" font-size="13">+0.48%</text>
-    <text x="1352" y="646" class="val" font-size="13">NDX</text><text x="1470" y="646" class="val" font-size="13">18,320.63</text><text x="1580" y="646" class="lime" font-size="13">+0.63%</text>
-    <text x="1352" y="670" class="val" font-size="13">VIX</text><text x="1470" y="670" class="val" font-size="13">12.41</text><text x="1580" y="670" class="val" font-size="13">-0.32%</text>
-    <text x="1352" y="694" class="val" font-size="13">DXY</text><text x="1470" y="694" class="val" font-size="13">104.21</text><text x="1580" y="694" class="val" font-size="13">-0.15%</text>
+    <text x="1352" y="526" class="val" font-size="13">SPX</text><text x="1470" y="526" class="val" font-size="13">5,278.40</text><text x="1580" y="526" class="lime" font-size="13">+0.48%</text>
+    <text x="1352" y="550" class="val" font-size="13">NDX</text><text x="1470" y="550" class="val" font-size="13">18,320.63</text><text x="1580" y="550" class="lime" font-size="13">+0.63%</text>
+    <text x="1352" y="574" class="val" font-size="13">VIX</text><text x="1470" y="574" class="val" font-size="13">12.41</text><text x="1580" y="574" class="val" font-size="13">-0.32%</text>
+    <text x="1352" y="598" class="val" font-size="13">DXY</text><text x="1470" y="598" class="val" font-size="13">104.21</text><text x="1580" y="598" class="val" font-size="13">-0.15%</text>
   </g>
 
   <!-- NEWSFEED -->

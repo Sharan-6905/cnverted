@@ -99,27 +99,40 @@ export function SiteHeader() {
                     className="overflow-hidden"
                   >
                     <div className="space-y-4 py-2">
-                      {PRODUCT_GROUPS.map((group) => (
-                        <div key={group.label}>
-                          <p className="mb-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-muted-soft">
-                            {group.label}
-                          </p>
-                          <ul className="space-y-0.5">
-                            {group.features.map((feature) => (
-                              <li key={feature.title}>
-                                <span className="flex items-center gap-1.5 py-1 text-sm text-body">
-                                  {feature.title}
-                                  {feature.soon !== false && (
-                                    <span className="rounded-full bg-brand-teal/10 px-1.5 py-0.5 font-mono text-[10px] font-medium text-brand-teal">
-                                      Soon
-                                    </span>
-                                  )}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
+                      {PRODUCT_GROUPS.map((group) => {
+                        const shipped = group.features.filter((f) => f.soon === false);
+                        const soon = group.features.filter((f) => f.soon !== false);
+                        return (
+                          <div key={group.label}>
+                            <p className="mb-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-muted-soft">
+                              {group.label}
+                            </p>
+                            {shipped.length > 0 && (
+                              <ul className="space-y-0.5">
+                                {shipped.map((feature) => (
+                                  <li key={feature.title} className="py-1 text-sm text-body">
+                                    {feature.title}
+                                  </li>
+                                ))}
+                              </ul>
+                            )}
+                            {soon.length > 0 && (
+                              <>
+                                <p className={cn("mb-1 text-[11px] text-muted-soft", shipped.length > 0 && "mt-2")}>
+                                  Coming soon
+                                </p>
+                                <ul className="space-y-0.5">
+                                  {soon.map((feature) => (
+                                    <li key={feature.title} className="py-1 text-sm text-body">
+                                      {feature.title}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   </motion.div>
                 )}

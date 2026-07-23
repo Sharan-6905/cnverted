@@ -4,7 +4,41 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { PRODUCT_GROUPS as GROUPS } from "@/lib/product-features";
+import { PRODUCT_GROUPS as GROUPS, type ProductFeature } from "@/lib/product-features";
+
+function FeatureItem({
+  feature,
+  active,
+  onToggle,
+}: {
+  feature: ProductFeature;
+  active: boolean;
+  onToggle: () => void;
+}) {
+  return (
+    <li>
+      <button
+        onClick={onToggle}
+        className="flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-left text-sm text-body smooth-transition transition-colors hover:bg-surface-soft hover:text-ink"
+      >
+        {feature.title}
+      </button>
+      <AnimatePresence>
+        {active && (
+          <motion.p
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.18 }}
+            className="overflow-hidden px-2 pb-1.5 text-xs leading-relaxed text-muted"
+          >
+            {feature.description}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </li>
+  );
+}
 
 export function ProductMenu() {
   const [open, setOpen] = useState(false);
@@ -35,45 +69,55 @@ export function ProductMenu() {
           >
             <div className="rounded-2xl border border-hairline bg-canvas p-5 shadow-soft">
               <div className="grid grid-cols-3 gap-5">
-                {GROUPS.map((group) => (
-                  <div key={group.label}>
-                    <p className="mb-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-muted-soft">
-                      {group.label}
-                    </p>
-                    <ul className="space-y-1">
-                      {group.features.map((feature) => (
-                        <li key={feature.title}>
-                          <button
-                            onClick={() =>
-                              setActiveFeature((cur) => (cur === feature.title ? null : feature.title))
-                            }
-                            className="flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-left text-sm text-body smooth-transition transition-colors hover:bg-surface-soft hover:text-ink"
+                {GROUPS.map((group) => {
+                  const shipped = group.features.filter((f) => f.soon === false);
+                  const soon = group.features.filter((f) => f.soon !== false);
+                  return (
+                    <div key={group.label}>
+                      <p className="mb-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-muted-soft">
+                        {group.label}
+                      </p>
+                      {shipped.length > 0 && (
+                        <ul className="space-y-1">
+                          {shipped.map((feature) => (
+                            <FeatureItem
+                              key={feature.title}
+                              feature={feature}
+                              active={activeFeature === feature.title}
+                              onToggle={() =>
+                                setActiveFeature((cur) => (cur === feature.title ? null : feature.title))
+                              }
+                            />
+                          ))}
+                        </ul>
+                      )}
+                      {soon.length > 0 && (
+                        <>
+                          <p
+                            className={cn(
+                              "mb-1.5 text-[11px] font-medium text-muted-soft",
+                              shipped.length > 0 && "mt-3"
+                            )}
                           >
-                            {feature.title}
-                            {feature.soon !== false && (
-                              <span className="rounded-full bg-brand-teal/10 px-1.5 py-0.5 font-mono text-[10px] font-medium text-brand-teal">
-                                Soon
-                              </span>
-                            )}
-                          </button>
-                          <AnimatePresence>
-                            {activeFeature === feature.title && (
-                              <motion.p
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.18 }}
-                                className="overflow-hidden px-2 pb-1.5 text-xs leading-relaxed text-muted"
-                              >
-                                {feature.description}
-                              </motion.p>
-                            )}
-                          </AnimatePresence>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
+                            Coming soon
+                          </p>
+                          <ul className="space-y-1">
+                            {soon.map((feature) => (
+                              <FeatureItem
+                                key={feature.title}
+                                feature={feature}
+                                active={activeFeature === feature.title}
+                                onToggle={() =>
+                                  setActiveFeature((cur) => (cur === feature.title ? null : feature.title))
+                                }
+                              />
+                            ))}
+                          </ul>
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </motion.div>

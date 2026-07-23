@@ -5,11 +5,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Clay surfaces — warm cream throughout
-        canvas: "#FFFAF0",
-        "surface-soft": "#FAF5E8",
-        "surface-card": "#F5F0E0",
-        "surface-strong": "#EBE6D6",
+        // Clay surfaces — light neutral, just a hint of warmth
+        canvas: "#FFFFFF",
+        "surface-soft": "#F7F6F3",
+        "surface-card": "#F1F0EA",
+        "surface-strong": "#E8E6DD",
         "surface-dark": "#0A1A1A",
 
         ink: "#0A0A0A",
@@ -17,7 +17,7 @@ const config: Config = {
         body: "#3A3A3A",
         muted: "#6A6A6A",
         "muted-soft": "#9A9A9A",
-        hairline: "#E5E0D2",
+        hairline: "#E7E5DD",
         "on-dark": "#FFFFFF",
 
         // Saturated Clay feature-card palette

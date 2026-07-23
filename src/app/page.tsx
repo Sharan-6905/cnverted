@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <SiteHeader onSlackInvite={() => console.log("[cta] slack invite")} />
+      <SiteHeader />
 
       <main className="flex-1">
         <Hero featuredSignal={FEATURED_SIGNAL} />

@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { CtaBand } from "@/components/cta-band";
+import { PricingPlans } from "@/components/pricing-plans";
 
 export const metadata: Metadata = {
   title: "Pricing — Cnvrted",
@@ -18,8 +19,10 @@ export default function PricingPage() {
           centered
           eyebrow="Pricing"
           title="Simple, transparent pricing."
-          description="Cnvrted is in early access — pricing plans open up as we roll out to new teams. Join the list below to lock in early-access rates."
-        />
+          description="Cnvrted is in early access — join now to lock in these rates before general availability."
+        >
+          <PricingPlans />
+        </Section>
         <CtaBand />
       </main>
       <SiteFooter />

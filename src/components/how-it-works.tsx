@@ -43,13 +43,7 @@ export function HowItWorks() {
       eyebrow="How it works"
       title="From noise to a ready-to-work account in four steps."
     >
-      <div className="relative grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-        {/* Connecting line — sits behind the step cards, only visible at the 4-col breakpoint */}
-        <div
-          aria-hidden
-          className="absolute left-0 right-0 top-16 hidden h-px bg-hairline lg:block"
-          style={{ marginInline: "12.5%" }}
-        />
+      <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         {STEPS.map((s, i) => (
           <motion.div
             key={s.step}

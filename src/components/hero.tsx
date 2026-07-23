@@ -11,7 +11,8 @@ interface HeroProps {
 export function Hero({ featuredSignal }: HeroProps) {
   return (
     <section className="relative overflow-hidden px-6 pt-16 pb-20 md:pt-24">
-      <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
+      <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
         {/* Copy + CTA */}
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-hairline bg-surface-soft px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted">

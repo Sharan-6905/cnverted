@@ -4,23 +4,21 @@ import { useState } from "react";
 import Link from "next/link";
 import { Slack, Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
 import { ProductMenu } from "@/components/product-menu";
 import { PRODUCT_GROUPS } from "@/lib/product-features";
 import { cn } from "@/lib/utils";
 
-interface SiteHeaderProps {
-  onSlackInvite?: () => void;
-}
+const SLACK_INVITE_URL =
+  "https://join.slack.com/t/cnvrted/shared_invite/zt-4388qsrbr-x~RlkFSChnmWY7JojhV1fA";
 
 const NAV = [
   { label: "Blogs", href: "/blogs" },
   { label: "Pricing", href: "/pricing" },
-  { label: "About Us", href: "/about" },
 ];
 
-export function SiteHeader({ onSlackInvite }: SiteHeaderProps) {
+export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProductOpen, setMobileProductOpen] = useState(false);
 
@@ -46,15 +44,18 @@ export function SiteHeader({ onSlackInvite }: SiteHeaderProps) {
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-2.5">
-          <Button
-            variant="ghost"
-            size="sm"
-            className="hidden text-muted hover:text-ink sm:inline-flex"
-            onClick={onSlackInvite}
+          <a
+            href={SLACK_INVITE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "sm" }),
+              "hidden text-muted hover:text-ink sm:inline-flex"
+            )}
           >
             <Slack className="h-4 w-4" />
             Community
-          </Button>
+          </a>
           <button
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((v) => !v)}
@@ -138,15 +139,18 @@ export function SiteHeader({ onSlackInvite }: SiteHeaderProps) {
               </div>
 
               <div className="mt-3 border-t border-hairline pt-3">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="w-full justify-center text-muted hover:text-ink"
-                  onClick={onSlackInvite}
+                <a
+                  href={SLACK_INVITE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    buttonVariants({ variant: "ghost", size: "sm" }),
+                    "w-full justify-center text-muted hover:text-ink"
+                  )}
                 >
                   <Slack className="h-4 w-4" />
                   Community
-                </Button>
+                </a>
               </div>
             </div>
           </motion.div>

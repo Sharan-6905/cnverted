@@ -24,6 +24,16 @@
     border: 1px solid theme("colors.hairline");
     border-radius: theme("borderRadius.3xl");
   }
+
+  /* Faint square grid, fading out toward the edges — used behind the hero. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgba(10, 10, 10, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(10, 10, 10, 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 85%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 85%);
+  }
 }
 
 @layer utilities {

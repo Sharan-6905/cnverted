@@ -28,48 +28,53 @@ export function ProductMenu() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-1/2 top-full z-50 mt-3 w-[90vw] max-w-[560px] -translate-x-1/2 rounded-2xl border border-hairline bg-canvas p-5 shadow-soft"
+            /* pt-3 (not mt-3) so the hoverable box is contiguous with the trigger button —
+               a margin gap here is dead space that fires onMouseLeave before the cursor
+               ever reaches the panel below. */
+            className="absolute left-1/2 top-full z-50 w-[90vw] max-w-[560px] -translate-x-1/2 pt-3"
           >
-            <div className="grid grid-cols-3 gap-5">
-              {GROUPS.map((group) => (
-                <div key={group.label}>
-                  <p className="mb-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-muted-soft">
-                    {group.label}
-                  </p>
-                  <ul className="space-y-1">
-                    {group.features.map((feature) => (
-                      <li key={feature.title}>
-                        <button
-                          onClick={() =>
-                            setActiveFeature((cur) => (cur === feature.title ? null : feature.title))
-                          }
-                          className="flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-left text-sm text-body smooth-transition transition-colors hover:bg-surface-soft hover:text-ink"
-                        >
-                          {feature.title}
-                          {feature.soon !== false && (
-                            <span className="rounded-full bg-brand-teal/10 px-1.5 py-0.5 font-mono text-[10px] font-medium text-brand-teal">
-                              Soon
-                            </span>
-                          )}
-                        </button>
-                        <AnimatePresence>
-                          {activeFeature === feature.title && (
-                            <motion.p
-                              initial={{ opacity: 0, height: 0 }}
-                              animate={{ opacity: 1, height: "auto" }}
-                              exit={{ opacity: 0, height: 0 }}
-                              transition={{ duration: 0.18 }}
-                              className="overflow-hidden px-2 pb-1.5 text-xs leading-relaxed text-muted"
-                            >
-                              {feature.description}
-                            </motion.p>
-                          )}
-                        </AnimatePresence>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            <div className="rounded-2xl border border-hairline bg-canvas p-5 shadow-soft">
+              <div className="grid grid-cols-3 gap-5">
+                {GROUPS.map((group) => (
+                  <div key={group.label}>
+                    <p className="mb-2.5 text-xs font-semibold uppercase tracking-[0.1em] text-muted-soft">
+                      {group.label}
+                    </p>
+                    <ul className="space-y-1">
+                      {group.features.map((feature) => (
+                        <li key={feature.title}>
+                          <button
+                            onClick={() =>
+                              setActiveFeature((cur) => (cur === feature.title ? null : feature.title))
+                            }
+                            className="flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-left text-sm text-body smooth-transition transition-colors hover:bg-surface-soft hover:text-ink"
+                          >
+                            {feature.title}
+                            {feature.soon !== false && (
+                              <span className="rounded-full bg-brand-teal/10 px-1.5 py-0.5 font-mono text-[10px] font-medium text-brand-teal">
+                                Soon
+                              </span>
+                            )}
+                          </button>
+                          <AnimatePresence>
+                            {activeFeature === feature.title && (
+                              <motion.p
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: "auto" }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.18 }}
+                                className="overflow-hidden px-2 pb-1.5 text-xs leading-relaxed text-muted"
+                              >
+                                {feature.description}
+                              </motion.p>
+                            )}
+                          </AnimatePresence>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
         )}

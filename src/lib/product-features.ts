@@ -80,7 +80,7 @@ export const PRODUCT_GROUPS: ProductGroup[] = [
         description: "Listens in on calls to help with closing, talking points, and drafting follow-ups.",
       },
       {
-        title: "Addy planner",
+        title: "Customized planner",
         description: "A customized workflow planner that manages and automates your day.",
       },
     ],

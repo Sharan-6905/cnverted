@@ -33,7 +33,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Go-to-market",
     date: "2026-07-23",
     readingMinutes: 6,
-    cover: "/blog-gtm-play.svg",
+    cover: "/blog-gtm-play.svg?v=3",
     body: [
       {
         type: "p",

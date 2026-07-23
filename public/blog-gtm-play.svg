@@ -115,41 +115,41 @@
   <!-- ===== terminal panels ===== -->
   <!-- INTENT SIGNALS -->
   <g class="mono">
-    <text x="1250" y="86" class="hdr" font-size="15">CNVR   INTENT SIGNALS</text>
-    <text x="1636" y="86" class="lbl" font-size="15" text-anchor="end">11:47:23</text>
-    <line x1="1250" y1="104" x2="1636" y2="104" stroke="#233648" stroke-width="1"/>
+    <text x="1250" y="134" class="hdr" font-size="15">CNVR   INTENT SIGNALS</text>
+    <text x="1636" y="134" class="lbl" font-size="15" text-anchor="end">11:47:23</text>
+    <line x1="1250" y1="152" x2="1636" y2="152" stroke="#233648" stroke-width="1"/>
 
-    <text x="1250" y="144" class="lime" font-size="14" opacity="0.85">NEW INTENT DETECTED</text>
+    <text x="1250" y="192" class="lime" font-size="14" opacity="0.85">NEW INTENT DETECTED</text>
 
-    <text x="1250" y="182" class="dim" font-size="13">TIME</text>
-    <text x="1372" y="182" class="dim" font-size="13">TICKER</text>
-    <text x="1510" y="182" class="dim" font-size="13">SIGNAL STRENGTH</text>
+    <text x="1250" y="230" class="dim" font-size="13">TIME</text>
+    <text x="1372" y="230" class="dim" font-size="13">TICKER</text>
+    <text x="1510" y="230" class="dim" font-size="13">SIGNAL STRENGTH</text>
 
-    <text x="1250" y="208" class="val" font-size="13">11:47:21</text><text x="1372" y="208" class="val" font-size="13">ACME US</text><text x="1510" y="208" class="lime" font-size="13">98.7</text>
-    <text x="1250" y="230" class="val" font-size="13">11:47:19</text><text x="1372" y="230" class="val" font-size="13">BETA US</text><text x="1510" y="230" class="lime" font-size="13">94.2</text>
-    <text x="1250" y="252" class="val" font-size="13">11:47:16</text><text x="1372" y="252" class="val" font-size="13">CRNX US</text><text x="1510" y="252" class="lime" font-size="13">91.6</text>
-    <text x="1250" y="274" class="val" font-size="13">11:47:15</text><text x="1372" y="274" class="val" font-size="13">DVLT US</text><text x="1510" y="274" class="lime" font-size="13">89.3</text>
+    <text x="1250" y="256" class="val" font-size="13">11:47:21</text><text x="1372" y="256" class="val" font-size="13">ACME US</text><text x="1510" y="256" class="lime" font-size="13">98.7</text>
+    <text x="1250" y="278" class="val" font-size="13">11:47:19</text><text x="1372" y="278" class="val" font-size="13">BETA US</text><text x="1510" y="278" class="lime" font-size="13">94.2</text>
+    <text x="1250" y="300" class="val" font-size="13">11:47:16</text><text x="1372" y="300" class="val" font-size="13">CRNX US</text><text x="1510" y="300" class="lime" font-size="13">91.6</text>
+    <text x="1250" y="322" class="val" font-size="13">11:47:15</text><text x="1372" y="322" class="val" font-size="13">DVLT US</text><text x="1510" y="322" class="lime" font-size="13">89.3</text>
   </g>
 
   <!-- MARKET CONTEXT -->
   <g class="mono">
-    <text x="1352" y="470" class="hdr" font-size="14">MARKET CONTEXT</text>
-    <text x="1352" y="500" class="dim" font-size="13">INDEX</text>
-    <text x="1470" y="500" class="dim" font-size="13">VALUE</text>
-    <text x="1580" y="500" class="dim" font-size="13">% CHANGE</text>
+    <text x="1352" y="463" class="hdr" font-size="14">MARKET CONTEXT</text>
+    <text x="1352" y="493" class="dim" font-size="13">INDEX</text>
+    <text x="1470" y="493" class="dim" font-size="13">VALUE</text>
+    <text x="1580" y="493" class="dim" font-size="13">% CHANGE</text>
 
-    <text x="1352" y="526" class="val" font-size="13">SPX</text><text x="1470" y="526" class="val" font-size="13">5,278.40</text><text x="1580" y="526" class="lime" font-size="13">+0.48%</text>
-    <text x="1352" y="550" class="val" font-size="13">NDX</text><text x="1470" y="550" class="val" font-size="13">18,320.63</text><text x="1580" y="550" class="lime" font-size="13">+0.63%</text>
-    <text x="1352" y="574" class="val" font-size="13">VIX</text><text x="1470" y="574" class="val" font-size="13">12.41</text><text x="1580" y="574" class="val" font-size="13">-0.32%</text>
-    <text x="1352" y="598" class="val" font-size="13">DXY</text><text x="1470" y="598" class="val" font-size="13">104.21</text><text x="1580" y="598" class="val" font-size="13">-0.15%</text>
+    <text x="1352" y="519" class="val" font-size="13">SPX</text><text x="1470" y="519" class="val" font-size="13">5,278.40</text><text x="1580" y="519" class="lime" font-size="13">+0.48%</text>
+    <text x="1352" y="543" class="val" font-size="13">NDX</text><text x="1470" y="543" class="val" font-size="13">18,320.63</text><text x="1580" y="543" class="lime" font-size="13">+0.63%</text>
+    <text x="1352" y="567" class="val" font-size="13">VIX</text><text x="1470" y="567" class="val" font-size="13">12.41</text><text x="1580" y="567" class="val" font-size="13">-0.32%</text>
+    <text x="1352" y="591" class="val" font-size="13">DXY</text><text x="1470" y="591" class="val" font-size="13">104.21</text><text x="1580" y="591" class="val" font-size="13">-0.15%</text>
   </g>
 
   <!-- NEWSFEED -->
   <g class="mono">
-    <text x="1250" y="786" class="hdr" font-size="14">NEWSFEED</text>
-    <text x="1250" y="814" class="lbl" font-size="13">11:46:54</text><text x="1368" y="814" class="val" font-size="13">Global markets rally...</text>
-    <text x="1250" y="836" class="lbl" font-size="13">11:46:31</text><text x="1368" y="836" class="val" font-size="13">Fed minutes signal...</text>
-    <text x="1250" y="858" class="lbl" font-size="13">11:45:02</text><text x="1368" y="858" class="val" font-size="13">Tech earnings beat...</text>
-    <text x="1250" y="880" class="lbl" font-size="13">11:44:11</text><text x="1368" y="880" class="val" font-size="13">Oil prices dip on...</text>
+    <text x="1250" y="732" class="hdr" font-size="14">NEWSFEED</text>
+    <text x="1250" y="760" class="lbl" font-size="13">11:46:54</text><text x="1368" y="760" class="val" font-size="13">Global markets rally...</text>
+    <text x="1250" y="782" class="lbl" font-size="13">11:46:31</text><text x="1368" y="782" class="val" font-size="13">Fed minutes signal...</text>
+    <text x="1250" y="804" class="lbl" font-size="13">11:45:02</text><text x="1368" y="804" class="val" font-size="13">Tech earnings beat...</text>
+    <text x="1250" y="826" class="lbl" font-size="13">11:44:11</text><text x="1368" y="826" class="val" font-size="13">Oil prices dip on...</text>
   </g>
 </svg>

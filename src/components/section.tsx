@@ -21,7 +21,7 @@ export function Section({
 }: SectionProps) {
   return (
     <section
-      className={cn("px-6 py-20 md:py-28", className)}
+      className={cn("px-5 py-14 sm:px-6 sm:py-20 md:py-28", className)}
       {...props}
     >
       <div className="mx-auto max-w-6xl">

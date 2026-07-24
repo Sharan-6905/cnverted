@@ -33,7 +33,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Comparison",
     date: "2026-07-24",
     readingMinutes: 7,
-    cover: "/blog-apollo-vs-cnvrted.svg",
+    cover: "/blog-apollo-vs-cnvrted.svg?v=2",
     body: [
       {
         type: "p",

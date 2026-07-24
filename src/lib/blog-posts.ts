@@ -25,6 +25,105 @@ export interface BlogPost {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "apollo-vs-cnvrted",
+    title: "Apollo vs. Cnvrted: Names vs. Buyers",
+    excerpt:
+      "An honest comparison — where Apollo genuinely wins, where it structurally can't, and how to tell which one your team actually needs. Coverage is a bet on reach; timing is a bet on now.",
+    dek: "Where Apollo genuinely wins, where it structurally can't, and how to tell which your team needs. One is a bet on coverage; the other on timing.",
+    category: "Comparison",
+    date: "2026-07-24",
+    readingMinutes: 7,
+    cover: "/blog-apollo-vs-cnvrted.svg",
+    body: [
+      {
+        type: "p",
+        text: "If you're running B2B outbound, you've used Apollo — or you've at least had the tab open. It's the default. So let's do the honest comparison, not the hit piece: where Apollo genuinely wins, where it structurally can't, and how to tell which one your team actually needs.",
+      },
+      {
+        type: "p",
+        text: "Spoiler: they're not really the same category. And pretending Apollo has no strengths would be the fastest way to lose your trust, so we won't.",
+      },
+      { type: "h2", text: "What Apollo is genuinely great at" },
+      { type: "p", text: "Apollo earned its place. Credit where it's due:" },
+      {
+        type: "p",
+        text: "**Coverage.** A database of 200M+ contacts and 30M+ companies is a serious asset. If your job is “find me every Director of Sales at a Series B SaaS company in North America,” Apollo will hand you a list in seconds. That breadth is real and it's hard to build.",
+      },
+      {
+        type: "p",
+        text: "**Consolidation.** For $49–119 per user per month, you get a contact database, email sequencing, a dialer, CRM sync, and an AI assistant under one roof. For an early-stage team that would otherwise stitch together four tools, that's a genuinely good deal, and the free tier is one of the most generous in the category.",
+      },
+      {
+        type: "p",
+        text: "**It's a complete outbound stack.** Find, sequence, dial, track — all in one place. That's not nothing. For a lot of SMB teams, it's exactly right.",
+      },
+      {
+        type: "p",
+        text: "If your bottleneck is *coverage and consolidation* — you need volume, and you need it cheap and in one place — Apollo is a fine answer. Genuinely.",
+      },
+      { type: "h2", text: "The one thing it structurally can't do" },
+      { type: "p", text: "Here's the line." },
+      {
+        type: "p",
+        text: "Apollo tells you **who exists**. At its best — on the higher tiers, where intent data is unlocked — it tells you which *topics* an account is broadly researching. That intent is **topic-level and account-level**: aggregated, gated by plan tier, and generally inferred from third-party web activity. It's a probability that *someone somewhere* at a company has been reading about your category.",
+      },
+      {
+        type: "p",
+        text: "What it does not tell you is: **which specific person is voicing that intent, in their own words, right now.**",
+      },
+      {
+        type: "p",
+        text: "That's not a knock on Apollo's execution — it's a limit of the model. A static database is a snapshot. It's updated, sure, but its native question is *“who fits?”* — not *“who's moving today?”* Topic-level intent is a blurry heat map of a building. It doesn't point at the person standing at the window waving.",
+      },
+      { type: "h2", text: "Coverage vs. timing: two different bets" },
+      {
+        type: "p",
+        text: "This is the real distinction, and it's worth naming plainly:",
+      },
+      {
+        type: "p",
+        text: "**Apollo is a bet on coverage.** More contacts, more filters, more reach. The theory: if you can reach enough of the right-shaped people, some fraction will be in-market. It's a volume game, and Apollo plays it well.",
+      },
+      {
+        type: "p",
+        text: "**Cnvrted is a bet on timing.** We read LinkedIn, Reddit, and X in real time and surface actual buying-intent signals — a specific person complaining about their current vendor, a founder posting three times this week about the exact pain you solve, a leadership hire that just unlocked a mandate. Not “this account is probably researching your category.” *This person, this post, this window, right now.*",
+      },
+      {
+        type: "p",
+        text: "One is a directory. The other is a live feed. Apollo answers *who could buy*. Cnvrted answers *who's buying* — the trigger you actually build a play around.",
+      },
+      { type: "h2", text: "So which do you need?" },
+      { type: "p", text: "Honestly? It depends on what your bottleneck is." },
+      {
+        type: "p",
+        text: "**Use Apollo if** your problem is reach — you need a big list, a sequencer, and a dialer in one affordable place, and you're comfortable running a volume motion. It's the right tool for that job.",
+      },
+      {
+        type: "p",
+        text: "**Use Cnvrted if** your problem is *timing* — you're already reaching people, but you're reaching them cold, at the wrong moment, and your reply rates show it. If the question keeping you up isn't “who could I email?” but “who's worth emailing *today*?” — that's the gap we were built for.",
+      },
+      {
+        type: "p",
+        text: "And plenty of teams run both: Apollo for the reach and the send, Cnvrted for the trigger that tells you *when* the send is worth making. A signal that fires into an Apollo sequence is worth ten cold ones.",
+      },
+      { type: "h2", text: "The honest bottom line" },
+      {
+        type: "p",
+        text: "Apollo isn't bad. It's the best version of a static-database, coverage-first tool, and that model has a real place in a GTM stack.",
+      },
+      {
+        type: "p",
+        text: "But coverage was never the hard part of modern selling. *Timing* is. The buyer who's moving right now converts at a multiple of the buyer who merely fits your ICP — and no amount of database size tells you which is which. That takes listening to the market as it speaks, in real time, in the open.",
+      },
+      { type: "p", text: "Apollo gives you names. We give you buyers." },
+      { type: "p", text: "**Buyers, not names.**" },
+      {
+        type: "cta",
+        text: "Cnvrted surfaces real-time buying-intent signals from LinkedIn, Reddit, and X — so your outbound fires on people who are actually moving, not names on a list. [See what's firing in your market.](https://cnvrted.com)",
+      },
+    ],
+  },
+  {
     slug: "what-is-a-gtm-play",
     title: "What Is a GTM Play (and Why Your Signals Are Useless Without One)",
     excerpt:

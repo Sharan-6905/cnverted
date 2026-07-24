@@ -97,10 +97,12 @@ export function HeroScene({ signal }: { signal: Signal }) {
         </motion.div>
       </motion.div>
 
-      {/* Live signal credibility card — gentle parallax */}
+      {/* Live signal credibility card — gentle parallax.
+          Centred under the video on mobile (auto-margins survive framer's
+          y-transform); bleeds left on sm+ for the layered desktop look. */}
       <motion.div
         style={signalStyle}
-        className="absolute -bottom-4 -left-2 w-[280px] max-w-[80%] sm:-left-6"
+        className="absolute -bottom-5 inset-x-0 mx-auto w-[88%] max-w-[300px] sm:inset-x-auto sm:mx-0 sm:-bottom-4 sm:-left-6 sm:w-[280px] sm:max-w-[80%]"
       >
         <SignalCard signal={signal} highlighted />
       </motion.div>

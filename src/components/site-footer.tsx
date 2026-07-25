@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/logo";
+import { supabase } from "@/lib/supabase";
 
 const COLUMNS = [
   {
@@ -47,11 +48,20 @@ const LEGAL_LINKS = [
 function FooterWaitlistForm() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!email) return;
-    console.log("[footer-waitlist] submit:", email);
+    setLoading(true);
+    setError(null);
+    const { error } = await supabase.from("footer_waitlist_emails").insert({ email });
+    setLoading(false);
+    if (error) {
+      setError(error.code === "23505" ? "You're already on the list." : "Something went wrong. Try again.");
+      return;
+    }
     setSubmitted(true);
   }
 
@@ -65,28 +75,31 @@ function FooterWaitlistForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="mt-5 flex flex-col gap-2 sm:flex-row">
-      <label htmlFor="footer-cta-email" className="sr-only">
-        Work email
-      </label>
-      <div className="relative flex-1">
-        <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-soft" />
-        <Input
-          id="footer-cta-email"
-          type="email"
-          required
-          autoComplete="email"
-          placeholder="Enter your mail id"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="border-white/25 bg-white/90 pl-10"
-        />
-      </div>
-      <Button type="submit" variant="primary" size="md" className="shrink-0">
-        Join
-        <ArrowRight className="h-4 w-4" />
-      </Button>
-    </form>
+    <div className="mt-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2 sm:flex-row">
+        <label htmlFor="footer-cta-email" className="sr-only">
+          Work email
+        </label>
+        <div className="relative flex-1">
+          <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-soft" />
+          <Input
+            id="footer-cta-email"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder="Enter your mail id"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="border-white/25 bg-white/90 pl-10"
+          />
+        </div>
+        <Button type="submit" variant="primary" size="md" className="shrink-0" disabled={loading}>
+          {loading ? "Joining…" : "Join"}
+          <ArrowRight className="h-4 w-4" />
+        </Button>
+      </form>
+      {error && <p className="mt-2 text-xs text-red-300">{error}</p>}
+    </div>
   );
 }
 

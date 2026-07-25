@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, Mail, MessageCircle, Mic, Sparkles } from "lucide-react";
+import { ArrowRight, Mail, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/logo";
@@ -44,7 +44,6 @@ export function IntentCapture() {
         >
           <div className="flex items-center gap-2.5 px-3 py-2.5">
             <Logo className="h-5 w-5 shrink-0" />
-            <MessageCircle className="h-4 w-4 shrink-0 text-muted-soft" />
             <input
               type="text"
               value={sells}
@@ -52,7 +51,6 @@ export function IntentCapture() {
               placeholder="What do you sell? E.g., B2B software, Consulting services"
               className="w-full bg-transparent text-sm text-ink placeholder:text-muted-soft focus:outline-none"
             />
-            <Mic className="h-4 w-4 shrink-0 text-muted-soft" />
           </div>
 
           <div className="mt-1 flex flex-col gap-2 border-t border-hairline pt-2.5 sm:flex-row sm:items-center">

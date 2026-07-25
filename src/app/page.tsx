@@ -2,6 +2,7 @@
 
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
+import { IntentCapture } from "@/components/intent-capture";
 import { HowItWorks } from "@/components/how-it-works";
 import { FeatureRows } from "@/components/feature-rows";
 import { LiveSignalFeed } from "@/components/live-signal-feed";
@@ -23,6 +24,7 @@ export default function Home() {
 
       <main className="flex-1">
         <Hero featuredSignal={FEATURED_SIGNAL} />
+        <IntentCapture />
         <HowItWorks />
         <FeatureRows />
         <LiveSignalFeed signals={SIGNALS} onSelectSignal={handleSelectSignal} />

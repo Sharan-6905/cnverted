@@ -63,7 +63,7 @@ export function SiteFooter() {
 
         <div className="mt-14 flex flex-col items-center justify-between gap-6 border-t border-on-dark/10 pt-8 sm:flex-row">
           <div className="flex items-center gap-2.5">
-            <Logo className="h-6 w-6" />
+            <Logo className="h-8 w-auto" />
             <span className="text-sm font-semibold tracking-tight text-on-dark">Cnvrted</span>
           </div>
 

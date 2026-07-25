@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Cnvrted — Reach buyers the moment they're in-market",
   description:
     "Cnvrted monitors the dark funnel — LinkedIn, Reddit, X, and the open web — for real-time buying signals, then scores accounts by intent so your team engages at exactly the right time.",
-  icons: { icon: "/favicon.svg" },
+  icons: { icon: "/favicon.png" },
 };
 
 export default function RootLayout({

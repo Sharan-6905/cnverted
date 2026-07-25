@@ -7,36 +7,45 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/logo";
+import { LinkedInIcon, XIcon, InstagramIcon } from "@/components/social-icons";
 import { supabase } from "@/lib/supabase";
 
 const COLUMNS = [
   {
     heading: "Platform",
     links: [
-      { label: "Finding leads", href: "/#product" },
-      { label: "Web scraping", href: "/#product" },
-      { label: "Dashboard", href: "/#product" },
-      { label: "CoPilot", href: "/#product" },
-      { label: "Deal intelligence", href: "/#product" },
+      { label: "Pricing", href: "/pricing" },
+      { label: "Request Demo", href: "/early-access" },
     ],
   },
   {
-    heading: "Solutions",
+    heading: "Features",
     links: [
-      { label: "Sales Development Reps", href: "/#teams" },
-      { label: "Account Executives", href: "/#teams" },
-      { label: "RevOps", href: "/#teams" },
-      { label: "GTM Leaders", href: "/#teams" },
+      { label: "Product Capabilities", href: "/#product" },
+      { label: "Our Approach", href: "/about" },
+    ],
+  },
+  {
+    heading: "Resources",
+    links: [
+      { label: "Blog", href: "/blogs" },
+      { label: "Case Studies", href: "/case-studies" },
+      { label: "Help Center", href: "/help-center" },
     ],
   },
   {
     heading: "Company",
     links: [
-      { label: "Blogs", href: "/blogs" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "About Us", href: "/about" },
+      { label: "Contact", href: "#" },
+      { label: "Careers", href: "/careers" },
     ],
   },
+];
+
+const SOCIAL_LINKS = [
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/cnvrted", Icon: LinkedInIcon },
+  { label: "X", href: "https://x.com/cnvrted", Icon: XIcon },
+  { label: "Instagram", href: "https://www.instagram.com/cnvrted", Icon: InstagramIcon },
 ];
 
 const LEGAL_LINKS = [
@@ -127,7 +136,7 @@ export function SiteFooter() {
       </div>
 
       <div className="relative mx-auto max-w-6xl px-6 pb-16">
-        <div className="grid gap-10 sm:grid-cols-3">
+        <div className="grid grid-cols-4 gap-3 sm:gap-8 lg:gap-10">
           {COLUMNS.map((col) => (
             <div key={col.heading}>
               <p className="text-sm font-semibold text-on-dark">{col.heading}</p>
@@ -164,6 +173,21 @@ export function SiteFooter() {
               </a>
             ))}
           </nav>
+
+          <div className="flex items-center gap-4">
+            {SOCIAL_LINKS.map(({ label, href, Icon }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="text-on-dark/60 smooth-transition transition-colors hover:text-on-dark"
+              >
+                <Icon className="h-4 w-4" />
+              </a>
+            ))}
+          </div>
 
           <p className="text-xs text-on-dark/50">
             © {new Date().getFullYear()} Cnvrted. All rights reserved.

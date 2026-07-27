@@ -10,7 +10,7 @@ import { BuiltForTeams } from "@/components/built-for-teams";
 import { Integrations } from "@/components/integrations";
 import { Comparison } from "@/components/comparison";
 import { SiteFooter } from "@/components/site-footer";
-import { FEATURED_SIGNAL, SIGNALS, PERSONAS, INTEGRATIONS } from "@/lib/sample-data";
+import { FEATURED_SIGNAL, SIGNALS, INTEGRATIONS } from "@/lib/sample-data";
 import type { Signal } from "@/lib/types";
 
 export default function Home() {
@@ -28,7 +28,7 @@ export default function Home() {
         <IntegrationStack />
         <FeatureRows />
         <LiveSignalFeed signals={SIGNALS} onSelectSignal={handleSelectSignal} />
-        <BuiltForTeams personas={PERSONAS} />
+        <BuiltForTeams />
         <Integrations integrations={INTEGRATIONS} />
         <Comparison />
       </main>

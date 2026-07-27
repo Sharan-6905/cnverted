@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { CareerApplicationForm } from "@/components/career-application-form";
 
 export const metadata: Metadata = {
   title: "Careers — Cnvrted",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 
 const ROLES = [
   {
-    title: "AI Engineer",
+    title: "AI/ML Engineer",
     location: "Remote",
     type: "Full-time",
     description:
@@ -26,11 +27,18 @@ const ROLES = [
       "Sit between product and revenue — build the workflows and integrations that get signal into reps' hands, fast.",
   },
   {
-    title: "Founding Engineer",
+    title: "GTM Lead",
     location: "Remote",
     type: "Full-time",
     description:
-      "Join early and help shape the core product across the stack, from data ingestion to the dashboard reps live in.",
+      "Own go-to-market strategy end to end — from positioning to pipeline — as one of our earliest hires.",
+  },
+  {
+    title: "Founders Office Intern (In batches)",
+    location: "Remote",
+    type: "Internship",
+    description:
+      "Work directly with the founders across product, GTM, and ops — high ownership, fast learning.",
   },
 ];
 
@@ -63,6 +71,10 @@ export default function CareersPage() {
                 </p>
               </Card>
             ))}
+          </div>
+
+          <div className="mt-16">
+            <CareerApplicationForm />
           </div>
         </Section>
       </main>

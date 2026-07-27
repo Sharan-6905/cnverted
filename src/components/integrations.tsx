@@ -28,6 +28,22 @@ interface IntegrationsProps {
   integrations: Integration[];
 }
 
+function IntegrationLogo({ it }: { it: Integration }) {
+  const Mark = MARKS[it.id];
+  return (
+    <div className="flex shrink-0 items-center gap-2.5 opacity-90 smooth-transition transition-opacity hover:opacity-100">
+      {Mark !== undefined ? <Mark className="h-8 w-8" /> : null}
+      {Mark !== undefined ? (
+        <span className="font-display text-lg font-semibold tracking-tight text-ink">
+          {it.name}
+        </span>
+      ) : (
+        <ColorWordmark name={it.name} color={WORDMARK_COLORS[it.id] ?? "#3A3A3A"} />
+      )}
+    </div>
+  );
+}
+
 export function Integrations({ integrations }: IntegrationsProps) {
   return (
     <Section
@@ -36,28 +52,20 @@ export function Integrations({ integrations }: IntegrationsProps) {
       title="Scored accounts, right where you already work."
       description="Cnvrted pushes enriched, high-intent accounts straight into your CRM and outreach stack — no CSV exports, no busywork."
     >
-      <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
-        {integrations.map((it) => {
-          const Mark = MARKS[it.id];
-          return (
-            <div
-              key={it.id}
-              className="flex items-center gap-2.5 opacity-90 smooth-transition transition-opacity hover:opacity-100"
-            >
-              {Mark !== undefined ? <Mark className="h-8 w-8" /> : null}
-              {Mark !== undefined ? (
-                <span className="font-display text-lg font-semibold tracking-tight text-ink">
-                  {it.name}
-                </span>
-              ) : (
-                <ColorWordmark
-                  name={it.name}
-                  color={WORDMARK_COLORS[it.id] ?? "#3A3A3A"}
-                />
-              )}
-            </div>
-          );
-        })}
+      <div
+        className="relative overflow-hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 10%, black 90%, transparent)",
+        }}
+      >
+        <div className="animate-marquee flex w-max items-center gap-12">
+          {[...integrations, ...integrations].map((it, i) => (
+            <IntegrationLogo key={`${it.id}-${i}`} it={it} />
+          ))}
+        </div>
       </div>
     </Section>
   );

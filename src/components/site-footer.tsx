@@ -36,7 +36,7 @@ const COLUMNS = [
   {
     heading: "Company",
     links: [
-      { label: "Contact", href: "#" },
+      { label: "Contact", href: "/contact" },
       { label: "Careers", href: "/careers" },
     ],
   },
@@ -51,7 +51,7 @@ const SOCIAL_LINKS = [
 const LEGAL_LINKS = [
   { label: "Privacy", href: "#" },
   { label: "Terms", href: "#" },
-  { label: "Contact", href: "#" },
+  { label: "Contact", href: "/contact" },
 ];
 
 function FooterWaitlistForm() {
@@ -72,13 +72,18 @@ function FooterWaitlistForm() {
       return;
     }
     setSubmitted(true);
+    fetch("/api/waitlist-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    }).catch(() => {});
   }
 
   if (submitted) {
     return (
       <div className="mt-5 flex items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/10 px-4 py-3 text-sm text-on-dark">
         <Check className="h-4 w-4 shrink-0" />
-        You&apos;re on the list — talk soon.
+        Thank you for registering — our team will get in touch with you.
       </div>
     );
   }

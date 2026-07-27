@@ -3,7 +3,7 @@
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
 import { IntentCapture } from "@/components/intent-capture";
-import { HowItWorks } from "@/components/how-it-works";
+import { IntegrationStack } from "@/components/integration-stack";
 import { FeatureRows } from "@/components/feature-rows";
 import { LiveSignalFeed } from "@/components/live-signal-feed";
 import { BuiltForTeams } from "@/components/built-for-teams";
@@ -25,7 +25,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero featuredSignal={FEATURED_SIGNAL} />
         <IntentCapture />
-        <HowItWorks />
+        <IntegrationStack />
         <FeatureRows />
         <LiveSignalFeed signals={SIGNALS} onSelectSignal={handleSelectSignal} />
         <BuiltForTeams personas={PERSONAS} />

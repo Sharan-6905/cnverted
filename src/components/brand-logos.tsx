@@ -107,6 +107,45 @@ export function ZapierColor({ className }: IconProps) {
   return <ZapierMark className={cn("text-[#FF4F00]", className)} />;
 }
 
+/** Gmail app icon — the multi-color "M" envelope mark. */
+export function GmailColor({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <path fill="#4285F4" d="M3 8.5 8 12v8H4a1 1 0 0 1-1-1V8.5z" />
+      <path fill="#34A853" d="M21 8.5 16 12v8h4a1 1 0 0 0 1-1V8.5z" />
+      <path fill="#EA4335" d="M3 8.5 12 15l9-6.5V7a1 1 0 0 0-1-1h-1L12 12 5 6H4a1 1 0 0 0-1 1v1.5z" />
+      <path fill="#C5221F" d="M3 7v1.5l5 3.6V8.2L5 6h-.6A1 1 0 0 0 3 7z" />
+      <path fill="#FBBC04" d="M21 7v1.5l-5 3.6V8.2L19 6h.6A1 1 0 0 1 21 7z" />
+    </svg>
+  );
+}
+
+/** Google Calendar app icon — rounded square with the four brand colors and "31". */
+export function GoogleCalendarColor({ className }: IconProps) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <path fill="#1967D2" d="M17 3h-2v4h2V3zM9 3H7v4h2V3z" />
+      <path fill="#4285F4" d="M17 5H7a3 3 0 0 0-3 3v2h16V8a3 3 0 0 0-3-3z" />
+      <path fill="#EA4335" d="M20 17.5 17.5 20H20v-2.5z" />
+      <path fill="#34A853" d="M20 10h-3v4.5h3V10z" />
+      <path fill="#FBBC04" d="M7 17.5V20h10.5l2.5-2.5H7z" />
+      <path fill="#4285F4" d="M4 10v7a3 3 0 0 0 3 3v-4.5H4V10z" />
+      <rect x="7" y="10" width="10" height="7.5" fill="#fff" />
+      <text
+        x="12"
+        y="16.3"
+        textAnchor="middle"
+        fontSize="6.2"
+        fontWeight="600"
+        fill="#1967D2"
+        fontFamily="Arial, sans-serif"
+      >
+        31
+      </text>
+    </svg>
+  );
+}
+
 /** Colored wordmark in a brand's hue. */
 export function ColorWordmark({
   name,

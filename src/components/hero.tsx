@@ -29,10 +29,13 @@ export function Hero({ featuredSignal }: HeroProps) {
             tells you why, and helps you close — all in one place.
           </p>
 
-          {/* CTA buttons — the waitlist form lives at the bottom of the page */}
+          {/* CTA buttons */}
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href="/early-access" className={buttonVariants({ variant: "primary", size: "lg" })}>
-              Get early access
+            <a
+              href="https://beta.cnvrted.com"
+              className={buttonVariants({ variant: "primary", size: "lg" })}
+            >
+              Get access
               <ArrowRight className="h-4 w-4" />
             </a>
           </div>

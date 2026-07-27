@@ -59,11 +59,11 @@ export function CareerApplicationForm() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
       >
-        <Card className="mx-auto max-w-xl p-8 sm:p-10">
-          <h3 className="text-center font-display text-2xl font-semibold text-ink">
+        <Card className="mx-auto max-w-sm border border-blue-200/50 bg-blue-400/10 p-6 shadow-soft backdrop-blur-xl sm:p-7">
+          <h3 className="text-center font-display text-xl font-semibold text-ink">
             Join with us
           </h3>
-          <form onSubmit={handleSubmit} className="mt-6 space-y-4">
+          <form onSubmit={handleSubmit} className="mt-5 space-y-3">
         <div>
           <label htmlFor="career-name" className="mb-1.5 block text-sm font-medium text-ink">
             Name
@@ -101,7 +101,7 @@ export function CareerApplicationForm() {
             required
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@company.com"
+            placeholder="Enter your mail"
           />
         </div>
 

@@ -129,11 +129,11 @@ export function SiteFooter() {
       />
       <div className="absolute inset-0 bg-surface-dark/55" />
       <div className="relative mx-auto max-w-6xl px-6 pt-16">
-        <div className="mx-auto max-w-sm rounded-2xl border border-white/25 bg-blue-400/10 px-5 py-5 text-center shadow-soft backdrop-blur-xl">
-          <h2 className="mx-auto max-w-[15rem] font-display text-base font-semibold tracking-tight text-on-dark md:text-lg">
+        <div className="mx-auto max-w-xs rounded-2xl border border-white/25 bg-blue-400/10 px-4 py-4 text-center shadow-soft backdrop-blur-xl">
+          <h2 className="mx-auto max-w-[13rem] font-display text-sm font-semibold tracking-tight text-on-dark md:text-base">
             Get to buyers before your competition even knows they&apos;re looking.
           </h2>
-          <p className="mx-auto mt-1.5 max-w-[15rem] text-xs leading-relaxed text-on-dark/70">
+          <p className="mx-auto mt-1.5 max-w-[13rem] text-[11px] leading-relaxed text-on-dark/70">
             Join the early-access list. Be first to see the accounts ready to buy.
           </p>
           <FooterWaitlistForm />

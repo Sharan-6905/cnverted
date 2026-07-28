@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import { Check } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 interface Plan {
@@ -52,8 +51,6 @@ const PLANS: Plan[] = [
 ];
 
 export function PricingPlans() {
-  const [showContact, setShowContact] = useState(false);
-
   return (
     <div className="grid gap-5 sm:grid-cols-3">
       {PLANS.map((plan) => (
@@ -93,35 +90,23 @@ export function PricingPlans() {
 
           <div className="mt-7">
             {plan.name === "Enterprise" ? (
-              <Button
-                variant="secondary"
-                size="md"
-                className="w-full"
-                onClick={() => setShowContact(true)}
+              <a
+                href="mailto:work@cnvrted.com"
+                className={buttonVariants({ variant: "secondary", size: "md", className: "w-full" })}
               >
                 Contact us
-              </Button>
+              </a>
             ) : (
               <a
-                href="/early-access"
+                href="https://beta.cnvrted.com"
                 className="flex h-11 w-full items-center justify-center rounded-xl bg-ink text-sm font-medium text-on-dark smooth-transition transition-colors hover:bg-body-strong"
               >
-                Get early access
+                Get access
               </a>
             )}
           </div>
         </Card>
       ))}
-
-      {showContact && (
-        <p className="sm:col-span-3 rounded-xl border border-hairline bg-surface-soft px-4 py-3 text-center text-sm text-body">
-          For enterprise plans, reach out to{" "}
-          <a href="mailto:work@cnvrted.com" className="font-medium text-ink underline underline-offset-2">
-            work@cnvrted.com
-          </a>{" "}
-          and we&rsquo;ll get back to you.
-        </p>
-      )}
     </div>
   );
 }

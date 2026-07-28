@@ -59,7 +59,7 @@ export function CareerApplicationForm() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
       >
-        <Card className="mx-auto max-w-sm border border-blue-200/50 bg-blue-400/10 p-6 shadow-soft backdrop-blur-xl sm:p-7">
+        <Card className="mx-auto max-w-sm border border-blue-200/50 bg-gradient-to-br from-blue-400/15 via-teal-300/10 to-emerald-300/10 p-6 shadow-soft backdrop-blur-xl sm:p-7">
           <h3 className="text-center font-display text-xl font-semibold text-ink">
             Join with us
           </h3>

@@ -57,6 +57,12 @@ export function SiteHeader() {
             <SlackLogo className="h-4 w-4" />
             Community
           </a>
+          <a
+            href="https://beta.cnvrted.com"
+            className={cn(buttonVariants({ variant: "primary", size: "sm" }), "hidden sm:inline-flex")}
+          >
+            Get started
+          </a>
           <button
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             onClick={() => setMobileOpen((v) => !v)}

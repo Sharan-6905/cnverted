@@ -1,5 +1,3 @@
-import { ArrowRight, ShieldCheck } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
 import { HeroScene } from "@/components/hero-scene";
 import type { Signal } from "@/lib/types";
 
@@ -29,20 +27,6 @@ export function Hero({ featuredSignal }: HeroProps) {
             tells you why, and helps you close — all in one place.
           </p>
 
-          {/* CTA buttons */}
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href="https://beta.cnvrted.com"
-              className={buttonVariants({ variant: "primary", size: "lg" })}
-            >
-              Get access
-              <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
-          <p className="mt-4 flex items-center gap-1.5 text-xs text-muted">
-            <ShieldCheck className="h-3.5 w-3.5" />
-            Be first to access. No signup pressure, no spam — ever.
-          </p>
         </div>
 
         {/* Scroll-driven clay motion scene */}

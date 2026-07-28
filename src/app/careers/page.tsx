@@ -54,7 +54,7 @@ export default function CareersPage() {
         >
           <div className="space-y-4">
             {ROLES.map((role) => (
-              <Card key={role.title} className="p-6 sm:p-7">
+              <Card key={role.title} className="border-blue-200/50 bg-blue-50/60 p-6 sm:p-7">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <h3 className="text-lg font-semibold text-ink">{role.title}</h3>

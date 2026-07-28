@@ -16,10 +16,17 @@ export const metadata: Metadata = {
 export default function BlogsPage() {
   return (
     <div className="relative flex min-h-screen flex-col">
+      {/* Ambient colour + grid behind the frosted-glass cards */}
       <div
-        className="bg-grid-page pointer-events-none absolute inset-0 -z-10"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
         aria-hidden="true"
-      />
+      >
+        <div className="bg-grid-page absolute inset-0" />
+        <div className="absolute -left-20 top-52 h-80 w-80 rounded-full bg-brand-teal/40 blur-[100px]" />
+        <div className="absolute right-[-5rem] top-72 h-96 w-96 rounded-full bg-brand-peach/50 blur-[110px]" />
+        <div className="absolute bottom-16 left-[38%] h-96 w-96 rounded-full bg-brand-lavender/45 blur-[110px]" />
+        <div className="absolute bottom-40 left-[-4rem] h-72 w-72 rounded-full bg-brand-ochre/30 blur-[110px]" />
+      </div>
       <SiteHeader />
       <main className="flex-1">
         <Section
@@ -41,13 +48,13 @@ export default function BlogsPage() {
               <Link
                 key={post.slug}
                 href={`/blogs/${post.slug}`}
-                className="group flex flex-col overflow-hidden rounded-3xl border border-hairline bg-canvas smooth-transition transition-[border-color,box-shadow,transform] hover:-translate-y-1 hover:border-muted-soft/50 hover:shadow-float"
+                className="group flex flex-col overflow-hidden rounded-3xl border border-white/60 bg-canvas/40 shadow-[0_10px_44px_-12px_rgba(20,16,8,0.22)] backdrop-blur-2xl smooth-transition transition-[border-color,box-shadow,transform] hover:-translate-y-1 hover:border-white/90 hover:bg-canvas/55 hover:shadow-float"
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={post.cover}
                   alt={post.title}
-                  className="aspect-[16/9] w-full border-b border-hairline bg-surface-dark object-cover"
+                  className="aspect-[16/9] w-full border-b border-white/40 bg-surface-dark object-cover"
                 />
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
@@ -64,7 +71,7 @@ export default function BlogsPage() {
                   <p className="mt-2.5 flex-1 text-sm leading-relaxed text-body">
                     {post.excerpt}
                   </p>
-                  <div className="mt-5 flex items-center gap-3 border-t border-hairline pt-4 text-xs text-muted">
+                  <div className="mt-5 flex items-center gap-3 border-t border-white/50 pt-4 text-xs text-muted">
                     <span>{formatPostDate(post.date)}</span>
                     <span className="inline-flex items-center gap-1">
                       <Clock className="h-3 w-3" />

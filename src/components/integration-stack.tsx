@@ -96,7 +96,7 @@ export function IntegrationStack() {
         </nav>
 
         {/* Middle: step content */}
-        <div className="space-y-32">
+        <div className="space-y-16 lg:space-y-32">
           {STEPS.map((s, i) => (
             <StepBlock key={s.label} step={s} onActive={() => setActive(i)} />
           ))}
@@ -154,8 +154,8 @@ function StepBlock({
         <p className="text-[15px] leading-relaxed text-muted">{step.note}</p>
       </div>
 
-      <div className="mx-auto mt-10 flex h-24 w-40 items-center justify-center lg:hidden">
-        <StepLogo step={step} className="h-16 w-16" />
+      <div className="mx-auto mt-6 flex h-16 w-40 items-center justify-center lg:hidden">
+        <StepLogo step={step} className="h-14 w-14" />
       </div>
     </div>
   );

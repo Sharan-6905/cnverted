@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
-import { CtaBand } from "@/components/cta-band";
 import { PricingPlans } from "@/components/pricing-plans";
 
 export const metadata: Metadata = {
@@ -23,7 +22,6 @@ export default function PricingPage() {
         >
           <PricingPlans />
         </Section>
-        <CtaBand />
       </main>
       <SiteFooter />
     </div>

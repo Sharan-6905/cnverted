@@ -139,24 +139,35 @@ function StepBlock({
 
   return (
     <div ref={ref}>
-      <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-card px-3 py-1 text-xs font-semibold text-ink">
-        <CornerDownLeft className="h-3.5 w-3.5" />
-        {step.step}
-      </span>
+      <motion.div
+        initial={false}
+        animate={{ opacity: inView ? 1 : 0.4, y: inView ? 0 : 12 }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-card px-3 py-1 text-xs font-semibold text-ink">
+          <CornerDownLeft className="h-3.5 w-3.5" />
+          {step.step}
+        </span>
 
-      <h3 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
-        {step.title}
-      </h3>
+        <h3 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
+          {step.title}
+        </h3>
 
-      <p className="mt-4 max-w-md text-[15px] leading-relaxed text-body">{step.body}</p>
+        <p className="mt-4 max-w-md text-[15px] leading-relaxed text-body">{step.body}</p>
 
-      <div className="mt-6 max-w-md border-t border-hairline pt-6">
-        <p className="text-[15px] leading-relaxed text-muted">{step.note}</p>
-      </div>
+        <div className="mt-6 max-w-md border-t border-hairline pt-6">
+          <p className="text-[15px] leading-relaxed text-muted">{step.note}</p>
+        </div>
 
-      <div className="mx-auto mt-6 flex h-16 w-40 items-center justify-center lg:hidden">
-        <StepLogo step={step} className="h-14 w-14" />
-      </div>
+        <motion.div
+          initial={false}
+          animate={{ opacity: inView ? 1 : 0.4, scale: inView ? 1 : 0.85 }}
+          transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          className="mx-auto mt-6 flex h-16 w-40 items-center justify-center lg:hidden"
+        >
+          <StepLogo step={step} className="h-14 w-14" />
+        </motion.div>
+      </motion.div>
     </div>
   );
 }

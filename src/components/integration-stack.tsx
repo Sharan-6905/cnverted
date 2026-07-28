@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { CornerDownLeft } from "lucide-react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { GmailColor, GoogleCalendarColor, ColorWordmark } from "@/components/brand-logos";
 
 const STEPS = [
   {
     label: "Reply",
     step: "01",
-    Logo: GmailColor,
+    logo: "/logos/gmail.svg",
     title: "A reply lands in Gmail",
     body: "The moment a prospect replies to your outreach, cnvrted reads it — no forwarding, no manual triage.",
     note: "Every reply is caught the second it arrives.",
@@ -18,7 +18,7 @@ const STEPS = [
   {
     label: "Schedule",
     step: "02",
-    Logo: null,
+    logo: "/logos/cal-com.svg",
     title: "The call books itself",
     body: "Cnvrted routes the reply straight into Cal.com, finds a slot, and gets the meeting on the books — automatically.",
     note: "No back-and-forth. No dropped threads.",
@@ -26,7 +26,7 @@ const STEPS = [
   {
     label: "Sync",
     step: "03",
-    Logo: GoogleCalendarColor,
+    logo: "/logos/google-calendar.svg",
     title: "It lands on your calendar",
     body: "The confirmed meeting is written straight to Google Calendar and synced back to the deal — ready before you even open your inbox.",
     note: "This is what a rep's inbox was always supposed to feel like.",
@@ -34,8 +34,11 @@ const STEPS = [
 ];
 
 function StepLogo({ step, className }: { step: (typeof STEPS)[number]; className?: string }) {
-  if (step.Logo) return <step.Logo className={className} />;
-  return <ColorWordmark name="Cal.com" color="#1A1A1A" className="text-3xl" />;
+  return (
+    <span className={cn("relative block", className)}>
+      <Image src={step.logo} alt={step.label} fill className="object-contain" />
+    </span>
+  );
 }
 
 export function IntegrationStack() {

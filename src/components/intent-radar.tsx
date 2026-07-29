@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { Section } from "@/components/section";
+import { RadarController } from "@/components/radar/radar-controller";
 
 export function IntentRadar() {
   return (
@@ -9,19 +9,7 @@ export function IntentRadar() {
       title="We don't guess who's ready. We watch."
       description="Every dot on this radar is a real account showing intent right now — and the exact reason it's in-market."
     >
-      <div
-        className="relative mx-auto w-full max-w-6xl overflow-hidden rounded-3xl"
-        style={{ aspectRatio: "1536 / 884" }}
-      >
-        <Image
-          src="/banners/intent-radar.png"
-          alt="A radar of accounts showing buying intent, each paired with the specific reason they're in-market."
-          fill
-          sizes="(max-width: 1152px) 100vw, 1152px"
-          quality={95}
-          className="object-contain"
-        />
-      </div>
+      <RadarController />
     </Section>
   );
 }

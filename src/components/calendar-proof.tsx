@@ -11,10 +11,10 @@ export function CalendarProof() {
     >
       <div
         className="relative mx-auto w-full max-w-5xl overflow-hidden rounded-3xl shadow-float"
-        style={{ aspectRatio: "1600 / 840" }}
+        style={{ aspectRatio: "1728 / 910" }}
       >
         <Image
-          src="/banners/calendar-booked.jpeg"
+          src="/banners/calendar-booked.png"
           alt="A sales rep's calendar fully booked with back-to-back meetings — Product Discovery, Use Case Demo, Lead Qualification, Solution Overview — all booked with in-market accounts."
           fill
           sizes="(max-width: 1024px) 100vw, 1024px"

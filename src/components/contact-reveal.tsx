@@ -12,7 +12,7 @@ export function ContactReveal() {
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 lg:flex-row lg:items-center">
         <div
           className="relative w-full max-w-md overflow-hidden rounded-3xl shadow-float lg:w-[38%]"
-          style={{ aspectRatio: "1402 / 1122" }}
+          style={{ aspectRatio: "1402 / 1102" }}
         >
           <Image
             src="/banners/email-followup.png"

@@ -24,12 +24,12 @@ const STEPS = [
     note: "No back-and-forth. No dropped threads.",
   },
   {
-    label: "Sync",
+    label: "Meet",
     step: "03",
-    logo: "/logos/google-calendar.svg",
-    title: "It lands on your calendar",
-    body: "The confirmed meeting is written straight to Google Calendar and synced back to the deal — ready before you even open your inbox.",
-    note: "This is what a rep's inbox was always supposed to feel like.",
+    logo: "/logos/google-meet.svg",
+    title: "You just show up on Google Meet",
+    body: "A Meet link is generated and shared with the prospect automatically, and the call is logged against the deal — all you do is join and close.",
+    note: "This is what a rep's day was always supposed to feel like.",
   },
 ];
 

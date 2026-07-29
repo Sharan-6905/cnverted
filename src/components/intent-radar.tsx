@@ -17,6 +17,8 @@ export function IntentRadar() {
           src="/banners/intent-radar.png"
           alt="A radar of accounts showing buying intent, each paired with the specific reason they're in-market."
           fill
+          sizes="(max-width: 1152px) 100vw, 1152px"
+          quality={95}
           className="object-contain"
         />
       </div>

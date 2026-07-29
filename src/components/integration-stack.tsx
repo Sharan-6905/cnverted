@@ -10,7 +10,7 @@ const STEPS = [
   {
     label: "Reply",
     step: "01",
-    logo: "/logos/gmail.svg",
+    logo: "/logos/gmail.png",
     title: "A reply lands in Gmail",
     body: "The moment a prospect replies to your outreach, cnvrted reads it — no forwarding, no manual triage.",
     note: "Every reply is caught the second it arrives.",
@@ -18,7 +18,7 @@ const STEPS = [
   {
     label: "Schedule",
     step: "02",
-    logo: "/logos/cal-com.svg",
+    logo: "/logos/cal-com.png",
     title: "The call books itself",
     body: "Cnvrted routes the reply straight into Cal.com, finds a slot, and gets the meeting on the books — automatically.",
     note: "No back-and-forth. No dropped threads.",
@@ -26,7 +26,7 @@ const STEPS = [
   {
     label: "Meet",
     step: "03",
-    logo: "/logos/google-meet.svg",
+    logo: "/logos/google-meet.png",
     title: "You just show up on Google Meet",
     body: "A Meet link is generated and shared with the prospect automatically, and the call is logged against the deal — all you do is join and close.",
     note: "This is what a rep's day was always supposed to feel like.",
@@ -107,7 +107,7 @@ export function IntegrationStack() {
 
         {/* Right: sticky crossfading logo */}
         <div className="hidden lg:sticky lg:top-32 lg:block lg:h-fit">
-          <div className="relative flex h-56 w-56 items-center justify-center">
+          <div className="relative flex h-72 w-72 items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={STEPS[active].label}
@@ -116,7 +116,7 @@ export function IntegrationStack() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
               >
-                <StepLogo step={STEPS[active]} className="h-28 w-28" />
+                <StepLogo step={STEPS[active]} className="h-44 w-44" />
               </motion.div>
             </AnimatePresence>
           </div>
@@ -166,9 +166,9 @@ function StepBlock({
           initial={false}
           animate={{ opacity: inView ? 1 : 0.4, scale: inView ? 1 : 0.85 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-6 flex h-16 w-40 items-center justify-center lg:hidden"
+          className="mx-auto mt-6 flex h-24 w-52 items-center justify-center lg:hidden"
         >
-          <StepLogo step={step} className="h-14 w-14" />
+          <StepLogo step={step} className="h-20 w-20" />
         </motion.div>
       </motion.div>
     </div>

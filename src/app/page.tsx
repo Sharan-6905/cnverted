@@ -7,6 +7,7 @@ import { IntentCapture } from "@/components/intent-capture";
 import { IntegrationStack } from "@/components/integration-stack";
 import { FeatureRows } from "@/components/feature-rows";
 import { ContactReveal } from "@/components/contact-reveal";
+import { CalendarProof } from "@/components/calendar-proof";
 import { IcpEnrichmentTable } from "@/components/icp-enrichment-table";
 import { Integrations } from "@/components/integrations";
 import { Comparison } from "@/components/comparison";
@@ -25,6 +26,7 @@ export default function Home() {
         <IntegrationStack />
         <FeatureRows />
         <ContactReveal />
+        <CalendarProof />
         <IcpEnrichmentTable />
         <Integrations integrations={INTEGRATIONS} />
         <Comparison />

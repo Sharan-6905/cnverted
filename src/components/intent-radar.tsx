@@ -11,7 +11,7 @@ export function IntentRadar() {
     >
       <div
         className="relative mx-auto w-full max-w-6xl overflow-hidden rounded-3xl"
-        style={{ aspectRatio: "1536 / 1024" }}
+        style={{ aspectRatio: "1536 / 884" }}
       >
         <Image
           src="/banners/intent-radar.png"

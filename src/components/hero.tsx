@@ -8,7 +8,7 @@ interface HeroProps {
 
 export function Hero({ featuredSignal }: HeroProps) {
   return (
-    <section className="relative overflow-hidden px-6 pt-16 pb-20 md:pt-24">
+    <section className="relative overflow-hidden px-6 pt-8 pb-20 md:pt-12">
       <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
         {/* Copy + CTA */}

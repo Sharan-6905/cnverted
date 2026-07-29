@@ -2,11 +2,12 @@
 
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
+import { IntentRadar } from "@/components/intent-radar";
 import { IntentCapture } from "@/components/intent-capture";
 import { IntegrationStack } from "@/components/integration-stack";
 import { FeatureRows } from "@/components/feature-rows";
+import { ContactReveal } from "@/components/contact-reveal";
 import { IcpEnrichmentTable } from "@/components/icp-enrichment-table";
-import { BuiltForTeams } from "@/components/built-for-teams";
 import { Integrations } from "@/components/integrations";
 import { Comparison } from "@/components/comparison";
 import { SiteFooter } from "@/components/site-footer";
@@ -19,11 +20,12 @@ export default function Home() {
 
       <main className="flex-1">
         <Hero featuredSignal={FEATURED_SIGNAL} />
+        <IntentRadar />
         <IntentCapture />
         <IntegrationStack />
         <FeatureRows />
+        <ContactReveal />
         <IcpEnrichmentTable />
-        <BuiltForTeams />
         <Integrations integrations={INTEGRATIONS} />
         <Comparison />
       </main>

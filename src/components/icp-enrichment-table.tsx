@@ -46,6 +46,8 @@ export function IcpEnrichmentTable() {
   return (
     <Section
       id="signals"
+      centered
+      className="pt-4 sm:pt-6 md:pt-8"
       eyebrow="Live enrichment"
       title="Watch Orka find your ICP."
       description="A sample of what enrichment looks like as it runs — every row is a company scored and matched against your ideal customer profile."

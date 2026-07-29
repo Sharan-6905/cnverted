@@ -1,30 +1,45 @@
 "use client";
 
+import Image from "next/image";
 import { Search, Menu } from "lucide-react";
 import { Section } from "@/components/section";
 import { cn } from "@/lib/utils";
 
 interface Row {
   company: string;
-  color: string;
-  initial: string;
+  logo?: string;
   whyIcp: string;
   designation: string;
   domain: string;
 }
 
 const ROWS: Row[] = [
-  { company: "Stripe", color: "#635BFF", initial: "S", whyIcp: "Fintech leader", designation: "CEO", domain: "stripe.com" },
-  { company: "Datadog", color: "#632CA6", initial: "D", whyIcp: "DevOps target", designation: "CTO", domain: "datadoghq.com" },
-  { company: "Figma", color: "#F24E1E", initial: "F", whyIcp: "Design-led SaaS", designation: "Head of Marketing", domain: "figma.com" },
-  { company: "Notion", color: "#0A0A0A", initial: "N", whyIcp: "PLG collaboration fit", designation: "COO", domain: "makenotion.com" },
-  { company: "Vercel", color: "#0A0A0A", initial: "▲", whyIcp: "Developer-first platform", designation: "Founder", domain: "vercel.com" },
-  { company: "Retool", color: "#1A1A1A", initial: "R", whyIcp: "Ops tooling fit", designation: "CFO", domain: "retool.com" },
-  { company: "Ramp", color: "#1A1A1A", initial: "▲", whyIcp: "B2B finance fit", designation: "VP Sales", domain: "ramp.com" },
+  { company: "Stripe", logo: "/logos/companies/stripe.svg", whyIcp: "Fintech leader", designation: "CEO", domain: "stripe.com" },
+  { company: "Datadog", logo: "/logos/companies/datadog.svg", whyIcp: "DevOps target", designation: "CTO", domain: "datadoghq.com" },
+  { company: "Figma", logo: "/logos/companies/figma.svg", whyIcp: "Design-led SaaS", designation: "Head of Marketing", domain: "figma.com" },
+  { company: "Notion", logo: "/logos/companies/notion.svg", whyIcp: "PLG collaboration fit", designation: "COO", domain: "makenotion.com" },
+  { company: "Vercel", logo: "/logos/companies/vercel.svg", whyIcp: "Developer-first platform", designation: "Founder", domain: "vercel.com" },
+  { company: "Retool", logo: "/logos/companies/retool.svg", whyIcp: "Ops tooling fit", designation: "CFO", domain: "retool.com" },
+  { company: "Ramp", logo: "/logos/companies/ramp.png", whyIcp: "B2B finance fit", designation: "VP Sales", domain: "ramp.com" },
 ];
 
 function maskEmail(domain: string) {
   return `contact@${domain}`;
+}
+
+function CompanyMark({ row }: { row: Row }) {
+  if (row.logo) {
+    return (
+      <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-hairline bg-canvas p-1.5">
+        <Image src={row.logo} alt={row.company} fill className="object-contain p-1.5" />
+      </span>
+    );
+  }
+  return (
+    <span className="flex h-7 items-center rounded-lg px-2 text-xs font-bold tracking-tight text-ink">
+      {row.company}
+    </span>
+  );
 }
 
 export function IcpEnrichmentTable() {
@@ -55,13 +70,8 @@ export function IcpEnrichmentTable() {
                   <td className="px-6 py-4" />
                   <td className="px-3 py-4">
                     <div className="flex items-center gap-2.5">
-                      <span
-                        className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-xs font-bold text-white"
-                        style={{ backgroundColor: row.color }}
-                      >
-                        {row.initial}
-                      </span>
-                      <span className="font-medium text-ink">{row.company}</span>
+                      <CompanyMark row={row} />
+                      {row.logo && <span className="font-medium text-ink">{row.company}</span>}
                     </div>
                   </td>
                   <td className="px-3 py-4 text-body">{row.whyIcp}</td>
@@ -73,8 +83,13 @@ export function IcpEnrichmentTable() {
                 <td className="px-6 py-4" />
                 <td className="px-3 py-4">
                   <div className="flex items-center gap-2.5">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-surface-card text-xs font-bold text-muted-soft">
-                      ?
+                    <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-hairline bg-canvas p-1.5">
+                      <Image
+                        src="/logos/companies/linear.svg"
+                        alt="Linear"
+                        fill
+                        className="object-contain p-1.5"
+                      />
                     </span>
                     <span className="font-medium text-ink">Linear</span>
                   </div>

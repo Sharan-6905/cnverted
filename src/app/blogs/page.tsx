@@ -23,9 +23,9 @@ export default function BlogsPage() {
       >
         <div className="bg-grid-page absolute inset-0" />
         <div className="absolute -left-20 top-52 h-80 w-80 rounded-full bg-brand-teal/40 blur-[100px]" />
-        <div className="absolute right-[-5rem] top-72 h-96 w-96 rounded-full bg-brand-peach/50 blur-[110px]" />
-        <div className="absolute bottom-16 left-[38%] h-96 w-96 rounded-full bg-brand-lavender/45 blur-[110px]" />
-        <div className="absolute bottom-40 left-[-4rem] h-72 w-72 rounded-full bg-brand-ochre/30 blur-[110px]" />
+        <div className="absolute right-[-5rem] top-72 h-96 w-96 rounded-full bg-[#1B3A63]/40 blur-[110px]" />
+        <div className="absolute bottom-16 left-[38%] h-96 w-96 rounded-full bg-[#BEF264]/35 blur-[110px]" />
+        <div className="absolute bottom-40 left-[-4rem] h-72 w-72 rounded-full bg-[#7FD1B5]/35 blur-[110px]" />
       </div>
       <SiteHeader />
       <main className="flex-1">

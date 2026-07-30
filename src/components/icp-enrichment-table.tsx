@@ -1,7 +1,6 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Search, Menu, BadgeCheck } from "lucide-react";
 import { motion } from "framer-motion";
@@ -43,20 +42,6 @@ function CompanyMark({ row }: { row: Row }) {
       {row.company}
     </span>
   );
-}
-
-function ScoringPercent() {
-  const [pct, setPct] = useState(0);
-
-  useEffect(() => {
-    setPct(0);
-    const id = setInterval(() => {
-      setPct((p) => (p >= 72 ? 0 : p + Math.ceil(Math.random() * 6)));
-    }, 220);
-    return () => clearInterval(id);
-  }, []);
-
-  return <span className="tabular-nums text-[#2563FF]">{Math.min(pct, 72)}%</span>;
 }
 
 function ShimmerBar({ width, delay }: { width: string; delay: number }) {
@@ -160,15 +145,10 @@ export function IcpEnrichmentTable() {
                   </div>
                 </td>
                 <td className="px-3 py-4" colSpan={3}>
-                  <div className="flex items-center justify-between">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#2563FF]">
-                      <Search className="h-3.5 w-3.5 animate-pulse" />
-                      Scoring against your ICP&hellip;
-                    </span>
-                    <span className="font-mono text-xs font-semibold">
-                      <ScoringPercent />
-                    </span>
-                  </div>
+                  <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#2563FF]">
+                    <Search className="h-3.5 w-3.5 animate-pulse" />
+                    Scoring against your ICP&hellip;
+                  </span>
                   <div className="mt-2 flex gap-2">
                     <ShimmerBar width="w-24" delay={0} />
                     <ShimmerBar width="w-16" delay={0.15} />

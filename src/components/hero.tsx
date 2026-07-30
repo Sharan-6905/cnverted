@@ -20,12 +20,13 @@ export function Hero({ featuredSignal }: HeroProps) {
           </span>
 
           <h1 className="mt-6 max-w-xl font-display text-display-xl font-semibold tracking-tight text-ink">
-            Buyers, not names.
+            Find buyers before your competitors do.
           </h1>
 
           <p className="mt-5 max-w-md text-lg leading-relaxed text-body">
-            The complete sales dashboard. Cnvrted finds who&apos;s ready to buy,
-            tells you why, and helps you close — all in one place.
+            CNVRTED continuously scans the web for buying signals, identifies
+            companies entering a purchase cycle, and shows exactly why
+            they&apos;re ready—so your team reaches buyers before everyone else.
           </p>
 
           <div className="mt-10">

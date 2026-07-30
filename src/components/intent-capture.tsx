@@ -107,7 +107,7 @@ export function IntentCapture() {
               {/* placeholder for the prospect's reply */}
               <motion.div {...fadeUp(1.0)} className="flex justify-end">
                 <div className="max-w-[70%] rounded-2xl rounded-tr-sm border border-dashed border-brand-teal/40 bg-brand-teal/5 px-4 py-3 text-[15px] text-muted-soft">
-                  You: <span className="italic">what you sell…</span>
+                  You: <span className="italic">B2B project management software…</span>
                 </div>
               </motion.div>
 

@@ -81,11 +81,15 @@ export const SWEEP_DURATION_MS = 4000;
 export const CYCLE_DURATION_MS = SWEEP_DURATION_MS * 2;
 export const POST_DETECTION_PAUSE_MS = 2000;
 
+function round(n: number) {
+  return Math.round(n * 1000) / 1000;
+}
+
 export function polarToPercent(angleDeg: number, radiusFraction: number) {
   const rad = (angleDeg * Math.PI) / 180;
   const dx = Math.sin(rad) * radiusFraction * 50;
   const dy = -Math.cos(rad) * radiusFraction * 50;
-  return { left: 50 + dx, top: 50 + dy };
+  return { left: round(50 + dx), top: round(50 + dy) };
 }
 
 // Row display order sorted by each avatar's vertical position, so connector

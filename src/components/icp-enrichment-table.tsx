@@ -1,7 +1,10 @@
 "use client";
 
+import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { Search, Menu } from "lucide-react";
+import { Search, Menu, BadgeCheck } from "lucide-react";
+import { motion } from "framer-motion";
 import { Section } from "@/components/section";
 import { cn } from "@/lib/utils";
 
@@ -30,14 +33,57 @@ function maskEmail(domain: string) {
 function CompanyMark({ row }: { row: Row }) {
   if (row.logo) {
     return (
-      <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-hairline bg-canvas p-1.5">
+      <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-hairline bg-canvas shadow-soft">
         <Image src={row.logo} alt={row.company} fill className="object-contain p-1.5" />
       </span>
     );
   }
   return (
-    <span className="flex h-7 items-center rounded-lg px-2 text-xs font-bold tracking-tight text-ink">
+    <span className="flex h-8 items-center rounded-xl px-2 text-xs font-bold tracking-tight text-ink">
       {row.company}
+    </span>
+  );
+}
+
+function ScoringPercent() {
+  const [pct, setPct] = useState(0);
+
+  useEffect(() => {
+    setPct(0);
+    const id = setInterval(() => {
+      setPct((p) => (p >= 72 ? 0 : p + Math.ceil(Math.random() * 6)));
+    }, 220);
+    return () => clearInterval(id);
+  }, []);
+
+  return <span className="tabular-nums text-[#2563FF]">{Math.min(pct, 72)}%</span>;
+}
+
+function ShimmerBar({ width, delay }: { width: string; delay: number }) {
+  return (
+    <span
+      className={cn("relative h-2 overflow-hidden rounded-full bg-[#2563FF]/10", width)}
+    >
+      <motion.span
+        className="absolute inset-y-0 left-0 w-1/3 rounded-full bg-[#2563FF]/40"
+        animate={{ x: ["-100%", "220%"] }}
+        transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut", delay }}
+      />
+    </span>
+  );
+}
+
+function Badge({ children, tone = "neutral" }: { children: ReactNode; tone?: "neutral" | "teal" }) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium",
+        tone === "teal"
+          ? "bg-brand-teal/10 text-brand-teal"
+          : "bg-surface-soft text-body"
+      )}
+    >
+      {children}
     </span>
   );
 }
@@ -56,19 +102,26 @@ export function IcpEnrichmentTable() {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[720px] border-collapse text-left text-sm">
             <thead>
-              <tr className="border-b border-hairline text-xs font-semibold uppercase tracking-[0.08em] text-muted-soft">
-                <th className="w-10 px-6 py-3">
+              <tr className="border-b border-hairline bg-surface-soft/40 text-xs font-semibold uppercase tracking-[0.08em] text-muted-soft">
+                <th className="w-10 px-6 py-3.5">
                   <Menu className="h-4 w-4" />
                 </th>
-                <th className="px-3 py-3">Company</th>
-                <th className="px-3 py-3">Why in-ICP</th>
-                <th className="px-3 py-3">Designation</th>
-                <th className="px-3 py-3">Email</th>
+                <th className="px-3 py-3.5">Company</th>
+                <th className="px-3 py-3.5">Why in-ICP</th>
+                <th className="px-3 py-3.5">Designation</th>
+                <th className="px-3 py-3.5">Email</th>
               </tr>
             </thead>
             <tbody>
-              {ROWS.map((row) => (
-                <tr key={row.company} className="border-b border-hairline last:border-0">
+              {ROWS.map((row, i) => (
+                <motion.tr
+                  key={row.company}
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: i * 0.05 }}
+                  className="group border-b border-hairline smooth-transition transition-colors last:border-0 hover:bg-surface-soft/50"
+                >
                   <td className="px-6 py-4" />
                   <td className="px-3 py-4">
                     <div className="flex items-center gap-2.5">
@@ -76,34 +129,52 @@ export function IcpEnrichmentTable() {
                       {row.logo && <span className="font-medium text-ink">{row.company}</span>}
                     </div>
                   </td>
-                  <td className="px-3 py-4 text-body">{row.whyIcp}</td>
-                  <td className="px-3 py-4 text-body">{row.designation}</td>
-                  <td className="px-3 py-4 text-body">{maskEmail(row.domain)}</td>
-                </tr>
+                  <td className="px-3 py-4">
+                    <Badge tone="teal">{row.whyIcp}</Badge>
+                  </td>
+                  <td className="px-3 py-4">
+                    <Badge>{row.designation}</Badge>
+                  </td>
+                  <td className="px-3 py-4">
+                    <span className="inline-flex items-center gap-1.5 text-body">
+                      <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-brand-teal" />
+                      {maskEmail(row.domain)}
+                    </span>
+                  </td>
+                </motion.tr>
               ))}
               <tr>
                 <td className="px-6 py-4" />
                 <td className="px-3 py-4">
                   <div className="flex items-center gap-2.5">
-                    <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-lg border border-hairline bg-canvas p-1.5">
+                    <span className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-xl border border-hairline bg-canvas shadow-soft">
+                      <span className="absolute inset-0 -m-1 animate-ping rounded-2xl bg-[#2563FF]/15" />
                       <Image
                         src="/logos/companies/linear.svg"
                         alt="Linear"
                         fill
-                        className="object-contain p-1.5"
+                        className="relative object-contain p-1.5"
                       />
                     </span>
                     <span className="font-medium text-ink">Linear</span>
                   </div>
                 </td>
-                {[0, 1, 2].map((i) => (
-                  <td key={i} className="px-3 py-4">
-                    <span className={cn("inline-flex items-center gap-1.5 text-brand-teal")}>
+                <td className="px-3 py-4" colSpan={3}>
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#2563FF]">
                       <Search className="h-3.5 w-3.5 animate-pulse" />
-                      searching&hellip;
+                      Scoring against your ICP&hellip;
                     </span>
-                  </td>
-                ))}
+                    <span className="font-mono text-xs font-semibold">
+                      <ScoringPercent />
+                    </span>
+                  </div>
+                  <div className="mt-2 flex gap-2">
+                    <ShimmerBar width="w-24" delay={0} />
+                    <ShimmerBar width="w-16" delay={0.15} />
+                    <ShimmerBar width="w-12" delay={0.3} />
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>

@@ -1,4 +1,5 @@
 import { HeroScene } from "@/components/hero-scene";
+import { LiveSignalsWidget } from "@/components/live-signals-widget";
 import type { Signal } from "@/lib/types";
 
 interface HeroProps {
@@ -27,6 +28,9 @@ export function Hero({ featuredSignal }: HeroProps) {
             tells you why, and helps you close — all in one place.
           </p>
 
+          <div className="mt-10">
+            <LiveSignalsWidget />
+          </div>
         </div>
 
         {/* Scroll-driven clay motion scene */}

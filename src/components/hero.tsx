@@ -19,7 +19,10 @@ export function Hero({ featuredSignal }: HeroProps) {
             Real-time buying signals
           </span>
 
-          <h1 className="mt-6 max-w-xl font-display text-display-xl font-semibold tracking-tight text-ink">
+          <h1
+            className="mt-6 max-w-xl font-display text-display-xl font-semibold tracking-tight text-ink"
+            style={{ fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif' }}
+          >
             Find buyers before your competitors do.
           </h1>
 

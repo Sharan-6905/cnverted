@@ -16,6 +16,14 @@ export function XIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
+export function DiscordIcon(props: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M20.32 4.7A19.8 19.8 0 0 0 15.4 3.1c-.21.38-.46.9-.63 1.31a18.3 18.3 0 0 0-5.5 0c-.17-.41-.42-.93-.64-1.31A19.7 19.7 0 0 0 3.7 4.7C.86 8.94.09 13.07.47 17.14a19.9 19.9 0 0 0 6.02 3.04c.49-.66.92-1.36 1.29-2.1a12.9 12.9 0 0 1-2.03-.97c.17-.12.34-.25.5-.38a14.2 14.2 0 0 0 12.02 0c.16.13.33.26.5.38-.65.38-1.33.71-2.04.97.37.74.8 1.44 1.29 2.1a19.9 19.9 0 0 0 6.02-3.04c.44-4.72-.75-8.81-3.22-13.44zM8.68 14.6c-1.03 0-1.87-.95-1.87-2.11s.82-2.11 1.87-2.11 1.89.96 1.87 2.11c0 1.16-.82 2.11-1.87 2.11zm6.65 0c-1.03 0-1.87-.95-1.87-2.11s.82-2.11 1.87-2.11 1.89.96 1.87 2.11c0 1.16-.82 2.11-1.87 2.11z" />
+    </svg>
+  );
+}
+
 export function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>

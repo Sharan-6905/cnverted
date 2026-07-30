@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/logo";
-import { LinkedInIcon, XIcon, InstagramIcon } from "@/components/social-icons";
+import { LinkedInIcon, XIcon, InstagramIcon, DiscordIcon } from "@/components/social-icons";
 import { supabase } from "@/lib/supabase";
 
 const COLUMNS = [
@@ -47,6 +47,11 @@ const SOCIAL_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/cnvrted", Icon: LinkedInIcon },
   { label: "X", href: "https://x.com/cnvrted", Icon: XIcon },
   { label: "Instagram", href: "https://www.instagram.com/cnvrted", Icon: InstagramIcon },
+  {
+    label: "Discord",
+    href: "https://join.slack.com/t/cnvrted/shared_invite/zt-4388qsrbr-x~RlkFSChnmWY7JojhV1fA",
+    Icon: DiscordIcon,
+  },
 ];
 
 const LEGAL_LINKS = [

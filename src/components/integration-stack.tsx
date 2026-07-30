@@ -45,8 +45,9 @@ export function IntegrationStack() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="relative bg-canvas px-6 py-24 sm:py-32">
-      <div className="mx-auto mb-16 max-w-2xl text-center">
+    <section className="relative overflow-hidden bg-canvas px-6 py-24 sm:py-32">
+      <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+      <div className="relative mx-auto mb-16 max-w-2xl text-center">
         <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           Automations
         </span>
@@ -59,7 +60,7 @@ export function IntegrationStack() {
         </p>
       </div>
 
-      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[180px_1fr_260px]">
+      <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-[180px_1fr_260px]">
         {/* Left: sticky step nav */}
         <nav className="hidden lg:sticky lg:top-32 lg:block lg:h-fit">
           <ul className="relative">

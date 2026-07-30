@@ -44,7 +44,13 @@ const ROLES = [
 
 export default function CareersPage() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="relative flex min-h-screen flex-col">
+      <div
+        className="pointer-events-none fixed inset-0 -z-10 bg-cover bg-center"
+        style={{ backgroundImage: "url(/banners/careers-bg.png)" }}
+        aria-hidden="true"
+      />
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-white/90" aria-hidden="true" />
       <SiteHeader />
       <main className="flex-1">
         <Section

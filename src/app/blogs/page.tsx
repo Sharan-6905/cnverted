@@ -50,12 +50,6 @@ export default function BlogsPage() {
                 href={`/blogs/${post.slug}`}
                 className="group flex flex-col overflow-hidden rounded-3xl border border-white/60 bg-canvas/40 shadow-[0_10px_44px_-12px_rgba(20,16,8,0.22)] backdrop-blur-2xl smooth-transition transition-[border-color,box-shadow,transform] hover:-translate-y-1 hover:border-white/90 hover:bg-canvas/55 hover:shadow-float"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={post.cover}
-                  alt={post.title}
-                  className="aspect-[16/9] w-full border-b border-white/40 bg-surface-dark object-cover"
-                />
                 <div className="flex flex-1 flex-col p-6">
                   <div className="flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
                     <span>{post.category}</span>

@@ -1,5 +1,5 @@
 import { HeroScene } from "@/components/hero-scene";
-import { LiveSignalsWidget } from "@/components/live-signals-widget";
+import { MascotIntelligence } from "@/components/mascot-intelligence";
 import type { Signal } from "@/lib/types";
 
 interface HeroProps {
@@ -30,7 +30,7 @@ export function Hero({ featuredSignal }: HeroProps) {
           </p>
 
           <div className="mt-10">
-            <LiveSignalsWidget />
+            <MascotIntelligence />
           </div>
         </div>
 

@@ -41,7 +41,7 @@ export default function AboutPage() {
       <main className="flex-1">
         <Section className="py-10 sm:py-12 md:py-14">
           {/* Hero */}
-          <div className="mx-auto max-w-2xl text-center">
+          <div className="mx-auto max-w-4xl text-center">
             <span className="inline-flex items-center rounded-full border border-white/60 bg-canvas/50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand-teal backdrop-blur-md">
               About us
             </span>
@@ -56,8 +56,8 @@ export default function AboutPage() {
           </div>
 
           {/* Story */}
-          <Card className="mx-auto mt-10 max-w-3xl border-white/60 bg-canvas/40 p-6 shadow-[0_10px_44px_-12px_rgba(20,16,8,0.18)] backdrop-blur-2xl sm:p-8">
-            <div className="space-y-5 text-[15px] leading-[1.75] text-body">
+          <Card className="mx-auto mt-10 max-w-5xl border-white/60 bg-canvas/40 p-6 shadow-[0_10px_44px_-12px_rgba(20,16,8,0.18)] backdrop-blur-2xl sm:p-8 lg:p-12">
+            <div className="space-y-5 text-base leading-[1.85] text-body lg:text-[17px]">
               <p>
                 <NameLink href="https://www.linkedin.com/in/dhruvprad/">Dhruv</NameLink> met{" "}
                 <NameLink href="https://www.linkedin.com/in/sharan-s-6278b3360/">Sharan</NameLink> through

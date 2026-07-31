@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
 
 const inter = Inter({
@@ -22,7 +23,27 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: TITLE,
   description: DESCRIPTION,
-  icons: { icon: "/favicon.png" },
+  keywords: [
+    "buying signals",
+    "intent data",
+    "B2B sales intelligence",
+    "real-time intent signals",
+    "dark funnel",
+    "outbound sales",
+    "ICP scoring",
+    "sales prospecting",
+    "account-based marketing",
+    "buying intent",
+    "B2B lead generation",
+    "intent-driven outbound",
+    "sales intelligence platform",
+    "Cnvrted",
+  ],
+  authors: [{ name: "Cnvrted", url: SITE_URL }],
+  creator: "Cnvrted",
+  publisher: "Cnvrted",
+  alternates: { canonical: SITE_URL },
+  icons: { icon: "/favicon.png", apple: "/favicon.png" },
   openGraph: {
     type: "website",
     siteName: "Cnvrted",
@@ -54,7 +75,10 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${bricolage.variable} h-full`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        <StructuredData />
+        {children}
+      </body>
     </html>
   );
 }

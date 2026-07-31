@@ -27,7 +27,41 @@ export async function generateMetadata({
   return {
     title: `${post.title} — Cnvrted`,
     description: post.excerpt,
+    alternates: { canonical: `https://www.cnvrted.com/blogs/${post.slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      url: `https://www.cnvrted.com/blogs/${post.slug}`,
+      publishedTime: post.date,
+      authors: ["Cnvrted"],
+      images: [post.cover],
+    },
   };
+}
+
+function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    image: `https://www.cnvrted.com${post.cover}`,
+    datePublished: post.date,
+    author: { "@type": "Organization", name: "Cnvrted", url: "https://www.cnvrted.com" },
+    publisher: {
+      "@type": "Organization",
+      name: "Cnvrted",
+      logo: { "@type": "ImageObject", url: "https://www.cnvrted.com/cnvrted-logo.png" },
+    },
+    mainEntityOfPage: `https://www.cnvrted.com/blogs/${post.slug}`,
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
 }
 
 export default async function BlogPostPage({
@@ -45,6 +79,7 @@ export default async function BlogPostPage({
         className="bg-grid-page pointer-events-none absolute inset-0 -z-10"
         aria-hidden="true"
       />
+      <ArticleSchema post={post} />
       <SiteHeader />
       <main className="flex-1">
         <article className="px-6 py-16 md:py-24">

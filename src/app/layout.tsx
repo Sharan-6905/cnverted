@@ -42,6 +42,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Cnvrted", url: SITE_URL }],
   creator: "Cnvrted",
   publisher: "Cnvrted",
+  verification: { google: "a75IvLpxbTPDRrbkfayrxglnfwi7ukJnVAUkMWMiQ1k" },
   alternates: { canonical: SITE_URL },
   icons: { icon: "/favicon.png", apple: "/favicon.png" },
   openGraph: {

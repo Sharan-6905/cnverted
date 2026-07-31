@@ -45,7 +45,7 @@ export function IntegrationStack() {
   const [active, setActive] = useState(0);
 
   return (
-    <section className="relative overflow-hidden bg-canvas px-6 py-24 sm:py-32">
+    <section className="relative bg-canvas px-6 py-24 sm:py-32">
       <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="relative mx-auto mb-16 max-w-2xl text-center">
         <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.16em] text-muted">

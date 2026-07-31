@@ -22,6 +22,8 @@ const config: Config = {
 
         // Saturated Clay feature-card palette
         brand: {
+          // sampled from the whale mascot's body
+          navy: "#2C456F",
           pink: "#FF4D8B",
           teal: "#1A3A3A",
           lavender: "#B8A4ED",

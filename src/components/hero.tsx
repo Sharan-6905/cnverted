@@ -20,7 +20,8 @@ export function Hero({ featuredSignal }: HeroProps) {
           </span>
 
           <h1 className="mt-6 max-w-xl font-display text-display-xl font-semibold tracking-tight text-ink">
-            Find buyers before your competitors do.
+            Find <span className="text-brand-navy">buyers</span> before your
+            competitors do.
           </h1>
 
           <p className="mt-5 max-w-md text-lg leading-relaxed text-body">

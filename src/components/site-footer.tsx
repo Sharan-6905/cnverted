@@ -201,9 +201,17 @@ export function SiteFooter() {
           </div>
 
           <p className="text-xs text-on-dark/50">
-            Build by bangalore boys. © {new Date().getFullYear()} Cnvrted. All
-            rights reserved.
+            © {new Date().getFullYear()} Cnvrted. All rights reserved.
           </p>
+        </div>
+
+        {/* Made-with badge, sitting in the open space under the footer bar */}
+        <div className="mt-12 flex justify-center">
+          <span className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.07] px-5 py-2.5 text-xs tracking-wide text-on-dark/70 shadow-soft backdrop-blur-md smooth-transition transition-colors hover:border-white/25 hover:bg-white/[0.12]">
+            <Logo className="h-5 w-auto" />
+            Build by{" "}
+            <span className="font-semibold text-[#BEF264]">bangalore boys</span>
+          </span>
         </div>
       </div>
     </footer>

@@ -36,6 +36,7 @@ const COLUMNS = [
   {
     heading: "Company",
     links: [
+      { label: "About Us", href: "/about" },
       { label: "Contact", href: "/contact" },
       { label: "Careers", href: "/careers" },
       { label: "Learn from us", href: "/learn" },
@@ -209,7 +210,7 @@ export function SiteFooter() {
         <div className="mt-12 flex justify-center">
           <span className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.07] px-5 py-2.5 text-xs tracking-wide text-on-dark/70 shadow-soft backdrop-blur-md smooth-transition transition-colors hover:border-white/25 hover:bg-white/[0.12]">
             <Logo className="h-5 w-auto" />
-            Build by{" "}
+            Built by{" "}
             <span className="font-semibold text-[#BEF264]">Bangalore boys</span>
           </span>
         </div>

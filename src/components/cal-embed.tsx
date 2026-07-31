@@ -8,8 +8,11 @@ declare global {
   }
 }
 
-/** cal.com username/team slug — booking page lives at https://cal.com/cnvrted */
-const CAL_LINK = "cnvrted";
+/** cal.com username — full profile lives at https://cal.com/cnvrted */
+const CAL_USERNAME = "cnvrted";
+/** Default event type embedded inline, so visitors land straight on a date
+ * calendar instead of an event-type picker list. */
+const CAL_LINK = `${CAL_USERNAME}/30min`;
 
 /**
  * Official Cal.com inline embed (vanilla snippet from cal.com/docs, no extra
@@ -60,14 +63,19 @@ export function CalEmbed({ className }: { className?: string }) {
       window.Cal!("inline", {
         elementOrSelector: ref.current,
         calLink: CAL_LINK,
-        config: { theme: "light", layout: "month_view" },
+        config: {
+          theme: "light",
+          layout: "month_view",
+          // Skip the host avatar/name panel — jump straight to the date calendar.
+          hideEventTypeDetails: "true",
+        },
       });
     }
 
     window.Cal!("ui", {
       theme: "light",
       styles: { branding: { brandColor: "#1A3A3A" } },
-      hideEventTypeDetails: false,
+      hideEventTypeDetails: true,
       layout: "month_view",
     });
   }, []);
@@ -75,4 +83,4 @@ export function CalEmbed({ className }: { className?: string }) {
   return <div ref={ref} className={className} style={{ minHeight: 620 }} />;
 }
 
-export const CAL_BOOKING_URL = `https://cal.com/${CAL_LINK}`;
+export const CAL_BOOKING_URL = `https://cal.com/${CAL_USERNAME}`;

@@ -26,6 +26,7 @@ export default function BlogsPage() {
         <div className="absolute right-[-5rem] top-72 h-96 w-96 rounded-full bg-[#1B3A63]/40 blur-[110px]" />
         <div className="absolute bottom-16 left-[38%] h-96 w-96 rounded-full bg-[#BEF264]/35 blur-[110px]" />
         <div className="absolute bottom-40 left-[-4rem] h-72 w-72 rounded-full bg-[#7FD1B5]/35 blur-[110px]" />
+        <div className="absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-blue-400/30 blur-[100px]" />
       </div>
       <SiteHeader />
       <main className="flex-1">

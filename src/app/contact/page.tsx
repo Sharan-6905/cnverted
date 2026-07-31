@@ -24,9 +24,13 @@ export default function ContactPage() {
   return (
     <div className="relative flex min-h-screen flex-col">
       <div
-        className="bg-grid-page pointer-events-none absolute inset-0 -z-10"
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
         aria-hidden="true"
-      />
+      >
+        <div className="bg-grid-page absolute inset-0" />
+        <div className="absolute -right-24 top-40 h-96 w-96 rounded-full bg-blue-500/20 blur-[110px]" />
+        <div className="absolute -left-24 top-[28rem] h-80 w-80 rounded-full bg-blue-400/15 blur-[110px]" />
+      </div>
       <SiteHeader />
       <main className="flex-1">
         <Section>
@@ -46,15 +50,15 @@ export default function ContactPage() {
           <div className="mx-auto mt-12 grid max-w-5xl gap-6 lg:grid-cols-[1.3fr_1fr]">
             {/* Live calendar */}
             <Card className="overflow-hidden">
-              <div className="flex items-center justify-between gap-4 border-b border-hairline bg-brand-teal px-6 py-5 text-on-dark">
+              <div className="flex items-center justify-between gap-4 border-b border-hairline bg-black px-6 py-5 text-on-dark">
                 <div className="flex items-center gap-3">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-on-dark/15">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-blue-500/25">
                     <CalendarDays className="h-4.5 w-4.5" />
                   </span>
                   <div>
                     <p className="text-sm font-semibold">Schedule a demo</p>
                     <p className="text-xs text-on-dark/75">
-                      Book a personalized walkthrough with our team.
+                      Book a personalized walkthrough with our founding team.
                     </p>
                   </div>
                 </div>
@@ -68,7 +72,9 @@ export default function ContactPage() {
                   <ArrowUpRight className="h-3.5 w-3.5" />
                 </a>
               </div>
-              <CalEmbed className="w-full" />
+              <div className="bg-gradient-to-b from-blue-50 to-canvas p-2">
+                <CalEmbed className="w-full overflow-hidden rounded-2xl" />
+              </div>
             </Card>
 
             {/* Email + leadership */}

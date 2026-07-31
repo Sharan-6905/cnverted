@@ -37,7 +37,7 @@ const PLANS: Plan[] = [
     ],
     Icon: TrendingUp,
     accent: "text-blue-600",
-    surface: "bg-gradient-to-b from-blue-50 to-canvas",
+    surface: "bg-gradient-to-b from-blue-50/70 to-canvas/40",
     cta: { label: "Select plan", href: "https://beta.cnvrted.com" },
   },
   {
@@ -56,7 +56,7 @@ const PLANS: Plan[] = [
     ],
     Icon: Handshake,
     accent: "text-brand-teal",
-    surface: "bg-gradient-to-b from-lime-50 to-canvas",
+    surface: "bg-gradient-to-b from-lime-50/70 to-canvas/40",
     cta: { label: "Select plan", href: "https://beta.cnvrted.com" },
     featured: true,
   },
@@ -74,7 +74,7 @@ const PLANS: Plan[] = [
     ],
     Icon: Building2,
     accent: "text-fuchsia-600",
-    surface: "bg-gradient-to-b from-fuchsia-50 to-canvas",
+    surface: "bg-gradient-to-b from-fuchsia-50/70 to-canvas/40",
     cta: { label: "Talk to sales", href: "/contact" },
   },
 ];
@@ -96,11 +96,11 @@ function PlanCard({ plan }: { plan: Plan }) {
   return (
     <div
       className={cn(
-        "flex flex-col overflow-hidden rounded-3xl border p-7 smooth-transition transition-[border-color,box-shadow]",
+        "flex flex-col overflow-hidden rounded-3xl border p-7 backdrop-blur-2xl smooth-transition transition-[border-color,box-shadow]",
         plan.surface,
         plan.featured
           ? "border-brand-teal/30 shadow-float"
-          : "border-hairline shadow-soft"
+          : "border-white/60 shadow-[0_10px_44px_-12px_rgba(20,16,8,0.20)]"
       )}
     >
       <div className="flex items-start justify-between gap-3">
@@ -160,7 +160,7 @@ function PlanCard({ plan }: { plan: Plan }) {
         className={cn(
           "mt-7 flex h-12 w-full items-center justify-center rounded-xl text-sm font-medium smooth-transition transition-colors active:scale-[0.98]",
           plan.name === "Enterprise"
-            ? "border border-hairline bg-canvas/80 text-ink hover:bg-canvas"
+            ? "border border-white/70 bg-white/60 text-ink backdrop-blur-md hover:bg-white/80"
             : "bg-[#2B2B2B] text-on-dark hover:bg-ink"
         )}
       >

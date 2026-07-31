@@ -25,8 +25,16 @@ const ROWS: Row[] = [
   { company: "Ramp", logo: "/logos/companies/ramp.png", whyIcp: "B2B finance fit", designation: "VP Sales", domain: "ramp.com" },
 ];
 
-function maskEmail(domain: string) {
-  return `contact@${domain}`;
+/** Domain stays legible; the local part is blurred out as sample data. */
+function MaskedEmail({ domain }: { domain: string }) {
+  return (
+    <span>
+      <span className="select-none blur-[3px]" aria-hidden="true">
+        contact
+      </span>
+      @{domain}
+    </span>
+  );
 }
 
 function CompanyMark({ row }: { row: Row }) {
@@ -127,7 +135,7 @@ export function IcpEnrichmentTable() {
                   <td className="px-3 py-4">
                     <span className="inline-flex items-center gap-1.5 text-body">
                       <BadgeCheck className="h-3.5 w-3.5 shrink-0 text-brand-teal" />
-                      {maskEmail(row.domain)}
+                      <MaskedEmail domain={row.domain} />
                     </span>
                   </td>
                 </motion.tr>

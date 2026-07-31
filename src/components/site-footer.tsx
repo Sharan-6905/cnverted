@@ -210,7 +210,7 @@ export function SiteFooter() {
           <span className="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/[0.07] px-5 py-2.5 text-xs tracking-wide text-on-dark/70 shadow-soft backdrop-blur-md smooth-transition transition-colors hover:border-white/25 hover:bg-white/[0.12]">
             <Logo className="h-5 w-auto" />
             Build by{" "}
-            <span className="font-semibold text-[#BEF264]">bangalore boys</span>
+            <span className="font-semibold text-[#BEF264]">Bangalore boys</span>
           </span>
         </div>
       </div>

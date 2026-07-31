@@ -201,7 +201,8 @@ export function SiteFooter() {
           </div>
 
           <p className="text-xs text-on-dark/50">
-            © {new Date().getFullYear()} Cnvrted. All rights reserved.
+            Bangalore based. © {new Date().getFullYear()} Cnvrted. All rights
+            reserved.
           </p>
         </div>
       </div>

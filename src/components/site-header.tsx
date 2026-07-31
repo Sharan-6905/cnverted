@@ -54,8 +54,8 @@ export function SiteHeader() {
               "hidden text-muted hover:text-ink sm:inline-flex"
             )}
           >
-            <SlackLogo className="h-4 w-4" />
-            Community
+            <SlackLogo className="h-[18px] w-[18px] saturate-[1.35]" />
+            Join Slack
           </a>
           <a
             href="https://beta.cnvrted.com"
@@ -168,8 +168,8 @@ export function SiteHeader() {
                     "w-full justify-center text-muted hover:text-ink"
                   )}
                 >
-                  <SlackLogo className="h-4 w-4" />
-                  Community
+                  <SlackLogo className="h-[18px] w-[18px] saturate-[1.35]" />
+                  Join Slack
                 </a>
               </div>
             </div>

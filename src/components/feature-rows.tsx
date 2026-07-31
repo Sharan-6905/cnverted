@@ -1,5 +1,9 @@
+"use client";
+
 import Image, { type StaticImageData } from "next/image";
+import { motion, useReducedMotion } from "framer-motion";
 import { Section } from "@/components/section";
+import { REVEAL_DURATION, REVEAL_EASE } from "@/components/reveal";
 import { cn } from "@/lib/utils";
 import featureBuyer from "../../public/feature-buyer.png";
 import stepScan from "../../public/step-scan.png";
@@ -54,6 +58,8 @@ const FEATURES: Feature[] = [
 ];
 
 export function FeatureRows() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <Section
       id="product"
@@ -65,7 +71,7 @@ export function FeatureRows() {
         {FEATURES.map((f, i) => {
           const wide = i >= 3; // last two cards span wider and go horizontal
           return (
-            <article
+            <motion.article
               key={f.n}
               className={cn(
                 "rounded-3xl border border-hairline p-6 md:p-7",
@@ -73,6 +79,19 @@ export function FeatureRows() {
                 wide ? "lg:col-span-3" : "lg:col-span-2",
                 wide && "sm:flex sm:items-center sm:gap-6"
               )}
+              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={
+                reduceMotion
+                  ? { duration: 0 }
+                  : {
+                      duration: REVEAL_DURATION,
+                      ease: REVEAL_EASE,
+                      // cascade left-to-right within each grid row
+                      delay: (i % 3) * 0.08,
+                    }
+              }
             >
               <div
                 className={cn(
@@ -97,7 +116,7 @@ export function FeatureRows() {
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-body">{f.body}</p>
               </div>
-            </article>
+            </motion.article>
           );
         })}
       </div>

@@ -34,7 +34,7 @@ export async function generateMetadata({
       description: post.excerpt,
       url: `https://www.cnvrted.com/blogs/${post.slug}`,
       publishedTime: post.date,
-      authors: ["Cnvrted"],
+      authors: [post.author.name],
       images: [post.cover],
     },
   };
@@ -48,7 +48,12 @@ function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
     description: post.excerpt,
     image: `https://www.cnvrted.com${post.cover}`,
     datePublished: post.date,
-    author: { "@type": "Organization", name: "Cnvrted", url: "https://www.cnvrted.com" },
+    author: {
+      "@type": "Person",
+      name: post.author.name,
+      url: post.author.linkedin,
+      sameAs: [post.author.linkedin],
+    },
     publisher: {
       "@type": "Organization",
       name: "Cnvrted",
@@ -108,7 +113,15 @@ export default async function BlogPostPage({
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-body">{post.dek}</p>
               <p className="mt-6 border-t border-hairline pt-5 text-sm text-muted">
-                {formatPostDate(post.date)} · The Cnvrted team
+                {formatPostDate(post.date)} · by{" "}
+                <a
+                  href={post.author.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer author"
+                  className="font-medium text-ink underline decoration-hairline underline-offset-2 smooth-transition transition-colors hover:text-brand-teal hover:decoration-brand-teal"
+                >
+                  {post.author.name}
+                </a>
               </p>
             </header>
 

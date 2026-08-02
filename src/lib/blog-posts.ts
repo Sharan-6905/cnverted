@@ -9,6 +9,17 @@ export type Block =
   | { type: "bullets"; items: string[] }
   | { type: "cta"; text: string };
 
+export interface Author {
+  name: string;
+  /** Public profile the byline links to, and the sameAs used in Article schema. */
+  linkedin: string;
+}
+
+export const DHRUV_PRADEEP: Author = {
+  name: "Dhruv Pradeep",
+  linkedin: "https://www.linkedin.com/in/dhruvprad/",
+};
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -18,6 +29,7 @@ export interface BlogPost {
   category: string;
   date: string; // ISO
   readingMinutes: number;
+  author: Author;
   /** Path to the cover image under /public. */
   cover: string;
   body: Block[];
@@ -33,6 +45,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Comparison",
     date: "2026-07-24",
     readingMinutes: 7,
+    author: DHRUV_PRADEEP,
     cover: "/blog-apollo-vs-cnvrted.svg?v=2",
     body: [
       {
@@ -132,6 +145,7 @@ export const BLOG_POSTS: BlogPost[] = [
     category: "Go-to-market",
     date: "2026-07-23",
     readingMinutes: 6,
+    author: DHRUV_PRADEEP,
     cover: "/blog-gtm-play.svg?v=3",
     body: [
       {

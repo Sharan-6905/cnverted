@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { EarlyAccessForm } from "@/components/early-access-form";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 export const metadata: Metadata = {
   title: "Early access — Cnvrted",
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 export default function EarlyAccessPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <BreadcrumbSchema trail={[{ name: "Early Access" }]} />
       <SiteHeader />
       <main className="flex-1">
         <Section

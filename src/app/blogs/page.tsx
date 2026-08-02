@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { BLOG_POSTS, formatPostDate } from "@/lib/blog-posts";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -28,6 +29,7 @@ export default function BlogsPage() {
         <div className="absolute bottom-40 left-[-4rem] h-72 w-72 rounded-full bg-[#7FD1B5]/35 blur-[110px]" />
         <div className="absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-blue-400/30 blur-[100px]" />
       </div>
+      <BreadcrumbSchema trail={[{ name: "Blog" }]} />
       <SiteHeader />
       <main className="flex-1">
         <Section

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — Cnvrted",
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <BreadcrumbSchema trail={[{ name: "Privacy" }]} />
       <SiteHeader />
       <main className="flex-1">
         <Section eyebrow="Legal" title="Privacy Policy" description="Last updated: 2026">

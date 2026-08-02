@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { RichText } from "@/components/rich-text";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import {
   BLOG_POSTS,
   getPostBySlug,
@@ -85,6 +86,9 @@ export default async function BlogPostPage({
         aria-hidden="true"
       />
       <ArticleSchema post={post} />
+      <BreadcrumbSchema
+        trail={[{ name: "Blog", path: "/blogs" }, { name: post.title }]}
+      />
       <SiteHeader />
       <main className="flex-1">
         <article className="px-6 py-16 md:py-24">

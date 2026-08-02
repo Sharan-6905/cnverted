@@ -4,6 +4,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { Card } from "@/components/ui/card";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 export const metadata: Metadata = {
   title: "Help Center — Cnvrted",
@@ -31,6 +32,7 @@ const FAQS = [
 export default function HelpCenterPage() {
   return (
     <div className="flex min-h-screen flex-col">
+      <BreadcrumbSchema trail={[{ name: "Help Center" }]} />
       <SiteHeader />
       <main className="flex-1">
         <Section

@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { Card } from "@/components/ui/card";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 export const metadata: Metadata = {
   title: "About Us — Cnvrted",
@@ -36,6 +37,7 @@ export default function AboutPage() {
         <div className="absolute bottom-16 right-1/3 h-72 w-72 rounded-full bg-brand-lavender/20 blur-[110px]" />
       </div>
 
+      <BreadcrumbSchema trail={[{ name: "About Us" }]} />
       <SiteHeader />
 
       <main className="flex-1">

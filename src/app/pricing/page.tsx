@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { PricingPlans } from "@/components/pricing-plans";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 export const metadata: Metadata = {
   title: "Pricing — Cnvrted",
@@ -23,6 +24,7 @@ export default function PricingPage() {
         <div className="absolute bottom-10 left-[38%] h-96 w-96 rounded-full bg-[#BEF264]/30 blur-[110px]" />
         <div className="absolute bottom-32 right-[10%] h-72 w-72 rounded-full bg-fuchsia-300/25 blur-[110px]" />
       </div>
+      <BreadcrumbSchema trail={[{ name: "Pricing" }]} />
       <SiteHeader />
       <main className="flex-1">
         <Section

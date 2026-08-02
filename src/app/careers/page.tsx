@@ -5,6 +5,7 @@ import { Section } from "@/components/section";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CareerApplicationForm } from "@/components/career-application-form";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 export const metadata: Metadata = {
   title: "Careers — Cnvrted",
@@ -51,6 +52,7 @@ export default function CareersPage() {
         aria-hidden="true"
       />
       <div className="pointer-events-none fixed inset-0 -z-10 bg-white/90" aria-hidden="true" />
+      <BreadcrumbSchema trail={[{ name: "Careers" }]} />
       <SiteHeader />
       <main className="flex-1">
         <Section

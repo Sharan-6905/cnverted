@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { Card } from "@/components/ui/card";
 import { CalEmbed, CAL_BOOKING_URL } from "@/components/cal-embed";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 
 export const metadata: Metadata = {
   title: "Contact — Cnvrted",
@@ -32,6 +33,7 @@ export default function ContactPage() {
         <div className="absolute -left-24 top-[24rem] h-80 w-80 rounded-full bg-blue-400/25 blur-[100px]" />
         <div className="absolute bottom-8 right-1/4 h-72 w-72 rounded-full bg-brand-teal/20 blur-[110px]" />
       </div>
+      <BreadcrumbSchema trail={[{ name: "Contact" }]} />
       <SiteHeader />
       <main className="flex-1">
         <Section className="py-10 sm:py-12 md:py-14">

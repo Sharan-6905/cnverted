@@ -59,7 +59,10 @@ export function SiteHeader() {
           </a>
           <a
             href="https://beta.cnvrted.com"
-            className={cn(buttonVariants({ variant: "primary", size: "sm" }), "hidden sm:inline-flex")}
+            className={cn(
+              buttonVariants({ variant: "primary", size: "sm" }),
+              "hidden bg-brand-navy shadow-[0_0_14px_1px_rgba(44,69,111,0.3)] duration-300 hover:bg-brand-navy/90 hover:shadow-[0_0_28px_8px_rgba(44,69,111,0.6)] sm:inline-flex"
+            )}
           >
             Get started
           </a>

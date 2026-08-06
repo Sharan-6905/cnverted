@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-import { Send } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Logo } from "@/components/logo";
@@ -21,14 +19,6 @@ const fadeUp = (delay: number) => ({
 });
 
 export function IntentCapture() {
-  const [message, setMessage] = useState("");
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!message) return;
-    console.log("[orka] submit:", message);
-  }
-
   return (
     <section className="relative overflow-hidden px-6 py-24 sm:py-32">
       <motion.div
@@ -128,30 +118,6 @@ export function IntentCapture() {
                 </div>
               </motion.div>
             </div>
-
-            <form
-              onSubmit={handleSubmit}
-              className="flex items-center gap-2 border-t border-hairline p-3.5"
-            >
-              <label htmlFor="orka-message" className="sr-only">
-                What do you sell?
-              </label>
-              <input
-                id="orka-message"
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                placeholder="What do you sell?"
-                className="w-full rounded-full border border-hairline bg-surface-soft px-4 py-3 text-sm text-ink placeholder:text-muted-soft focus:outline-none focus:ring-2 focus:ring-brand-teal/25"
-              />
-              <button
-                type="submit"
-                aria-label="Send"
-                className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ink text-on-dark smooth-transition hover:bg-body-strong"
-              >
-                <Send className="h-4 w-4" />
-              </button>
-            </form>
           </div>
         </motion.div>
       </div>

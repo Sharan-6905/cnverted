@@ -26,9 +26,20 @@ export function Connector({ id, x1, y1, x2, y2 }: ConnectorProps) {
         strokeLinecap="round"
         strokeDasharray="4 6"
         initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
+        animate={{ pathLength: 1, opacity: [0, 1, 1, 0.6] }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
+        transition={{ duration: 0.6, ease: "easeInOut", times: [0, 0.5, 0.85, 1] }}
+      />
+      {/* brief brighten while the packet travels */}
+      <motion.path
+        d={d}
+        fill="none"
+        stroke="#2563FF"
+        strokeWidth={2}
+        strokeLinecap="round"
+        initial={{ pathLength: 0, opacity: 0 }}
+        animate={{ pathLength: 1, opacity: [0, 0.5, 0] }}
+        transition={{ duration: 0.65, ease: "easeInOut" }}
       />
 
       <motion.circle
@@ -37,9 +48,9 @@ export function Connector({ id, x1, y1, x2, y2 }: ConnectorProps) {
         r={3.5}
         fill="#2563FF"
         initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
+        animate={{ opacity: 1, scale: [0.5, 1.6, 1] }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.35 }}
       />
       <motion.circle
         cx={x2}
@@ -47,12 +58,12 @@ export function Connector({ id, x1, y1, x2, y2 }: ConnectorProps) {
         r={3.5}
         fill="#2563FF"
         initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
+        animate={{ opacity: 1, scale: [0.5, 1.6, 1] }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3, delay: 0.5 }}
+        transition={{ duration: 0.35, delay: 0.5 }}
       />
 
-      <circle r={4.5} fill="#2563FF" id={`dot-${id}`}>
+      <circle r={4.5} fill="#2563FF" id={`dot-${id}`} style={{ filter: "drop-shadow(0 0 3px #2563FF)" }}>
         <animateMotion dur="0.6s" fill="freeze" path={d} />
       </circle>
     </g>

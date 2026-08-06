@@ -109,7 +109,7 @@ export function RadarController() {
     >
       <div
         className="relative shrink-0"
-        style={{ width: RADAR_SIZE, height: RADAR_SIZE }}
+        style={{ width: "min(420px, 82vw)", aspectRatio: "1 / 1" }}
       >
         <div
           className="absolute inset-0 rounded-full"

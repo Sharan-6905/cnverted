@@ -135,7 +135,12 @@ function StepBlock({
   onActive: () => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
+  // Drives the desktop sidebar/logo highlighting — needs to fire continuously
+  // as the user scrolls past each step.
   const inView = useInView(ref, { margin: "-45% 0px -45% 0px" });
+  // Drives the fade-in itself — a one-time reveal so content never sits
+  // dimmed while just scrolled past on short/mobile viewports.
+  const revealed = useInView(ref, { margin: "-15% 0px -15% 0px", once: true });
 
   useEffect(() => {
     if (inView) onActive();
@@ -145,15 +150,21 @@ function StepBlock({
     <div ref={ref}>
       <motion.div
         initial={false}
-        animate={{ opacity: inView ? 1 : 0.4, y: inView ? 0 : 12 }}
+        animate={{ opacity: revealed ? 1 : 0.4, y: revealed ? 0 : 12 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-surface-card px-3 py-1 text-xs font-semibold text-ink">
+        <div className="mb-3 flex items-center gap-2 lg:hidden">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-brand-teal px-2.5 py-1 text-[11px] font-semibold text-on-dark">
+            Step {step.step.replace(/^0/, "")} of 3
+          </span>
+        </div>
+
+        <span className="hidden items-center gap-1.5 rounded-full bg-surface-card px-3 py-1 text-xs font-semibold text-ink lg:inline-flex">
           <CornerDownLeft className="h-3.5 w-3.5" />
           {step.step}
         </span>
 
-        <h3 className="mt-5 font-display text-3xl font-semibold text-ink sm:text-4xl">
+        <h3 className="mt-5 font-display text-2xl font-semibold text-ink sm:text-3xl lg:text-4xl">
           {step.title}
         </h3>
 
@@ -165,7 +176,7 @@ function StepBlock({
 
         <motion.div
           initial={false}
-          animate={{ opacity: inView ? 1 : 0.4, scale: inView ? 1 : 0.85 }}
+          animate={{ opacity: revealed ? 1 : 0.4, scale: revealed ? 1 : 0.85 }}
           transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="mx-auto mt-6 flex h-24 w-52 items-center justify-center lg:hidden"
         >

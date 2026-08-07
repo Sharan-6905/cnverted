@@ -63,8 +63,7 @@ export function SignalCard({ signal, highlighted, onSelect }: SignalCardProps) {
 
       <div className="mt-4 flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-[15px] font-semibold text-ink blur-[4px] select-none">{signal.company}</h3>
-          <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted">
+          <p className="line-clamp-2 text-sm leading-relaxed text-muted">
             {signal.description}
           </p>
         </div>

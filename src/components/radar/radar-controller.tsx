@@ -22,14 +22,16 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 /* Content                                                             */
 /* ------------------------------------------------------------------ */
 
+const MUTED_ICON = "#6A6A6A";
+
 const SIGNAL_CHIPS = [
-  { label: "Hiring SDRs", Icon: Linkedin },
-  { label: "Executive Change", Icon: UserCog },
-  { label: "New Funding", Icon: TrendingUp },
-  { label: "Website Relaunch", Icon: Globe2 },
-  { label: "Tech Stack Adoption", Icon: Cpu },
-  { label: "Product Launch", Icon: Rocket },
-  { label: "Reddit Discussion", Icon: MessageSquare },
+  { label: "Hiring SDRs", Icon: Linkedin, color: "#0A66C2" }, // LinkedIn blue
+  { label: "Executive Change", Icon: UserCog, color: MUTED_ICON },
+  { label: "New Funding", Icon: TrendingUp, color: MUTED_ICON },
+  { label: "Website Relaunch", Icon: Globe2, color: MUTED_ICON },
+  { label: "Tech Stack Adoption", Icon: Cpu, color: MUTED_ICON },
+  { label: "Product Launch", Icon: Rocket, color: MUTED_ICON },
+  { label: "Reddit Discussion", Icon: MessageSquare, color: "#FF4500" }, // Reddit orange
 ];
 
 const STAGE_LABELS = ["Scanning", "Verifying", "Enriching", "Matching ICP", "Scoring intent"];
@@ -92,10 +94,12 @@ const CHIP_MOTION = (() => {
 function FloatingChip({
   label,
   Icon,
+  color,
   index,
 }: {
   label: string;
   Icon: typeof Linkedin;
+  color: string;
   index: number;
 }) {
   const m = CHIP_MOTION[index];
@@ -106,7 +110,7 @@ function FloatingChip({
       transition={{ duration: m.duration, delay: m.delay, repeat: Infinity, ease: "easeInOut" }}
     >
       <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-surface-soft">
-        <Icon className="h-3.5 w-3.5 text-body" />
+        <Icon className="h-3.5 w-3.5" style={{ color }} />
         <span className="absolute -bottom-0.5 -right-0.5 flex h-2 w-2">
           <span
             className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
@@ -326,9 +330,9 @@ export function RadarController() {
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-muted lg:text-left">
             Live internet signals
           </p>
-          {SIGNAL_CHIPS.map(({ label, Icon }, i) => (
+          {SIGNAL_CHIPS.map(({ label, Icon, color }, i) => (
             <div key={label} ref={(el) => { chipRefs.current[i] = el; }}>
-              <FloatingChip label={label} Icon={Icon} index={i} />
+              <FloatingChip label={label} Icon={Icon} color={color} index={i} />
             </div>
           ))}
         </div>

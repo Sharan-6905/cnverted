@@ -10,16 +10,17 @@ interface StoryIntroProps {
 
 /**
  * A single-question narrative beat: large centered headline, short
- * supporting copy, generous whitespace. No cards, no icons, no
- * background texture — typography and space carry the section.
+ * supporting copy, generous whitespace. No cards, no icons — just the
+ * site's faint grid texture behind the type.
  */
 export function StoryIntro({ headline, body }: StoryIntroProps) {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="px-6 py-20 sm:py-32 lg:py-44">
+    <section className="relative px-6 py-20 sm:py-32 lg:py-44">
+      <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
       <motion.div
-        className="mx-auto w-[92%] max-w-[960px] text-center sm:w-[85%]"
+        className="relative mx-auto w-[92%] max-w-[960px] text-center sm:w-[85%]"
         initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}

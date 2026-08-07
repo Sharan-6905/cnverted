@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 
 /* ------------------------------------------------------------------ */
@@ -58,33 +58,48 @@ const SIGNAL_ORDER = [...seededShuffle(SIGNAL_LABELS, 7), ...seededShuffle(SIGNA
 const COMPANY_ORDER = seededShuffle(COMPANIES, 3);
 
 /* ------------------------------------------------------------------ */
-/* Globe geometry — a dotted wireframe sphere, orthographic projection */
+/* Globe geometry — a true CSS 3D point-cloud sphere.                  */
+/* perspective + preserve-3d + translateZ per dot, rotated as a whole  */
+/* group so the browser's own 3D engine handles occlusion/foreshorten-*/
+/* ing natively (no canvas, no three.js, no per-frame JS recompute).   */
 /* ------------------------------------------------------------------ */
 
-const GLOBE_SIZE = 320;
-const GLOBE_R = GLOBE_SIZE / 2 - 4;
+const GLOBE_SIZE = 720; // px, the sphere's physical diameter
+const GLOBE_R = GLOBE_SIZE / 2;
+const PERSPECTIVE = 1600;
 
 interface GlobeDot {
-  x: number;
-  y: number;
-  z: number;
+  lat: number;
+  lon: number;
+  land: boolean;
 }
 
-// Rough continent bounding regions in [lonMin, lonMax, latMin, latMax] so the
-// dot field reads as landmasses (like a real dot-matrix world map) rather
-// than a uniform grid. Approximate on purpose — this is decorative.
+// Rough continent bounding regions in [lonMin, lonMax, latMin, latMax] —
+// approximate on purpose, this is a decorative abstraction, not a map.
 const LAND_REGIONS: [number, number, number, number][] = [
-  [-168, -52, 15, 72], // North America
-  [-82, -34, -56, 13], // South America
-  [-11, 40, 35, 71], // Europe
-  [-18, 52, -35, 38], // Africa
-  [40, 180, 5, 78], // Asia
+  [-168, -140, 55, 72], // Alaska
+  [-140, -95, 48, 72], // Canada north
+  [-125, -95, 25, 48], // US / Canada south
+  [-105, -85, 15, 25], // Mexico
+  [-90, -60, 42, 62], // eastern Canada
+  [-82, -60, -20, 13], // northern South America
+  [-72, -34, -56, -20], // southern South America
+  [-10, 32, 43, 71], // Europe mainland + Scandinavia
+  [-9, 3, 36, 44], // Iberia
+  [7, 19, 36, 47], // Italy
+  [19, 40, 34, 47], // Balkans/Greece/Turkey edge
+  [-18, 52, -35, 15], // Africa south
+  [10, 52, 15, 32], // Africa north
+  [40, 60, 12, 55],
+  [60, 100, 5, 55],
+  [100, 145, 18, 55],
+  [130, 180, 42, 78], // Siberia / Russia east
   [95, 145, -11, 28], // SE Asia / Indonesia
   [112, 154, -44, -10], // Australia
 ];
 
 function isLand(latDeg: number, lonDeg: number) {
-  const lon = ((lonDeg + 180) % 360) - 180; // normalize to [-180, 180]
+  const lon = ((lonDeg + 180) % 360) - 180;
   return LAND_REGIONS.some(
     ([lonMin, lonMax, latMin, latMax]) =>
       lon >= lonMin && lon <= lonMax && latDeg >= latMin && latDeg <= latMax
@@ -93,33 +108,42 @@ function isLand(latDeg: number, lonDeg: number) {
 
 function buildGlobeDots(): GlobeDot[] {
   const dots: GlobeDot[] = [];
-  for (let lat = -80; lat <= 80; lat += 6) {
-    const latRad = (lat * Math.PI) / 180;
-    for (let lon = 0; lon < 360; lon += 6) {
-      if (!isLand(lat, lon)) continue;
-      const lonRad = (lon * Math.PI) / 180;
-      const x = Math.cos(latRad) * Math.sin(lonRad);
-      const y = Math.sin(latRad);
-      const z = Math.cos(latRad) * Math.cos(lonRad);
-      if (z > 0.02) dots.push({ x, y, z });
+  for (let lat = -84; lat <= 84; lat += 6.5) {
+    for (let lon = 0; lon < 360; lon += 6.5) {
+      dots.push({ lat, lon, land: isLand(lat, lon) });
     }
   }
   return dots;
 }
 
 const GLOBE_DOTS = buildGlobeDots();
+
+// Only front-facing dots (at the sphere's resting orientation) make sense as
+// pulse origins, since the pulse/pill overlay is a flat 2D layer drawn on
+// top of the (independently rotating) 3D sphere.
+const FRONT_DOTS = GLOBE_DOTS.filter((d) => {
+  const latRad = (d.lat * Math.PI) / 180;
+  const lonRad = (d.lon * Math.PI) / 180;
+  return Math.cos(latRad) * Math.cos(lonRad) > 0.25;
+});
 const DOT_ORDER = seededShuffle(
-  GLOBE_DOTS.map((_, i) => i),
+  FRONT_DOTS.map((_, i) => i),
   11
 );
 
-function project(d: GlobeDot) {
-  return {
-    left: 50 + d.x * 50,
-    top: 50 - d.y * 50,
-    r: 0.55 + d.z * 0.65,
-    opacity: 0.28 + d.z * 0.45,
-  };
+function round(n: number) {
+  return Math.round(n * 1000) / 1000;
+}
+
+// Orthographic projection used only for the pulse/pill/connector overlay
+// (which sits on top of the CSS-3D sphere and needs simple 2D percent
+// coordinates matching the sphere's *resting* orientation).
+function projectStatic(lat: number, lon: number) {
+  const latRad = (lat * Math.PI) / 180;
+  const lonRad = (lon * Math.PI) / 180;
+  const x = Math.cos(latRad) * Math.sin(lonRad);
+  const y = Math.sin(latRad);
+  return { left: round(50 + x * 50), top: round(50 - y * 50) };
 }
 
 /* ------------------------------------------------------------------ */
@@ -176,6 +200,8 @@ interface FloatingPill {
   text: string;
   left: number;
   top: number;
+  anchorLeft: number;
+  anchorTop: number;
 }
 
 interface ActivePulse {
@@ -214,8 +240,8 @@ export function RadarController() {
       const i = tickRef.current++;
 
       const dotIdx = DOT_ORDER[i % DOT_ORDER.length];
-      const dot = GLOBE_DOTS[dotIdx];
-      const { left, top } = project(dot);
+      const dot = FRONT_DOTS[dotIdx];
+      const { left, top } = projectStatic(dot.lat, dot.lon);
 
       setPulse({ key: i, left, top });
 
@@ -227,12 +253,15 @@ export function RadarController() {
           ...prev,
           {
             key: i,
+            anchorLeft: left,
+            anchorTop: top,
             text: label,
-            left: Math.min(78, Math.max(8, left + (i % 2 === 0 ? 10 : -10))),
-            top: Math.min(82, Math.max(6, top + (i % 3 === 0 ? -8 : 8))),
+            left: Math.min(70, Math.max(4, left + (i % 2 === 0 ? 14 : -14))),
+            top: Math.min(76, Math.max(4, top + (i % 3 === 0 ? -12 : 12))),
           },
         ];
-        return next.slice(-5);
+        // Keep at most two signals active at once, per spec.
+        return next.slice(-2);
       });
 
       setStatus("Verifying signal");
@@ -295,7 +324,6 @@ export function RadarController() {
     };
   }, []);
 
-  const dots = useMemo(() => GLOBE_DOTS.map((d) => ({ ...project(d) })), []);
   const score = SCORE_STEPS[scoreIndex];
 
   return (
@@ -343,83 +371,72 @@ export function RadarController() {
         </div>
 
         {/* Right column — globe + ORKA */}
-        <div className="relative mx-auto" style={{ width: "min(460px, 100%)" }}>
-          <div className="relative" style={{ paddingTop: "88%" }}>
-            <div className="absolute inset-0">
-              {/* Globe stage */}
-              <div
-                className="absolute left-0 top-0"
-                style={{ width: GLOBE_SIZE, height: GLOBE_SIZE }}
-              >
-                <svg
-                  width="100%"
-                  height="100%"
-                  viewBox={`0 0 ${GLOBE_SIZE} ${GLOBE_SIZE}`}
-                  className="absolute inset-0"
-                >
-                  <circle
-                    cx={GLOBE_SIZE / 2}
-                    cy={GLOBE_SIZE / 2}
-                    r={GLOBE_R}
-                    fill="none"
-                    stroke="#E8E8E8"
-                    strokeWidth={1}
-                  />
-                  {[-0.45, 0, 0.45].map((f) => (
-                    <line
-                      key={`lat${f}`}
-                      x1={GLOBE_SIZE / 2 - Math.sqrt(Math.max(0, 1 - f * f * 4)) * GLOBE_R}
-                      x2={GLOBE_SIZE / 2 + Math.sqrt(Math.max(0, 1 - f * f * 4)) * GLOBE_R}
-                      y1={GLOBE_SIZE / 2 + f * GLOBE_R}
-                      y2={GLOBE_SIZE / 2 + f * GLOBE_R}
-                      stroke="#EDEDED"
-                      strokeWidth={1}
-                    />
-                  ))}
-                </svg>
+        <div
+          className="relative mx-auto overflow-hidden lg:mx-0 lg:ml-auto"
+          style={{
+            width: "100%",
+            maxWidth: 560,
+            aspectRatio: "1 / 1.05",
+            borderRadius: 24,
+          }}
+        >
+          <div
+            className="absolute"
+            style={{
+              width: GLOBE_SIZE,
+              height: GLOBE_SIZE,
+              right: "-32%",
+              bottom: "-14%",
+            }}
+          >
+            {/* Globe stage */}
+            <div className="absolute inset-0" style={{ width: GLOBE_SIZE, height: GLOBE_SIZE }}>
+              {/* soft spherical shading for depth */}
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background:
+                      "radial-gradient(circle at 30% 26%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 45%), radial-gradient(circle at 70% 80%, rgba(0,0,0,0.06) 0%, transparent 55%)",
+                    zIndex: 2,
+                  }}
+                  aria-hidden="true"
+                />
+                <div
+                  className="absolute inset-0 rounded-full"
+                  style={{ border: "1px solid #E8E8E8" }}
+                  aria-hidden="true"
+                />
 
-                {/* slowly rotating meridians + dot field */}
-                <motion.div
-                  className="absolute inset-0"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 140, repeat: Infinity, ease: "linear" }}
-                  style={{ transformOrigin: "50% 50%" }}
+                {/* true 3D point-cloud sphere, rotating forever, very slowly */}
+                <div
+                  className="absolute inset-0 overflow-hidden rounded-full"
+                  style={{ perspective: PERSPECTIVE }}
                 >
-                  <svg
-                    width="100%"
-                    height="100%"
-                    viewBox={`0 0 ${GLOBE_SIZE} ${GLOBE_SIZE}`}
+                  <motion.div
                     className="absolute inset-0"
+                    style={{ transformStyle: "preserve-3d" }}
+                    animate={{ rotateY: 360 }}
+                    transition={{ duration: 52, repeat: Infinity, ease: "linear" }}
                   >
-                    {[0.22, 0.55, 0.85].map((f) => (
-                      <ellipse
-                        key={f}
-                        cx={GLOBE_SIZE / 2}
-                        cy={GLOBE_SIZE / 2}
-                        rx={GLOBE_R * f}
-                        ry={GLOBE_R}
-                        fill="none"
-                        stroke="#EEEEEE"
-                        strokeWidth={1}
+                    {GLOBE_DOTS.map((d, i) => (
+                      <span
+                        key={i}
+                        className="absolute rounded-full"
+                        style={{
+                          left: "50%",
+                          top: "50%",
+                          width: d.land ? 3.2 : 2.2,
+                          height: d.land ? 3.2 : 2.2,
+                          marginLeft: d.land ? -1.6 : -1.1,
+                          marginTop: d.land ? -1.6 : -1.1,
+                          backgroundColor: d.land ? "#9AA2AC" : "#D3D8DD",
+                          transform: `rotateY(${d.lon}deg) rotateX(${-d.lat}deg) translateZ(${GLOBE_R}px)`,
+                          backfaceVisibility: "hidden",
+                        }}
                       />
                     ))}
-                  </svg>
-
-                  {dots.map((d, i) => (
-                    <span
-                      key={i}
-                      className="absolute rounded-full bg-[#B9BFC6]"
-                      style={{
-                        left: `${d.left}%`,
-                        top: `${d.top}%`,
-                        width: d.r,
-                        height: d.r,
-                        opacity: d.opacity,
-                        transform: "translate(-50%,-50%)",
-                      }}
-                    />
-                  ))}
-                </motion.div>
+                  </motion.div>
+                </div>
 
                 {/* pulse */}
                 <AnimatePresence>
@@ -531,7 +548,7 @@ export function RadarController() {
                 style={{
                   left: `${ORKA_POS.left}%`,
                   top: `${ORKA_POS.top}%`,
-                  transform: "translate(-50%,-50%)",
+                  transform: "translate(-50%, -50%)",
                   boxShadow: "0 12px 34px rgba(0,0,0,0.08)",
                 }}
               >
@@ -614,7 +631,6 @@ export function RadarController() {
               </AnimatePresence>
             </div>
           </div>
-        </div>
       </div>
     </section>
   );

@@ -13,8 +13,9 @@ interface StoryIntroProps {
  */
 export function StoryIntro({ headline, body }: StoryIntroProps) {
   return (
-    <section className="px-6 py-20 sm:py-28">
-      <Reveal className="mx-auto max-w-6xl text-center">
+    <section className="relative px-6 py-20 sm:py-28">
+      <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+      <Reveal className="relative mx-auto max-w-6xl text-center">
         <h2 className="mx-auto max-w-3xl font-display text-display-lg font-semibold tracking-tight text-ink">
           {headline}
         </h2>

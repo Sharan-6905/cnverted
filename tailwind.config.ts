@@ -45,7 +45,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Bricolage Grotesque", "Inter", "sans-serif"],
+        display: ["var(--font-display)", "Poppins", "Inter", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {

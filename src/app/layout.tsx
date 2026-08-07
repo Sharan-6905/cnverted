@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Poppins, Inter } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
 });
 
-const bricolage = Bricolage_Grotesque({
+const poppins = Poppins({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["500", "600", "700"],
@@ -74,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${bricolage.variable} h-full`}
+      className={`${inter.variable} ${poppins.variable} h-full`}
     >
       <body className="min-h-full">
         <StructuredData />

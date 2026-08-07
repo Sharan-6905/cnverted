@@ -1,673 +1,539 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import type { ReactNode } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Linkedin,
+  TrendingUp,
+  Rocket,
+  UserCog,
+  MessageSquare,
+  Globe2,
+  Briefcase,
+  Cpu,
+  Newspaper,
+} from "lucide-react";
+
+const GREEN = "#1E9E5A";
+const EASE = [0.22, 1, 0.36, 1] as const;
 
 /* ------------------------------------------------------------------ */
 /* Content                                                             */
 /* ------------------------------------------------------------------ */
 
-const SIGNAL_LABELS = [
-  "VP Sales Hired",
-  "Raised Series A",
-  "Pricing Page Updated",
-  "Technology Migration",
-  "Hiring SDRs",
-  "Executive Change",
-  "Product Launch",
-  "Salesforce Installed",
-  "HubSpot Added",
-  "Security Page Updated",
-  "Opened London Office",
-  "AI Team Expansion",
+const SOURCES = [
+  { label: "LinkedIn Hiring", Icon: Linkedin },
+  { label: "Funding News", Icon: TrendingUp },
+  { label: "Product Launches", Icon: Rocket },
+  { label: "Executive Changes", Icon: UserCog },
+  { label: "Reddit Discussions", Icon: MessageSquare },
+  { label: "Company Websites", Icon: Globe2 },
+  { label: "Job Boards", Icon: Briefcase },
+  { label: "Tech Stack Detection", Icon: Cpu },
+  { label: "Press Releases", Icon: Newspaper },
 ];
 
-const COMPANIES = [
-  "Stripe",
-  "Linear",
-  "Rippling",
-  "Vanta",
-  "Notion",
-  "ClickUp",
-  "Ramp",
-  "Mercury",
-  "Retool",
-  "Clerk",
+const MODULES = [
+  "Crawl sources",
+  "Remove noise",
+  "Deduplicate",
+  "Enrich companies",
+  "Detect buying signals",
+  "Match ICP",
+  "Calculate intent score",
 ];
 
-const SCORE_STEPS = [42, 58, 71, 86, 94, 100];
-const GREEN = "#1E9E5A";
+const SIGNAL_CARDS = [
+  { title: "Hiring SDR Team", confidence: 92, time: "2m ago" },
+  { title: "Series A Raised", confidence: 97, time: "6m ago" },
+  { title: "Opened London Office", confidence: 88, time: "11m ago" },
+  { title: "Tech Stack Migration", confidence: 84, time: "14m ago" },
+];
 
-// Deterministic shuffle (fixed seed) — never repeats the same order twice in
-// a row, but stays identical between server and client renders.
-function seededShuffle<T>(arr: T[], seed: number): T[] {
-  const a = [...arr];
+const ICP_LINES: [string, string][] = [
+  ["Industry", "B2B SaaS"],
+  ["Employees", "250"],
+  ["Location", "United Kingdom"],
+  ["Buying signals", "7"],
+  ["ICP match", "96%"],
+];
+
+const PAIN_POINTS = ["Hiring sales team", "Geographic expansion", "Product launch"];
+
+const SCORE_CHECKLIST = ["Hiring", "Funding", "Expansion", "Executive hire", "Product launch"];
+
+const ACCOUNTS = [
+  { company: "Acme Technologies", score: 94, priority: "High", owner: "A. Reyes", signal: "Series A raised", status: "Qualified" },
+  { company: "Northwind Data", score: 88, priority: "High", owner: "J. Park", signal: "Hiring SDR team", status: "Qualified" },
+  { company: "Bluepeak Labs", score: 74, priority: "Medium", owner: "S. Cole", signal: "Website relaunch", status: "Reviewing" },
+  { company: "Fenwick Cloud", score: 61, priority: "Medium", owner: "A. Reyes", signal: "Tech stack migration", status: "Reviewing" },
+  { company: "Orbital Health", score: 45, priority: "Low", owner: "J. Park", signal: "Exec change", status: "Watching" },
+];
+
+const PIPELINE_LABELS = [
+  "Internet signals",
+  "Signal collection",
+  "Intelligence engine",
+  "Signal extraction",
+  "ICP qualification",
+  "Intent scoring",
+  "Qualified accounts",
+];
+
+/* ------------------------------------------------------------------ */
+/* Timing — one full loop is ~19s, per spec (18-20s)                   */
+/* ------------------------------------------------------------------ */
+
+const T_COLLECT_END = 2200;
+const T_STREAM_END = 4200;
+const T_ENGINE_START = 4200;
+const MODULE_STEP_MS = 680; // 7 modules ≈ 4760ms
+const T_ENGINE_END = T_ENGINE_START + MODULES.length * MODULE_STEP_MS; // ~8960
+const T_CARDS_END = T_ENGINE_END + 2200; // ~11160
+const T_ICP_END = T_CARDS_END + ICP_LINES.length * 320 + 500; // ~13260
+const T_SCORE_END = T_ICP_END + 1400 + SCORE_CHECKLIST.length * 220; // ~15760
+const CYCLE_MS = 19200;
+
+function stageForTime(t: number) {
+  if (t < T_COLLECT_END) return 1;
+  if (t < T_STREAM_END) return 0;
+  if (t < T_ENGINE_END) return 2;
+  if (t < T_CARDS_END) return 3;
+  if (t < T_ICP_END) return 4;
+  if (t < T_SCORE_END) return 5;
+  return 6;
+}
+
+/* ------------------------------------------------------------------ */
+/* Ambient flowing particles (decorative — always running, independent */
+/* of the story timeline, tuned for a moderate/performant count).      */
+/* ------------------------------------------------------------------ */
+
+function seededRand(seed: number) {
   let s = seed;
-  const rand = () => {
+  return () => {
     s = (s * 9301 + 49297) % 233280;
     return s / 233280;
   };
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(rand() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
 }
 
-const SIGNAL_ORDER = [...seededShuffle(SIGNAL_LABELS, 7), ...seededShuffle(SIGNAL_LABELS, 19)];
-const COMPANY_ORDER = seededShuffle(COMPANIES, 3);
+const PARTICLES = (() => {
+  const rand = seededRand(5);
+  return Array.from({ length: 22 }, (_, i) => ({
+    id: i,
+    top: 6 + rand() * 88,
+    duration: 2.6 + rand() * 2.2,
+    delay: rand() * 3,
+  }));
+})();
 
 /* ------------------------------------------------------------------ */
-/* Globe geometry — a true CSS 3D point-cloud sphere.                  */
-/* perspective + preserve-3d + translateZ per dot, rotated as a whole  */
-/* group so the browser's own 3D engine handles occlusion/foreshorten-*/
-/* ing natively (no canvas, no three.js, no per-frame JS recompute).   */
+/* Small building blocks                                               */
 /* ------------------------------------------------------------------ */
 
-// The sphere's transforms are expressed relative to a fixed "design" size,
-// then the whole stage is uniformly scaled to whatever the container
-// actually measures — see `stageSize`/`scale` in the component below. This
-// keeps the sphere fully visible and centered at any viewport width instead
-// of relying on cropping/overflow tricks.
-const GLOBE_SIZE = 460;
-const GLOBE_R = GLOBE_SIZE / 2;
-const PERSPECTIVE = 1400;
-
-interface GlobeDot {
-  lat: number;
-  lon: number;
-  land: boolean;
-}
-
-// Rough continent bounding regions in [lonMin, lonMax, latMin, latMax] —
-// approximate on purpose, this is a decorative abstraction, not a map.
-const LAND_REGIONS: [number, number, number, number][] = [
-  [-168, -140, 55, 72], // Alaska
-  [-140, -95, 48, 72], // Canada north
-  [-125, -95, 25, 48], // US / Canada south
-  [-105, -85, 15, 25], // Mexico
-  [-90, -60, 42, 62], // eastern Canada
-  [-82, -60, -20, 13], // northern South America
-  [-72, -34, -56, -20], // southern South America
-  [-10, 32, 43, 71], // Europe mainland + Scandinavia
-  [-9, 3, 36, 44], // Iberia
-  [7, 19, 36, 47], // Italy
-  [19, 40, 34, 47], // Balkans/Greece/Turkey edge
-  [-18, 52, -35, 15], // Africa south
-  [10, 52, 15, 32], // Africa north
-  [40, 60, 12, 55],
-  [60, 100, 5, 55],
-  [100, 145, 18, 55],
-  [130, 180, 42, 78], // Siberia / Russia east
-  [95, 145, -11, 28], // SE Asia / Indonesia
-  [112, 154, -44, -10], // Australia
-];
-
-function isLand(latDeg: number, lonDeg: number) {
-  const lon = ((lonDeg + 180) % 360) - 180;
-  return LAND_REGIONS.some(
-    ([lonMin, lonMax, latMin, latMax]) =>
-      lon >= lonMin && lon <= lonMax && latDeg >= latMin && latDeg <= latMax
+function StageLabel({ children }: { children: ReactNode }) {
+  return (
+    <p className="mb-4 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-muted lg:text-left">
+      {children}
+    </p>
   );
 }
 
-function buildGlobeDots(): GlobeDot[] {
-  const dots: GlobeDot[] = [];
-  for (let lat = -84; lat <= 84; lat += 6.5) {
-    for (let lon = 0; lon < 360; lon += 6.5) {
-      dots.push({ lat, lon, land: isLand(lat, lon) });
-    }
-  }
-  return dots;
-}
-
-const GLOBE_DOTS = buildGlobeDots();
-
-// Only front-facing dots (at the sphere's resting orientation) make sense as
-// pulse origins, since the pulse/pill overlay is a flat 2D layer drawn on
-// top of the (independently rotating) 3D sphere.
-const FRONT_DOTS = GLOBE_DOTS.filter((d) => {
-  const latRad = (d.lat * Math.PI) / 180;
-  const lonRad = (d.lon * Math.PI) / 180;
-  return Math.cos(latRad) * Math.cos(lonRad) > 0.25;
-});
-const DOT_ORDER = seededShuffle(
-  FRONT_DOTS.map((_, i) => i),
-  11
-);
-
-function round(n: number) {
-  return Math.round(n * 1000) / 1000;
-}
-
-// Orthographic projection used only for the pulse/pill/connector overlay
-// (which sits on top of the CSS-3D sphere and needs simple 2D percent
-// coordinates matching the sphere's *resting* orientation).
-function projectStatic(lat: number, lon: number) {
-  const latRad = (lat * Math.PI) / 180;
-  const lonRad = (lon * Math.PI) / 180;
-  const x = Math.cos(latRad) * Math.sin(lonRad);
-  const y = Math.sin(latRad);
-  return { left: round(50 + x * 50), top: round(50 - y * 50) };
-}
-
-/* ------------------------------------------------------------------ */
-/* Count-up stat                                                       */
-/* ------------------------------------------------------------------ */
-
-function CountUp({
-  target,
-  decimals = 0,
-  suffix = "",
+function Card({
+  children,
+  className = "",
+  active = false,
 }: {
-  target: number;
-  decimals?: number;
-  suffix?: string;
+  children: ReactNode;
+  className?: string;
+  active?: boolean;
 }) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const [value, setValue] = useState(0);
+  return (
+    <div
+      className={`rounded-2xl border bg-white p-3 transition-shadow ${className}`}
+      style={{
+        borderColor: active ? GREEN : "#ECECEC",
+        boxShadow: active ? `0 0 0 3px ${GREEN}1A, 0 8px 20px rgba(0,0,0,0.05)` : "0 4px 14px rgba(0,0,0,0.04)",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Component                                                            */
+/* ------------------------------------------------------------------ */
+
+export function RadarController() {
+  const [elapsed, setElapsed] = useState(0);
+  const startRef = useRef<number>(0);
 
   useEffect(() => {
-    if (!inView) return;
-    const duration = 1100;
-    const start = performance.now();
     let raf: number;
+    startRef.current = performance.now();
     function tick(now: number) {
-      const t = Math.min(1, (now - start) / duration);
-      const eased = 1 - Math.pow(1 - t, 3);
-      setValue(target * eased);
-      if (t < 1) raf = requestAnimationFrame(tick);
+      const t = (now - startRef.current) % CYCLE_MS;
+      setElapsed(Math.round(t / 40) * 40); // throttle re-renders to ~25fps of state churn
+      raf = requestAnimationFrame(tick);
     }
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [inView, target]);
-
-  const formatted =
-    decimals > 0
-      ? value.toFixed(decimals)
-      : Math.round(value).toLocaleString("en-US");
-
-  return (
-    <span ref={ref}>
-      {formatted}
-      {suffix}
-    </span>
-  );
-}
-
-/* ------------------------------------------------------------------ */
-/* Component                                                           */
-/* ------------------------------------------------------------------ */
-
-interface FloatingPill {
-  key: number;
-  text: string;
-  left: number;
-  top: number;
-  anchorLeft: number;
-  anchorTop: number;
-}
-
-interface ActivePulse {
-  key: number;
-  left: number;
-  top: number;
-}
-
-interface LeadCardData {
-  key: number;
-  company: string;
-  score: number;
-  signals: string[];
-}
-
-const PULSE_INTERVAL_MS = 2400;
-const ORKA_POS = { left: 90, top: 76 }; // percent, just outside the sphere's bottom-right edge
-
-export function RadarController() {
-  const [pulse, setPulse] = useState<ActivePulse | null>(null);
-  const [pills, setPills] = useState<FloatingPill[]>([]);
-  const [scoreIndex, setScoreIndex] = useState(0);
-  const [lead, setLead] = useState<LeadCardData | null>(null);
-  const [status, setStatus] = useState("Analyzing buying intent");
-  const [scale, setScale] = useState(1);
-  const stageRef = useRef<HTMLDivElement>(null);
-
-  // Uniformly scale the whole (fixed-design-size) stage to whatever the
-  // container actually measures, so the full sphere is always visible —
-  // never cropped — at any viewport width.
-  useEffect(() => {
-    const el = stageRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver((entries) => {
-      const width = entries[0]?.contentRect.width;
-      if (width) setScale(width / GLOBE_SIZE);
-    });
-    ro.observe(el);
-    return () => ro.disconnect();
   }, []);
 
-  const tickRef = useRef(0);
-  const recentSignalsRef = useRef<string[]>([]);
-  const companyIndexRef = useRef(0);
+  const stage = stageForTime(elapsed);
+  const activeSource = Math.floor(elapsed / 260) % SOURCES.length;
 
-  useEffect(() => {
-    let cancelled = false;
-    const timeouts: ReturnType<typeof setTimeout>[] = [];
+  const moduleIdx =
+    elapsed >= T_ENGINE_START && elapsed < T_ENGINE_END
+      ? Math.min(MODULES.length - 1, Math.floor((elapsed - T_ENGINE_START) / MODULE_STEP_MS))
+      : elapsed >= T_ENGINE_END
+        ? MODULES.length - 1
+        : -1;
 
-    function fireTick() {
-      if (cancelled) return;
-      const i = tickRef.current++;
+  const cardsRevealed =
+    elapsed >= T_ENGINE_END
+      ? Math.min(
+          SIGNAL_CARDS.length,
+          Math.floor((elapsed - T_ENGINE_END) / ((T_CARDS_END - T_ENGINE_END) / SIGNAL_CARDS.length)) + 1
+        )
+      : 0;
 
-      const dotIdx = DOT_ORDER[i % DOT_ORDER.length];
-      const dot = FRONT_DOTS[dotIdx];
-      const { left, top } = projectStatic(dot.lat, dot.lon);
+  const icpLinesRevealed =
+    elapsed >= T_CARDS_END
+      ? Math.min(ICP_LINES.length, Math.floor((elapsed - T_CARDS_END) / 320) + 1)
+      : 0;
+  const painRevealed = elapsed >= T_CARDS_END + ICP_LINES.length * 320 ? PAIN_POINTS.length : 0;
 
-      setPulse({ key: i, left, top });
+  const scoreProgress =
+    elapsed >= T_ICP_END ? Math.min(1, (elapsed - T_ICP_END) / 1400) : 0;
+  const scoreValue = Math.round(94 * (1 - Math.pow(1 - scoreProgress, 3)));
+  const checklistRevealed =
+    elapsed >= T_ICP_END + 1400
+      ? Math.min(SCORE_CHECKLIST.length, Math.floor((elapsed - (T_ICP_END + 1400)) / 220) + 1)
+      : 0;
 
-      const label = SIGNAL_ORDER[i % SIGNAL_ORDER.length];
-      recentSignalsRef.current = [label, ...recentSignalsRef.current].slice(0, 3);
-
-      setPills((prev) => {
-        // Push the pill outward along the same direction from the sphere's
-        // center as its anchor point, so it floats just outside the visible
-        // circle instead of sitting on top of the dots or the copy column.
-        const dx = left - 50;
-        const dy = top - 50;
-        const dist = Math.hypot(dx, dy) || 1;
-        const outward = 74;
-        const pillLeft = 50 + (dx / dist) * outward;
-        const pillTop = 50 + (dy / dist) * outward;
-
-        const next = [
-          ...prev,
-          {
-            key: i,
-            anchorLeft: left,
-            anchorTop: top,
-            text: label,
-            left: round(pillLeft),
-            top: round(pillTop),
-          },
-        ];
-        // Keep at most two signals active at once, per spec.
-        return next.slice(-2);
-      });
-
-      setStatus("Verifying signal");
-      timeouts.push(
-        setTimeout(() => {
-          if (cancelled) return;
-          setStatus("Analyzing buying intent");
-          setScoreIndex((prevIdx) => {
-            const nextIdx = Math.min(prevIdx + 1, SCORE_STEPS.length - 1);
-            if (SCORE_STEPS[nextIdx] === 100) {
-              timeouts.push(
-                setTimeout(() => {
-                  if (cancelled) return;
-                  const company = COMPANY_ORDER[companyIndexRef.current % COMPANY_ORDER.length];
-                  companyIndexRef.current += 1;
-                  setLead({
-                    key: i,
-                    company,
-                    score: 92 + (i % 7),
-                    signals: recentSignalsRef.current,
-                  });
-                  setStatus("Qualified account surfaced");
-
-                  timeouts.push(
-                    setTimeout(() => {
-                      if (cancelled) return;
-                      setLead(null);
-                      setScoreIndex(0);
-                      setStatus("Analyzing buying intent");
-                    }, 3000)
-                  );
-                }, 500)
-              );
-            }
-            return nextIdx;
-          });
-        }, 600)
-      );
-
-      // clear this pulse's ring after it plays
-      timeouts.push(
-        setTimeout(() => {
-          if (!cancelled) setPulse((p) => (p?.key === i ? null : p));
-        }, 1400)
-      );
-      // clear this pill after it has had time to be read
-      timeouts.push(
-        setTimeout(() => {
-          if (!cancelled) setPills((prev) => prev.filter((p) => p.key !== i));
-        }, 4200)
-      );
-    }
-
-    fireTick();
-    const interval = setInterval(fireTick, PULSE_INTERVAL_MS);
-    return () => {
-      cancelled = true;
-      clearInterval(interval);
-      timeouts.forEach(clearTimeout);
-    };
-  }, []);
-
-  const score = SCORE_STEPS[scoreIndex];
+  const rowsRevealed =
+    elapsed >= T_SCORE_END
+      ? Math.min(ACCOUNTS.length, Math.floor((elapsed - T_SCORE_END) / 320) + 1)
+      : 0;
 
   return (
-    <section className="bg-white px-6 py-24 sm:py-32">
-      <div className="mx-auto grid max-w-6xl items-center gap-16 lg:grid-cols-[0.82fr_1fr]">
-        {/* Left column */}
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-hairline px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-            <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: GREEN }} />
-            Cnvrted
+    <section className="relative overflow-hidden bg-white px-6 py-24 sm:py-32">
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(rgba(10,10,10,0.05) 1px, transparent 1px)",
+          backgroundSize: "22px 22px",
+          maskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 85%)",
+          WebkitMaskImage: "radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 85%)",
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="relative mx-auto max-w-2xl text-center">
+        <span className="inline-flex items-center gap-2 rounded-full border border-hairline px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+          <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: GREEN }} />
+          Cnvrted
+        </span>
+        <h2 className="mt-6 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+          From internet noise to qualified accounts.
+        </h2>
+        <p className="mt-4 text-[15px] leading-relaxed text-body">
+          Watch how Cnvrted continuously scans public signals, verifies and scores them with AI,
+          and delivers sales-ready accounts — before your competitors even know they exist.
+        </p>
+      </div>
+
+      {/* pipeline breadcrumb */}
+      <div className="relative mx-auto mt-12 flex max-w-4xl flex-wrap items-center justify-center gap-x-2 gap-y-2">
+        {PIPELINE_LABELS.map((label, i) => (
+          <span key={label} className="flex items-center gap-2">
+            <motion.span
+              animate={{ color: i === stage ? GREEN : "#9CA3AF", opacity: i === stage ? 1 : 0.6 }}
+              transition={{ duration: 0.3 }}
+              className="text-[11px] font-medium"
+            >
+              {label}
+            </motion.span>
+            {i < PIPELINE_LABELS.length - 1 && (
+              <span className="text-[10px] text-muted-soft/50">→</span>
+            )}
           </span>
+        ))}
+      </div>
 
-          <h2 className="mt-6 font-display text-3xl font-semibold leading-tight tracking-tight text-ink sm:text-4xl">
-            Every company leaves buying signals.
-          </h2>
-
-          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-body">
-            Cnvrted continuously monitors hiring, funding, technology adoption,
-            executive changes, product launches, website updates, and public
-            conversations across the internet. Every verified signal
-            contributes to a company&apos;s buying intent score, helping your
-            sales team discover opportunities before competitors do.
-          </p>
-
-          <div className="mt-10 grid grid-cols-3 gap-6 border-t border-hairline pt-8">
-            <div>
-              <p className="font-display text-2xl font-semibold text-ink">
-                <CountUp target={12.4} decimals={1} suffix="M+" />
-              </p>
-              <p className="mt-1 text-xs text-muted">Signals processed today</p>
-            </div>
-            <div>
-              <p className="font-display text-2xl font-semibold text-ink">
-                <CountUp target={480} suffix="K+" />
-              </p>
-              <p className="mt-1 text-xs text-muted">Companies monitored</p>
-            </div>
-            <div>
-              <p className="font-display text-2xl font-semibold text-ink">
-                <CountUp target={1850} />
-              </p>
-              <p className="mt-1 text-xs text-muted">High intent accounts</p>
-            </div>
+      {/* workflow */}
+      <div className="relative mx-auto mt-14 flex max-w-[1400px] flex-col gap-10 overflow-x-auto pb-4 lg:flex-row lg:items-center lg:justify-between lg:gap-4">
+        {/* Stage 1 — sources */}
+        <div className="mx-auto w-full max-w-[220px] shrink-0 lg:mx-0">
+          <StageLabel>Internet signals</StageLabel>
+          <div className="space-y-2">
+            {SOURCES.slice(0, 6).map((s, i) => {
+              const active = i === activeSource;
+              const Icon = s.Icon;
+              return (
+                <div
+                  key={s.label}
+                  className="flex items-center gap-2 rounded-xl border px-2.5 py-2 transition-colors"
+                  style={{
+                    borderColor: active ? GREEN : "#ECECEC",
+                    backgroundColor: active ? `${GREEN}0D` : "#fff",
+                  }}
+                >
+                  <span className="relative flex h-1.5 w-1.5 shrink-0">
+                    <span
+                      className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+                      style={{ backgroundColor: GREEN }}
+                    />
+                    <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ backgroundColor: GREEN }} />
+                  </span>
+                  <Icon className="h-3.5 w-3.5 shrink-0 text-muted" />
+                  <span className="truncate text-xs font-medium text-ink">{s.label}</span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        {/* Right column — globe + ORKA. This outer box is the only
-            responsive element: width is the real layout constraint (~45-50%
-            of the hero via the grid track + this max-width), and the fixed
-            -design-size stage inside it is scaled uniformly to fit — so the
-            full circular sphere is always visible, never cropped. */}
-        <div
-          className="mx-auto flex items-center justify-center lg:mx-0 lg:ml-auto"
-          style={{ width: "100%", maxWidth: GLOBE_SIZE, aspectRatio: "1 / 1" }}
-        >
-          <div ref={stageRef} className="relative h-full w-full">
-            <div
-              className="absolute left-1/2 top-1/2"
-              style={{
-                width: GLOBE_SIZE,
-                height: GLOBE_SIZE,
-                transform: `translate(-50%, -50%) scale(${scale})`,
+        {/* Stage 2 — particle stream */}
+        <div className="relative mx-auto h-16 w-full max-w-[120px] shrink-0 overflow-hidden lg:h-40 lg:w-24">
+          {PARTICLES.map((p) => (
+            <motion.span
+              key={p.id}
+              className="absolute h-1 w-1 rounded-full lg:left-1/2"
+              style={{ top: `${p.top}%`, backgroundColor: GREEN, opacity: 0.5 }}
+              animate={{
+                x: ["-10%", "410%"],
+                opacity: [0, 0.6, 0],
               }}
-            >
-              {/* Globe stage */}
-              <div className="absolute inset-0" style={{ width: GLOBE_SIZE, height: GLOBE_SIZE }}>
-              {/* soft spherical shading for depth */}
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{
-                    background:
-                      "radial-gradient(circle at 30% 26%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0) 45%), radial-gradient(circle at 70% 80%, rgba(0,0,0,0.06) 0%, transparent 55%)",
-                    zIndex: 2,
+              transition={{
+                duration: p.duration,
+                delay: p.delay,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Stage 3 — engine */}
+        <div className="relative mx-auto flex w-full max-w-[220px] shrink-0 flex-col items-center">
+          <StageLabel>Intelligence engine</StageLabel>
+          <div className="relative flex h-40 w-40 items-center justify-center">
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              style={{ border: "1px solid #ECECEC" }}
+              animate={{ rotate: 360 }}
+              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+            />
+            <motion.div
+              className="absolute inset-3 rounded-full"
+              style={{ border: `1px dashed ${GREEN}55` }}
+              animate={{ rotate: -360 }}
+              transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+            />
+            <div
+              className="absolute inset-0 rounded-full"
+              style={{
+                background: `radial-gradient(circle, ${GREEN}14 0%, transparent 70%)`,
+              }}
+              aria-hidden="true"
+            />
+            <div className="relative z-10 flex flex-col items-center rounded-2xl border border-hairline bg-white px-4 py-3 text-center shadow-soft">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.1em] text-ink">Cnvrted</span>
+              <span className="text-[10px] text-muted">Intent intelligence engine</span>
+            </div>
+          </div>
+          <div className="mt-4 w-full space-y-1.5">
+            {MODULES.map((m, i) => (
+              <div key={m} className="flex items-center gap-2">
+                <motion.span
+                  animate={{
+                    backgroundColor: i <= moduleIdx ? GREEN : "#E5E5E5",
+                    scale: i === moduleIdx ? 1.3 : 1,
                   }}
-                  aria-hidden="true"
+                  transition={{ duration: 0.25 }}
+                  className="h-1.5 w-1.5 shrink-0 rounded-full"
                 />
-                <div
-                  className="absolute inset-0 rounded-full"
-                  style={{ border: "1px solid #E8E8E8" }}
-                  aria-hidden="true"
-                />
-
-                {/* true 3D point-cloud sphere, rotating forever, very slowly */}
-                <div
-                  className="absolute inset-0 overflow-hidden rounded-full"
-                  style={{ perspective: PERSPECTIVE }}
+                <motion.span
+                  animate={{ color: i === moduleIdx ? GREEN : i < moduleIdx ? "#6B7280" : "#B0B0B0" }}
+                  transition={{ duration: 0.25 }}
+                  className="text-[11px] font-medium"
                 >
-                  <motion.div
-                    className="absolute inset-0"
-                    style={{ transformStyle: "preserve-3d" }}
-                    animate={{ rotateY: 360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                  >
-                    {GLOBE_DOTS.map((d, i) => (
-                      <span
-                        key={i}
-                        className="absolute rounded-full"
-                        style={{
-                          left: "50%",
-                          top: "50%",
-                          width: d.land ? 3.2 : 2.2,
-                          height: d.land ? 3.2 : 2.2,
-                          marginLeft: d.land ? -1.6 : -1.1,
-                          marginTop: d.land ? -1.6 : -1.1,
-                          backgroundColor: d.land ? "#9AA2AC" : "#D3D8DD",
-                          transform: `rotateY(${d.lon}deg) rotateX(${-d.lat}deg) translateZ(${GLOBE_R}px)`,
-                          backfaceVisibility: "hidden",
-                        }}
-                      />
-                    ))}
-                  </motion.div>
-                </div>
+                  {m}
+                </motion.span>
+              </div>
+            ))}
+          </div>
+        </div>
 
-                {/* pulse */}
-                <AnimatePresence>
-                  {pulse && (
+        {/* Stage 4 — signal cards */}
+        <div className="mx-auto w-full max-w-[220px] shrink-0 lg:mx-0">
+          <StageLabel>Signal extraction</StageLabel>
+          <div className="space-y-2">
+            <AnimatePresence>
+              {SIGNAL_CARDS.map((c, i) =>
+                i < cardsRevealed ? (
+                  <motion.div
+                    key={c.title}
+                    initial={{ opacity: 0, x: -12, scale: 0.96 }}
+                    animate={{ opacity: 1, x: 0, scale: 1 }}
+                    transition={{ duration: 0.45, ease: EASE }}
+                  >
+                    <Card>
+                      <div className="flex items-center gap-1.5">
+                        <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: GREEN }} />
+                        <span className="text-xs font-semibold text-ink">{c.title}</span>
+                      </div>
+                      <div className="mt-1 flex items-center justify-between text-[10px] text-muted">
+                        <span>{c.confidence}% confidence</span>
+                        <span>{c.time}</span>
+                      </div>
+                    </Card>
+                  </motion.div>
+                ) : null
+              )}
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Stage 5 — ICP qualification */}
+        <div className="mx-auto w-full max-w-[240px] shrink-0 lg:mx-0">
+          <StageLabel>ICP qualification</StageLabel>
+          <Card active={stage === 4}>
+            <p className="text-xs font-semibold text-ink">Acme Technologies</p>
+            <div className="mt-2 space-y-1">
+              <AnimatePresence>
+                {ICP_LINES.map(([label, value], i) =>
+                  i < icpLinesRevealed ? (
                     <motion.div
-                      key={pulse.key}
-                      className="absolute rounded-full"
-                      style={{
-                        left: `${pulse.left}%`,
-                        top: `${pulse.top}%`,
-                        border: `1.5px solid ${GREEN}`,
-                        translateX: "-50%",
-                        translateY: "-50%",
-                      }}
-                      initial={{ width: 4, height: 4, opacity: 0.9 }}
-                      animate={{ width: 46, height: 46, opacity: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 1.3, ease: "easeOut" }}
-                    />
-                  )}
-                </AnimatePresence>
-                <AnimatePresence>
-                  {pulse && (
-                    <motion.div
-                      key={`dot-${pulse.key}`}
-                      className="absolute rounded-full"
-                      style={{
-                        left: `${pulse.left}%`,
-                        top: `${pulse.top}%`,
-                        backgroundColor: GREEN,
-                        translateX: "-50%",
-                        translateY: "-50%",
-                      }}
-                      initial={{ width: 3, height: 3, opacity: 1 }}
-                      animate={{ width: 6, height: 6, opacity: 1 }}
-                      exit={{ opacity: 0 }}
+                      key={label}
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.3 }}
-                    />
-                  )}
-                </AnimatePresence>
-
-                {/* signal path -> ORKA panel */}
-                <svg
-                  width="100%"
-                  height="100%"
-                  viewBox={`0 0 ${GLOBE_SIZE} ${GLOBE_SIZE}`}
-                  className="pointer-events-none absolute inset-0 overflow-visible"
-                >
-                  <AnimatePresence>
-                    {pulse &&
-                      (() => {
-                        const x1 = (pulse.left / 100) * GLOBE_SIZE;
-                        const y1 = (pulse.top / 100) * GLOBE_SIZE;
-                        const x2 = (ORKA_POS.left / 100) * GLOBE_SIZE;
-                        const y2 = (ORKA_POS.top / 100) * GLOBE_SIZE;
-                        const mx = (x1 + x2) / 2;
-                        const d = `M ${x1} ${y1} Q ${mx} ${y1}, ${x2} ${y2}`;
-                        return (
-                          <motion.g key={`path-${pulse.key}`}>
-                            <motion.path
-                              d={d}
-                              fill="none"
-                              stroke="#D6E9DC"
-                              strokeWidth={1}
-                              strokeDasharray="3 5"
-                              initial={{ pathLength: 0, opacity: 0 }}
-                              animate={{ pathLength: 1, opacity: 1 }}
-                              exit={{ opacity: 0 }}
-                              transition={{ duration: 0.9, ease: "easeInOut" }}
-                            />
-                            <circle r={2.5} fill={GREEN}>
-                              <animateMotion dur="1s" fill="freeze" path={d} />
-                            </circle>
-                          </motion.g>
-                        );
-                      })()}
-                  </AnimatePresence>
-                </svg>
-              </div>
-
-              {/* Floating signal pills */}
-              <AnimatePresence>
-                {pills.map((p) => (
-                  <motion.div
-                    key={p.key}
-                    className="absolute"
-                    style={{ left: `${p.left}%`, top: `${p.top}%` }}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.5, ease: "easeOut" }}
-                  >
-                    {/* continuous gentle float, independent of entrance/exit */}
-                    <motion.div
-                      className="flex items-center gap-1.5 whitespace-nowrap rounded-full border border-hairline bg-white px-3 py-1.5 text-[11px] font-medium text-ink"
-                      style={{ boxShadow: "0 6px 20px rgba(0,0,0,0.06)" }}
-                      animate={{ y: [-3, 3, -3] }}
-                      transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                      className="flex items-center justify-between text-[11px]"
                     >
-                      <span
-                        className="h-1.5 w-1.5 shrink-0 rounded-full"
-                        style={{ backgroundColor: GREEN }}
-                      />
-                      {p.text}
+                      <span className="text-muted">{label}</span>
+                      <span className="font-medium text-ink">{value}</span>
                     </motion.div>
-                  </motion.div>
-                ))}
-              </AnimatePresence>
-
-              {/* ORKA Intelligence panel */}
-              <div
-                className="absolute w-48 rounded-2xl border border-hairline bg-white p-4"
-                style={{
-                  left: `${ORKA_POS.left}%`,
-                  top: `${ORKA_POS.top}%`,
-                  transform: "translate(-50%, -50%)",
-                  boxShadow: "0 12px 34px rgba(0,0,0,0.08)",
-                }}
-              >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.1em] text-ink">
-                  Orka Intelligence
-                </p>
-                <AnimatePresence mode="wait">
-                  <motion.p
-                    key={status}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.25 }}
-                    className="mt-1 text-[11px] text-muted"
-                  >
-                    {status}
-                  </motion.p>
-                </AnimatePresence>
-
-                <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-surface-soft">
-                  <motion.div
-                    className="h-full rounded-full"
-                    style={{ backgroundColor: GREEN }}
-                    animate={{ width: `${score}%` }}
-                    transition={{ type: "spring", stiffness: 120, damping: 20 }}
-                  />
-                </div>
-
-                <div className="mt-3 flex items-baseline justify-between">
-                  <span className="text-[10px] uppercase tracking-[0.08em] text-muted">
-                    Intent score
-                  </span>
-                  <motion.span
-                    key={score}
-                    initial={{ opacity: 0, y: -4 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                    className="font-display text-lg font-semibold"
-                    style={{ color: GREEN }}
-                  >
-                    {score}
-                  </motion.span>
-                </div>
-              </div>
-
-              {/* Lead card */}
-              <AnimatePresence>
-                {lead && (
-                  <motion.div
-                    key={lead.key}
-                    className="absolute w-56 rounded-2xl border border-hairline bg-white p-4"
-                    style={{
-                      left: "6%",
-                      bottom: "2%",
-                      boxShadow: "0 16px 40px rgba(0,0,0,0.1)",
-                    }}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -16 }}
-                    transition={{ type: "spring", stiffness: 220, damping: 24 }}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-sm font-semibold text-ink">{lead.company}</span>
-                      <span
-                        className="rounded-full px-2 py-0.5 text-[11px] font-semibold"
-                        style={{ backgroundColor: "#E6F5EC", color: GREEN }}
-                      >
-                        {lead.score}
-                      </span>
-                    </div>
-                    <ul className="mt-2 space-y-1">
-                      {lead.signals.map((s) => (
-                        <li key={s} className="flex items-center gap-1.5 text-[11px] text-muted">
-                          <span style={{ color: GREEN }}>✓</span>
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="mt-2 text-[11px] font-medium" style={{ color: GREEN }}>
-                      Confidence: Very high
-                    </p>
-                  </motion.div>
+                  ) : null
                 )}
               </AnimatePresence>
             </div>
+            {painRevealed > 0 && (
+              <div className="mt-2.5 border-t border-hairline pt-2">
+                <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-soft">
+                  Pain points
+                </p>
+                <ul className="mt-1 space-y-1">
+                  {PAIN_POINTS.map((p) => (
+                    <li key={p} className="flex items-center gap-1.5 text-[11px] text-body">
+                      <span style={{ color: GREEN }}>✓</span>
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </Card>
+        </div>
+
+        {/* Stage 6 — intent score */}
+        <div className="mx-auto w-full max-w-[200px] shrink-0 lg:mx-0">
+          <StageLabel>Intent scoring</StageLabel>
+          <Card active={stage === 5}>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted">
+              Buying intent score
+            </p>
+            <div className="relative mx-auto mt-2 flex h-24 w-24 items-center justify-center">
+              <svg viewBox="0 0 100 100" className="absolute inset-0 -rotate-90">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#ECECEC" strokeWidth="7" />
+                <motion.circle
+                  cx="50"
+                  cy="50"
+                  r="42"
+                  fill="none"
+                  stroke={GREEN}
+                  strokeWidth="7"
+                  strokeLinecap="round"
+                  strokeDasharray={2 * Math.PI * 42}
+                  animate={{ strokeDashoffset: 2 * Math.PI * 42 * (1 - scoreProgress * 0.94) }}
+                  transition={{ duration: 0.2 }}
+                />
+              </svg>
+              <span className="font-display text-2xl font-semibold" style={{ color: GREEN }}>
+                {scoreValue}
+              </span>
+            </div>
+            <p className="mt-1 text-center text-[11px] font-medium" style={{ color: GREEN }}>
+              Very high intent
+            </p>
+            <ul className="mt-2 space-y-1">
+              {SCORE_CHECKLIST.map((s, i) =>
+                i < checklistRevealed ? (
+                  <motion.li
+                    key={s}
+                    initial={{ opacity: 0, x: -6 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="flex items-center gap-1.5 text-[11px] text-body"
+                  >
+                    <span style={{ color: GREEN }}>✓</span>
+                    {s}
+                  </motion.li>
+                ) : null
+              )}
+            </ul>
+          </Card>
+        </div>
+
+        {/* Stage 7 — qualified accounts */}
+        <div className="mx-auto w-full max-w-[420px] shrink-0 lg:mx-0">
+          <StageLabel>Qualified accounts</StageLabel>
+          <div className="overflow-x-auto rounded-2xl border border-hairline bg-white shadow-soft">
+            <table className="w-full min-w-[400px] border-collapse text-left">
+              <thead>
+                <tr className="border-b border-hairline text-[9px] font-semibold uppercase tracking-[0.06em] text-muted-soft">
+                  <th className="px-2.5 py-2">Company</th>
+                  <th className="px-2.5 py-2">Score</th>
+                  <th className="px-2.5 py-2">Priority</th>
+                  <th className="px-2.5 py-2">Owner</th>
+                  <th className="px-2.5 py-2">Latest signal</th>
+                  <th className="px-2.5 py-2">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <AnimatePresence>
+                  {ACCOUNTS.map((a, i) =>
+                    i < rowsRevealed ? (
+                      <motion.tr
+                        key={a.company}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                        className="border-b border-hairline last:border-0"
+                        style={{ backgroundColor: a.score >= 85 ? `${GREEN}0D` : "transparent" }}
+                      >
+                        <td className="whitespace-nowrap px-2.5 py-2 text-[11px] font-medium text-ink">{a.company}</td>
+                        <td
+                          className="px-2.5 py-2 text-[11px] font-semibold"
+                          style={{ color: a.score >= 85 ? GREEN : "#6B7280" }}
+                        >
+                          {a.score}
+                        </td>
+                        <td className="whitespace-nowrap px-2.5 py-2 text-[11px] text-muted">{a.priority}</td>
+                        <td className="whitespace-nowrap px-2.5 py-2 text-[11px] text-muted">{a.owner}</td>
+                        <td className="whitespace-nowrap px-2.5 py-2 text-[11px] text-muted">{a.signal}</td>
+                        <td className="px-2.5 py-2 text-[11px] text-muted">{a.status}</td>
+                      </motion.tr>
+                    ) : null
+                  )}
+                </AnimatePresence>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

@@ -22,15 +22,13 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 /* Content                                                             */
 /* ------------------------------------------------------------------ */
 
-const MUTED_ICON = "#6A6A6A";
-
 const SIGNAL_CHIPS = [
   { label: "Hiring SDRs", Icon: Linkedin, color: "#0A66C2" }, // LinkedIn blue
-  { label: "Executive Change", Icon: UserCog, color: MUTED_ICON },
-  { label: "New Funding", Icon: TrendingUp, color: MUTED_ICON },
-  { label: "Website Relaunch", Icon: Globe2, color: MUTED_ICON },
-  { label: "Tech Stack Adoption", Icon: Cpu, color: MUTED_ICON },
-  { label: "Product Launch", Icon: Rocket, color: MUTED_ICON },
+  { label: "Executive Change", Icon: UserCog, color: "#7C3AED" }, // violet
+  { label: "New Funding", Icon: TrendingUp, color: "#16A34A" }, // emerald
+  { label: "Website Relaunch", Icon: Globe2, color: "#0EA5E9" }, // sky blue
+  { label: "Tech Stack Adoption", Icon: Cpu, color: "#6366F1" }, // indigo
+  { label: "Product Launch", Icon: Rocket, color: "#F97316" }, // orange
   { label: "Reddit Discussion", Icon: MessageSquare, color: "#FF4500" }, // Reddit orange
 ];
 

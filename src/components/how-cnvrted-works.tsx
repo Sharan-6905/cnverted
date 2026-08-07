@@ -41,7 +41,7 @@ export function HowCnvrtedWorks() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative px-6 py-14 sm:py-20">
+    <section className="relative px-6 py-10 sm:py-14">
       <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
       <Reveal className="relative mx-auto max-w-2xl text-center">
         <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.16em] text-muted">

@@ -13,7 +13,7 @@ interface StoryIntroProps {
  */
 export function StoryIntro({ headline, body }: StoryIntroProps) {
   return (
-    <section className="relative px-6 py-14 sm:py-20">
+    <section className="relative px-6 py-10 sm:py-14">
       <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
       <Reveal className="relative mx-auto max-w-6xl text-center">
         <h2 className="mx-auto max-w-3xl font-display text-display-lg font-semibold tracking-tight text-ink">

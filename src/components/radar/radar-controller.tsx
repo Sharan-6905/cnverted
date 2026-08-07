@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 const GREEN = "#1E9E5A";
@@ -73,15 +74,8 @@ const CHIP_MOTION = (() => {
   }));
 })();
 
-/* Ambient flowing paths — decorative, not wired to literal chip         */
-/* positions. Coordinates are percentages of the canvas (viewBox 0-100). */
-const LEFT_PATHS = [
-  "M2,8 C 22,8 34,34 49,48",
-  "M2,28 C 22,24 36,40 49,50",
-  "M2,50 C 22,50 36,50 49,52",
-  "M2,72 C 22,74 36,58 49,54",
-  "M2,92 C 22,90 34,64 49,56",
-];
+/* Ambient decorative flow from the engine toward the qualified account. */
+/* Coordinates are percentages of the canvas (viewBox 0-100).            */
 const RIGHT_PATHS = ["M51,48 C 66,38 80,22 98,12", "M51,52 C 68,54 82,60 98,66", "M51,50 C 70,50 84,50 98,50"];
 
 /* ------------------------------------------------------------------ */
@@ -92,19 +86,33 @@ function FloatingChip({ label, index }: { label: string; index: number }) {
   const m = CHIP_MOTION[index];
   return (
     <motion.div
-      className="relative flex items-center gap-2.5 rounded-full border border-hairline bg-white px-4 py-2.5 shadow-soft"
+      className="relative flex items-center gap-3 rounded-2xl border border-hairline bg-white py-2.5 pl-2.5 pr-4 shadow-soft"
       animate={{ y: [0, -6, 0] }}
       transition={{ duration: m.duration, delay: m.delay, repeat: Infinity, ease: "easeInOut" }}
     >
-      <span className="relative flex h-1.5 w-1.5 shrink-0">
-        <span
-          className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
-          style={{ backgroundColor: GREEN }}
-        />
-        <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ backgroundColor: GREEN }} />
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-surface-soft">
+        <span className="relative flex h-1.5 w-1.5">
+          <span
+            className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
+            style={{ backgroundColor: GREEN }}
+          />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ backgroundColor: GREEN }} />
+        </span>
       </span>
       <span className="whitespace-nowrap text-[13px] font-medium text-ink">{label}</span>
     </motion.div>
+  );
+}
+
+function PlusMarker({ left, top }: { left: number; top: number }) {
+  return (
+    <span
+      className="absolute z-10 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-hairline bg-white text-[9px] leading-none text-muted-soft lg:flex"
+      style={{ left: `${left}%`, top: `${top}%` }}
+      aria-hidden="true"
+    >
+      +
+    </span>
   );
 }
 
@@ -138,6 +146,12 @@ export function RadarController() {
   const [elapsed, setElapsed] = useState(0);
   const startRef = useRef<number>(0);
 
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const engineRef = useRef<HTMLDivElement>(null);
+  const chipRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [canvasSize, setCanvasSize] = useState({ w: 0, h: 0 });
+  const [chipPaths, setChipPaths] = useState<string[]>([]);
+
   useEffect(() => {
     let raf: number;
     startRef.current = performance.now();
@@ -148,6 +162,44 @@ export function RadarController() {
     }
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
+  }, []);
+
+  useEffect(() => {
+    function measure() {
+      const canvasEl = canvasRef.current;
+      const engineEl = engineRef.current;
+      if (!canvasEl || !engineEl) return;
+
+      const canvasRect = canvasEl.getBoundingClientRect();
+      setCanvasSize({ w: canvasRect.width, h: canvasRect.height });
+
+      const engineRect = engineEl.getBoundingClientRect();
+      const targetX = engineRect.left - canvasRect.left;
+      const targetY = engineRect.top - canvasRect.top + engineRect.height / 2;
+
+      setChipPaths(
+        chipRefs.current.map((el) => {
+          if (!el) return "";
+          const r = el.getBoundingClientRect();
+          const startX = r.right - canvasRect.left;
+          const startY = r.top - canvasRect.top + r.height / 2;
+          const midX = (startX + targetX) / 2;
+          return `M${startX.toFixed(1)},${startY.toFixed(1)} C ${midX.toFixed(1)},${startY.toFixed(1)} ${midX.toFixed(1)},${targetY.toFixed(1)} ${targetX.toFixed(1)},${targetY.toFixed(1)}`;
+        })
+      );
+    }
+
+    measure();
+    const timer = setTimeout(measure, 300); // re-measure once fonts/layout settle
+    window.addEventListener("resize", measure);
+    const ro = new ResizeObserver(measure);
+    if (canvasRef.current) ro.observe(canvasRef.current);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("resize", measure);
+      ro.disconnect();
+    };
   }, []);
 
   const stageIdx = Math.min(STAGE_LABELS.length - 1, Math.floor(elapsed / STAGE_MS));
@@ -190,15 +242,54 @@ export function RadarController() {
         </p>
       </div>
 
-      <div className="relative mx-auto mt-20 grid max-w-[1300px] grid-cols-1 gap-16 lg:min-h-[560px] lg:grid-cols-[240px_1fr_360px] lg:items-center lg:gap-6">
-        {/* ambient flow paths — desktop only */}
+      <div className="relative mx-auto mt-14 hidden max-w-[1300px] grid-cols-[240px_1fr_360px] gap-6 lg:grid">
+        <p className="text-[13px] text-muted-soft">Continuously scanning the open web for buying signals.</p>
+        <div aria-hidden="true" />
+        <p className="text-right text-[13px] text-muted-soft">Matched against your ICP and scored in real time.</p>
+      </div>
+
+      <div
+        ref={canvasRef}
+        className="relative mx-auto mt-6 grid max-w-[1300px] grid-cols-1 gap-16 lg:min-h-[560px] lg:grid-cols-[240px_1fr_360px] lg:items-center lg:gap-6"
+      >
+        {/* precise connectors — one per signal chip, traced to the engine */}
+        {canvasSize.w > 0 && (
+          <svg
+            className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+            viewBox={`0 0 ${canvasSize.w} ${canvasSize.h}`}
+            aria-hidden="true"
+          >
+            {chipPaths.map((d, i) =>
+              d ? (
+                <g key={i}>
+                  <path
+                    id={`chip-path-${i}`}
+                    d={d}
+                    fill="none"
+                    stroke="rgba(10,10,10,0.08)"
+                    strokeWidth="1"
+                  />
+                  {[0, 1].map((j) => (
+                    <circle key={j} r="2" fill={GREEN} opacity="0.7">
+                      <animateMotion dur={`${3 + ((i + j) % 3) * 0.5}s`} begin={`${j * 1.5 + i * 0.2}s`} repeatCount="indefinite">
+                        <mpath href={`#chip-path-${i}`} />
+                      </animateMotion>
+                    </circle>
+                  ))}
+                </g>
+              ) : null
+            )}
+          </svg>
+        )}
+
+        {/* ambient flow — engine to qualified account, desktop only */}
         <svg
           className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
           viewBox="0 0 100 100"
           preserveAspectRatio="none"
           aria-hidden="true"
         >
-          {[...LEFT_PATHS, ...RIGHT_PATHS].map((d, i) => (
+          {RIGHT_PATHS.map((d, i) => (
             <g key={i}>
               <path id={`flow-${i}`} d={d} fill="none" stroke="rgba(10,10,10,0.05)" strokeWidth="0.15" vectorEffect="non-scaling-stroke" />
               {[0, 1].map((j) => (
@@ -211,6 +302,9 @@ export function RadarController() {
             </g>
           ))}
         </svg>
+        <PlusMarker left={75} top={25} />
+        <PlusMarker left={75} top={57} />
+        <PlusMarker left={75} top={50} />
 
         {/* Left — live internet signals */}
         <div className="relative z-10 mx-auto flex w-full max-w-[240px] flex-col gap-4 lg:mx-0">
@@ -218,13 +312,15 @@ export function RadarController() {
             Live internet signals
           </p>
           {SIGNAL_CHIPS.map((label, i) => (
-            <FloatingChip key={label} label={label} index={i} />
+            <div key={label} ref={(el) => { chipRefs.current[i] = el; }}>
+              <FloatingChip label={label} index={i} />
+            </div>
           ))}
         </div>
 
         {/* Middle — intelligence engine */}
         <div className="relative z-10 mx-auto flex flex-col items-center">
-          <div className="relative flex h-64 w-64 items-center justify-center sm:h-72 sm:w-72 lg:h-80 lg:w-80">
+          <div ref={engineRef} className="relative flex h-64 w-64 items-center justify-center sm:h-72 sm:w-72 lg:h-80 lg:w-80">
             <div
               className="absolute inset-0 rounded-full"
               style={{ background: `radial-gradient(circle, ${GREEN}14 0%, transparent 70%)` }}
@@ -257,7 +353,10 @@ export function RadarController() {
             <OrbitRing duration={11} radius={70} size={3} />
 
             <div className="relative z-10 flex flex-col items-center rounded-3xl border border-hairline bg-white px-7 py-5 text-center shadow-soft">
-              <span className="text-sm font-semibold uppercase tracking-[0.12em] text-ink">Cnvrted</span>
+              <div className="relative h-12 w-12">
+                <Image src="/cnvrted-logo.png" alt="" fill className="object-contain" aria-hidden="true" />
+              </div>
+              <span className="mt-2 text-sm font-semibold uppercase tracking-[0.12em] text-ink">Cnvrted</span>
               <span className="mt-0.5 text-xs text-muted">Intent Intelligence</span>
             </div>
           </div>

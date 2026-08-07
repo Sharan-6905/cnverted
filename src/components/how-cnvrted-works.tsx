@@ -62,7 +62,7 @@ export function HowCnvrtedWorks() {
           {STEPS.map((step, i) => (
             <motion.div
               key={step.title}
-              className="group relative flex gap-4 sm:flex-col sm:items-start sm:gap-0"
+              className="group relative flex gap-4 sm:flex-col sm:items-center sm:gap-0"
               initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
@@ -71,7 +71,7 @@ export function HowCnvrtedWorks() {
               <span className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-hairline bg-white text-muted smooth-transition transition-colors group-hover:border-brand-teal group-hover:text-brand-teal">
                 <step.Icon className="h-5 w-5" />
               </span>
-              <div className="sm:mt-4">
+              <div className="sm:mt-4 sm:text-center">
                 <h3 className="text-sm font-semibold text-ink">{step.title}</h3>
                 <p className="mt-1.5 text-[13px] leading-relaxed text-muted">{step.body}</p>
               </div>

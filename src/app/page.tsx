@@ -37,10 +37,6 @@ export default function Home() {
           body="Every signal is collected, analyzed, connected, and ranked by our intelligence engine. Instead of asking your team to interpret hundreds of updates, CNVRTED surfaces the companies that are most likely to be buying — along with the evidence behind every recommendation."
         />
 
-        <StoryIntro
-          headline="Meet ORKA. Your AI sales analyst."
-          body="Ask questions about any company. Understand why an intent score changed. Summarize research. Discover competitors. Generate personalized outreach. ORKA turns company intelligence into actionable answers without leaving your workflow."
-        />
         <IntentCapture />
 
         <StoryIntro
@@ -56,10 +52,6 @@ export default function Home() {
           <CalendarProof />
         </Reveal>
 
-        <StoryIntro
-          headline="Everything your team needs, in one workspace."
-          body="Every company profile combines decision makers, buying signals, hiring activity, funding history, technology stack, recent news, and AI-generated insights into a single view. No switching between multiple tools. No fragmented research."
-        />
         <StoryIntro
           headline="Every score comes with evidence."
           body="CNVRTED never gives you a number without explaining why. Every recommendation is backed by real company activity, allowing your team to understand what changed, when it changed, and why it's relevant before reaching out."

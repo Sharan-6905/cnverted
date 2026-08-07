@@ -64,9 +64,14 @@ const COMPANY_ORDER = seededShuffle(COMPANIES, 3);
 /* ing natively (no canvas, no three.js, no per-frame JS recompute).   */
 /* ------------------------------------------------------------------ */
 
-const GLOBE_SIZE = 720; // px, the sphere's physical diameter
+// The sphere's transforms are expressed relative to a fixed "design" size,
+// then the whole stage is uniformly scaled to whatever the container
+// actually measures — see `stageSize`/`scale` in the component below. This
+// keeps the sphere fully visible and centered at any viewport width instead
+// of relying on cropping/overflow tricks.
+const GLOBE_SIZE = 460;
 const GLOBE_R = GLOBE_SIZE / 2;
-const PERSPECTIVE = 1600;
+const PERSPECTIVE = 1400;
 
 interface GlobeDot {
   lat: number;
@@ -218,7 +223,7 @@ interface LeadCardData {
 }
 
 const PULSE_INTERVAL_MS = 2400;
-const ORKA_POS = { left: 88, top: 62 }; // percent, within the globe stage
+const ORKA_POS = { left: 90, top: 76 }; // percent, just outside the sphere's bottom-right edge
 
 export function RadarController() {
   const [pulse, setPulse] = useState<ActivePulse | null>(null);
@@ -226,6 +231,22 @@ export function RadarController() {
   const [scoreIndex, setScoreIndex] = useState(0);
   const [lead, setLead] = useState<LeadCardData | null>(null);
   const [status, setStatus] = useState("Analyzing buying intent");
+  const [scale, setScale] = useState(1);
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  // Uniformly scale the whole (fixed-design-size) stage to whatever the
+  // container actually measures, so the full sphere is always visible —
+  // never cropped — at any viewport width.
+  useEffect(() => {
+    const el = stageRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width;
+      if (width) setScale(width / GLOBE_SIZE);
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const tickRef = useRef(0);
   const recentSignalsRef = useRef<string[]>([]);
@@ -249,6 +270,16 @@ export function RadarController() {
       recentSignalsRef.current = [label, ...recentSignalsRef.current].slice(0, 3);
 
       setPills((prev) => {
+        // Push the pill outward along the same direction from the sphere's
+        // center as its anchor point, so it floats just outside the visible
+        // circle instead of sitting on top of the dots or the copy column.
+        const dx = left - 50;
+        const dy = top - 50;
+        const dist = Math.hypot(dx, dy) || 1;
+        const outward = 74;
+        const pillLeft = 50 + (dx / dist) * outward;
+        const pillTop = 50 + (dy / dist) * outward;
+
         const next = [
           ...prev,
           {
@@ -256,8 +287,8 @@ export function RadarController() {
             anchorLeft: left,
             anchorTop: top,
             text: label,
-            left: Math.min(70, Math.max(4, left + (i % 2 === 0 ? 14 : -14))),
-            top: Math.min(76, Math.max(4, top + (i % 3 === 0 ? -12 : 12))),
+            left: round(pillLeft),
+            top: round(pillTop),
           },
         ];
         // Keep at most two signals active at once, per spec.
@@ -370,27 +401,26 @@ export function RadarController() {
           </div>
         </div>
 
-        {/* Right column — globe + ORKA */}
+        {/* Right column — globe + ORKA. This outer box is the only
+            responsive element: width is the real layout constraint (~45-50%
+            of the hero via the grid track + this max-width), and the fixed
+            -design-size stage inside it is scaled uniformly to fit — so the
+            full circular sphere is always visible, never cropped. */}
         <div
-          className="relative mx-auto overflow-hidden lg:mx-0 lg:ml-auto"
-          style={{
-            width: "100%",
-            maxWidth: 560,
-            aspectRatio: "1 / 1.05",
-            borderRadius: 24,
-          }}
+          className="mx-auto flex items-center justify-center lg:mx-0 lg:ml-auto"
+          style={{ width: "100%", maxWidth: GLOBE_SIZE, aspectRatio: "1 / 1" }}
         >
-          <div
-            className="absolute"
-            style={{
-              width: GLOBE_SIZE,
-              height: GLOBE_SIZE,
-              right: "-32%",
-              bottom: "-14%",
-            }}
-          >
-            {/* Globe stage */}
-            <div className="absolute inset-0" style={{ width: GLOBE_SIZE, height: GLOBE_SIZE }}>
+          <div ref={stageRef} className="relative h-full w-full">
+            <div
+              className="absolute left-1/2 top-1/2"
+              style={{
+                width: GLOBE_SIZE,
+                height: GLOBE_SIZE,
+                transform: `translate(-50%, -50%) scale(${scale})`,
+              }}
+            >
+              {/* Globe stage */}
+              <div className="absolute inset-0" style={{ width: GLOBE_SIZE, height: GLOBE_SIZE }}>
               {/* soft spherical shading for depth */}
                 <div
                   className="absolute inset-0 rounded-full"
@@ -416,7 +446,7 @@ export function RadarController() {
                     className="absolute inset-0"
                     style={{ transformStyle: "preserve-3d" }}
                     animate={{ rotateY: 360 }}
-                    transition={{ duration: 52, repeat: Infinity, ease: "linear" }}
+                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                   >
                     {GLOBE_DOTS.map((d, i) => (
                       <span
@@ -522,22 +552,26 @@ export function RadarController() {
                 {pills.map((p) => (
                   <motion.div
                     key={p.key}
-                    className="absolute flex items-center gap-1.5 whitespace-nowrap rounded-full border border-hairline bg-white px-3 py-1.5 text-[11px] font-medium text-ink"
-                    style={{
-                      left: `${p.left}%`,
-                      top: `${p.top}%`,
-                      boxShadow: "0 6px 20px rgba(0,0,0,0.06)",
-                    }}
-                    initial={{ opacity: 0, y: 6, scale: 0.9 }}
-                    animate={{ opacity: 1, y: [6, -2, 0], scale: 1 }}
-                    exit={{ opacity: 0, y: -6, scale: 0.95 }}
+                    className="absolute"
+                    style={{ left: `${p.left}%`, top: `${p.top}%` }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                   >
-                    <span
-                      className="h-1.5 w-1.5 shrink-0 rounded-full"
-                      style={{ backgroundColor: GREEN }}
-                    />
-                    {p.text}
+                    {/* continuous gentle float, independent of entrance/exit */}
+                    <motion.div
+                      className="flex items-center gap-1.5 whitespace-nowrap rounded-full border border-hairline bg-white px-3 py-1.5 text-[11px] font-medium text-ink"
+                      style={{ boxShadow: "0 6px 20px rgba(0,0,0,0.06)" }}
+                      animate={{ y: [-3, 3, -3] }}
+                      transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      <span
+                        className="h-1.5 w-1.5 shrink-0 rounded-full"
+                        style={{ backgroundColor: GREEN }}
+                      />
+                      {p.text}
+                    </motion.div>
                   </motion.div>
                 ))}
               </AnimatePresence>
@@ -599,8 +633,12 @@ export function RadarController() {
                 {lead && (
                   <motion.div
                     key={lead.key}
-                    className="absolute left-1/2 w-56 -translate-x-1/2 rounded-2xl border border-hairline bg-white p-4"
-                    style={{ bottom: "-8%", boxShadow: "0 16px 40px rgba(0,0,0,0.1)" }}
+                    className="absolute w-56 rounded-2xl border border-hairline bg-white p-4"
+                    style={{
+                      left: "6%",
+                      bottom: "2%",
+                      boxShadow: "0 16px 40px rgba(0,0,0,0.1)",
+                    }}
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -16 }}
@@ -631,6 +669,7 @@ export function RadarController() {
               </AnimatePresence>
             </div>
           </div>
+        </div>
       </div>
     </section>
   );

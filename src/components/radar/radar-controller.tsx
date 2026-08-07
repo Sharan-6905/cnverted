@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Database, Send } from "lucide-react";
 
-const GREEN = "#1E9E5A";
+const ACCENT = "#2C456F";
 const EASE = [0.22, 1, 0.36, 1] as const;
 
 /* ------------------------------------------------------------------ */
@@ -37,11 +37,11 @@ const OUTREACH_ACTIONS = [
 ];
 
 /* ------------------------------------------------------------------ */
-/* Timing — one full loop ~16s                                         */
+/* Timing — one full loop ~10s                                         */
 /* ------------------------------------------------------------------ */
 
-const STAGE_MS = 2800;
-const HOLD_MS = 2400;
+const STAGE_MS = 1800;
+const HOLD_MS = 1300;
 const T1 = STAGE_MS; // verifying starts — company identity appears
 const T2 = STAGE_MS * 2; // enriching starts — firmographics reveal
 const T3 = STAGE_MS * 3; // matching ICP starts — intent bar reveal
@@ -91,9 +91,9 @@ function FloatingChip({ label, index }: { label: string; index: number }) {
         <span className="relative flex h-1.5 w-1.5">
           <span
             className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
-            style={{ backgroundColor: GREEN }}
+            style={{ backgroundColor: ACCENT }}
           />
-          <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ backgroundColor: GREEN }} />
+          <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ backgroundColor: ACCENT }} />
         </span>
       </span>
       <span className="whitespace-nowrap text-[13px] font-medium text-ink">{label}</span>
@@ -113,7 +113,7 @@ function OrbitRing({ duration, reverse, radius, size }: { duration: number; reve
         style={{
           width: size,
           height: size,
-          backgroundColor: GREEN,
+          backgroundColor: ACCENT,
           top: `calc(50% - ${radius}px - ${size / 2}px)`,
           left: `calc(50% - ${size / 2}px)`,
           opacity: 0.7,
@@ -206,13 +206,13 @@ export function RadarController() {
 
   const identityRevealed = elapsed >= T1;
   const linesRevealed =
-    elapsed >= T2 ? Math.min(FIRMOGRAPHIC_LINES.length, Math.floor((elapsed - T2) / 380) + 1) : 0;
+    elapsed >= T2 ? Math.min(FIRMOGRAPHIC_LINES.length, Math.floor((elapsed - T2) / 250) + 1) : 0;
 
-  const intentProgress = elapsed >= T3 ? Math.min(1, (elapsed - T3) / 1200) : 0;
+  const intentProgress = elapsed >= T3 ? Math.min(1, (elapsed - T3) / 800) : 0;
 
-  const scoreProgress = elapsed >= T4 ? Math.min(1, (elapsed - T4) / 1400) : 0;
+  const scoreProgress = elapsed >= T4 ? Math.min(1, (elapsed - T4) / 900) : 0;
   const scoreValue = Math.round(94 * (1 - Math.pow(1 - scoreProgress, 3)));
-  const readyRevealed = elapsed >= T4 + 1600;
+  const readyRevealed = elapsed >= T4 + 1050;
 
   return (
     <section className="relative overflow-hidden bg-white px-6 py-24 sm:py-32">
@@ -229,7 +229,7 @@ export function RadarController() {
 
       <div className="relative mx-auto max-w-2xl text-center">
         <span className="inline-flex items-center gap-2 rounded-full border border-hairline px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
-          <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: GREEN }} />
+          <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: ACCENT }} />
           How Cnvrted works
         </span>
         <h2 className="mt-6 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
@@ -269,7 +269,7 @@ export function RadarController() {
                     strokeWidth="1"
                   />
                   {[0, 1].map((j) => (
-                    <circle key={j} r="2" fill={GREEN} opacity="0.7">
+                    <circle key={j} r="2" fill={ACCENT} opacity="0.7">
                       <animateMotion dur={`${3 + ((i + j) % 3) * 0.5}s`} begin={`${j * 1.5 + i * 0.2}s`} repeatCount="indefinite">
                         <mpath href={`#chip-path-${i}`} />
                       </animateMotion>
@@ -290,7 +290,7 @@ export function RadarController() {
           >
             <path id="account-path" d={accountPath} fill="none" stroke="rgba(10,10,10,0.1)" strokeWidth="1.25" />
             {[0, 1, 2].map((j) => (
-              <circle key={j} r="2.2" fill={GREEN} opacity="0.75">
+              <circle key={j} r="2.2" fill={ACCENT} opacity="0.75">
                 <animateMotion dur={`${3.4 + j * 0.5}s`} begin={`${j * 1.1}s`} repeatCount="indefinite">
                   <mpath href="#account-path" />
                 </animateMotion>
@@ -316,14 +316,14 @@ export function RadarController() {
           <div ref={engineRef} className="relative flex h-64 w-64 items-center justify-center sm:h-72 sm:w-72 lg:h-80 lg:w-80">
             <div
               className="absolute inset-0 rounded-full"
-              style={{ background: `radial-gradient(circle, ${GREEN}14 0%, transparent 70%)` }}
+              style={{ background: `radial-gradient(circle, ${ACCENT}14 0%, transparent 70%)` }}
               aria-hidden="true"
             />
             <motion.div
               className="absolute inset-0 rounded-full"
               animate={{ scale: [1, 1.06, 1], opacity: [0.5, 0.85, 0.5] }}
               transition={{ duration: 3.4, repeat: Infinity, ease: "easeInOut" }}
-              style={{ background: `radial-gradient(circle, ${GREEN}1F 0%, transparent 65%)` }}
+              style={{ background: `radial-gradient(circle, ${ACCENT}1F 0%, transparent 65%)` }}
               aria-hidden="true"
             />
 
@@ -336,7 +336,7 @@ export function RadarController() {
             />
             <motion.div
               className="absolute inset-12 rounded-full"
-              style={{ border: `1px dashed ${GREEN}55` }}
+              style={{ border: `1px dashed ${ACCENT}55` }}
               animate={{ rotate: -360 }}
               transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
             />
@@ -372,7 +372,7 @@ export function RadarController() {
                 <motion.span
                   key={label}
                   animate={{
-                    backgroundColor: i === stageIdx ? GREEN : "#E5E5E5",
+                    backgroundColor: i === stageIdx ? ACCENT : "#E5E5E5",
                     scale: i === stageIdx ? 1.3 : 1,
                   }}
                   transition={{ duration: 0.25 }}
@@ -442,7 +442,7 @@ export function RadarController() {
                   <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-surface-soft">
                     <motion.div
                       className="h-full rounded-full"
-                      style={{ backgroundColor: GREEN }}
+                      style={{ backgroundColor: ACCENT }}
                       animate={{ width: `${intentProgress * 86}%` }}
                       transition={{ duration: 0.2 }}
                     />
@@ -465,7 +465,7 @@ export function RadarController() {
                         cy="50"
                         r="42"
                         fill="none"
-                        stroke={GREEN}
+                        stroke={ACCENT}
                         strokeWidth="7"
                         strokeLinecap="round"
                         strokeDasharray={2 * Math.PI * 42}
@@ -473,12 +473,12 @@ export function RadarController() {
                         transition={{ duration: 0.2 }}
                       />
                     </svg>
-                    <span className="font-display text-xl font-semibold" style={{ color: GREEN }}>
+                    <span className="font-display text-xl font-semibold" style={{ color: ACCENT }}>
                       {scoreValue}
                     </span>
                   </div>
                   <div>
-                    <p className="text-[13px] font-medium" style={{ color: GREEN }}>
+                    <p className="text-[13px] font-medium" style={{ color: ACCENT }}>
                       Very high intent
                     </p>
                     <p className="mt-1 text-[12px] text-muted">98% confidence · 7 signals detected</p>
@@ -496,9 +496,9 @@ export function RadarController() {
                   >
                     <span
                       className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-semibold"
-                      style={{ backgroundColor: `${GREEN}14`, color: GREEN }}
+                      style={{ backgroundColor: `${ACCENT}14`, color: ACCENT }}
                     >
-                      <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: GREEN }} />
+                      <span className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: ACCENT }} />
                       Ready for outreach
                     </span>
                     <div className="flex items-center gap-1 text-[10px] text-muted-soft">
@@ -506,7 +506,7 @@ export function RadarController() {
                       <span>→</span>
                       <span>Scored</span>
                       <span>→</span>
-                      <span className="font-semibold" style={{ color: GREEN }}>
+                      <span className="font-semibold" style={{ color: ACCENT }}>
                         Ready
                       </span>
                     </div>

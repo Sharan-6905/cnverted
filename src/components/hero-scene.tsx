@@ -8,8 +8,6 @@ import {
   useTransform,
   useReducedMotion,
 } from "framer-motion";
-import { SignalCard } from "@/components/signal-card";
-import type { Signal } from "@/lib/types";
 import clayCard from "../../public/clay-card.png";
 import clayPing from "../../public/clay-ping.png";
 
@@ -18,7 +16,7 @@ import clayPing from "../../public/clay-ping.png";
  * floating transparent-cutout clay accents that parallax as the hero scrolls.
  * Falls back to static poster + no parallax when reduced-motion is set.
  */
-export function HeroScene({ signal }: { signal: Signal }) {
+export function HeroScene() {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
@@ -33,12 +31,10 @@ export function HeroScene({ signal }: { signal: Signal }) {
   const cardRot = useTransform(scrollYProgress, [0, 1], [-8, 6]);
   const pingY = useTransform(scrollYProgress, [0, 1], [-10, 120]);
   const pingScale = useTransform(scrollYProgress, [0, 1], [0.9, 1.25]);
-  const signalY = useTransform(scrollYProgress, [0, 1], [20, -60]);
 
   const stageStyle = reduce ? {} : { y: stageY };
   const cardStyle = reduce ? {} : { y: cardY, rotate: cardRot };
   const pingStyle = reduce ? {} : { y: pingY, scale: pingScale };
-  const signalStyle = reduce ? {} : { y: signalY };
 
   // gentle continuous float layered on top of the scroll parallax
   const float = reduce
@@ -95,16 +91,6 @@ export function HeroScene({ signal }: { signal: Signal }) {
             className="h-full w-full object-contain drop-shadow-md"
           />
         </motion.div>
-      </motion.div>
-
-      {/* Live signal credibility card — gentle parallax.
-          Centred under the video on mobile (auto-margins survive framer's
-          y-transform); bleeds left on sm+ for the layered desktop look. */}
-      <motion.div
-        style={signalStyle}
-        className="absolute -bottom-5 inset-x-0 mx-auto w-[88%] max-w-[300px] sm:inset-x-auto sm:mx-0 sm:-bottom-4 sm:-left-6 sm:w-[280px] sm:max-w-[80%]"
-      >
-        <SignalCard signal={signal} highlighted />
       </motion.div>
     </div>
   );

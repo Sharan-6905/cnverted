@@ -13,7 +13,7 @@ import { Integrations } from "@/components/integrations";
 import { Comparison } from "@/components/comparison";
 import { Reveal } from "@/components/reveal";
 import { SiteFooter } from "@/components/site-footer";
-import { FEATURED_SIGNAL, INTEGRATIONS } from "@/lib/sample-data";
+import { INTEGRATIONS } from "@/lib/sample-data";
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
       <SiteHeader />
 
       <main className="flex-1">
-        <Hero featuredSignal={FEATURED_SIGNAL} />
+        <Hero />
         <IntentRadar />
         <IntentCapture />
         <IntegrationStack />

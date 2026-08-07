@@ -1,16 +1,5 @@
 import type { Signal, Persona, ProcessStep, Integration } from "@/lib/types";
 
-export const FEATURED_SIGNAL: Signal = {
-  id: "sig-featured",
-  company: "Rippling",
-  description: "VP of Sales viewed pricing 3× and downloaded the ROI guide today.",
-  category: "pain-signal",
-  source: "Cnvrted web monitor",
-  timestamp: "8m ago",
-  score: 94,
-  level: "high",
-};
-
 export const SIGNALS: Signal[] = [
   {
     id: "sig-1",

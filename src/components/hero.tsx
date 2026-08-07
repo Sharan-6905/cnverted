@@ -1,13 +1,7 @@
 import { HeroScene } from "@/components/hero-scene";
 import { MascotIntelligence } from "@/components/mascot-intelligence";
-import type { Signal } from "@/lib/types";
 
-interface HeroProps {
-  /** a single high-intent signal shown floating in the hero */
-  featuredSignal: Signal;
-}
-
-export function Hero({ featuredSignal }: HeroProps) {
+export function Hero() {
   return (
     <section className="relative overflow-hidden px-6 pt-8 pb-20 md:pt-12">
       <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
@@ -36,7 +30,7 @@ export function Hero({ featuredSignal }: HeroProps) {
         </div>
 
         {/* Scroll-driven clay motion scene */}
-        <HeroScene signal={featuredSignal} />
+        <HeroScene />
       </div>
     </section>
   );

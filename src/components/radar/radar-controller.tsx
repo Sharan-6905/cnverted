@@ -3,7 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Database, Send } from "lucide-react";
+import {
+  Database,
+  Send,
+  Linkedin,
+  UserCog,
+  TrendingUp,
+  Globe2,
+  Cpu,
+  Rocket,
+  MessageSquare,
+} from "lucide-react";
 
 const ACCENT = "#2C456F";
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -13,13 +23,13 @@ const EASE = [0.22, 1, 0.36, 1] as const;
 /* ------------------------------------------------------------------ */
 
 const SIGNAL_CHIPS = [
-  "Hiring SDRs",
-  "Executive Change",
-  "New Funding",
-  "Website Relaunch",
-  "Tech Stack Adoption",
-  "Product Launch",
-  "Reddit Discussion",
+  { label: "Hiring SDRs", Icon: Linkedin },
+  { label: "Executive Change", Icon: UserCog },
+  { label: "New Funding", Icon: TrendingUp },
+  { label: "Website Relaunch", Icon: Globe2 },
+  { label: "Tech Stack Adoption", Icon: Cpu },
+  { label: "Product Launch", Icon: Rocket },
+  { label: "Reddit Discussion", Icon: MessageSquare },
 ];
 
 const STAGE_LABELS = ["Scanning", "Verifying", "Enriching", "Matching ICP", "Scoring intent"];
@@ -79,7 +89,15 @@ const CHIP_MOTION = (() => {
 /* Small building blocks                                               */
 /* ------------------------------------------------------------------ */
 
-function FloatingChip({ label, index }: { label: string; index: number }) {
+function FloatingChip({
+  label,
+  Icon,
+  index,
+}: {
+  label: string;
+  Icon: typeof Linkedin;
+  index: number;
+}) {
   const m = CHIP_MOTION[index];
   return (
     <motion.div
@@ -87,13 +105,17 @@ function FloatingChip({ label, index }: { label: string; index: number }) {
       animate={{ y: [0, -6, 0] }}
       transition={{ duration: m.duration, delay: m.delay, repeat: Infinity, ease: "easeInOut" }}
     >
-      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-surface-soft">
-        <span className="relative flex h-1.5 w-1.5">
+      <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-surface-soft">
+        <Icon className="h-3.5 w-3.5 text-body" />
+        <span className="absolute -bottom-0.5 -right-0.5 flex h-2 w-2">
           <span
             className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
             style={{ backgroundColor: ACCENT }}
           />
-          <span className="relative inline-flex h-1.5 w-1.5 rounded-full" style={{ backgroundColor: ACCENT }} />
+          <span
+            className="relative inline-flex h-2 w-2 rounded-full border border-white"
+            style={{ backgroundColor: ACCENT }}
+          />
         </span>
       </span>
       <span className="whitespace-nowrap text-[13px] font-medium text-ink">{label}</span>
@@ -304,9 +326,9 @@ export function RadarController() {
           <p className="text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-muted lg:text-left">
             Live internet signals
           </p>
-          {SIGNAL_CHIPS.map((label, i) => (
+          {SIGNAL_CHIPS.map(({ label, Icon }, i) => (
             <div key={label} ref={(el) => { chipRefs.current[i] = el; }}>
-              <FloatingChip label={label} index={i} />
+              <FloatingChip label={label} Icon={Icon} index={i} />
             </div>
           ))}
         </div>

@@ -16,10 +16,10 @@ export function StoryIntro({ headline, body }: StoryIntroProps) {
     <section className="relative px-6 py-10 sm:py-14">
       <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
       <Reveal className="relative mx-auto max-w-6xl text-center">
-        <h2 className="mx-auto max-w-3xl font-display text-display-lg font-semibold tracking-tight text-ink">
+        <h2 className="mx-auto max-w-4xl font-display text-display-lg font-semibold tracking-tight text-ink">
           {headline}
         </h2>
-        <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-body">{body}</p>
+        <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-body">{body}</p>
       </Reveal>
     </section>
   );

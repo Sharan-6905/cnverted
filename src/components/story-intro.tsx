@@ -1,5 +1,7 @@
+"use client";
+
 import type { ReactNode } from "react";
-import { Reveal } from "@/components/reveal";
+import { motion, useReducedMotion } from "framer-motion";
 
 interface StoryIntroProps {
   headline: ReactNode;
@@ -7,20 +9,29 @@ interface StoryIntroProps {
 }
 
 /**
- * A single-question narrative beat: large centered headline, 2–3 lines of
- * supporting copy, generous whitespace. No cards, no icons — used between the
- * homepage's visual/product sections so each scroll explains one concept.
+ * A single-question narrative beat: large centered headline, short
+ * supporting copy, generous whitespace. No cards, no icons, no
+ * background texture — typography and space carry the section.
  */
 export function StoryIntro({ headline, body }: StoryIntroProps) {
+  const reduceMotion = useReducedMotion();
+
   return (
-    <section className="relative px-6 py-10 sm:py-14">
-      <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
-      <Reveal className="relative mx-auto max-w-6xl text-center">
-        <h2 className="mx-auto max-w-4xl font-display text-display-lg font-semibold tracking-tight text-ink">
+    <section className="px-6 py-20 sm:py-32 lg:py-44">
+      <motion.div
+        className="mx-auto w-[92%] max-w-[720px] text-center sm:w-[85%]"
+        initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={reduceMotion ? { duration: 0 } : { duration: 0.8, ease: "easeOut" }}
+      >
+        <h2 className="font-display text-[40px] font-bold leading-[0.98] tracking-tight text-ink sm:text-[56px] lg:text-[68px]">
           {headline}
         </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-body">{body}</p>
-      </Reveal>
+        <p className="mx-auto mt-10 max-w-[720px] text-xl font-medium leading-[1.8] text-muted sm:mt-12">
+          {body}
+        </p>
+      </motion.div>
     </section>
   );
 }

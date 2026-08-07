@@ -29,19 +29,51 @@ export default function Home() {
 
         <StoryIntro
           headline="The internet never stops changing."
-          body="Every day, companies leave behind signals that reveal where they're headed. New funding rounds, hiring activity, product launches, technology changes, leadership moves, and public conversations all tell part of the story. CNVRTED continuously watches these signals and transforms them into opportunities your sales team can act on."
+          body={
+            <>
+              Every day, companies leave behind signals that reveal where they&apos;re headed.
+              <br />
+              New funding rounds, hiring activity, product launches, technology changes,
+              <br />
+              leadership moves, and public conversations all tell part of the story.
+              <br />
+              CNVRTED continuously watches these signals and transforms them into opportunities
+              your sales team can act on.
+            </>
+          }
         />
         <IntentRadar />
         <StoryIntro
           headline="Millions of signals. One clear decision."
-          body="Every signal is collected, analyzed, connected, and ranked by our intelligence engine. Instead of asking your team to interpret hundreds of updates, CNVRTED surfaces the companies that are most likely to be buying — along with the evidence behind every recommendation."
+          body={
+            <>
+              Every signal is collected, analyzed, connected, and ranked by our intelligence
+              engine.
+              <br />
+              Instead of asking your team to interpret hundreds of updates,
+              <br />
+              CNVRTED surfaces the companies most likely to be buying —
+              <br />
+              along with the evidence behind every recommendation.
+            </>
+          }
         />
 
         <IntentCapture />
 
         <StoryIntro
           headline="Research is only the beginning."
-          body="Once high-intent companies are identified, ORKA transforms live company intelligence into personalized outreach. Every message is grounded in real events happening inside the account, making conversations more relevant from the very first interaction."
+          body={
+            <>
+              Once high-intent companies are identified, ORKA transforms live company
+              intelligence
+              <br />
+              into personalized outreach. Every message is grounded in real events
+              <br />
+              happening inside the account, making conversations more relevant from the very
+              first interaction.
+            </>
+          }
         />
         <IntegrationStack />
         <FeatureRows />
@@ -54,7 +86,17 @@ export default function Home() {
 
         <StoryIntro
           headline="Every score comes with evidence."
-          body="CNVRTED never gives you a number without explaining why. Every recommendation is backed by real company activity, allowing your team to understand what changed, when it changed, and why it's relevant before reaching out."
+          body={
+            <>
+              CNVRTED never gives you a number without explaining why.
+              <br />
+              Every recommendation is backed by real company activity,
+              <br />
+              allowing your team to understand what changed, when it changed,
+              <br />
+              and why it&apos;s relevant before reaching out.
+            </>
+          }
         />
         <IcpEnrichmentTable />
         <Reveal>

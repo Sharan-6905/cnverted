@@ -138,10 +138,12 @@ export function SiteFooter() {
       <div className="relative mx-auto max-w-6xl px-6 pt-8">
         <div className="mx-auto flex max-w-lg flex-col items-center rounded-2xl border border-white/25 bg-blue-400/10 px-6 py-6 text-center shadow-soft backdrop-blur-xl">
           <h2 className="mx-auto max-w-sm font-display text-base font-semibold tracking-tight text-on-dark md:text-lg">
-            Get to buyers before your competition even knows they&apos;re looking.
+            Reach the right companies before everyone else does.
           </h2>
           <p className="mx-auto mt-2 max-w-sm text-xs leading-relaxed text-on-dark/70">
-            Join the early-access list. Be first to see the accounts ready to buy.
+            Modern sales isn&apos;t about contacting more companies. It&apos;s about recognizing
+            buying intent before your competitors and acting while the opportunity is still
+            fresh. Join the early-access list to stay ahead.
           </p>
           <FooterWaitlistForm />
         </div>

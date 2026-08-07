@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { Database, Send } from "lucide-react";
 
 const GREEN = "#1E9E5A";
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -30,9 +31,9 @@ const COMPANY = {
   region: "United Kingdom",
 };
 
-const SIGNAL_BUBBLES = [
-  { title: "Hiring SDR Team", confidence: 96, time: "2m ago" },
-  { title: "Funding Round", confidence: 92, time: "6m ago" },
+const OUTREACH_ACTIONS = [
+  { label: "Push to CRM", Icon: Database },
+  { label: "Send outreach", Icon: Send },
 ];
 
 /* ------------------------------------------------------------------ */
@@ -74,10 +75,6 @@ const CHIP_MOTION = (() => {
   }));
 })();
 
-/* Ambient decorative flow from the engine toward the qualified account. */
-/* Coordinates are percentages of the canvas (viewBox 0-100).            */
-const RIGHT_PATHS = ["M51,48 C 66,38 80,22 98,12", "M51,52 C 68,54 82,60 98,66", "M51,50 C 70,50 84,50 98,50"];
-
 /* ------------------------------------------------------------------ */
 /* Small building blocks                                               */
 /* ------------------------------------------------------------------ */
@@ -101,18 +98,6 @@ function FloatingChip({ label, index }: { label: string; index: number }) {
       </span>
       <span className="whitespace-nowrap text-[13px] font-medium text-ink">{label}</span>
     </motion.div>
-  );
-}
-
-function PlusMarker({ left, top }: { left: number; top: number }) {
-  return (
-    <span
-      className="absolute z-10 hidden h-4 w-4 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-hairline bg-white text-[9px] leading-none text-muted-soft lg:flex"
-      style={{ left: `${left}%`, top: `${top}%` }}
-      aria-hidden="true"
-    >
-      +
-    </span>
   );
 }
 
@@ -148,9 +133,11 @@ export function RadarController() {
 
   const canvasRef = useRef<HTMLDivElement>(null);
   const engineRef = useRef<HTMLDivElement>(null);
+  const accountRef = useRef<HTMLDivElement>(null);
   const chipRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [canvasSize, setCanvasSize] = useState({ w: 0, h: 0 });
   const [chipPaths, setChipPaths] = useState<string[]>([]);
+  const [accountPath, setAccountPath] = useState("");
 
   useEffect(() => {
     let raf: number;
@@ -187,6 +174,19 @@ export function RadarController() {
           return `M${startX.toFixed(1)},${startY.toFixed(1)} C ${midX.toFixed(1)},${startY.toFixed(1)} ${midX.toFixed(1)},${targetY.toFixed(1)} ${targetX.toFixed(1)},${targetY.toFixed(1)}`;
         })
       );
+
+      const accountEl = accountRef.current;
+      if (accountEl) {
+        const accountRect = accountEl.getBoundingClientRect();
+        const engineStartX = engineRect.right - canvasRect.left;
+        const engineStartY = targetY;
+        const accountEndX = accountRect.left - canvasRect.left;
+        const accountEndY = accountRect.top - canvasRect.top + accountRect.height / 2;
+        const midX = (engineStartX + accountEndX) / 2;
+        setAccountPath(
+          `M${engineStartX.toFixed(1)},${engineStartY.toFixed(1)} C ${midX.toFixed(1)},${engineStartY.toFixed(1)} ${midX.toFixed(1)},${accountEndY.toFixed(1)} ${accountEndX.toFixed(1)},${accountEndY.toFixed(1)}`
+        );
+      }
     }
 
     measure();
@@ -209,7 +209,6 @@ export function RadarController() {
     elapsed >= T2 ? Math.min(FIRMOGRAPHIC_LINES.length, Math.floor((elapsed - T2) / 380) + 1) : 0;
 
   const intentProgress = elapsed >= T3 ? Math.min(1, (elapsed - T3) / 1200) : 0;
-  const bubblesRevealed = elapsed >= T3 + 500 ? Math.min(SIGNAL_BUBBLES.length, Math.floor((elapsed - (T3 + 500)) / 600) + 1) : 0;
 
   const scoreProgress = elapsed >= T4 ? Math.min(1, (elapsed - T4) / 1400) : 0;
   const scoreValue = Math.round(94 * (1 - Math.pow(1 - scoreProgress, 3)));
@@ -282,29 +281,23 @@ export function RadarController() {
           </svg>
         )}
 
-        {/* ambient flow — engine to qualified account, desktop only */}
-        <svg
-          className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          {RIGHT_PATHS.map((d, i) => (
-            <g key={i}>
-              <path id={`flow-${i}`} d={d} fill="none" stroke="rgba(10,10,10,0.05)" strokeWidth="0.15" vectorEffect="non-scaling-stroke" />
-              {[0, 1].map((j) => (
-                <circle key={j} r="0.5" fill={GREEN} opacity="0.65">
-                  <animateMotion dur={`${3.2 + ((i + j) % 3) * 0.6}s`} begin={`${j * 1.6}s`} repeatCount="indefinite">
-                    <mpath href={`#flow-${i}`} />
-                  </animateMotion>
-                </circle>
-              ))}
-            </g>
-          ))}
-        </svg>
-        <PlusMarker left={75} top={25} />
-        <PlusMarker left={75} top={57} />
-        <PlusMarker left={75} top={50} />
+        {/* precise connector — engine to qualified account */}
+        {accountPath && (
+          <svg
+            className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+            viewBox={`0 0 ${canvasSize.w} ${canvasSize.h}`}
+            aria-hidden="true"
+          >
+            <path id="account-path" d={accountPath} fill="none" stroke="rgba(10,10,10,0.1)" strokeWidth="1.25" />
+            {[0, 1, 2].map((j) => (
+              <circle key={j} r="2.2" fill={GREEN} opacity="0.75">
+                <animateMotion dur={`${3.4 + j * 0.5}s`} begin={`${j * 1.1}s`} repeatCount="indefinite">
+                  <mpath href="#account-path" />
+                </animateMotion>
+              </circle>
+            ))}
+          </svg>
+        )}
 
         {/* Left — live internet signals */}
         <div className="relative z-10 mx-auto flex w-full max-w-[240px] flex-col gap-4 lg:mx-0">
@@ -396,32 +389,7 @@ export function RadarController() {
             Qualified account
           </p>
 
-          <div className="relative">
-            <AnimatePresence>
-              {SIGNAL_BUBBLES.map((b, i) =>
-                i < bubblesRevealed ? (
-                  <motion.div
-                    key={b.title}
-                    initial={{ opacity: 0, y: 10, scale: 0.94 }}
-                    animate={{ opacity: 1, y: [0, -4, 0], scale: 1 }}
-                    transition={{
-                      opacity: { duration: 0.4, ease: EASE },
-                      scale: { duration: 0.4, ease: EASE },
-                      y: { duration: 3.2 + i * 0.4, repeat: Infinity, ease: "easeInOut" },
-                    }}
-                    className="absolute z-20 flex items-center gap-2 rounded-full border border-hairline bg-white px-3.5 py-2 shadow-soft"
-                    style={i === 0 ? { top: -18, right: 20 } : { top: -52, right: 110 }}
-                  >
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: GREEN }} />
-                    <span className="whitespace-nowrap text-[11px] font-medium text-ink">{b.title}</span>
-                    <span className="whitespace-nowrap text-[11px] font-semibold" style={{ color: GREEN }}>
-                      {b.confidence}%
-                    </span>
-                  </motion.div>
-                ) : null
-              )}
-            </AnimatePresence>
-
+          <div ref={accountRef} className="relative">
             <div className="rounded-[1.75rem] border border-hairline bg-white p-7 shadow-soft">
               <AnimatePresence>
                 {identityRevealed && (
@@ -546,6 +514,27 @@ export function RadarController() {
                 )}
               </AnimatePresence>
             </div>
+
+            <AnimatePresence>
+              {readyRevealed && (
+                <motion.div
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35, delay: 0.15, ease: EASE }}
+                  className="mt-3 flex items-center justify-center gap-2"
+                >
+                  {OUTREACH_ACTIONS.map(({ label, Icon }, i) => (
+                    <div key={label} className="flex items-center gap-2">
+                      {i > 0 && <span className="text-[11px] text-muted-soft">+</span>}
+                      <span className="inline-flex items-center gap-1.5 rounded-full border border-hairline bg-white px-3 py-1.5 text-[11px] font-medium text-ink shadow-soft">
+                        <Icon className="h-3 w-3 text-muted" />
+                        {label}
+                      </span>
+                    </div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>

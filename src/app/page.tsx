@@ -39,10 +39,6 @@ export default function Home() {
 
         <IntentCapture />
 
-        <StoryIntro
-          headline="Research is only the beginning."
-          body="Once high-intent companies are identified, ORKA transforms live company intelligence into personalized outreach. Every message is grounded in real events happening inside the account, making conversations more relevant from the very first interaction."
-        />
         <IntegrationStack />
         <FeatureRows />
         <Reveal>

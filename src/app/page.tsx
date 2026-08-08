@@ -27,10 +27,6 @@ export default function Home() {
 
         <HowCnvrtedWorks />
 
-        <StoryIntro
-          headline="The internet never stops changing."
-          body="Every day, companies leave behind signals that reveal where they're headed. New funding rounds, hiring activity, product launches, technology changes, leadership moves, and public conversations all tell part of the story. CNVRTED continuously watches these signals and transforms them into opportunities your sales team can act on."
-        />
         <IntentRadar />
 
         <IntentCapture />

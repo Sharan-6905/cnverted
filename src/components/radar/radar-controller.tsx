@@ -107,18 +107,8 @@ function FloatingChip({
       animate={{ y: [0, -6, 0] }}
       transition={{ duration: m.duration, delay: m.delay, repeat: Infinity, ease: "easeInOut" }}
     >
-      <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-surface-soft">
+      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-surface-soft">
         <Icon className="h-3.5 w-3.5" style={{ color }} />
-        <span className="absolute -bottom-0.5 -right-0.5 flex h-2 w-2">
-          <span
-            className="absolute inline-flex h-full w-full animate-ping rounded-full opacity-60"
-            style={{ backgroundColor: ACCENT }}
-          />
-          <span
-            className="relative inline-flex h-2 w-2 rounded-full border border-white"
-            style={{ backgroundColor: ACCENT }}
-          />
-        </span>
       </span>
       <span className="whitespace-nowrap text-[13px] font-medium text-ink">{label}</span>
     </motion.div>

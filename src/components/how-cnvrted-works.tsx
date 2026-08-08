@@ -47,7 +47,7 @@ export function HowCnvrtedWorks() {
         <span className="mb-3 inline-block text-xs font-semibold uppercase tracking-[0.16em] text-muted">
           The full loop
         </span>
-        <h2 className="font-display text-display-md font-semibold tracking-tight text-ink">
+        <h2 className="font-display text-display-md font-semibold text-ink">
           From open web to <span className="text-accent">booked meeting</span>.
         </h2>
       </Reveal>

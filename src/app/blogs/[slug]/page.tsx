@@ -112,7 +112,7 @@ export default async function BlogPostPage({
                 </span>
               </div>
 
-              <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.1] tracking-tight text-ink md:text-5xl">
+              <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.15] text-ink md:text-5xl">
                 {post.title}
               </h1>
               <p className="mt-5 text-lg leading-relaxed text-body">{post.dek}</p>

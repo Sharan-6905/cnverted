@@ -12,7 +12,7 @@ export function Hero() {
             Real-time buying signals
           </span>
 
-          <h1 className="mt-6 max-w-xl font-display text-display-xl font-semibold tracking-tight text-ink">
+          <h1 className="mt-6 max-w-xl font-display text-display-xl font-semibold text-ink">
             Find <span className="text-accent">buyers</span> before your
             competitors do.
           </h1>

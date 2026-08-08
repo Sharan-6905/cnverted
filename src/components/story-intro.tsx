@@ -44,7 +44,7 @@ export function StoryIntro({ headline, body, image, imageAlt = "" }: StoryIntroP
         transition={reduceMotion ? { duration: 0 } : { duration: 0.8, ease: "easeOut" }}
       >
         <div>
-          <h2 className="font-display text-[40px] font-bold leading-[0.98] tracking-tight text-ink sm:text-[56px] lg:text-[52px]">
+          <h2 className="font-display text-[40px] font-bold leading-[1.06] text-ink sm:text-[56px] lg:text-[52px]">
             {headline}
           </h2>
           <p

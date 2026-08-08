@@ -41,7 +41,7 @@ export default function ContactPage() {
             <span className="inline-flex items-center rounded-full border border-white/60 bg-canvas/50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand-teal backdrop-blur-md">
               Contact us
             </span>
-            <h1 className="mt-4 font-display text-display-md font-semibold tracking-tight text-ink">
+            <h1 className="mt-4 font-display text-display-md font-semibold text-ink">
               Talk to <span className="text-accent">an expert</span> at Cnvrted.
             </h1>
             <p className="mt-3 text-[15px] leading-relaxed text-body">

@@ -47,7 +47,7 @@ export default function AboutPage() {
             <span className="inline-flex items-center rounded-full border border-white/60 bg-canvas/50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand-teal backdrop-blur-md">
               About us
             </span>
-            <h1 className="mt-4 font-display text-display-md font-semibold tracking-tight text-ink">
+            <h1 className="mt-4 font-display text-display-md font-semibold text-ink">
               Three Bangalore boys{" "}
               <span className="text-accent">competing with the giants</span>.
             </h1>

@@ -50,9 +50,11 @@ const config: Config = {
       },
       fontSize: {
         // Fluid display sizes — shrink on small screens, cap on desktop.
-        "display-xl": ["clamp(2.75rem, 8.5vw, 4.5rem)", { lineHeight: "1.02", letterSpacing: "-0.03em" }],
-        "display-lg": ["clamp(2.25rem, 7vw, 3.5rem)", { lineHeight: "1.06", letterSpacing: "-0.025em" }],
-        "display-md": ["clamp(2rem, 5.5vw, 2.5rem)", { lineHeight: "1.12", letterSpacing: "-0.02em" }],
+        // Tracking stays near neutral: the serif display face needs the room a
+        // geometric sans did not.
+        "display-xl": ["clamp(2.75rem, 8.5vw, 4.5rem)", { lineHeight: "1.06", letterSpacing: "-0.01em" }],
+        "display-lg": ["clamp(2.25rem, 7vw, 3.5rem)", { lineHeight: "1.1", letterSpacing: "-0.005em" }],
+        "display-md": ["clamp(2rem, 5.5vw, 2.5rem)", { lineHeight: "1.16", letterSpacing: "0" }],
       },
       boxShadow: {
         soft: "0 1px 2px rgba(20,16,8,0.04), 0 2px 8px rgba(20,16,8,0.05)",

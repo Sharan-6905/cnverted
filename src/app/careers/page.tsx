@@ -57,7 +57,12 @@ export default function CareersPage() {
       <main className="flex-1">
         <Section
           eyebrow="Careers"
-          title="Help us build the future of outbound."
+          title={
+            <>
+              Help us build{" "}
+              <span className="text-accent">the future of outbound</span>.
+            </>
+          }
           description="We're a small team moving fast. Here's what we're hiring for right now."
         >
           <div className="space-y-4">

@@ -64,7 +64,12 @@ export function FeatureRows() {
     <Section
       id="product"
       eyebrow="The complete sales dashboard"
-      title="Find who's ready, know why, and close them."
+      title={
+        <>
+          Find <span className="text-accent">who&apos;s ready</span>, know
+          why, and close them.
+        </>
+      }
       description="One place for the whole motion — from the first buying signal on the open web to the revenue it becomes."
     >
       <div className="grid gap-4 lg:grid-cols-6">

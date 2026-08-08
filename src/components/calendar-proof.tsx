@@ -6,7 +6,12 @@ export function CalendarProof() {
     <Section
       centered
       eyebrow="Outcome"
-      title="Your calendar, not your prospecting list."
+      title={
+        <>
+          <span className="text-accent">Your calendar</span>, not your
+          prospecting list.
+        </>
+      }
       description="Every account we surface turns into a meeting on your calendar — not another lead you have to chase."
     >
       <div

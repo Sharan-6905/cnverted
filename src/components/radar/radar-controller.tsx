@@ -257,7 +257,7 @@ export function RadarController() {
           How Cnvrted works
         </span>
         <h2 className="mt-6 font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-          One connected intelligence system.
+          One connected <span className="text-accent">intelligence system</span>.
         </h2>
         <p className="mt-4 text-[15px] leading-relaxed text-body">
           Signals become a qualified, ready-to-work account — continuously, without a single

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -32,7 +32,12 @@ export function ProcessBreakdown({
     <Section
       id="pipeline"
       eyebrow="Under the hood"
-      title="Five steps from raw web to CRM-ready pipeline."
+      title={
+        <>
+          Five steps from raw web to{" "}
+          <span className="text-accent">CRM-ready pipeline</span>.
+        </>
+      }
       description="Click through the pipeline that turns scattered public activity into scored, enriched accounts in your system of record."
     >
       <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">

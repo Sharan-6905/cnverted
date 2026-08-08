@@ -30,7 +30,12 @@ export default function PricingPage() {
         <Section
           centered
           eyebrow="Pricing"
-          title="Simple, transparent pricing."
+          title={
+            <>
+              Simple, <span className="text-accent">transparent</span>{" "}
+              pricing.
+            </>
+          }
           description="Cnvrted is in early access — join now to lock in these rates before general availability."
         >
           <PricingPlans />

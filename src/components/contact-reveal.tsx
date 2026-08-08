@@ -6,7 +6,12 @@ export function ContactReveal() {
     <Section
       centered
       eyebrow="Full contact reach"
-      title="Not just a name — the whole contact."
+      title={
+        <>
+          Not just a name —{" "}
+          <span className="text-accent">the whole contact</span>.
+        </>
+      }
       description="LinkedIn, verified work email, role, and a message that's already warm — every account arrives ready to reach."
     >
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 lg:flex-row lg:items-center">

@@ -19,7 +19,11 @@ export default function EarlyAccessPage() {
         <Section
           centered
           eyebrow="Early access"
-          title="Tell us about your team."
+          title={
+            <>
+              Tell us about <span className="text-accent">your team</span>.
+            </>
+          }
           description="Five short sections — a founder reads every submission and reaches out within 24 hours to lock a demo slot."
           className="pb-8"
         >

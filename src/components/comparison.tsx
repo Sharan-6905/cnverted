@@ -16,7 +16,11 @@ export function Comparison() {
       id="why"
       centered
       eyebrow="Why us"
-      title="Not another lead database."
+      title={
+        <>
+          Not another <span className="text-accent">lead database</span>.
+        </>
+      }
       description="Lead databases sell you static contact data. Cnvrted sells you timing — the single thing that decides whether outreach lands."
     >
       <div className="overflow-hidden rounded-2xl border border-hairline">

@@ -14,7 +14,11 @@ export function LiveSignalFeed({ signals, onSelectSignal }: LiveSignalFeedProps)
     <Section
       id="signals"
       eyebrow="Live feed"
-      title="Real signals, as they fire."
+      title={
+        <>
+          Real signals, <span className="text-accent">as they fire</span>.
+        </>
+      }
       description="A sample of what the intent stream looks like — each card is a scored account with the source and the why-now."
     >
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

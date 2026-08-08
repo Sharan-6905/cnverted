@@ -37,7 +37,12 @@ export default function HelpCenterPage() {
       <main className="flex-1">
         <Section
           eyebrow="Help center"
-          title="Have a question? We're here to help."
+          title={
+            <>
+              Have a question? We&apos;re{" "}
+              <span className="text-accent">here to help</span>.
+            </>
+          }
           description="Look through the common questions below, or reach out directly — we read every message."
         >
           <div className="space-y-4">

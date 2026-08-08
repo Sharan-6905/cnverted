@@ -25,7 +25,12 @@ export function SignalVsNoise({ signal, noise = DEFAULT_NOISE }: SignalVsNoisePr
     <Section
       id="why"
       eyebrow="Signal, not noise"
-      title="A database gives you names. We give you timing."
+      title={
+        <>
+          A database gives you names. We give you{" "}
+          <span className="text-accent">timing</span>.
+        </>
+      }
       description="Static lead lists are a wall of contacts with no reason to reach out. Cnvrted surfaces the one account that just entered the market — with the context to open the conversation."
     >
       <div className="grid items-center gap-6 lg:grid-cols-[1fr_auto_1fr]">

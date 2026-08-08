@@ -48,7 +48,8 @@ export default function AboutPage() {
               About us
             </span>
             <h1 className="mt-4 font-display text-display-md font-semibold tracking-tight text-ink">
-              Three Bangalore boys competing with the giants.
+              Three Bangalore boys{" "}
+              <span className="text-accent">competing with the giants</span>.
             </h1>
             <p className="mt-3 text-[15px] leading-relaxed text-body">
               Cnvrted started the way most things do — not with a grand plan,

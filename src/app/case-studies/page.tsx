@@ -18,7 +18,11 @@ export default function CaseStudiesPage() {
         <Section
           centered
           eyebrow="Case studies"
-          title="Coming soon."
+          title={
+            <>
+              Coming <span className="text-accent">soon</span>.
+            </>
+          }
           description="We're early — our first customers are just getting started with Cnvrted. Real results and case studies will land here as they come in."
         />
       </main>

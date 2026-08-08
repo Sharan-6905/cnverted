@@ -49,7 +49,12 @@ export function Integrations({ integrations }: IntegrationsProps) {
     <Section
       centered
       eyebrow="Integrations"
-      title="Scored accounts, right where you already work."
+      title={
+        <>
+          Scored accounts,{" "}
+          <span className="text-accent">right where you already work</span>.
+        </>
+      }
       description="Cnvrted pushes enriched, high-intent accounts straight into your CRM and outreach stack — no CSV exports, no busywork."
     >
       <div

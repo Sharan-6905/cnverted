@@ -34,7 +34,12 @@ export default function BlogsPage() {
       <main className="flex-1">
         <Section
           eyebrow="Blog"
-          title="Insights on outbound, intent, and GTM."
+          title={
+            <>
+              Insights on{" "}
+              <span className="text-accent">outbound, intent, and GTM</span>.
+            </>
+          }
           description="Buying signals, pipeline strategy, and the plays that turn one into the other."
         >
           <div

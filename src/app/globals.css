@@ -25,6 +25,12 @@
     border-radius: theme("borderRadius.3xl");
   }
 
+  /* Emphasis phrase inside a display heading, carried by colour alone — no rule
+     to collide with the next line at the tight leading the display sizes use. */
+  .text-accent {
+    color: theme("colors.brand.navy");
+  }
+
   /* Faint square grid, fading out toward the edges — used behind the hero. */
   .bg-grid {
     background-image:

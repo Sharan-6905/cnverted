@@ -52,7 +52,7 @@ export function IntegrationStack() {
           Automations
         </span>
         <h2 className="font-display text-display-md font-semibold text-ink">
-          One reply. Cnvrted takes it from there.
+          <span className="text-accent">One reply</span>. Cnvrted takes it from there.
         </h2>
         <p className="mt-4 text-[15px] leading-relaxed text-body">
           A single email reply turns into a booked, calendared meeting — no one on your team has

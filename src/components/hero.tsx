@@ -13,11 +13,7 @@ export function Hero() {
           </span>
 
           <h1 className="mt-6 max-w-xl font-display text-display-xl font-semibold tracking-tight text-ink">
-            Find{" "}
-            <span className="bg-gradient-to-r from-brand-navy to-intent-high bg-clip-text text-transparent">
-              buyers
-            </span>{" "}
-            before your
+            Find <span className="text-accent">buyers</span> before your
             competitors do.
           </h1>
 

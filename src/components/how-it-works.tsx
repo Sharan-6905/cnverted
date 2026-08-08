@@ -41,7 +41,13 @@ export function HowItWorks() {
       id="how"
       centered
       eyebrow="How it works"
-      title="From noise to a ready-to-work account in four steps."
+      title={
+        <>
+          From noise to a{" "}
+          <span className="text-accent">ready-to-work account</span> in four
+          steps.
+        </>
+      }
     >
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         {STEPS.map((s, i) => (

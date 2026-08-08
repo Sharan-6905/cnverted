@@ -18,7 +18,11 @@ export default function LearnPage() {
         <Section
           centered
           eyebrow="Learn from us"
-          title="Coming soon."
+          title={
+            <>
+              Coming <span className="text-accent">soon</span>.
+            </>
+          }
           description="We're putting together guides and playbooks on finding, reaching, and closing in-market buyers. Check back soon."
         />
       </main>

@@ -42,7 +42,7 @@ export default function ContactPage() {
               Contact us
             </span>
             <h1 className="mt-4 font-display text-display-md font-semibold tracking-tight text-ink">
-              Talk to an expert at Cnvrted.
+              Talk to <span className="text-accent">an expert</span> at Cnvrted.
             </h1>
             <p className="mt-3 text-[15px] leading-relaxed text-body">
               Have questions or need assistance? We&apos;re here to help — reach

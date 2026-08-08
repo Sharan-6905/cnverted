@@ -1,11 +1,14 @@
 "use client";
 
 import type { ReactNode } from "react";
+import Image, { type StaticImageData } from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 
 interface StoryIntroProps {
   headline: ReactNode;
   body: ReactNode;
+  image?: StaticImageData | string;
+  imageAlt?: string;
 }
 
 /**
@@ -13,7 +16,7 @@ interface StoryIntroProps {
  * supporting copy, generous whitespace. No cards, no icons — just the
  * site's faint grid texture behind the type.
  */
-export function StoryIntro({ headline, body }: StoryIntroProps) {
+export function StoryIntro({ headline, body, image, imageAlt = "" }: StoryIntroProps) {
   const reduceMotion = useReducedMotion();
 
   return (
@@ -32,6 +35,21 @@ export function StoryIntro({ headline, body }: StoryIntroProps) {
         <p className="mx-auto mt-10 max-w-[820px] text-xl font-medium leading-[1.8] text-muted sm:mt-12">
           {body}
         </p>
+
+        {image && (
+          <div
+            className="relative mx-auto mt-16 w-full max-w-[880px] overflow-hidden rounded-3xl shadow-float"
+            style={{ aspectRatio: "1456 / 1080" }}
+          >
+            <Image
+              src={image}
+              alt={imageAlt}
+              fill
+              sizes="(max-width: 900px) 92vw, 880px"
+              className="object-cover"
+            />
+          </div>
+        )}
       </motion.div>
     </section>
   );

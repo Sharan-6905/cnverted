@@ -47,6 +47,8 @@ export default function Home() {
         <StoryIntro
           headline="Every score comes with evidence."
           body="CNVRTED never gives you a number without explaining why. Every recommendation is backed by real company activity, allowing your team to understand what changed, when it changed, and why it's relevant before reaching out."
+          image="/radar-scan.png"
+          imageAlt="A radar dish scanning a field, illuminating the companies it detects as buying signals."
         />
         <IcpEnrichmentTable />
         <Reveal>

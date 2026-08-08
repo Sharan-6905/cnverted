@@ -33,6 +33,7 @@ export default function BlogsPage() {
       <SiteHeader />
       <main className="flex-1">
         <Section
+          centered
           eyebrow="Blog"
           title={
             <>

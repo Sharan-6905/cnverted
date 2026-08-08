@@ -56,6 +56,7 @@ export default function CareersPage() {
       <SiteHeader />
       <main className="flex-1">
         <Section
+          centered
           eyebrow="Careers"
           title={
             <>

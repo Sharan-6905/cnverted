@@ -32,10 +32,6 @@ export default function Home() {
           body="Every day, companies leave behind signals that reveal where they're headed. New funding rounds, hiring activity, product launches, technology changes, leadership moves, and public conversations all tell part of the story. CNVRTED continuously watches these signals and transforms them into opportunities your sales team can act on."
         />
         <IntentRadar />
-        <StoryIntro
-          headline="Millions of signals. One clear decision."
-          body="Every signal is collected, analyzed, connected, and ranked by our intelligence engine. Instead of asking your team to interpret hundreds of updates, CNVRTED surfaces the companies most likely to be buying — along with the evidence behind every recommendation."
-        />
 
         <IntentCapture />
 

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
 
@@ -9,10 +9,10 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
-const poppins = Poppins({
+const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
 });
 
 const SITE_URL = "https://www.cnvrted.com";
@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${poppins.variable} h-full`}
+      className={`${inter.variable} ${plusJakartaSans.variable} h-full`}
     >
       <body className="min-h-full">
         <StructuredData />

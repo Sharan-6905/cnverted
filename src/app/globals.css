@@ -28,7 +28,7 @@
   /* Emphasis phrase inside a display heading, carried by colour alone — no rule
      to collide with the next line at the tight leading the display sizes use. */
   .text-accent {
-    background-image: linear-gradient(to right, #0f2a52, theme("colors.blue.400"));
+    background-image: linear-gradient(to right, theme("colors.brand.navy"), theme("colors.intent.high"));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

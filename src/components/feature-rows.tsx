@@ -63,6 +63,7 @@ export function FeatureRows() {
   return (
     <Section
       id="product"
+      centered
       eyebrow="The complete sales dashboard"
       title={
         <>

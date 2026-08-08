@@ -7,7 +7,6 @@ import { Newspaper, TrendingUp, Users } from "lucide-react";
 import { LinkedInMark, RedditMark } from "@/components/brand-logos";
 
 const W = 250;
-const H = 226;
 
 // mascot image box
 const IMG_W = 150;
@@ -41,15 +40,6 @@ const CYCLE_MS = 9200;
 
 type Phase = "collecting" | "analyzing" | "ranking" | "beaming" | "scoring" | "done";
 
-const LABELS: Record<Phase, string> = {
-  collecting: "Collecting evidence…",
-  analyzing: "Analyzing signals…",
-  ranking: "Ranking intent…",
-  beaming: "Ranking intent…",
-  scoring: "Intent score",
-  done: "Intent score",
-};
-
 export function MascotIntelligence() {
   const [activeSource, setActiveSource] = useState(0);
   const [particleKey, setParticleKey] = useState(0);
@@ -57,19 +47,14 @@ export function MascotIntelligence() {
   const [eyeFlash, setEyeFlash] = useState(0);
   const [pulseKey, setPulseKey] = useState(0);
   const [wagKey, setWagKey] = useState(0);
-  const [score, setScore] = useState(0);
-  const [showBadge, setShowBadge] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
     const timeouts: ReturnType<typeof setTimeout>[] = [];
-    let scoreInterval: ReturnType<typeof setInterval> | undefined;
 
     function runCycle() {
       if (cancelled) return;
       setPhase("collecting");
-      setScore(0);
-      setShowBadge(false);
       setActiveSource(0);
 
       SOURCES.forEach((_, i) => {
@@ -98,21 +83,6 @@ export function MascotIntelligence() {
       timeouts.push(setTimeout(() => !cancelled && setPhase("ranking"), ANALYZE_END));
       timeouts.push(setTimeout(() => !cancelled && setPhase("beaming"), RANK_END));
       timeouts.push(setTimeout(() => !cancelled && setPhase("scoring"), BEAM_END));
-
-      timeouts.push(
-        setTimeout(() => {
-          if (cancelled) return;
-          const start = Date.now();
-          const duration = SCORE_END - BEAM_END;
-          scoreInterval = setInterval(() => {
-            const t = Math.min(1, (Date.now() - start) / duration);
-            setScore(Math.round(t * 94));
-            if (t >= 1 && scoreInterval) clearInterval(scoreInterval);
-          }, 40);
-        }, BEAM_END)
-      );
-
-      timeouts.push(setTimeout(() => !cancelled && setShowBadge(true), SCORE_END));
       timeouts.push(setTimeout(() => !cancelled && setPhase("done"), PAUSE_END));
       timeouts.push(setTimeout(runCycle, CYCLE_MS));
     }
@@ -121,14 +91,13 @@ export function MascotIntelligence() {
     return () => {
       cancelled = true;
       timeouts.forEach(clearTimeout);
-      if (scoreInterval) clearInterval(scoreInterval);
     };
   }, []);
 
   const isCollecting = phase === "collecting";
 
   return (
-    <div className="bg-white" style={{ width: W, maxWidth: W, height: H }}>
+    <div className="bg-white" style={{ width: W, maxWidth: W }}>
       <div className="relative" style={{ width: W, height: IMG_TOP + IMG_H + 6 }}>
         <svg width={W} height={IMG_TOP + IMG_H + 6} viewBox={`0 0 ${W} ${IMG_TOP + IMG_H + 6}`} className="absolute inset-0">
           {/* traveling particles */}
@@ -242,47 +211,6 @@ export function MascotIntelligence() {
           />
         </motion.div>
       </div>
-
-      <div className="text-center">
-        <AnimatePresence mode="wait">
-          <motion.p
-            key={phase === "beaming" || phase === "ranking" ? "ranking" : phase}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="text-[11px] font-medium text-muted-soft"
-          >
-            {LABELS[phase]}
-          </motion.p>
-        </AnimatePresence>
-      </div>
-
-      <AnimatePresence>
-        {(phase === "scoring" || phase === "done") && (
-          <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="mt-1 flex items-center justify-center gap-2"
-          >
-            <span className="text-2xl font-bold text-ink">{score}</span>
-            <AnimatePresence>
-              {showBadge && (
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.25 }}
-                  className="rounded-full bg-emerald-100 px-2.5 py-1 text-[10px] font-semibold text-emerald-600"
-                >
-                  HIGH
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 }

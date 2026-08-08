@@ -24,13 +24,18 @@ export function StoryIntro({ headline, body, image, imageAlt = "" }: StoryIntroP
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative px-6 py-20 sm:py-32 lg:py-44">
+    <section
+      className={cn(
+        "relative px-6",
+        image ? "py-16 sm:py-20 lg:py-24" : "py-20 sm:py-32 lg:py-44"
+      )}
+    >
       <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
       <motion.div
         className={cn(
           "relative mx-auto w-[92%] sm:w-[85%]",
           image
-            ? "max-w-[1120px] text-center lg:grid lg:grid-cols-2 lg:items-center lg:gap-16 lg:text-left"
+            ? "max-w-[1240px] text-center lg:grid lg:grid-cols-[1fr_1.1fr] lg:items-center lg:gap-16 lg:text-left"
             : "max-w-[960px] text-center"
         )}
         initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
@@ -54,14 +59,14 @@ export function StoryIntro({ headline, body, image, imageAlt = "" }: StoryIntroP
 
         {image && (
           <div
-            className="relative mx-auto mt-16 w-full max-w-[520px] overflow-hidden rounded-3xl shadow-float lg:mx-0 lg:mt-0"
+            className="relative mx-auto mt-16 w-full max-w-[560px] overflow-hidden rounded-3xl shadow-float lg:mx-0 lg:mt-0 lg:max-w-none"
             style={{ aspectRatio: "1456 / 1080" }}
           >
             <Image
               src={image}
               alt={imageAlt}
               fill
-              sizes="(max-width: 1024px) 92vw, 520px"
+              sizes="(max-width: 1024px) 92vw, 640px"
               className="object-cover"
             />
           </div>

@@ -90,7 +90,11 @@ export function IcpEnrichmentTable() {
       eyebrow="Live enrichment"
       title={
         <>
-          Watch <span className="text-brand-navy">Orka</span> find your ICP.
+          Watch{" "}
+          <span className="bg-gradient-to-r from-brand-navy to-intent-high bg-clip-text text-transparent">
+            Orka
+          </span>{" "}
+          find your ICP.
         </>
       }
       description="A sample of what enrichment looks like as it runs — every row is a company scored and matched against your ideal customer profile."

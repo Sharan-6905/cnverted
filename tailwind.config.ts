@@ -44,8 +44,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-inter)", "Inter", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Plus Jakarta Sans", "Inter", "sans-serif"],
+        sans: ["var(--font-poppins)", "Poppins", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Tinos", "Times New Roman", "Times", "serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {

@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Poppins, Tinos } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
+const poppins = Poppins({
+  variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
-const plusJakartaSans = Plus_Jakarta_Sans({
+// Tinos is metric-compatible with Times New Roman and ships only 400/700,
+// so heading weights between the two resolve upward to 700.
+const tinos = Tinos({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: ["400", "700"],
 });
 
 const SITE_URL = "https://www.cnvrted.com";
@@ -75,7 +77,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${plusJakartaSans.variable} h-full`}
+      className={`${poppins.variable} ${tinos.variable} h-full`}
     >
       <body className="min-h-full">
         <StructuredData />

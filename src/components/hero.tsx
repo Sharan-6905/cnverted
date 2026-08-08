@@ -1,5 +1,4 @@
 import { HeroScene } from "@/components/hero-scene";
-import { MascotIntelligence } from "@/components/mascot-intelligence";
 
 export function Hero() {
   return (
@@ -23,10 +22,6 @@ export function Hero() {
             companies entering a purchase cycle, and shows exactly why
             they&apos;re ready—so your team reaches buyers before everyone else.
           </p>
-
-          <div className="mt-10">
-            <MascotIntelligence />
-          </div>
         </div>
 
         {/* Scroll-driven clay motion scene */}

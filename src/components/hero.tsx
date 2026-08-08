@@ -13,8 +13,8 @@ export function Hero() {
           </span>
 
           <h1 className="mt-6 max-w-xl font-display text-display-xl font-semibold text-ink">
-            Find <span className="text-accent">buyers</span> before your
-            competitors do.
+            Find <span className="text-accent">buyers</span> before your{" "}
+            <span className="text-accent">competitors</span> do.
           </h1>
 
           <p className="mt-5 max-w-md text-lg leading-relaxed text-body">

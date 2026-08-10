@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
-import { Poppins, Newsreader } from "next/font/google";
+import { Raleway, Merriweather } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
 
-const poppins = Poppins({
+const raleway = Raleway({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
 });
 
 // Editorial serif used for every heading site-wide.
-const newsreader = Newsreader({
+const merriweather = Merriweather({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "700"],
   style: "normal",
 });
 
@@ -77,7 +77,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${newsreader.variable} h-full`}
+      className={`${raleway.variable} ${merriweather.variable} h-full`}
     >
       <body className="min-h-full">
         <StructuredData />

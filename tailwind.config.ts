@@ -44,15 +44,15 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["var(--font-poppins)", "Poppins", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Georgia", "Times New Roman", "Times", "serif"],
+        sans: ["var(--font-poppins)", "Raleway", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Merriweather", "Georgia", "Times New Roman", "Times", "serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {
         // Fluid display sizes — shrink on small screens, cap on desktop.
         // Tracking stays near neutral: the serif display face needs the room a
         // geometric sans did not.
-        "display-xl": ["clamp(2.75rem, 8.5vw, 4.5rem)", { lineHeight: "1.02", letterSpacing: "-0.02em" }],
+        "display-xl": ["clamp(2.75rem, 8.5vw, 4rem)", { lineHeight: "1.02", letterSpacing: "-0.02em" }],
         "display-lg": ["clamp(2.25rem, 7vw, 3.5rem)", { lineHeight: "1.1", letterSpacing: "-0.005em" }],
         "display-md": ["clamp(2rem, 5.5vw, 2.5rem)", { lineHeight: "1.16", letterSpacing: "0" }],
       },

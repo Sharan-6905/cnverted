@@ -10,13 +10,19 @@ export function Hero() {
       <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.3fr_1fr]">
         {/* Copy + CTA */}
-        <div>
+        <div className="relative">
+          <div
+            className="pointer-events-none absolute -left-32 top-10 -z-10 h-80 w-80 rounded-full bg-blue-200 blur-2xl"
+            style={{ opacity: 0.35 }}
+            aria-hidden="true"
+          />
+
           <span className="inline-flex items-center gap-2 rounded-full border border-hairline bg-surface-soft px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
             <span className="h-1.5 w-1.5 rounded-full bg-brand-teal" />
             Real-time buying signals
           </span>
 
-          <h1 className="mt-6 max-w-2xl font-display text-display-xl font-normal text-ink">
+          <h1 className="mt-6 max-w-3xl font-display text-display-xl font-normal text-ink">
             Find <HighlightWord>buyers</HighlightWord> before your{" "}
             <HighlightWord>competitors</HighlightWord> do.
           </h1>

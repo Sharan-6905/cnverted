@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Tinos } from "next/font/google";
+import { Poppins, Libertinus_Serif } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
 
@@ -9,12 +9,12 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
-// Tinos is metric-compatible with Times New Roman and ships only 400/700,
-// so heading weights between the two resolve upward to 700.
-const tinos = Tinos({
+// Libertinus Serif ships 400/600/700, so the .font-display 700 override
+// still resolves to a real bold cut rather than a synthetic one.
+const libertinusSerif = Libertinus_Serif({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["400", "600", "700"],
 });
 
 const SITE_URL = "https://www.cnvrted.com";
@@ -77,7 +77,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${tinos.variable} h-full`}
+      className={`${poppins.variable} ${libertinusSerif.variable} h-full`}
     >
       <body className="min-h-full">
         <StructuredData />

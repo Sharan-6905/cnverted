@@ -88,9 +88,8 @@
     transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-duration: 320ms;
   }
-  /* Display face weight. Tinos ships 400/700 only, so bold is the only way
-     to get a heavier serif heading. Declared here to win over the
-     per-heading font-semibold classes. */
+  /* Display face weight, forced to 700 to win over per-heading
+     font-semibold classes. */
   .font-display {
     font-weight: 700;
   }

@@ -158,7 +158,7 @@ export function ColorWordmark({
 }) {
   return (
     <span
-      className={cn("font-display text-[17px] font-bold tracking-tight", className)}
+      className={cn("font-sans text-[17px] font-semibold tracking-tight", className)}
       style={{ color }}
     >
       {name}

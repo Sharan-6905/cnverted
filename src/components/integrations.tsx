@@ -34,7 +34,7 @@ function IntegrationLogo({ it }: { it: Integration }) {
     <div className="flex shrink-0 items-center gap-2.5 opacity-90 smooth-transition transition-opacity hover:opacity-100">
       {Mark !== undefined ? <Mark className="h-8 w-8" /> : null}
       {Mark !== undefined ? (
-        <span className="font-display text-lg font-semibold tracking-tight text-ink">
+        <span className="font-sans text-lg font-semibold tracking-tight text-ink">
           {it.name}
         </span>
       ) : (

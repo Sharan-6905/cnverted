@@ -108,14 +108,14 @@ function FooterWaitlistForm() {
             type="email"
             required
             autoComplete="email"
-            placeholder="Enter your mail id"
+            placeholder="Enter your work email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className="border-white/25 bg-white/90 pl-10"
           />
         </div>
         <Button type="submit" variant="primary" size="md" className="shrink-0" disabled={loading}>
-          {loading ? "Joining…" : "Join"}
+          {loading ? "Joining…" : "Get Started"}
           <ArrowRight className="h-4 w-4" />
         </Button>
       </form>
@@ -138,7 +138,7 @@ export function SiteFooter() {
       <div className="relative mx-auto max-w-6xl px-6 pt-8">
         <div className="mx-auto flex max-w-lg flex-col items-center rounded-2xl border border-white/25 bg-blue-400/10 px-6 py-6 text-center shadow-soft backdrop-blur-xl">
           <h2 className="mx-auto max-w-sm font-display text-base font-semibold tracking-tight text-on-dark md:text-lg">
-            Reach the right companies before everyone else does.
+            Know who&rsquo;s in-market. Before they reach out.
           </h2>
           <FooterWaitlistForm />
         </div>

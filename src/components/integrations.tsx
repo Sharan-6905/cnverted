@@ -17,9 +17,14 @@ const MARKS: Record<string, (p: IconProps) => React.JSX.Element> = {
   zapier: ZapierColor,
 };
 
-// Each brand's real wordmark rendered with the closest weight/spacing/color
-// our own type system can produce — not their exact licensed typeface, but
-// styled to read as that brand rather than generic body text.
+// A neutral OS-default sans stack — deliberately NOT font-sans (Poppins) or
+// font-display (Tinos), so these wordmarks stop reading as "the CNVRTED
+// font." We can't embed each brand's actual licensed typeface (Larsseit,
+// Salesforce Sans, etc.), so weight/tracking/color are tuned per brand to
+// approximate how each name actually presents.
+const NEUTRAL_STACK =
+  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+
 const WORDMARK_STYLE: Record<string, { color: string; weight: string; tracking: string }> = {
   slack: { color: "#4A154B", weight: "800", tracking: "-0.01em" },
   salesforce: { color: "#00A1E0", weight: "600", tracking: "-0.005em" },
@@ -42,8 +47,13 @@ function IntegrationLogo({ it }: { it: Integration }) {
     <div className="flex shrink-0 items-center gap-2.5 opacity-90 smooth-transition transition-opacity hover:opacity-100">
       {Mark !== undefined ? <Mark className="h-8 w-8" /> : null}
       <span
-        className="font-sans text-lg"
-        style={{ color: style?.color, fontWeight: style?.weight, letterSpacing: style?.tracking }}
+        className="text-lg"
+        style={{
+          color: style?.color,
+          fontWeight: style?.weight,
+          letterSpacing: style?.tracking,
+          fontFamily: NEUTRAL_STACK,
+        }}
       >
         {it.name}
       </span>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Fjalla_One } from "next/font/google";
+import { Poppins, Inter_Tight } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
 
@@ -9,10 +9,10 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
-const fjallaOne = Fjalla_One({
+const interTight = Inter_Tight({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "600", "700"],
 });
 
 const SITE_URL = "https://www.cnvrted.com";
@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${fjallaOne.variable} h-full`}
+      className={`${poppins.variable} ${interTight.variable} h-full`}
     >
       <body className="min-h-full">
         <StructuredData />

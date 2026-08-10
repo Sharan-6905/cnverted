@@ -17,17 +17,18 @@ const MARKS: Record<string, (p: IconProps) => React.JSX.Element> = {
   zapier: ZapierColor,
 };
 
-// Per-brand weight/spacing only — color comes from the shared whale-navy →
-// intent-green gradient (.text-accent) instead of each brand's own hue.
-const WORDMARK_STYLE: Record<string, { weight: string; tracking: string }> = {
-  slack: { weight: "800", tracking: "-0.01em" },
-  salesforce: { weight: "600", tracking: "-0.005em" },
-  hubspot: { weight: "700", tracking: "-0.01em" },
-  notion: { weight: "600", tracking: "-0.01em" },
-  zapier: { weight: "800", tracking: "-0.01em" },
-  outreach: { weight: "700", tracking: "-0.005em" },
-  salesloft: { weight: "600", tracking: "0em" },
-  apollo: { weight: "700", tracking: "-0.005em" },
+// Each brand's real wordmark rendered with the closest weight/spacing/color
+// our own type system can produce — not their exact licensed typeface, but
+// styled to read as that brand rather than generic body text.
+const WORDMARK_STYLE: Record<string, { color: string; weight: string; tracking: string }> = {
+  slack: { color: "#4A154B", weight: "800", tracking: "-0.01em" },
+  salesforce: { color: "#00A1E0", weight: "600", tracking: "-0.005em" },
+  hubspot: { color: "#FF7A59", weight: "700", tracking: "-0.01em" },
+  notion: { color: "#000000", weight: "600", tracking: "-0.01em" },
+  zapier: { color: "#FF4A00", weight: "800", tracking: "-0.01em" },
+  outreach: { color: "#5A50FF", weight: "700", tracking: "-0.005em" },
+  salesloft: { color: "#00A0B7", weight: "600", tracking: "0em" },
+  apollo: { color: "#6D4AFF", weight: "700", tracking: "-0.005em" },
 };
 
 interface IntegrationsProps {
@@ -41,8 +42,8 @@ function IntegrationLogo({ it }: { it: Integration }) {
     <div className="flex shrink-0 items-center gap-2.5 opacity-90 smooth-transition transition-opacity hover:opacity-100">
       {Mark !== undefined ? <Mark className="h-8 w-8" /> : null}
       <span
-        className="text-accent font-sans text-lg"
-        style={{ fontWeight: style?.weight, letterSpacing: style?.tracking }}
+        className="font-sans text-lg"
+        style={{ color: style?.color, fontWeight: style?.weight, letterSpacing: style?.tracking }}
       >
         {it.name}
       </span>

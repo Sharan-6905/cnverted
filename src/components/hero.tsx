@@ -16,7 +16,7 @@ export function Hero() {
             Real-time buying signals
           </span>
 
-          <h1 className="mt-6 max-w-xl font-display text-display-xl font-semibold text-ink">
+          <h1 className="mt-6 max-w-none font-display text-display-xl font-semibold text-ink">
             Find <HighlightWord>buyers</HighlightWord> before your{" "}
             <HighlightWord>competitors</HighlightWord> do.
           </h1>

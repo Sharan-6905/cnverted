@@ -8,7 +8,7 @@ export function Hero() {
   return (
     <section className="relative overflow-hidden px-6 pt-8 pb-20 md:pt-12">
       <div className="bg-grid pointer-events-none absolute inset-0" aria-hidden="true" />
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1fr_1.05fr]">
+      <div className="relative mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.3fr_1fr]">
         {/* Copy + CTA */}
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-hairline bg-surface-soft px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
@@ -16,7 +16,7 @@ export function Hero() {
             Real-time buying signals
           </span>
 
-          <h1 className="mt-6 max-w-none font-display text-display-xl font-semibold text-ink">
+          <h1 className="mt-6 max-w-2xl font-display text-display-xl font-normal text-ink">
             Find <HighlightWord>buyers</HighlightWord> before your{" "}
             <HighlightWord>competitors</HighlightWord> do.
           </h1>

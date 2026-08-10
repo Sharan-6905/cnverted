@@ -45,7 +45,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-poppins)", "Poppins", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "Inter Tight", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Georgia", "Times New Roman", "Times", "serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {

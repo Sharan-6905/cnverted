@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Inter_Tight } from "next/font/google";
+import { Poppins, Newsreader } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
 
@@ -9,10 +9,12 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
-const interTight = Inter_Tight({
+// Editorial serif used for every heading site-wide.
+const newsreader = Newsreader({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: "400",
+  style: "normal",
 });
 
 const SITE_URL = "https://www.cnvrted.com";
@@ -75,7 +77,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${interTight.variable} h-full`}
+      className={`${poppins.variable} ${newsreader.variable} h-full`}
     >
       <body className="min-h-full">
         <StructuredData />

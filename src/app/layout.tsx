@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Libertinus_Serif } from "next/font/google";
+import { Poppins, Fjalla_One } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
 
@@ -9,12 +9,10 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
-// Libertinus Serif ships 400/600/700, so the .font-display 700 override
-// still resolves to a real bold cut rather than a synthetic one.
-const libertinusSerif = Libertinus_Serif({
+const fjallaOne = Fjalla_One({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: "400",
 });
 
 const SITE_URL = "https://www.cnvrted.com";
@@ -77,7 +75,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${libertinusSerif.variable} h-full`}
+      className={`${poppins.variable} ${fjallaOne.variable} h-full`}
     >
       <body className="min-h-full">
         <StructuredData />

@@ -26,11 +26,11 @@ const NEUTRAL_STACK =
   '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
 
 const WORDMARK_STYLE: Record<string, { color: string; weight: string; tracking: string }> = {
-  slack: { color: "#4A154B", weight: "800", tracking: "-0.01em" },
+  slack: { color: "#4A154B", weight: "600", tracking: "-0.01em" },
   salesforce: { color: "#00A1E0", weight: "600", tracking: "-0.005em" },
   hubspot: { color: "#FF7A59", weight: "700", tracking: "-0.01em" },
   notion: { color: "#000000", weight: "600", tracking: "-0.01em" },
-  zapier: { color: "#FF4A00", weight: "800", tracking: "-0.01em" },
+  zapier: { color: "#FF4A00", weight: "600", tracking: "-0.01em" },
   outreach: { color: "#5A50FF", weight: "700", tracking: "-0.005em" },
   salesloft: { color: "#00A0B7", weight: "600", tracking: "0em" },
   apollo: { color: "#6D4AFF", weight: "700", tracking: "-0.005em" },

@@ -1,32 +1,7 @@
 import { HeroScene } from "@/components/hero-scene";
 
-/**
- * A restrained, hero-only emphasis treatment: solid brand-navy text plus a
- * thin, slightly irregular hand-drawn underline (not a CSS border-bottom, not
- * the shared .text-accent gradient used elsewhere on the page).
- */
 function HighlightWord({ children }: { children: string }) {
-  return (
-    <span className="relative inline-block text-brand-navy">
-      {children}
-      <svg
-        className="absolute left-0 w-full"
-        style={{ bottom: "-0.1em", height: "0.11em" }}
-        viewBox="0 0 100 12"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <path
-          d="M1,7.5 C 16,3 32,10 48,5.5 C 63,1.5 78,9 99,4.5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          opacity="0.5"
-        />
-      </svg>
-    </span>
-  );
+  return <span className="text-accent">{children}</span>;
 }
 
 export function Hero() {

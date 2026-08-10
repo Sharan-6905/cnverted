@@ -5,7 +5,6 @@ import {
   HubSpotColor,
   NotionColor,
   ZapierColor,
-  ColorWordmark,
 } from "@/components/brand-logos";
 import type { Integration } from "@/lib/types";
 
@@ -17,11 +16,18 @@ const MARKS: Record<string, (p: IconProps) => React.JSX.Element> = {
   notion: NotionColor,
   zapier: ZapierColor,
 };
-// brand hues for the wordmark-only tools
-const WORDMARK_COLORS: Record<string, string> = {
-  outreach: "#5A50FF",
-  salesloft: "#00A0B7",
-  apollo: "#6D4AFF",
+
+// Per-brand weight/spacing only — color comes from the shared whale-navy →
+// intent-green gradient (.text-accent) instead of each brand's own hue.
+const WORDMARK_STYLE: Record<string, { weight: string; tracking: string }> = {
+  slack: { weight: "800", tracking: "-0.01em" },
+  salesforce: { weight: "600", tracking: "-0.005em" },
+  hubspot: { weight: "700", tracking: "-0.01em" },
+  notion: { weight: "600", tracking: "-0.01em" },
+  zapier: { weight: "800", tracking: "-0.01em" },
+  outreach: { weight: "700", tracking: "-0.005em" },
+  salesloft: { weight: "600", tracking: "0em" },
+  apollo: { weight: "700", tracking: "-0.005em" },
 };
 
 interface IntegrationsProps {
@@ -30,16 +36,16 @@ interface IntegrationsProps {
 
 function IntegrationLogo({ it }: { it: Integration }) {
   const Mark = MARKS[it.id];
+  const style = WORDMARK_STYLE[it.id];
   return (
     <div className="flex shrink-0 items-center gap-2.5 opacity-90 smooth-transition transition-opacity hover:opacity-100">
       {Mark !== undefined ? <Mark className="h-8 w-8" /> : null}
-      {Mark !== undefined ? (
-        <span className="font-sans text-lg font-semibold tracking-tight text-ink">
-          {it.name}
-        </span>
-      ) : (
-        <ColorWordmark name={it.name} color={WORDMARK_COLORS[it.id] ?? "#3A3A3A"} />
-      )}
+      <span
+        className="text-accent font-sans text-lg"
+        style={{ fontWeight: style?.weight, letterSpacing: style?.tracking }}
+      >
+        {it.name}
+      </span>
     </div>
   );
 }

@@ -146,22 +146,3 @@ export function GoogleCalendarColor({ className }: IconProps) {
   );
 }
 
-/** Colored wordmark in a brand's hue. */
-export function ColorWordmark({
-  name,
-  color,
-  className,
-}: {
-  name: string;
-  color: string;
-  className?: string;
-}) {
-  return (
-    <span
-      className={cn("font-sans text-[17px] font-semibold tracking-tight", className)}
-      style={{ color }}
-    >
-      {name}
-    </span>
-  );
-}

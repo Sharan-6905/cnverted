@@ -1,4 +1,4 @@
-const LOGO_URL = "https://www.cnvrted.com/favicon.png";
+const LOGO_URL = "https://www.cnvrted.com/whale-logo.png";
 
 export function emailShell(opts: { heading: string; bodyHtml: string }) {
   return `<!doctype html>

@@ -5,6 +5,7 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/lib/supabase";
 import {
   TEAM_SIZES,
   SALES_TOOLS,
@@ -86,6 +87,7 @@ export function EarlyAccessForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   function set<K extends keyof EarlyAccessData>(key: K, value: EarlyAccessData[K]) {
@@ -99,7 +101,7 @@ export function EarlyAccessForm() {
     }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     const nextErrors = validate(data);
     setErrors(nextErrors);
@@ -113,7 +115,40 @@ export function EarlyAccessForm() {
     }
 
     setSubmitting(true);
-    console.log("[early-access] submit:", data);
+    setSubmitError(null);
+
+    const { error } = await supabase.from("registration").insert({
+      full_name: data.fullName,
+      phone: data.phone,
+      email: data.email,
+      company: data.company || null,
+      role: data.role,
+      what_you_do: data.whatYouDo || null,
+      team_size: data.teamSize,
+      location: data.location,
+      used_sales_tool: data.usedSalesTool,
+      tools: data.tools,
+      tools_feedback: data.toolsFeedback || null,
+      finding_accounts_today: data.findingAccountsToday || null,
+      biggest_challenge: data.biggestChallenge || null,
+      intent: data.intent,
+      demo_time: data.demoTime || null,
+    });
+
+    if (error) {
+      setSubmitError("Something went wrong — please try again.");
+      setSubmitting(false);
+      return;
+    }
+
+    // Confirmation email is best-effort — a failure here shouldn't block the
+    // success screen, since the submission is already saved.
+    fetch("/api/early-access-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: data.email, fullName: data.fullName }),
+    }).catch(() => {});
+
     setSent(true);
     setSubmitting(false);
   }
@@ -389,6 +424,7 @@ export function EarlyAccessForm() {
         <Button type="submit" variant="accent" size="lg" disabled={submitting}>
           {submitting ? "Sending…" : "Send it over"}
         </Button>
+        {submitError && <p className="mt-3 text-xs text-red-600">{submitError}</p>}
         <p className="mt-3 text-xs text-muted-soft">No spam. Ever.</p>
       </div>
     </form>

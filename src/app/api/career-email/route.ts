@@ -5,23 +5,25 @@ import { emailShell } from "@/lib/email-template";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
-  const { email } = await req.json();
+  const { email, name } = await req.json();
 
   if (!email || typeof email !== "string") {
     return NextResponse.json({ error: "Missing email" }, { status: 400 });
   }
 
+  const firstName = (name || "").trim().split(" ")[0] || "there";
+
   const html = emailShell({
-    heading: "You're on the list.",
+    heading: "We've got your application.",
     bodyHtml: `
       <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3A3A3A;">
-        Thanks for your interest in Cnvrted — we've added <strong>${email}</strong> to our early-access list.
+        Hi ${firstName},
       </p>
       <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3A3A3A;">
-        We're onboarding teams in small batches so every account gets a proper walkthrough. Our team will reach out directly to set up your demo and get you started.
+        Thanks for applying to Cnvrted — we've received your application and our team is reviewing it now.
       </p>
       <p style="margin:0;font-size:15px;line-height:1.6;color:#3A3A3A;">
-        In the meantime, feel free to reply to this email with any questions.
+        If your background looks like a fit, someone from our team will reach out directly to set up a conversation.
       </p>
     `,
   });
@@ -29,7 +31,7 @@ export async function POST(req: Request) {
   const { error } = await resend.emails.send({
     from: "Cnvrted <work@cnvrted.com>",
     to: email,
-    subject: "You're on the Cnvrted early-access list",
+    subject: "We've received your application",
     html,
   });
 

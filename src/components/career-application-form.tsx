@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
+import { supabase } from "@/lib/supabase";
 
 const ROLE_OPTIONS = [
   "AI/ML Engineer",
@@ -21,12 +22,39 @@ export function CareerApplicationForm() {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     if (!name || !phone || !email || !role) return;
-    console.log("[careers] submit:", { name, phone, email, role });
+
+    setSubmitting(true);
+    setSubmitError(null);
+
+    const { error } = await supabase.from("career_applications").insert({
+      full_name: name,
+      phone,
+      email,
+      role,
+    });
+
+    if (error) {
+      setSubmitError("Something went wrong — please try again.");
+      setSubmitting(false);
+      return;
+    }
+
+    // Confirmation email is best-effort — a failure here shouldn't block the
+    // success screen, since the application is already saved.
+    fetch("/api/career-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, name }),
+    }).catch(() => {});
+
     setSubmitted(true);
+    setSubmitting(false);
   }
 
   if (submitted) {
@@ -127,9 +155,10 @@ export function CareerApplicationForm() {
           </select>
         </div>
 
-        <Button type="submit" variant="primary" size="md" className="w-full">
-          Submit
+        <Button type="submit" variant="primary" size="md" className="w-full" disabled={submitting}>
+          {submitting ? "Submitting…" : "Submit"}
         </Button>
+        {submitError && <p className="mt-2 text-center text-xs text-red-600">{submitError}</p>}
           </form>
         </Card>
       </motion.div>

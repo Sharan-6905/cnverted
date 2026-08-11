@@ -1,5 +1,5 @@
 -- Early access questionnaire submissions
-create table if not exists early_access_submissions (
+create table if not exists registration (
   id uuid primary key default gen_random_uuid(),
   created_at timestamptz not null default now(),
 
@@ -32,10 +32,10 @@ create table if not exists early_access_submissions (
 -- Row Level Security: allow anyone to submit the form, but nobody can read
 -- back through the public API (only accessible via the Supabase dashboard
 -- or a service-role key on the server).
-alter table early_access_submissions enable row level security;
+alter table registration enable row level security;
 
 create policy "Anyone can submit early access form"
-  on early_access_submissions
+  on registration
   for insert
   to anon
   with check (true);

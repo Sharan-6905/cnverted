@@ -10,6 +10,8 @@ interface Testimonial {
   name: string;
   role: string;
   company: string;
+  /** hide company behind a blur — used for placeholder testimonials */
+  blurCompany?: boolean;
 }
 
 const TESTIMONIALS: Testimonial[] = [
@@ -17,8 +19,8 @@ const TESTIMONIALS: Testimonial[] = [
     quote:
       "Within the first week, we were getting high-intent leads that were actually ready to talk. It's changed how we prioritize outreach entirely.",
     name: "Vishnu Vijayan",
-    role: "Customer",
-    company: "Confidential",
+    role: "Director",
+    company: "11fps",
   },
   {
     quote:
@@ -26,6 +28,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Sarah Chen",
     role: "VP Sales",
     company: "Northbeam",
+    blurCompany: true,
   },
   {
     quote:
@@ -33,6 +36,7 @@ const TESTIMONIALS: Testimonial[] = [
     name: "Marcus Webb",
     role: "Head of RevOps",
     company: "Loopline",
+    blurCompany: true,
   },
 ];
 
@@ -98,10 +102,16 @@ export function TestimonialCarousel() {
                 <p className="text-sm font-semibold text-ink">{active.name}</p>
                 <p className="mt-1 text-sm text-muted">
                   {active.role} at{" "}
-                  <span className="select-none blur-[4px]" aria-hidden="true">
-                    {active.company}
-                  </span>
-                  <span className="sr-only">a company we&rsquo;re keeping confidential</span>
+                  {active.blurCompany ? (
+                    <>
+                      <span className="select-none blur-[4px]" aria-hidden="true">
+                        {active.company}
+                      </span>
+                      <span className="sr-only">a company we&rsquo;re keeping confidential</span>
+                    </>
+                  ) : (
+                    active.company
+                  )}
                 </p>
               </div>
             </motion.div>

@@ -12,6 +12,8 @@ interface Testimonial {
   name: string;
   role: string;
   company: string;
+  /** if set, the company name links out here */
+  companyUrl?: string;
   /** hide company behind a blur — used for placeholder testimonials */
   blurCompany?: boolean;
 }
@@ -22,8 +24,9 @@ const TESTIMONIALS: Testimonial[] = [
       "Within the first week, we were getting high-intent leads that were actually ready to talk. It's changed how we prioritize outreach entirely.",
     highlights: ["high-intent leads", "ready to talk"],
     name: "Vishnu Vijayan",
-    role: "Director",
+    role: "MD",
     company: "11fps",
+    companyUrl: "https://11fps.com",
   },
   {
     quote:
@@ -71,7 +74,7 @@ export function TestimonialCarousel() {
     if (isHovered) return;
     const id = setInterval(() => {
       setActiveIndex((i) => (i + 1) % TESTIMONIALS.length);
-    }, 2000);
+    }, 4000);
     return () => clearInterval(id);
   }, [isHovered]);
 
@@ -131,6 +134,15 @@ export function TestimonialCarousel() {
                       </span>
                       <span className="sr-only">a company we&rsquo;re keeping confidential</span>
                     </>
+                  ) : active.companyUrl ? (
+                    <a
+                      href={active.companyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-medium text-ink underline decoration-hairline underline-offset-2 smooth-transition transition-colors hover:text-brand-teal hover:decoration-brand-teal"
+                    >
+                      {active.company}
+                    </a>
                   ) : (
                     active.company
                   )}

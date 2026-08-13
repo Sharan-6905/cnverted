@@ -73,7 +73,12 @@ export function SignalOpportunities() {
       id="signals"
       centered
       eyebrow="Signals"
-      title="Find the moments that create pipeline"
+      title={
+        <>
+          Find the <span className="text-accent">moments</span> that create{" "}
+          <span className="text-accent">pipeline</span>
+        </>
+      }
       description="Cnvrted watches the open web for the events and conversations that tell you when an account might actually be ready to buy."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

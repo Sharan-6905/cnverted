@@ -74,7 +74,7 @@ export function TestimonialCarousel() {
     if (isHovered) return;
     const id = setInterval(() => {
       setActiveIndex((i) => (i + 1) % TESTIMONIALS.length);
-    }, 4000);
+    }, 3000);
     return () => clearInterval(id);
   }, [isHovered]);
 

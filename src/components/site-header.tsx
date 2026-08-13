@@ -61,7 +61,7 @@ export function SiteHeader() {
             href="https://beta.cnvrted.com"
             className={cn(
               buttonVariants({ variant: "primary", size: "sm" }),
-              "hidden bg-brand-navy hover:bg-brand-navy/90 sm:inline-flex"
+              "hidden bg-gradient-to-r from-brand-navy to-[#4FA8F5] hover:opacity-90 sm:inline-flex"
             )}
           >
             Get started

@@ -32,6 +32,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
+    -webkit-text-stroke: 0;
   }
 
   /* Faint square grid, fading out toward the edges — used behind the hero. */

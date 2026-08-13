@@ -7,13 +7,13 @@ import { StoryIntro } from "@/components/story-intro";
 import { IntentRadar } from "@/components/intent-radar";
 import { IntentCapture } from "@/components/intent-capture";
 import { IntegrationStack } from "@/components/integration-stack";
-import { FeatureRows } from "@/components/feature-rows";
 import { SignalOpportunities } from "@/components/signal-opportunities";
 import { ContactReveal } from "@/components/contact-reveal";
 import { CalendarProof } from "@/components/calendar-proof";
 import { IcpEnrichmentTable } from "@/components/icp-enrichment-table";
 import { Integrations } from "@/components/integrations";
 import { Comparison } from "@/components/comparison";
+import { TestimonialCarousel } from "@/components/testimonial-carousel";
 import { Reveal } from "@/components/reveal";
 import { SiteFooter } from "@/components/site-footer";
 import { INTEGRATIONS } from "@/lib/sample-data";
@@ -33,7 +33,7 @@ export default function Home() {
         <IntentCapture />
 
         <IntegrationStack />
-        <FeatureRows />
+        <TestimonialCarousel />
         <SignalOpportunities />
         <Reveal>
           <ContactReveal />

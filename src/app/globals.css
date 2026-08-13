@@ -35,12 +35,17 @@
     -webkit-text-stroke: 0;
   }
 
-  /* Faint square grid, fading out toward the edges — used behind the hero. */
+  /* Faint square grid, fading out toward the edges — used behind several
+     sections. background-attachment: fixed anchors the tiling to the
+     viewport instead of each section's own box, so the grid reads as one
+     continuous pattern instead of restarting (and visibly misaligning) at
+     every section boundary. */
   .bg-grid {
     background-image:
       linear-gradient(to right, rgba(10, 10, 10, 0.06) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(10, 10, 10, 0.06) 1px, transparent 1px);
     background-size: 44px 44px;
+    background-attachment: fixed;
     mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 85%);
     -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 40%, transparent 85%);
   }
@@ -52,6 +57,7 @@
       linear-gradient(to right, rgba(10, 10, 10, 0.05) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(10, 10, 10, 0.05) 1px, transparent 1px);
     background-size: 44px 44px;
+    background-attachment: fixed;
     mask-image: linear-gradient(
       to bottom,
       transparent 0,

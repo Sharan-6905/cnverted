@@ -81,30 +81,32 @@ export function TestimonialCarousel() {
       </div>
 
       <div className="relative mx-auto mt-14 max-w-2xl">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeIndex}
-            initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
-            transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center"
-          >
-            <p className="font-display text-2xl font-normal leading-snug text-ink sm:text-[28px]">
-              &ldquo;{active.quote}&rdquo;
-            </p>
-            <div className="mt-8">
-              <p className="text-sm font-semibold text-ink">{active.name}</p>
-              <p className="mt-1 text-sm text-muted">
-                {active.role} at{" "}
-                <span className="select-none blur-[4px]" aria-hidden="true">
-                  {active.company}
-                </span>
-                <span className="sr-only">a company we&rsquo;re keeping confidential</span>
+        <div className="overflow-hidden rounded-3xl border border-hairline bg-canvas p-8 shadow-soft sm:p-12">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
+              transition={{ duration: reduceMotion ? 0 : 0.45, ease: [0.22, 1, 0.36, 1] }}
+              className="text-center"
+            >
+              <p className="font-display text-2xl font-normal leading-snug text-ink sm:text-[28px]">
+                &ldquo;{active.quote}&rdquo;
               </p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+              <div className="mt-8">
+                <p className="text-sm font-semibold text-ink">{active.name}</p>
+                <p className="mt-1 text-sm text-muted">
+                  {active.role} at{" "}
+                  <span className="select-none blur-[4px]" aria-hidden="true">
+                    {active.company}
+                  </span>
+                  <span className="sr-only">a company we&rsquo;re keeping confidential</span>
+                </p>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
         <div className="mt-10 flex items-center justify-center gap-6">
           <button

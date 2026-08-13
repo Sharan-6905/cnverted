@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 
 interface Testimonial {
   quote: string;
+  /** exact substrings from `quote` to render in the accent colour */
+  highlights: string[];
   name: string;
   role: string;
   company: string;
@@ -18,6 +20,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     quote:
       "Within the first week, we were getting high-intent leads that were actually ready to talk. It's changed how we prioritize outreach entirely.",
+    highlights: ["high-intent leads", "ready to talk"],
     name: "Vishnu Vijayan",
     role: "Director",
     company: "11fps",
@@ -25,6 +28,7 @@ const TESTIMONIALS: Testimonial[] = [
   {
     quote:
       "We stopped guessing which accounts to call first. Cnvrted tells us the moment someone's actually in-market, and our reply rates nearly doubled in a quarter.",
+    highlights: ["in-market", "reply rates nearly doubled"],
     name: "Sarah Chen",
     role: "VP Sales",
     company: "Northbeam",
@@ -33,12 +37,30 @@ const TESTIMONIALS: Testimonial[] = [
   {
     quote:
       "Every other tool gave us a static list and called it intent. Cnvrted gives us the trigger — the actual reason to reach out today instead of next month.",
+    highlights: ["the trigger"],
     name: "Marcus Webb",
     role: "Head of RevOps",
     company: "Loopline",
     blurCompany: true,
   },
 ];
+
+/** Splits a quote on its highlight phrases and wraps each match in the accent colour. */
+function renderQuote(quote: string, highlights: string[]) {
+  if (highlights.length === 0) return quote;
+  const escaped = highlights.map((h) => h.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const pattern = new RegExp(`(${escaped.join("|")})`, "gi");
+  const parts = quote.split(pattern);
+  return parts.map((part, i) =>
+    highlights.some((h) => h.toLowerCase() === part.toLowerCase()) ? (
+      <span key={i} className="text-accent">
+        {part}
+      </span>
+    ) : (
+      part
+    )
+  );
+}
 
 export function TestimonialCarousel() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -49,7 +71,7 @@ export function TestimonialCarousel() {
     if (isHovered) return;
     const id = setInterval(() => {
       setActiveIndex((i) => (i + 1) % TESTIMONIALS.length);
-    }, 5500);
+    }, 2000);
     return () => clearInterval(id);
   }, [isHovered]);
 
@@ -80,7 +102,7 @@ export function TestimonialCarousel() {
           Testimonials
         </span>
         <h2 className="font-display text-display-md font-semibold text-ink">
-          What <span className="text-accent">sales leaders</span> are saying.
+          What <span className="text-accent">our users</span> are telling.
         </h2>
       </div>
 
@@ -96,7 +118,7 @@ export function TestimonialCarousel() {
               className="text-center"
             >
               <p className="font-display text-2xl font-normal leading-snug text-ink sm:text-[28px]">
-                &ldquo;{active.quote}&rdquo;
+                &ldquo;{renderQuote(active.quote, active.highlights)}&rdquo;
               </p>
               <div className="mt-8">
                 <p className="text-sm font-semibold text-ink">{active.name}</p>

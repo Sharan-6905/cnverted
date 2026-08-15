@@ -5,7 +5,7 @@ create table if not exists career_applications (
 
   full_name text not null,
   phone text not null,
-  email text not null,
+  email text not null unique,
   role text not null
 );
 

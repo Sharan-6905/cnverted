@@ -136,7 +136,11 @@ export function EarlyAccessForm() {
     });
 
     if (error) {
-      setSubmitError("Something went wrong — please try again.");
+      setSubmitError(
+        error.code === "23505"
+          ? "That email has already registered — we've got it."
+          : "Something went wrong — please try again."
+      );
       setSubmitting(false);
       return;
     }

@@ -6,7 +6,7 @@ create table if not exists registration (
   -- Step 1 — who you are
   full_name text not null,
   phone text not null,
-  email text not null,
+  email text not null unique,
 
   -- Step 2 — where you work
   company text,

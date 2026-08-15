@@ -40,7 +40,11 @@ export function CareerApplicationForm() {
     });
 
     if (error) {
-      setSubmitError("Something went wrong — please try again.");
+      setSubmitError(
+        error.code === "23505"
+          ? "You've already applied with that email — we've got it."
+          : "Something went wrong — please try again."
+      );
       setSubmitting(false);
       return;
     }

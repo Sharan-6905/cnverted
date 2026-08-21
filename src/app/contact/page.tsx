@@ -54,7 +54,10 @@ export default function ContactPage() {
             {/* Live calendar — full width so the month view can place its time
                 slots beside the calendar (they appear once a date is picked)
                 instead of stacking a long list underneath. */}
-            <Card className="overflow-hidden border-white/60 bg-canvas/40 shadow-[0_10px_44px_-12px_rgba(20,16,8,0.22)] backdrop-blur-2xl">
+            <Card
+              id="book"
+              className="scroll-mt-24 overflow-hidden border-white/60 bg-canvas/40 shadow-[0_10px_44px_-12px_rgba(20,16,8,0.22)] backdrop-blur-2xl"
+            >
               <div className="flex items-center justify-between gap-4 border-b border-white/10 bg-black/90 px-5 py-4 text-on-dark backdrop-blur-xl">
                 <div className="flex items-center gap-3">
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-blue-500/25 backdrop-blur-md">

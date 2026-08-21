@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/logo";
 import { LinkedInIcon, XIcon, InstagramIcon, DiscordIcon } from "@/components/social-icons";
 import { supabase } from "@/lib/supabase";
+import { CAL_BOOKING_URL } from "@/components/cal-embed";
 
 const COLUMNS = [
   {
@@ -38,6 +39,7 @@ const COLUMNS = [
     links: [
       { label: "About Us", href: "/about" },
       { label: "Contact", href: "/contact" },
+      { label: "Book a Call", href: CAL_BOOKING_URL },
       { label: "Careers", href: "/careers" },
       { label: "Learn from us", href: "/learn" },
     ],
@@ -154,6 +156,9 @@ export function SiteFooter() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      {...(link.href.startsWith("http")
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
                       className="text-sm text-on-dark/60 smooth-transition transition-colors hover:text-on-dark"
                     >
                       {link.label}

@@ -32,6 +32,22 @@ export function Hero() {
             companies entering a purchase cycle, and shows exactly why
             they&apos;re ready—so your team reaches buyers before everyone else.
           </p>
+
+          <a
+            href="https://www.producthunt.com/products/cnvrted/reviews/new?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-cnvrted"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 inline-block"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/product_review.svg?product_id=1298689&theme=light"
+              alt="Cnvrted - Buyers, not names — real-time B2B buying intent | Product Hunt"
+              width={250}
+              height={54}
+              style={{ width: 250, height: 54 }}
+            />
+          </a>
         </div>
 
         {/* Scroll-driven clay motion scene */}

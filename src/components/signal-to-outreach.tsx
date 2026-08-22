@@ -99,7 +99,7 @@ export function SignalToOutreach() {
       }
       description="CNVRTED turns real-time buying signals into qualified accounts, identifies the people behind them, and gives your team the context to start the conversation."
     >
-      <div className="grid items-center gap-12 lg:grid-cols-[1.55fr_1fr]">
+      <div className="grid items-center gap-12 lg:grid-cols-[1.2fr_1fr]">
         <Step
           number="01"
           title="Find the account"
@@ -113,7 +113,7 @@ export function SignalToOutreach() {
               src="/banners/target-list.png"
               alt="The CNVRTED target list: 96 accounts with the company, website, why it matches the ICP, the contact, their designation, a verified work email, and Generate and Save actions on every row."
               fill
-              sizes="(max-width: 1024px) 100vw, 700px"
+              sizes="(max-width: 1024px) 100vw, 620px"
               quality={95}
               className="object-contain"
             />
@@ -144,7 +144,7 @@ export function SignalToOutreach() {
                 src="/banners/outreach-email.png"
                 alt="The outreach email CNVRTED generated for the contact the target list surfaced, opening with the account's funding round and tying that moment to the product before asking for a short call."
                 fill
-                sizes="(max-width: 1024px) 100vw, 440px"
+                sizes="(max-width: 1024px) 100vw, 520px"
                 quality={95}
                 className="object-contain"
               />

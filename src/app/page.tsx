@@ -8,7 +8,7 @@ import { IntentRadar } from "@/components/intent-radar";
 import { IntentCapture } from "@/components/intent-capture";
 import { IntegrationStack } from "@/components/integration-stack";
 import { SignalOpportunities } from "@/components/signal-opportunities";
-import { ContactReveal } from "@/components/contact-reveal";
+import { SignalToOutreach } from "@/components/signal-to-outreach";
 import { CalendarProof } from "@/components/calendar-proof";
 import { IcpEnrichmentTable } from "@/components/icp-enrichment-table";
 import { Integrations } from "@/components/integrations";
@@ -35,9 +35,7 @@ export default function Home() {
         <IntegrationStack />
         <TestimonialCarousel />
         <SignalOpportunities />
-        <Reveal>
-          <ContactReveal />
-        </Reveal>
+        <SignalToOutreach />
         <Reveal>
           <CalendarProof />
         </Reveal>

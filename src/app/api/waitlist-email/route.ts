@@ -1,21 +1,27 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { emailShell } from "@/lib/email-template";
+import { escapeHtml, isValidEmail, rateLimit, readJsonBody } from "@/lib/api-safety";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
-  const { email } = await req.json();
+  if (!rateLimit(req)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+  }
 
-  if (!email || typeof email !== "string") {
-    return NextResponse.json({ error: "Missing email" }, { status: 400 });
+  const body = await readJsonBody(req);
+  const email = body?.email;
+
+  if (!isValidEmail(email)) {
+    return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
 
   const html = emailShell({
     heading: "You're on the list.",
     bodyHtml: `
       <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3A3A3A;">
-        Thanks for your interest in Cnvrted — we've added <strong>${email}</strong> to our early-access list.
+        Thanks for your interest in Cnvrted — we've added <strong>${escapeHtml(email)}</strong> to our early-access list.
       </p>
       <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3A3A3A;">
         We're onboarding teams in small batches so every account gets a proper walkthrough. Our team will reach out directly to set up your demo and get you started.
@@ -34,7 +40,9 @@ export async function POST(req: Request) {
   });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    // the provider's message can carry account detail — keep it server-side
+    console.error("waitlist-email send failed:", error);
+    return NextResponse.json({ error: "Could not send email" }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true });

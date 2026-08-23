@@ -1,23 +1,35 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { emailShell } from "@/lib/email-template";
+import {
+  escapeHtml,
+  isValidEmail,
+  rateLimit,
+  readJsonBody,
+  sanitizeText,
+} from "@/lib/api-safety";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
-  const { email, name } = await req.json();
-
-  if (!email || typeof email !== "string") {
-    return NextResponse.json({ error: "Missing email" }, { status: 400 });
+  if (!rateLimit(req)) {
+    return NextResponse.json({ error: "Too many requests" }, { status: 429 });
   }
 
-  const firstName = (name || "").trim().split(" ")[0] || "there";
+  const body = await readJsonBody(req);
+  const email = body?.email;
+
+  if (!isValidEmail(email)) {
+    return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+  }
+
+  const firstName = sanitizeText(body?.name, 40).split(" ")[0] || "there";
 
   const html = emailShell({
     heading: "We've got your application.",
     bodyHtml: `
       <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3A3A3A;">
-        Hi ${firstName},
+        Hi ${escapeHtml(firstName)},
       </p>
       <p style="margin:0 0 16px;font-size:15px;line-height:1.6;color:#3A3A3A;">
         Thanks for applying to Cnvrted — we've received your application and our team is reviewing it now.
@@ -36,7 +48,9 @@ export async function POST(req: Request) {
   });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    // the provider's message can carry account detail — keep it server-side
+    console.error("career-email send failed:", error);
+    return NextResponse.json({ error: "Could not send email" }, { status: 500 });
   }
 
   return NextResponse.json({ ok: true });

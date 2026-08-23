@@ -19,13 +19,6 @@ const COLUMNS = [
     ],
   },
   {
-    heading: "Features",
-    links: [
-      { label: "Product Capabilities", href: "/#product" },
-      { label: "Our Approach", href: "/about" },
-    ],
-  },
-  {
     heading: "Resources",
     links: [
       { label: "Blog", href: "/blogs" },
@@ -146,7 +139,7 @@ export function SiteFooter() {
       </div>
 
       <div className="relative mx-auto max-w-6xl px-6 pb-16">
-        <div className="grid grid-cols-4 gap-3 sm:gap-8 lg:gap-10">
+        <div className="grid grid-cols-3 gap-3 sm:gap-8 lg:gap-10">
           {COLUMNS.map((col) => (
             <div key={col.heading}>
               <p className="text-sm font-semibold text-on-dark">{col.heading}</p>

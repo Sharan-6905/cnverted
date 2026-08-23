@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { TrendingUp, Handshake, Building2, Check, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CAL_BOOKING_URL } from "@/components/cal-embed";
 
 interface Plan {
   name: string;
@@ -38,7 +39,7 @@ const PLANS: Plan[] = [
     Icon: TrendingUp,
     accent: "text-blue-600",
     surface: "bg-gradient-to-b from-blue-50/70 to-canvas/40",
-    cta: { label: "Select plan", href: "https://beta.cnvrted.com" },
+    cta: { label: "Select plan", href: CAL_BOOKING_URL },
   },
   {
     name: "Professional",
@@ -57,7 +58,7 @@ const PLANS: Plan[] = [
     Icon: Handshake,
     accent: "text-brand-teal",
     surface: "bg-gradient-to-b from-lime-50/70 to-canvas/40",
-    cta: { label: "Select plan", href: "https://beta.cnvrted.com" },
+    cta: { label: "Select plan", href: CAL_BOOKING_URL },
     featured: true,
   },
   {

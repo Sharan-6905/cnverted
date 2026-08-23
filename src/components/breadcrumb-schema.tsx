@@ -1,3 +1,5 @@
+import { getNonce } from "@/lib/nonce";
+
 const SITE_URL = "https://www.cnvrted.com";
 
 interface Crumb {
@@ -12,7 +14,8 @@ interface Crumb {
  * Home is implicit; pass the rest of the trail down to (but not including
  * a path for) the current page.
  */
-export function BreadcrumbSchema({ trail }: { trail: Crumb[] }) {
+export async function BreadcrumbSchema({ trail }: { trail: Crumb[] }) {
+  const nonce = await getNonce();
   const items = [{ name: "Home", path: "/" }, ...trail];
   const schema = {
     "@context": "https://schema.org",
@@ -27,6 +30,7 @@ export function BreadcrumbSchema({ trail }: { trail: Crumb[] }) {
 
   return (
     <script
+      nonce={nonce}
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

@@ -1,11 +1,8 @@
 import type { NextConfig } from "next";
 
 /**
- * Sent on every response. No CSP here yet: the app ships inline styles and
- * Next's own inline bootstrap, so a policy strict enough to be worth having
- * needs a nonce pass through the layout — tracked separately rather than
- * shipped as a permissive `unsafe-inline` rule that would only look like
- * protection.
+ * Sent on every response. The Content-Security-Policy is not here — it carries
+ * a per-request nonce, so it is built in middleware where the request exists.
  */
 const SECURITY_HEADERS = [
   {

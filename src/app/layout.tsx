@@ -22,6 +22,11 @@ const TITLE = "Cnvrted — Reach buyers the moment they're in-market";
 const DESCRIPTION =
   "Cnvrted monitors the dark funnel — LinkedIn, Reddit, X, and the open web — for real-time buying signals, then scores accounts by intent so your team engages at exactly the right time.";
 
+// The CSP nonce is minted per request in middleware, so pages have to render
+// per request for Next to stamp it onto the inline bootstrap. Prerendered
+// HTML would carry a stale nonce and every script would be blocked.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: TITLE,

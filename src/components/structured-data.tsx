@@ -1,3 +1,5 @@
+import { getNonce } from "@/lib/nonce";
+
 const SITE_URL = "https://www.cnvrted.com";
 
 const organizationSchema = {
@@ -117,22 +119,28 @@ const faqSchema = {
   ],
 };
 
-export function StructuredData() {
+export async function StructuredData() {
+  const nonce = await getNonce();
+
   return (
     <>
       <script
+        nonce={nonce}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       <script
+        nonce={nonce}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
       <script
+        nonce={nonce}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
       />
       <script
+        nonce={nonce}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />

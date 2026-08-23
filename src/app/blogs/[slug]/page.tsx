@@ -12,6 +12,7 @@ import {
   formatPostDate,
   type Block,
 } from "@/lib/blog-posts";
+import { getNonce } from "@/lib/nonce";
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((post) => ({ slug: post.slug }));
@@ -41,7 +42,8 @@ export async function generateMetadata({
   };
 }
 
-function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
+async function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
+  const nonce = await getNonce();
   const schema = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -64,6 +66,7 @@ function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
   };
   return (
     <script
+      nonce={nonce}
       type="application/ld+json"
       dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
     />

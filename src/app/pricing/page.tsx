@@ -4,6 +4,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { PricingPlans } from "@/components/pricing-plans";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { BookingCard } from "@/components/booking-card";
 
 export const metadata: Metadata = {
   title: "Pricing — Cnvrted",
@@ -39,6 +40,10 @@ export default function PricingPage() {
           description="Cnvrted is in early access — join now to lock in these rates before general availability."
         >
           <PricingPlans />
+
+          {/* Where the plan CTAs land — the calendar needs the full column
+              width to keep its slots beside the month grid. */}
+          <BookingCard className="mt-16" />
         </Section>
       </main>
       <SiteFooter />

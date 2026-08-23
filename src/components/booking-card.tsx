@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import { CalendarDays, ArrowUpRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { CalEmbed, CAL_BOOKING_URL } from "@/components/cal-embed";
@@ -7,6 +8,8 @@ interface BookingCardProps {
   /** anchor target, so CTAs elsewhere on the page can link to `#{id}` */
   id?: string;
   className?: string;
+  /** rendered beside the Cal.com link — the dialog puts its close button here */
+  headerAction?: ReactNode;
 }
 
 /**
@@ -14,7 +17,11 @@ interface BookingCardProps {
  * pricing pages so the booking surface — and the account behind it — stays in
  * one place.
  */
-export function BookingCard({ id = "book", className }: BookingCardProps) {
+export function BookingCard({
+  id = "book",
+  className,
+  headerAction,
+}: BookingCardProps) {
   return (
     <Card
       id={id}
@@ -35,15 +42,18 @@ export function BookingCard({ id = "book", className }: BookingCardProps) {
             </p>
           </div>
         </div>
-        <a
-          href={CAL_BOOKING_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden shrink-0 items-center gap-1 rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-on-dark/90 backdrop-blur-md smooth-transition hover:bg-white/20 hover:text-on-dark sm:inline-flex"
-        >
-          Open in Cal.com
-          <ArrowUpRight className="h-3.5 w-3.5" />
-        </a>
+        <div className="flex shrink-0 items-center gap-2">
+          <a
+            href={CAL_BOOKING_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hidden items-center gap-1 rounded-lg border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-medium text-on-dark/90 backdrop-blur-md smooth-transition hover:bg-white/20 hover:text-on-dark sm:inline-flex"
+          >
+            Open in Cal.com
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
+          {headerAction}
+        </div>
       </div>
 
       {/* Inline calendar only where the month view fits side-by-side. Below that

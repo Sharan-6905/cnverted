@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { TrendingUp, Handshake, Building2, Check, type LucideIcon } from "lucide-react";
+import * as Dialog from "@radix-ui/react-dialog";
+import { TrendingUp, Handshake, Building2, Check, X, type LucideIcon } from "lucide-react";
+import { BookingCard } from "@/components/booking-card";
 import { cn } from "@/lib/utils";
 
 interface Plan {
@@ -17,7 +19,8 @@ interface Plan {
   accent: string;
   /** soft gradient wash behind the card */
   surface: string;
-  cta: { label: string; href: string };
+  /** `href` navigates; `book` opens the scheduling dialog instead */
+  cta: { label: string; href?: string; book?: boolean };
   featured?: boolean;
 }
 
@@ -38,7 +41,7 @@ const PLANS: Plan[] = [
     Icon: TrendingUp,
     accent: "text-blue-600",
     surface: "bg-gradient-to-b from-blue-50/70 to-canvas/40",
-    cta: { label: "Select plan", href: "#book" },
+    cta: { label: "Select plan", book: true },
   },
   {
     name: "Professional",
@@ -57,7 +60,7 @@ const PLANS: Plan[] = [
     Icon: Handshake,
     accent: "text-brand-teal",
     surface: "bg-gradient-to-b from-lime-50/70 to-canvas/40",
-    cta: { label: "Select plan", href: "#book" },
+    cta: { label: "Select plan", book: true },
     featured: true,
   },
   {
@@ -80,18 +83,53 @@ const PLANS: Plan[] = [
 ];
 
 export function PricingPlans() {
+  const [booking, setBooking] = useState(false);
+
   return (
-    <div className="grid items-start gap-5 lg:grid-cols-3">
-      {PLANS.map((plan) => (
-        <PlanCard key={plan.name} plan={plan} />
-      ))}
-    </div>
+    /* The calendar lives in a dialog rather than on the page: Radix only mounts
+       the content while it is open, so cal.com's script is fetched the first
+       time someone picks a plan instead of on every pricing visit. */
+    <Dialog.Root open={booking} onOpenChange={setBooking}>
+      <div className="grid items-start gap-5 lg:grid-cols-3">
+        {PLANS.map((plan) => (
+          <PlanCard key={plan.name} plan={plan} />
+        ))}
+      </div>
+
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/40 backdrop-blur-sm" />
+        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[92dvh] w-[95vw] max-w-[1200px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto focus:outline-none">
+          <Dialog.Title className="sr-only">Schedule a demo</Dialog.Title>
+          <Dialog.Description className="sr-only">
+            Pick a date and time for a walkthrough with our founding team.
+          </Dialog.Description>
+          <BookingCard
+            className="bg-canvas"
+            headerAction={
+              <Dialog.Close
+                aria-label="Close"
+                className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/20 bg-white/10 text-on-dark/90 backdrop-blur-md smooth-transition hover:bg-white/20 hover:text-on-dark"
+              >
+                <X className="h-4 w-4" />
+              </Dialog.Close>
+            }
+          />
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   );
 }
+
+const ctaClass =
+  "mt-7 flex h-12 w-full items-center justify-center rounded-xl text-sm font-medium smooth-transition transition-colors active:scale-[0.98]";
 
 function PlanCard({ plan }: { plan: Plan }) {
   const [expanded, setExpanded] = useState(false);
   const { Icon } = plan;
+  const ctaTone =
+    plan.name === "Enterprise"
+      ? "border border-white/70 bg-white/60 text-ink backdrop-blur-md hover:bg-white/80"
+      : "bg-[#2B2B2B] text-on-dark hover:bg-ink";
 
   return (
     <div
@@ -152,20 +190,21 @@ function PlanCard({ plan }: { plan: Plan }) {
         {expanded ? "See less" : "See more"}
       </button>
 
-      <a
-        href={plan.cta.href}
-        {...(plan.cta.href.startsWith("http")
-          ? { target: "_blank", rel: "noopener noreferrer" }
-          : {})}
-        className={cn(
-          "mt-7 flex h-12 w-full items-center justify-center rounded-xl text-sm font-medium smooth-transition transition-colors active:scale-[0.98]",
-          plan.name === "Enterprise"
-            ? "border border-white/70 bg-white/60 text-ink backdrop-blur-md hover:bg-white/80"
-            : "bg-[#2B2B2B] text-on-dark hover:bg-ink"
-        )}
-      >
-        {plan.cta.label}
-      </a>
+      {plan.cta.book ? (
+        <Dialog.Trigger className={cn(ctaClass, ctaTone)}>
+          {plan.cta.label}
+        </Dialog.Trigger>
+      ) : (
+        <a
+          href={plan.cta.href}
+          {...(plan.cta.href?.startsWith("http")
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
+          className={cn(ctaClass, ctaTone)}
+        >
+          {plan.cta.label}
+        </a>
+      )}
     </div>
   );
 }

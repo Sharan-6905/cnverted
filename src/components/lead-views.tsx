@@ -1,6 +1,7 @@
 "use client";
 
-import { Building2, Flame, Snowflake, ListChecks, ImageOff, type LucideIcon } from "lucide-react";
+import Image from "next/image";
+import { Building2, Flame, Snowflake, ListChecks, type LucideIcon } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Section } from "@/components/section";
 import { Badge } from "@/components/ui/badge";
@@ -13,10 +14,6 @@ import { REVEAL_DURATION, REVEAL_EASE } from "@/components/reveal";
  * from buyer behavior — not sequential steps. Cold Leads is the complement of
  * both; Target List is what's been promoted out of any of the three once a
  * contact is attached.
- *
- * Each row reserves the right column for a screenshot of that tab. Until those
- * land, it renders a placeholder — swap it for a real Image and the layout
- * doesn't need to change.
  */
 
 interface LeadView {
@@ -25,6 +22,10 @@ interface LeadView {
   title: string;
   description: string;
   tone: string;
+  image: string;
+  alt: string;
+  /** each screenshot's own width/height, so it renders at its native ratio */
+  aspectRatio: string;
 }
 
 const VIEWS: LeadView[] = [
@@ -35,6 +36,9 @@ const VIEWS: LeadView[] = [
     description:
       "ICP-fit accounts flagged by a company-level trigger — new funding, a hiring surge, a tech-stack change, an exec move. Something changed at the company; that's what put it on your radar.",
     tone: "border-brand-navy/20 bg-brand-navy/10 text-brand-navy",
+    image: "/banners/lead-company.png",
+    alt: "The Company Leads tab: 19 leads scored 92 to 68, each row showing the company, score, the trigger that fired — Series B funding, a hiring surge, a product launch — the reasoning behind it, the contact's role, and their LinkedIn and email.",
+    aspectRatio: "1619 / 972",
   },
   {
     Icon: Flame,
@@ -43,6 +47,9 @@ const VIEWS: LeadView[] = [
     description:
       "The same universe ranked by a 0–100 intent score — how actively people at that account are researching a purchase like yours. High scorers are worth working first, trigger or not.",
     tone: "border-brand-coral/30 bg-brand-coral/10 text-brand-coral",
+    image: "/banners/lead-intent.png",
+    alt: "The Intent Leads tab: the same 19 accounts with a stated-intent line for each — what the account is actively evaluating or exploring — next to their role, LinkedIn contact, and a Save action.",
+    aspectRatio: "1536 / 1024",
   },
   {
     Icon: Snowflake,
@@ -51,6 +58,9 @@ const VIEWS: LeadView[] = [
     description:
       "ICP-fit accounts with no active trigger and a low intent score today. Not urgent, but kept on the radar — CNVRTED keeps scoring in the background and moves them up the moment either changes.",
     tone: "border-brand-lavender/40 bg-brand-lavender/15 text-[#6B5FA8]",
+    image: "/banners/lead-cold.png",
+    alt: "The Cold Leads tab: 19 ICP-fit accounts with a match reason and a confidence score in the 36-62 range, well below the Company and Intent Leads scores, and no role or email filled in yet.",
+    aspectRatio: "1612 / 975",
   },
   {
     Icon: ListChecks,
@@ -59,6 +69,9 @@ const VIEWS: LeadView[] = [
     description:
       "The shortlist you've promoted out of Intent or Cold Leads, enriched with the right contact, their role, and a verified email — one Generate away from a personalized outreach message.",
     tone: "border-intent-high/30 bg-intent-high-bg text-intent-high",
+    image: "/banners/target-list.png",
+    alt: "The Target List tab: 96 accounts with the company, website, why it matches the ICP, the contact, their designation, a verified work email, and Generate and Save actions on every row.",
+    aspectRatio: "1536 / 1024",
   },
 ];
 
@@ -109,17 +122,18 @@ export function LeadViews() {
               </p>
             </div>
 
-            {/* Screenshot of this tab goes here — placeholder until it lands. */}
             <div
-              className="flex aspect-[4/3] w-full items-center justify-center rounded-3xl border-2 border-dashed border-hairline bg-surface-soft sm:aspect-video lg:aspect-[4/3]"
-              aria-hidden="true"
+              className="relative w-full overflow-hidden rounded-3xl border border-hairline shadow-soft"
+              style={{ aspectRatio: view.aspectRatio }}
             >
-              <div className="flex flex-col items-center gap-2 text-muted-soft">
-                <ImageOff className="h-6 w-6" strokeWidth={1.5} />
-                <span className="text-xs font-medium">
-                  {view.title} screenshot
-                </span>
-              </div>
+              <Image
+                src={view.image}
+                alt={view.alt}
+                fill
+                sizes="(max-width: 1024px) 100vw, 640px"
+                quality={95}
+                className="object-contain"
+              />
             </div>
           </motion.article>
         ))}

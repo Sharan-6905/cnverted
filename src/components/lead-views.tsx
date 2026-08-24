@@ -107,7 +107,11 @@ export function LeadViews() {
                 src={view.image}
                 alt={view.alt}
                 fill
-                sizes="(max-width: 768px) 100vw, 560px"
+                /* These are dense table screenshots in a ~560px column, so the
+                   hint deliberately overstates the display width — it makes the
+                   browser pull a near-native-resolution file and keeps the row
+                   text legible instead of soft on both 1x and 2x screens. */
+                sizes="(max-width: 768px) 100vw, 1200px"
                 quality={95}
                 className="object-contain"
               />

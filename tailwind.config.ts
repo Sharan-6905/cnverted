@@ -44,11 +44,8 @@ const config: Config = {
         },
       },
       fontFamily: {
-        // Site-wide typeface. No webfont is self-hosted for it yet — this is
-        // the fallback stack on its own, so it resolves to Arial until a real
-        // "Sohne Buch" file is added (see the @font-face note in globals.css).
-        sans: ['"Sohne Buch"', "Arial", "sans-serif"],
-        display: ['"Sohne Buch"', "Arial", "sans-serif"],
+        sans: ["var(--font-poppins)", "Raleway", "system-ui", "sans-serif"],
+        display: ["var(--font-display)", "Merriweather", "Georgia", "Times New Roman", "Times", "serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       fontSize: {

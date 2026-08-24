@@ -1,6 +1,6 @@
 "use client";
 
-import { Building2, Flame, Snowflake, ListChecks, type LucideIcon } from "lucide-react";
+import { Building2, Flame, Snowflake, ListChecks, ImageOff, type LucideIcon } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Section } from "@/components/section";
 import { Badge } from "@/components/ui/badge";
@@ -14,8 +14,9 @@ import { REVEAL_DURATION, REVEAL_EASE } from "@/components/reveal";
  * both; Target List is what's been promoted out of any of the three once a
  * contact is attached.
  *
- * Screenshots of each tab land later — this ships as icon cards so the
- * section is complete on its own rather than shipping empty image slots.
+ * Each row reserves the right column for a screenshot of that tab. Until those
+ * land, it renders a placeholder — swap it for a real Image and the layout
+ * doesn't need to change.
  */
 
 interface LeadView {
@@ -75,36 +76,51 @@ export function LeadViews() {
       }
       description="CNVRTED flags every ICP-fit account two ways — a company trigger and an intent score — and lets you promote the strongest of either into a target list ready for outreach."
     >
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="space-y-12 lg:space-y-16">
         {VIEWS.map((view, i) => (
           <motion.article
             key={view.title}
-            className="group relative flex flex-col rounded-3xl border border-hairline bg-canvas p-6 smooth-transition transition-[transform,border-color,box-shadow] hover:-translate-y-0.5 hover:border-ink/20 hover:shadow-float"
+            className="grid items-center gap-8 lg:grid-cols-[1fr_1.1fr] lg:gap-14"
             initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.25 }}
             transition={
               reduceMotion
                 ? { duration: 0 }
-                : { duration: REVEAL_DURATION, ease: REVEAL_EASE, delay: i * 0.08 }
+                : { duration: REVEAL_DURATION, ease: REVEAL_EASE, delay: i * 0.05 }
             }
           >
-            <span
-              className={`flex h-10 w-10 items-center justify-center rounded-xl border ${view.tone}`}
+            <div>
+              <span
+                className={`flex h-10 w-10 items-center justify-center rounded-xl border ${view.tone}`}
+              >
+                <view.Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
+              </span>
+
+              <Badge variant="outline" size="sm" className="mt-4 w-fit">
+                {view.tag}
+              </Badge>
+
+              <h3 className="mt-3 font-display text-2xl font-semibold leading-snug tracking-tight text-ink">
+                {view.title}
+              </h3>
+              <p className="mt-3 max-w-md text-[15px] leading-relaxed text-body">
+                {view.description}
+              </p>
+            </div>
+
+            {/* Screenshot of this tab goes here — placeholder until it lands. */}
+            <div
+              className="flex aspect-[4/3] w-full items-center justify-center rounded-3xl border-2 border-dashed border-hairline bg-surface-soft sm:aspect-video lg:aspect-[4/3]"
+              aria-hidden="true"
             >
-              <view.Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
-            </span>
-
-            <Badge variant="outline" size="sm" className="mt-4 w-fit">
-              {view.tag}
-            </Badge>
-
-            <h3 className="mt-3 font-display text-lg font-semibold leading-snug tracking-tight text-ink">
-              {view.title}
-            </h3>
-            <p className="mt-2 text-sm leading-relaxed text-body">
-              {view.description}
-            </p>
+              <div className="flex flex-col items-center gap-2 text-muted-soft">
+                <ImageOff className="h-6 w-6" strokeWidth={1.5} />
+                <span className="text-xs font-medium">
+                  {view.title} screenshot
+                </span>
+              </div>
+            </div>
           </motion.article>
         ))}
       </div>

@@ -34,8 +34,8 @@ const VIEWS: LeadView[] = [
       "Companies showing a real trigger — funding, hiring, launching — that signals they're about to need you.",
     tone: "border-brand-navy/20 bg-brand-navy/10 text-brand-navy",
     image: "/banners/lead-company.png",
-    alt: "The Company Leads tab: 19 leads scored 92 to 68, each row showing the company, score, the trigger that fired — Series B funding, a hiring surge, a product launch — the reasoning behind it, the contact's role, and their LinkedIn and email.",
-    aspectRatio: "1619 / 972",
+    alt: "The Company Leads tab: 21 leads scored 99 down to 70, each row showing the company, score, the trigger that fired — an $18M Series B, a product launch, a US expansion, hiring AI engineers — and the reasoning behind it.",
+    aspectRatio: "1691 / 930",
   },
   {
     Icon: Flame,
@@ -45,8 +45,8 @@ const VIEWS: LeadView[] = [
       "Buyers who are asking for this right now, in their own words.",
     tone: "border-brand-coral/30 bg-brand-coral/10 text-brand-coral",
     image: "/banners/lead-intent.png",
-    alt: "The Intent Leads tab: the same 19 accounts with a stated-intent line for each — what the account is actively evaluating or exploring — next to their role, LinkedIn contact, and a Save action.",
-    aspectRatio: "1536 / 1024",
+    alt: "The Intent Leads tab: 25 leads, each with the buyer's own words about what they are building or hiring for — an AI copilot for construction, a founding engineer for a pair programmer, a telemedicine CTO — beside their LinkedIn contact.",
+    aspectRatio: "1701 / 925",
   },
   {
     Icon: Snowflake,
@@ -56,8 +56,8 @@ const VIEWS: LeadView[] = [
       "On-demand volume: every contact that matches your ICP, ready when you need scale.",
     tone: "border-brand-lavender/40 bg-brand-lavender/15 text-[#6B5FA8]",
     image: "/banners/lead-cold.png",
-    alt: "The Cold Leads tab: 19 ICP-fit accounts with a match reason and a confidence score in the 36-62 range, well below the Company and Intent Leads scores, and no role or email filled in yet.",
-    aspectRatio: "1612 / 975",
+    alt: "The Cold Leads tab: 100 leads matching the ICP, each with a named contact and title such as Chief Human Resources Officer, and industry, founded, revenue and detail columns waiting on a Find Details lookup.",
+    aspectRatio: "1699 / 926",
   },
   {
     Icon: ListChecks,
@@ -66,9 +66,9 @@ const VIEWS: LeadView[] = [
     description:
       "Your curated watchlist of perfect-fit companies, monitored continuously so you never miss the moment they move.",
     tone: "border-intent-high/30 bg-intent-high-bg text-intent-high",
-    image: "/banners/target-list.png",
-    alt: "The Target List tab: 96 accounts with the company, website, why it matches the ICP, the contact, their designation, a verified work email, and Generate and Save actions on every row.",
-    aspectRatio: "1536 / 1024",
+    image: "/banners/lead-target.png",
+    alt: "The Target List tab: 90 accounts with the company, website, a precision-match reason for the ICP fit, the contact, their designation, a verified work email, and Generate and Save actions on every row.",
+    aspectRatio: "1690 / 931",
   },
 ];
 

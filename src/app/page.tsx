@@ -3,6 +3,7 @@
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
 import { HowCnvrtedWorks } from "@/components/how-cnvrted-works";
+import { ProductVideo } from "@/components/product-video";
 import { LeadViews } from "@/components/lead-views";
 import { StoryIntro } from "@/components/story-intro";
 import { IntentRadar } from "@/components/intent-radar";
@@ -26,6 +27,8 @@ export default function Home() {
 
       <main className="flex-1">
         <Hero />
+
+        <ProductVideo />
 
         <HowCnvrtedWorks />
 

@@ -26,7 +26,9 @@ function buildCsp(nonce: string, isDev: boolean) {
     `font-src 'self' data:`,
     // next/font self-hosts, so the only third parties here are supabase + cal
     `connect-src 'self' ${supabase} https://cal.com https://app.cal.com${isDev ? " ws: http://localhost:*" : ""}`,
-    `frame-src 'self' https://cal.com https://app.cal.com`,
+    // youtube-nocookie serves the homepage Short; it redirects playback
+    // requests to www.youtube.com, so both origins have to be allowed
+    `frame-src 'self' https://cal.com https://app.cal.com https://www.youtube-nocookie.com https://www.youtube.com`,
     `frame-ancestors 'none'`,
     `form-action 'self'`,
     `base-uri 'self'`,

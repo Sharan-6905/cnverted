@@ -3,6 +3,7 @@
 import { SiteHeader } from "@/components/site-header";
 import { Hero } from "@/components/hero";
 import { HowCnvrtedWorks } from "@/components/how-cnvrted-works";
+import { LeadViews } from "@/components/lead-views";
 import { StoryIntro } from "@/components/story-intro";
 import { IntentRadar } from "@/components/intent-radar";
 import { IntentCapture } from "@/components/intent-capture";
@@ -27,6 +28,8 @@ export default function Home() {
         <Hero />
 
         <HowCnvrtedWorks />
+
+        <LeadViews />
 
         <IntentRadar />
 

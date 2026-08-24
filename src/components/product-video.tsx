@@ -30,7 +30,7 @@ export function ProductVideo() {
       eyebrow="See it in action"
       title={
         <>
-          CNVRTED, <span className="text-accent">in ninety seconds</span>.
+          CNVRTED, <span className="text-accent">in fifty seconds</span>.
         </>
       }
       description="A quick look at how a buying signal becomes an account, a contact, and a message your team can send."

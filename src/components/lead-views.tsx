@@ -1,16 +1,18 @@
 "use client";
 
-import { Building2, Flame, Snowflake, ListChecks, ArrowRight, type LucideIcon } from "lucide-react";
+import { Building2, Flame, Snowflake, ListChecks, type LucideIcon } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { Section } from "@/components/section";
 import { Badge } from "@/components/ui/badge";
 import { REVEAL_DURATION, REVEAL_EASE } from "@/components/reveal";
 
 /**
- * The four tabs inside the CNVRTED dashboard, explained in funnel order:
- * Company Leads is the full universe; Intent and Cold Leads are that universe
- * scored by whether a signal fired; Target List is what you've promoted out
- * of either, once a contact is attached and it's ready for outreach.
+ * The four tabs inside the CNVRTED dashboard. Company and Intent Leads are two
+ * independent ways an ICP-fit account gets flagged — a company-level trigger
+ * (funding, hiring, a tech change, an exec move) versus a 0-100 intent score
+ * from buyer behavior — not sequential steps. Cold Leads is the complement of
+ * both; Target List is what's been promoted out of any of the three once a
+ * contact is attached.
  *
  * Screenshots of each tab land later — this ships as icon cards so the
  * section is complete on its own rather than shipping empty image slots.
@@ -27,26 +29,26 @@ interface LeadView {
 const VIEWS: LeadView[] = [
   {
     Icon: Building2,
-    tag: "The universe",
+    tag: "Company trigger",
     title: "Company Leads",
     description:
-      "Every company in your ICP that CNVRTED has found on the open web — whether or not they're showing a buying signal yet. This is the full account list everything else is scored against.",
+      "ICP-fit accounts flagged by a company-level trigger — new funding, a hiring surge, a tech-stack change, an exec move. Something changed at the company; that's what put it on your radar.",
     tone: "border-brand-navy/20 bg-brand-navy/10 text-brand-navy",
   },
   {
     Icon: Flame,
-    tag: "Signal fired",
+    tag: "Intent score",
     title: "Intent Leads",
     description:
-      "Company Leads filtered down to accounts with a real-time buying signal right now — new funding, hiring surges, a tech-stack change, an exec move, or a pain signal. The ones worth working first.",
+      "The same universe ranked by a 0–100 intent score — how actively people at that account are researching a purchase like yours. High scorers are worth working first, trigger or not.",
     tone: "border-brand-coral/30 bg-brand-coral/10 text-brand-coral",
   },
   {
     Icon: Snowflake,
-    tag: "No signal — yet",
+    tag: "No trigger or score",
     title: "Cold Leads",
     description:
-      "ICP-fit accounts with nothing active today. Not urgent, but kept on the radar — CNVRTED keeps watching, and moves an account into Intent Leads the moment a signal shows up.",
+      "ICP-fit accounts with no active trigger and a low intent score today. Not urgent, but kept on the radar — CNVRTED keeps scoring in the background and moves them up the moment either changes.",
     tone: "border-brand-lavender/40 bg-brand-lavender/15 text-[#6B5FA8]",
   },
   {
@@ -68,10 +70,10 @@ export function LeadViews() {
       eyebrow="Inside the platform"
       title={
         <>
-          Four views, <span className="text-accent">one pipeline</span>.
+          Two signals, <span className="text-accent">one target list</span>.
         </>
       }
-      description="Every account CNVRTED finds moves through the same four tabs — from the full universe of ICP-fit companies down to a target list ready for outreach."
+      description="CNVRTED flags every ICP-fit account two ways — a company trigger and an intent score — and lets you promote the strongest of either into a target list ready for outreach."
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {VIEWS.map((view, i) => (
@@ -103,14 +105,6 @@ export function LeadViews() {
             <p className="mt-2 text-sm leading-relaxed text-body">
               {view.description}
             </p>
-
-            {/* funnel arrow between steps, desktop only */}
-            {i < VIEWS.length - 1 && (
-              <ArrowRight
-                className="absolute right-[-22px] top-1/2 hidden h-4 w-4 -translate-y-1/2 text-muted-soft lg:block"
-                aria-hidden="true"
-              />
-            )}
           </motion.article>
         ))}
       </div>

@@ -1,21 +1,6 @@
 import type { Metadata } from "next";
-import { Raleway, Merriweather } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
-
-const raleway = Raleway({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
-
-// Editorial serif used for every heading site-wide.
-const merriweather = Merriweather({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  style: "normal",
-});
 
 const SITE_URL = "https://www.cnvrted.com";
 const TITLE = "Cnvrted — Reach buyers the moment they're in-market";
@@ -80,10 +65,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      className={`${raleway.variable} ${merriweather.variable} h-full`}
-    >
+    <html lang="en" className="h-full">
       <body className="min-h-full">
         <StructuredData />
         {children}

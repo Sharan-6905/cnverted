@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Sohne Buch is a licensed Klim typeface, so no webfont file ships in this
+   repo — the stack in tailwind.config.ts resolves to Arial until one is added.
+   To activate it: drop the files in public/fonts/ and uncomment below.
+
+@font-face {
+  font-family: "Sohne Buch";
+  src:
+    url("/fonts/sohne-buch.woff2") format("woff2"),
+    url("/fonts/sohne-buch.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+*/
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -95,13 +110,12 @@
     transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-duration: 320ms;
   }
-  /* Editorial serif weight, forced to 400 (regular) with a thin stroke added
-     to thicken it slightly — Merriweather has no 500/600 weight to step to.
-     Letter-spacing kept slightly tight, with !important to win over
-     per-heading tracking-tight utilities. */
+  /* Headings keep the slightly tight tracking the display face was tuned for.
+     Weight is deliberately NOT pinned here — each heading's own font-semibold
+     / font-medium utility decides that, so the hierarchy stays intact. The
+     previous rule forced 400 plus a faux-bold text-stroke because Merriweather
+     shipped no 500/600; the current stack has real weights and needs neither. */
   .font-display {
-    font-weight: 400;
-    -webkit-text-stroke: 0.4px currentColor;
-    letter-spacing: -0.01em !important;
+    letter-spacing: -0.01em;
   }
 }

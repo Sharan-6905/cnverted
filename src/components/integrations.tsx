@@ -17,8 +17,8 @@ const MARKS: Record<string, (p: IconProps) => React.JSX.Element> = {
   zapier: ZapierColor,
 };
 
-// A neutral OS-default sans stack — deliberately NOT font-sans (Poppins) or
-// font-display (Tinos), so these wordmarks stop reading as "the CNVRTED
+// A neutral OS-default sans stack — deliberately NOT the site font-sans /
+// font-display stack, so these wordmarks stop reading as "the CNVRTED
 // font." We can't embed each brand's actual licensed typeface (Larsseit,
 // Salesforce Sans, etc.), so weight/tracking/color are tuned per brand to
 // approximate how each name actually presents.

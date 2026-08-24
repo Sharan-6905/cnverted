@@ -24,7 +24,7 @@ function buildCsp(nonce: string, isDev: boolean) {
     `style-src 'self' 'unsafe-inline'`,
     `img-src 'self' blob: data: https://api.producthunt.com https://cal.com https://app.cal.com`,
     `font-src 'self' data:`,
-    // next/font self-hosts, so the only third parties here are supabase + cal
+    // fonts are local or system, so the only third parties here are supabase + cal
     `connect-src 'self' ${supabase} https://cal.com https://app.cal.com${isDev ? " ws: http://localhost:*" : ""}`,
     `frame-src 'self' https://cal.com https://app.cal.com`,
     `frame-ancestors 'none'`,

@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { Clause, Bullets, Mail } from "@/components/legal";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — Cnvrted",
@@ -11,49 +12,6 @@ export const metadata: Metadata = {
 };
 
 const LAST_UPDATED = "25 August 2026";
-
-function Clause({
-  n,
-  title,
-  children,
-}: {
-  n: number;
-  title: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <section className="scroll-mt-24" id={`s${n}`}>
-      <h2 className="font-display text-xl font-semibold text-ink">
-        <span className="mr-2 font-mono text-sm font-normal text-muted-soft">{n}</span>
-        {title}
-      </h2>
-      <div className="mt-3 space-y-3">{children}</div>
-    </section>
-  );
-}
-
-function Bullets({ items }: { items: React.ReactNode[] }) {
-  return (
-    <ul className="space-y-2 pl-5">
-      {items.map((item, i) => (
-        <li key={i} className="list-disc marker:text-muted-soft">
-          {item}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function Mail({ address }: { address: string }) {
-  return (
-    <a
-      href={`mailto:${address}`}
-      className="text-ink underline underline-offset-2 hover:text-[#2C456F]"
-    >
-      {address}
-    </a>
-  );
-}
 
 const RETENTION: [string, string][] = [
   ["Account and profile data", "Life of the account, then 90 days"],

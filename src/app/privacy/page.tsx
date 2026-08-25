@@ -163,16 +163,21 @@ export default function PrivacyPage() {
                 2.2 From your Google account, if you connect one
               </h3>
               <p>
-                Connecting a Google account is optional and powers outreach features. When you
-                connect one, we access only what the scopes you approve allow, which is what we
-                need to:
+                Connecting a Google account is optional and powers outreach features. We request
+                two scopes, <code className="font-mono text-[13px]">gmail.send</code> and{" "}
+                <code className="font-mono text-[13px]">gmail.readonly</code>, and use them only
+                to:
               </p>
               <Bullets
                 items={[
                   "send the emails you compose and approve in Cnvrted, from your own mailbox; and",
-                  "detect and read replies to those emails, so the product can tell you when a prospect has responded and move the account along your pipeline.",
+                  "read the messages needed to detect and display replies to emails you sent through Cnvrted, so they appear against the right conversation in your pipeline.",
                 ]}
               />
+              <p>
+                We do not read or store email unrelated to conversations you started through the
+                Service, and we never use Gmail data for advertising.
+              </p>
               <p>
                 You see the exact scopes on Google&rsquo;s consent screen before you approve
                 anything, and you can disconnect at any time from your integration settings in
@@ -212,8 +217,9 @@ export default function PrivacyPage() {
                 across the open internet, including publicly accessible company websites,
                 careers pages and press releases; public professional profiles and public posts;
                 public regulatory and corporate registry filings; and public job listings,
-                funding announcements, news and industry directories. Where we license data from
-                third-party providers, those providers are listed in Section 5.
+                funding announcements, news and industry directories. We also use third-party
+                research and enrichment providers — currently Apollo, Serper and Exa — to find
+                and verify company and contact information from public sources.
               </p>
               <p>
                 From this we build records that may include name, job title and department,
@@ -294,9 +300,9 @@ export default function PrivacyPage() {
               <p>
                 <strong className="font-semibold text-ink">Training our own models.</strong> We
                 may use aggregated, de-identified usage and signal data to improve our own
-                scoring and classification. We do not train models on the contents of a
-                connected Google account, and we do not train on customer-uploaded data unless a
-                customer has separately opted in in writing.
+                scoring and classification. Gmail data is never used to train generalised AI or
+                machine learning models, ours or anyone else&rsquo;s, and we do not train on
+                customer-uploaded data unless a customer has separately opted in in writing.
               </p>
               <p>
                 <strong className="font-semibold text-ink">
@@ -319,8 +325,10 @@ export default function PrivacyPage() {
                     </strong>{" "}
                     Supabase (database and authentication), Vercel (website hosting), Railway
                     and Cloudflare (application and API infrastructure), Resend (transactional
-                    email), and our large language model providers. Each is bound by contract to
-                    process data only on our instructions.
+                    email), Anthropic and OpenAI (scoring, outreach drafting and the in-product
+                    assistant), and Apollo, Serper and Exa (company and contact research and
+                    enrichment). Each is bound by contract to process data only on our
+                    instructions.
                   </>,
                   <>
                     <strong className="font-semibold text-ink">

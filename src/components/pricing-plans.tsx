@@ -26,10 +26,10 @@ interface Plan {
 
 const PLANS: Plan[] = [
   {
-    name: "Growth",
+    name: "Spark",
     tagline: "Pay-as-you-go for early teams",
-    price: "$419",
-    period: "Quarterly",
+    price: "$25",
+    period: "4 days",
     description:
       "For early stage companies or growing sales teams (1–10 reps) who want to test the waters with us, or are ready to replace guesswork with real buying signals.",
     features: [
@@ -44,10 +44,10 @@ const PLANS: Plan[] = [
     cta: { label: "Select plan", book: true },
   },
   {
-    name: "Professional",
+    name: "Surge",
     tagline: "Built for scaling teams",
-    price: "$1199",
-    period: "Quarterly",
+    price: "$119",
+    period: "Monthly",
     description:
       "For established sales organizations (5+ reps) looking to significantly widen their funnel and consistently reach buyers at the moment they enter the market.",
     features: [
@@ -64,7 +64,7 @@ const PLANS: Plan[] = [
     featured: true,
   },
   {
-    name: "Enterprise",
+    name: "Dominion",
     tagline: "For full control & custom needs",
     price: "Talk to sales",
     description:

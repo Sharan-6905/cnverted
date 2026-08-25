@@ -55,18 +55,18 @@ const softwareSchema = {
   offers: [
     {
       "@type": "Offer",
-      name: "Growth",
-      price: "419",
+      name: "Spark",
+      price: "25",
       priceCurrency: "USD",
-      billingIncrement: "P3M",
+      billingIncrement: "P4D",
       description: "For teams getting started with intent-driven outbound.",
     },
     {
       "@type": "Offer",
-      name: "Professional",
-      price: "1199",
+      name: "Surge",
+      price: "119",
       priceCurrency: "USD",
-      billingIncrement: "P3M",
+      billingIncrement: "P1M",
       description: "For scaling teams that need deeper signals and automation.",
     },
   ],
@@ -105,7 +105,7 @@ const faqSchema = {
       name: "How much does Cnvrted cost?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Cnvrted offers three plans: Growth at $419/quarter for teams getting started, Professional at $1,199/quarter for scaling teams, and Enterprise with custom pricing. All plans include real-time intent signals and ICP scoring.",
+        text: "Cnvrted offers three plans: Spark at $25 for four days of access, Surge at $119 per month for scaling teams, and Dominion with custom enterprise pricing. All plans include real-time intent signals and ICP scoring.",
       },
     },
     {

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "The terms that govern your use of the Cnvrted platform.",
 };
 
-const LAST_UPDATED = "25 August 2026";
+const LAST_UPDATED = "26 August 2026";
 
 export default function TermsPage() {
   return (
@@ -77,10 +77,11 @@ export default function TermsPage() {
                 <a href="/pricing" className="text-ink underline underline-offset-2">
                   cnvrted.com/pricing
                 </a>
-                . Growth and Professional are quoted in US Dollars and billed quarterly in
-                advance; Enterprise is priced by agreement. Plans are currently arranged with our
-                team rather than through self-service checkout, and payment terms are confirmed
-                to you in writing before your first invoice.
+                . Prices are quoted in US Dollars. Spark is a one-off charge for four days of
+                access; Surge is billed monthly in advance; Dominion is priced by agreement.
+                Plans are currently arranged with our team rather than through self-service
+                checkout, and payment terms are confirmed to you in writing before your first
+                invoice.
               </p>
               <p>
                 We may change plans and pricing, and will give existing subscribers reasonable
@@ -88,9 +89,10 @@ export default function TermsPage() {
                 price are set out at the time and it is non-refundable.
               </p>
               <p>
-                <strong className="font-semibold text-ink">Refunds.</strong> Quarterly fees are
-                not refunded for a partial quarter. For longer commitments we may refund the
-                unused portion at our discretion, less any discount you received for committing.
+                <strong className="font-semibold text-ink">Refunds.</strong> Spark is
+                non-refundable once access starts. Surge is not refunded for a partial month. For
+                longer commitments we may refund the unused portion at our discretion, less any
+                discount you received for committing.
               </p>
               <p>
                 All fees exclude taxes. You are responsible for GST, VAT, sales tax or any other

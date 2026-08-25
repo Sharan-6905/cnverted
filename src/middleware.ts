@@ -24,8 +24,9 @@ function buildCsp(nonce: string, isDev: boolean) {
     `style-src 'self' 'unsafe-inline'`,
     `img-src 'self' blob: data: https://api.producthunt.com https://cal.com https://app.cal.com`,
     `font-src 'self' data:`,
-    // next/font self-hosts, so the only third parties here are supabase + cal
-    `connect-src 'self' ${supabase} https://cal.com https://app.cal.com${isDev ? " ws: http://localhost:*" : ""}`,
+    // next/font self-hosts, so the third parties here are supabase, cal, and the
+    // public understand-website endpoint the homepage widget calls from the browser
+    `connect-src 'self' ${supabase} https://cal.com https://app.cal.com https://api.cnvrted.com${isDev ? " ws: http://localhost:*" : ""}`,
     // youtube-nocookie serves the homepage Short; it redirects playback
     // requests to www.youtube.com, so both origins have to be allowed
     `frame-src 'self' https://cal.com https://app.cal.com https://www.youtube-nocookie.com https://www.youtube.com`,

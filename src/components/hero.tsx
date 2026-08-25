@@ -1,4 +1,5 @@
 import { HeroScene } from "@/components/hero-scene";
+import { UnderstandWidget } from "@/components/understand-widget";
 
 function HighlightWord({ children }: { children: string }) {
   return <span className="text-accent">{children}</span>;
@@ -48,6 +49,8 @@ export function Hero() {
               style={{ width: 250, height: 54 }}
             />
           </a>
+
+          <UnderstandWidget />
         </div>
 
         {/* Scroll-driven clay motion scene */}

@@ -65,7 +65,9 @@ export function UnderstandWidget() {
           aria-label="Your website URL"
           autoComplete="url"
           disabled={loading}
-          className="h-12"
+          // blue focus glow, picking up the accent blue the display headings
+          // already use — the design system's default focus is teal
+          className="h-12 focus:border-[#4FA8F5] focus:ring-4 focus:ring-[#4FA8F5]/20"
         />
         <Button type="submit" variant="accent" size="lg" disabled={loading || !url.trim()}>
           {loading ? "Reading…" : "See what we understand"}

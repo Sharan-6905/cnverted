@@ -70,7 +70,14 @@ export function UnderstandWidget() {
           // field reads as the thing to use without waiting for a click.
           className="h-12 border-[#4FA8F5]/45 shadow-[0_0_18px_rgba(79,168,245,0.35)] transition-[border-color,box-shadow] focus:border-[#4FA8F5] focus:shadow-[0_0_26px_rgba(79,168,245,0.6)] focus:ring-[#4FA8F5]/30"
         />
-        <Button type="submit" variant="accent" size="lg" disabled={loading || !url.trim()}>
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          disabled={loading || !url.trim()}
+          // same gradient the header's "Get started" carries
+          className="bg-gradient-to-r from-brand-navy to-[#4FA8F5] hover:opacity-90"
+        >
           {loading ? "Reading…" : "See what we understand"}
         </Button>
       </form>

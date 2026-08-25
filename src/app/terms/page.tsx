@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { LegalToc } from "@/components/legal-toc";
 import { Clause, Bullets, Mail, Caps } from "@/components/legal";
 
 export const metadata: Metadata = {
@@ -23,7 +24,8 @@ export default function TermsPage() {
           title="Terms of Service"
           description={`Last updated: ${LAST_UPDATED}. These terms govern your access to and use of Cnvrted.`}
         >
-          <div className="max-w-2xl space-y-10 text-[15px] leading-relaxed text-body">
+          <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-14">
+            <div className="max-w-2xl space-y-10 text-[15px] leading-relaxed text-body">
             <p>
               These Terms are between you and Cnvrted Pvt Ltd, a company incorporated in India
               with its registered office at #41, VJ Infinity, 2nd Cross, Doctors Layout, B.
@@ -329,6 +331,8 @@ export default function TermsPage() {
                 Notices and everything else: <Mail address="work@cnvrted.com" />
               </p>
             </Clause>
+          </div>
+            <LegalToc />
           </div>
         </Section>
       </main>

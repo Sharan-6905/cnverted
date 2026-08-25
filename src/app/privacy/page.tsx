@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { LegalToc } from "@/components/legal-toc";
 import { Clause, Bullets, Mail } from "@/components/legal";
 
 export const metadata: Metadata = {
@@ -35,7 +36,8 @@ export default function PrivacyPage() {
           title="Privacy Policy"
           description={`Last updated: ${LAST_UPDATED}. This policy explains what Cnvrted collects, why, who sees it, and how you get it removed.`}
         >
-          <div className="max-w-2xl space-y-10 text-[15px] leading-relaxed text-body">
+          <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-14">
+            <div className="max-w-2xl space-y-10 text-[15px] leading-relaxed text-body">
             <p>
               It applies to cnvrted.com, beta.cnvrted.com and our APIs (together, the
               &ldquo;Services&rdquo;). &ldquo;Cnvrted&rdquo;, &ldquo;we&rdquo; and
@@ -477,6 +479,8 @@ export default function PrivacyPage() {
                 Privacy, grievances and everything else: <Mail address="work@cnvrted.com" />
               </p>
             </Clause>
+          </div>
+            <LegalToc />
           </div>
         </Section>
       </main>

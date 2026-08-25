@@ -54,9 +54,7 @@ export function UnderstandWidget() {
       </span>
 
       <p className="mt-2 max-w-md text-sm leading-relaxed text-body">
-        Enter your website and we&rsquo;ll read it back to you in two or three sentences — what you
-        sell and who you sell it to. It&rsquo;s the first thing we work out before we go looking for
-        your buyers.
+        Paste your URL, we&rsquo;ll find your ICP.
       </p>
 
       <form onSubmit={handleSubmit} className="mt-4 flex flex-col gap-3 sm:flex-row">

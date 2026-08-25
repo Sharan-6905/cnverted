@@ -165,9 +165,11 @@ export function UnderstandWidget() {
         <Button
           type="submit"
           variant="primary"
-          size="lg"
+          size="md"
           disabled={loading || !url.trim()}
-          className="bg-gradient-to-r from-brand-navy to-[#4FA8F5] hover:opacity-90"
+          // md sizing for a lighter button, but held at h-12 so it still lines
+          // up with the field beside it
+          className="h-12 shrink-0 bg-gradient-to-r from-brand-navy to-[#4FA8F5] hover:opacity-90"
         >
           {loading ? "Reading…" : "Read my website"}
         </Button>

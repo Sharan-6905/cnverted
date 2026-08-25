@@ -108,7 +108,7 @@ export default function PrivacyPage() {
                 a company website, a public professional profile, a public post, a press
                 release, a job listing. We use it to help our customers work out which companies
                 are likely in the market for what they sell. If you would rather not be in
-                there, email <Mail address="privacy@cnvrted.com" /> and we will remove you.
+                there, email <Mail address="work@cnvrted.com" /> and we will remove you.
               </p>
               <Bullets
                 items={[
@@ -263,7 +263,7 @@ export default function PrivacyPage() {
               </p>
               <p>
                 We do not knowingly collect data about anyone under 18. If you believe we hold
-                data about a child, email <Mail address="privacy@cnvrted.com" /> and we will
+                data about a child, email <Mail address="work@cnvrted.com" /> and we will
                 delete it.
               </p>
             </Clause>
@@ -386,7 +386,7 @@ export default function PrivacyPage() {
               />
               <p>
                 <strong className="font-semibold text-ink">How to exercise them.</strong> Email{" "}
-                <Mail address="privacy@cnvrted.com" />. Customers can also do most of this from
+                <Mail address="work@cnvrted.com" />. Customers can also do most of this from
                 account settings. We may ask for enough information to confirm who you are, but
                 no more than we need, and we respond within 30 days. If we need longer and the
                 law allows it, we will tell you why before the deadline.
@@ -405,7 +405,7 @@ export default function PrivacyPage() {
               <p>
                 <strong className="font-semibold text-ink">Grievances (India).</strong> Under the
                 DPDP Act, 2023 and the Information Technology Act, 2000, you can reach our
-                Grievance Officer at <Mail address="grievance@cnvrted.com" />, or by post at the
+                Grievance Officer at <Mail address="work@cnvrted.com" />, or by post at the
                 registered office above. If we do not resolve your complaint, you may escalate
                 to the Data Protection Board of India or, in the EEA, UK or Switzerland, to your
                 local supervisory authority.
@@ -486,7 +486,7 @@ export default function PrivacyPage() {
                 transfers from the EEA and the UK. We do not transfer personal data to any
                 country restricted by the Central Government under Section 16 of the DPDP Act. A
                 copy of the relevant transfer mechanism is available on request from{" "}
-                <Mail address="privacy@cnvrted.com" />.
+                <Mail address="work@cnvrted.com" />.
               </p>
             </Clause>
 
@@ -514,13 +514,9 @@ export default function PrivacyPage() {
                 Karnataka 560043, India
               </p>
               <p>
-                Privacy: <Mail address="privacy@cnvrted.com" />
-                <br />
-                Grievances: <Mail address="grievance@cnvrted.com" />
-                <br />
                 Security: <Mail address="info@cnvrted.com" />
                 <br />
-                General: <Mail address="work@cnvrted.com" />
+                Privacy, grievances and everything else: <Mail address="work@cnvrted.com" />
               </p>
             </Clause>
           </div>

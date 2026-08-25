@@ -65,9 +65,10 @@ export function UnderstandWidget() {
           aria-label="Your website URL"
           autoComplete="url"
           disabled={loading}
-          // blue focus glow, picking up the accent blue the display headings
-          // already use — the design system's default focus is teal
-          className="h-12 focus:border-[#4FA8F5] focus:ring-4 focus:ring-[#4FA8F5]/20"
+          // Blue glow bleeding outside the border, in the accent blue the h1
+          // gradient ends on. It sits at rest and brightens on focus, so the
+          // field reads as the thing to use without waiting for a click.
+          className="h-12 border-[#4FA8F5]/45 shadow-[0_0_18px_rgba(79,168,245,0.35)] transition-[border-color,box-shadow] focus:border-[#4FA8F5] focus:shadow-[0_0_26px_rgba(79,168,245,0.6)] focus:ring-[#4FA8F5]/30"
         />
         <Button type="submit" variant="accent" size="lg" disabled={loading || !url.trim()}>
           {loading ? "Reading…" : "See what we understand"}

@@ -89,7 +89,7 @@ export function UnderstandWidget() {
       )}
 
       {understanding ? (
-        <div className="mt-4 rounded-2xl border border-hairline bg-surface-soft p-5">
+        <div className="mt-4 rounded-2xl border border-[#4FA8F5]/45 bg-canvas p-5 shadow-[0_0_18px_rgba(79,168,245,0.3)]">
           <span className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">
             What we understood
           </span>

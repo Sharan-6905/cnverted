@@ -16,8 +16,6 @@ import { REVEAL_DURATION, REVEAL_EASE } from "@/components/reveal";
 
 const API_BASE = "https://api.cnvrted.com";
 
-const EXAMPLES = ["linear.app", "hubspot.com", "intercom.com"];
-
 /** Only steps the backend genuinely performs — one page, read, summarised. */
 const STAGES = [
   "Fetching your homepage",
@@ -179,25 +177,6 @@ export function UnderstandWidget() {
         <p className="mt-2.5 text-xs text-red-600" role="alert">
           {error}
         </p>
-      )}
-
-      {!loading && !understanding && (
-        <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-soft">
-          <span>Try an example:</span>
-          {EXAMPLES.map((example) => (
-            <button
-              key={example}
-              type="button"
-              onClick={() => {
-                setUrl(example);
-                run(example);
-              }}
-              className="font-mono text-[#2C456F] underline-offset-4 hover:underline"
-            >
-              {example}
-            </button>
-          ))}
-        </div>
       )}
 
       {loading && <Stages current={stage} />}

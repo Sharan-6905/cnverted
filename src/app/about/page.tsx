@@ -121,7 +121,7 @@ export default function AboutPage() {
           </Card>
 
           {/* Map — where we built Cnvrted */}
-          <div className="mx-auto mt-14 max-w-5xl text-center">
+          <div className="mx-auto mt-14 max-w-4xl text-center">
             <span className="inline-flex items-center rounded-full border border-white/60 bg-canvas/50 px-3.5 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-brand-teal backdrop-blur-md">
               Where we build
             </span>
@@ -133,19 +133,20 @@ export default function AboutPage() {
               From late nights in Indiranagar to early mornings in
               Kammanahalli — this is where Cnvrted came to life.
             </p>
-
-            <Card className="mt-8 overflow-hidden border-white/60 bg-canvas/40 shadow-[0_10px_44px_-12px_rgba(20,16,8,0.18)] backdrop-blur-2xl">
-              <Image
-                src="/bengaluru-map.png"
-                alt="Hand-drawn map of Bengaluru showing Indiranagar and Kammanahalli — the neighbourhoods where Cnvrted was built"
-                width={1280}
-                height={960}
-                className="h-auto w-full"
-                priority={false}
-              />
-            </Card>
           </div>
         </Section>
+
+        {/* Full-bleed map */}
+        <div className="w-full">
+          <Image
+            src="/bengaluru-map.png"
+            alt="Hand-drawn map of Bengaluru showing Indiranagar and Kammanahalli — the neighbourhoods where Cnvrted was built"
+            width={1280}
+            height={960}
+            className="h-auto w-full"
+            priority={false}
+          />
+        </div>
       </main>
 
       <SiteFooter />

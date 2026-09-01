@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Section } from "@/components/section";
@@ -118,6 +119,37 @@ export default function AboutPage() {
               </p>
             </div>
           </Card>
+
+          {/* Map — where we built Cnvrted */}
+          <div className="mx-auto mt-14 max-w-5xl text-center font-mono">
+            <span className="inline-flex items-center rounded-full border border-emerald-400/30 bg-emerald-950/40 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-emerald-400 backdrop-blur-md">
+              // where we build
+            </span>
+            <h2 className="mt-4 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+              <span className="text-violet-400">const</span>{" "}
+              <span className="text-sky-400">location</span>{" "}
+              <span className="text-orange-400">=</span>{" "}
+              <span className="text-emerald-400">&quot;Bengaluru&quot;</span>
+              <span className="text-zinc-500">;</span>
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-zinc-400">
+              <span className="text-zinc-500">{'/*'}</span>{" "}
+              From late nights in Indiranagar to early mornings in
+              Kammanahalli — this is where Cnvrted came to life.{" "}
+              <span className="text-zinc-500">{'*/'}</span>
+            </p>
+
+            <Card className="mt-8 overflow-hidden border-white/60 bg-canvas/40 shadow-[0_10px_44px_-12px_rgba(20,16,8,0.18)] backdrop-blur-2xl">
+              <Image
+                src="/bengaluru-map.png"
+                alt="Hand-drawn map of Bengaluru showing Indiranagar and Kammanahalli — the neighbourhoods where Cnvrted was built"
+                width={1280}
+                height={960}
+                className="h-auto w-full"
+                priority={false}
+              />
+            </Card>
+          </div>
         </Section>
       </main>
 

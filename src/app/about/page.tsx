@@ -121,24 +121,90 @@ export default function AboutPage() {
           </Card>
 
           {/* Map — where we built Cnvrted */}
-          <div className="mx-auto mt-14 max-w-5xl text-center font-mono">
-            <span className="inline-flex items-center rounded-full border border-emerald-400/30 bg-emerald-950/40 px-3.5 py-1.5 text-xs font-medium uppercase tracking-[0.14em] text-emerald-400 backdrop-blur-md">
-              // where we build
-            </span>
-            <h2 className="mt-4 text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-              <span className="text-violet-400">const</span>{" "}
-              <span className="text-sky-400">location</span>{" "}
-              <span className="text-orange-400">=</span>{" "}
-              <span className="text-emerald-400">&quot;Bengaluru&quot;</span>
-              <span className="text-zinc-500">;</span>
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-[14px] leading-relaxed text-zinc-400">
-              <span className="text-zinc-500">{'/*'}</span>{" "}
-              From late nights in Indiranagar to early mornings in
-              Kammanahalli — this is where Cnvrted came to life.{" "}
-              <span className="text-zinc-500">{'*/'}</span>
-            </p>
+          <div className="mx-auto mt-14 max-w-5xl">
+            {/* Code editor window */}
+            <div className="overflow-hidden rounded-xl border border-zinc-700/60 bg-[#1e1e2e] shadow-[0_20px_60px_-16px_rgba(0,0,0,0.5)]">
+              {/* Title bar */}
+              <div className="flex items-center gap-2 border-b border-zinc-700/50 bg-[#181825] px-4 py-3">
+                <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
+                <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
+                <span className="h-3 w-3 rounded-full bg-[#28c840]" />
+                <span className="ml-3 font-mono text-[13px] text-zinc-400">manifesto.js</span>
+                <span className="ml-auto font-mono text-[11px] uppercase tracking-wider text-zinc-600">read only</span>
+              </div>
 
+              {/* Code body */}
+              <div className="flex font-mono text-[14px] leading-[1.9] sm:text-[15px]">
+                {/* Line numbers */}
+                <div className="select-none border-r border-zinc-700/40 px-4 py-5 text-right text-zinc-600" aria-hidden="true">
+                  {Array.from({ length: 14 }, (_, i) => (
+                    <div key={i}>{i + 1}</div>
+                  ))}
+                </div>
+
+                {/* Code */}
+                <div className="flex-1 overflow-x-auto px-5 py-5 text-left">
+                  {/* JSDoc block */}
+                  <div className="text-emerald-400/80">
+                    <div>{'/***'}</div>
+                    <div><span className="text-zinc-600"> *  </span>manifesto.js</div>
+                    <div><span className="text-zinc-600"> *  </span><span className="text-emerald-500">@author</span>{'    '}Dhruv Pradeep</div>
+                    <div><span className="text-zinc-600"> *  </span><span className="text-emerald-500">@location</span>{'  '}Bangalore, IN</div>
+                    <div><span className="text-zinc-600"> *  </span><span className="text-emerald-500">@status</span>{'    '}in progress</div>
+                    <div><span className="text-zinc-600"> */</span></div>
+                  </div>
+
+                  {/* Empty line */}
+                  <div>&nbsp;</div>
+
+                  {/* Comment line */}
+                  <div className="text-zinc-500">
+                    {'// I stopped waiting for permission.'}
+                  </div>
+
+                  {/* Code line */}
+                  <div>
+                    <span className="text-violet-400">const</span>{' '}
+                    <span className="text-sky-400">permission</span>{' '}
+                    <span className="text-orange-400">=</span>{' '}
+                    <span className="text-orange-300">null</span>
+                    <span className="text-zinc-500">;</span>
+                  </div>
+
+                  {/* Empty line */}
+                  <div>&nbsp;</div>
+
+                  {/* Comment line */}
+                  <div className="text-zinc-500">
+                    {'// Three boys. One obsession. No backup plan.'}
+                  </div>
+
+                  {/* Code lines */}
+                  <div>
+                    <span className="text-violet-400">const</span>{' '}
+                    <span className="text-sky-400">team</span>{' '}
+                    <span className="text-orange-400">=</span>{' '}
+                    <span className="text-zinc-400">[</span>
+                    <span className="text-emerald-400">&quot;Dhruv&quot;</span>
+                    <span className="text-zinc-500">,</span>{' '}
+                    <span className="text-emerald-400">&quot;Sharan&quot;</span>
+                    <span className="text-zinc-500">,</span>{' '}
+                    <span className="text-emerald-400">&quot;Kailas&quot;</span>
+                    <span className="text-zinc-400">]</span>
+                    <span className="text-zinc-500">;</span>
+                  </div>
+                  <div>
+                    <span className="text-violet-400">const</span>{' '}
+                    <span className="text-sky-400">location</span>{' '}
+                    <span className="text-orange-400">=</span>{' '}
+                    <span className="text-emerald-400">&quot;Bengaluru&quot;</span>
+                    <span className="text-zinc-500">;</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Map below the editor */}
             <Card className="mt-8 overflow-hidden border-white/60 bg-canvas/40 shadow-[0_10px_44px_-12px_rgba(20,16,8,0.18)] backdrop-blur-2xl">
               <Image
                 src="/bengaluru-map.png"

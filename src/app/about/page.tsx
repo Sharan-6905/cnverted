@@ -133,20 +133,19 @@ export default function AboutPage() {
               From late nights in Indiranagar to early mornings in
               Kammanahalli — this is where Cnvrted came to life.
             </p>
+
+            <div className="mt-8 overflow-hidden rounded-2xl">
+              <Image
+                src="/bengaluru-map.png"
+                alt="Hand-drawn map of Bengaluru showing Indiranagar and Kammanahalli — the neighbourhoods where Cnvrted was built"
+                width={1280}
+                height={960}
+                className="h-auto w-full"
+                priority={false}
+              />
+            </div>
           </div>
         </Section>
-
-        {/* Full-bleed map */}
-        <div className="w-full">
-          <Image
-            src="/bengaluru-map.png"
-            alt="Hand-drawn map of Bengaluru showing Indiranagar and Kammanahalli — the neighbourhoods where Cnvrted was built"
-            width={1280}
-            height={960}
-            className="h-auto w-full"
-            priority={false}
-          />
-        </div>
       </main>
 
       <SiteFooter />

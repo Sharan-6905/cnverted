@@ -1,0 +1,62 @@
+.support-artwork-frame { height: 641px; }
+.support-artwork { position: absolute; inset: 0; width: 1440px; height: 641px; overflow: hidden; }
+.support-artwork img { position: absolute; max-width: none; }
+.support-trees { left: -64px; top: -49px; width: 1745px; height: 963px; }
+.support-help-fade { left: -1199px; top: -201px; }
+.support-cloud-crop { position: absolute; inset: 0; overflow: hidden; opacity: .48; }
+.support-clouds { left: -473.04px; top: -212.17px; width: 2403.9px; height: 1327.3px; }
+.support-slack-fade-bottom { left: -1465.9px; top: 146.1px; }
+.support-slack-fade-top { left: -301.1px; top: -178.1px; }
+.support-terms-crop { position: absolute; left: 0; top: 1px; width: 1442px; height: 683px; overflow: hidden; transform: scaleX(-1); }
+.support-terms-landscape { left: -1215.2px; top: -412.1px; width: 2691px; height: 1486px; }
+.support-privacy-landscape { left: -42px; top: -453px; width: 2043px; height: 1128px; }
+.support-legal-birds { left: 1313px; top: 487px; width: 96px; height: 33px; opacity: .54; }
+.support-legal-fade-bottom { left: -833.1px; top: 337.9px; }
+.support-legal-fade-top { left: -318.1px; top: -40.1px; }
+.support-privacy-fade-wrap { position: absolute; width: 2942px; height: 656.058px; left: -757.2px; top: 295.5px; transform: rotate(6.54deg); }
+.support-privacy-fade-wrap img { left: -76.1px; top: -76.1px; }
+.legal-content { position: relative; }
+.legal-heading { position: relative; padding-top: 294px; padding-left: 56px; }
+.legal-back { position: absolute; left: 0; top: 318px; color: #7c7c70; border-radius: 100%; }
+.figma-site .legal-heading h1 { font-size: clamp(44px, 5.6vw, 72px); line-height: 1.15; }
+.legal-updated, .legal-intro { max-width: 672px; color: #5f5f5f; font-size: 16px; line-height: 28px; }
+.legal-updated { margin-top: 16px; }
+.legal-intro { margin-top: 16px; }
+.legal-intro a { text-decoration: underline; text-underline-offset: 3px; }
+.legal-layout { position: relative; display: grid; grid-template-columns: minmax(0, 672px) minmax(200px, 240px); align-items: start; gap: 40px; max-width: 952px; padding-top: 64px; }
+.legal-prose { min-width: 0; color: #3a3a3a; font-size: 16px; line-height: 2; overflow-wrap: anywhere; }
+.legal-prose > section + section { margin-top: 40px; }
+.legal-prose section { scroll-margin-top: 32px; }
+.figma-site .legal-prose h2 { font-size: 32px; line-height: 1.25; letter-spacing: -.02em; }
+.legal-prose h2 > span { display: none; }
+.figma-site .legal-prose h3 { font-family: var(--font-design-sans), sans-serif; font-size: 17px; line-height: 1.6; font-weight: 500; letter-spacing: 0; }
+.legal-prose table { width: 100%; }
+.legal-prose th, .legal-prose td { vertical-align: top; }
+.legal-toc { position: sticky; top: 32px; max-height: calc(100svh - 64px); overflow-y: auto; color: #7d7c73; font-size: 13px; line-height: 1.5; }
+.legal-toc summary { list-style: none; cursor: pointer; }
+.legal-toc summary::-webkit-details-marker { display: none; }
+.figma-site .legal-toc h2 { font-size: 28px; line-height: 1.3; margin-bottom: 18px; }
+.legal-toc ol { display: grid; gap: 10px; }
+.legal-toc a { display: flex; align-items: baseline; gap: 8px; }
+.legal-toc a:hover, .legal-toc a[aria-current="location"] { color: var(--olive); }
+.legal-toc a span { font-size: 11px; min-width: 14px; }
+.design-legal-page .design-faq { padding-top: 120px; }
+@media (max-width: 1023px) {
+  .legal-heading { padding-top: 230px; padding-left: 0; }
+  .legal-back { position: static; display: inline-flex; margin-bottom: 20px; }
+  .legal-layout { grid-template-columns: minmax(0, 1fr); max-width: 736px; padding-top: 40px; gap: 36px; }
+  .legal-toc { position: static; max-height: none; grid-row: 1; border-block: 1px solid #e7e5dd; padding-block: 18px; }
+  .legal-toc summary::after { content: "+"; float: right; color: var(--olive); }
+  .legal-toc[open] summary::after { content: "−"; }
+  .figma-site .legal-toc h2 { display: inline; font-size: 24px; }
+  .legal-toc ol { margin-top: 18px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .support-artwork-frame > .illustration { min-width: 1000px; }
+  .legal-heading { padding-top: 160px; }
+  .legal-updated, .legal-intro { font-size: 15px; line-height: 26px; }
+  .legal-prose { font-size: 16px; line-height: 1.8; }
+  .figma-site .legal-prose h2 { font-size: 28px; }
+  .legal-toc ol { grid-template-columns: minmax(0, 1fr); }
+  .design-legal-page .design-faq { padding-top: 72px; }
+}

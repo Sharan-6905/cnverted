@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
 
 type Item = { id: string; label: string };
 
@@ -47,31 +46,23 @@ export function LegalToc() {
   if (items.length === 0) return null;
 
   return (
-    <nav
-      aria-label="On this page"
-      className="sticky top-24 hidden self-start lg:block"
-    >
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted-soft">
-        On this page
-      </p>
-      <ol className="space-y-1.5 border-l border-hairline">
+    <details className="legal-toc" open>
+      <summary><h2>On this page</h2></summary>
+      <nav aria-label="On this page">
+      <ol>
         {items.map((item, i) => (
           <li key={item.id}>
             <a
               href={`#${item.id}`}
-              className={cn(
-                "-ml-px flex gap-2 border-l py-0.5 pl-3 text-[13px] leading-snug smooth-transition transition-colors",
-                active === item.id
-                  ? "border-[#4FA8F5] text-ink"
-                  : "border-transparent text-muted hover:border-muted-soft hover:text-ink"
-              )}
+              aria-current={active === item.id ? "location" : undefined}
             >
-              <span className="font-mono text-[11px] text-muted-soft">{i + 1}</span>
+              <span>{i + 1}</span>
               {item.label}
             </a>
           </li>
         ))}
       </ol>
-    </nav>
+      </nav>
+    </details>
   );
 }

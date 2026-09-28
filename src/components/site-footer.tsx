@@ -8,7 +8,8 @@ import { BOOKING_URL } from "@/lib/booking";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/logo";
-import { LinkedInIcon, XIcon, InstagramIcon, DiscordIcon } from "@/components/social-icons";
+import { LinkedInIcon, XIcon, InstagramIcon } from "@/components/social-icons";
+import { SlackLogo } from "@/components/slack-logo";
 import { supabase } from "@/lib/supabase";
 
 const COLUMNS = [
@@ -25,6 +26,7 @@ const COLUMNS = [
       { label: "Blog", href: "/blogs" },
       { label: "Case Studies", href: "/case-studies" },
       { label: "Help Center", href: "/help-center" },
+      { label: "Join Slack", href: "/join-slack" },
     ],
   },
   {
@@ -44,9 +46,9 @@ const SOCIAL_LINKS = [
   { label: "X", href: "https://x.com/cnvrted", Icon: XIcon },
   { label: "Instagram", href: "https://www.instagram.com/cnvrted", Icon: InstagramIcon },
   {
-    label: "Discord",
-    href: "https://join.slack.com/t/cnvrted/shared_invite/zt-4388qsrbr-x~RlkFSChnmWY7JojhV1fA",
-    Icon: DiscordIcon,
+    label: "Join Slack",
+    href: "/join-slack",
+    Icon: SlackLogo,
   },
 ];
 
@@ -183,8 +185,8 @@ export function SiteFooter() {
               <a
                 key={label}
                 href={href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={href.startsWith("https") ? "_blank" : undefined}
+                rel={href.startsWith("https") ? "noopener noreferrer" : undefined}
                 aria-label={label}
                 className="text-on-dark/60 smooth-transition transition-colors hover:text-on-dark"
               >

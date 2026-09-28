@@ -71,6 +71,20 @@ export const HELP_ARTICLES = [
     answer: "Email work@cnvrted.com with a description of the issue and any relevant screenshots. Please leave out passwords and other sensitive details.",
     link: { label: "Email the team", href: "mailto:work@cnvrted.com" },
   },
+  {
+    id: "community",
+    category: "Account & support",
+    question: "How can I join the Cnvrted Slack community?",
+    answer: "Tell us your name, email, business name, and business domain. You can add a website too. Once your answers reach our team, you’ll get a link to join Slack.",
+    link: { label: "Join our Slack community", href: "/join-slack" },
+  },
+  {
+    id: "terms",
+    category: "Account & support",
+    question: "Where can I find the Terms & Conditions?",
+    answer: "Our Terms & Conditions cover using Cnvrted, account responsibilities, plans, and support. Read them alongside our Privacy Policy.",
+    link: { label: "Read the Terms & Conditions", href: "/terms" },
+  },
 ] satisfies Array<{
   id: string;
   category: (typeof HELP_CATEGORIES)[number];

@@ -38,6 +38,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...blogs,
+    { url: `${SITE_URL}/help-center`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/join-slack`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/careers`, changeFrequency: "weekly", priority: 0.7 },
     ...CAREER_ROLES.map((role) => ({
       url: `${SITE_URL}/careers/${role.slug}`,

@@ -11,12 +11,12 @@ import { ProductMenu } from "@/components/product-menu";
 import { PRODUCT_GROUPS } from "@/lib/product-features";
 import { cn } from "@/lib/utils";
 
-const SLACK_INVITE_URL =
-  "https://join.slack.com/t/cnvrted/shared_invite/zt-4388qsrbr-x~RlkFSChnmWY7JojhV1fA";
+const COMMUNITY_URL = "/join-slack";
 
 const NAV = [
   { label: "Blogs", href: "/blogs" },
   { label: "Pricing", href: "/pricing" },
+  { label: "Help Center", href: "/help-center" },
 ];
 
 export function SiteHeader() {
@@ -62,9 +62,7 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-2 sm:gap-2.5">
           <a
-            href={SLACK_INVITE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={COMMUNITY_URL}
             className={cn(
               buttonVariants({ variant: "ghost", size: "sm" }),
               "hidden text-muted hover:text-ink sm:inline-flex",
@@ -217,9 +215,7 @@ export function SiteHeader() {
                   Get started
                 </a>
                 <a
-                  href={SLACK_INVITE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={COMMUNITY_URL}
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "sm" }),
                     "w-full justify-center text-muted hover:text-ink",

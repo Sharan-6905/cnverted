@@ -19,12 +19,13 @@ const columns = [
       ["Blogs", "/blogs"],
       ["Case Studies", "/case-studies"],
       ["Help Center", "/help-center"],
+      ["Join Slack", "/join-slack"],
     ],
   },
   {
     title: "Company",
     links: [
-      ["Terms of Service", "/terms"],
+      ["Terms & Conditions", "/terms"],
       ["Privacy Policy", "/privacy"],
       ["Contact", "/contact"],
     ],
@@ -43,8 +44,8 @@ const social = [
     image: assets.home.imgIcon4,
   },
   {
-    label: "Community",
-    href: "https://join.slack.com/t/cnvrted/shared_invite/zt-4388qsrbr-x~RlkFSChnmWY7JojhV1fA",
+    label: "Join Slack",
+    href: "/join-slack",
     image: assets.home.imgIcon5,
   },
 ];
@@ -71,8 +72,8 @@ export function IllustratedFooter() {
               <a
                 key={item.label}
                 href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={item.href.startsWith("https") ? "_blank" : undefined}
+                rel={item.href.startsWith("https") ? "noopener noreferrer" : undefined}
                 aria-label={item.label}
               >
                 <Image src={item.image} alt="" width={26} height={26} />

@@ -9,7 +9,9 @@ Design: [Cnvrted website](https://www.figma.com/design/OjyEeHT6HACp1iY71CWyYI/Un
 - `/about`: landscape, story, gallery and Bengaluru map. The dark story media area matches the empty frame in Figma; no video was supplied.
 - `/careers`: searchable roles and category filters.
 - `/careers/[slug]`: role details and an application form with the selected role prefilled. Existing roles are retained alongside the Figma Marketing Lead role.
-- `/help-center`: illustrated Help Center from Figma frame `120:2636`, with working search, categories, and five-answer pagination.
+- `/help-center`: illustrated Help Center updated to Figma frame `127:4175`, with working search, categories, and five-answer pagination.
+- `/terms` and `/privacy`: illustrated legal pages from frames `127:5043` and `127:5469`, preserving the complete policies and a linked contents rail.
+- `/join-slack`: five-step community form from frames `127:6000` through `127:7425`, followed by the immediate Slack invitation from `127:7280` after successful email submission.
 
 All five career detail pages use role-specific copy from `src/lib/career-details.ts`: an overview, two focus areas, responsibilities, and candidate requirements. AI/ML covers signal processing and model evaluation; GTM Engineering covers workflows and integrations; GTM Lead covers ICP strategy and pipeline; Marketing covers content and demand; the Founders Office internship covers research and operational projects. The generic fallback for non-marketing roles is removed. A typed role-slug map requires a full description for each listed role. Short listing summaries remain in `src/lib/careers.ts`, so the full job descriptions are not imported by the client-side search or application form. Existing locations, employment types, and the Marketing Lead experience range are preserved.
 
@@ -65,7 +67,7 @@ npm run build
 npm run start -- -p 3020
 ```
 
-Use the existing Supabase environment configuration for application storage. Email notifications require `RESEND_API_KEY`; the three email endpoints now return a controlled 503 when the key is absent, instead of failing during the build. The existing rate limits and validation remain in place.
+Use the existing Supabase environment configuration for application storage. Email notifications require a server-side `RESEND_API_KEY` and a verified `cnvrted.com` sending domain in Resend. Email endpoints return a controlled 503 when the key is absent, instead of failing during the build. Keep the key in ignored `.env.local` for development and configure it separately in the hosting environment for deployment. The existing rate limits and validation remain in place.
 
 ## Verification
 
@@ -99,3 +101,19 @@ The new Help Center uses Figma frame `120:2636`: the original hands artwork and 
 Original Figma assets are saved as `public/figma/help-*`: the 3524×1599 PNG, bottom fade (4064.2×636.2), top fade (1946.2×441.2), search and category SVGs (32×32), and pagination SVG (147×14.7279). The artwork retains its Figma coordinates inside `ScaledArtwork`; SVG root dimensions are preserved. No temporary Figma URLs are used in the app.
 
 Verified desktop appearance against the Figma screenshot, responsive overflow at 320, 390, 768, 1024, and 1440px, image loading/geometry, combined search and category filters, pagination reset, empty results, and keyboard controls. TypeScript and whitespace checks pass. All work stays local.
+
+## Support, legal pages, and Slack flow — September 28 update
+
+The updated Help Center replaces the earlier hands illustration with the tree-and-cloud artwork in Figma frame `127:4175`. Terms & Conditions (`127:5043`) and Privacy Policy (`127:5469`) now share the illustrated header, typography, navigation, FAQ, and footer. All 20 terms clauses and 13 privacy clauses remain available. A collapsible contents rail links to each section; long tables and text reflow on phones. Terms reflect Spark's 40 free credits, and privacy copy describes the community form's email handling.
+
+`SupportArtwork` reuses existing landscape assets where their bytes match the new exports. New Figma fades and the privacy landscape are local files in `public/figma/`. The original SVG dimensions are preserved. No temporary Figma asset URLs are used.
+
+Help Center now has 12 answers, including links to the community flow and terms. Header, footer, and legacy navigation link to `/help-center`, `/terms`, `/privacy`, and `/join-slack`; the sitemap includes both new destinations.
+
+The community form follows the five Figma steps: full name, email address, business name, business domain (industry), and optional website. Back retains answers; Enter advances; invalid fields get focused feedback. A successful `POST /api/community` emails answers to the fixed recipient `work@cnvrted.com` and then reveals the “Join Slack” button. It does not create an account or join the workspace automatically. A failed request retains the form for retry and never displays a success message. The browser request has a 15-second timeout and is cancelled on unmount. Credentials stay server-side; answers are not saved to browser storage or URL parameters.
+
+The endpoint validates and bounds the request body, checks its origin against the browser-facing host, rate-limits submissions, escapes HTML, and uses a deterministic provider idempotency key to prevent duplicate emails on retry. Run `node scripts/verify-community.cjs` for validation, escaping, optional website, proxy origin, request limit, missing-key, provider-failure, and retry checks. The test harness sends no email.
+
+Verification: production Webpack build, TypeScript, and whitespace checks passed. Help pagination, combined filters, empty-state reset, mobile menu links, legal contents toggling, privacy retention table, and section anchors were checked. Updated pages fit 1280px desktop and 390px phone viewports without horizontal overflow. An isolated production preview with a mocked Resend response confirmed that a delivery failure can be retried successfully and reveals the Slack button only after success. The invitation was opened read-only and displays the Cnvrted workspace invitation; no Slack account was created and no real email was sent.
+
+Email setup remains incomplete: the local Resend key authenticates, but its `cnvrted.com` domain is marked `failed`. On September 28, the public Cloudflare DNS signing key at `resend._domainkey.cnvrted.com` differed from the key expected by that Resend account. `send.cnvrted.com` also had MX records for both `ap-northeast-1` and `us-east-1`. Confirm which Resend account owns the existing sender before replacing any records. The local key is in ignored `.env.local`; the deployment environment needs its own valid Resend configuration. No live DNS records were changed by this website update.

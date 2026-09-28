@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { Section } from "@/components/section";
+import { IllustratedLegalPage } from "@/components/illustrated/legal-page";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
-import { LegalToc } from "@/components/legal-toc";
 import { Clause, Bullets, Mail } from "@/components/legal";
 
 export const metadata: Metadata = {
@@ -12,7 +9,7 @@ export const metadata: Metadata = {
     "What Cnvrted collects, why, who sees it, and how to get your information removed.",
 };
 
-const LAST_UPDATED = "25 August 2026";
+const LAST_UPDATED = "28 September 2026";
 
 const RETENTION: [string, string][] = [
   ["Account and profile data", "Life of the account, then 90 days"],
@@ -27,17 +24,12 @@ const RETENTION: [string, string][] = [
 
 export default function PrivacyPage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <BreadcrumbSchema trail={[{ name: "Privacy" }]} />
-      <SiteHeader />
-      <main className="flex-1">
-        <Section
-          eyebrow="Legal"
-          title="Privacy Policy"
-          description={`Last updated: ${LAST_UPDATED}. This policy explains what Cnvrted collects, why, who sees it, and how you get it removed.`}
-        >
-          <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-14">
-            <div className="max-w-2xl space-y-10 text-[15px] leading-relaxed text-body">
+    <IllustratedLegalPage
+      variant="privacy"
+      title="Privacy Policy"
+      lastUpdated={LAST_UPDATED}
+      description="This policy explains what Cnvrted collects, why, who sees it, and how you get it removed."
+      intro={(
             <p>
               It applies to cnvrted.com, beta.cnvrted.com and our APIs (together, the
               &ldquo;Services&rdquo;). &ldquo;Cnvrted&rdquo;, &ldquo;we&rdquo; and
@@ -49,6 +41,9 @@ export default function PrivacyPage() {
               </a>
               .
             </p>
+      )}
+    >
+      <BreadcrumbSchema trail={[{ name: "Privacy Policy" }]} />
 
             <Clause n={1} title="The short version">
               <p>Most people reading this fall into one of two groups.</p>
@@ -207,6 +202,7 @@ export default function PrivacyPage() {
               <Bullets
                 items={[
                   "Forms. Early-access registrations, waitlist signups and career applications: the details you enter, which we store with our database provider.",
+                  "Slack community sign-ups. Your name, email, business name, business domain and optional website are sent to our team through Resend. After submission, you can follow an invitation link to Slack; joining there is governed by Slack’s own terms and privacy policy.",
                   "Server logs. Our hosting provider records IP address, device and browser type, referring URL and timestamps as part of serving and securing the site.",
                   "Cookies. We use only cookies that are strictly necessary — keeping you signed in to the product and keeping sessions secure. We do not run advertising or analytics cookies, and there is no third-party tracking on this site. If that changes we will add a consent banner before it does.",
                 ]}
@@ -479,12 +475,6 @@ export default function PrivacyPage() {
                 Privacy, grievances and everything else: <Mail address="work@cnvrted.com" />
               </p>
             </Clause>
-          </div>
-            <LegalToc />
-          </div>
-        </Section>
-      </main>
-      <SiteFooter />
-    </div>
+    </IllustratedLegalPage>
   );
 }

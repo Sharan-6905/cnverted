@@ -1,31 +1,23 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { Section } from "@/components/section";
+import { IllustratedLegalPage } from "@/components/illustrated/legal-page";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
-import { LegalToc } from "@/components/legal-toc";
 import { Clause, Bullets, Mail, Caps } from "@/components/legal";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Cnvrted",
+  title: "Terms & Conditions — Cnvrted",
   description: "The terms that govern your use of the Cnvrted platform.",
 };
 
-const LAST_UPDATED = "26 August 2026";
+const LAST_UPDATED = "28 September 2026";
 
 export default function TermsPage() {
   return (
-    <div className="flex min-h-screen flex-col">
-      <BreadcrumbSchema trail={[{ name: "Terms" }]} />
-      <SiteHeader />
-      <main className="flex-1">
-        <Section
-          eyebrow="Legal"
-          title="Terms of Service"
-          description={`Last updated: ${LAST_UPDATED}. These terms govern your access to and use of Cnvrted.`}
-        >
-          <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_240px] lg:gap-14">
-            <div className="max-w-2xl space-y-10 text-[15px] leading-relaxed text-body">
+    <IllustratedLegalPage
+      variant="terms"
+      title="Terms & Conditions"
+      lastUpdated={LAST_UPDATED}
+      description="These terms govern your access to and use of Cnvrted."
+      intro={(
             <p>
               These Terms are between you and Cnvrted Pvt Ltd, a company incorporated in India
               with its registered office at #41, VJ Infinity, 2nd Cross, Doctors Layout, B.
@@ -34,6 +26,9 @@ export default function TermsPage() {
               our APIs (together, the &ldquo;Platform&rdquo;). Using the Platform means you
               accept them. If you are acting for an organisation, you confirm you can bind it.
             </p>
+      )}
+    >
+      <BreadcrumbSchema trail={[{ name: "Terms & Conditions" }]} />
 
             <Clause n={1} title="What Cnvrted does">
               <p>
@@ -79,9 +74,9 @@ export default function TermsPage() {
                 <a href="/pricing" className="text-ink underline underline-offset-2">
                   cnvrted.com/pricing
                 </a>
-                . Prices are quoted in US Dollars. Spark is a one-off charge for four days of
-                access; Surge is billed monthly in advance; Dominion is priced by agreement.
-                Plans are currently arranged with our team rather than through self-service
+                . Spark includes 40 free credits. Paid prices are quoted in US Dollars;
+                Surge is billed monthly in advance and Dominion is priced by agreement.
+                Paid plans are currently arranged with our team rather than through self-service
                 checkout, and payment terms are confirmed to you in writing before your first
                 invoice.
               </p>
@@ -91,8 +86,8 @@ export default function TermsPage() {
                 price are set out at the time and it is non-refundable.
               </p>
               <p>
-                <strong className="font-semibold text-ink">Refunds.</strong> Spark is
-                non-refundable once access starts. Surge is not refunded for a partial month. For
+                <strong className="font-semibold text-ink">Refunds.</strong> Surge is
+                not refunded for a partial month. For
                 longer commitments we may refund the unused portion at our discretion, less any
                 discount you received for committing.
               </p>
@@ -331,12 +326,6 @@ export default function TermsPage() {
                 Notices and everything else: <Mail address="work@cnvrted.com" />
               </p>
             </Clause>
-          </div>
-            <LegalToc />
-          </div>
-        </Section>
-      </main>
-      <SiteFooter />
-    </div>
+    </IllustratedLegalPage>
   );
 }

@@ -8,11 +8,12 @@ import { Button } from "@/components/ui/button";
 import { assets } from "./assets";
 
 const links = [
+  { label: "Help Center", href: "/help-center", icon: assets.home.imgInfo },
   { label: "Blogs", href: "/blogs", icon: assets.home.imgBookOpenText },
   { label: "About Us", href: "/about", icon: assets.home.imgInfo },
   {
     label: "Join Slack",
-    href: "https://join.slack.com/t/cnvrted/shared_invite/zt-4388qsrbr-x~RlkFSChnmWY7JojhV1fA",
+    href: "/join-slack",
     icon: assets.home.imgGroup1437254394,
   },
 ];

@@ -1,12 +1,4 @@
 .help-center-content { position: relative; }
-.help-artwork-frame { height: 641px; }
-.help-artwork-frame::after { content: ""; position: absolute; inset: auto 0 0; height: 80px; background: linear-gradient(transparent, #fff); }
-.help-artwork { position: absolute; top: 1px; width: 1440px; height: 641px; overflow: hidden; }
-.help-artwork-background { position: absolute; left: 137px; top: -23px; width: 1440px; height: 641px; }
-.help-artwork-background img { position: absolute; max-width: none; }
-.help-artwork-hands { left: -775px; top: -479px; width: 3524px; height: 1599px; }
-.help-artwork-fade-bottom { left: -1336.1px; top: 203.9px; }
-.help-artwork-fade-top { left: -301.1px; top: -178.1px; }
 .help-hero { position: relative; padding: 232px 24px 20px; text-align: center; }
 .figma-site .help-hero h1 { font-size: clamp(48px, 6.4vw, 82px); line-height: 1.2; letter-spacing: -.025em; }
 .help-hero > p { max-width: 517px; margin: 10px auto 0; font-size: 20px; line-height: 32px; color: #5f5f5f; }
@@ -44,7 +36,6 @@
   .help-question p { line-height: 26px; }
 }
 @media (max-width: 600px) {
-  .help-artwork-frame > .illustration { min-width: 1000px; }
   .help-hero { padding: 160px 24px 28px; }
   .help-hero > p { margin-top: 14px; font-size: 17px; line-height: 27px; }
   .help-filters { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-bottom: 28px; }

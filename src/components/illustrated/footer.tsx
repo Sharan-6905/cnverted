@@ -1,0 +1,137 @@
+import Link from "next/link";
+import Image from "next/image";
+import { assets } from "./assets";
+import { ScaledArtwork } from "./scaled-artwork";
+
+const columns = [
+  {
+    title: "About Us",
+    links: [
+      ["About us", "/about"],
+      ["Careers", "/careers"],
+      ["Partners", "/contact"],
+      ["Our customers", "/case-studies"],
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      ["Blogs", "/blogs"],
+      ["Case Studies", "/case-studies"],
+      ["Help Center", "/help-center"],
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      ["Terms of Service", "/terms"],
+      ["Privacy Policy", "/privacy"],
+      ["Contact", "/contact"],
+    ],
+  },
+];
+const social = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/cnvrted",
+    image: assets.home.imgIcon2,
+  },
+  { label: "X", href: "https://x.com/cnvrted", image: assets.home.imgIcon3 },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/company/cnvrted",
+    image: assets.home.imgIcon4,
+  },
+  {
+    label: "Community",
+    href: "https://join.slack.com/t/cnvrted/shared_invite/zt-4388qsrbr-x~RlkFSChnmWY7JojhV1fA",
+    image: assets.home.imgIcon5,
+  },
+];
+export function IllustratedFooter() {
+  return (
+    <footer className="design-footer">
+      <div className="design-footer-columns design-container">
+        <div className="design-footer-brand">
+          <Link href="/" aria-label="Cnvrted home">
+            <Image
+              src={assets.home.imgCnvrted}
+              alt="Cnvrted"
+              width={193}
+              height={40}
+            />
+          </Link>
+          <p>
+            Cnvrted turns buying signals into the right conversations. Find your
+            ideal customers, understand what changed, and reach out at the right
+            time.
+          </p>
+          <div className="design-social">
+            {social.map((item) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={item.label}
+              >
+                <Image src={item.image} alt="" width={26} height={26} />
+              </a>
+            ))}
+          </div>
+        </div>
+        {columns.map((column) => (
+          <nav key={column.title} aria-label={column.title}>
+            <h2>{column.title}</h2>
+            <ul>
+              {column.links.map(([label, href]) => (
+                <li key={label}>
+                  <Link href={href}>{label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))}
+      </div>
+      <div className="design-footer-legal design-container">
+        <Link href="/" className="design-footer-signature">
+          <Image
+            src={assets.home.imgImageCnvrted}
+            alt=""
+            width={40}
+            height={32}
+          />
+          <span>Cnvrted</span>
+        </Link>
+        <small>
+          © {new Date().getFullYear()} Cnvrted. All rights reserved.
+        </small>
+      </div>
+      <ScaledArtwork width={1440} height={465} className="design-footer-art">
+        <Image
+          src={assets.home.imgImage53}
+          alt=""
+          width={276}
+          height={414}
+          className="absolute max-w-none left-[23px] top-[0px] h-[414px] w-[276px]"
+          sizes="276px"
+        />
+        <Image
+          src={assets.home.imgImage51}
+          alt=""
+          width={1491}
+          height={497}
+          className="absolute max-w-none left-[-51px] top-[6px] h-[497px] w-[1491px]"
+          sizes="100vw"
+        />
+        <Image
+          src={assets.home.imgVector18}
+          alt=""
+          width={792}
+          height={164}
+          className="absolute max-w-none left-[483px] top-[87px]"
+        />
+      </ScaledArtwork>
+    </footer>
+  );
+}

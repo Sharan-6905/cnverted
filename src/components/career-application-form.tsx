@@ -7,20 +7,19 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import { supabase } from "@/lib/supabase";
+import { CAREER_ROLES } from "@/lib/careers";
 
-const ROLE_OPTIONS = [
-  "AI/ML Engineer",
-  "GTM Engineer",
-  "GTM Lead",
-  "Founders Office Intern (In batches)",
-];
+const ROLE_OPTIONS = CAREER_ROLES.map((role) => role.title);
 
-export function CareerApplicationForm() {
-  const [open, setOpen] = useState(false);
+export function CareerApplicationForm({
+  initialRole = "",
+  defaultOpen = false,
+}: { initialRole?: string; defaultOpen?: boolean } = {}) {
+  const [open, setOpen] = useState(defaultOpen);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState(initialRole);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -32,33 +31,40 @@ export function CareerApplicationForm() {
     setSubmitting(true);
     setSubmitError(null);
 
-    const { error } = await supabase.from("career_applications").insert({
-      full_name: name,
-      phone,
-      email,
-      role,
-    });
+    try {
+      const { error } = await supabase.from("career_applications").insert({
+        full_name: name,
+        phone,
+        email,
+        role,
+      });
 
-    if (error) {
+      if (error) {
+        setSubmitError(
+          error.code === "23505"
+            ? "You've already applied with that email — we've got it."
+            : "Something went wrong — please try again.",
+        );
+        setSubmitting(false);
+        return;
+      }
+
+      // Confirmation email is best-effort — a failure here shouldn't block the
+      // success screen, since the application is already saved.
+      fetch("/api/career-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name }),
+      }).catch(() => {});
+
+      setSubmitted(true);
+      setSubmitting(false);
+    } catch {
       setSubmitError(
-        error.code === "23505"
-          ? "You've already applied with that email — we've got it."
-          : "Something went wrong — please try again."
+        "We couldn’t send your application. Please try again or email info@cnvrted.com.",
       );
       setSubmitting(false);
-      return;
     }
-
-    // Confirmation email is best-effort — a failure here shouldn't block the
-    // success screen, since the application is already saved.
-    fetch("/api/career-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, name }),
-    }).catch(() => {});
-
-    setSubmitted(true);
-    setSubmitting(false);
   }
 
   if (submitted) {
@@ -96,73 +102,95 @@ export function CareerApplicationForm() {
             Join with us
           </h3>
           <form onSubmit={handleSubmit} className="mt-5 space-y-3">
-        <div>
-          <label htmlFor="career-name" className="mb-1.5 block text-sm font-medium text-ink">
-            Name
-          </label>
-          <Input
-            id="career-name"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Your full name"
-          />
-        </div>
+            <div>
+              <label
+                htmlFor="career-name"
+                className="mb-1.5 block text-sm font-medium text-ink"
+              >
+                Name
+              </label>
+              <Input
+                id="career-name"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your full name"
+              />
+            </div>
 
-        <div>
-          <label htmlFor="career-phone" className="mb-1.5 block text-sm font-medium text-ink">
-            Phone
-          </label>
-          <Input
-            id="career-phone"
-            type="tel"
-            required
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            placeholder="Your phone number"
-          />
-        </div>
+            <div>
+              <label
+                htmlFor="career-phone"
+                className="mb-1.5 block text-sm font-medium text-ink"
+              >
+                Phone
+              </label>
+              <Input
+                id="career-phone"
+                type="tel"
+                required
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="Your phone number"
+              />
+            </div>
 
-        <div>
-          <label htmlFor="career-email" className="mb-1.5 block text-sm font-medium text-ink">
-            Email
-          </label>
-          <Input
-            id="career-email"
-            type="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your mail"
-          />
-        </div>
+            <div>
+              <label
+                htmlFor="career-email"
+                className="mb-1.5 block text-sm font-medium text-ink"
+              >
+                Email
+              </label>
+              <Input
+                id="career-email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your mail"
+              />
+            </div>
 
-        <div>
-          <label htmlFor="career-role" className="mb-1.5 block text-sm font-medium text-ink">
-            Role applied for
-          </label>
-          <select
-            id="career-role"
-            required
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="h-11 w-full rounded-xl border border-hairline bg-canvas px-4 text-sm text-ink smooth-transition transition-colors focus:border-ink focus:outline-none focus:ring-2 focus:ring-brand-teal/25"
-          >
-            <option value="" disabled>
-              Select a role
-            </option>
-            {ROLE_OPTIONS.map((r) => (
-              <option key={r} value={r}>
-                {r}
-              </option>
-            ))}
-          </select>
-        </div>
+            <div>
+              <label
+                htmlFor="career-role"
+                className="mb-1.5 block text-sm font-medium text-ink"
+              >
+                Role applied for
+              </label>
+              <select
+                id="career-role"
+                required
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                className="h-11 w-full rounded-xl border border-hairline bg-canvas px-4 text-sm text-ink smooth-transition transition-colors focus:border-ink focus:outline-none focus:ring-2 focus:ring-brand-teal/25"
+              >
+                <option value="" disabled>
+                  Select a role
+                </option>
+                {ROLE_OPTIONS.map((r) => (
+                  <option key={r} value={r}>
+                    {r}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-        <Button type="submit" variant="primary" size="md" className="w-full" disabled={submitting}>
-          {submitting ? "Submitting…" : "Submit"}
-        </Button>
-        {submitError && <p className="mt-2 text-center text-xs text-red-600">{submitError}</p>}
+            <Button
+              type="submit"
+              variant="primary"
+              size="md"
+              className="w-full"
+              disabled={submitting}
+            >
+              {submitting ? "Submitting…" : "Submit"}
+            </Button>
+            {submitError && (
+              <p role="alert" className="mt-2 text-center text-xs text-red-600">
+                {submitError}
+              </p>
+            )}
           </form>
         </Card>
       </motion.div>

@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS as blogPosts } from "@/lib/blog-posts";
+import { CAREER_ROLES } from "@/lib/careers";
 
 const SITE_URL = "https://www.cnvrted.com";
 
@@ -37,6 +38,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...blogs,
+    { url: `${SITE_URL}/careers`, changeFrequency: "weekly", priority: 0.7 },
+    ...CAREER_ROLES.map((role) => ({
+      url: `${SITE_URL}/careers/${role.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
     {
       url: `${SITE_URL}/contact`,
       lastModified: new Date(),

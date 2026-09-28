@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ArrowRight, Check, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { BOOKING_URL } from "@/lib/booking";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/logo";
@@ -15,7 +16,7 @@ const COLUMNS = [
     heading: "Platform",
     links: [
       { label: "Pricing", href: "/pricing" },
-      { label: "Request Demo", href: "/early-access" },
+      { label: "Book a call", href: BOOKING_URL },
     ],
   },
   {
@@ -31,7 +32,7 @@ const COLUMNS = [
     links: [
       { label: "About Us", href: "/about" },
       { label: "Contact", href: "/contact" },
-      { label: "Book a Call", href: "/contact#book" },
+      { label: "Book a call", href: BOOKING_URL },
       { label: "Careers", href: "/careers" },
       { label: "Learn from us", href: "/learn" },
     ],

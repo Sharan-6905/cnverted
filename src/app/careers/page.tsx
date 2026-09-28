@@ -1,98 +1,43 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { Section } from "@/components/section";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { CareerApplicationForm } from "@/components/career-application-form";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { IllustratedShell } from "@/components/illustrated/shell";
+import { IllustratedHero, DesignLink } from "@/components/illustrated/hero";
+import { RoleList } from "@/components/illustrated/role-list";
 
 export const metadata: Metadata = {
   title: "Careers — Cnvrted",
-  description: "We're hiring. Open roles at Cnvrted.",
+  description:
+    "Join the Cnvrted team. Explore open roles in marketing, engineering, go-to-market and operations.",
+  alternates: { canonical: "/careers" },
 };
-
-const ROLES = [
-  {
-    title: "AI/ML Engineer",
-    location: "Remote",
-    type: "Full-time",
-    description:
-      "Build and ship the models and pipelines that turn raw signal into scored, ready-to-work accounts.",
-  },
-  {
-    title: "GTM Engineer",
-    location: "Remote",
-    type: "Full-time",
-    description:
-      "Sit between product and revenue — build the workflows and integrations that get signal into reps' hands, fast.",
-  },
-  {
-    title: "GTM Lead",
-    location: "Remote",
-    type: "Full-time",
-    description:
-      "Own go-to-market strategy end to end — from positioning to pipeline — as one of our earliest hires.",
-  },
-  {
-    title: "Founders Office Intern (In batches)",
-    location: "Remote",
-    type: "Internship",
-    description:
-      "Work directly with the founders across product, GTM, and ops — high ownership, fast learning.",
-  },
-];
-
 export default function CareersPage() {
   return (
-    <div className="relative flex min-h-screen flex-col">
-      <div
-        className="pointer-events-none fixed inset-0 -z-10 bg-cover bg-center"
-        style={{ backgroundImage: "url(/banners/careers-bg.png)" }}
-        aria-hidden="true"
-      />
-      <div className="pointer-events-none fixed inset-0 -z-10 bg-white/90" aria-hidden="true" />
+    <IllustratedShell className="design-careers-page">
       <BreadcrumbSchema trail={[{ name: "Careers" }]} />
-      <SiteHeader />
-      <main className="flex-1">
-        <Section
-          centered
-          eyebrow="Careers"
-          title={
-            <>
-              Help us build{" "}
-              <span className="text-accent">the future of outbound</span>.
-            </>
-          }
-          description="We're a small team moving fast. Here's what we're hiring for right now."
-        >
-          <div className="space-y-4">
-            {ROLES.map((role) => (
-              <Card key={role.title} className="border-blue-200/50 bg-blue-50/60 p-6 sm:p-7">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <h3 className="text-lg font-semibold text-ink">{role.title}</h3>
-                    <p className="mt-1 text-sm text-muted">
-                      {role.location} · {role.type}
-                    </p>
-                  </div>
-                  <Badge variant="clay" size="sm">
-                    Hiring
-                  </Badge>
-                </div>
-                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-body">
-                  {role.description}
-                </p>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-16">
-            <CareerApplicationForm />
-          </div>
-        </Section>
-      </main>
-      <SiteFooter />
-    </div>
+      <IllustratedHero
+        kind="careers"
+        title="Join our team"
+        description="Help us turn signals across the web into better customer conversations. Join our team across engineering, marketing, go-to-market, and operations."
+      >
+        <DesignLink href="/contact" secondary>
+          Contact
+        </DesignLink>
+        <DesignLink href="#open-roles">Open Roles</DesignLink>
+      </IllustratedHero>
+      <section
+        id="open-roles"
+        className="design-open-roles design-container"
+        aria-labelledby="roles-title"
+      >
+        <div className="design-section-heading">
+          <h2 id="roles-title">Open Roles</h2>
+          <p>
+            Help us build the future of outbound. Find your place on the Cnvrted
+            team.
+          </p>
+        </div>
+        <RoleList />
+      </section>
+    </IllustratedShell>
   );
 }

@@ -1,9 +1,12 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { emailShell } from "@/lib/email-template";
-import { escapeHtml, isValidEmail, rateLimit, readJsonBody } from "@/lib/api-safety";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import {
+  escapeHtml,
+  isValidEmail,
+  rateLimit,
+  readJsonBody,
+} from "@/lib/api-safety";
 
 export async function POST(req: Request) {
   if (!rateLimit(req)) {
@@ -32,6 +35,16 @@ export async function POST(req: Request) {
     `,
   });
 
+  // Email credentials are only needed when handling a request, not at build time.
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    return NextResponse.json(
+      { error: "Email is temporarily unavailable" },
+      { status: 503 },
+    );
+  }
+  const resend = new Resend(apiKey);
+
   const { error } = await resend.emails.send({
     from: "Cnvrted <work@cnvrted.com>",
     to: email,
@@ -42,7 +55,10 @@ export async function POST(req: Request) {
   if (error) {
     // the provider's message can carry account detail — keep it server-side
     console.error("waitlist-email send failed:", error);
-    return NextResponse.json({ error: "Could not send email" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Could not send email" },
+      { status: 500 },
+    );
   }
 
   return NextResponse.json({ ok: true });

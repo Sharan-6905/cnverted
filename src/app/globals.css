@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Keep mobile form text readable without triggering focus zoom on iOS. */
+@media (max-width: 767px) {
+  :is(input, select, textarea):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]) {
+    font-size: 16px;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,16 +22,32 @@ const NAV = [
 export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileProductOpen, setMobileProductOpen] = useState(false);
+  const mobileTrigger = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const closeMenu = () => {
+      setMobileOpen(false);
+      setMobileProductOpen(false);
+    };
+    desktop.addEventListener("change", closeMenu);
+    return () => desktop.removeEventListener("change", closeMenu);
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 border-b border-hairline bg-canvas/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2.5" aria-label="Cnvrted home">
+        <Link
+          href="/"
+          className="flex items-center gap-2.5"
+          aria-label="Cnvrted home"
+        >
           <Logo className="h-9 w-auto" />
-          <span className="text-[17px] font-semibold tracking-tight">Cnvrted</span>
+          <span className="text-[17px] font-semibold tracking-tight">
+            Cnvrted
+          </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-8 lg:flex">
           <ProductMenu />
           {NAV.map((item) => (
             <Link
@@ -51,7 +67,7 @@ export function SiteHeader() {
             rel="noopener noreferrer"
             className={cn(
               buttonVariants({ variant: "ghost", size: "sm" }),
-              "hidden text-muted hover:text-ink sm:inline-flex"
+              "hidden text-muted hover:text-ink sm:inline-flex",
             )}
           >
             <SlackLogo className="h-[18px] w-[18px] saturate-[1.35]" />
@@ -61,17 +77,24 @@ export function SiteHeader() {
             href="https://beta.cnvrted.com"
             className={cn(
               buttonVariants({ variant: "primary", size: "sm" }),
-              "hidden bg-gradient-to-r from-brand-navy to-[#4FA8F5] hover:opacity-90 sm:inline-flex"
+              "hidden bg-gradient-to-r from-brand-navy to-[#4FA8F5] hover:opacity-90 sm:inline-flex",
             )}
           >
             Get started
           </a>
           <button
+            ref={mobileTrigger}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            aria-controls="site-mobile-navigation"
             onClick={() => setMobileOpen((v) => !v)}
-            className="ml-1 flex h-9 w-9 items-center justify-center rounded-lg text-ink md:hidden"
+            className="ml-1 flex h-11 w-11 items-center justify-center rounded-lg text-ink lg:hidden"
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
           </button>
         </div>
       </div>
@@ -79,11 +102,18 @@ export function SiteHeader() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
+            id="site-mobile-navigation"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden border-t border-hairline bg-canvas md:hidden"
+            className="overflow-hidden border-t border-hairline bg-canvas lg:hidden"
+            onKeyDown={(event) => {
+              if (event.key === "Escape") {
+                setMobileOpen(false);
+                mobileTrigger.current?.focus();
+              }
+            }}
           >
             <div className="max-h-[calc(100dvh-4rem)] overflow-y-auto px-4 py-4 sm:px-6">
               {/* Product accordion */}
@@ -95,7 +125,7 @@ export function SiteHeader() {
                 <ChevronDown
                   className={cn(
                     "h-4 w-4 smooth-transition transition-transform",
-                    mobileProductOpen && "rotate-180"
+                    mobileProductOpen && "rotate-180",
                   )}
                 />
               </button>
@@ -110,8 +140,12 @@ export function SiteHeader() {
                   >
                     <div className="space-y-4 py-2">
                       {PRODUCT_GROUPS.map((group) => {
-                        const shipped = group.features.filter((f) => f.soon === false);
-                        const soon = group.features.filter((f) => f.soon !== false);
+                        const shipped = group.features.filter(
+                          (f) => f.soon === false,
+                        );
+                        const soon = group.features.filter(
+                          (f) => f.soon !== false,
+                        );
                         return (
                           <div key={group.label}>
                             <p className="mb-1.5 text-xs font-semibold uppercase tracking-[0.1em] text-muted-soft">
@@ -120,7 +154,10 @@ export function SiteHeader() {
                             {shipped.length > 0 && (
                               <ul className="space-y-0.5">
                                 {shipped.map((feature) => (
-                                  <li key={feature.title} className="py-1 text-sm text-body">
+                                  <li
+                                    key={feature.title}
+                                    className="py-1 text-sm text-body"
+                                  >
                                     {feature.title}
                                   </li>
                                 ))}
@@ -128,12 +165,20 @@ export function SiteHeader() {
                             )}
                             {soon.length > 0 && (
                               <>
-                                <p className={cn("mb-1 text-[11px] text-muted-soft", shipped.length > 0 && "mt-2")}>
+                                <p
+                                  className={cn(
+                                    "mb-1 text-[11px] text-muted-soft",
+                                    shipped.length > 0 && "mt-2",
+                                  )}
+                                >
                                   Coming soon
                                 </p>
                                 <ul className="space-y-0.5">
                                   {soon.map((feature) => (
-                                    <li key={feature.title} className="py-1 text-sm text-body">
+                                    <li
+                                      key={feature.title}
+                                      className="py-1 text-sm text-body"
+                                    >
                                       {feature.title}
                                     </li>
                                   ))}
@@ -163,12 +208,21 @@ export function SiteHeader() {
 
               <div className="mt-3 border-t border-hairline pt-3">
                 <a
+                  href="https://beta.cnvrted.com"
+                  className={cn(
+                    buttonVariants({ variant: "primary" }),
+                    "mb-2 min-h-11 w-full justify-center",
+                  )}
+                >
+                  Get started
+                </a>
+                <a
                   href={SLACK_INVITE_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={cn(
                     buttonVariants({ variant: "ghost", size: "sm" }),
-                    "w-full justify-center text-muted hover:text-ink"
+                    "w-full justify-center text-muted hover:text-ink",
                   )}
                 >
                   <SlackLogo className="h-[18px] w-[18px] saturate-[1.35]" />

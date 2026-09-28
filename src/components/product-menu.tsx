@@ -67,7 +67,7 @@ export function ProductMenu() {
                ever reaches the panel below. */
             className="absolute left-1/2 top-full z-50 w-[90vw] max-w-[560px] -translate-x-1/2 pt-3"
           >
-            <div className="rounded-2xl border border-hairline bg-canvas p-5 shadow-soft">
+            <div className="max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain rounded-2xl border border-hairline bg-canvas p-5 shadow-soft">
               <div className="grid grid-cols-3 gap-5">
                 {GROUPS.map((group) => {
                   const shipped = group.features.filter((f) => f.soon === false);

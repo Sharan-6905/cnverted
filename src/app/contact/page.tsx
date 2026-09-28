@@ -10,7 +10,7 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 export const metadata: Metadata = {
   title: "Contact — Cnvrted",
   description:
-    "Talk to an expert at Cnvrted. Book a demo, email the team, or reach our leadership directly.",
+    "Talk to an expert at Cnvrted. Book a call, email the team, or reach our leadership directly.",
 };
 
 const GENERAL_EMAIL = "info@cnvrted.com";
@@ -51,9 +51,7 @@ export default function ContactPage() {
           </div>
 
           <div className="mx-auto mt-8 max-w-5xl space-y-5">
-            {/* Live calendar — full width so the month view can place its time
-                slots beside the calendar (they appear once a date is picked)
-                instead of stacking a long list underneath. */}
+            {/* Shared Calendly booking destination. */}
             <BookingCard />
 
             {/* Email + leadership */}

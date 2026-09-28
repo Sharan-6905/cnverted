@@ -1,0 +1,62 @@
+.help-center-content { position: relative; }
+.help-artwork-frame { height: 641px; }
+.help-artwork-frame::after { content: ""; position: absolute; inset: auto 0 0; height: 80px; background: linear-gradient(transparent, #fff); }
+.help-artwork { position: absolute; top: 1px; width: 1440px; height: 641px; overflow: hidden; }
+.help-artwork-background { position: absolute; left: 137px; top: -23px; width: 1440px; height: 641px; }
+.help-artwork-background img { position: absolute; max-width: none; }
+.help-artwork-hands { left: -775px; top: -479px; width: 3524px; height: 1599px; }
+.help-artwork-fade-bottom { left: -1336.1px; top: 203.9px; }
+.help-artwork-fade-top { left: -301.1px; top: -178.1px; }
+.help-hero { position: relative; padding: 232px 24px 20px; text-align: center; }
+.figma-site .help-hero h1 { font-size: clamp(48px, 6.4vw, 82px); line-height: 1.2; letter-spacing: -.025em; }
+.help-hero > p { max-width: 517px; margin: 10px auto 0; font-size: 20px; line-height: 32px; color: #5f5f5f; }
+.help-browser { position: relative; max-width: 1160px; }
+.help-filters { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 0 auto 44px; }
+.help-search-field { position: relative; flex: 0 1 487px; min-width: 0; }
+.help-search-field > img { position: absolute; left: 36px; top: 15px; pointer-events: none; }
+.help-search-field input { height: 64px; border-radius: 100px; border: 1px solid #dbdbdb; background: #ffffff80; padding: 14px 28px 14px 78px; font-family: var(--font-open-sans), sans-serif; font-size: 24px; line-height: 1.46; color: #5f5f5f; }
+.help-search-field input::placeholder { color: #92928a; }
+.help-filter-or { color: #b4b4b4; font-family: var(--font-spartan), sans-serif; }
+.help-category-field { position: relative; flex: 0 0 auto; }
+.help-category-field > img { position: absolute; right: 28px; top: 15px; pointer-events: none; }
+.help-category-field select { appearance: none; width: 220px; height: 64px; padding: 14px 65px 14px 36px; border: 1px solid #dbdbdb; border-radius: 100px; background: #ffffff80; color: #5f5f5f; font-family: var(--font-open-sans), sans-serif; font-size: 24px; text-overflow: ellipsis; cursor: pointer; }
+.help-category-field select[data-selected="true"] { padding-left: 24px; font-size: 16px; }
+.help-questions { display: grid; gap: 18px; }
+.help-question { padding: 24px; border: 1px solid #e7e5dd; border-radius: 24px; background: #fff; box-shadow: 0 1px 1px #1410080a, 0 2px 4px #1410080d; }
+.figma-site .help-question h3 { font-family: var(--font-design-sans), sans-serif; font-size: 20px; line-height: 32px; letter-spacing: 0; }
+.help-question p { margin-top: 8px; color: #5f5f5f; font-size: 16px; line-height: 24px; }
+.help-article-link, .help-empty a { color: var(--olive); text-decoration: underline; text-underline-offset: 4px; }
+.help-article-link { display: inline-block; margin-top: 12px; }
+.help-pagination { display: flex; align-items: center; justify-content: flex-end; gap: 24px; margin-top: 18px; min-height: 44px; }
+.help-page-count { color: #76776e; font-size: 13px; }
+.help-pagination-controls { position: relative; display: grid; grid-template-columns: 1fr 1fr; width: 147px; height: 44px; }
+.help-pagination-controls > img { position: absolute; top: 14.636px; left: 0; pointer-events: none; }
+.help-pagination-controls button { position: relative; border-radius: 8px; cursor: pointer; }
+.help-pagination-controls button:hover:not(:disabled) { background: #6a7a1d12; }
+.help-pagination-controls button:disabled { cursor: default; background: #ffffff80; }
+.help-empty { padding: 48px 24px; border: 1px solid #e7e5dd; border-radius: 24px; text-align: center; background: #fff; }
+.help-empty p { margin-top: 16px; color: #5f5f5f; }
+.help-empty button { margin-top: 24px; }
+.design-help-page .design-faq { padding-top: 80px; }
+@media (max-width: 1023px) {
+  .help-hero { padding-top: 200px; }
+  .help-search-field input, .help-category-field select { font-size: 20px; }
+  .help-question p { line-height: 26px; }
+}
+@media (max-width: 600px) {
+  .help-artwork-frame > .illustration { min-width: 1000px; }
+  .help-hero { padding: 160px 24px 28px; }
+  .help-hero > p { margin-top: 14px; font-size: 17px; line-height: 27px; }
+  .help-filters { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; margin-bottom: 28px; }
+  .help-filter-or { display: none; }
+  .help-search-field input, .help-category-field select { height: 56px; font-size: 16px; }
+  .help-search-field input { padding-left: 62px; }
+  .help-search-field > img { left: 20px; top: 11px; }
+  .help-category-field select { width: 100%; padding-left: 24px; }
+  .help-category-field > img { right: 20px; top: 11px; }
+  .help-questions { gap: 14px; }
+  .help-question { padding: 22px; border-radius: 20px; }
+  .figma-site .help-question h3 { font-size: 19px; line-height: 27px; }
+  .help-question p { font-size: 16px; line-height: 25px; }
+  .design-help-page .design-faq { padding-top: 56px; }
+}

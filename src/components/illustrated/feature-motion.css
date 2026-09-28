@@ -1,0 +1,314 @@
+.feature-cycle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.feature-cycle-frame {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  animation: feature-swap-four var(--feature-cycle) cubic-bezier(0.4, 0, 0.2, 1)
+    var(--feature-delay) infinite both;
+}
+.feature-cycle-2 > .feature-cycle-frame {
+  animation-name: feature-swap-two;
+}
+.feature-cycle-6 > .feature-cycle-frame {
+  animation-name: feature-swap-six;
+}
+.feature-llm {
+  position: absolute;
+  left: 235px;
+  top: 34px;
+  z-index: 10;
+  width: 67px;
+  height: 59px;
+  isolation: isolate;
+}
+.feature-llm::before,
+.feature-llm::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border: 1px solid #ffffffd9;
+  border-radius: 12px;
+  background: linear-gradient(140deg, #e8edd7bb, #e4ebff80);
+  transform: translate(-3px, 3px) rotate(-8deg);
+}
+.feature-llm::after {
+  transform: translate(3px, -2px) rotate(5deg);
+  background: linear-gradient(140deg, #f9e6d78c, #ffffff99);
+}
+.feature-llm-model {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ffffffee;
+  border-radius: 12px;
+  color: var(--model-color);
+  background: linear-gradient(
+    140deg,
+    #ffffffed,
+    color-mix(in srgb, var(--model-tint) 82%, #ffffffa6)
+  );
+  box-shadow:
+    inset 0 1px 1px #ffffff,
+    0 4px 12px #57533c14;
+  backdrop-filter: blur(8px) saturate(145%);
+  -webkit-backdrop-filter: blur(8px) saturate(145%);
+}
+.feature-llm-model::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(140deg, #ffffff45, transparent 45%);
+  pointer-events: none;
+}
+.feature-llm-model[data-dark="true"] {
+  background: linear-gradient(140deg, #354c6c, #14263fe8);
+  box-shadow:
+    inset 0 1px 1px #ffffff45,
+    0 4px 12px #1b6dc526;
+}
+.feature-llm-model img {
+  position: relative;
+  z-index: 1;
+  width: 29px;
+  height: 29px;
+  object-fit: contain;
+}
+.feature-llm-model span {
+  font-size: 8px;
+  line-height: 10px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.feature-recipe-scene {
+  position: relative;
+  width: 605.5px;
+  height: 185px;
+}
+.feature-recipe-aura {
+  position: absolute;
+  left: 204px;
+  top: 14px;
+  width: 382px;
+  height: 158px;
+  background:
+    radial-gradient(ellipse at 30% 65%, #dfe9bf5c, transparent 60%),
+    radial-gradient(ellipse at 75% 30%, #f5dfc94d, transparent 64%);
+}
+.feature-recipe-slot {
+  position: absolute;
+  width: 108px;
+  height: 118px;
+}
+.feature-recipe-slot-0 {
+  left: 226px;
+  top: 40px;
+  --card-angle: -14deg;
+}
+.feature-recipe-slot-1 {
+  left: 334px;
+  top: 16px;
+  --card-angle: -5deg;
+}
+.feature-recipe-slot-2 {
+  left: 456px;
+  top: 28px;
+  --card-angle: 10deg;
+}
+.feature-recipe-float {
+  width: 100%;
+  height: 100%;
+  animation: feature-card-float 5.4s ease-in-out var(--float-delay) infinite;
+}
+.feature-recipe-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #ffffff;
+  border-radius: 7px;
+  background: linear-gradient(140deg, #fffffff5, #fffdf9df);
+  box-shadow:
+    0 8px 19px #554a3614,
+    inset 0 1px 0 #ffffff;
+  transform: rotate(var(--card-angle));
+}
+.feature-recipe-content {
+  padding: 7px;
+}
+.feature-recipe-image {
+  width: 92px;
+  height: 59px;
+  overflow: hidden;
+  border-radius: 4px;
+  background: #f8f2e2;
+}
+.feature-recipe-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.35);
+}
+.feature-recipe-content strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 9px;
+  line-height: 12px;
+  font-weight: 500;
+  color: #373b2c;
+}
+.feature-recipe-content small {
+  display: block;
+  margin-top: 2px;
+  font-size: 7.5px;
+  line-height: 10px;
+  color: #878b7e;
+}
+.feature-recipe-learning {
+  position: absolute;
+  left: 345px;
+  top: 138px;
+  z-index: 2;
+  width: 145px;
+  height: 36px;
+}
+.feature-recipe-learning-card {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  height: 100%;
+  padding: 5px 9px;
+  border: 1px solid #ffffff;
+  border-radius: 8px;
+  background: linear-gradient(140deg, #ffffffed, #f7faecdf);
+  box-shadow:
+    0 5px 15px #576a2912,
+    inset 0 1px 0 #ffffff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transform: rotate(-4deg);
+}
+.feature-recipe-learning-card strong,
+.feature-recipe-learning-card small {
+  display: block;
+  white-space: nowrap;
+}
+.feature-recipe-learning-card strong {
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 12px;
+  color: #556528;
+}
+.feature-recipe-learning-card small {
+  font-size: 6.5px;
+  line-height: 9px;
+  color: #8b917d;
+}
+.feature-trigger-cycle {
+  width: 157.635px;
+  height: 14px;
+}
+.feature-trigger {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  height: 100%;
+  color: #3b4034;
+  font-size: 9.183px;
+  font-weight: 500;
+  line-height: 14px;
+  white-space: nowrap;
+}
+.feature-trigger svg {
+  width: 11px;
+  height: 11px;
+  flex: 0 0 auto;
+  color: var(--trigger-color);
+  stroke-width: 1.8;
+}
+@keyframes feature-swap-four {
+  0%,
+  21%,
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  25%,
+  96% {
+    opacity: 0;
+    transform: translateY(-3px) scale(0.98);
+  }
+  96.01% {
+    opacity: 0;
+    transform: translateY(3px) scale(1.02);
+  }
+}
+@keyframes feature-swap-two {
+  0%,
+  45%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50%,
+  95% {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  95.01% {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+@keyframes feature-swap-six {
+  0%,
+  14.5%,
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  16.6667%,
+  97.8333% {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+  97.8334% {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+}
+@keyframes feature-card-float {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-0.6deg);
+  }
+  50% {
+    transform: translate(2px, -6px) rotate(0.6deg);
+  }
+}
+.feature-motion {
+  animation-play-state: paused;
+}
+.illustration[data-running="true"] .feature-motion {
+  animation-play-state: running;
+}
+@media (prefers-reduced-motion: reduce) {
+  .feature-cycle-frame {
+    opacity: 0;
+    transform: none;
+  }
+  .feature-cycle-frame:first-child {
+    opacity: 1;
+  }
+}

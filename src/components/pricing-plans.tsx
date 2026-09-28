@@ -1,9 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import * as Dialog from "@radix-ui/react-dialog";
-import { TrendingUp, Handshake, Building2, Check, X, type LucideIcon } from "lucide-react";
-import { BookingCard } from "@/components/booking-card";
+import { TrendingUp, Handshake, Building2, Check, type LucideIcon } from "lucide-react";
+import { BOOKING_URL } from "@/lib/booking";
 import { cn } from "@/lib/utils";
 
 interface Plan {
@@ -19,8 +18,7 @@ interface Plan {
   accent: string;
   /** soft gradient wash behind the card */
   surface: string;
-  /** `href` navigates; `book` opens the scheduling dialog instead */
-  cta: { label: string; href?: string; book?: boolean };
+  cta: string;
   featured?: boolean;
 }
 
@@ -41,7 +39,7 @@ const PLANS: Plan[] = [
     Icon: TrendingUp,
     accent: "text-blue-600",
     surface: "bg-gradient-to-b from-blue-50/70 to-canvas/40",
-    cta: { label: "Select plan", book: true },
+    cta: "Select plan",
   },
   {
     name: "Surge",
@@ -51,7 +49,7 @@ const PLANS: Plan[] = [
     description:
       "For established sales organizations (5+ reps) looking to significantly widen their funnel and consistently reach buyers at the moment they enter the market.",
     features: [
-      "Everything in Growth",
+      "Everything in Spark",
       "Up to 10 seats",
       "Automated outreach",
       "CoPilot AI assistant",
@@ -60,7 +58,7 @@ const PLANS: Plan[] = [
     Icon: Handshake,
     accent: "text-brand-teal",
     surface: "bg-gradient-to-b from-lime-50/70 to-canvas/40",
-    cta: { label: "Select plan", book: true },
+    cta: "Select plan",
     featured: true,
   },
   {
@@ -70,7 +68,7 @@ const PLANS: Plan[] = [
     description:
       "In this plan, we become a credible extension of your revenue team and guide you every step of the way, building a signal-led motion that fits your org.",
     features: [
-      "Everything in Professional",
+      "Everything in Surge",
       "Unlimited seats",
       "Custom integrations",
       "Dedicated success manager",
@@ -78,45 +76,17 @@ const PLANS: Plan[] = [
     Icon: Building2,
     accent: "text-fuchsia-600",
     surface: "bg-gradient-to-b from-fuchsia-50/70 to-canvas/40",
-    cta: { label: "Talk to sales", href: "/contact" },
+    cta: "Talk to sales",
   },
 ];
 
 export function PricingPlans() {
-  const [booking, setBooking] = useState(false);
-
   return (
-    /* The calendar lives in a dialog rather than on the page: Radix only mounts
-       the content while it is open, so cal.com's script is fetched the first
-       time someone picks a plan instead of on every pricing visit. */
-    <Dialog.Root open={booking} onOpenChange={setBooking}>
-      <div className="grid items-start gap-5 lg:grid-cols-3">
-        {PLANS.map((plan) => (
-          <PlanCard key={plan.name} plan={plan} />
-        ))}
-      </div>
-
-      <Dialog.Portal>
-        <Dialog.Overlay className="fixed inset-0 z-50 bg-ink/40 backdrop-blur-sm" />
-        <Dialog.Content className="fixed left-1/2 top-1/2 z-50 max-h-[92dvh] w-[95vw] max-w-[1200px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto focus:outline-none">
-          <Dialog.Title className="sr-only">Schedule a demo</Dialog.Title>
-          <Dialog.Description className="sr-only">
-            Pick a date and time for a walkthrough with our founding team.
-          </Dialog.Description>
-          <BookingCard
-            className="bg-canvas"
-            headerAction={
-              <Dialog.Close
-                aria-label="Close"
-                className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/20 bg-white/10 text-on-dark/90 backdrop-blur-md smooth-transition hover:bg-white/20 hover:text-on-dark"
-              >
-                <X className="h-4 w-4" />
-              </Dialog.Close>
-            }
-          />
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <div className="pricing-cards-grid grid items-start gap-5 lg:grid-cols-3">
+      {PLANS.map((plan) => (
+        <PlanCard key={plan.name} plan={plan} />
+      ))}
+    </div>
   );
 }
 
@@ -126,15 +96,13 @@ const ctaClass =
 function PlanCard({ plan }: { plan: Plan }) {
   const [expanded, setExpanded] = useState(false);
   const { Icon } = plan;
-  const ctaTone =
-    plan.name === "Enterprise"
-      ? "border border-white/70 bg-white/60 text-ink backdrop-blur-md hover:bg-white/80"
-      : "bg-[#2B2B2B] text-on-dark hover:bg-ink";
+  const planId = plan.name.toLowerCase();
 
   return (
-    <div
+    <article
+      aria-labelledby={`plan-${planId}`}
       className={cn(
-        "flex flex-col overflow-hidden rounded-3xl border p-7 backdrop-blur-2xl smooth-transition transition-[border-color,box-shadow]",
+        "pricing-card flex flex-col overflow-hidden rounded-3xl border p-7 backdrop-blur-2xl smooth-transition transition-[border-color,box-shadow]",
         plan.surface,
         plan.featured
           ? "border-brand-teal/30 shadow-float"
@@ -142,7 +110,7 @@ function PlanCard({ plan }: { plan: Plan }) {
       )}
     >
       <div className="flex items-start justify-between gap-3">
-        <Icon className={cn("h-6 w-6", plan.accent)} strokeWidth={2} />
+        <Icon aria-hidden="true" className={cn("h-6 w-6", plan.accent)} strokeWidth={2} />
         {plan.featured && (
           <span className="rounded-full bg-lime-200/70 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.1em] text-brand-teal">
             Most popular
@@ -150,9 +118,9 @@ function PlanCard({ plan }: { plan: Plan }) {
         )}
       </div>
 
-      <h3 className="mt-5 font-display text-3xl font-semibold tracking-tight text-ink">
+      <h2 id={`plan-${planId}`} className="pricing-card-title mt-5 font-display text-3xl font-semibold tracking-tight text-ink">
         {plan.name}
-      </h3>
+      </h2>
       <p className="mt-1 text-sm text-body">{plan.tagline}</p>
 
       <p className="mt-7 flex flex-wrap items-baseline gap-x-2">
@@ -163,6 +131,7 @@ function PlanCard({ plan }: { plan: Plan }) {
       </p>
 
       <p
+        id={`plan-description-${planId}`}
         className={cn(
           "mt-4 text-sm leading-relaxed text-body",
           !expanded && "line-clamp-2"
@@ -171,40 +140,35 @@ function PlanCard({ plan }: { plan: Plan }) {
         {plan.description}
       </p>
 
-      {expanded && (
+      <div id={`plan-features-${planId}`} hidden={!expanded}>
         <ul className="mt-4 space-y-2.5">
           {plan.features.map((f) => (
             <li key={f} className="flex items-start gap-2 text-sm text-body">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-brand-teal" />
+              <Check aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-brand-teal" />
               {f}
             </li>
           ))}
         </ul>
-      )}
+      </div>
 
       <button
         type="button"
         onClick={() => setExpanded((v) => !v)}
-        className="mt-2 w-fit text-sm font-medium text-ink underline-offset-4 smooth-transition hover:underline"
+        aria-expanded={expanded}
+        aria-controls={`plan-description-${planId} plan-features-${planId}`}
+        aria-label={`${expanded ? "See less" : "See more"} about ${plan.name}`}
+        className="mt-1 min-h-11 w-fit text-sm font-medium text-ink underline-offset-4 smooth-transition hover:underline"
       >
         {expanded ? "See less" : "See more"}
       </button>
 
-      {plan.cta.book ? (
-        <Dialog.Trigger className={cn(ctaClass, ctaTone)}>
-          {plan.cta.label}
-        </Dialog.Trigger>
-      ) : (
-        <a
-          href={plan.cta.href}
-          {...(plan.cta.href?.startsWith("http")
-            ? { target: "_blank", rel: "noopener noreferrer" }
-            : {})}
-          className={cn(ctaClass, ctaTone)}
-        >
-          {plan.cta.label}
-        </a>
-      )}
-    </div>
+      <a
+        href={BOOKING_URL}
+        aria-label={`${plan.cta} — ${plan.name}`}
+        className={cn(ctaClass, "bg-[#2B2B2B] text-on-dark hover:bg-ink")}
+      >
+        {plan.cta}
+      </a>
+    </article>
   );
 }

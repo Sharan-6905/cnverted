@@ -1,0 +1,172 @@
+.pricing-hero {
+  position: relative;
+  height: 641px;
+}
+.pricing-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 120px;
+  background: linear-gradient(to bottom, #ffffff00, #fff);
+  pointer-events: none;
+}
+.pricing-hero-copy {
+  position: relative;
+  z-index: 1;
+  padding: 232px 24px 0;
+  text-align: center;
+}
+.figma-site .pricing-hero h1 {
+  font-size: clamp(48px, 6.4vw, 82px);
+  line-height: 1.2;
+}
+.pricing-hero-copy p {
+  margin: 10px auto 0;
+  max-width: 517px;
+  font-size: 20px;
+  line-height: 32px;
+  color: #5f5f5f;
+}
+.pricing-plans {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  max-width: 1160px;
+  margin-top: -126px;
+}
+.pricing-plan {
+  --plan-surface: #fef9d9;
+  position: relative;
+  min-width: 0;
+  padding: 53px 28px 40px;
+  border: 1px solid #ffffff99;
+  border-radius: 24px;
+  background: var(--plan-surface);
+  box-shadow: -4px 4px 20px #00000012;
+}
+.pricing-plan-surge {
+  --plan-surface: #f0f8ce;
+  border-color: #fbd600;
+  box-shadow: inset 0 0 0 3px #fbd600, -4px 4px 20px #00000012;
+}
+.pricing-plan-art {
+  position: absolute;
+  pointer-events: none;
+}
+.pricing-plan-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pricing-plan-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.pricing-plan-spark .pricing-plan-art {
+  width: 169px;
+  height: 148px;
+  top: -47px;
+  right: 14px;
+  transform: scaleX(-1);
+}
+.pricing-plan-spark .pricing-plan-art::after {
+  background: linear-gradient(173deg, #fef9d903 61%, var(--plan-surface) 85%);
+}
+.pricing-plan-surge .pricing-plan-art {
+  width: 218px;
+  height: 195px;
+  top: -85px;
+  right: 21px;
+  transform: scaleX(-1);
+}
+.pricing-plan-surge .pricing-plan-art::after {
+  background: linear-gradient(170deg, #f0f8ce00 45%, var(--plan-surface) 82%);
+}
+.pricing-plan-dominion .pricing-plan-art {
+  width: 247px;
+  height: 226px;
+  top: -124px;
+  right: 8px;
+}
+.pricing-plan-dominion .pricing-plan-art::after {
+  background: linear-gradient(18deg, var(--plan-surface) 18%, #fef9d900 29%, #fef9d900 50%);
+}
+.pricing-plan-content { position: relative; }
+.figma-site .pricing-plan h2 {
+  font-size: 36px;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.pricing-plan-credits {
+  margin-top: 8px;
+  color: #5f5f5f;
+  font-size: 18px;
+  min-height: 24px;
+}
+.pricing-plan-price {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+  margin-block: 14px 16px;
+  min-height: 51px;
+}
+.pricing-plan-price > span {
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: 42px;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+.pricing-plan-price small { font-size: 14px; color: #5f5f5f; }
+.pricing-plan-cta {
+  min-height: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 100px;
+  color: #fff;
+  background: var(--olive);
+  box-shadow: inset 2px 4px 9px #ffffff40;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 16px;
+  transition: background 180ms, transform 180ms;
+}
+.pricing-plan-cta:hover { background: #576616; transform: translateY(-2px); }
+.design-pricing-page .design-faq { padding-top: 80px; }
+@media (min-width: 901px) and (max-width: 1100px) {
+  .pricing-plans { gap: 16px; }
+  .pricing-plan { padding-inline: 22px; }
+  .pricing-plan-art { zoom: .85; }
+  .pricing-plan-dominion .pricing-plan-price > span { font-size: 34px; }
+}
+@media (max-width: 900px) {
+  .pricing-hero { height: 525px; }
+  .pricing-hero-copy { padding-top: 170px; }
+  .pricing-plans {
+    max-width: 560px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 130px;
+    margin-top: -115px;
+  }
+  .pricing-plan { min-height: 0; padding: 46px 32px 36px; }
+}
+@media (max-width: 600px) {
+  .pricing-hero { height: 470px; }
+  .pricing-hero-copy { padding-top: 155px; }
+  .pricing-hero-copy p { font-size: 17px; line-height: 27px; }
+  .pricing-hero .design-hero-landscape > .illustration { min-width: 1000px; }
+  .pricing-plans { margin-top: -100px; gap: 112px; }
+  .pricing-plan { padding: 42px 24px 32px; }
+  .pricing-plan-art { zoom: .8; }
+  .pricing-plan-price > span { font-size: 38px; }
+  .pricing-plan-credits { font-size: 16px; }
+  .design-pricing-page .design-faq { padding-top: 56px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pricing-plan-cta { transition: none; }
+  .pricing-plan-cta:hover { transform: none; }
+}

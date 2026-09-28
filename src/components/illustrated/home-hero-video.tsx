@@ -60,19 +60,23 @@ export function HomeHeroVideo() {
         loop
         playsInline
         preload="auto"
-        poster="/videos/home-hero-poster-4k.jpg"
+        poster="/videos/home-hero-detail-poster.webp"
         onPlaying={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onError={() => setPlaying(false)}
         tabIndex={-1}
       >
-        <source src="/videos/home-hero-loop-4k.mp4" type="video/mp4" />
+        <source
+          src="/videos/home-hero-detail-4k-hevc.mp4"
+          type='video/mp4; codecs="hvc1"'
+        />
+        <source src="/videos/home-hero-detail-4k.mp4" type="video/mp4" />
       </video>
       {/* WebKit can discard a paused video surface when a preview is reopened.
             Keep a real image above it until playback has actually started. */}
       <Image
         className="design-hero-video-poster"
-        src="/videos/home-hero-poster-4k.jpg"
+        src="/videos/home-hero-detail-poster.webp"
         alt=""
         width={3840}
         height={2160}

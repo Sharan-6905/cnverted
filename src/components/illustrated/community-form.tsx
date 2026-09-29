@@ -83,37 +83,51 @@ export function CommunityForm() {
   return (
     <form className="community-form" method="post" onSubmit={submit} noValidate aria-busy={busy}>
       <noscript><p>Please enable JavaScript to complete this form, or email <a href="mailto:work@cnvrted.com">work@cnvrted.com</a>.</p></noscript>
-      <div className="community-progress" role="progressbar" aria-label="Community sign-up progress" aria-valuemin={1} aria-valuemax={5} aria-valuenow={step + 1} aria-valuetext={`Step ${step + 1} of 5: ${current.label}`}>
-        {COMMUNITY_STEPS.map((item, index) => <span key={item.key} data-reached={index <= step} />)}
-      </div>
-      <div className="community-step" key={current.key}>
-        <label htmlFor={`community-${current.key}`} className="community-label">{current.label} <span>{step + 1} / 5</span></label>
-        <input
-          ref={input}
-          id={`community-${current.key}`}
-          name={current.key}
-          type={current.type}
-          inputMode={current.key === "website" ? "url" : current.key === "email" ? "email" : "text"}
-          autoComplete={current.autoComplete}
-          autoCapitalize={current.key === "email" || current.key === "website" ? "none" : "words"}
-          spellCheck={false}
-          maxLength={current.maxLength}
-          required={current.key !== "website"}
-          placeholder={current.placeholder}
-          value={answers[current.key]}
-          onChange={(event) => { setAnswers((previous) => ({ ...previous, [current.key]: event.target.value })); setError(""); }}
-          aria-invalid={Boolean(error)}
-          aria-describedby={error ? "community-hint community-error" : "community-hint"}
-          readOnly={busy}
-        />
-        <p id="community-hint" className="community-hint">{current.hint}</p>
-      </div>
-      <div className="community-honeypot" aria-hidden="true"><label htmlFor="community-fax">Leave empty</label><input ref={honeypot} id="community-fax" name="companyFax" tabIndex={-1} autoComplete="off" /></div>
-      <div className="community-error-slot">{error && <p id="community-error" role="alert">{error}</p>}</div>
-      <div className="community-actions">
-        <button type="button" className="community-back" onClick={() => goTo(step - 1)} disabled={step === 0 || busy}><ArrowLeft size={20} aria-hidden="true" /> Back</button>
-        <button type="submit" className="design-button design-button-solid" disabled={busy}>{busy ? "Sending…" : step === COMMUNITY_STEPS.length - 1 ? "Send & continue" : "Continue"}<ArrowRight size={19} aria-hidden="true" /></button>
-        <span className="community-enter">press Enter ↵</span>
+      <div className="community-answer-card">
+        <div className="community-card-header">
+          <span className="community-card-eyebrow"><SlackLogo width={18} height={18} /> Your introduction</span>
+          <span className="community-step-count" aria-hidden="true"><strong>{String(step + 1).padStart(2, "0")}</strong> / {String(COMMUNITY_STEPS.length).padStart(2, "0")}</span>
+        </div>
+        <div className="community-progress" role="progressbar" aria-label="Community sign-up progress" aria-valuemin={1} aria-valuemax={COMMUNITY_STEPS.length} aria-valuenow={step + 1} aria-valuetext={`Step ${step + 1} of ${COMMUNITY_STEPS.length}: ${current.label}`}>
+          {COMMUNITY_STEPS.map((item, index) => <span key={item.key} data-reached={index <= step} />)}
+        </div>
+        <div className="community-step" key={current.key}>
+          <label htmlFor={`community-${current.key}`} className="community-label">
+            <span className="community-field-name">{current.label}</span>
+            <span className="community-question">{current.question}</span>
+          </label>
+          <div className="community-answer" data-invalid={Boolean(error)}>
+            <input
+              ref={input}
+              id={`community-${current.key}`}
+              name={current.key}
+              type={current.type}
+              inputMode={current.key === "website" ? "url" : current.key === "email" ? "email" : "text"}
+              autoComplete={current.autoComplete}
+              autoCapitalize={current.key === "email" || current.key === "website" ? "none" : "words"}
+              spellCheck={false}
+              maxLength={current.maxLength}
+              required={current.key !== "website"}
+              placeholder={current.placeholder}
+              value={answers[current.key]}
+              onChange={(event) => { setAnswers((previous) => ({ ...previous, [current.key]: event.target.value })); setError(""); }}
+              aria-invalid={Boolean(error)}
+              aria-describedby={error ? "community-hint community-error" : "community-hint"}
+              readOnly={busy}
+              enterKeyHint={step === COMMUNITY_STEPS.length - 1 ? "send" : "next"}
+            />
+          </div>
+          <p id="community-hint" className="community-hint">{current.hint}</p>
+        </div>
+        <div className="community-honeypot" aria-hidden="true"><label htmlFor="community-fax">Leave empty</label><input ref={honeypot} id="community-fax" name="companyFax" tabIndex={-1} autoComplete="off" /></div>
+        <div className="community-error-slot">{error && <p id="community-error" role="alert">{error}</p>}</div>
+        <div className="community-actions">
+          <button type="button" className="community-back" onClick={() => goTo(step - 1)} disabled={step === 0 || busy}><ArrowLeft size={20} aria-hidden="true" /> Back</button>
+          <div className="community-next">
+            <button type="submit" className="design-button design-button-solid" disabled={busy}>{busy ? "Sending…" : step === COMMUNITY_STEPS.length - 1 ? "Send & continue" : "Continue"}<ArrowRight size={19} aria-hidden="true" /></button>
+            <span className="community-enter">or press <kbd>Enter ↵</kbd></span>
+          </div>
+        </div>
       </div>
       <p className="community-privacy">Your answers go to the Cnvrted team. Read our <Link href="/privacy">Privacy Policy</Link> and <Link href="/terms">Terms & Conditions</Link>.</p>
     </form>

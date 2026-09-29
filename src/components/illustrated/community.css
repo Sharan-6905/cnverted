@@ -2,26 +2,40 @@
 .community-heading { position: relative; padding: 232px 24px 0; text-align: center; }
 .figma-site .community-heading h1 { font-size: clamp(44px, 6.4vw, 82px); line-height: 1.2; }
 .community-heading p { max-width: 419px; margin: 10px auto 0; color: #5f5f5f; font-size: 20px; line-height: 32px; }
-.community-form { position: relative; max-width: 900px; margin: 64px auto 0; padding: 0 28px; text-align: center; }
-.community-progress { display: flex; gap: 5px; max-width: 260px; margin: 0 auto 30px; }
-.community-progress span { height: 3px; border-radius: 3px; background: #e7e5dd; flex: 1; transition: background-color .2s; }
+.community-form { position: relative; max-width: 724px; margin: 48px auto 0; padding: 0 28px; }
+.community-answer-card { padding: 28px 36px 26px; border: 1px solid #e4e2d4; border-radius: 24px; background: linear-gradient(145deg, #fffefa 0%, #faf9f1 100%); box-shadow: 0 16px 48px -24px #474a3033, inset 0 1px 0 #fff; }
+.community-card-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.community-card-eyebrow { display: inline-flex; align-items: center; gap: 10px; color: #64694c; font-size: 12px; font-weight: 500; letter-spacing: .07em; text-transform: uppercase; }
+.community-card-eyebrow svg { flex-shrink: 0; }
+.community-step-count { color: #8b8d7e; font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.community-step-count strong { color: #586426; font-weight: 500; }
+.community-progress { display: flex; gap: 6px; margin: 18px 0 28px; }
+.community-progress span { height: 3px; border-radius: 3px; background: #e7e7da; flex: 1; transition: background-color .25s; }
 .community-progress span[data-reached="true"] { background: var(--olive); }
-.community-step { animation: community-step-in .24s ease-out; }
-.community-label { display: block; color: #66665c; font-size: 14px; }
-.community-label span { margin-left: 10px; font-size: 12px; color: #85857a; }
-.figma-site .community-step input { width: 100%; height: 90px; border: 0; border-radius: 8px; background: transparent; color: #0c0c0c; caret-color: var(--olive); font-family: var(--font-design-sans), sans-serif; font-size: clamp(25px, 3.2vw, 42px); line-height: 1.3; text-align: center; padding: 14px 10px; box-shadow: none; }
-.figma-site .community-step input::placeholder { color: #909086; opacity: 1; }
-.figma-site .community-step input:focus { outline: none; background: #fff9; }
-.figma-site .community-step input:focus-visible { outline: 1px solid #b8c283; outline-offset: 3px; }
-.community-hint { color: #76766a; font-size: 14px; line-height: 22px; margin-top: 6px; }
-.community-error-slot { min-height: 38px; padding-top: 8px; }
-.community-error-slot p { color: #a0382c; font-size: 14px; }
-.community-actions { display: flex; justify-content: center; align-items: center; gap: 28px; }
-.community-actions .design-button { min-width: 165px; font-size: 17px; }
+.community-step { min-height: 199px; animation: community-step-in .28s ease-out; }
+.community-label { display: block; cursor: text; }
+.community-field-name { display: block; color: #747760; font-size: 12px; margin-bottom: 6px; }
+.community-question { display: block; color: #272c20; font-family: var(--font-editorial), Georgia, serif; font-size: clamp(25px, 3vw, 32px); font-weight: 400; letter-spacing: -.025em; line-height: 1.2; }
+.community-answer { position: relative; margin-top: 22px; border-bottom: 1px solid #b6b9a3; }
+.community-answer::after { content: ""; position: absolute; inset: auto 0 -1px; height: 2px; background: var(--olive); transform: scaleX(0); transform-origin: left; transition: transform .25s ease; }
+.community-answer:focus-within::after { transform: scaleX(1); }
+.community-answer[data-invalid="true"] { border-color: #a0382c; }
+.community-answer[data-invalid="true"]::after { background: #a0382c; }
+.figma-site .community-step input { display: block; width: 100%; min-width: 0; height: 64px; border: 0; border-radius: 0; background: transparent; color: #35442c; caret-color: var(--olive); font-family: var(--font-design-sans), sans-serif; font-size: clamp(24px, 2.8vw, 32px); line-height: 1.3; text-align: left; padding: 10px 0 14px; box-shadow: none; }
+.figma-site .community-step input::placeholder { color: #989b88; opacity: 1; }
+.figma-site .community-step input:focus, .figma-site .community-step input:focus-visible { outline: none; }
+.community-hint { color: #717563; font-size: 12px; line-height: 20px; margin-top: 10px; }
+.community-error-slot { min-height: 28px; padding-top: 4px; }
+.community-error-slot p { color: #a0382c; font-size: 13px; line-height: 20px; }
+.community-actions { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; padding-top: 6px; }
+.community-actions .design-button { min-width: 152px; min-height: 48px; font-size: 14px; box-shadow: inset 0 2px 4px #ffffff26, 0 3px 0 #35420f; }
 .community-actions button:disabled { opacity: .4; cursor: default; }
-.community-back { display: inline-flex; align-items: center; gap: 8px; color: #686b58; font-size: 14px; min-height: 44px; }
-.community-enter { color: #848476; font-size: 12px; width: 76px; }
-.community-privacy { font-size: 12px; line-height: 20px; color: #7b7c72; max-width: 470px; margin: 28px auto 0; }
+.community-back { display: inline-flex; align-items: center; gap: 8px; color: #686b58; font-size: 13px; min-height: 48px; border-radius: 100px; padding-right: 12px; }
+.community-back:not(:disabled):hover { color: #35442c; }
+.community-next { text-align: center; }
+.community-enter { display: block; color: #717563; font-size: 11px; margin-top: 12px; }
+.community-enter kbd { font: inherit; }
+.community-privacy { font-size: 12px; line-height: 20px; color: #7b7c72; max-width: 430px; margin: 22px auto 0; text-align: center; }
 .community-privacy a, .community-support a { color: var(--olive); text-decoration: underline; text-underline-offset: 3px; }
 .community-honeypot { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 .community-complete { position: relative; margin: 92px auto 0; padding-inline: 24px; text-align: center; max-width: 760px; min-height: 255px; }
@@ -37,13 +51,22 @@
 @media (max-width: 600px) {
   .community-heading { padding-top: 160px; }
   .community-heading p { font-size: 17px; line-height: 27px; }
-  .community-form { margin-top: 46px; padding-inline: 24px; }
-  .community-step input { text-align: left; }
-  .figma-site .community-step input { font-size: 24px; height: 90px; }
-  .community-step input::placeholder { font-size: 19px; }
-  .community-actions { gap: 24px; }
+  .community-form { margin-top: 32px; padding-inline: 20px; }
+  .community-answer-card { padding: 22px 22px 24px; border-radius: 20px; }
+  .community-card-eyebrow { font-size: 10px; gap: 8px; }
+  .community-progress { margin-bottom: 24px; }
+  .community-step { min-height: 205px; }
+  .community-question { min-height: 60px; }
+  .community-answer { margin-top: 14px; }
+  .figma-site .community-form .community-answer input:not([type="hidden"]) { font-size: 24px; height: 58px; }
+  .community-actions { gap: 12px; padding-top: 4px; }
+  .community-actions .design-button { min-width: 0; padding-inline: 18px; }
   .community-enter { display: none; }
   .community-complete { margin-top: 64px; }
   .design-community-page .design-faq { padding-top: 64px; }
 }
-@media (prefers-reduced-motion: reduce) { .community-step { animation: none; } .community-progress span { transition: none; } }
+@media (max-width: 360px) {
+  .community-actions .design-button { gap: 8px; padding-inline: 12px; }
+  .community-back { padding-right: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .community-step { animation: none; } .community-progress span, .community-answer::after { transition: none; } }

@@ -2,11 +2,11 @@ export const SLACK_INVITE_URL =
   "https://join.slack.com/t/cnvrted/shared_invite/zt-4388qsrbr-x~RlkFSChnmWY7JojhV1fA";
 
 export const COMMUNITY_STEPS = [
-  { key: "fullName", label: "Full name", placeholder: "Please enter your full name here", autoComplete: "name", type: "text", maxLength: 100, hint: "What should we call you?" },
-  { key: "email", label: "Email address", placeholder: "Your email address?", autoComplete: "email", type: "email", maxLength: 254, hint: "Use the email you’ll use for Slack." },
-  { key: "company", label: "Business name", placeholder: "Your business name", autoComplete: "organization", type: "text", maxLength: 120, hint: "Working independently? You can write “Independent”." },
-  { key: "industry", label: "Business domain", placeholder: "Your business domain?", autoComplete: "off", type: "text", maxLength: 120, hint: "Your industry or field — for example, B2B SaaS, retail, or consulting." },
-  { key: "website", label: "Website (optional)", placeholder: "Your website (if any)", autoComplete: "url", type: "text", maxLength: 300, hint: "A company website or portfolio. You can leave this blank." },
+  { key: "fullName", label: "Full name", question: "What should we call you?", placeholder: "Your full name", autoComplete: "name", type: "text", maxLength: 100, hint: "The name you’d like the community to know." },
+  { key: "email", label: "Email address", question: "Where can we reach you?", placeholder: "you@company.com", autoComplete: "email", type: "email", maxLength: 254, hint: "Use the email you’ll use for Slack." },
+  { key: "company", label: "Business name", question: "Who are you building with?", placeholder: "Your company name", autoComplete: "organization", type: "text", maxLength: 120, hint: "Working independently? Just write “Independent”." },
+  { key: "industry", label: "Business domain", question: "What’s your corner of the world?", placeholder: "e.g. B2B SaaS", autoComplete: "off", type: "text", maxLength: 120, hint: "Your industry or field, from retail to consulting." },
+  { key: "website", label: "Website (optional)", question: "Where can we see your work?", placeholder: "yourcompany.com", autoComplete: "url", type: "text", maxLength: 300, hint: "A website or portfolio. Feel free to skip this one." },
 ] as const;
 
 export type CommunityField = (typeof COMMUNITY_STEPS)[number]["key"];

@@ -40,6 +40,7 @@ export default function BlogsPage() {
               <span>{post.category}</span>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
+              <div className="design-blog-card-author">By {post.author.name}</div>
               <div className="design-blog-card-meta">
                 <time dateTime={post.date}>{formatPostDate(post.date)}</time>
                 <span>

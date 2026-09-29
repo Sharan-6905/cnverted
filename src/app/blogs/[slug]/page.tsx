@@ -29,6 +29,7 @@ export async function generateMetadata({
   return {
     title: `${post.title} — Cnvrted`,
     description: post.excerpt,
+    authors: [{ name: post.author.name, url: post.author.linkedin }],
     alternates: { canonical: `https://www.cnvrted.com/blogs/${post.slug}` },
     openGraph: {
       type: "article",
@@ -61,7 +62,7 @@ async function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
       "@type": "Person",
       name: post.author.name,
       url: post.author.linkedin,
-      sameAs: [post.author.linkedin],
+      sameAs: [post.author.linkedin, post.author.x],
     },
     publisher: {
       "@type": "Organization",
@@ -108,6 +109,17 @@ export default async function BlogPostPage({
             <div className="design-article-tags">
               <span>{post.category}</span>
               <span>{post.readingMinutes} min read</span>
+            </div>
+            <div className="design-article-byline">
+              <p>Written by <strong>{post.author.name}</strong></p>
+              <div className="design-article-author-links">
+                <a href={post.author.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${post.author.name} on LinkedIn (opens in a new tab)`}>
+                  LinkedIn <span aria-hidden="true">↗</span>
+                </a>
+                <a href={post.author.x} target="_blank" rel="noopener noreferrer" aria-label={`${post.author.name} on X (opens in a new tab)`}>
+                  X <span aria-hidden="true">↗</span>
+                </a>
+              </div>
             </div>
           </header>
           <div className="design-article-content">

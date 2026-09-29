@@ -11,13 +11,15 @@ export type Block =
 
 export interface Author {
   name: string;
-  /** Public profile the byline links to, and the sameAs used in Article schema. */
+  /** Public profiles linked in the byline and Article schema. */
   linkedin: string;
+  x: string;
 }
 
 export const DHRUV_PRADEEP: Author = {
   name: "Dhruv Pradeep",
   linkedin: "https://www.linkedin.com/in/dhruvprad/",
+  x: "https://x.com/dhruvprad",
 };
 
 export interface BlogPost {

@@ -29,11 +29,19 @@
 .help-empty { padding: 48px 24px; border: 1px solid #e7e5dd; border-radius: 24px; text-align: center; background: #fff; }
 .help-empty p { margin-top: 16px; color: #5f5f5f; }
 .help-empty button { margin-top: 24px; }
+.help-support { position: relative; max-width: 1160px; margin-top: 36px; }
+.help-support-card { display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 36px; border: 1px solid #e0e4c7; border-radius: 24px; background: #f8f8ed; }
+.help-support-copy { max-width: 580px; }
+.figma-site .help-support h2 { font-size: 32px; line-height: 1.2; letter-spacing: -.02em; }
+.help-support p { margin-top: 10px; color: #5f6256; font-size: 16px; line-height: 26px; }
+.help-support-email { flex-shrink: 0; min-height: 50px; }
+.help-support-email svg { flex-shrink: 0; }
 .design-help-page .design-faq { padding-top: 80px; }
 @media (max-width: 1023px) {
   .help-hero { padding-top: 200px; }
   .help-search-field input, .help-category-field select { font-size: 20px; }
   .help-question p { line-height: 26px; }
+  .help-support-card { align-items: flex-start; flex-direction: column; gap: 24px; padding: 28px; }
 }
 @media (max-width: 600px) {
   .help-hero { padding: 160px 24px 28px; }
@@ -49,5 +57,9 @@
   .help-question { padding: 22px; border-radius: 20px; }
   .figma-site .help-question h3 { font-size: 19px; line-height: 27px; }
   .help-question p { font-size: 16px; line-height: 25px; }
+  .help-support { margin-top: 28px; }
+  .help-support-card { padding: 24px; border-radius: 20px; }
+  .figma-site .help-support h2 { font-size: 28px; }
+  .help-support-email { width: 100%; padding-inline: 14px; font-size: 15px; }
   .design-help-page .design-faq { padding-top: 56px; }
 }

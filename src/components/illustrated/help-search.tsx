@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Input } from "@/components/ui/input";
-import { HELP_ARTICLES, HELP_CATEGORIES } from "@/lib/help-center";
+import { HELP_ARTICLES, HELP_CATEGORIES, HELP_SUPPORT_EMAIL } from "@/lib/help-center";
 
 const PAGE_SIZE = 5;
 
@@ -84,7 +84,7 @@ export function HelpSearch() {
         {results.length === 0 && (
           <div className="help-empty">
             <h3>No answers found</h3>
-            <p>Try another keyword or category, or <a href="mailto:work@cnvrted.com">email our team</a>.</p>
+            <p>Try another keyword or category, or <a href={`mailto:${HELP_SUPPORT_EMAIL}`}>email our team</a>.</p>
             <button type="button" className="design-button design-button-outline" onClick={clearFilters}>Clear filters</button>
           </div>
         )}

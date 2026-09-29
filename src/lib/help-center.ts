@@ -1,3 +1,5 @@
+export const HELP_SUPPORT_EMAIL = "info@cnvrted.com";
+
 export const HELP_CATEGORIES = [
   "Getting started",
   "Signals & leads",
@@ -68,8 +70,8 @@ export const HELP_ARTICLES = [
     id: "contact",
     category: "Account & support",
     question: "How can I get help with my account?",
-    answer: "Email work@cnvrted.com with a description of the issue and any relevant screenshots. Please leave out passwords and other sensitive details.",
-    link: { label: "Email the team", href: "mailto:work@cnvrted.com" },
+    answer: `Email ${HELP_SUPPORT_EMAIL} with a description of the issue and any relevant screenshots. Please leave out passwords and other sensitive details.`,
+    link: { label: "Email the team", href: `mailto:${HELP_SUPPORT_EMAIL}` },
   },
   {
     id: "community",

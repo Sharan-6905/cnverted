@@ -4,7 +4,7 @@ Design: [Cnvrted website](https://www.figma.com/design/OjyEeHT6HACp1iY71CWyYI/Un
 
 ## Pages
 
-- `/`: looping video hero with a single Book a call action, signal windmill, ICP features, GTM strategy cards, integrations, FAQ and footer.
+- `/`: looping video hero with a single Book a call action, signal windmill, ICP features, GTM strategy canvas preview, horizontal integrations, FAQ and footer.
 - `/blogs`: Figma card layout backed by the existing articles in `src/lib/blog-posts.ts`.
 - `/about`: landscape, story, gallery and Bengaluru map. The dark story media area matches the empty frame in Figma; no video was supplied.
 - `/careers`: searchable roles and category filters.
@@ -52,6 +52,22 @@ The 2026-09-27 responsive pass preserves the artwork and desktop motion while ad
 - Mobile inputs, selects, and textareas use 16px text; booking destinations and form submission behavior are unchanged.
 
 Browser verification covered the homepage at 320, 375, 390, 430, 667 (landscape), 768, 820, 1024, 1280, 1366, 1440, and 1920px. Eighteen other public routes (including both blog articles and all five career details) passed layout/overflow checks at 320, 390, 768, 1024, and 1440px: 90 route/width combinations. Mobile/tablet menus, keyboard dismissal, form text sizes, the 320px pricing dialog, and the direct Calendly link were checked without submitting forms or booking events. These are browser viewport checks, not physical-device certification.
+
+## Homepage canvas and integrations — September 29
+
+The current homepage uses the newer home frame `120:799`: GTM canvas `148:494` and horizontal integrations `120:1457`. `strategy-section-figma.tsx` replaces the old three-card strategy board; the original section and earlier demo experiment remain available for reverting. The hero, signals, feature cards, and other routes are unchanged.
+
+The node graph is server-rendered from Figma's text, coordinates, connector exports, and original dot-grid image. The client wrapper provides 100–300% zoom, centered zooming, drag/scroll pan, a model preference selector, and per-session brief history. Submitting a brief stages it locally and offers the existing beta workspace link; it does **not** call an LLM, generate a plan, or transfer the draft to the beta app. The initial graph is the sample strategy from Figma.
+
+The integrations section uses the exported logo tiles and edge fade in an automatically scrolling row. The supplied animated-card reference is adapted in `components/ui/feature-block-animated-card.tsx`: logos lift and gently scale in sequence while an olive/gold signal sweeps across them, with deterministic sparkle positions. Three identical groups form a seamless 25-second sideways loop; duplicate groups are hidden from assistive technology. Hovering does not interrupt the marquee. The pause/play button was removed at the user’s request; the sideways movement and roughly 5.3-second logo wave run automatically. Motion pauses offscreen/in hidden tabs and is disabled for reduced-motion preferences. Original logo colors and SVG dimensions are retained. No new dependency was needed.
+
+The fade is clipped to its own section to avoid covering adjacent content. On phones and tablets, the same automatic loop runs without the fade for legibility. With reduced motion, only the original group remains and supports manual horizontal scrolling. Vertical page scrolling still works over the row. Desktop (1440px) and phone (390px) animation previews have no horizontal page overflow; playback, matching loop-group widths, TypeScript, and the production build were checked. On phones, the canvas sits above its composer, with a full graph overview and zoom/pan access to its details.
+
+The overview canvas does not capture page scrolling. Its scroll container is enabled only when zoomed, and normal scroll chaining lets users continue down the page at the canvas boundaries. This replaces the initial `overscroll-behavior: contain` setting, which trapped wheel gestures over the unzoomed graph.
+
+Desktop (1440px), tablet (820px), and phone (390px and 320px) previews have no horizontal page overflow. Browser checks covered zoom limits, mouse panning, fit reset, model selection, local brief submission/history, loaded imagery, and SVG proportions. The production build passes. These changes are local and have not been pushed.
+
+All 33 asset exports were checked; four raster exports were byte-identical to existing assets and reused. New SVGs are stored in `public/figma/home-canvas`, with their intrinsic dimensions recorded in `homepage-canvas-assets.ts`. The graph uses those exact SVG files, never redrawn connectors or logos.
 
 ## Run locally
 

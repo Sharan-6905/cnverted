@@ -6,7 +6,7 @@ import "./scroll-experience.css";
 
 const revealGroups = [
   { selector: ".design-strategies .design-section-heading > *", stagger: 90 },
-  { selector: ".design-integrations > div:first-child > *", stagger: 90 },
+  { selector: ".design-integrations-strip .design-section-heading > *", stagger: 90 },
   { selector: ".design-faq > h2, .design-faq-list > details", stagger: 55 },
   { selector: ".design-footer-columns > *", stagger: 90 },
 ];

@@ -4,13 +4,13 @@ import {
   BrainArtwork,
   RecipeArtwork,
   WorkflowArtwork,
-  IntegrationArtwork,
 } from "./artwork";
 import { ScaledArtwork } from "./scaled-artwork";
 import { LeadFlow } from "./lead-flow";
 import { HomeScrollExperience } from "./scroll-experience";
 import { LiveHeadline } from "./live-headline";
-import { StrategySection } from "./strategy-section-original";
+import { StrategySection } from "./strategy-section-figma";
+import { IntegrationsStrip } from "./integrations-strip";
 
 export function IllustratedHome() {
   return (
@@ -130,25 +130,7 @@ export function IllustratedHome() {
         </div>
       </div>
       <StrategySection />
-      <section
-        className="design-integrations design-container"
-        aria-labelledby="integrations-title"
-      >
-        <div>
-          <h2 id="integrations-title">Integrations</h2>
-          <p>
-            Bring buying signals into the tools your team already uses, and keep
-            your revenue workflow connected.
-          </p>
-        </div>
-        <ScaledArtwork
-          width={410}
-          height={607}
-          label="Integration logos including Slack, HubSpot, Salesforce, OpenAI, Microsoft Copilot and Zapier."
-        >
-          <IntegrationArtwork />
-        </ScaledArtwork>
-      </section>
+      <IntegrationsStrip />
     </>
   );
 }

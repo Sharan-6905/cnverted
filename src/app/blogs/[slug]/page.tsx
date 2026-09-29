@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
+import { IllustratedShell } from "@/components/illustrated/shell";
+import { SupportArtwork } from "@/components/illustrated/support-artwork";
+import "@/components/illustrated/article.css";
 import { RichText } from "@/components/rich-text";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import {
   BLOG_POSTS,
   getPostBySlug,
-  formatPostDate,
   type Block,
 } from "@/lib/blog-posts";
 import { getNonce } from "@/lib/nonce";
@@ -37,6 +37,12 @@ export async function generateMetadata({
       url: `https://www.cnvrted.com/blogs/${post.slug}`,
       publishedTime: post.date,
       authors: [post.author.name],
+      images: [{ url: post.cover, width: 1023, height: 437, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
       images: [post.cover],
     },
   };
@@ -83,170 +89,73 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   return (
-    <div className="relative flex min-h-screen flex-col">
-      <div
-        className="bg-grid-page pointer-events-none absolute inset-0 -z-10"
-        aria-hidden="true"
-      />
+    <IllustratedShell className="design-article-page">
       <ArticleSchema post={post} />
       <BreadcrumbSchema
         trail={[{ name: "Blog", path: "/blogs" }, { name: post.title }]}
       />
-      <SiteHeader />
-      <main className="flex-1">
-        <article className="px-6 py-16 md:py-24">
-          <div className="mx-auto max-w-2xl">
-            <Link
-              href="/blogs"
-              className="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-ink"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              All posts
+      <div className="design-article-scene">
+        <SupportArtwork variant="article" />
+        <article className="design-article design-container" aria-labelledby="article-title">
+          <header className="design-article-heading">
+            <Link href="/blogs" className="design-article-back" aria-label="Back to all blogs">
+              <Image src="/figma/blogs/back-arrow.svg" alt="" width={32} height={32} unoptimized />
             </Link>
-
-            <header className="mt-8">
-              <div className="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-muted">
-                <span className="rounded-full bg-surface-card px-3 py-1 text-body-strong">
-                  {post.category}
-                </span>
-                <span className="inline-flex items-center gap-1.5 normal-case tracking-normal text-muted">
-                  <Clock className="h-3.5 w-3.5" />
-                  {post.readingMinutes} min read
-                </span>
-              </div>
-
-              <h1 className="mt-5 font-display text-4xl font-semibold leading-[1.15] text-ink md:text-5xl">
-                {post.title}
-              </h1>
-              <p className="mt-5 text-lg leading-relaxed text-body">{post.dek}</p>
-              <p className="mt-6 border-t border-hairline pt-5 text-sm text-muted">
-                {formatPostDate(post.date)} · by{" "}
-                <a
-                  href={post.author.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer author"
-                  className="font-medium text-ink underline decoration-hairline underline-offset-2 smooth-transition transition-colors hover:text-brand-teal hover:decoration-brand-teal"
-                >
-                  {post.author.name}
-                </a>
-              </p>
-            </header>
-
-            <div className="mt-10 overflow-hidden rounded-3xl border border-hairline bg-surface-dark">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={post.cover}
-                alt={post.title}
-                className="aspect-[16/9] w-full object-cover"
-              />
+            <h1 id="article-title" className={post.category === "Comparison" ? "design-article-title-short" : undefined}>
+              {post.title}
+            </h1>
+            <p className="design-article-dek">{post.dek}</p>
+            <div className="design-article-tags">
+              <span>{post.category}</span>
+              <span>{post.readingMinutes} min read</span>
             </div>
-
-            <div className="mt-10 space-y-6">
-              {post.body.map((block, i) => (
-                <BlockRenderer key={i} block={block} />
-              ))}
-            </div>
-
-            <div className="mt-16 border-t border-hairline pt-8">
-              <Link
-                href="/early-access"
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-brand-teal px-6 text-[15px] font-medium text-on-dark shadow-soft smooth-transition transition-[filter,transform] hover:brightness-105 active:scale-[0.98]"
-              >
-                Get on the early-access list
-                <ArrowRight className="h-4 w-4" />
-              </Link>
+          </header>
+          <div className="design-article-content">
+            <Image
+              className="design-article-cover"
+              src={post.cover}
+              alt={post.category === "Comparison" ? "Cnvrted’s illustrated windmill and buying signals alongside Apollo." : "Cnvrted go-to-market strategy canvas, with connected strategy and launch nodes."}
+              width={1023}
+              height={437}
+              sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1206px) calc(100vw - 120px), 1023px"
+              loading="eager"
+            />
+            <div className="design-article-prose">
+              {post.body.map((block, i) => <BlockRenderer key={i} block={block} />)}
             </div>
           </div>
         </article>
-      </main>
-      <SiteFooter />
-    </div>
+      </div>
+    </IllustratedShell>
   );
 }
 
 function BlockRenderer({ block }: { block: Block }) {
   switch (block.type) {
     case "h2":
-      return (
-        <h2 className="pt-6 font-display text-2xl font-semibold tracking-tight text-ink md:text-[28px]">
-          {block.text}
-        </h2>
-      );
+      return <h2>{block.text}</h2>;
     case "p":
-      return (
-        <p className="text-[17px] leading-[1.75] text-body">
-          <RichText text={block.text} />
-        </p>
-      );
+      return <p><RichText text={block.text} /></p>;
     case "numbered":
       return (
-        <ol className="space-y-4">
+        <ol className="design-article-numbered">
           {block.items.map((item, i) => (
-            <li key={i} className="flex gap-4">
-              <span className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-surface-card text-sm font-semibold text-ink">
-                {i + 1}
-              </span>
-              <p className="text-[17px] leading-[1.7] text-body">
-                <strong className="font-semibold text-ink">{item.title}</strong>{" "}
-                <RichText text={item.text} />
-              </p>
+            <li key={i}>
+              <span className="design-article-number" aria-hidden="true">{i + 1}</span>
+              <p><strong>{item.title}</strong>{" "}<RichText text={item.text} /></p>
             </li>
           ))}
         </ol>
       );
     case "bullets":
       return (
-        <ul className="space-y-3">
-          {block.items.map((item, i) => (
-            <li key={i} className="flex gap-3">
-              <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-peach" />
-              <p className="text-[17px] leading-[1.7] text-body">
-                <RichText text={item} />
-              </p>
-            </li>
-          ))}
+        <ul className="design-article-bullets">
+          {block.items.map((item, i) => <li key={i}><RichText text={item} /></li>)}
         </ul>
       );
     case "callout":
-      return (
-        <blockquote className="rounded-3xl border border-hairline bg-surface-soft px-7 py-6">
-          <div className="space-y-1.5 font-display text-lg leading-relaxed text-body-strong">
-            {block.lines.map((line, i) => (
-              <p key={i}>{line}</p>
-            ))}
-          </div>
-        </blockquote>
-      );
+      return <blockquote>{block.lines.map((line, i) => <p key={i}>{line}</p>)}</blockquote>;
     case "cta":
-      return (
-        <div className="rounded-3xl bg-surface-dark px-7 py-7 text-[17px] leading-[1.7] text-on-dark/85">
-          <RichTextOnDark text={block.text} />
-        </div>
-      );
-    default:
-      return null;
+      return <p className="design-article-closing"><RichText text={block.text} /></p>;
   }
-}
-
-// The CTA block sits on a dark surface, so links need a lighter treatment.
-function RichTextOnDark({ text }: { text: string }) {
-  const linkMatch = /\[([^\]]+)\]\(([^)]+)\)/.exec(text);
-  if (!linkMatch) return <RichText text={text} />;
-  const before = text.slice(0, linkMatch.index);
-  const [, label, href] = linkMatch;
-  const after = text.slice(linkMatch.index + linkMatch[0].length);
-  return (
-    <>
-      {before}
-      <Link
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="font-semibold text-on-dark underline decoration-brand-peach decoration-2 underline-offset-4 hover:decoration-brand-mint"
-      >
-        {label}
-      </Link>
-      {after}
-    </>
-  );
 }

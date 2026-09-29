@@ -6,6 +6,7 @@ Design: [Cnvrted website](https://www.figma.com/design/OjyEeHT6HACp1iY71CWyYI/Un
 
 - `/`: looping video hero with a single Book a call action, signal windmill, ICP features, GTM strategy canvas preview, horizontal integrations, FAQ and footer.
 - `/blogs`: Figma card layout backed by the existing articles in `src/lib/blog-posts.ts`.
+- `/blogs/apollo-vs-cnvrted` and `/blogs/what-is-a-gtm-play`: article designs from frames `209:1869` and `209:1294`, with exact cover artwork, illustrated headers, editorial typography, category/read-time pills, and shared FAQ/footer. Existing URLs and clean article copy are preserved; duplicated paragraphs and unrelated placeholder FAQs in Figma are omitted. Covers also supply article social previews. Layouts reflow for desktop, tablet, and phones.
 - `/about`: landscape, story, gallery and Bengaluru map. The dark story media area matches the empty frame in Figma; no video was supplied.
 - `/careers`: searchable roles and category filters.
 - `/careers/[slug]`: role details and an application form with the selected role prefilled. Existing roles are retained alongside the Figma Marketing Lead role.

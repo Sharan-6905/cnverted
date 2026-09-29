@@ -3,7 +3,7 @@ import { ScaledArtwork } from "./scaled-artwork";
 import { assets } from "./assets";
 import "./support-pages.css";
 
-type Variant = "help" | "slack" | "contact" | "terms" | "privacy";
+type Variant = "help" | "slack" | "contact" | "terms" | "privacy" | "article";
 
 /** Figma artwork stays on a 1440px canvas; all page content reflows separately. */
 export function SupportArtwork({ variant }: { variant: Variant }) {
@@ -26,7 +26,7 @@ export function SupportArtwork({ variant }: { variant: Variant }) {
             </>
           ) : (
             <>
-              {variant === "terms" ? (
+              {variant === "terms" || variant === "article" ? (
                 <div className="support-terms-crop">
                   <Image className="support-terms-landscape" src={assets.careers.imgImage60} alt="" width={2691} height={1486} sizes="2691px" loading="eager" />
                 </div>
@@ -39,9 +39,9 @@ export function SupportArtwork({ variant }: { variant: Variant }) {
                   <Image src="/figma/privacy-fade-bottom.svg" alt="" width={3094.2} height={808.3} unoptimized loading="eager" />
                 </div>
               ) : (
-                <Image className="support-legal-fade-bottom" src="/figma/legal-fade-bottom.svg" alt="" width={3094.2} height={516.2} unoptimized loading="eager" />
+                <Image className="support-legal-fade-bottom" src={variant === "article" ? "/figma/blogs/fade-bottom.svg" : "/figma/legal-fade-bottom.svg"} alt="" width={3094.2} height={516.2} unoptimized loading="eager" />
               )}
-              <Image className="support-legal-fade-top" src="/figma/legal-fade-top.svg" alt="" width={1976.2} height={340.2} unoptimized loading="eager" />
+              <Image className="support-legal-fade-top" src={variant === "article" ? "/figma/blogs/fade-top.svg" : "/figma/legal-fade-top.svg"} alt="" width={1976.2} height={340.2} unoptimized loading="eager" />
             </>
           )}
         </div>

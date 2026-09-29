@@ -38,7 +38,7 @@ export interface BlogPost {
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "apollo-vs-cnvrted",
-    title: "Apollo vs. Cnvrted: Names vs. Buyers",
+    title: "Cnvrted vs Apollo: Names vs. Buyers",
     excerpt:
       "An honest comparison — where Apollo genuinely wins, where it structurally can't, and how to tell which one your team actually needs. Coverage is a bet on reach; timing is a bet on now.",
     dek: "Where Apollo genuinely wins, where it structurally can't, and how to tell which your team needs. One is a bet on coverage; the other on timing.",
@@ -46,7 +46,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-07-24",
     readingMinutes: 7,
     author: DHRUV_PRADEEP,
-    cover: "/blog-apollo-vs-cnvrted.svg?v=2",
+    cover: "/figma/blogs/apollo-comparison.png",
     body: [
       {
         type: "p",
@@ -146,7 +146,7 @@ export const BLOG_POSTS: BlogPost[] = [
     date: "2026-07-23",
     readingMinutes: 6,
     author: DHRUV_PRADEEP,
-    cover: "/blog-gtm-play.svg?v=3",
+    cover: "/figma/blogs/gtm-play.png",
     body: [
       {
         type: "p",

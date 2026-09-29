@@ -5,9 +5,8 @@ import { ScaledArtwork } from "./scaled-artwork";
 import { SupportArtwork } from "./support-artwork";
 import "./contact.css";
 
-type Founder = {
+type TeamMember = {
   name: string;
-  role: string;
   description: string;
   email: string;
   portrait: string;
@@ -17,34 +16,45 @@ type Founder = {
   x?: string;
 };
 
-const founders: readonly Founder[] = [
+const foundingTeam: readonly TeamMember[] = [
   {
     name: DHRUV_PRADEEP.name,
-    role: "Co-founder, CEO",
     description: "Talk GTM strategy, partnerships, and getting started with Cnvrted.",
     email: "dhruv@cnvrted.com",
     portrait: "/figma/contact/dhruv.png",
     imageSize: 1600,
     crop: "dhruv",
     linkedin: DHRUV_PRADEEP.linkedin,
+    x: "https://x.com/dhruvprad",
   },
   {
     name: "Kailas S",
-    role: "Co-founder, CTO",
     description: "Talk product, AI, and connecting Cnvrted to your tools.",
     email: "kailas@cnvrted.com",
     portrait: "/figma/contact/kailas.png",
     imageSize: 1040,
     crop: "kailas",
+    linkedin: "https://www.linkedin.com/in/kailas-krsna-s-a7855334a/",
+    x: "https://x.com/kailaskrsna",
   },
   {
-    name: "Saran S",
-    role: "Co-founder, COO",
+    name: "Sharan S",
     description: "Talk onboarding, operations, and scaling your team’s workflow.",
     email: "sharan@cnvrted.com",
     portrait: "/figma/contact/saran.png",
     imageSize: 1600,
     crop: "saran",
+    linkedin: "https://www.linkedin.com/in/sharan-s-6278b3360/",
+    x: "https://x.com/Sharan6905",
+  },
+  {
+    name: "Anupam Bagchi",
+    description: "Talk design, user experience, and making Cnvrted easier to use.",
+    email: "anupam@cnvrted.com",
+    portrait: "/figma/contact/anupam.png",
+    imageSize: 800,
+    crop: "anupam",
+    linkedin: "https://www.linkedin.com/in/anupambagchi2/",
   },
 ];
 
@@ -64,22 +74,20 @@ export function IllustratedContact({ nonce }: { nonce?: string }) {
           </ScaledArtwork>
         </div>
         <div className="contact-founders-heading">
-          <h2 id="founders-title">Meet the founders</h2>
+          <h2 id="founders-title">Meet the Founding Team</h2>
           <p>Get to know the people behind Cnvrted.</p>
         </div>
         <div className="contact-founder-grid design-container">
-          {founders.map((founder) => (
+          {foundingTeam.map((founder) => (
             <article className="contact-founder" key={founder.email}>
               <div className={`contact-founder-photo contact-founder-photo-${founder.crop}`}>
                 <div className="contact-founder-crop">
                   <Image src={founder.portrait} alt={founder.name} width={founder.imageSize} height={founder.imageSize} sizes="(max-width: 767px) 700px, 520px" />
-                  <span className="contact-founder-photo-role" aria-hidden="true">{founder.role}</span>
                 </div>
               </div>
               <div className="contact-founder-content">
                 <div>
                   <h3>{founder.name}</h3>
-                  <p className="contact-founder-role">{founder.role}</p>
                   <p className="contact-founder-description">{founder.description}</p>
                   <a className="contact-founder-email" href={`mailto:${founder.email}`}>{founder.email}</a>
                 </div>

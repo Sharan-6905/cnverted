@@ -28,7 +28,7 @@
 .contact-founders-heading > p { max-width: 520px; margin: 10px auto 0; color: #5f5f5f; font-size: 20px; line-height: 32px; }
 .contact-founders-glow { position: absolute; top: 45px; left: 50%; transform: translateX(-50%); width: 100%; max-width: 1440px; pointer-events: none; }
 .contact-founders-glow img { position: absolute; left: -32.2px; max-width: none; }
-.contact-founder-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; gap: 24px; max-width: 978px; margin-top: 24px; }
+.contact-founder-grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: stretch; gap: 24px; max-width: 1176px; margin-top: 24px; }
 .contact-founder { min-width: 0; display: flex; flex-direction: column; overflow: hidden; padding-bottom: 16px; border: 1px solid #eaecf0; border-radius: 12px; background: #fff; box-shadow: 0 0 12.5px #0000000d; }
 .contact-founder-photo { position: relative; overflow: hidden; padding: 10px; }
 .contact-founder-crop { position: relative; aspect-ratio: 290 / 181; background: #d9d9d9; }
@@ -36,10 +36,9 @@
 .contact-founder-photo-dhruv img { width: 123.7931%; left: -19.3103%; top: -23.5359%; }
 .contact-founder-photo-kailas img { width: 179.3103%; left: -20%; top: -93.8122%; }
 .contact-founder-photo-saran img { width: 125.8621%; left: -7.2414%; top: -44.0884%; }
-.contact-founder-photo-role { position: absolute; bottom: 0; left: 0; padding: 9px 10px; border-radius: 4px; background: #ffffff1a; color: #e7e7e7; font-size: 14px; line-height: 20px; backdrop-filter: blur(5px); }
+.contact-founder-photo-anupam img { width: calc(100% + 20px); height: calc(100% + 20px); inset: -10px; object-fit: cover; object-position: center 30%; }
 .contact-founder-content { display: flex; flex: 1; flex-direction: column; justify-content: space-between; gap: 24px; padding: 16px 16px 0; }
 .figma-site .contact-founder h3 { font-size: 24px; line-height: 30px; letter-spacing: 0; color: #282828; }
-.contact-founder-role { margin-top: 4px; font-size: 14px; line-height: 20px; color: #5f5f5f; }
 .contact-founder-description { margin-top: 8px; font-family: var(--font-inter), sans-serif; color: #5f5f5f; font-size: 14px; line-height: 22px; }
 .contact-founder-email { display: inline-block; margin-top: 8px; font-size: 16px; line-height: 24px; overflow-wrap: anywhere; }
 .contact-founder-socials { display: flex; gap: 16px; min-height: 36px; }
@@ -47,13 +46,15 @@
 .contact-founder-socials a { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #f2f4f7; }
 .contact-founder-socials a:hover { background: #e9eddb; }
 .design-contact-page .design-faq { padding-top: 112px; }
+@media (min-width: 768px) and (max-width: 1100px) {
+  .contact-founder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 760px; }
+}
 @media (max-width: 1023px) {
   .contact-hero { padding-top: 200px; }
   .contact-founder-grid { gap: 16px; width: calc(100% - 48px); }
   .contact-founder-content { padding-inline: 14px; }
   .figma-site .contact-founder h3 { font-size: 22px; }
   .contact-founder-email { font-size: 14px; }
-  .contact-founder-photo-role { font-size: 12px; padding: 5px 7px; }
 }
 @media (max-width: 767px) {
   .contact-hero { padding: 156px 24px 24px; }
@@ -73,6 +74,5 @@
   .contact-founder-email { padding-block: 4px; font-size: 16px; }
   .contact-founder-socials { min-height: 44px; }
   .contact-founder-socials a { width: 44px; height: 44px; }
-  .contact-founder-photo-role { font-size: 14px; padding: 9px 10px; }
   .design-contact-page .design-faq { padding-top: 72px; }
 }

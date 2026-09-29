@@ -9,7 +9,7 @@ import { BOOKING_URL } from "@/lib/booking";
 
 export const metadata: Metadata = {
   title: "Contact — Cnvrted",
-  description: "Connect with Cnvrted. Book a 30-minute call, discuss your go-to-market goals, or reach our founders directly.",
+  description: "Connect with Cnvrted. Book a 30-minute call, discuss your go-to-market goals, or reach our founding team directly.",
 };
 
 const contactFAQs: FAQItem[] = [
@@ -18,7 +18,7 @@ const contactFAQs: FAQItem[] = [
   { question: "What should I prepare?", answer: "Bring your company website and a little context about your team, customers, and current challenges. You can share preparation notes when booking." },
   { question: "Can we talk about plans and pricing?", answer: <>Absolutely. See our <Link href="/pricing">pricing page</Link> or <a href={BOOKING_URL}>book a call</a> to discuss your team’s needs.</> },
   { question: "How do I get product support?", answer: <>Browse the <Link href="/help-center">Help Center</Link> or email <a href="mailto:info@cnvrted.com">info@cnvrted.com</a> with your question.</> },
-  { question: "Can I contact a founder directly?", answer: "Yes. Use the email links above to reach Dhruv, Kailas, or Saran directly." },
+  { question: "Can I contact the team directly?", answer: "Yes. Use the email links above to reach Dhruv, Kailas, Sharan, or Anupam directly." },
 ];
 
 export default async function ContactPage() {

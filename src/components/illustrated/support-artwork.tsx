@@ -3,7 +3,7 @@ import { ScaledArtwork } from "./scaled-artwork";
 import { assets } from "./assets";
 import "./support-pages.css";
 
-type Variant = "help" | "slack" | "terms" | "privacy";
+type Variant = "help" | "slack" | "contact" | "terms" | "privacy";
 
 /** Figma artwork stays on a 1440px canvas; all page content reflows separately. */
 export function SupportArtwork({ variant }: { variant: Variant }) {
@@ -16,13 +16,13 @@ export function SupportArtwork({ variant }: { variant: Variant }) {
               <Image className="support-trees" src={assets.blogListing.imgImage61} alt="" width={1745} height={963} sizes="1745px" loading="eager" />
               <Image className="support-help-fade" src="/figma/support-fade.svg" alt="" width={4064.2} height={1018.2} unoptimized loading="eager" />
             </>
-          ) : variant === "slack" ? (
+          ) : variant === "slack" || variant === "contact" ? (
             <>
               <div className="support-cloud-crop">
                 <Image className="support-clouds" src={assets.blogListing.imgImage61} alt="" width={2403.9} height={1327.3} sizes="2404px" loading="eager" />
               </div>
-              <Image className="support-slack-fade-bottom" src="/figma/slack-fade-bottom.svg" alt="" width={4339.8} height={946.8} unoptimized loading="eager" />
-              <Image className="support-slack-fade-top" src="/figma/slack-fade-top.svg" alt="" width={1946.2} height={441.2} unoptimized loading="eager" />
+              <Image className="support-slack-fade-bottom" src={variant === "contact" ? "/figma/contact/fade-bottom.svg" : "/figma/slack-fade-bottom.svg"} alt="" width={4339.8} height={946.8} unoptimized loading="eager" />
+              <Image className="support-slack-fade-top" src={variant === "contact" ? "/figma/contact/fade-top.svg" : "/figma/slack-fade-top.svg"} alt="" width={1946.2} height={441.2} unoptimized loading="eager" />
             </>
           ) : (
             <>

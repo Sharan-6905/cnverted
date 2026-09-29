@@ -29,7 +29,7 @@ function buildCsp(nonce: string, isDev: boolean) {
     `connect-src 'self' ${supabase} https://cal.com https://app.cal.com https://api.cnvrted.com${isDev ? " ws: http://localhost:*" : ""}`,
     // youtube-nocookie serves the homepage Short; it redirects playback
     // requests to www.youtube.com, so both origins have to be allowed
-    `frame-src 'self' https://cal.com https://app.cal.com https://www.youtube-nocookie.com https://www.youtube.com`,
+    `frame-src 'self' https://cal.com https://app.cal.com https://calendly.com https://www.youtube-nocookie.com https://www.youtube.com`,
     `frame-ancestors 'none'`,
     `form-action 'self'`,
     `base-uri 'self'`,

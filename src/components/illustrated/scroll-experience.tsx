@@ -1,14 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { createFeatureHandoff } from "./feature-handoff";
 import "./scroll-experience.css";
 
 const revealGroups = [
-  { selector: ".design-strategies .design-section-heading > *", stagger: 90 },
-  { selector: ".design-integrations-strip .design-section-heading > *", stagger: 90 },
-  { selector: ".design-faq > h2, .design-faq-list > details", stagger: 55 },
-  { selector: ".design-footer-columns > *", stagger: 90 },
+  { selector: ".design-features-heading > *", kind: "heading", stagger: 80 },
+  { selector: ".design-feature-card", kind: "card", stagger: 90 },
+  { selector: ".design-strategies .design-section-heading > *", kind: "heading", stagger: 70 },
+  { selector: ".strategy-canvas-preview", kind: "canvas", stagger: 0 },
+  { selector: ".design-integrations-strip .design-section-heading > *", kind: "heading", stagger: 70 },
+  { selector: ".integrations-strip-animation", kind: "strip", stagger: 0 },
+  { selector: ".design-faq > h2, .design-faq-list > details", kind: "quiet", stagger: 40 },
+  { selector: ".design-footer-columns > *", kind: "quiet", stagger: 50 },
 ];
 
 const clamp = (value: number) => Math.min(1, Math.max(0, value));
@@ -49,9 +52,10 @@ export function HomeScrollExperience() {
           .querySelectorAll<HTMLElement>(group.selector)
           .forEach((element, index) => {
             reveals.push(element);
+            element.dataset.scrollKind = group.kind;
             element.style.setProperty(
               "--reveal-delay",
-              `${(index % 3) * group.stagger}ms`,
+              `${(index % 2) * group.stagger}ms`,
             );
             // Do not flash or hide content already visible on refresh / anchor navigation.
             element.dataset.scrollReveal =
@@ -65,17 +69,6 @@ export function HomeScrollExperience() {
 
       const opening = root.querySelector<HTMLElement>(".design-opening-story");
       const heroPin = root.querySelector<HTMLElement>(".design-hero-pin");
-      let featureHandoff = createFeatureHandoff(root);
-      const strategy = root.querySelector<HTMLElement>(
-        ".design-strategy-board",
-      );
-      const integration = root.querySelector<HTMLElement>(
-        ".design-integrations > .illustration",
-      );
-      const footer = root.querySelector<HTMLElement>(".design-footer-art");
-      const depthElements = [strategy, integration, footer].filter(
-        (element): element is HTMLElement => element !== null,
-      );
       root.dataset.scrollEffects = "on";
 
       let frame = 0;
@@ -96,15 +89,8 @@ export function HomeScrollExperience() {
         const viewport = window.innerHeight;
         const amount = window.innerWidth <= 720 ? 0.35 : 1;
 
-        // Read all layout before updating styles. Track the untransformed section,
-        // never its moving artwork, so motion cannot feed back into its own position.
-        const positions = depthElements.flatMap((element) => {
-          const anchor = element.closest("section, footer");
-          // A refresh or route transition can detach artwork before effect cleanup.
-          return anchor && element.isConnected
-            ? [{ element, rect: anchor.getBoundingClientRect() }]
-            : [];
-        });
+        // Only the opening scene scrubs continuously. Later chapters reveal once
+        // and settle, so reading and interacting never competes with parallax.
         const openingTop = opening?.getBoundingClientRect().top ?? 0;
         const heroHeight = heroPin?.offsetHeight ?? viewport;
         const handoff = clamp(
@@ -114,13 +100,6 @@ export function HomeScrollExperience() {
         const headingEntrance = phase(handoff, 0.06, 0.4);
         const flowEntrance = phase(handoff, 0.3, 0.94);
         const openingChanged = handoff !== lastHandoff || amount !== lastAmount;
-        // A streamed section may arrive after this small client component mounts.
-        featureHandoff ??= createFeatureHandoff(root);
-        const featureFrame = featureHandoff?.measure(
-          correction,
-          viewport,
-          window.innerWidth,
-        );
 
         if (opening && heroPin && openingChanged) {
           lastHandoff = handoff;
@@ -173,30 +152,6 @@ export function HomeScrollExperience() {
           heroPin.inert = handoff >= 0.6;
         }
 
-        for (const { element, rect } of positions) {
-          const top = rect.top + correction;
-          const passage = clamp((viewport - top) / (viewport + rect.height));
-          const travel =
-            element === integration ? 90 : element === footer ? 48 : 60;
-          element.style.setProperty(
-            "--scroll-depth",
-            `${(0.5 - passage) * travel * amount}px`,
-          );
-          if (element === strategy) {
-            const entrance = clamp(passage * 2.2);
-            element.style.setProperty(
-              "--scroll-scale",
-              `${1 - (1 - entrance) * 0.045 * amount}`,
-            );
-            element.style.setProperty(
-              "--scroll-tilt",
-              `${(1 - entrance) * 5 * amount}deg`,
-            );
-          }
-        }
-
-        featureHandoff?.apply(featureFrame ?? null);
-
         if (Math.abs(scroll - currentScroll) > 0.1)
           frame = requestAnimationFrame(render);
         else previousTime = 0;
@@ -219,12 +174,33 @@ export function HomeScrollExperience() {
         }
       }
 
+      // In-page links should land on readable content, including when a reveal
+      // was still waiting below the fold before navigation.
+      function revealAnchor() {
+        if (!window.location.hash) return;
+        let target: HTMLElement | null;
+        try {
+          target = document.getElementById(decodeURIComponent(window.location.hash.slice(1)));
+        } catch {
+          return;
+        }
+        if (!target || !root?.contains(target)) return;
+        for (const element of reveals) {
+          if (element === target || element.contains(target)) {
+            element.dataset.scrollReveal = "visible";
+            observer.unobserve(element);
+          }
+        }
+      }
+
       const resizeObserver = new ResizeObserver(schedule);
       resizeObserver.observe(root);
       window.addEventListener("scroll", schedule, { passive: true });
       window.addEventListener("resize", schedule, { passive: true });
       document.addEventListener("visibilitychange", schedule);
       root.addEventListener("focusin", revealFocus);
+      window.addEventListener("hashchange", revealAnchor);
+      revealAnchor();
       schedule();
 
       disposeMotion = () => {
@@ -235,23 +211,14 @@ export function HomeScrollExperience() {
         window.removeEventListener("resize", schedule);
         document.removeEventListener("visibilitychange", schedule);
         root.removeEventListener("focusin", revealFocus);
+        window.removeEventListener("hashchange", revealAnchor);
         delete root.dataset.scrollEffects;
         opening?.removeAttribute("style");
         if (heroPin) heroPin.inert = false;
-        featureHandoff?.dispose();
         for (const element of reveals) {
           delete element.dataset.scrollReveal;
           delete element.dataset.scrollKind;
           element.style.removeProperty("--reveal-delay");
-        }
-        for (const element of depthElements) {
-          for (const property of [
-            "--scroll-depth",
-            "--scroll-scale",
-            "--scroll-tilt",
-          ]) {
-            element.style.removeProperty(property);
-          }
         }
       };
     }

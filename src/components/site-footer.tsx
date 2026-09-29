@@ -8,8 +8,7 @@ import { BOOKING_URL } from "@/lib/booking";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/logo";
-import { LinkedInIcon, XIcon, InstagramIcon } from "@/components/social-icons";
-import { SlackLogo } from "@/components/slack-logo";
+import { LinkedInIcon, XIcon, DiscordIcon } from "@/components/social-icons";
 import { supabase } from "@/lib/supabase";
 
 const COLUMNS = [
@@ -44,11 +43,10 @@ const COLUMNS = [
 const SOCIAL_LINKS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/company/cnvrted", Icon: LinkedInIcon },
   { label: "X", href: "https://x.com/cnvrted", Icon: XIcon },
-  { label: "Instagram", href: "https://www.instagram.com/cnvrted", Icon: InstagramIcon },
   {
-    label: "Join Slack",
-    href: "/join-slack",
-    Icon: SlackLogo,
+    label: "Discord",
+    href: "https://discord.gg/xChmhfQx4",
+    Icon: DiscordIcon,
   },
 ];
 

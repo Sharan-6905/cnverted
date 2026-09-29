@@ -24,7 +24,7 @@ const organizationSchema = {
   sameAs: [
     "https://www.linkedin.com/company/cnvrted",
     "https://x.com/cnvrted",
-    "https://www.instagram.com/cnvrted",
+    "https://discord.gg/xChmhfQx4",
   ],
   contactPoint: {
     "@type": "ContactPoint",

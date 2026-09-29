@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { assets } from "./assets";
 import { ScaledArtwork } from "./scaled-artwork";
+import { FooterSpotlight } from "./footer-spotlight";
 
 const columns = [
   {
@@ -32,11 +33,6 @@ const columns = [
   },
 ];
 const social = [
-  {
-    label: "Instagram",
-    href: "https://www.instagram.com/cnvrted",
-    image: assets.home.imgIcon2,
-  },
   { label: "X", href: "https://x.com/cnvrted", image: assets.home.imgIcon3 },
   {
     label: "LinkedIn",
@@ -44,8 +40,8 @@ const social = [
     image: assets.home.imgIcon4,
   },
   {
-    label: "Join Slack",
-    href: "/join-slack",
+    label: "Discord",
+    href: "https://discord.gg/xChmhfQx4",
     image: assets.home.imgIcon5,
   },
 ];
@@ -108,31 +104,33 @@ export function IllustratedFooter() {
           © {new Date().getFullYear()} Cnvrted. All rights reserved.
         </small>
       </div>
-      <ScaledArtwork width={1440} height={465} className="design-footer-art">
-        <Image
-          src={assets.home.imgImage53}
-          alt=""
-          width={276}
-          height={414}
-          className="absolute max-w-none left-[23px] top-[0px] h-[414px] w-[276px]"
-          sizes="276px"
-        />
-        <Image
-          src={assets.home.imgImage51}
-          alt=""
-          width={1491}
-          height={497}
-          className="absolute max-w-none left-[-51px] top-[6px] h-[497px] w-[1491px]"
-          sizes="100vw"
-        />
-        <Image
-          src={assets.home.imgVector18}
-          alt=""
-          width={792}
-          height={164}
-          className="absolute max-w-none left-[483px] top-[87px]"
-        />
-      </ScaledArtwork>
+      <FooterSpotlight>
+        <ScaledArtwork width={1440} height={465}>
+          <Image
+            src={assets.home.imgImage53}
+            alt=""
+            width={276}
+            height={414}
+            className="absolute max-w-none left-[23px] top-[0px] h-[414px] w-[276px]"
+            sizes="276px"
+          />
+          <Image
+            src={assets.home.imgImage51}
+            alt=""
+            width={1491}
+            height={497}
+            className="absolute max-w-none left-[-51px] top-[6px] h-[497px] w-[1491px]"
+            sizes="100vw"
+          />
+          <Image
+            src={assets.home.imgVector18}
+            alt=""
+            width={792}
+            height={164}
+            className="design-footer-wordmark absolute max-w-none left-[483px] top-[87px]"
+          />
+        </ScaledArtwork>
+      </FooterSpotlight>
     </footer>
   );
 }

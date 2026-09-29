@@ -1,16 +1,3 @@
-.design-scroll-progress {
-  position: fixed;
-  z-index: 60;
-  inset: 0 0 auto;
-  height: 3px;
-  pointer-events: none;
-  background: linear-gradient(90deg, #667a24, #a3b957 70%, #e6c95d);
-  box-shadow: 0 1px 8px #a6b86b33;
-  transform: scaleX(0);
-  transform-origin: left;
-  opacity: 0;
-}
-
 .design-opening-story {
   --opening-height: clamp(620px, 100svh, 1080px);
   position: relative;
@@ -43,7 +30,8 @@
 }
 
 .design-opening-story #signals-title {
-  scroll-margin-top: 48px;
+  /* Leave room for the section's scroll-driven scale as the anchor settles. */
+  scroll-margin-top: calc(var(--header-clearance) + 48px);
 }
 
 .design-story-cue {
@@ -104,10 +92,6 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  [data-scroll-effects="on"] .design-scroll-progress {
-    opacity: 1;
-  }
-
   [data-scroll-reveal] {
     transition:
       opacity 720ms cubic-bezier(0.22, 1, 0.36, 1) var(--reveal-delay, 0ms),
@@ -284,9 +268,6 @@
   [data-scroll-reveal="pending"] {
     opacity: 1;
     transform: none;
-  }
-  .design-scroll-progress {
-    display: none;
   }
   .design-hero-pin,
   .design-signal-pin {

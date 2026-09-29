@@ -1,6 +1,7 @@
 .figma-site {
   --olive: #6a7a1d;
   --olive-light: #f3f9d3;
+  --header-clearance: 123px;
   position: relative;
   overflow: clip;
   background: #fff;
@@ -39,8 +40,9 @@
 .figma-site h3 {
   font-size: 32px;
 }
-.figma-site :is(h2, h3)[id] {
-  scroll-margin-top: 32px;
+.figma-site :is(h1, h2, h3)[id] {
+  /* Heading reveals settle 30px above their initial anchor position. */
+  scroll-margin-top: calc(var(--header-clearance) + 32px);
 }
 .figma-site a,
 .figma-site button,
@@ -86,7 +88,7 @@
   pointer-events: none;
 }
 .illustrated-header {
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 25px;
@@ -103,7 +105,9 @@
   justify-content: flex-end;
   gap: 24px;
   border-radius: 100px;
-  background: rgba(255, 255, 255, 0.36);
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   box-shadow: 0 4px 28.9px #0000000d;
   font-family: var(--font-open-sans), sans-serif;
   font-size: 16px;
@@ -143,6 +147,8 @@
   top: calc(100% + 5px);
   left: -12px;
   width: 160px;
+  max-height: calc(100dvh - var(--header-clearance) - 16px);
+  overflow-y: auto;
   padding: 16px 12px;
   background: #fff;
   border-radius: 8px;
@@ -645,7 +651,23 @@
   color: #ffffff80;
 }
 .design-footer-art {
+  position: relative;
+  isolation: isolate;
   margin-top: 45px;
+}
+.design-footer-art:not([data-spotlight-ready]) > .illustration {
+  filter: brightness(0.06);
+}
+.design-footer-wordmark {
+  filter: brightness(0) invert(1);
+  opacity: 0.88;
+}
+.design-footer-spotlight {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 .design-blog-list {
   position: relative;
@@ -1022,7 +1044,7 @@
   max-width: 1040px;
   margin: 64px auto 0;
   padding-inline: 24px;
-  scroll-margin-top: 40px;
+  scroll-margin-top: var(--header-clearance);
 }
 .design-application > h2 {
   text-align: center;
@@ -1134,6 +1156,9 @@
   }
 }
 @media (max-width: 767px) {
+  .figma-site {
+    --header-clearance: 96px;
+  }
   .figma-site h2 {
     font-size: 36px;
     line-height: 1.12;
@@ -1152,7 +1177,7 @@
     width: calc(100% - 32px);
     padding: 8px 10px 8px 16px;
     gap: 8px;
-    background: #ffffffbf;
+    background: #fffffff0;
     box-shadow: 0 4px 24px #00000008;
   }
   .design-home-link span {

@@ -19,19 +19,18 @@ const phase = (value: number, start: number, end: number) => {
 
 /** Progressive enhancement for the homepage; server-rendered content stays visible. */
 export function HomeScrollExperience() {
-  const progressRef = useRef<HTMLDivElement>(null);
+  const anchorRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const progress = progressRef.current;
-    const root = progress?.closest<HTMLElement>(".figma-site");
-    if (!root || !progress) return;
+    const root = anchorRef.current?.closest<HTMLElement>(".figma-site");
+    if (!root) return;
 
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let disposeMotion = () => {};
 
     function startMotion() {
       disposeMotion();
-      if (!root || !progress || preference.matches) return;
+      if (!root || preference.matches) return;
 
       const reveals: HTMLElement[] = [];
       const observer = new IntersectionObserver(
@@ -87,7 +86,7 @@ export function HomeScrollExperience() {
 
       function render(time: number) {
         frame = 0;
-        if (!root?.isConnected || !progress || document.hidden) return;
+        if (!root?.isConnected || document.hidden) return;
         const scroll = window.scrollY;
         const elapsed = Math.min(64, previousTime ? time - previousTime : 16);
         previousTime = time;
@@ -108,7 +107,6 @@ export function HomeScrollExperience() {
         });
         const openingTop = opening?.getBoundingClientRect().top ?? 0;
         const heroHeight = heroPin?.offsetHeight ?? viewport;
-        const maxScroll = document.documentElement.scrollHeight - viewport;
         const handoff = clamp(
           -(openingTop + correction) / Math.max(1, heroHeight),
         );
@@ -123,7 +121,6 @@ export function HomeScrollExperience() {
           viewport,
           window.innerWidth,
         );
-        progress.style.transform = `scaleX(${clamp(scroll / Math.max(1, maxScroll))})`;
 
         if (opening && heroPin && openingChanged) {
           lastHandoff = handoff;
@@ -267,11 +264,5 @@ export function HomeScrollExperience() {
     };
   }, []);
 
-  return (
-    <div
-      ref={progressRef}
-      className="design-scroll-progress"
-      aria-hidden="true"
-    />
-  );
+  return <span ref={anchorRef} hidden aria-hidden="true" />;
 }

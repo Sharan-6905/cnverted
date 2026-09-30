@@ -12,9 +12,10 @@
 .design-article-tags span { padding: 6px 12px; border: 1px solid #e1ebae; border-radius: 100px; background: #fff; line-height: 20px; }
 .design-article-byline { display: flex; flex-wrap: wrap; align-items: center; gap: 0 20px; margin-top: 16px; color: #5f5f5f; font-size: 14px; line-height: 24px; }
 .design-article-byline strong { color: #343330; font-weight: 500; }
-.design-article-author-links { display: flex; align-items: center; gap: 16px; }
-.design-article-author-links a { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; color: var(--olive); text-decoration: underline; text-decoration-color: #bcc888; text-underline-offset: 4px; }
-.design-article-author-links a:hover { color: #3f5011; text-decoration-color: currentColor; }
+.design-article-author-links { display: flex; align-items: center; gap: 4px; }
+.design-article-author-links a { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; color: #343330; }
+.design-article-author-links a:hover { color: var(--olive); background: #f0f2e4; }
+.design-article-author-links a:focus-visible { outline: 2px solid var(--olive); outline-offset: 2px; }
 .design-article-content { margin-top: 40px; }
 .design-article-cover { display: block; width: 100%; height: auto; aspect-ratio: 1023 / 437; border-radius: 12px; }
 .design-article-prose { margin-top: 20px; color: #0a0a0a; font-size: 16px; line-height: 32px; overflow-wrap: anywhere; }

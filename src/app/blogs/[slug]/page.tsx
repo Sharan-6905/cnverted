@@ -6,6 +6,7 @@ import { IllustratedShell } from "@/components/illustrated/shell";
 import { SupportArtwork } from "@/components/illustrated/support-artwork";
 import "@/components/illustrated/article.css";
 import { RichText } from "@/components/rich-text";
+import { LinkedInIcon, XIcon } from "@/components/social-icons";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import {
   BLOG_POSTS,
@@ -114,10 +115,10 @@ export default async function BlogPostPage({
               <p>Written by <strong>{post.author.name}</strong></p>
               <div className="design-article-author-links">
                 <a href={post.author.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${post.author.name} on LinkedIn (opens in a new tab)`}>
-                  LinkedIn <span aria-hidden="true">↗</span>
+                  <LinkedInIcon width={22} height={22} />
                 </a>
                 <a href={post.author.x} target="_blank" rel="noopener noreferrer" aria-label={`${post.author.name} on X (opens in a new tab)`}>
-                  X <span aria-hidden="true">↗</span>
+                  <XIcon width={19} height={19} />
                 </a>
               </div>
             </div>

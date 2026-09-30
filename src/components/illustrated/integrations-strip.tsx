@@ -12,6 +12,7 @@ const logos = [
   { name: "Zapier", asset: art.imgCdnlogoComZapierLogo1 },
   { name: "Slack", asset: art.imgSlackIcon20191 },
   { name: "Outreach", asset: art.imgImage58, width: 75, height: 75 },
+  { name: "Composio", asset: { src: "/brands/composio.png", width: 180, height: 180 }, width: 60, height: 60 },
 ];
 
 export function IntegrationsStrip() {

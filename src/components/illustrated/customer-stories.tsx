@@ -20,7 +20,7 @@ export function CustomerStories() {
     <div className="design-customer-stories">
       <section className="design-side-stories design-container" aria-labelledby="side-story-title">
         <div className="design-section-heading">
-          <h2 id="side-story-title">Cnvrted side story</h2>
+          <h2 id="side-story-title">Case Studies</h2>
           <p>How real teams put Cnvrted to work.</p>
         </div>
         <SideStoryCarousel stories={CASE_STUDY_SUMMARIES} />

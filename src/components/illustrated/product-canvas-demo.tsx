@@ -16,6 +16,8 @@ import {
   ChevronDown,
   Download,
   Maximize2,
+  MessageSquare,
+  Workflow,
   Pause,
   Play,
   RotateCcw,
@@ -242,6 +244,7 @@ export function ProductCanvasDemo() {
   const [zoom, setZoom] = useState(1);
   const [settings, setSettings] = useState(false);
   const [askApproval, setAskApproval] = useState(true);
+  const [mobile, setMobile] = useState(false);
   const [view, setView] = useState<"chat" | "canvas">("canvas");
   const [paused, setPaused] = useState(false);
   const [automatic, setAutomatic] = useState(true);
@@ -263,6 +266,14 @@ export function ProductCanvasDemo() {
     !searchOpen &&
     !prompt.trim() &&
     !(reducedMotion && run.phase >= 6);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 767px)");
+    const update = () => setMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     const element = root.current;
@@ -335,7 +346,7 @@ export function ProductCanvasDemo() {
         top: run.phase === 0 ? 0 : element.scrollHeight,
         behavior: reducedMotion ? "instant" : "smooth",
       });
-  }, [run.phase, run.cycle, reducedMotion]);
+  }, [run.phase, run.cycle, reducedMotion, view]);
 
   useEffect(() => {
     if (!settings) return;
@@ -429,6 +440,78 @@ export function ProductCanvasDemo() {
         }
       }}
     >
+      <div className="product-demo-controls" data-panel-open={!!panel}>
+        <div className="product-demo-footer">
+          <div className="product-playback-status">
+            <span className="product-playback-eyebrow">
+              <i data-busy={running} />
+              {automatic ? "Product walkthrough" : "Your playground"}
+              <small>
+                {String(Math.min(run.phase + 1, 7)).padStart(2, "0")} / 07
+              </small>
+            </span>
+            <span className="product-run-status" role="status">
+              {paused ? "Paused · make it your own" : PRODUCT_PHASES[run.phase]}
+            </span>
+          </div>
+          <button
+            type="button"
+            className="product-playback-button"
+            data-paused={paused}
+            aria-label={
+              automatic || busy
+                ? paused
+                  ? "Play demo"
+                  : "Pause demo"
+                : "Replay demo"
+            }
+            onClick={() => (automatic || busy ? setPaused(!paused) : replay())}
+          >
+            <span className="product-playback-icon">
+              {automatic || busy ? (
+                paused ? (
+                  <Play size={15} fill="currentColor" />
+                ) : (
+                  <Pause size={15} fill="currentColor" />
+                )
+              ) : (
+                <RotateCcw size={16} />
+              )}
+            </span>
+            <span>
+              {automatic || busy
+                ? paused
+                  ? "Play demo"
+                  : "Pause demo"
+                : "Replay demo"}
+            </span>
+          </button>
+        </div>
+        <div className="product-timeline" aria-hidden="true">
+          {PHASE_DELAYS.slice(0, 7).map((_, index) => (
+            <span key={index}>
+              <motion.i
+                style={{
+                  scaleX:
+                    run.phase === index ? progress : run.phase > index ? 1 : 0,
+                }}
+              />
+            </span>
+          ))}
+        </div>
+        {!automatic && run.phase === 5 && (
+          <button
+            type="button"
+            className="product-mobile-approve"
+            onClick={() => {
+              approve();
+              openPanel("leads");
+            }}
+          >
+            Review & approve shortlist <ArrowRight size={14} />
+          </button>
+        )}
+      </div>
       <div className="product-demo-surface" ref={setPortal}>
         <div className="product-demo-layout">
           <aside
@@ -490,14 +573,14 @@ export function ProductCanvasDemo() {
                 aria-pressed={view === "chat"}
                 onClick={() => setView("chat")}
               >
-                Chat with Orka
+                <MessageSquare size={16} aria-hidden="true" /> Chat with Orka
               </button>
               <button
                 type="button"
                 aria-pressed={view === "canvas"}
                 onClick={() => setView("canvas")}
               >
-                Canvas{" "}
+                <Workflow size={16} aria-hidden="true" /> Canvas{" "}
                 {run.phase >= 2 && (
                   <span>
                     {run.phase >= 5 ? 5 : run.phase === 4 ? 4 : run.phase - 1}
@@ -955,173 +1038,138 @@ export function ProductCanvasDemo() {
           }}
         >
           {portal && (
-            <Dialog.Portal container={portal}>
-              <Dialog.Overlay className="product-panel-backdrop" />
-              <Dialog.Content
-                className={`product-panel product-panel-${panel}`}
-                onCloseAutoFocus={(event) => {
-                  event.preventDefault();
-                  lastFocus.current?.focus({ preventScroll: true });
-                }}
-              >
-                <Dialog.Close
-                  className="product-panel-close"
-                  aria-label="Close panel"
+            <Dialog.Portal
+              container={
+                mobile
+                  ? (root.current?.closest<HTMLElement>(".figma-site") ??
+                    undefined)
+                  : portal
+              }
+            >
+              <div className="product-demo product-dialog-root">
+                <Dialog.Overlay className="product-panel-backdrop" />
+                <Dialog.Content
+                  className={`product-panel product-panel-${panel}`}
+                  onCloseAutoFocus={(event) => {
+                    event.preventDefault();
+                    lastFocus.current?.focus({ preventScroll: true });
+                  }}
                 >
-                  <X size={19} />
-                </Dialog.Close>
-                <Dialog.Title className="product-panel-title">
-                  {panel === "history"
-                    ? "Recent Activities"
-                    : panel === "leads"
-                      ? "11 Company Lead"
-                      : nodes[node].detail}
-                </Dialog.Title>
-                <Dialog.Description className="product-panel-description">
-                  {panel === "history"
-                    ? "Revisit a workflow from this demo session."
-                    : panel === "leads"
-                      ? "Explore the sample shortlist. Search, select, save or export the example results."
-                      : "A step in your connected GTM workflow."}
-                </Dialog.Description>
-                {panel === "history" && (
-                  <>
-                    <label className="product-search-field">
-                      <Search size={16} />
-                      <input
-                        aria-label="Search recent activities"
-                        placeholder="Search"
-                        value={historyQuery}
-                        onChange={(event) =>
-                          setHistoryQuery(event.target.value)
-                        }
-                      />
-                    </label>
-                    <p className="product-history-date">This session</p>
-                    <div className="product-history-list">
-                      {historyItems
-                        .filter((item) =>
-                          item.prompt
-                            .toLowerCase()
-                            .includes(historyQuery.toLowerCase()),
-                        )
-                        .map((item) => (
-                          <button
-                            type="button"
-                            key={item.prompt}
-                            onClick={() => {
-                              setModel(item.model);
-                              start(item.prompt, item.model);
-                            }}
-                          >
-                            <span>{item.prompt}</span>
-                            <small>
-                              {item.model}
-                              <ArrowRight size={14} />
-                            </small>
-                          </button>
-                        ))}
+                  <Dialog.Close
+                    className="product-panel-close"
+                    aria-label="Close panel"
+                  >
+                    <X size={19} />
+                  </Dialog.Close>
+                  <Dialog.Title className="product-panel-title">
+                    {panel === "history"
+                      ? "Recent Activities"
+                      : panel === "leads"
+                        ? "11 Company Lead"
+                        : nodes[node].detail}
+                  </Dialog.Title>
+                  <Dialog.Description className="product-panel-description">
+                    {panel === "history"
+                      ? "Revisit a workflow from this demo session."
+                      : panel === "leads"
+                        ? "Explore the sample shortlist. Search, select, save or export the example results."
+                        : "A step in your connected GTM workflow."}
+                  </Dialog.Description>
+                  {panel === "history" && (
+                    <>
+                      <label className="product-search-field">
+                        <Search size={16} />
+                        <input
+                          aria-label="Search recent activities"
+                          placeholder="Search"
+                          value={historyQuery}
+                          onChange={(event) =>
+                            setHistoryQuery(event.target.value)
+                          }
+                        />
+                      </label>
+                      <p className="product-history-date">This session</p>
+                      <div className="product-history-list">
+                        {historyItems
+                          .filter((item) =>
+                            item.prompt
+                              .toLowerCase()
+                              .includes(historyQuery.toLowerCase()),
+                          )
+                          .map((item) => (
+                            <button
+                              type="button"
+                              key={item.prompt}
+                              onClick={() => {
+                                setModel(item.model);
+                                start(item.prompt, item.model);
+                              }}
+                            >
+                              <span>{item.prompt}</span>
+                              <small>
+                                {item.model}
+                                <ArrowRight size={14} />
+                              </small>
+                            </button>
+                          ))}
+                      </div>
+                      {!historyItems.some((item) =>
+                        item.prompt
+                          .toLowerCase()
+                          .includes(historyQuery.toLowerCase()),
+                      ) && (
+                        <p className="product-empty">No matching workflows.</p>
+                      )}
+                    </>
+                  )}
+                  {panel === "leads" && (
+                    <LeadTable
+                      scenario={run.scenario}
+                      saved={savedRuns.has(run.prompt)}
+                      onSavedChange={() =>
+                        setSavedRuns((previous) => {
+                          const next = new Set(previous);
+                          if (next.has(run.prompt)) next.delete(run.prompt);
+                          else next.add(run.prompt);
+                          return next;
+                        })
+                      }
+                    />
+                  )}
+                  {panel === "node" && (
+                    <div className="product-node-detail">
+                      <span className="product-detail-eyebrow">
+                        {nodes[node].label}
+                      </span>
+                      <p>{nodes[node].text}</p>
+                      <span className="product-detail-status">
+                        <Check size={14} />
+                        {node === 4 && run.phase !== 6
+                          ? "Review required"
+                          : "Generated in the demo"}
+                      </span>
+                      {node === 4 && run.phase === 5 && (
+                        <button
+                          type="button"
+                          className="product-black-button"
+                          onClick={() => {
+                            approve();
+                            setPanel("leads");
+                          }}
+                        >
+                          Approve & open lead list <ArrowRight size={15} />
+                        </button>
+                      )}
                     </div>
-                    {!historyItems.some((item) =>
-                      item.prompt
-                        .toLowerCase()
-                        .includes(historyQuery.toLowerCase()),
-                    ) && (
-                      <p className="product-empty">No matching workflows.</p>
-                    )}
-                  </>
-                )}
-                {panel === "leads" && (
-                  <LeadTable
-                    scenario={run.scenario}
-                    saved={savedRuns.has(run.prompt)}
-                    onSavedChange={() =>
-                      setSavedRuns((previous) => {
-                        const next = new Set(previous);
-                        if (next.has(run.prompt)) next.delete(run.prompt);
-                        else next.add(run.prompt);
-                        return next;
-                      })
-                    }
-                  />
-                )}
-                {panel === "node" && (
-                  <div className="product-node-detail">
-                    <span className="product-detail-eyebrow">
-                      {nodes[node].label}
-                    </span>
-                    <p>{nodes[node].text}</p>
-                    <span className="product-detail-status">
-                      <Check size={14} />
-                      {node === 4 && run.phase !== 6
-                        ? "Review required"
-                        : "Generated in the demo"}
-                    </span>
-                    {node === 4 && run.phase === 5 && (
-                      <button
-                        type="button"
-                        className="product-black-button"
-                        onClick={() => {
-                          approve();
-                          setPanel("leads");
-                        }}
-                      >
-                        Approve & open lead list <ArrowRight size={15} />
-                      </button>
-                    )}
-                  </div>
-                )}
-              </Dialog.Content>
+                  )}
+                </Dialog.Content>
+              </div>
             </Dialog.Portal>
           )}
         </Dialog.Root>
       </div>
-      <div className="product-timeline" aria-hidden="true">
-        {PHASE_DELAYS.slice(0, 7).map((_, index) => (
-          <span key={index} data-complete={run.phase > index}>
-            <motion.i
-              style={{
-                scaleX:
-                  run.phase === index ? progress : run.phase > index ? 1 : 0,
-              }}
-            />
-          </span>
-        ))}
-      </div>
-      <div className="product-demo-footer">
-        <span className="product-run-status" role="status">
-          <i data-busy={running} />
-          {paused ? "Paused · explore the canvas" : PRODUCT_PHASES[run.phase]}
-        </span>
-        <div>
-          {run.phase === 5 && (
-            <button
-              type="button"
-              className="product-mobile-approve"
-              onClick={() => {
-                approve();
-                openPanel("leads");
-              }}
-            >
-              Review & approve <ArrowRight size={14} />
-            </button>
-          )}
-          {automatic || busy ? (
-            <button type="button" onClick={() => setPaused(!paused)}>
-              {paused ? <Play size={13} /> : <Pause size={13} />}
-              {paused ? "Play demo" : "Pause demo"}
-            </button>
-          ) : (
-            <button type="button" onClick={replay}>
-              <RotateCcw size={13} />
-              Replay demo
-            </button>
-          )}
-        </div>
-      </div>
       <p className="product-demo-disclaimer">
-        A hands-on product preview with example data. Model selection is
-        simulated.
+        Interactive preview · sample data and simulated AI.
       </p>
     </div>
   );

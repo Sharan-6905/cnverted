@@ -44,6 +44,13 @@ const compactPositions = [
   [10, 464],
   [193, 676],
 ];
+const phonePositions = [
+  [18, 18],
+  [42, 176],
+  [18, 334],
+  [42, 492],
+  [18, 650],
+];
 const revealPhase = [2, 3, 4, 4, 5];
 const nodeIcons = [Target, ScanLine, Radar, Users, ListFilter];
 const metrics = [
@@ -83,6 +90,7 @@ function Cable({
   fromSide,
   toSide,
   compact,
+  phone,
   output,
   visible,
   active,
@@ -92,16 +100,26 @@ function Cable({
   fromSide: Side;
   toSide: Side;
   compact: boolean;
+  phone: boolean;
   output: boolean;
   visible: boolean;
   active: boolean;
 }) {
   const reducedMotion = useReducedMotion();
-  const width = compact ? 144 : 198;
-  const height = compact ? 170 : 178;
+  const width = phone ? 260 : compact ? 144 : 198;
+  const height = phone ? 124 : compact ? 170 : 178;
   const path = useTransform(() => {
     const [x1, y1, dx1, dy1] = port(from, fromSide, width, height);
-    const [x2, y2, dx2, dy2] = port(to, toSide, width, output ? 130 : height);
+    const [x2, y2, dx2, dy2] = port(
+      to,
+      toSide,
+      width,
+      output ? (phone ? 116 : 130) : height,
+    );
+    if (phone && fromSide === "left" && toSide === "left") {
+      const lane = Math.max(4, Math.min(x1, x2) - 38);
+      return `M${x1} ${y1} Q${lane} ${y1} ${lane} ${y1 + 20} L${lane} ${y2 - 20} Q${lane} ${y2} ${x2} ${y2}`;
+    }
     const bend = Math.max(
       36,
       Math.min(160, Math.hypot(x2 - x1, y2 - y1) * 0.45),
@@ -135,6 +153,7 @@ function CanvasNode({
   node,
   phase,
   compact,
+  phone,
   scale,
   bounds,
   onNode,
@@ -145,6 +164,7 @@ function CanvasNode({
   node: ProductNode;
   phase: number;
   compact: boolean;
+  phone: boolean;
   scale: number;
   bounds: [number, number];
   onNode: () => void;
@@ -166,12 +186,28 @@ function CanvasNode({
     point.x.stop();
     point.y.stop();
     point.x.set(
-      Math.max(8, Math.min(bounds[0] - (compact ? 144 : 198) - 8, x)),
+      Math.max(
+        8,
+        Math.min(bounds[0] - (phone ? 260 : compact ? 144 : 198) - 8, x),
+      ),
     );
     point.y.set(
       Math.max(
         8,
-        Math.min(bounds[1] - (index === 4 ? 130 : compact ? 170 : 178) - 8, y),
+        Math.min(
+          bounds[1] -
+            (index === 4
+              ? phone
+                ? 116
+                : 130
+              : phone
+                ? 124
+                : compact
+                  ? 170
+                  : 178) -
+            8,
+          y,
+        ),
       ),
     );
   };
@@ -296,6 +332,7 @@ function CanvasNode({
 
 function GraphScene({
   compact,
+  phone,
   phase,
   cycle,
   nodes,
@@ -306,6 +343,7 @@ function GraphScene({
   onInteract,
 }: {
   compact: boolean;
+  phone: boolean;
   phase: number;
   cycle: number;
   nodes: ProductNode[];
@@ -315,7 +353,11 @@ function GraphScene({
   onNode: (index: number) => void;
   onInteract: () => void;
 }) {
-  const bases = compact ? compactPositions : desktopPositions;
+  const bases = phone
+    ? phonePositions
+    : compact
+      ? compactPositions
+      : desktopPositions;
   const p0 = usePoint(bases[0][0], bases[0][1]);
   const p1 = usePoint(bases[1][0], bases[1][1]);
   const p2 = usePoint(bases[2][0], bases[2][1]);
@@ -324,26 +366,34 @@ function GraphScene({
   const points = [p0, p1, p2, p3, p4];
   const manuallyMoved = useRef(new Set<number>());
   const reducedMotion = useReducedMotion();
-  const width = compact ? 350 : 973;
-  const height = compact ? 830 : 925;
+  const width = phone ? 320 : compact ? 350 : 973;
+  const height = phone ? 800 : compact ? 830 : 925;
   // Motion values drive both cards and SVG cables without a React render per frame.
   useEffect(() => {
     if (!running || reducedMotion) return;
-    const drift = compact
+    const drift = phone
       ? [
-          [2, 0],
-          [-3, 6],
-          [0, 4],
           [3, 0],
           [-3, 0],
+          [3, 0],
+          [-3, 0],
+          [3, 0],
         ]
-      : [
-          [20, -12],
-          [24, -20],
-          [0, 18],
-          [-15, -18],
-          [-15, -22],
-        ];
+      : compact
+        ? [
+            [2, 0],
+            [-3, 6],
+            [0, 4],
+            [3, 0],
+            [-3, 0],
+          ]
+        : [
+            [20, -12],
+            [24, -20],
+            [0, 18],
+            [-15, -18],
+            [-15, -22],
+          ];
     const animations = points.flatMap((point, i) => {
       if (manuallyMoved.current.has(i)) return [];
       const target = phase >= 4 ? drift[i] : [0, 0];
@@ -361,24 +411,32 @@ function GraphScene({
     return () => animations.forEach((animation) => animation.stop());
     // Points are stable motion values; a keyed scene resets them for each demo cycle.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [phase, running, reducedMotion, compact]);
-  const cables: [number, number, Side, Side, number][] = compact
+  }, [phase, running, reducedMotion, compact, phone]);
+  const cables: [number, number, Side, Side, number][] = phone
     ? [
-        [0, 1, "right", "left", 3],
-        [1, 2, "top", "bottom", 4],
-        [1, 3, "left", "right", 4],
-        [3, 4, "bottom", "left", 5],
-      ]
-    : [
-        [0, 1, "right", "left", 3],
-        [1, 2, "top", "left", 4],
-        [1, 3, "right", "top", 4],
+        [0, 1, "bottom", "top", 3],
+        [1, 2, "bottom", "top", 4],
+        [1, 3, "left", "left", 4],
         [3, 4, "bottom", "top", 5],
-      ];
+      ]
+    : compact
+      ? [
+          [0, 1, "right", "left", 3],
+          [1, 2, "top", "bottom", 4],
+          [1, 3, "left", "right", 4],
+          [3, 4, "bottom", "left", 5],
+        ]
+      : [
+          [0, 1, "right", "left", 3],
+          [1, 2, "top", "left", 4],
+          [1, 3, "right", "top", 4],
+          [3, 4, "bottom", "top", 5],
+        ];
   return (
     <div
       className="product-graph-scene"
       data-compact={compact}
+      data-phone={phone}
       style={{ width, height, transform: `scale(${scale})` }}
     >
       <svg
@@ -396,6 +454,7 @@ function GraphScene({
             fromSide={fromSide}
             toSide={toSide}
             compact={compact}
+            phone={phone}
             output={to === 4}
             visible={phase >= at}
             active={running && phase >= at && phase <= 5}
@@ -419,6 +478,7 @@ function GraphScene({
             node={node}
             phase={phase}
             compact={compact}
+            phone={phone}
             scale={scale}
             bounds={[width, height]}
             onNode={() => onNode(i)}
@@ -466,24 +526,33 @@ export function ProductCanvasGraph({
   onInteract: () => void;
 }) {
   const viewport = useRef<HTMLDivElement>(null);
-  const [size, setSize] = useState({ width: 700, height: 700 });
+  const [size, setSize] = useState({ width: 700, height: 700, phone: false });
   useLayoutEffect(() => {
     const element = viewport.current;
     if (!element) return;
     const resize = () => {
       if (element.clientWidth)
-        setSize({ width: element.clientWidth, height: element.clientHeight });
+        setSize({
+          width: element.clientWidth,
+          height: element.clientHeight,
+          phone: window.matchMedia("(max-width: 767px)").matches,
+        });
     };
     resize();
     const observer = new ResizeObserver(resize);
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
-  const compact = size.width < 600;
-  const sceneWidth = compact ? 350 : 973;
-  const sceneHeight = compact ? 830 : 925;
+  const phone = size.phone;
+  const compact = phone || size.width < 600;
+  const sceneWidth = phone ? 320 : compact ? 350 : 973;
+  const sceneHeight = phone ? 800 : compact ? 830 : 925;
   const scale =
-    Math.min(size.width / sceneWidth, size.height / sceneHeight) * zoom;
+    Math.min(
+      size.width / sceneWidth,
+      size.height / sceneHeight,
+      phone ? 1.15 : Infinity,
+    ) * zoom;
   const found = nodes.filter((node) =>
     `${node.label} ${node.text} ${node.detail}`
       .toLowerCase()
@@ -506,8 +575,9 @@ export function ProductCanvasGraph({
         }}
       >
         <GraphScene
-          key={`${cycle}-${compact}`}
+          key={`${cycle}-${compact}-${phone}`}
           compact={compact}
+          phone={phone}
           phase={phase}
           cycle={cycle}
           nodes={nodes}

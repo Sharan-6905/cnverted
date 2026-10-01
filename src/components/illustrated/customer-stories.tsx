@@ -4,42 +4,7 @@ import { SideStoryCarousel } from "./side-story-carousel";
 import "./customer-stories.css";
 import Link from "next/link";
 
-// Original Figma artwork plus Sonet's official wordmark supplied by the user.
-const clients = [
-  { file: "client-fps.png", name: "FPS", width: 115.201, height: 115.201 },
-  {
-    file: "client-symbol.png",
-    name: "Cnvrted client",
-    width: 125,
-    height: 125,
-  },
-  { file: "client-curato.png", name: "Curato", width: 133.084, height: 120.1 },
-  { file: "client-365.png", name: "365", width: 104.487, height: 120.1 },
-  {
-    file: "client-abstract.png",
-    name: "Cnvrted client",
-    width: 115.984,
-    height: 115.984,
-  },
-  {
-    file: "client-social-tag.png",
-    name: "Social Tag",
-    width: 116.469,
-    height: 116.469,
-  },
-  {
-    file: "client-bahari.svg",
-    name: "Bahari Services",
-    width: 215.5,
-    height: 116.25,
-  },
-  {
-    file: "client-sonet.png",
-    name: "Sonet Integrated Solutions",
-    width: 1000,
-    height: 350,
-  },
-];
+import { CUSTOMERS } from "@/lib/customers";
 
 export function CustomerStories() {
   return (
@@ -83,7 +48,7 @@ export function ClientProof() {
         scrollDirection="right"
         className="client-logos-animation"
         ariaLabel="Our clients. Logos scroll automatically to the right."
-        icons={clients.map((client) => ({
+        icons={CUSTOMERS.map((client) => ({
           label: client.name,
           className: "client-glass-tile",
           icon: (
@@ -102,6 +67,9 @@ export function ClientProof() {
           ),
         }))}
       />
+      <Link className="marketing-text-link case-studies-all" href="/customers">
+        Meet our customers <span aria-hidden="true">↗</span>
+      </Link>
     </section>
   );
 }

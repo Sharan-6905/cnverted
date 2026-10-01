@@ -39,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...blogs,
+    { url: `${SITE_URL}/customers`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/case-studies`, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/learn`, changeFrequency: "monthly", priority: 0.6 },
     ...CASE_STUDIES.map((story) => ({

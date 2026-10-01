@@ -11,7 +11,7 @@ const columns = [
       ["About us", "/about"],
       ["Careers", "/careers"],
       ["Partners", "/contact"],
-      ["Our customers", "/case-studies"],
+      ["Our customers", "/customers"],
     ],
   },
   {

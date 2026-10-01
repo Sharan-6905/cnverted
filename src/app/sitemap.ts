@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { BLOG_POSTS as blogPosts } from "@/lib/blog-posts";
 import { CAREER_ROLES } from "@/lib/careers";
+import { CASE_STUDIES } from "@/lib/case-studies";
 
 const SITE_URL = "https://www.cnvrted.com";
 
@@ -38,6 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     ...blogs,
+    ...CASE_STUDIES.map((story) => ({
+      url: `${SITE_URL}/case-studies/${story.slug}`,
+      lastModified: new Date(story.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    })),
     { url: `${SITE_URL}/help-center`, changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/join-slack`, changeFrequency: "monthly", priority: 0.5 },
     { url: `${SITE_URL}/careers`, changeFrequency: "weekly", priority: 0.7 },

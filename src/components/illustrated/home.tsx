@@ -11,6 +11,7 @@ import { HomeScrollExperience } from "./scroll-experience";
 import { LiveHeadline } from "./live-headline";
 import { StrategySection } from "./strategy-section-figma";
 import { IntegrationsStrip } from "./integrations-strip";
+import { CustomerStories } from "./customer-stories";
 
 export function IllustratedHome() {
   return (
@@ -131,6 +132,7 @@ export function IllustratedHome() {
       </div>
       <StrategySection />
       <IntegrationsStrip />
+      <CustomerStories />
     </>
   );
 }

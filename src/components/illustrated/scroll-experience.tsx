@@ -10,6 +10,8 @@ const revealGroups = [
   { selector: ".strategy-canvas-preview", kind: "canvas", stagger: 0 },
   { selector: ".design-integrations-strip .design-section-heading > *", kind: "heading", stagger: 70 },
   { selector: ".integrations-strip-animation", kind: "strip", stagger: 0 },
+  { selector: ".design-customer-stories .design-section-heading > *", kind: "heading", stagger: 70 },
+  { selector: ".side-story-carousel, .client-logos-animation", kind: "quiet", stagger: 0 },
   { selector: ".design-faq > h2, .design-faq-list > details", kind: "quiet", stagger: 40 },
   { selector: ".design-footer-columns > *", kind: "quiet", stagger: 50 },
 ];

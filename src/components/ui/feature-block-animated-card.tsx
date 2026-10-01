@@ -11,6 +11,7 @@ export interface AnimatedCardProps {
   description?: ReactNode;
   variant?: "card" | "strip";
   autoScroll?: boolean;
+  scrollDirection?: "left" | "right";
   ariaLabel?: string;
   icons?: Array<{
     icon: ReactNode;
@@ -27,7 +28,7 @@ const particles = [
 ];
 
 export function AnimatedCard({
-  className, title, description, variant = "card", autoScroll = false, icons = [],
+  className, title, description, variant = "card", autoScroll = false, scrollDirection = "left", icons = [],
   ariaLabel = "Connected tools. Scroll horizontally to explore.",
 }: AnimatedCardProps) {
   const [scope, animate] = useAnimate<HTMLDivElement>();
@@ -104,7 +105,7 @@ export function AnimatedCard({
   }, [animate, autoScroll, iconCount, scope]);
 
   return (
-    <div ref={scope} className={cn(styles.root, variant === "card" && styles.card, autoScroll && styles.marquee, className)} data-motion="paused">
+    <div ref={scope} className={cn(styles.root, variant === "card" && styles.card, autoScroll && styles.marquee, className)} data-motion="paused" data-scroll-direction={scrollDirection}>
       <div className={cn(styles.viewport, "animated-card-viewport")} tabIndex={0} role="region" aria-label={ariaLabel}>
         <div className={cn(autoScroll && styles.conveyor)} data-integration-conveyor={autoScroll || undefined}>
         {(autoScroll && iconCount ? [0, 1, 2] : [0]).map((copy) => (

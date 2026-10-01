@@ -7,7 +7,7 @@ const revealGroups = [
   { selector: ".design-features-heading > *", kind: "heading", stagger: 80 },
   { selector: ".design-feature-card", kind: "card", stagger: 90 },
   { selector: ".design-strategies .design-section-heading > *", kind: "heading", stagger: 70 },
-  { selector: ".strategy-canvas-preview", kind: "canvas", stagger: 0 },
+  { selector: ".strategy-canvas-preview, .product-demo", kind: "canvas", stagger: 0 },
   { selector: ".design-integrations-strip .design-section-heading > *", kind: "heading", stagger: 70 },
   { selector: ".integrations-strip-animation", kind: "strip", stagger: 0 },
   { selector: ".design-customer-stories .design-section-heading > *", kind: "heading", stagger: 70 },

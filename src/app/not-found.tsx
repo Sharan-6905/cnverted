@@ -3,6 +3,7 @@ import Image from "next/image";
 import { IllustratedShell } from "@/components/illustrated/shell";
 import { ScaledArtwork } from "@/components/illustrated/scaled-artwork";
 import { DesignLink } from "@/components/illustrated/hero";
+import { NotFoundSpotlight } from "@/components/illustrated/not-found-spotlight";
 import "./not-found.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <IllustratedShell className="design-not-found-page">
-      <section className="not-found-hero" aria-labelledby="not-found-title">
+      <NotFoundSpotlight>
         <div className="not-found-artwork" aria-hidden="true">
           <ScaledArtwork width={1440} height={641}>
             <Image
@@ -56,7 +57,7 @@ export default function NotFound() {
             Go Home
           </DesignLink>
         </div>
-      </section>
+      </NotFoundSpotlight>
     </IllustratedShell>
   );
 }

@@ -1,5 +1,41 @@
-.design-not-found-page {
-  background: #fff;
+.figma-site.design-not-found-page {
+  background: #080b0c;
+  color: #f2eee4;
+}
+.design-not-found-page .design-nav {
+  background: #141819e8;
+  border: 1px solid #ffffff18;
+  box-shadow: 0 10px 40px #00000030;
+}
+.design-not-found-page .design-home-link span,
+.design-not-found-page .design-mobile-toggle {
+  color: #f2eee4;
+}
+.design-not-found-page .design-mobile-toggle:hover,
+.design-not-found-page .design-mobile-toggle[aria-expanded="true"] {
+  background: #ffffff12;
+  color: #f2eee4;
+}
+.design-not-found-page .design-resources svg,
+.design-not-found-page .design-desktop-nav > a:hover {
+  color: #c3ca9a;
+}
+.design-not-found-page .design-resource-links,
+.design-not-found-page .design-mobile-nav {
+  background: #171d1e;
+  border: 1px solid #ffffff18;
+  color: #f2eee4;
+}
+.design-not-found-page .design-resource-links > a:hover,
+.design-not-found-page .design-mobile-nav a:hover {
+  background: #ffffff0a;
+}
+.design-not-found-page :focus-visible {
+  outline-color: #d6d9ad;
+}
+.design-not-found-page .design-skip-link {
+  background: #171d1e;
+  color: #f2eee4;
 }
 .not-found-hero {
   --not-found-scene-width: max(1024px, 100vw);
@@ -7,7 +43,40 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background: linear-gradient(#fff5e6, #fff 70%);
+  background: #080b0c;
+}
+.not-found-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: #080b0cf5;
+}
+.not-found-hero[data-spotlight-ready]::before {
+  opacity: 0;
+}
+.not-found-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent
+      calc(var(--not-found-scene-width) * 0.29 + var(--not-found-scene-top)),
+    #080b0c
+      calc(var(--not-found-scene-width) * 0.362 + var(--not-found-scene-top))
+  );
+}
+.not-found-spotlight {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }
 .not-found-artwork {
   position: absolute;
@@ -41,6 +110,8 @@
   max-width: none;
 }
 .not-found-copy {
+  position: relative;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,10 +131,44 @@
   max-width: 517px;
   font-size: 28px;
   line-height: 1.45;
-  color: #5f5f5f;
+  color: #b5b8b3;
 }
 .not-found-copy .design-button {
   min-height: 48px;
+  border-color: #a5ac67;
+  background: #6a7a1d;
+  box-shadow:
+    0 0 32px #b6be6717,
+    inset 0 1px 0 #ffffff40;
+}
+.not-found-copy .design-button:hover {
+  background: #7d8c2d;
+  box-shadow:
+    0 0 36px #b6be6729,
+    inset 0 1px 0 #ffffff40;
+}
+.design-not-found-page .design-faq-list,
+.design-not-found-page .design-faq details {
+  border-color: #ffffff1c;
+}
+.design-not-found-page .design-faq summary {
+  color: #d5d7d0;
+}
+.design-not-found-page .design-faq summary img {
+  filter: brightness(2);
+}
+.design-not-found-page .design-faq-answer {
+  color: #b5b8b3;
+}
+.design-not-found-page .design-faq-answer a {
+  color: #ced6a7;
+}
+.design-not-found-page .design-footer {
+  background: #080b0c;
+  border-top: 1px solid #ffffff12;
+}
+.design-not-found-page .design-footer-columns h2 {
+  color: #9b9f96;
 }
 @media (max-width: 767px) {
   .not-found-hero {

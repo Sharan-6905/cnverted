@@ -8,6 +8,7 @@ import { CommunityForm } from "@/components/illustrated/community-form";
 import "@/components/illustrated/community.css";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/join-slack" },
   title: "Join our Slack community — Cnvrted",
   description: "Connect with the Cnvrted community on Slack. Tell us a little about yourself to get started.",
 };
@@ -58,7 +59,7 @@ export default function JoinSlackPage() {
       <div className="community-content">
         <SupportArtwork variant="slack" />
         <header className="community-heading">
-          <h1>Cnvrted at Slack</h1>
+          <h1>Join the Cnvrted community</h1>
           <p>Before joining our Slack community, we’d like to ask a few questions.</p>
         </header>
         <CommunityForm />

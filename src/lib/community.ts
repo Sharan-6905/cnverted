@@ -5,7 +5,7 @@ export const COMMUNITY_STEPS = [
   { key: "fullName", label: "Full name", question: "What should we call you?", placeholder: "Your full name", autoComplete: "name", type: "text", maxLength: 100, hint: "The name you’d like the community to know." },
   { key: "email", label: "Email address", question: "Where can we reach you?", placeholder: "you@company.com", autoComplete: "email", type: "email", maxLength: 254, hint: "Use the email you’ll use for Slack." },
   { key: "company", label: "Business name", question: "Who are you building with?", placeholder: "Your company name", autoComplete: "organization", type: "text", maxLength: 120, hint: "Working independently? Just write “Independent”." },
-  { key: "industry", label: "Business domain", question: "What’s your corner of the world?", placeholder: "e.g. B2B SaaS", autoComplete: "off", type: "text", maxLength: 120, hint: "Your industry or field, from retail to consulting." },
+  { key: "industry", label: "Industry", question: "What’s your corner of the world?", placeholder: "e.g. B2B SaaS", autoComplete: "off", type: "text", maxLength: 120, hint: "Your industry or field, from retail to consulting." },
   { key: "website", label: "Website (optional)", question: "Where can we see your work?", placeholder: "yourcompany.com", autoComplete: "url", type: "text", maxLength: 300, hint: "A website or portfolio. Feel free to skip this one." },
 ] as const;
 

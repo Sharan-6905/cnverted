@@ -91,7 +91,7 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   return (
-    <IllustratedShell className="design-article-page">
+    <IllustratedShell faqItems={[]} className="design-article-page">
       <ArticleSchema post={post} />
       <BreadcrumbSchema
         trail={[{ name: "Blog", path: "/blogs" }, { name: post.title }]}

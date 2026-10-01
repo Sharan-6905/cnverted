@@ -4,6 +4,7 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { Clause, Bullets, Mail, Caps } from "@/components/legal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/terms" },
   title: "Terms & Conditions — Cnvrted",
   description: "The terms that govern your use of the Cnvrted platform.",
 };

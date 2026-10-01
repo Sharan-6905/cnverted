@@ -44,7 +44,7 @@ export function HelpSearch() {
             id="help-query"
             ref={searchInput}
             type="search"
-            placeholder="Search problem"
+            placeholder="Search help articles"
             value={query}
             onChange={(event) => { setQuery(event.target.value); setPage(0); }}
             aria-controls="help-results"

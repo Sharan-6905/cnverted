@@ -55,7 +55,7 @@ export function ContactCalendar({ nonce }: { nonce?: string }) {
   }, [scriptReady]);
 
   return (
-    <section className="contact-booking" aria-label="Book a call">
+    <section className="contact-booking" aria-label="Book a demo">
       <Script
         src="https://assets.calendly.com/assets/external/widget.js"
         strategy="afterInteractive"
@@ -71,7 +71,7 @@ export function ContactCalendar({ nonce }: { nonce?: string }) {
             <h2>Let’s talk GTM.</h2>
             <p>Choose a time to talk about your team and your next stage of growth.</p>
             <div className="contact-calendar-actions">
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a call</a>
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a demo</a>
               {status === "unavailable" && <button type="button" onClick={() => window.location.reload()}>Retry calendar</button>}
             </div>
             <p className="contact-calendar-status" role="status">

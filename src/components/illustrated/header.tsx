@@ -10,6 +10,8 @@ import { assets } from "./assets";
 const links = [
   { label: "Help Center", href: "/help-center", icon: assets.home.imgInfo },
   { label: "Blogs", href: "/blogs", icon: assets.home.imgBookOpenText },
+  { label: "Case Studies", href: "/case-studies", icon: assets.home.imgBookOpenText },
+  { label: "Learn", href: "/learn", icon: assets.home.imgBookOpenText },
   { label: "About Us", href: "/about", icon: assets.home.imgInfo },
   {
     label: "Join Slack",
@@ -97,7 +99,7 @@ export function IllustratedHeader() {
           href="https://beta.cnvrted.com"
           className="design-button design-button-solid design-nav-cta"
         >
-          Get Started
+          Start free
         </a>
         <Button
           ref={mobileTrigger}

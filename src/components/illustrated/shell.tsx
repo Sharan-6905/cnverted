@@ -10,6 +10,7 @@ import { IllustratedHeader } from "./header";
 import { IllustratedFooter } from "./footer";
 import { FAQ, type FAQItem } from "./faq";
 import "./illustrated.css";
+import "./marketing.css";
 
 const editorial = Fraunces({
   subsets: ["latin"],
@@ -43,10 +44,12 @@ export function IllustratedShell({
   children,
   className = "",
   faqItems,
+  closingCTA,
 }: {
   children: ReactNode;
   className?: string;
   faqItems?: readonly FAQItem[];
+  closingCTA?: ReactNode;
 }) {
   return (
     <div
@@ -55,7 +58,8 @@ export function IllustratedShell({
       <IllustratedHeader />
       <main id="main-content">
         {children}
-        <FAQ items={faqItems} />
+        {faqItems?.length !== 0 && <FAQ items={faqItems} />}
+        {closingCTA}
       </main>
       <IllustratedFooter />
     </div>

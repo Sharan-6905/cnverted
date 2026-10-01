@@ -4,6 +4,7 @@ import { IllustratedShell } from "@/components/illustrated/shell";
 import { IllustratedPricing, pricingFAQs } from "@/components/illustrated/pricing";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/pricing" },
   title: "Pricing — Cnvrted",
   description:
     "Start with Spark and 40 free credits. Grow with Surge at $119 per month, or choose Dominion for custom credits.",

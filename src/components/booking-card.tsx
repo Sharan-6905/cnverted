@@ -35,7 +35,7 @@ export function BookingCard({
             <CalendarDays className="h-4.5 w-4.5" />
           </span>
           <div>
-            <p className="text-sm font-semibold">Book a call</p>
+            <p className="text-sm font-semibold">Book a demo</p>
             <p className="text-xs text-on-dark/70">
               Talk through your GTM goals with our team.
             </p>
@@ -65,7 +65,7 @@ export function BookingCard({
           rel="noopener noreferrer"
           className="mt-4 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-black px-5 text-sm font-medium text-on-dark shadow-soft smooth-transition active:scale-[0.98]"
         >
-          Book a call
+          Book a demo
           <ArrowUpRight className="h-4 w-4" />
         </a>
       </div>

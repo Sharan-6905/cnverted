@@ -19,7 +19,8 @@ type TeamMember = {
 const foundingTeam: readonly TeamMember[] = [
   {
     name: DHRUV_PRADEEP.name,
-    description: "Talk GTM strategy, partnerships, and getting started with Cnvrted.",
+    description:
+      "Talk GTM strategy, partnerships, and getting started with Cnvrted.",
     email: "dhruv@cnvrted.com",
     portrait: "/figma/contact/dhruv.png",
     imageSize: 1600,
@@ -39,7 +40,8 @@ const foundingTeam: readonly TeamMember[] = [
   },
   {
     name: "Sharan S",
-    description: "Talk onboarding, operations, and scaling your team’s workflow.",
+    description:
+      "Talk onboarding, operations, and scaling your team’s workflow.",
     email: "sharan@cnvrted.com",
     portrait: "/figma/contact/saran.png",
     imageSize: 1600,
@@ -49,7 +51,8 @@ const foundingTeam: readonly TeamMember[] = [
   },
   {
     name: "Anupam Bagchi",
-    description: "Talk design, user experience, and making Cnvrted easier to use.",
+    description:
+      "Talk design, user experience, and making Cnvrted easier to use.",
     email: "anupam@cnvrted.com",
     portrait: "/figma/contact/anupam.png",
     imageSize: 800,
@@ -67,47 +70,96 @@ export function IllustratedContact({ nonce }: { nonce?: string }) {
         <p>Let’s talk about your go-to-market.</p>
       </header>
       <ContactCalendar nonce={nonce} />
-      <section className="contact-founders" aria-labelledby="founders-title">
-        <div className="contact-founders-glow" aria-hidden="true">
-          <ScaledArtwork width={1440} height={438.4}>
-            <Image src="/figma/contact/founder-glow.svg" alt="" width={1627.4} height={438.4} unoptimized />
-          </ScaledArtwork>
-        </div>
-        <div className="contact-founders-heading">
-          <h2 id="founders-title">Meet the Founding Team</h2>
-          <p>Get to know the people behind Cnvrted.</p>
-        </div>
-        <div className="contact-founder-grid design-container">
-          {foundingTeam.map((founder) => (
-            <article className="contact-founder" key={founder.email}>
-              <div className={`contact-founder-photo contact-founder-photo-${founder.crop}`}>
-                <div className="contact-founder-crop">
-                  <Image src={founder.portrait} alt={founder.name} width={founder.imageSize} height={founder.imageSize} sizes="(max-width: 767px) 700px, 520px" />
-                </div>
-              </div>
-              <div className="contact-founder-content">
-                <div>
-                  <h3>{founder.name}</h3>
-                  <p className="contact-founder-description">{founder.description}</p>
-                  <a className="contact-founder-email" href={`mailto:${founder.email}`}>{founder.email}</a>
-                </div>
-                <div className="contact-founder-socials">
-                  {founder.linkedin ? (
-                    <a href={founder.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${founder.name} on LinkedIn`}>
-                      <Image src="/figma/contact/linkedin.svg" width={24} height={24} alt="" unoptimized />
-                    </a>
-                  ) : null}
-                  {founder.x ? (
-                    <a href={founder.x} target="_blank" rel="noopener noreferrer" aria-label={`${founder.name} on X`}>
-                      <Image src="/figma/contact/x.svg" width={24} height={24} alt="" unoptimized />
-                    </a>
-                  ) : null}
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
+      <FoundingTeam />
     </div>
+  );
+}
+
+export function FoundingTeam() {
+  return (
+    <section className="contact-founders" aria-labelledby="founders-title">
+      <div className="contact-founders-glow" aria-hidden="true">
+        <ScaledArtwork width={1440} height={438.4}>
+          <Image
+            src="/figma/contact/founder-glow.svg"
+            alt=""
+            width={1627.4}
+            height={438.4}
+            unoptimized
+          />
+        </ScaledArtwork>
+      </div>
+      <div className="contact-founders-heading">
+        <h2 id="founders-title">Meet the Founding Team</h2>
+        <p>Get to know the people behind Cnvrted.</p>
+      </div>
+      <div className="contact-founder-grid design-container">
+        {foundingTeam.map((founder) => (
+          <article className="contact-founder" key={founder.email}>
+            <div
+              className={`contact-founder-photo contact-founder-photo-${founder.crop}`}
+            >
+              <div className="contact-founder-crop">
+                <Image
+                  src={founder.portrait}
+                  alt={founder.name}
+                  width={founder.imageSize}
+                  height={founder.imageSize}
+                  sizes="(max-width: 767px) 700px, 520px"
+                />
+              </div>
+            </div>
+            <div className="contact-founder-content">
+              <div>
+                <h3>{founder.name}</h3>
+                <p className="contact-founder-description">
+                  {founder.description}
+                </p>
+                <a
+                  className="contact-founder-email"
+                  href={`mailto:${founder.email}`}
+                >
+                  {founder.email}
+                </a>
+              </div>
+              <div className="contact-founder-socials">
+                {founder.linkedin ? (
+                  <a
+                    href={founder.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${founder.name} on LinkedIn`}
+                  >
+                    <Image
+                      src="/figma/contact/linkedin.svg"
+                      width={24}
+                      height={24}
+                      alt=""
+                      unoptimized
+                    />
+                  </a>
+                ) : null}
+                {founder.x ? (
+                  <a
+                    href={founder.x}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${founder.name} on X`}
+                  >
+                    <Image
+                      src="/figma/contact/x.svg"
+                      width={24}
+                      height={24}
+                      alt=""
+                      unoptimized
+                    />
+                  </a>
+                ) : null}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }

@@ -1,3 +1,4 @@
+import { careerFAQs } from "@/components/illustrated/faq";
 import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { IllustratedShell } from "@/components/illustrated/shell";
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
 };
 export default function CareersPage() {
   return (
-    <IllustratedShell className="design-careers-page">
+    <IllustratedShell faqItems={careerFAQs} className="design-careers-page">
       <BreadcrumbSchema trail={[{ name: "Careers" }]} />
       <IllustratedHero
         kind="careers"

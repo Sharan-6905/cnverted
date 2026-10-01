@@ -10,9 +10,8 @@ export function StrategySection() {
       <div className="design-section-heading">
         <h2 id="strategy-title">GTM Strategies</h2>
         <p>
-          Enter the market confidently with our advanced AI model designed to
-          help launch any
-          <br className="strategy-heading-break" /> company or product.
+          Tell Orka who you want to reach. Follow the research, buying signals,
+          and shortlist it builds on your canvas.
         </p>
       </div>
       <ProductCanvasDemo />

@@ -6,64 +6,66 @@ import type { ReactNode } from "react";
 
 export type FAQItem = { question: string; answer: ReactNode };
 
-const faqs = [
+const faqs: readonly FAQItem[] = [
   {
-    question: "How does Cnvrted find buying signals?",
+    question: "What does Cnvrted help me do?",
+    answer:
+      "Find prospects that match your ideal customer profile and understand why they may be worth contacting now. Cnvrted brings together the buying signal, its source, and the context for your outreach.",
+  },
+  {
+    question: "What counts as a buying signal?",
+    answer:
+      "A relevant job posting, a funding announcement, a technology change, or a public request for recommendations can be a useful signal. The important part is whether that change relates to the problem your product solves.",
+  },
+  {
+    question: "How do I define my ideal customer?",
+    answer:
+      "Describe the companies and people you want to reach in plain language: their industry, size, roles, and the problems you help solve. Use that context to guide Orka’s research and review the shortlist it builds.",
+  },
+  {
+    question: "Does a buying signal guarantee someone will buy?",
+    answer:
+      "No. A signal gives you a reason to investigate, not a guaranteed buyer. Review the source, check the fit, and use your judgment before reaching out.",
+  },
+  {
+    question: "Can I try Cnvrted for free?",
     answer: (
       <>
-        We monitor sources across the open web and social — funding news, hiring
-        activity, tech changes, executive moves, and more — to find accounts
-        that are ready to buy.
+        Yes. Start with Spark and 40 free credits in the{" "}
+        <a href="https://beta.cnvrted.com">Cnvrted beta</a>. See{" "}
+        <Link href="/pricing">pricing</Link> for paid plans and credit details.
       </>
     ),
   },
   {
-    question: "How is Cnvrted different from a lead database?",
+    question: "Will it fit the tools my team already uses?",
     answer: (
       <>
-        Lead databases give you static contact records. Cnvrted gives you
-        timing: the moment an account becomes ready to buy, with the context
-        behind the signal.
+        Tell us which CRM, outreach, and collaboration tools you use.{" "}
+        <Link href={BOOKING_URL}>Book a demo</Link> to check integration
+        availability and the setup for your workflow.
       </>
     ),
   },
+];
+
+export const careerFAQs: readonly FAQItem[] = [
   {
-    question: "How does pricing work for a team?",
-    answer: (
-      <>
-        Choose a plan for your team size and workflow. Explore our{" "}
-        <Link href="/pricing">pricing plans</Link> or{" "}
-        <Link href="/contact">talk to the team</Link> about your needs.
-      </>
-    ),
+    question: "How do I apply?",
+    answer:
+      "Open a role, read its responsibilities and requirements, and use the application form on that page. Add your name, phone number, and email so the team can reach you.",
   },
   {
-    question: "How does Cnvrted handle my data?",
-    answer: (
-      <>
-        Our <Link href="/privacy">Privacy Policy</Link> explains what
-        information we collect, how we use it, and the choices available to you.
-        Contact <a href="mailto:info@cnvrted.com">info@cnvrted.com</a> with
-        questions.
-      </>
-    ),
+    question: "Where can I find the location and role details?",
+    answer:
+      "Each listing includes the role’s location, work arrangement, and responsibilities. Check the individual role page before applying.",
   },
   {
-    question: "Can I connect Cnvrted to my existing workflow?",
+    question: "Who can I contact with an application question?",
     answer: (
       <>
-        Cnvrted brings buying signals into your revenue workflow.{" "}
-        <Link href={BOOKING_URL}>Book a call</Link> to discuss the CRM and
-        integrations your team uses.
-      </>
-    ),
-  },
-  {
-    question: "How can I get started?",
-    answer: (
-      <>
-        Visit the <a href="https://beta.cnvrted.com">Cnvrted beta</a> or{" "}
-        <Link href={BOOKING_URL}>book a call</Link> with our team.
+        Email <a href="mailto:info@cnvrted.com">info@cnvrted.com</a> with the
+        role title and your question.
       </>
     ),
   },

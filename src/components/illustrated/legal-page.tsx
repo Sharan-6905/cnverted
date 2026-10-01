@@ -14,7 +14,7 @@ export function IllustratedLegalPage({ variant, title, description, lastUpdated,
   children: ReactNode;
 }) {
   return (
-    <IllustratedShell className="design-legal-page">
+    <IllustratedShell faqItems={[]} className="design-legal-page">
       <div className="legal-content">
         <SupportArtwork variant={variant} />
         <header className="legal-heading design-container">

@@ -72,10 +72,10 @@ export function IllustratedHero({
           {children ?? (
             <>
               <DesignLink href="https://beta.cnvrted.com" secondary>
-                Sign In
+                Start free
               </DesignLink>
               <DesignLink href={BOOKING_URL} arrow>
-                Book a call
+                Book a demo
               </DesignLink>
             </>
           )}

@@ -16,7 +16,7 @@ const COLUMNS = [
     heading: "Platform",
     links: [
       { label: "Pricing", href: "/pricing" },
-      { label: "Book a call", href: BOOKING_URL },
+      { label: "Book a demo", href: BOOKING_URL },
     ],
   },
   {
@@ -33,7 +33,7 @@ const COLUMNS = [
     links: [
       { label: "About Us", href: "/about" },
       { label: "Contact", href: "/contact" },
-      { label: "Book a call", href: BOOKING_URL },
+      { label: "Book a demo", href: BOOKING_URL },
       { label: "Careers", href: "/careers" },
       { label: "Learn from us", href: "/learn" },
     ],
@@ -110,7 +110,7 @@ function FooterWaitlistForm() {
           />
         </div>
         <Button type="submit" variant="primary" size="md" className="shrink-0" disabled={loading}>
-          {loading ? "Joining…" : "Get Started"}
+          {loading ? "Joining…" : "Join the waitlist"}
           <ArrowRight className="h-4 w-4" />
         </Button>
       </form>

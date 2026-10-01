@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 };
 export default function BlogsPage() {
   return (
-    <IllustratedShell className="design-blog-page">
+    <IllustratedShell faqItems={[]} className="design-blog-page">
       <BreadcrumbSchema trail={[{ name: "Blog" }]} />
       <IllustratedHero
         kind="blogs"

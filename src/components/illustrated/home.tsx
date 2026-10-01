@@ -11,7 +11,7 @@ import { HomeScrollExperience } from "./scroll-experience";
 import { LiveHeadline } from "./live-headline";
 import { StrategySection } from "./strategy-section-figma";
 import { IntegrationsStrip } from "./integrations-strip";
-import { CustomerStories } from "./customer-stories";
+import { CustomerStories, ClientProof } from "./customer-stories";
 
 export function IllustratedHome() {
   return (
@@ -25,7 +25,7 @@ export function IllustratedHome() {
             description="Cnvrted turns signals across the web into high-intent leads, matched to your ICP and ranked by AI."
           >
             <DesignLink href={BOOKING_URL} arrow>
-              Book a call
+              Book a demo
             </DesignLink>
           </IllustratedHero>
           <a className="design-story-cue" href="#signals-title">
@@ -50,7 +50,7 @@ export function IllustratedHome() {
         <div className="design-signal-pin">
           <section className="design-windmill" aria-labelledby="signals-title">
             <div className="design-section-heading">
-              <h2 id="signals-title">Squeeze market in minutes</h2>
+              <h2 id="signals-title">Find buying signals in minutes</h2>
               <p>
                 Turn buying signals into qualified leads, ranked and ready to
                 reach.
@@ -60,6 +60,7 @@ export function IllustratedHome() {
           </section>
         </div>
       </div>
+      <ClientProof />
       <div className="design-feature-chapter">
         <section
           className="design-features design-container"
@@ -67,7 +68,7 @@ export function IllustratedHome() {
         >
           <div className="design-features-heading">
             <h2 id="features-title">
-              From open web to
+              From the open web to
               <br />
               booked meetings
             </h2>
@@ -78,7 +79,7 @@ export function IllustratedHome() {
                 right conversation.
               </p>
               <DesignLink href={BOOKING_URL} arrow>
-                Book a call
+                Book a demo
               </DesignLink>
             </div>
           </div>
@@ -93,7 +94,7 @@ export function IllustratedHome() {
                   Describe your ideal customer in plain English. Cnvrted
                   builds a living ICP from it — industry, role, company size,
                   buying signals — and keeps refining it from what actually
-                  cnvrts.
+                  converts.
                 </p>
               </div>
             </article>
@@ -115,10 +116,9 @@ export function IllustratedHome() {
               <div className="design-feature-copy">
                 <h3>GTM Strategies</h3>
                 <p>
-                  Share your top 10 customers with us. Cnvrted analyzes their
-                  common traits, focusing not just on demographics but also on
-                  the signals that indicated their purchase intent. This
-                  creates your blueprint.
+                  Turn your ideal customer profile into a plan. Ask Orka to
+                  research a market, find buying signals, and build a shortlist
+                  you can review before reaching out.
                 </p>
               </div>
               <ScaledArtwork width={613} height={325} animated>

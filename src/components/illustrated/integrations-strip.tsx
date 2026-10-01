@@ -20,7 +20,7 @@ export function IntegrationsStrip() {
     <section className="design-integrations-strip design-container" aria-labelledby="integrations-title">
       <div className="design-section-heading">
         <h2 id="integrations-title">Integrations</h2>
-        <p>Enter the market confidently with our advanced AI model designed to help launch any company or product.</p>
+        <p>Keep your sales tools in the picture. Explore integrations for your CRM, outreach, and team workflow.</p>
       </div>
       <AnimatedCard
         variant="strip"

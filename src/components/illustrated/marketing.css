@@ -1,0 +1,524 @@
+/* Shared editorial surfaces for the current illustrated site. */
+.marketing-eyebrow {
+  display: block;
+  font-family: var(--font-design-sans), sans-serif;
+  color: #77766c;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+.marketing-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: #586520;
+  font-size: 15px;
+  text-decoration: underline;
+  text-decoration-color: #c3c8a9;
+  text-underline-offset: 5px;
+}
+.marketing-text-link:hover {
+  color: #272d14;
+  text-decoration-color: currentColor;
+}
+.marketing-page-heading {
+  padding-block: 196px 64px;
+  text-align: center;
+}
+.figma-site .marketing-page-heading h1 {
+  margin-top: 16px;
+  font-size: clamp(44px, 5.5vw, 76px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+.marketing-page-heading > p {
+  max-width: 580px;
+  margin: 20px auto 0;
+  color: #66665f;
+  font-size: 19px;
+  line-height: 1.6;
+}
+.marketing-page-heading > .marketing-text-link {
+  margin-top: 20px;
+}
+.design-library-page,
+.design-early-access-page {
+  background: linear-gradient(180deg, #fbf8ed 0, #fff 520px);
+}
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+.resource-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  border: 1px solid #e1dfd6;
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+}
+.resource-cover {
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 2 / 1;
+  background: #f5f0e6;
+  border-bottom: 1px solid #ece9e2;
+}
+.resource-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.resource-card:hover .resource-cover img {
+  transform: scale(1.025);
+}
+.resource-card-copy {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 28px 30px;
+}
+.figma-site .resource-card h2 {
+  margin-top: 14px;
+  font-family: var(--font-editorial), Georgia, serif;
+  font-size: clamp(27px, 2.6vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+.resource-card h2 a:hover {
+  color: #596227;
+}
+.resource-card-copy > p {
+  margin-top: 16px;
+  color: #60615b;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.resource-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: auto;
+  padding-top: 28px;
+  color: #77766c;
+  font-size: 13px;
+}
+.resource-card-copy > .marketing-text-link {
+  margin-top: 8px;
+}
+.resource-help {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 48px;
+  padding: 28px 32px;
+  background: #f8f7f2;
+  border: 1px solid #e7e4da;
+  border-radius: 18px;
+}
+.figma-site .resource-help h2 {
+  font-size: 26px;
+  line-height: 1.25;
+}
+.resource-help p {
+  margin-top: 8px;
+  color: #67675e;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.resource-help > a {
+  flex-shrink: 0;
+}
+.design-closing-cta {
+  margin-block: 88px 96px;
+  border-block: 1px solid #e6e3d9;
+  padding: 72px 24px;
+  text-align: center;
+  background: radial-gradient(ellipse at center, #fbf7ea, #fff 75%);
+}
+.figma-site .design-closing-cta h2 {
+  max-width: 840px;
+  margin: 16px auto 0;
+  font-size: clamp(38px, 4.6vw, 64px);
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+}
+.design-closing-cta > p {
+  max-width: 520px;
+  margin: 20px auto 0;
+  color: #66665f;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.design-closing-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+.design-closing-actions .design-button {
+  min-height: 48px;
+}
+.design-clients.design-client-proof {
+  margin-top: 0;
+  padding-block: 48px 20px;
+  border-bottom: 1px solid #f0eee7;
+}
+.design-client-proof .design-section-heading h2 {
+  font-family: var(--font-design-sans), sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.design-client-proof .design-section-heading > p {
+  max-width: 580px;
+  margin-top: 10px;
+  font-size: 16px;
+}
+.design-client-proof .client-logos-animation {
+  margin-top: 8px;
+}
+.design-client-proof .client-glass-tile {
+  width: 138px;
+  height: 106px;
+  flex-basis: 138px;
+  border-radius: 20px;
+}
+.design-client-proof .client-glass-tile img {
+  height: 64px;
+}
+.design-client-proof .animated-card-track {
+  padding-block: 24px 32px;
+}
+.case-studies-all {
+  display: flex;
+  width: fit-content;
+  margin: 16px auto 0;
+}
+.case-results {
+  width: 100%;
+  margin: 0 0 32px;
+  padding: 26px 28px;
+  border: 1px solid #e5e2d8;
+  border-radius: 16px;
+  background: #faf9f5;
+}
+.case-results dl {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.case-results dl > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column-reverse;
+  gap: 5px;
+  padding-left: 20px;
+  border-left: 1px solid #dddacf;
+}
+.case-results dl > div:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+.case-results dt {
+  color: #69685f;
+  font-size: 13px;
+  line-height: 1.35;
+}
+.case-results dd {
+  font-family: var(--font-editorial), Georgia, serif;
+  color: #292a24;
+  font-size: 46px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.case-results > p {
+  margin-top: 16px;
+  color: #77766b;
+  font-size: 11px;
+  line-height: 1.5;
+}
+.case-results-compact {
+  padding: 18px 0 0;
+  margin: 20px 0 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid #e8e5dc;
+  border-radius: 0;
+}
+.case-results-compact dd {
+  font-size: 32px;
+}
+.case-results-compact dt {
+  font-size: 12px;
+}
+.case-results-compact dl {
+  gap: 12px;
+}
+.case-results-compact dl > div {
+  padding-left: 12px;
+}
+.side-story-copy:has(.case-results) .side-story-excerpt {
+  -webkit-line-clamp: 3;
+}
+.case-study-at-a-glance {
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid #dedbd2;
+}
+.case-study-at-a-glance dl {
+  margin-top: 24px;
+}
+.case-study-at-a-glance dl > div {
+  margin-top: 20px;
+}
+.case-study-at-a-glance dt {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #303129;
+}
+.case-study-at-a-glance dd {
+  color: #62625b;
+  line-height: 1.65;
+}
+.about-origin {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 72px;
+  padding-block: 20px 64px;
+  border-bottom: 1px solid #e8e5dc;
+}
+.figma-site .about-origin h2 {
+  margin-top: 14px;
+  font-size: clamp(32px, 3.5vw, 48px);
+  line-height: 1.2;
+}
+.about-origin p {
+  margin-bottom: 20px;
+  color: #5d5e57;
+  font-size: 18px;
+  line-height: 1.7;
+}
+.design-about-page .contact-founders {
+  padding-top: 64px;
+}
+.design-about-page .contact-founders-glow {
+  display: none;
+}
+.early-access-layout {
+  display: grid;
+  grid-template-columns: 0.75fr 1.25fr;
+  gap: 64px;
+  align-items: start;
+  padding-bottom: 96px;
+  --color-brand-teal: #687826;
+  --color-canvas: #fff;
+}
+.early-access-intro {
+  position: sticky;
+  top: 36px;
+  padding-block: 20px;
+}
+.figma-site .early-access-intro h2 {
+  margin-top: 12px;
+  font-size: 38px;
+  line-height: 1.2;
+}
+.early-access-intro p {
+  max-width: 330px;
+  margin-top: 24px;
+  color: #63645c;
+  line-height: 1.65;
+}
+.early-access-intro a {
+  color: #5d6b27;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.early-access-form {
+  border-color: #dfdfd5;
+  box-shadow: 0 10px 40px -24px #4b4a3030;
+}
+.early-access-form h2 {
+  font-family: var(--font-design-sans), sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+.early-access-form input:not([type="hidden"]),
+.early-access-form textarea {
+  font-size: 16px;
+  min-height: 48px;
+  background: #fcfcfa;
+}
+.early-access-form button[aria-pressed] {
+  min-height: 44px;
+}
+.early-access-form button[type="submit"] {
+  min-height: 48px;
+  border-radius: 999px;
+  padding-inline: 32px;
+  background: var(--olive);
+  color: #fff;
+}
+.early-access-form button[type="submit"]:hover {
+  background: #526017;
+}
+.figma-site .pricing-credit-guide {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
+  max-width: 980px;
+  margin: 64px auto 0;
+  padding: 28px 0;
+  border-block: 1px solid #e4e1d7;
+}
+.pricing-credit-guide h2 {
+  font-size: 30px;
+}
+.pricing-credit-guide p {
+  color: #68685e;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.pricing-credit-guide a {
+  color: #5c6b23;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.pricing-plan-note {
+  min-height: 40px;
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #676b53;
+}
+.community-heading h1 {
+  max-width: 960px;
+  margin-inline: auto;
+}
+@media (max-width: 1023px) {
+  .marketing-page-heading {
+    padding-top: 166px;
+  }
+  .early-access-layout {
+    grid-template-columns: 1fr 1.5fr;
+    gap: 28px;
+  }
+  .about-origin {
+    gap: 36px;
+  }
+}
+@media (max-width: 767px) {
+  .marketing-page-heading {
+    padding-block: 142px 36px;
+  }
+  .marketing-page-heading > p {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .resource-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+  .resource-card-copy {
+    padding: 24px;
+  }
+  .resource-help {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 24px;
+  }
+  .design-closing-cta {
+    margin-block: 56px;
+    padding: 44px 20px;
+  }
+  .design-closing-cta > p {
+    font-size: 16px;
+  }
+  .design-closing-actions {
+    gap: 12px;
+  }
+  .design-closing-actions .design-button {
+    width: 100%;
+    max-width: 340px;
+  }
+  .design-clients.design-client-proof {
+    padding-top: 32px;
+  }
+  .design-client-proof .client-glass-tile {
+    width: 120px;
+    height: 100px;
+    flex-basis: 120px;
+  }
+  .case-results {
+    padding: 22px 16px;
+  }
+  .case-results dd {
+    font-size: 36px;
+  }
+  .case-results dl {
+    gap: 8px;
+  }
+  .case-results dl > div {
+    padding-left: 12px;
+  }
+  .case-results-compact {
+    padding: 16px 0 0;
+  }
+  .case-results-compact dd {
+    font-size: 30px;
+  }
+  .case-results-compact dl > div {
+    padding-left: 8px;
+  }
+  .case-results-compact dt {
+    font-size: 11px;
+  }
+  .about-origin {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+    padding-block: 0 40px;
+  }
+  .about-origin p {
+    font-size: 17px;
+  }
+  .design-about-page .contact-founders {
+    padding-top: 44px;
+  }
+  .early-access-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+    padding-bottom: 56px;
+  }
+  .early-access-intro {
+    position: static;
+    padding-top: 0;
+  }
+  .early-access-intro p {
+    max-width: none;
+    margin-top: 16px;
+  }
+  .figma-site .pricing-credit-guide {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .resource-cover img {
+    transition: none;
+  }
+  .resource-card:hover .resource-cover img {
+    transform: none;
+  }
+}

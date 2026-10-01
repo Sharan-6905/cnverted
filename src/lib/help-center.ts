@@ -77,7 +77,7 @@ export const HELP_ARTICLES = [
     id: "community",
     category: "Account & support",
     question: "How can I join the Cnvrted Slack community?",
-    answer: "Tell us your name, email, business name, and business domain. You can add a website too. Once your answers reach our team, you’ll get a link to join Slack.",
+    answer: "Tell us your name, email, business name, and industry. You can add a website too. Once your answers reach our team, you’ll get a link to join Slack.",
     link: { label: "Join our Slack community", href: "/join-slack" },
   },
   {

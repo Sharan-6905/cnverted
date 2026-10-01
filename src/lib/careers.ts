@@ -56,7 +56,7 @@ export const CAREER_ROLES: CareerRole[] = [
   },
   {
     slug: "founders-office-intern",
-    title: "Founders Office Intern (In batches)",
+    title: "Founders’ Office Intern",
     category: "Operations",
     location: "Remote",
     type: "Internship",

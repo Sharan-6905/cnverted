@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import type { CaseStudySummary } from "@/lib/case-studies";
+import { CaseStudyResults } from "./case-study-results";
+import { formatPostDate } from "@/lib/blog-posts";
 
 export function SideStoryCarousel({ stories }: { stories: readonly CaseStudySummary[] }) {
   const [{ active, cycle }, setSlide] = useState({ active: 0, cycle: 0 });
@@ -62,7 +64,7 @@ export function SideStoryCarousel({ stories }: { stories: readonly CaseStudySumm
       data-autoplay={canPlay ? "running" : "paused"}
       role="region"
       aria-roledescription="carousel"
-      aria-label="Cnvrted side stories"
+      aria-label="Cnvrted case studies"
       onKeyDown={(event) => {
         if (event.key === "ArrowRight" || event.key === "ArrowLeft") {
           event.preventDefault();
@@ -106,8 +108,9 @@ export function SideStoryCarousel({ stories }: { stories: readonly CaseStudySumm
                 <div className="side-story-copy">
                   <h3 id={`side-story-card-title-${index}`}>{story.title}</h3>
                   <p className="side-story-excerpt">{story.excerpt}</p>
+                  {story.results && <CaseStudyResults results={story.results} compact />}
                   <div className="side-story-meta">
-                    <time dateTime={story.date}>July 23, 2026</time>
+                    <time dateTime={story.date}>{formatPostDate(story.date)}</time>
                     <span><img src="/figma/side-story/reading-time.svg" width={12} height={12} alt="" />{story.readTime} min</span>
                     <span className="side-story-read">Read <img src="/figma/side-story/read-arrow.svg" width={14} height={14} alt="" /></span>
                   </div>

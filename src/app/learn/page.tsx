@@ -1,32 +1,89 @@
 import type { Metadata } from "next";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
-import { Section } from "@/components/section";
+import Link from "next/link";
+import Image from "next/image";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
+import { IllustratedShell } from "@/components/illustrated/shell";
+import { ClosingCTA } from "@/components/illustrated/closing-cta";
+import { BLOG_POSTS } from "@/lib/blog-posts";
 
 export const metadata: Metadata = {
   title: "Learn — Cnvrted",
-  description: "Guides, playbooks, and resources from Cnvrted. Coming soon.",
+  description:
+    "Learn how to build a GTM play, understand buying signals, and choose the right prospecting approach for your team.",
+  alternates: { canonical: "/learn" },
 };
 
 export default function LearnPage() {
+  const guides = [...BLOG_POSTS].sort(
+    (a, b) =>
+      Number(b.slug === "what-is-a-gtm-play") -
+      Number(a.slug === "what-is-a-gtm-play"),
+  );
   return (
-    <div className="flex min-h-screen flex-col">
+    <IllustratedShell
+      className="design-library-page"
+      faqItems={[]}
+      closingCTA={<ClosingCTA />}
+    >
       <BreadcrumbSchema trail={[{ name: "Learn" }]} />
-      <SiteHeader />
-      <main className="flex-1">
-        <Section
-          centered
-          eyebrow="Learn from us"
-          title={
-            <>
-              Coming <span className="text-accent">soon</span>.
-            </>
-          }
-          description="We're putting together guides and playbooks on finding, reaching, and closing in-market buyers. Check back soon."
-        />
-      </main>
-      <SiteFooter />
-    </div>
+      <header className="marketing-page-heading design-container">
+        <span className="marketing-eyebrow">The field notes</span>
+        <h1>
+          Better context.
+          <br />
+          Better conversations.
+        </h1>
+        <p>
+          Practical reading on buying signals, prospecting, and planning your
+          next GTM play.
+        </p>
+      </header>
+      <div className="resource-grid design-container">
+        {guides.map((post) => (
+          <article className="resource-card" key={post.slug}>
+            <Link
+              className="resource-cover"
+              href={`/blogs/${post.slug}`}
+              tabIndex={-1}
+              aria-hidden="true"
+            >
+              <Image
+                src={post.cover}
+                alt=""
+                width={1200}
+                height={600}
+                sizes="(max-width: 767px) 100vw, 580px"
+              />
+            </Link>
+            <div className="resource-card-copy">
+              <span className="marketing-eyebrow">{post.category}</span>
+              <h2>
+                <Link href={`/blogs/${post.slug}`}>{post.title}</Link>
+              </h2>
+              <p>{post.dek}</p>
+              <div className="resource-meta">
+                <span>By {post.author.name}</span>
+                <span>{post.readingMinutes} min read</span>
+              </div>
+              <Link
+                className="marketing-text-link"
+                href={`/blogs/${post.slug}`}
+              >
+                Read the guide <span aria-hidden="true">↗</span>
+              </Link>
+            </div>
+          </article>
+        ))}
+      </div>
+      <aside className="resource-help design-container">
+        <div>
+          <h2>Looking for product help?</h2>
+          <p>Find answers about your account, credits, and getting started.</p>
+        </div>
+        <Link className="marketing-text-link" href="/help-center">
+          Visit the Help Center <span aria-hidden="true">↗</span>
+        </Link>
+      </aside>
+    </IllustratedShell>
   );
 }

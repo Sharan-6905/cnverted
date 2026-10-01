@@ -1,3 +1,4 @@
+import { careerFAQs } from "@/components/illustrated/faq";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CAREER_ROLES } from "@/lib/careers";
@@ -26,7 +27,7 @@ export default async function CareerDetailPage({ params }: Props) {
   if (!role) notFound();
   const details = CAREER_DETAILS[role.slug];
   return (
-    <IllustratedShell className="design-role-page">
+    <IllustratedShell faqItems={careerFAQs} className="design-role-page">
       <BreadcrumbSchema
         trail={[{ name: "Careers", path: "/careers" }, { name: role.title }]}
       />

@@ -70,6 +70,7 @@ function PillOption({
     <button
       type="button"
       onClick={onClick}
+      aria-pressed={selected}
       className={cn(
         "rounded-full px-3.5 py-1.5 text-sm smooth-transition transition-colors",
         selected
@@ -165,14 +166,14 @@ export function EarlyAccessForm() {
         </div>
         <h2 className="mt-6 font-display text-2xl font-semibold tracking-tight text-ink">We&rsquo;ve got it.</h2>
         <p className="mx-auto mt-3 max-w-[420px] text-[15px] leading-relaxed text-body">
-          A founder reads this within 24 hours and emails you directly to lock a demo slot.
+          You’re on the waitlist. Our team will email you about access and the right setup for your workflow.
         </p>
       </div>
     );
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} noValidate className="rounded-3xl border border-hairline bg-canvas shadow-soft">
+    <form ref={formRef} onSubmit={handleSubmit} noValidate className="early-access-form rounded-3xl border border-hairline bg-canvas shadow-soft">
       {/* Step 1 — Who you are */}
       <section className="px-6 py-9 sm:px-11 sm:py-11">
         <StepHeading number={1} title="Who you are" />
@@ -426,7 +427,7 @@ export function EarlyAccessForm() {
       {/* Footer */}
       <div className="px-6 py-9 text-center sm:px-11">
         <Button type="submit" variant="accent" size="lg" disabled={submitting}>
-          {submitting ? "Sending…" : "Send it over"}
+          {submitting ? "Sending…" : "Join the waitlist"}
         </Button>
         {submitError && <p className="mt-3 text-xs text-red-600">{submitError}</p>}
         <p className="mt-3 text-xs text-muted-soft">No spam. Ever.</p>

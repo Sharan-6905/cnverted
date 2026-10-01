@@ -57,7 +57,7 @@ export function HowCnvrtedWorks() {
           The full loop
         </span>
         <h2 className="font-display text-display-md font-semibold text-ink">
-          From open web to <span className="text-accent">booked meeting</span>.
+          From the open web to <span className="text-accent">booked meeting</span>.
         </h2>
       </Reveal>
 

@@ -4,6 +4,7 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { Clause, Bullets, Mail } from "@/components/legal";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/privacy" },
   title: "Privacy Policy — Cnvrted",
   description:
     "What Cnvrted collects, why, who sees it, and how to get your information removed.",
@@ -202,7 +203,7 @@ export default function PrivacyPage() {
               <Bullets
                 items={[
                   "Forms. Early-access registrations, waitlist signups and career applications: the details you enter, which we store with our database provider.",
-                  "Slack community sign-ups. Your name, email, business name, business domain and optional website are sent to our team through Resend. After submission, you can follow an invitation link to Slack; joining there is governed by Slack’s own terms and privacy policy.",
+                  "Slack community sign-ups. Your name, email, business name, industry and optional website are sent to our team through Resend. After submission, you can follow an invitation link to Slack; joining there is governed by Slack’s own terms and privacy policy.",
                   "Server logs. Our hosting provider records IP address, device and browser type, referring URL and timestamps as part of serving and securing the site.",
                   "Cookies. We use only cookies that are strictly necessary — keeping you signed in to the product and keeping sessions secure. We do not run advertising or analytics cookies, and there is no third-party tracking on this site. If that changes we will add a consent banner before it does.",
                 ]}

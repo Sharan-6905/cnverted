@@ -7,6 +7,7 @@ export interface CaseStudySummary {
   date: string;
   readTime: number;
   cover: { src: string; alt: string };
+  results?: readonly { value: string; label: string }[];
 }
 
 interface CaseStudy extends CaseStudySummary {
@@ -19,10 +20,15 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   {
     "slug": "from-cold-emails-to-warm-conversations",
     "title": "From 200 cold emails to 11 warm ones. 6 replied.",
-    "description": "An influencer founder we collaborated with sent out 200 cold emails daily using the same script, but only received 2–3 replies on good days. His domain reputation was declining, leading to fewer meetings booked each month.",
-    "excerpt": "An influencer founder we work with was doing what most founders do. Every morning, he'd pull a list from Apollo, load it into Instantly, and fire off 200 cold emails before lunch. Same script. Same opener. Same results.",
+    "description": "A founder moved from 200 generic emails a day to 11 messages based on recent buying signals. Six prospects replied, and three booked demos that week.",
+    "excerpt": "A founder replaced a daily 200-email routine with 11 messages grounded in recent buying signals. Here’s how those conversations led to three demos in a week.",
     "date": "2026-07-23",
     "readTime": 6,
+    results: [
+      { value: "11", label: "targeted emails" },
+      { value: "6", label: "replies" },
+      { value: "3", label: "demo calls" },
+    ],
     "cover": {
       "src": "/images/case-studies/cold-emails-warm-conversations.webp",
       "alt": "A flurry of pale envelopes becomes a few warm, glowing conversations above an illustrated coastal landscape."
@@ -120,6 +126,6 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
 
 // Keep full article text out of the interactive homepage carousel's props.
 export const CASE_STUDY_SUMMARIES: readonly CaseStudySummary[] = CASE_STUDIES.map(
-  ({ slug, title, description, excerpt, date, readTime, cover }) =>
-    ({ slug, title, description, excerpt, date, readTime, cover }),
+  ({ slug, title, description, excerpt, date, readTime, cover, results }) =>
+    ({ slug, title, description, excerpt, date, readTime, cover, results }),
 );

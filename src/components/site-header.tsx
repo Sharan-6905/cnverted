@@ -78,7 +78,7 @@ export function SiteHeader() {
               "hidden bg-gradient-to-r from-brand-navy to-[#4FA8F5] hover:opacity-90 sm:inline-flex",
             )}
           >
-            Get started
+            Start free
           </a>
           <button
             ref={mobileTrigger}
@@ -212,7 +212,7 @@ export function SiteHeader() {
                     "mb-2 min-h-11 w-full justify-center",
                   )}
                 >
-                  Get started
+                  Start free
                 </a>
                 <a
                   href={COMMUNITY_URL}

@@ -1,4 +1,5 @@
-// Editorial copy from Figma case-study frames 247:24650 and 247:24859.
+// Based on editorial copy from Figma frames 247:24650 and 247:24859.
+// Do not attach a customer identity or add results without team confirmation.
 export interface CaseStudySummary {
   slug: string;
   title: string;
@@ -11,9 +12,14 @@ export interface CaseStudySummary {
 }
 
 interface CaseStudy extends CaseStudySummary {
+  overview?: readonly { label: string; value: string }[];
   paragraphs: string[];
-  sections: { heading: string; items?: string[]; paragraph?: string }[];
-  comparison?: { heading: string; before: string[]; after: string[] };
+  sections: { heading: string; items?: string[]; paragraph?: string; paragraphs?: string[] }[];
+  comparison?: {
+    heading: string;
+    rows: readonly { metric: string; before: string; after: string }[];
+    note: string;
+  };
 }
 
 export const CASE_STUDIES: readonly CaseStudy[] = [
@@ -23,7 +29,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     "description": "A founder moved from 200 generic emails a day to 11 messages based on recent buying signals. Six prospects replied, and three booked demos that week.",
     "excerpt": "A founder replaced a daily 200-email routine with 11 messages grounded in recent buying signals. Here’s how those conversations led to three demos in a week.",
     "date": "2026-07-23",
-    "readTime": 6,
+    "readTime": 4,
     results: [
       { value: "11", label: "targeted emails" },
       { value: "6", label: "replies" },
@@ -33,38 +39,75 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       "src": "/images/case-studies/cold-emails-warm-conversations.webp",
       "alt": "A flurry of pale envelopes becomes a few warm, glowing conversations above an illustrated coastal landscape."
     },
-    "paragraphs": [
-      "A founder we work with was doing what most founders do. Every morning, he'd pull a list from Apollo, load it into Instantly, and fire off 200 cold emails before lunch. Same script. Same \"Hey {{first_name}}, I noticed you're the VP of Sales at {{company}}\" opener. Same results.",
-      "Out of 200, maybe 2 would reply. On a good day, 3. Most weeks, zero meetings booked. His domain reputation was slowly dying and he could feel it. Reply rates were dropping month over month.",
-      "The worst part wasn't the low numbers. It was the time. He was spending nearly three hours every morning just on the prospecting and sending routine. Finding the contacts, cleaning the list, deduplicating against his CRM, writing the emails, scheduling them out. Three hours of work before he could even start selling.",
-      "He came to us and said, \"I know my ICP. I just don't know which of them actually care right now.\"",
-      "That was the problem. He had 10,000 people who matched his ideal customer profile. But on any given week, maybe 30 of them were actively looking for what he sold. He was emailing all 10,000 to reach those 30, and burning the other 9,970 in the process.",
-      "We ran his ICP through Cnvrted. Instead of pulling a list of names, we scanned for people who had shown real buying intent in the last 7 days. People who had posted about the problem his product solves. People who were publicly asking for recommendations. People whose companies had just made a move that signalled they were about to buy.",
-      "Cnvrted found 11 people.",
-      "Not 10,000. Not 200. Eleven.",
-      "Each one came with the receipt. The actual post, the actual trigger, the timestamp. He could see exactly why each person was worth reaching out to.",
-      "He wrote 11 emails. Each one referenced the specific thing that person had said or done. No template. No merge tags. Real messages with real reasons.",
-      "6 replied. Not 6 out of 200. 6 out of 11.",
-      "Three of those turned into demo calls that same week. One closed within the month.",
-      "The math changed completely. Before Cnvrted, he was running a 1% reply rate on 200 emails and spending 3 hours a day to get there. After, he was running a 55% reply rate on 11 emails and spending about 20 minutes.",
-      "He told us later that the thing that surprised him most wasn't the reply rate. It was how different the conversations felt. When you reach out to someone and reference the exact thing they said two days ago, they don't treat you like a cold emailer. They treat you like someone who was paying attention. The entire dynamic shifts from \"who is this person and why are they in my inbox\" to \"oh, you actually know what I'm dealing with.\"",
-      "That's the difference between a name and a buyer. A name is a row in a spreadsheet. A buyer is a person who told the internet they're ready. You just have to be watching when they do."
+    overview: [
+      { label: "The challenge", value: "Find the prospects who had a reason to talk now, within an already defined ideal customer profile." },
+      { label: "The workflow", value: "Review recent buying signals, check the original source, and write a relevant email to each prospect." },
+      { label: "The result", value: "One batch of 11 emails produced six replies and three demo calls that week. One deal closed within the month." },
     ],
-    "sections": [],
+    "paragraphs": [
+      "A founder already knew which companies were a good fit for his product. The harder question was who had a reason to talk that week.",
+      "This story follows a change in his outreach: from a daily routine of 200 generic emails to one batch of 11 messages based on recent public buying signals. Six people replied, three booked demos that week, and one deal closed within the month."
+    ],
+    "sections": [
+      {
+        heading: "The challenge: a good fit, but no reason to reach out",
+        paragraphs: [
+          "Each morning, the founder pulled contacts from Apollo, loaded them into Instantly, and sent around 200 emails. The opener referred to the recipient’s role and company, but gave little reason for the conversation to happen now.",
+          "That routine typically produced two or three replies. Most weeks, it produced no meetings. Finding contacts, cleaning the list, checking for duplicates, writing, and scheduling took nearly three hours a day.",
+          "His ideal customer profile narrowed down who could benefit from the product. It did not tell him which of those people were actively dealing with the problem. That was the gap the team set out to address."
+        ]
+      },
+      {
+        heading: "Find recent evidence of a relevant problem",
+        paragraph: "We used the founder’s existing ideal customer profile in Cnvrted and looked for public signals from the previous seven days. The team looked for three kinds of evidence:",
+        items: [
+          "Someone describing a problem the product could help solve.",
+          "Someone asking publicly for a recommendation or an alternative.",
+          "A company change that made the product newly relevant."
+        ],
+        paragraphs: [
+          "Cnvrted surfaced 11 prospects, with the original source, the trigger, and a timestamp attached to each. The founder could review the evidence before deciding whether to reach out.",
+          "A signal was a reason to investigate, not proof that someone would buy. The useful combination was a prospect who fit the customer profile and recent evidence that the problem mattered to them."
+        ]
+      },
+      {
+        heading: "Turn the source into a specific conversation",
+        paragraphs: [
+          "The founder wrote an individual email to each of the 11 prospects. Each message referenced the relevant thing that person had said or done and connected it to the problem the product could solve.",
+          "The source gave him something concrete to respond to. He could explain why he was getting in touch, rather than opening with a generic observation about a job title or company.",
+          "The founder still made the outreach decision and wrote the emails. Cnvrted supplied the shortlist and the evidence behind it."
+        ]
+      },
+      {
+        heading: "What happened after the 11 emails",
+        paragraphs: [
+          "Six prospects replied: six out of 11, or about 55%. Three of those conversations became demo calls in the same week. One deal closed within the month.",
+          "The founder reported spending about 20 minutes on prospecting for the targeted batch, compared with nearly three hours on the previous daily routine.",
+          "These figures describe the batch in this story. The previous process was an ongoing daily routine; the new results came from one smaller campaign."
+        ]
+      },
+      {
+        heading: "How to apply the workflow to your own outreach",
+        paragraph: "Start with a small batch you can review personally:",
+        items: [
+          "Define the companies and people your product can help. Be specific about the problem, not just the industry or job title.",
+          "Choose a signal that gives you a reason to contact them now. Check the date and read the original source in context.",
+          "Keep only prospects where the signal and the customer profile both fit. A larger list is not the objective.",
+          "Write an email that connects what you saw to a useful next step. Let the source guide the message.",
+          "Record how many messages you sent, how many people replied, and which conversations became demos or customers. Compare batches over a consistent period."
+        ]
+      }
+    ],
     "comparison": {
-      "heading": "The numbers",
-      "before": [
-        "200 emails/day",
-        "1% reply rate",
-        "3 hours/day prospecting",
-        "0–1 meetings/week"
+      heading: "The results, in context",
+      rows: [
+        { metric: "Emails sent", before: "Around 200 per day", after: "11 in the targeted batch" },
+        { metric: "Replies", before: "Typically 2–3 from 200 emails", after: "6 from 11 emails" },
+        { metric: "Time spent", before: "Nearly 3 hours per day", after: "About 20 minutes for the batch" },
+        { metric: "Demo calls", before: "Most weeks, none", after: "3 that week" },
+        { metric: "Closed deals", before: "Not stated", after: "1 within the month" }
       ],
-      "after": [
-        "11 targeted emails",
-        "55% reply rate",
-        "20 minutes prospecting",
-        "3 meetings in the first week"
-      ]
+      note: "The baseline describes the founder’s previous daily routine. The new results cover one batch of 11 emails."
     }
   },
   {

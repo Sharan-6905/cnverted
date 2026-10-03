@@ -3,6 +3,7 @@ import { JsonLd } from "@/components/json-ld";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import { IllustratedShell } from "@/components/illustrated/shell";
 import { SupportArtwork } from "@/components/illustrated/support-artwork";
@@ -60,6 +61,7 @@ export default async function CaseStudyPage({ params }: Props) {
             <a className="design-article-back" href="/case-studies" aria-label="Back to Case Studies">
               <img src="/figma/blogs/back-arrow.svg" width={32} height={32} alt="" />
             </a>
+            <p className="marketing-eyebrow">{story.results ? "Customer story · Email outreach" : "Inside Cnvrted"}</p>
             <h1 id="article-title" style={{ maxWidth: 704 }}>{story.title}</h1>
             <p className="design-article-dek">{story.description}</p>
             <div className="design-article-tags"><time dateTime={story.date}>{formatPostDate(story.date)}</time><span>{story.readTime} min read</span></div>
@@ -67,28 +69,53 @@ export default async function CaseStudyPage({ params }: Props) {
           <div className="design-article-content">
             {story.results && <CaseStudyResults results={story.results} />}
             <img className="case-study-cover" src={story.cover.src} alt={story.cover.alt} width={1774} height={887} />
-            <div className="design-article-prose">
-              {story.results && <section className="case-study-at-a-glance" aria-labelledby="case-overview-title"><h2 id="case-overview-title">The story at a glance</h2><dl><div><dt>The challenge</dt><dd>Three hours of daily prospecting and 200 emails were producing only a handful of replies.</dd></div><div><dt>The change</dt><dd>Match the founder’s ICP to recent public buying signals, then write an individual email with the source and context in mind.</dd></div><div><dt>The outcome</dt><dd>Six replies from 11 emails, three demos that week, and one deal closed within the month.</dd></div></dl></section>}
-              {story.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
-              {story.comparison ? (
-                <section aria-labelledby="case-study-numbers">
-                  <h2 id="case-study-numbers">{story.comparison.heading}</h2>
-                  <table className="case-study-table">
-                    <caption className="sr-only">Results before and after using Cnvrted</caption>
-                    <thead><tr><th scope="col">Before Cnvrted</th><th scope="col">With Cnvrted</th></tr></thead>
-                    <tbody>{story.comparison.before.map((before, index) => (
-                      <tr key={before}><td>{before}</td><td>{story.comparison!.after[index]}</td></tr>
-                    ))}</tbody>
-                  </table>
-                </section>
-              ) : null}
-              {story.sections.map((section) => (
-                <section key={section.heading}>
-                  <h2>{section.heading}</h2>
-                  {section.paragraph ? <p>{section.paragraph}</p> : null}
-                  {section.items ? <ul className="design-article-bullets">{section.items.map((item) => <li key={item}>{item}</li>)}</ul> : null}
-                </section>
-              ))}
+            <div className="case-study-reading-grid">
+              <nav className="case-study-contents" aria-label="In this case study">
+                <p>In this story</p>
+                <ol>
+                  {story.sections.map((section, index) => (
+                    <li key={section.heading}><a href={`#case-section-${index + 1}`}>{section.heading}</a></li>
+                  ))}
+                  {story.comparison && <li><a href="#case-study-numbers">Results at a glance</a></li>}
+                </ol>
+                <Link className="case-study-demo-link" href="/#strategy-title">Explore the product demo <span aria-hidden="true">↗</span></Link>
+              </nav>
+              <div className="design-article-prose">
+                {story.overview && (
+                  <section className="case-study-at-a-glance" aria-labelledby="case-overview-title">
+                    <h2 id="case-overview-title">The story at a glance</h2>
+                    <dl>{story.overview.map(({ label, value }) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+                  </section>
+                )}
+                {story.paragraphs.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+                {story.sections.map((section, index) => (
+                  <section key={section.heading} aria-labelledby={`case-section-${index + 1}`}>
+                    <h2 id={`case-section-${index + 1}`}>{section.heading}</h2>
+                    {section.paragraph ? <p>{section.paragraph}</p> : null}
+                    {section.items ? <ul className="design-article-bullets">{section.items.map((item) => <li key={item}>{item}</li>)}</ul> : null}
+                    {section.paragraphs?.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
+                  </section>
+                ))}
+                {story.comparison ? (
+                  <section aria-labelledby="case-study-numbers">
+                    <h2 id="case-study-numbers">{story.comparison.heading}</h2>
+                    <table className="case-study-table case-study-comparison">
+                      <caption className="sr-only">The previous daily routine compared with one targeted outreach batch</caption>
+                      <thead><tr><th scope="col">Measure</th><th scope="col">Previous routine</th><th scope="col">Targeted batch</th></tr></thead>
+                      <tbody>{story.comparison.rows.map(({ metric, before, after }) => (
+                        <tr key={metric}><th scope="row">{metric}</th><td>{before}</td><td>{after}</td></tr>
+                      ))}</tbody>
+                    </table>
+                    <p className="case-study-method-note">{story.comparison.note}</p>
+                  </section>
+                ) : null}
+                <aside className="case-study-next" aria-labelledby="case-next-title">
+                  <span className="marketing-eyebrow">Put it into practice</span>
+                  <h2 id="case-next-title">Give each signal a next step.</h2>
+                  <p>See how to connect a trigger, a relevant message, and a clear action in a GTM play.</p>
+                  <Link href="/blogs/what-is-a-gtm-play">Read the GTM play guide <span aria-hidden="true">↗</span></Link>
+                </aside>
+              </div>
             </div>
           </div>
         </article>

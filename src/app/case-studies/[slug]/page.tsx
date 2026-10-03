@@ -1,3 +1,6 @@
+import { pageMetadata, absoluteUrl, SITE_URL } from "@/lib/seo";
+import { JsonLd } from "@/components/json-ld";
+import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CASE_STUDIES } from "@/lib/case-studies";
@@ -18,12 +21,15 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const story = CASE_STUDIES.find((item) => item.slug === slug);
-  if (!story) return {};
-  return {
+  if (!story) notFound();
+  return pageMetadata({
     title: `${story.title} — Cnvrted`,
     description: story.description,
-    alternates: { canonical: `/case-studies/${story.slug}` },
-  };
+    path: `/case-studies/${story.slug}`,
+    image: story.cover.src,
+    imageAlt: story.cover.alt,
+    publishedTime: story.date,
+  });
 }
 
 export default async function CaseStudyPage({ params }: Props) {
@@ -33,6 +39,20 @@ export default async function CaseStudyPage({ params }: Props) {
 
   return (
     <IllustratedShell faqItems={[]} className="design-article-page" closingCTA={<ClosingCTA />}>
+      <BreadcrumbSchema trail={[{ name: "Case Studies", path: "/case-studies" }, { name: story.title }]} />
+      <JsonLd data={{
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "@id": absoluteUrl(`/case-studies/${story.slug}#article`),
+        headline: story.title,
+        description: story.description,
+        image: absoluteUrl(story.cover.src),
+        datePublished: story.date,
+        inLanguage: "en",
+        author: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Cnvrted", url: SITE_URL },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        mainEntityOfPage: absoluteUrl(`/case-studies/${story.slug}`),
+      }} />
       <div className="design-article-scene">
         <SupportArtwork variant="case-study" />
         <article className="design-article design-container" aria-labelledby="article-title">

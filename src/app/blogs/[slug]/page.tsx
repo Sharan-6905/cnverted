@@ -11,9 +11,11 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import {
   BLOG_POSTS,
   getPostBySlug,
+  formatPostDate,
   type Block,
 } from "@/lib/blog-posts";
-import { getNonce } from "@/lib/nonce";
+import { JsonLd } from "@/components/json-ld";
+import { SITE_URL } from "@/lib/seo";
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((post) => ({ slug: post.slug }));
@@ -26,7 +28,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) return { title: "Post not found — Cnvrted" };
+  if (!post) notFound();
   return {
     title: `${post.title} — Cnvrted`,
     description: post.excerpt,
@@ -51,10 +53,11 @@ export async function generateMetadata({
 }
 
 async function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
-  const nonce = await getNonce();
   const schema = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
+    "@id": `${SITE_URL}/blogs/${post.slug}#article`,
+    inLanguage: "en",
     headline: post.title,
     description: post.excerpt,
     image: `https://www.cnvrted.com${post.cover}`,
@@ -66,19 +69,14 @@ async function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
       sameAs: [post.author.linkedin, post.author.x],
     },
     publisher: {
+      "@id": `${SITE_URL}/#organization`,
       "@type": "Organization",
       name: "Cnvrted",
       logo: { "@type": "ImageObject", url: "https://www.cnvrted.com/cnvrted-logo.png" },
     },
     mainEntityOfPage: `https://www.cnvrted.com/blogs/${post.slug}`,
   };
-  return (
-    <script
-      nonce={nonce}
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <JsonLd data={schema} />;
 }
 
 export default async function BlogPostPage({
@@ -110,6 +108,7 @@ export default async function BlogPostPage({
             <div className="design-article-tags">
               <span>{post.category}</span>
               <span>{post.readingMinutes} min read</span>
+              <time dateTime={post.date}>{formatPostDate(post.date)}</time>
             </div>
             <div className="design-article-byline">
               <p>Written by <strong>{post.author.name}</strong></p>

@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,12 +9,11 @@ import { CASE_STUDIES } from "@/lib/case-studies";
 import { formatPostDate } from "@/lib/blog-posts";
 import { CaseStudyResults } from "@/components/illustrated/case-study-results";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Case Studies — Cnvrted",
-  description:
-    "See how a founder turned 11 targeted emails into six replies, and how Cnvrted uses buying signals to find its own customers.",
-  alternates: { canonical: "/case-studies" },
-};
+  description: "See how a founder turned 11 targeted emails into six replies, and how Cnvrted uses buying signals to find its own customers.",
+  path: "/case-studies",
+});
 
 export default function CaseStudiesPage() {
   return (

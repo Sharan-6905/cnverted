@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,18 +11,11 @@ import { CUSTOMERS } from "@/lib/customers";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import "./customers.css";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Our Customers — Cnvrted",
-  description:
-    "Meet the teams using Cnvrted, from creative studios to technology companies. Explore our customer community and read practical case studies.",
-  alternates: { canonical: "/customers" },
-  openGraph: {
-    title: "Our Customers — Cnvrted",
-    description:
-      "Meet the teams choosing a more thoughtful way to find their next customers.",
-    url: "/customers",
-  },
-};
+  description: "Meet the teams using Cnvrted, from creative studios to technology companies. Explore our customer community and read practical case studies.",
+  path: "/customers",
+});
 
 export default function CustomersPage() {
   const customerStory = CASE_STUDIES.find(

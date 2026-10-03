@@ -17,8 +17,10 @@ const columns = [
   {
     title: "Resources",
     links: [
+      ["Pricing", "/pricing"],
       ["Blogs", "/blogs"],
       ["Case Studies", "/case-studies"],
+      ["Learn", "/learn"],
       ["Help Center", "/help-center"],
       ["Join Slack", "/join-slack"],
     ],

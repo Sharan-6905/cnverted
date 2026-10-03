@@ -1,14 +1,14 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { IllustratedLegalPage } from "@/components/illustrated/legal-page";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { Clause, Bullets, Mail } from "@/components/legal";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/privacy" },
+export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy — Cnvrted",
-  description:
-    "What Cnvrted collects, why, who sees it, and how to get your information removed.",
-};
+  description: "What Cnvrted collects, why, who sees it, and how to get your information removed.",
+  path: "/privacy",
+});
 
 const LAST_UPDATED = "28 September 2026";
 

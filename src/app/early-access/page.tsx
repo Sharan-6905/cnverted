@@ -1,15 +1,15 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { EarlyAccessForm } from "@/components/early-access-form";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { IllustratedShell } from "@/components/illustrated/shell";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Join the waitlist — Cnvrted",
-  description:
-    "Tell the Cnvrted team about your workflow and join the early-access waitlist. You can also start with 40 free credits in the beta today.",
-  alternates: { canonical: "/early-access" },
-};
+  description: "Tell the Cnvrted team about your workflow and join the early-access waitlist. You can also start with 40 free credits in the beta today.",
+  path: "/early-access",
+});
 
 export default function EarlyAccessPage() {
   return (

@@ -1,13 +1,14 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { IllustratedLegalPage } from "@/components/illustrated/legal-page";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { Clause, Bullets, Mail, Caps } from "@/components/legal";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/terms" },
+export const metadata: Metadata = pageMetadata({
   title: "Terms & Conditions — Cnvrted",
   description: "The terms that govern your use of the Cnvrted platform.",
-};
+  path: "/terms",
+});
 
 const LAST_UPDATED = "28 September 2026";
 

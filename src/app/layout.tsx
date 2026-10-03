@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/seo";
 import { Raleway, Merriweather } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
@@ -17,11 +18,6 @@ const merriweather = Merriweather({
   style: "normal",
 });
 
-const SITE_URL = "https://www.cnvrted.com";
-const TITLE = "Cnvrted — Reach buyers the moment they're in-market";
-const DESCRIPTION =
-  "Cnvrted monitors the dark funnel — LinkedIn, Reddit, X, and the open web — for real-time buying signals, then scores accounts by intent so your team engages at exactly the right time.";
-
 // The CSP nonce is minted per request in middleware, so pages have to render
 // per request for Next to stamp it onto the inline bootstrap. Prerendered
 // HTML would carry a stale nonce and every script would be blocked.
@@ -29,8 +25,19 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: TITLE,
-  description: DESCRIPTION,
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   keywords: [
     "buying signals",
     "intent data",
@@ -51,14 +58,13 @@ export const metadata: Metadata = {
   creator: "Cnvrted",
   publisher: "Cnvrted",
   verification: { google: "a75IvLpxbTPDRrbkfayrxglnfwi7ukJnVAUkMWMiQ1k" },
-  alternates: { canonical: SITE_URL },
   icons: { icon: "/favicon.png", apple: "/favicon.png" },
   openGraph: {
     type: "website",
     siteName: "Cnvrted",
     url: SITE_URL,
-    title: TITLE,
-    description: DESCRIPTION,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
       {
         url: "/og-cover.png",
@@ -70,8 +76,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: TITLE,
-    description: DESCRIPTION,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ["/og-cover.png"],
   },
 };

@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
 import Link from "next/link";
@@ -7,11 +8,11 @@ import { IllustratedContact } from "@/components/illustrated/contact";
 import type { FAQItem } from "@/components/illustrated/faq";
 import { BOOKING_URL } from "@/lib/booking";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/contact" },
-  title: "Contact — Cnvrted",
+export const metadata: Metadata = pageMetadata({
+  title: "Contact Cnvrted — Book a Demo or Get Support",
   description: "Connect with Cnvrted. Book a 30-minute call, discuss your go-to-market goals, or reach our founding team directly.",
-};
+  path: "/contact",
+});
 
 const contactFAQs: FAQItem[] = [
   { question: "What can we discuss on a call?", answer: "Tell us about your business, ideal customers, and GTM goals. We’ll walk through how buying signals, AI qualification, and Cnvrted could fit your workflow." },

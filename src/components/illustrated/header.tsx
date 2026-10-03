@@ -10,7 +10,11 @@ import { assets } from "./assets";
 const links = [
   { label: "Help Center", href: "/help-center", icon: assets.home.imgInfo },
   { label: "Blogs", href: "/blogs", icon: assets.home.imgBookOpenText },
-  { label: "Case Studies", href: "/case-studies", icon: assets.home.imgBookOpenText },
+  {
+    label: "Case Studies",
+    href: "/case-studies",
+    icon: assets.home.imgBookOpenText,
+  },
   { label: "Learn", href: "/learn", icon: assets.home.imgBookOpenText },
   { label: "About Us", href: "/about", icon: assets.home.imgInfo },
   {
@@ -74,25 +78,27 @@ export function IllustratedHeader() {
             >
               Resources <ChevronDown size={17} aria-hidden="true" />
             </button>
-            {resourcesOpen && (
-              <div id="resource-links" className="design-resource-links">
-                {links.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setResourcesOpen(false)}
-                    {...(link.href.startsWith("https")
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                  >
-                    <span>
-                      <Image src={link.icon} alt="" width={20} height={20} />
-                    </span>
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            )}
+            <div
+              id="resource-links"
+              className="design-resource-links"
+              hidden={!resourcesOpen}
+            >
+              {links.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  onClick={() => setResourcesOpen(false)}
+                  {...(link.href.startsWith("https")
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
+                  <span>
+                    <Image src={link.icon} alt="" width={20} height={20} />
+                  </span>
+                  {link.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
         <a
@@ -113,35 +119,34 @@ export function IllustratedHeader() {
           {mobileOpen ? <X size={21} /> : <Menu size={21} />}
         </Button>
       </nav>
-      {mobileOpen && (
-        <nav
-          id="mobile-navigation"
-          className="design-mobile-nav"
-          aria-label="Mobile navigation"
-          onKeyDown={(event) => {
-            if (event.key === "Escape") {
-              setMobileOpen(false);
-              mobileTrigger.current?.focus();
-            }
-          }}
-        >
-          {[
-            { label: "Home", href: "/" },
-            { label: "Pricing", href: "/pricing" },
-            ...links,
-            { label: "Careers", href: "/careers" },
-            { label: "Contact", href: "/contact" },
-          ].map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-      )}
+      <nav
+        hidden={!mobileOpen}
+        id="mobile-navigation"
+        className="design-mobile-nav"
+        aria-label="Mobile navigation"
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            setMobileOpen(false);
+            mobileTrigger.current?.focus();
+          }
+        }}
+      >
+        {[
+          { label: "Home", href: "/" },
+          { label: "Pricing", href: "/pricing" },
+          ...links,
+          { label: "Careers", href: "/careers" },
+          { label: "Contact", href: "/contact" },
+        ].map((link) => (
+          <Link
+            key={link.label}
+            href={link.href}
+            onClick={() => setMobileOpen(false)}
+          >
+            {link.label}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }

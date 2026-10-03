@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -6,12 +7,11 @@ import { IllustratedShell } from "@/components/illustrated/shell";
 import { ClosingCTA } from "@/components/illustrated/closing-cta";
 import { BLOG_POSTS } from "@/lib/blog-posts";
 
-export const metadata: Metadata = {
-  title: "Learn — Cnvrted",
-  description:
-    "Learn how to build a GTM play, understand buying signals, and choose the right prospecting approach for your team.",
-  alternates: { canonical: "/learn" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Learn — Buying Signals & GTM Playbooks | Cnvrted",
+  description: "Learn how to build a GTM play, understand buying signals, and choose the right prospecting approach for your team.",
+  path: "/learn",
+});
 
 export default function LearnPage() {
   const guides = [...BLOG_POSTS].sort(

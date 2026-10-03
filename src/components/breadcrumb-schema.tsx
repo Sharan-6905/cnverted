@@ -1,6 +1,5 @@
-import { getNonce } from "@/lib/nonce";
-
-const SITE_URL = "https://www.cnvrted.com";
+import { JsonLd } from "@/components/json-ld";
+import { SITE_URL } from "@/lib/seo";
 
 interface Crumb {
   name: string;
@@ -10,12 +9,11 @@ interface Crumb {
 
 /**
  * Emits BreadcrumbList JSON-LD so Google can read the page's place in the
- * site hierarchy — one of the stronger technical signals for sitelinks.
+ * site hierarchy. Sitelinks themselves are selected automatically by Google.
  * Home is implicit; pass the rest of the trail down to (but not including
  * a path for) the current page.
  */
-export async function BreadcrumbSchema({ trail }: { trail: Crumb[] }) {
-  const nonce = await getNonce();
+export function BreadcrumbSchema({ trail }: { trail: Crumb[] }) {
   const items = [{ name: "Home", path: "/" }, ...trail];
   const schema = {
     "@context": "https://schema.org",
@@ -24,15 +22,11 @@ export async function BreadcrumbSchema({ trail }: { trail: Crumb[] }) {
       "@type": "ListItem",
       position: i + 1,
       name: item.name,
-      ...(item.path ? { item: `${SITE_URL}${item.path === "/" ? "" : item.path}` } : {}),
+      ...(item.path
+        ? { item: `${SITE_URL}${item.path === "/" ? "" : item.path}` }
+        : {}),
     })),
   };
 
-  return (
-    <script
-      nonce={nonce}
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-    />
-  );
+  return <JsonLd data={schema} />;
 }

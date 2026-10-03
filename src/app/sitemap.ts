@@ -3,12 +3,14 @@ import { BLOG_POSTS as blogPosts } from "@/lib/blog-posts";
 import { CAREER_ROLES } from "@/lib/careers";
 import { CASE_STUDIES } from "@/lib/case-studies";
 
-const SITE_URL = "https://www.cnvrted.com";
+import { SITE_URL } from "@/lib/seo";
+
+// Omit lastModified until actual editorial modification dates are tracked.
+// Build time and original publication dates are not modification timestamps.
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogs = blogPosts.map((post) => ({
     url: `${SITE_URL}/blogs/${post.slug}`,
-    lastModified: new Date(post.date),
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
@@ -16,40 +18,47 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: SITE_URL,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${SITE_URL}/about`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
       url: `${SITE_URL}/pricing`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.9,
     },
     {
       url: `${SITE_URL}/blogs`,
-      lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
     },
     ...blogs,
     { url: `${SITE_URL}/customers`, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${SITE_URL}/case-studies`, changeFrequency: "monthly", priority: 0.8 },
+    {
+      url: `${SITE_URL}/case-studies`,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
     { url: `${SITE_URL}/learn`, changeFrequency: "monthly", priority: 0.6 },
     ...CASE_STUDIES.map((story) => ({
       url: `${SITE_URL}/case-studies/${story.slug}`,
-      lastModified: new Date(story.date),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
-    { url: `${SITE_URL}/help-center`, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE_URL}/join-slack`, changeFrequency: "monthly", priority: 0.5 },
+    {
+      url: `${SITE_URL}/help-center`,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/join-slack`,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
     { url: `${SITE_URL}/careers`, changeFrequency: "weekly", priority: 0.7 },
     ...CAREER_ROLES.map((role) => ({
       url: `${SITE_URL}/careers/${role.slug}`,
@@ -58,25 +67,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     {
       url: `${SITE_URL}/contact`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${SITE_URL}/early-access`,
-      lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.6,
     },
     {
       url: `${SITE_URL}/privacy`,
-      lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
       url: `${SITE_URL}/terms`,
-      lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.3,
     },

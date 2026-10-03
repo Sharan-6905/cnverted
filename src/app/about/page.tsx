@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { BOOKING_URL } from "@/lib/booking";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
@@ -7,12 +8,11 @@ import { MapArtwork } from "@/components/illustrated/artwork";
 import { ScaledArtwork } from "@/components/illustrated/scaled-artwork";
 import { FoundingTeam } from "@/components/illustrated/contact";
 
-export const metadata: Metadata = {
-  title: "About Us — Cnvrted",
-  description:
-    "Meet the founding team building Cnvrted in Bengaluru, and learn why we believe better outbound starts with timing.",
-  alternates: { canonical: "/about" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "About Cnvrted — Meet the Founding Team",
+  description: "Meet the founding team building Cnvrted in Bengaluru, and learn why we believe better outbound starts with timing.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

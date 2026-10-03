@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { careerFAQs } from "@/components/illustrated/faq";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -13,13 +14,12 @@ type Props = { params: Promise<{ slug: string }> };
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const role = CAREER_ROLES.find((role) => role.slug === slug);
-  return {
-    title: role
-      ? `${role.title} — Careers at Cnvrted`
-      : "Role not found — Cnvrted",
-    description: role?.description,
-    alternates: { canonical: `/careers/${slug}` },
-  };
+  if (!role) notFound();
+  return pageMetadata({
+    title: `${role.title} — Careers at Cnvrted`,
+    description: role.description,
+    path: `/careers/${slug}`,
+  });
 }
 export default async function CareerDetailPage({ params }: Props) {
   const { slug } = await params;

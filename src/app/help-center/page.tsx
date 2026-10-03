@@ -1,3 +1,6 @@
+import { FAQSchema } from "@/components/faq-schema";
+import { HELP_ARTICLES } from "@/lib/help-center";
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
@@ -7,11 +10,11 @@ import type { FAQItem } from "@/components/illustrated/faq";
 import { BOOKING_URL } from "@/lib/booking";
 import { HELP_SUPPORT_EMAIL } from "@/lib/help-center";
 
-export const metadata: Metadata = {
-  alternates: { canonical: "/help-center" },
+export const metadata: Metadata = pageMetadata({
   title: "Help Center — Cnvrted",
   description: "Find answers about Cnvrted’s buying signals, AI qualification, ICP, plans, and credits. Search by topic or contact our team.",
-};
+  path: "/help-center",
+});
 
 const helpFAQs: FAQItem[] = [
   { question: "How do I get started?", answer: <>Visit the <a href="https://beta.cnvrted.com">Cnvrted beta</a> or <a href={BOOKING_URL}>book a demo</a> with our team.</> },
@@ -26,6 +29,7 @@ export default function HelpCenterPage() {
   return (
     <IllustratedShell className="design-help-page" faqItems={helpFAQs}>
       <BreadcrumbSchema trail={[{ name: "Help Center" }]} />
+      <FAQSchema path="/help-center" items={HELP_ARTICLES} />
       <IllustratedHelpCenter />
     </IllustratedShell>
   );

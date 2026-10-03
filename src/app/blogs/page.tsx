@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -7,12 +8,11 @@ import { IllustratedShell } from "@/components/illustrated/shell";
 import { IllustratedHero } from "@/components/illustrated/hero";
 import { assets } from "@/components/illustrated/assets";
 
-export const metadata: Metadata = {
-  title: "Blog — Cnvrted",
-  description:
-    "Insights on outbound, buying intent, and go-to-market from the Cnvrted team.",
-  alternates: { canonical: "/blogs" },
-};
+export const metadata: Metadata = pageMetadata({
+  title: "Cnvrted Blog — Buying Signals & GTM Guides",
+  description: "Insights on outbound, buying intent, and go-to-market from the Cnvrted team.",
+  path: "/blogs",
+});
 export default function BlogsPage() {
   return (
     <IllustratedShell faqItems={[]} className="design-blog-page">
@@ -20,7 +20,7 @@ export default function BlogsPage() {
       <IllustratedHero
         kind="blogs"
         title="Cnvrted Blogs"
-        description="Stay updated with all the latest news articles and founder’s notes from social media."
+        description="Practical guides to buying signals, sales prospecting, and go-to-market strategy, written by Dhruv Pradeep."
       />
       <section
         className="design-blog-list design-container"

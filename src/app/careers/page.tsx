@@ -1,3 +1,4 @@
+import { pageMetadata } from "@/lib/seo";
 import { careerFAQs } from "@/components/illustrated/faq";
 import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
@@ -5,12 +6,11 @@ import { IllustratedShell } from "@/components/illustrated/shell";
 import { IllustratedHero, DesignLink } from "@/components/illustrated/hero";
 import { RoleList } from "@/components/illustrated/role-list";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Careers — Cnvrted",
-  description:
-    "Join the Cnvrted team. Explore open roles in marketing, engineering, go-to-market and operations.",
-  alternates: { canonical: "/careers" },
-};
+  description: "Join the Cnvrted team. Explore open roles in marketing, engineering, go-to-market and operations.",
+  path: "/careers",
+});
 export default function CareersPage() {
   return (
     <IllustratedShell faqItems={careerFAQs} className="design-careers-page">

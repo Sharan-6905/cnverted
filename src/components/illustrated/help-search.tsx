@@ -20,7 +20,6 @@ export function HelpSearch() {
     return (!category || article.category === category) && terms.every((term) => text.includes(term));
   });
   const pageCount = Math.ceil(results.length / PAGE_SIZE);
-  const visible = results.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
   function changePage(next: number) {
     setPage(next);
@@ -73,8 +72,8 @@ export function HelpSearch() {
           {pageCount > 0 ? ` Page ${page + 1} of ${pageCount}.` : ""}
         </p>
         <div className="help-questions">
-          {visible.map((article) => (
-            <article className="help-question" key={article.id}>
+          {results.map((article, index) => (
+            <article className="help-question" key={article.id} hidden={index < page * PAGE_SIZE || index >= (page + 1) * PAGE_SIZE}>
               <h3>{article.question}</h3>
               <p>{article.answer}</p>
               {article.link && <Link className="help-article-link" href={article.link.href}>{article.link.label}</Link>}

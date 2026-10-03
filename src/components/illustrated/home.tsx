@@ -22,7 +22,7 @@ export function IllustratedHome() {
           <IllustratedHero
             kind="home"
             title={<LiveHeadline />}
-            description="Cnvrted turns signals across the web into high-intent leads, matched to your ICP and ranked by AI."
+            description="Cnvrted is an AI sales prospecting platform. Find public buying signals, match them to your ideal customer profile, and reach out with context."
           >
             <DesignLink href={BOOKING_URL} arrow>
               Book a demo

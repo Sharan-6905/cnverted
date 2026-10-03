@@ -19,6 +19,13 @@ const SECURITY_HEADERS = [
 ];
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      // Legacy URLs still present in Google's index.
+      { source: "/about.html", destination: "/about", permanent: true },
+      { source: "/why-cnvrted", destination: "/", permanent: true },
+    ];
+  },
   images: {
     qualities: [75, 95],
     dangerouslyAllowSVG: true,

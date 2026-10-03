@@ -7,6 +7,7 @@
 - Blogs have person authors, public profile links, visible publication dates and BlogPosting markup. Case studies have Article markup, cover images and breadcrumbs. JSON-LD preserves the CSP nonce and escapes HTML-sensitive characters.
 - The homepage explains what Cnvrted is in plain language. Its FAQ markup comes from the same answer text as the visible FAQ. Help Center markup describes the existing help answers; paginated answers remain in server HTML and are accessible through the existing controls.
 - Header menus remain in server HTML while closed, with `hidden` controlling visibility. Footer links include Pricing and Learn.
+- Indexed legacy URLs `/about.html` and `/why-cnvrted` permanently redirect to `/about` and `/`, respectively, instead of returning 404.
 - The sitemap lists 23 canonical public pages. It omits error/preview URLs and no longer substitutes build time or publication date for the last meaningful content modification date.
 - Existing robots rules permit Googlebot, Bingbot, OAI-SearchBot and ChatGPT-User. No special AI-only pages, invented testimonials, keyword stuffing or training-access changes are used.
 

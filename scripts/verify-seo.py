@@ -118,4 +118,17 @@ for path in ("/404", "/blogs/seo-audit-missing", "/case-studies/seo-audit-missin
 for agent in ("Googlebot", "Bingbot", "OAI-SearchBot"):
     status, html = fetch("/pricing", agent)
     assert status == 200 and "40 free credits" in html, (agent, "content unavailable")
+
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, request, response, code, message, headers, new_url):
+        return None
+
+opener = urllib.request.build_opener(NoRedirect)
+for old, current in (("/about.html", "/about"), ("/why-cnvrted", "/")):
+    try:
+        response = opener.open(BASE + old, timeout=30)
+    except urllib.error.HTTPError as error:
+        response = error
+    assert response.status == 308, (old, "missing permanent redirect")
+    assert urllib.parse.urlparse(response.headers["Location"]).path == current, old
 print(json.dumps({"base": BASE, "pages": rows, "result": f"PASS: {len(rows)} pages, structured data, crawlers, sitemap and four 404 routes"}, indent=2))

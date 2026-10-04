@@ -75,7 +75,9 @@ export function IllustratedContact({ nonce }: { nonce?: string }) {
   );
 }
 
-export function FoundingTeam() {
+export function FoundingTeam({
+  description = "Get to know the people behind Cnvrted.",
+}: { description?: string } = {}) {
   return (
     <section className="contact-founders" aria-labelledby="founders-title">
       <div className="contact-founders-glow" aria-hidden="true">
@@ -91,7 +93,7 @@ export function FoundingTeam() {
       </div>
       <div className="contact-founders-heading">
         <h2 id="founders-title">Meet the Founding Team</h2>
-        <p>Get to know the people behind Cnvrted.</p>
+        <p>{description}</p>
       </div>
       <div className="contact-founder-grid design-container">
         {foundingTeam.map((founder) => (

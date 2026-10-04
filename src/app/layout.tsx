@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/seo";
+import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION, DEFAULT_SOCIAL_IMAGE } from "@/lib/seo";
 import { Raleway, Merriweather } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
 import "./globals.css";
@@ -65,20 +65,14 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [
-      {
-        url: "/og-cover.png",
-        width: 1200,
-        height: 630,
-        alt: "Cnvrted — real-time buying signals radar",
-      },
-    ],
+    images: [DEFAULT_SOCIAL_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@cnvrted",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/og-cover.png"],
+    images: [{ url: DEFAULT_SOCIAL_IMAGE.url, alt: DEFAULT_SOCIAL_IMAGE.alt }],
   },
 };
 

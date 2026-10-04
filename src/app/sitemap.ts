@@ -3,14 +3,16 @@ import { BLOG_POSTS as blogPosts } from "@/lib/blog-posts";
 import { CAREER_ROLES } from "@/lib/careers";
 import { CASE_STUDIES } from "@/lib/case-studies";
 
-import { SITE_URL } from "@/lib/seo";
+import { SITE_URL, absoluteUrl } from "@/lib/seo";
 
-// Omit lastModified until actual editorial modification dates are tracked.
+// Only use lastModified where an actual editorial revision date is recorded.
 // Build time and original publication dates are not modification timestamps.
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogs = blogPosts.map((post) => ({
     url: `${SITE_URL}/blogs/${post.slug}`,
+    ...(post.updated ? { lastModified: post.updated } : {}),
+    images: [absoluteUrl(post.cover)],
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
@@ -23,6 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/about`,
+      lastModified: "2026-10-04",
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -43,9 +46,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    { url: `${SITE_URL}/learn`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/learn`, lastModified: "2026-10-04", changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/learn/buying-signals`, lastModified: "2026-10-04", changeFrequency: "monthly", priority: 0.7 },
     ...CASE_STUDIES.map((story) => ({
       url: `${SITE_URL}/case-studies/${story.slug}`,
+      images: [absoluteUrl(story.cover.src)],
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),

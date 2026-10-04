@@ -55,6 +55,9 @@ export function IllustratedHome() {
                 Turn buying signals into qualified leads, ranked and ready to
                 reach.
               </p>
+              <a className="marketing-text-link" href="/learn/buying-signals">
+                What makes a useful buying signal? <span aria-hidden="true">↗</span>
+              </a>
             </div>
             <LeadFlow />
           </section>

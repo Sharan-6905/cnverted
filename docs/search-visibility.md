@@ -31,3 +31,33 @@ At the start of this audit, the Page Indexing report (last updated 21 September 
 Google selects rankings and sitelinks automatically. Sitemap submission and an accepted indexing request do not mean a page has been indexed, and neither guarantees four or five branded results. FAQ markup describes content; this commercial site should not expect Google's government/health FAQ rich-result eligibility.
 
 References: [Google sitelinks](https://developers.google.com/search/docs/appearance/sitelinks), [sitemaps](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap), [AI search guidance](https://developers.google.com/search/docs/fundamentals/ai-optimization-guide), [OpenAI crawlers](https://developers.openai.com/api/docs/bots).
+
+## Follow-up audit — 4 October 2026
+
+- Added `/learn/buying-signals`: a server-rendered guide with a direct definition, four illustrative examples, qualification checklist, a worked outreach example, relevant FAQs, Article markup, and breadcrumbs. Linked it from the homepage, Learn, and both blog articles.
+- Corrected the Apollo comparison using Apollo’s current buying-intent and pricing documentation. Removed the inaccurate higher-tier-only intent claim, fixed-price range, unsupported conversion multiples, and guaranteed-buyer wording. Its actual revision date appears in the article, Open Graph metadata, JSON-LD, and sitemap.
+- Restored `/blog` → `/blogs` after Google URL Inspection listed the legacy route as a referring page.
+- The sitemap now contains 24 canonical pages and the existing blog/case-study cover images. Recorded editorial dates are used only where known; build timestamps are never used as freshness signals.
+- Allowed crawling of `/og-preview` so search engines can read its existing `noindex`. It remains excluded from the sitemap.
+- Updated Organization markup to `founder`, aligned the city with the About page, and limited identity links to the company’s LinkedIn and X profiles.
+- Added a public IndexNow ownership-verification file (excluded from indexing via `X-Robots-Tag`) and `scripts/submit-indexnow.py`. The script previews by default, checks the deployed key before submission, and accepts canonical paths only. It reports receipt without claiming indexing.
+- Expanded `scripts/verify-seo.py` to verify unique descriptions, image alt attributes, internal anchors, discoverability of the guide, FAQ markup against actual page text, article revision dates, the preview’s noindex, and access for PerplexityBot and Claude-SearchBot as well as Google, Bing, and OpenAI search crawlers.
+
+### External observations at the start of this follow-up
+
+- Google URL Inspection: homepage indexed; Googlebot smartphone fetched it successfully on 3 October 2026; Google-selected canonical matched the homepage. The live test on 4 October also said the page can be indexed.
+- Page Indexing report still shows six indexed pages, with a report date of 21 September; it is not a current live-page count.
+- Sitemaps report still showed “Couldn’t fetch” from 3 October. Independent requests returned HTTP 200 and valid XML for Googlebot, Bingbot, OAI-SearchBot, PerplexityBot, and Claude-SearchBot user agents. Simulating a user agent does not establish whether an actual crawler IP is blocked.
+- The connected Vercel account has no matching project or team access. Do not claim the hosting firewall/logs have been audited.
+- The PageSpeed API returned HTTP 429. No fresh Lighthouse score or Core Web Vitals pass is claimed.
+- Existing paid-plan credit allowance and action costs still need confirmation from the product owner. Keep the current contact-for-details copy; do not invent credit rules.
+
+After deployment, submit changed pages once:
+
+```sh
+python3 scripts/submit-indexnow.py / /about /learn /learn/buying-signals /blogs/apollo-vs-cnvrted /blogs/what-is-a-gtm-play --submit
+```
+
+An IndexNow HTTP 200 means the URLs were received; HTTP 202 means receipt with key validation pending. Neither confirms indexing. Google requests and IndexNow submissions are separate processes.
+
+Sources: [Apollo buying intent](https://www.apollo.io/product/buying-intent), [Apollo pricing](https://www.apollo.io/pricing), [IndexNow protocol](https://www.indexnow.org/documentation), [Google AI features](https://developers.google.com/search/docs/appearance/ai-features).

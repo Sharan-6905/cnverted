@@ -23,6 +23,7 @@ const nextConfig: NextConfig = {
     return [
       // Legacy URLs still present in Google's index.
       { source: "/about.html", destination: "/about", permanent: true },
+      { source: "/blog", destination: "/blogs", permanent: true },
       { source: "/why-cnvrted", destination: "/", permanent: true },
     ];
   },
@@ -35,6 +36,10 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       { source: "/:path*", headers: SECURITY_HEADERS },
+      {
+        source: "/indexnow-key.txt",
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+      },
       {
         // form endpoints should never sit in a shared or browser cache
         source: "/api/:path*",

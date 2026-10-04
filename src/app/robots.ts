@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/og-preview"],
+        // Let crawlers read the preview route's noindex directive.
       },
     ],
     sitemap: "https://www.cnvrted.com/sitemap.xml",

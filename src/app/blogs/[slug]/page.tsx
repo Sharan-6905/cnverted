@@ -40,6 +40,7 @@ export async function generateMetadata({
       description: post.excerpt,
       url: `https://www.cnvrted.com/blogs/${post.slug}`,
       publishedTime: post.date,
+      ...(post.updated ? { modifiedTime: post.updated } : {}),
       authors: [post.author.name],
       images: [{ url: post.cover, width: 1023, height: 437, alt: post.title }],
     },
@@ -62,6 +63,7 @@ async function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
     description: post.excerpt,
     image: `https://www.cnvrted.com${post.cover}`,
     datePublished: post.date,
+    ...(post.updated ? { dateModified: post.updated } : {}),
     author: {
       "@type": "Person",
       name: post.author.name,
@@ -109,6 +111,7 @@ export default async function BlogPostPage({
               <span>{post.category}</span>
               <span>{post.readingMinutes} min read</span>
               <time dateTime={post.date}>{formatPostDate(post.date)}</time>
+              {post.updated && <time dateTime={post.updated}>Updated {formatPostDate(post.updated)}</time>}
             </div>
             <div className="design-article-byline">
               <p>Written by <strong>{post.author.name}</strong></p>
@@ -134,6 +137,11 @@ export default async function BlogPostPage({
             />
             <div className="design-article-prose">
               {post.body.map((block, i) => <BlockRenderer key={i} block={block} />)}
+              <aside aria-label="Related reading">
+                <h2>Keep exploring</h2>
+                <p><Link href="/learn/buying-signals">Buying signals: examples and a qualification checklist</Link></p>
+                <p><Link href="/case-studies/from-cold-emails-to-warm-conversations">See one signal-led outreach campaign and its results</Link></p>
+              </aside>
             </div>
           </div>
         </article>

@@ -30,6 +30,8 @@ export interface BlogPost {
   dek: string;
   category: string;
   date: string; // ISO
+  /** Actual editorial revision date, never the build time. */
+  updated?: string;
   readingMinutes: number;
   author: Author;
   /** Path to the cover image under /public. */
@@ -42,31 +44,32 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "apollo-vs-cnvrted",
     title: "Cnvrted vs Apollo: Names vs. Buyers",
     excerpt:
-      "An honest comparison — where Apollo genuinely wins, where it structurally can't, and how to tell which one your team actually needs. Coverage is a bet on reach; timing is a bet on now.",
-    dek: "Where Apollo genuinely wins, where it structurally can't, and how to tell which your team needs. One is a bet on coverage; the other on timing.",
+      "Compare Apollo’s prospecting and intent tools with Cnvrted’s approach to public buying signals. Choose based on evidence, workflow, and your team’s needs.",
+    dek: "Compare the evidence behind a prospect, the workflow around it, and the tools your team needs to turn context into a conversation.",
     category: "Comparison",
     date: "2026-07-24",
+    updated: "2026-10-04",
     readingMinutes: 7,
     author: DHRUV_PRADEEP,
     cover: "/figma/blogs/apollo-comparison.png",
     body: [
       {
         type: "p",
-        text: "If you're running B2B outbound, you've used Apollo — or you've at least had the tab open. It's the default. So let's do the honest comparison, not the hit piece: where Apollo genuinely wins, where it structurally can't, and how to tell which one your team actually needs.",
+        text: "Choosing a prospecting tool starts with the work your team needs to do. This comparison looks at Apollo’s prospecting and engagement tools alongside Cnvrted’s approach to public buying signals. We build Cnvrted, so this is our perspective, with links to Apollo’s own documentation for its capabilities.",
       },
       {
         type: "p",
-        text: "Spoiler: they're not really the same category. And pretending Apollo has no strengths would be the fastest way to lose your trust, so we won't.",
+        text: "Both products can help a team decide whom to contact. The useful question is what evidence you can inspect and how that evidence fits your outreach workflow.",
       },
       { type: "h2", text: "What Apollo is genuinely great at" },
       { type: "p", text: "Apollo earned its place. Credit where it's due:" },
       {
         type: "p",
-        text: "**Coverage.** A database of 200M+ contacts and 30M+ companies is a serious asset. If your job is “find me every Director of Sales at a Series B SaaS company in North America,” Apollo will hand you a list in seconds. That breadth is real and it's hard to build.",
+        text: "**Prospecting.** Apollo offers contact and company search, enrichment, and filters for building prospect lists.",
       },
       {
         type: "p",
-        text: "**Consolidation.** For $49–119 per user per month, you get a contact database, email sequencing, a dialer, CRM sync, and an AI assistant under one roof. For an early-stage team that would otherwise stitch together four tools, that's a genuinely good deal, and the free tier is one of the most generous in the category.",
+        text: "**Consolidation.** Apollo combines prospecting with sequencing, calling, and integrations. Its [pricing page](https://www.apollo.io/pricing) describes the current plans, credit rules, and feature availability; check the billing period and limits when comparing costs.",
       },
       {
         type: "p",
@@ -76,19 +79,19 @@ export const BLOG_POSTS: BlogPost[] = [
         type: "p",
         text: "If your bottleneck is *coverage and consolidation* — you need volume, and you need it cheap and in one place — Apollo is a fine answer. Genuinely.",
       },
-      { type: "h2", text: "The one thing it structurally can't do" },
-      { type: "p", text: "Here's the line." },
+      { type: "h2", text: "What does the intent data tell you?" },
+      { type: "p", text: "Start by asking what you can verify about each prospect." },
       {
         type: "p",
-        text: "Apollo tells you **who exists**. At its best — on the higher tiers, where intent data is unlocked — it tells you which *topics* an account is broadly researching. That intent is **topic-level and account-level**: aggregated, gated by plan tier, and generally inferred from third-party web activity. It's a probability that *someone somewhere* at a company has been reading about your category.",
+        text: "Apollo’s [Buying Intent documentation](https://www.apollo.io/product/buying-intent) describes company-level topic signals and says intent is available on all plans, including free, with topic limits varying by plan. It should not be described as a tool with no intent data.",
       },
       {
         type: "p",
-        text: "What it does not tell you is: **which specific person is voicing that intent, in their own words, right now.**",
+        text: "For any tool, ask: can I inspect the source, identify the person or company involved, and see when the event happened? A topic-level signal and a direct request for a recommendation provide different kinds of evidence.",
       },
       {
         type: "p",
-        text: "That's not a knock on Apollo's execution — it's a limit of the model. A static database is a snapshot. It's updated, sure, but its native question is *“who fits?”* — not *“who's moving today?”* Topic-level intent is a blurry heat map of a building. It doesn't point at the person standing at the window waving.",
+        text: "Evaluate that evidence against your own product. An account researching a topic may be relevant, but it does not establish who controls the budget or whether a purchase is planned.",
       },
       { type: "h2", text: "Coverage vs. timing: two different bets" },
       {
@@ -105,7 +108,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         type: "p",
-        text: "One is a directory. The other is a live feed. Apollo answers *who could buy*. Cnvrted answers *who's buying* — the trigger you actually build a play around.",
+        text: "Cnvrted’s aim is to connect the signal, its source, and your ICP in one research workflow. A signal is a reason to investigate; it does not prove someone will buy.",
       },
       { type: "h2", text: "So which do you need?" },
       { type: "p", text: "Honestly? It depends on what your bottleneck is." },
@@ -119,22 +122,22 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         type: "p",
-        text: "And plenty of teams run both: Apollo for the reach and the send, Cnvrted for the trigger that tells you *when* the send is worth making. A signal that fires into an Apollo sequence is worth ten cold ones.",
+        text: "If you already use an outreach platform, assess whether Cnvrted adds useful research context to that workflow. [Book a conversation with our team](/contact) to confirm the integrations and handoffs you need.",
       },
-      { type: "h2", text: "The honest bottom line" },
+      { type: "h2", text: "How to make the choice" },
       {
         type: "p",
-        text: "Apollo isn't bad. It's the best version of a static-database, coverage-first tool, and that model has a real place in a GTM stack.",
+        text: "Compare both tools with the same small set of target accounts. Check source quality, relevance, missing information, and the time your team spends verifying each lead.",
       },
       {
         type: "p",
-        text: "But coverage was never the hard part of modern selling. *Timing* is. The buyer who's moving right now converts at a multiple of the buyer who merely fits your ICP — and no amount of database size tells you which is which. That takes listening to the market as it speaks, in real time, in the open.",
+        text: "Measure replies, qualified conversations, and time spent in your own trial. We do not have a controlled, head-to-head benchmark showing that one platform produces a particular conversion multiple.",
       },
-      { type: "p", text: "Apollo gives you names. We give you buyers." },
-      { type: "p", text: "**Buyers, not names.**" },
+      { type: "p", text: "Choose the workflow that gives your team a defensible reason to reach out." },
+      { type: "p", text: "**Better evidence. More relevant conversations.**" },
       {
         type: "cta",
-        text: "Cnvrted surfaces real-time buying-intent signals from LinkedIn, Reddit, and X — so your outbound fires on people who are actually moving, not names on a list. [See what's firing in your market.](https://cnvrted.com)",
+        text: "[Explore Cnvrted’s plans](/pricing), [learn how to qualify buying signals](/learn/buying-signals), or [see a customer campaign](/case-studies/from-cold-emails-to-warm-conversations).",
       },
     ],
   },

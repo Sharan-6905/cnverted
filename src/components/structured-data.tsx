@@ -10,7 +10,7 @@ const organizationSchema = {
   logo: `${SITE_URL}/cnvrted-logo.png`,
   description:
     "Cnvrted monitors the open web for real-time buying signals, scores accounts by intent, and helps sales teams reach buyers before the competition.",
-  founders: [
+  founder: [
     {
       "@type": "Person",
       name: "Dhruv Pradeep",
@@ -32,13 +32,12 @@ const organizationSchema = {
   ],
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Bangalore",
+    addressLocality: "Bengaluru",
     addressCountry: "IN",
   },
   sameAs: [
     "https://www.linkedin.com/company/cnvrted",
     "https://x.com/cnvrted",
-    "https://discord.gg/xChmhfQx4",
   ],
   contactPoint: {
     "@type": "ContactPoint",

@@ -38,6 +38,16 @@ export default function LearnPage() {
           next GTM play.
         </p>
       </header>
+      <aside className="resource-help design-container">
+        <div>
+          <span className="marketing-eyebrow">Start here</span>
+          <h2>What makes a buying signal useful?</h2>
+          <p>Four examples, a five-step qualification checklist, and a worked outreach example.</p>
+        </div>
+        <Link className="marketing-text-link" href="/learn/buying-signals">
+          Read the field guide <span aria-hidden="true">↗</span>
+        </Link>
+      </aside>
       <div className="resource-grid design-container">
         {guides.map((post) => (
           <article className="resource-card" key={post.slug}>

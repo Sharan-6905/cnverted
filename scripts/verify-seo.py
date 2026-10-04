@@ -28,10 +28,20 @@ class Page(HTMLParser):
         self.meta, self.links, self.jsonld = {}, [], []
         self.title, self.canonical, self.h1_count = "", None, 0
         self.in_title, self.in_json, self.buffer = False, False, ""
+        self.in_script, self.in_style = False, False
+        self.text, self.ids, self.images = [], set(), []
         self.feed(html)
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
+        if attrs.get("id"):
+            self.ids.add(attrs["id"])
+        if tag == "img":
+            self.images.append(attrs)
+        if tag == "script":
+            self.in_script = True
+        if tag == "style":
+            self.in_style = True
         if tag == "meta":
             self.meta[attrs.get("name", attrs.get("property"))] = attrs.get("content", "")
         if tag == "link" and attrs.get("rel") == "canonical":
@@ -46,12 +56,18 @@ class Page(HTMLParser):
             self.in_json, self.buffer = True, ""
 
     def handle_data(self, data):
+        if not self.in_script and not self.in_style:
+            self.text.append(data)
         if self.in_title:
             self.title += data
         if self.in_json:
             self.buffer += data
 
     def handle_endtag(self, tag):
+        if tag == "script":
+            self.in_script = False
+        if tag == "style":
+            self.in_style = False
         if tag == "title":
             self.in_title = False
         if tag == "script" and self.in_json:
@@ -84,7 +100,7 @@ def audit(path):
     assert page.meta.get("twitter:image", "").startswith(CANONICAL), (path, "missing X image")
     assert page.jsonld, (path, "missing structured data")
     types = [node.get("@type") for node in page.jsonld]
-    if path.startswith(("/blogs/", "/case-studies/")):
+    if path.startswith(("/blogs/", "/case-studies/", "/learn/")):
         assert "Article" in types or "BlogPosting" in types, (path, "missing article")
         assert "BreadcrumbList" in types, (path, "missing breadcrumb")
     if path in ("/", "/pricing"):
@@ -98,24 +114,55 @@ def audit(path):
     if path == "/help-center":
         assert "FAQPage" in types
         assert "Which AI models does Cnvrted work with?" in html, "Paginated help missing from HTML"
-    return {"path": path, "title": page.title, "status": status}
+    assert all("alt" in image for image in page.images), (path, "image missing alt attribute")
+    visible_text = " ".join("".join(page.text).split())
+    for node in page.jsonld:
+        if node.get("@type") == "FAQPage":
+            for item in node["mainEntity"]:
+                for value in (item["name"], item["acceptedAnswer"]["text"]):
+                    assert " ".join(value.split()) in visible_text, (path, "FAQ schema differs from rendered text", value)
+    if path == "/blogs/apollo-vs-cnvrted":
+        article = next(node for node in page.jsonld if node.get("@type") == "BlogPosting")
+        assert article.get("dateModified") == "2026-10-04"
+        assert "Updated" in visible_text
+        assert "https://www.apollo.io/product/buying-intent" in page.links
+    return {"path": path, "title": page.title, "status": status, "page": page}
 
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
     rows = list(pool.map(audit, paths))
 assert len({row["title"] for row in rows}) == len(rows), "Duplicate page titles"
+pages = {row["path"]: row.pop("page") for row in rows}
+assert len({page.meta["description"] for page in pages.values()}) == len(pages), "Duplicate descriptions"
+for path, page in pages.items():
+    for href in page.links:
+        if not href:
+            continue
+        target = urllib.parse.urlparse(urllib.parse.urljoin(CANONICAL + path, href))
+        if target.netloc != urllib.parse.urlparse(CANONICAL).netloc:
+            continue
+        destination = target.path or "/"
+        if destination in pages and target.fragment:
+            assert urllib.parse.unquote(target.fragment) in pages[destination].ids, (path, "broken anchor", href)
+        elif destination not in pages:
+            assert destination.startswith("/images/"), (path, "internal link missing from sitemap", href)
+for source in ("/", "/learn", "/blogs/apollo-vs-cnvrted", "/blogs/what-is-a-gtm-play"):
+    assert "/learn/buying-signals" in pages[source].links, (source, "guide not discoverable")
 status, robots = fetch("/robots.txt")
 assert status == 200
 parser = urllib.robotparser.RobotFileParser()
 parser.parse(robots.splitlines())
-for agent in ("Googlebot", "Bingbot", "OAI-SearchBot", "ChatGPT-User"):
+for agent in ("Googlebot", "Bingbot", "OAI-SearchBot", "ChatGPT-User", "PerplexityBot", "Claude-SearchBot"):
     assert all(parser.can_fetch(agent, CANONICAL + path) for path in paths), agent
+assert parser.can_fetch("Googlebot", CANONICAL + "/og-preview"), "Crawler cannot read preview noindex"
+status, html = fetch("/og-preview")
+assert status == 200 and "noindex" in Page(html).meta.get("robots", ""), "Preview is indexable"
 for path in ("/404", "/blogs/seo-audit-missing", "/case-studies/seo-audit-missing", "/careers/seo-audit-missing"):
     status, html = fetch(path)
     page = Page(html)
     assert status == 404 and "noindex" in page.meta.get("robots", ""), (path, "bad 404")
     assert not page.canonical, (path, "404 has unrelated canonical")
-for agent in ("Googlebot", "Bingbot", "OAI-SearchBot"):
+for agent in ("Googlebot", "Bingbot", "OAI-SearchBot", "PerplexityBot", "Claude-SearchBot"):
     status, html = fetch("/pricing", agent)
     assert status == 200 and "40 free credits" in html, (agent, "content unavailable")
 
@@ -124,7 +171,7 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 opener = urllib.request.build_opener(NoRedirect)
-for old, current in (("/about.html", "/about"), ("/why-cnvrted", "/")):
+for old, current in (("/about.html", "/about"), ("/why-cnvrted", "/"), ("/blog", "/blogs")):
     try:
         response = opener.open(BASE + old, timeout=30)
     except urllib.error.HTTPError as error:

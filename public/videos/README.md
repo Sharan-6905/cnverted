@@ -39,4 +39,10 @@ Both final files decode all 193 frames without errors and place the MP4 `moov` a
 
 ## Responsive delivery — 4 October 2026
 
-The homepage now displays a responsive, optimized first-frame image while critical page resources load. Video sources are attached only after load, when the hero is visible and motion/data-saving preferences allow playback. Phones at up to 767 CSS pixels use the unchanged 1.1 MiB 720p source; larger screens retain the enhanced HEVC/H.264 version. Playback pauses offscreen and in hidden tabs. The image remains as the reduced-motion, data-saving and autoplay-failure fallback.
+The homepage now displays a responsive, optimized first-frame image while critical page resources load. Video sources are attached only after load, when the hero is visible and motion/data-saving preferences allow playback. Phones at up to 767 CSS pixels use the unchanged 1.1 MiB 720p source; screens from 768 to 1920 CSS pixels use a 1.83 MiB 1080p version derived from the enhanced master; wider displays retain the enhanced 4K HEVC/H.264 version. Playback pauses offscreen and in hidden tabs. The image remains as the reduced-motion, data-saving and autoplay-failure fallback.
+
+The 1080p version preserves all 193 frames and the 8.04-second timing. It uses Lanczos downsampling from the enhanced 4K H.264 master, H.264 CRF 25 / slow, YUV 4:2:0, BT.709, no audio, and fast-start MP4 metadata. A complete decode succeeds. Reproduce with FFmpeg:
+
+```sh
+ffmpeg -i home-hero-detail-4k.mp4 -vf scale=1920:1080:flags=lanczos:out_color_matrix=bt709 -c:v libx264 -crf 25 -preset slow -pix_fmt yuv420p -color_primaries bt709 -color_trc bt709 -colorspace bt709 -color_range tv -g 240 -sc_threshold 0 -an -movflags +faststart home-hero-detail-1080p.mp4
+```

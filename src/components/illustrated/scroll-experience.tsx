@@ -138,10 +138,8 @@ export function HomeScrollExperience() {
             "--story-heading-opacity",
             `${headingEntrance}`,
           );
-          opening.style.setProperty(
-            "--story-flow-opacity",
-            `${0.65 + flowEntrance * 0.35}`,
-          );
+          // Keep small diagram labels readable throughout the scroll transition.
+          opening.style.setProperty("--story-flow-opacity", "1");
           opening.style.setProperty(
             "--story-flow-y",
             `${(1 - flowEntrance) * 55 * Math.max(0.5, amount)}px`,

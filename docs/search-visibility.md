@@ -74,3 +74,12 @@ Targeted fixes preserve the visual design:
 - Improved low-contrast demo labels and stopped reducing the entire offscreen product canvas to 15% opacity. Its movement animation remains.
 - Production build and the expanded 24-page SEO audit pass. Mobile preview has no horizontal overflow, plays the 720p loop, and reports no console errors.
 - Search Console manual actions and security issues both report “No issues detected.”
+
+### Post-deployment checks and submissions
+
+- The live 24-page SEO audit passed on `https://www.cnvrted.com`. Production build passed.
+- [Mobile Lighthouse retest](https://pagespeed.web.dev/analysis/https-www-cnvrted-com/o6yzs6yffe?hl=en_GB&form_factor=mobile): Performance 83 (from 70), Accessibility 96, Best Practices 96, SEO 100. Lab LCP improved from 7.7 to 3.8 s; TBT from 180 to 120 ms; CLS remained 0. This is a single lab comparison, not a claim that rolling field Core Web Vitals have passed. The prior hydration error was absent.
+- Desktop in the same report scored Performance 87, SEO 100, with 0.6 s lab LCP. It still reported a failed fetch of the large 4K video. A subsequent 1.83 MiB 1080p encode serves standard laptop/desktop widths; phones use the 1.1 MiB original and displays wider than 1920 CSS pixels retain 4K.
+- Resubmitted the existing `sitemap.xml` once. Google confirmed successful submission, but the separate report still displayed “Couldn’t fetch.” A fresh Google live inspection at 08:58 on 4 October fetched successfully and displayed the actual XML, including the revised dates and image entries. The successful live fetch does not prove the sitemap pipeline has processed the file.
+- Indexing requests for `/learn/buying-signals` and `/blogs/apollo-vs-cnvrted` were accepted into Google's priority crawl queue. Neither was indexed at inspection time. `/about` was already indexed with one valid breadcrumb item; its reindex request encountered a transient Google submission error.
+- IndexNow returned HTTP 202 for six changed URLs: homepage, About, Learn, buying-signals guide, and both blog articles. Verification was pending; indexing is not confirmed.

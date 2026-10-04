@@ -27,9 +27,11 @@ export function HomeHeroVideo() {
       if (!element.getAttribute("src")) {
         element.src = window.matchMedia("(max-width: 767px)").matches
           ? "/videos/home-hero-loop.mp4"
-          : element.canPlayType('video/mp4; codecs="hvc1"')
-            ? "/videos/home-hero-detail-4k-hevc.mp4"
-            : "/videos/home-hero-detail-4k.mp4";
+          : window.matchMedia("(max-width: 1920px)").matches
+            ? "/videos/home-hero-detail-1080p.mp4"
+            : element.canPlayType('video/mp4; codecs="hvc1"')
+              ? "/videos/home-hero-detail-4k-hevc.mp4"
+              : "/videos/home-hero-detail-4k.mp4";
       }
       if (
         !element.paused &&

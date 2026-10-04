@@ -8,8 +8,7 @@ const organizationSchema = {
   name: "Cnvrted",
   url: SITE_URL,
   logo: `${SITE_URL}/cnvrted-logo.png`,
-  description:
-    "Cnvrted monitors the open web for real-time buying signals, scores accounts by intent, and helps sales teams reach buyers before the competition.",
+  description: SITE_DESCRIPTION,
   founder: [
     {
       "@type": "Person",
@@ -54,8 +53,7 @@ const websiteSchema = {
   inLanguage: "en",
   name: "Cnvrted",
   url: SITE_URL,
-  description:
-    "Real-time buying signal intelligence for B2B sales teams. Monitor LinkedIn, Reddit, X, job boards, and funding news for intent signals.",
+  description: SITE_DESCRIPTION,
   publisher: { "@id": `${SITE_URL}/#organization` },
 };
 

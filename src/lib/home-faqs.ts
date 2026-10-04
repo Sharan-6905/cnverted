@@ -3,7 +3,7 @@ export const HOME_FAQS = [
   {
     question: "What is Cnvrted?",
     answer:
-      "Cnvrted is a B2B sales intelligence platform for founders and sales teams. It finds public buying signals, matches prospects to your ideal customer profile, and brings the source and context into your outreach.",
+      "Cnvrted is an AI go-to-market (GTM) intelligence platform for founders and sales teams. It finds public buying signals, matches prospects to your ideal customer profile, and brings the source and context into your outreach.",
   },
   {
     question: "What counts as a buying signal?",

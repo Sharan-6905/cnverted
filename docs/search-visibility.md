@@ -61,3 +61,16 @@ python3 scripts/submit-indexnow.py / /about /learn /learn/buying-signals /blogs/
 An IndexNow HTTP 200 means the URLs were received; HTTP 202 means receipt with key validation pending. Neither confirms indexing. Google requests and IndexNow submissions are separate processes.
 
 Sources: [Apollo buying intent](https://www.apollo.io/product/buying-intent), [Apollo pricing](https://www.apollo.io/pricing), [IndexNow protocol](https://www.indexnow.org/documentation), [Google AI features](https://developers.google.com/search/docs/appearance/ai-features).
+
+### Performance follow-up
+
+The PageSpeed web interface worked despite the API rate limit. The initial mobile Lighthouse report on 4 October scored Performance 70, Accessibility 96, Best Practices 92, and SEO 100. Lab LCP was 7.7 s; its rolling CrUX field LCP was 3.4 s. The Search Console Core Web Vitals report separately had insufficient usage data. These are different reports, not a Core Web Vitals pass.
+
+Targeted fixes preserve the visual design:
+
+- Phones use the existing 1.1 MiB hero loop instead of downloading the 11–18 MiB 4K upscale. Animation loads after critical resources and pauses outside the viewport; reduced-motion and data-saving users keep the poster.
+- The hero poster and client logos use responsive image optimization; unused legacy font families are no longer preloaded globally.
+- Editorial dates explicitly use UTC so server and client do not disagree on calendar dates in US time zones. The date formatter was checked in UTC, America/Los_Angeles, and Asia/Kolkata.
+- Improved low-contrast demo labels and stopped reducing the entire offscreen product canvas to 15% opacity. Its movement animation remains.
+- Production build and the expanded 24-page SEO audit pass. Mobile preview has no horizontal overflow, plays the 720p loop, and reports no console errors.
+- Search Console manual actions and security issues both report “No issues detected.”

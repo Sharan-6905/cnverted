@@ -36,3 +36,7 @@ Confirm the bitstream color metadata as well as the MP4 metadata. The final file
 ### Local verification
 
 Both final files decode all 193 frames without errors and place the MP4 `moov` atom before `mdat` for fast start. The final H.264 file is 18.17 MiB; HEVC is 11.47 MiB. The H.264 fallback was verified playing at 3840×2160 in the local browser, with the matching poster loaded, muted looping playback, and no console errors. TypeScript and whitespace checks pass. The previous video assets are unchanged. Verification was completed locally before publication.
+
+## Responsive delivery — 4 October 2026
+
+The homepage now displays a responsive, optimized first-frame image while critical page resources load. Video sources are attached only after load, when the hero is visible and motion/data-saving preferences allow playback. Phones at up to 767 CSS pixels use the unchanged 1.1 MiB 720p source; larger screens retain the enhanced HEVC/H.264 version. Playback pauses offscreen and in hidden tabs. The image remains as the reduced-motion, data-saving and autoplay-failure fallback.

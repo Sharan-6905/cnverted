@@ -8,6 +8,7 @@ const raleway = Raleway({
   variable: "--font-poppins",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  preload: false,
 });
 
 // Editorial serif used for every heading site-wide.
@@ -16,6 +17,7 @@ const merriweather = Merriweather({
   subsets: ["latin"],
   weight: ["400", "700"],
   style: "normal",
+  preload: false,
 });
 
 // The CSP nonce is minted per request in middleware, so pages have to render

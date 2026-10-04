@@ -38,6 +38,7 @@ const spartan = League_Spartan({
   subsets: ["latin"],
   variable: "--font-spartan",
   weight: "400",
+  preload: false,
 });
 
 export function IllustratedShell({

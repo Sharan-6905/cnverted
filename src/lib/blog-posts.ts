@@ -287,6 +287,8 @@ export function getPostBySlug(slug: string): BlogPost | undefined {
 
 export function formatPostDate(iso: string): string {
   return new Date(iso).toLocaleDateString("en-US", {
+    // Editorial dates are calendar dates, independent of a reader's time zone.
+    timeZone: "UTC",
     year: "numeric",
     month: "long",
     day: "numeric",

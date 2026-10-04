@@ -144,7 +144,7 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  color: #8c8c87;
+  color: #6b6b65;
   white-space: nowrap;
 }
 .product-workspace {
@@ -831,7 +831,7 @@
   display: flex;
   align-items: center;
   gap: 7px;
-  color: #8b9484;
+  color: #606957;
   text-transform: uppercase;
   font-size: 9px;
   font-weight: 500;
@@ -853,7 +853,7 @@
   font-size: 9px;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
-  color: #a4ab9b;
+  color: #68705f;
   letter-spacing: 0.6px;
 }
 .product-run-status {
@@ -934,7 +934,7 @@
 }
 .product-demo .product-demo-disclaimer {
   margin-top: 6px;
-  color: #a0a197;
+  color: #6d6e63;
   font-size: 10px;
 }
 .product-mobile-narration,
@@ -1558,7 +1558,7 @@
     border: 1px solid transparent;
     border-radius: 9px;
     font-size: 12px;
-    color: #8a9182;
+    color: #626b5a;
     transition:
       color 0.2s,
       background 0.2s,

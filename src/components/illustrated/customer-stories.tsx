@@ -3,6 +3,7 @@ import { AnimatedCard } from "@/components/ui/feature-block-animated-card";
 import { SideStoryCarousel } from "./side-story-carousel";
 import "./customer-stories.css";
 import Link from "next/link";
+import Image from "next/image";
 
 import { CUSTOMERS } from "@/lib/customers";
 
@@ -52,7 +53,7 @@ export function ClientProof() {
           label: client.name,
           className: "client-glass-tile",
           icon: (
-            <img
+            <Image
               className={
                 client.width / client.height > 1.7
                   ? "client-logo-wide"
@@ -62,7 +63,7 @@ export function ClientProof() {
               alt={client.name}
               width={client.width}
               height={client.height}
-              decoding="async"
+              sizes={client.width / client.height > 1.7 ? "116px" : "112px"}
             />
           ),
         }))}

@@ -98,7 +98,7 @@
   }
 
   [data-scroll-kind="canvas"][data-scroll-reveal="pending"] {
-    opacity: 0.15;
+    opacity: 1;
     transform: translate3d(0, 24px, 0) scale(0.976);
     transform-origin: center top;
   }

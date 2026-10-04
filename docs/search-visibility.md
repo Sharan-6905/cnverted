@@ -90,3 +90,31 @@ Targeted fixes preserve the visual design:
 - Crawl stats (last updated 2 October) report 954 requests over 90 days, 96% HTTP 200, a 142 ms average response time, and no host problems.
 - Historical 404 examples mainly included old `/favicon.ico` and `/favicon.svg` requests. Both now permanently redirect to the current 256×256 `/favicon.png`, and the audit checks these redirects. The page metadata already links the PNG directly.
 - An old `/llms.txt` probe was also listed. That nonstandard file is not required for Google or OpenAI search eligibility; the visible HTML guide, crawlable links, structured data, and sitemap remain the authoritative sources.
+
+## Final verified state — 4 October 2026
+
+The final live audit passes all 24 sitemap pages, metadata and JSON-LD checks, internal links/anchors, crawler rules, legacy redirects, and the four noindex 404 checks. The production build passes.
+
+[Final PageSpeed report](https://pagespeed.web.dev/analysis/https-www-cnvrted-com/15i0kjhh3c?hl=en_GB&form_factor=mobile), captured at 09:03 local time:
+
+| Lighthouse lab metric | Mobile | Desktop |
+| --- | --- | --- |
+| Performance | 80 | 97 |
+| Accessibility | 96 | 97 |
+| Best Practices | 96 | 96 |
+| SEO | 100 | 100 |
+| LCP | 3.8 s | 0.9 s |
+| Total blocking time | 220 ms | 30 ms |
+| CLS | 0 | 0 |
+
+The desktop video network error and React hydration error are absent in the final report. Mobile performance varied between 80 and 83 across the two retests; use the latest result, not the best one. Before these fixes, mobile performance was 70 and lab LCP was 7.7 s. Lighthouse is a lab sample, not a guarantee of real-user performance or rankings.
+
+Google accepted indexing requests for the homepage, About (successful on one retry), the new buying-signals guide, and the revised Apollo comparison. Homepage and About were already indexed; the guide and comparison were not yet indexed when inspected. IndexNow accepted the final homepage update with HTTP 200 after initially receiving the six changed URLs with HTTP 202.
+
+Remaining external or longer-term work:
+
+- The sitemap report still says “Couldn’t fetch” after successful resubmission, even though Google's live tool fetched the actual XML successfully. Recheck after processing; if the discrepancy persists, inspect hosting request/firewall logs with the co-founder's Vercel access. The currently connected account cannot access that project. Do not repeatedly delete or resubmit the sitemap.
+- Rolling field Core Web Vitals still fail in PageSpeed. Mobile lab LCP also has room to improve. Further work should profile CSS delivery and initial main-thread work while preserving the existing interactions; do not present the technical SEO score as a performance pass.
+- Small animated-diagram contrast and sprite aspect-ratio rounding warnings remain in Lighthouse. The 256×171 optimized sprite is displayed at a 3:2 ratio; this is a minor rounding difference, not the earlier runtime failure.
+- Confirm paid-plan allowances and credit costs with the product owner before publishing specific numbers.
+- Search rankings, sitelinks, and AI citations are selected by the platforms. No four-to-five-result promise, FAQ rich-result promise, or indexing deadline is made.

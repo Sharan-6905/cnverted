@@ -83,3 +83,10 @@ Targeted fixes preserve the visual design:
 - Resubmitted the existing `sitemap.xml` once. Google confirmed successful submission, but the separate report still displayed “Couldn’t fetch.” A fresh Google live inspection at 08:58 on 4 October fetched successfully and displayed the actual XML, including the revised dates and image entries. The successful live fetch does not prove the sitemap pipeline has processed the file.
 - Indexing requests for `/learn/buying-signals` and `/blogs/apollo-vs-cnvrted` were accepted into Google's priority crawl queue. Neither was indexed at inspection time. `/about` was already indexed with one valid breadcrumb item; its reindex request encountered a transient Google submission error.
 - IndexNow returned HTTP 202 for six changed URLs: homepage, About, Learn, buying-signals guide, and both blog articles. Verification was pending; indexing is not confirmed.
+
+### Crawl diagnostics and AI visibility controls
+
+- Google's Search generative AI control inherits **Include** from the domain default. No settings change was needed. Inclusion enables eligibility for AI Overviews and AI Mode; it does not guarantee selection or citation.
+- Crawl stats (last updated 2 October) report 954 requests over 90 days, 96% HTTP 200, a 142 ms average response time, and no host problems.
+- Historical 404 examples mainly included old `/favicon.ico` and `/favicon.svg` requests. Both now permanently redirect to the current 256×256 `/favicon.png`, and the audit checks these redirects. The page metadata already links the PNG directly.
+- An old `/llms.txt` probe was also listed. That nonstandard file is not required for Google or OpenAI search eligibility; the visible HTML guide, crawlable links, structured data, and sitemap remain the authoritative sources.

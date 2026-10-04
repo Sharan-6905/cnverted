@@ -24,6 +24,8 @@ const nextConfig: NextConfig = {
       // Legacy URLs still present in Google's index.
       { source: "/about.html", destination: "/about", permanent: true },
       { source: "/blog", destination: "/blogs", permanent: true },
+      { source: "/favicon.ico", destination: "/favicon.png", permanent: true },
+      { source: "/favicon.svg", destination: "/favicon.png", permanent: true },
       { source: "/why-cnvrted", destination: "/", permanent: true },
     ];
   },

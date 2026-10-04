@@ -171,7 +171,7 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 opener = urllib.request.build_opener(NoRedirect)
-for old, current in (("/about.html", "/about"), ("/why-cnvrted", "/"), ("/blog", "/blogs")):
+for old, current in (("/about.html", "/about"), ("/why-cnvrted", "/"), ("/blog", "/blogs"), ("/favicon.ico", "/favicon.png"), ("/favicon.svg", "/favicon.png")):
     try:
         response = opener.open(BASE + old, timeout=30)
     except urllib.error.HTTPError as error:

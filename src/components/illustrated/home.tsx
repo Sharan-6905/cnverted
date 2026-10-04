@@ -1,4 +1,4 @@
-import { BOOKING_URL } from "@/lib/booking";
+import { DEMO_PATH } from "@/lib/booking";
 import { IllustratedHero, DesignLink } from "./hero";
 import {
   BrainArtwork,
@@ -24,7 +24,7 @@ export function IllustratedHome() {
             title={<LiveHeadline />}
             description="Find the companies that fit, understand why now, and turn that context into your next outreach."
           >
-            <DesignLink href={BOOKING_URL} arrow>
+            <DesignLink href={DEMO_PATH} arrow>
               Book a demo
             </DesignLink>
           </IllustratedHero>
@@ -81,7 +81,7 @@ export function IllustratedHome() {
                 buying signals, and give your team the context to start the
                 right conversation.
               </p>
-              <DesignLink href={BOOKING_URL} arrow>
+              <DesignLink href={DEMO_PATH} arrow>
                 Book a demo
               </DesignLink>
             </div>

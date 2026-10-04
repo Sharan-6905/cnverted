@@ -3,6 +3,7 @@ import Image from "next/image";
 import { assets } from "./assets";
 import { ScaledArtwork } from "./scaled-artwork";
 import { FooterSpotlight } from "./footer-spotlight";
+import { DEMO_PATH } from "@/lib/booking";
 
 const columns = [
   {
@@ -28,6 +29,7 @@ const columns = [
   {
     title: "Company",
     links: [
+      ["Book a demo", DEMO_PATH],
       ["Terms & Conditions", "/terms"],
       ["Privacy Policy", "/privacy"],
       ["Contact", "/contact"],

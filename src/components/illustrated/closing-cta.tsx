@@ -1,4 +1,4 @@
-import { BOOKING_URL } from "@/lib/booking";
+import { DEMO_PATH } from "@/lib/booking";
 import { DesignLink } from "./hero";
 
 export function ClosingCTA() {
@@ -18,7 +18,7 @@ export function ClosingCTA() {
         <DesignLink href="https://beta.cnvrted.com" arrow>
           Start free
         </DesignLink>
-        <DesignLink href={BOOKING_URL} secondary>
+        <DesignLink href={DEMO_PATH} secondary>
           Book a demo
         </DesignLink>
       </div>

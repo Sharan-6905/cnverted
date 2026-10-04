@@ -67,7 +67,7 @@ export function ContactCalendar({ nonce }: { nonce?: string }) {
         <div ref={container} className="contact-calendar" inert={status !== "ready"} aria-hidden={status !== "ready"} />
         {status !== "ready" && (
           <div className="contact-calendar-fallback">
-            <span className="contact-calendar-kicker">30 minutes · Google Meet</span>
+            <span className="contact-calendar-kicker">30 minutes · Online call</span>
             <h2>Let’s talk GTM.</h2>
             <p>Choose a time to talk about your team and your next stage of growth.</p>
             <div className="contact-calendar-actions">

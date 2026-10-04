@@ -1,0 +1,79 @@
+.figma-site.design-demo-page {
+  background: linear-gradient(180deg, #fbf8ed 0, #fff 700px);
+}
+
+.demo-heading.marketing-page-heading {
+  padding-block: 170px 36px;
+}
+
+.demo-heading.marketing-page-heading > p {
+  max-width: 660px;
+}
+
+.demo-agenda {
+  padding-block: 88px 44px;
+}
+
+.figma-site .demo-agenda h2 {
+  margin-top: 12px;
+  font-size: clamp(32px, 4vw, 48px);
+  line-height: 1.15;
+}
+
+.demo-agenda ol {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 36px;
+  margin-top: 36px;
+  list-style: none;
+}
+
+.demo-agenda li {
+  padding-top: 20px;
+  border-top: 1px solid #deddd3;
+}
+
+.demo-step {
+  color: #697829;
+  font-size: 14px;
+}
+
+.figma-site .demo-agenda h3 {
+  margin-top: 12px;
+  font-size: 24px;
+  line-height: 1.3;
+}
+
+.demo-agenda li p,
+.demo-before p {
+  margin-top: 12px;
+  color: #62625b;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.demo-before {
+  padding-block: 20px 48px;
+}
+
+.demo-before > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  margin-top: 8px;
+}
+
+@media (max-width: 767px) {
+  .demo-heading.marketing-page-heading {
+    padding-block: 136px 28px;
+  }
+
+  .demo-agenda {
+    padding-top: 56px;
+  }
+
+  .demo-agenda ol {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}

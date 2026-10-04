@@ -6,8 +6,10 @@ import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { assets } from "./assets";
+import { DEMO_PATH } from "@/lib/booking";
 
 const links = [
+  { label: "Book a demo", href: DEMO_PATH, icon: assets.home.imgInfo },
   { label: "Help Center", href: "/help-center", icon: assets.home.imgInfo },
   { label: "Blogs", href: "/blogs", icon: assets.home.imgBookOpenText },
   {

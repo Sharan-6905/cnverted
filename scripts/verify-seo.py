@@ -108,9 +108,13 @@ def audit(path):
     else:
         assert "SoftwareApplication" not in types, (path, "irrelevant product offers")
     if path == "/":
-        for destination in ("/pricing", "/about", "/customers", "/case-studies", "/blogs", "/contact"):
+        for destination in ("/pricing", "/about", "/customers", "/case-studies", "/blogs", "/contact", "/book-demo"):
             assert destination in page.links, (path, "missing crawlable link", destination)
         assert "FAQPage" in types
+    if path == "/book-demo":
+        assert "FAQPage" in types and "BreadcrumbList" in types
+        assert "https://calendly.com/cnvrted/30min" in page.links, "Booking fallback is missing"
+        assert "What we’ll cover." in html, "Booking content is missing from server-rendered HTML"
     if path == "/help-center":
         assert "FAQPage" in types
         assert "Which AI models does Cnvrted work with?" in html, "Paginated help missing from HTML"

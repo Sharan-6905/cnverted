@@ -80,6 +80,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     {
       url: `${SITE_URL}/contact`,
+      lastModified: "2026-10-05",
       changeFrequency: "monthly",
       priority: 0.7,
     },

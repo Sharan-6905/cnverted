@@ -10,9 +10,9 @@ import "@/components/illustrated/contact.css";
 import "./book-demo.css";
 
 export const metadata = pageMetadata({
-  title: "Cnvrted GTM Demo | Book a 30-Minute Walkthrough",
+  title: "Book a Call | Cnvrted GTM Demo",
   description:
-    "Book a 30-minute Cnvrted demo. Explore buying signals, ICP matching, and your GTM workflow with the team. Choose an available time in our live calendar.",
+    "Book a 30-minute GTM demo with the Cnvrted team. Explore buying signals, ICP fit, and outreach for your business. Choose a time in our live calendar.",
   path: DEMO_PATH,
 });
 
@@ -44,10 +44,10 @@ export default async function BookDemoPage() {
 
   return (
     <IllustratedShell className="design-demo-page" faqItems={demoFAQs}>
-      <BreadcrumbSchema trail={[{ name: "Book a demo" }]} />
+      <BreadcrumbSchema trail={[{ name: "Book a call" }]} />
       <FAQSchema path={DEMO_PATH} items={demoFAQs} />
       <header className="marketing-page-heading demo-heading design-container">
-        <span className="marketing-eyebrow">30 minutes · Your GTM, in focus</span>
+        <span className="marketing-eyebrow">Book a call · 30 minutes</span>
         <h1>Cnvrted GTM Demo</h1>
         <p>
           Bring the customers you want to reach. We’ll explore the signals,

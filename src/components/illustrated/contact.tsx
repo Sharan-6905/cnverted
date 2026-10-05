@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Link from "next/link";
+import { DEMO_PATH } from "@/lib/booking";
 import { DHRUV_PRADEEP } from "@/lib/blog-posts";
 import { ContactCalendar } from "./contact-calendar";
 import { ScaledArtwork } from "./scaled-artwork";
@@ -67,7 +69,8 @@ export function IllustratedContact({ nonce }: { nonce?: string }) {
       <SupportArtwork variant="contact" />
       <header className="contact-hero">
         <h1 id="contact-title">Connect with Cnvrted</h1>
-        <p>Let’s talk about your go-to-market.</p>
+        <p>Product support, partnerships, or a question for the team.</p>
+        <Link className="marketing-text-link" href={DEMO_PATH}>Book a call for a GTM demo <span aria-hidden="true">↗</span></Link>
       </header>
       <ContactCalendar nonce={nonce} />
       <FoundingTeam />

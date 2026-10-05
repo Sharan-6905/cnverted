@@ -9,7 +9,6 @@ import { assets } from "./assets";
 import { DEMO_PATH } from "@/lib/booking";
 
 const links = [
-  { label: "Book a demo", href: DEMO_PATH, icon: assets.home.imgInfo },
   { label: "Help Center", href: "/help-center", icon: assets.home.imgInfo },
   { label: "Blogs", href: "/blogs", icon: assets.home.imgBookOpenText },
   {
@@ -57,6 +56,7 @@ export function IllustratedHeader() {
           <span>Cnvrted</span>
         </Link>
         <div className="design-desktop-nav">
+          <Link href={DEMO_PATH}>Book a call</Link>
           <Link href="/pricing">Pricing</Link>
           <div
             className="design-resources"
@@ -135,6 +135,7 @@ export function IllustratedHeader() {
       >
         {[
           { label: "Home", href: "/" },
+          { label: "Book a call", href: DEMO_PATH },
           { label: "Pricing", href: "/pricing" },
           ...links,
           { label: "Careers", href: "/careers" },

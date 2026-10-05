@@ -152,3 +152,13 @@ The mobile score improved from today's 84 baseline (80 in the prior report), wit
 Remaining mobile delay is chiefly render-blocking CSS. Tested alternative stylesheet grouping locally without a bundle-count improvement. Also tested inline CSS: it removed stylesheet requests but increased compressed HTML from about 32 KB to 132 KB, versus roughly 36 KB of separately cached compressed CSS. Neither experiment was retained or deployed. Existing cacheable CSS and the smaller HTML response remain.
 
 Rolling field Core Web Vitals still fail (mobile field LCP 3.4 s). Those 28-day measurements cannot reflect a fresh deployment immediately. The lab result does not guarantee a field pass, a ranking change, or identical timings on every visit.
+
+## Booking-page prominence — 5 October 2026
+
+- Promoted **Book a call** from the Resources dropdown into the main desktop navigation and near the top of the mobile menu. The homepage's main CTA and shared footer use the same label and point to `/book-demo`.
+- Set the booking title to **Book a Call | Cnvrted GTM Demo**, with a matching visible booking label and breadcrumb. The calendar event remains **Cnvrted GTM Demo**.
+- Clarified Contact's metadata and introduction around support, partnerships, and the founding team. Its demo links now point to the site's booking page rather than bypassing it for Calendly.
+- Production build and all 26-page SEO checks pass. Verified the booking link at mobile and tablet widths and checked the Contact layout.
+- Search Console confirms `/book-demo` is indexed with one valid breadcrumb item. The sitemap report now shows **Success**, last read 5 October, with 25 discovered pages; the earlier “Couldn't fetch” report has resolved. The site currently lists 26 pages, so this is not a claim that Google has processed every new URL.
+
+[Google's sitelinks guidance](https://developers.google.com/search/docs/appearance/sitelinks) recommends clear titles, headings, internal anchors, and logical navigation. Sitelinks and their ordering are automated; these changes improve prominence and clarity but do not set a search-result position.

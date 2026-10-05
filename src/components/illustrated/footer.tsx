@@ -29,7 +29,7 @@ const columns = [
   {
     title: "Company",
     links: [
-      ["Book a demo", DEMO_PATH],
+      ["Book a call", DEMO_PATH],
       ["Terms & Conditions", "/terms"],
       ["Privacy Policy", "/privacy"],
       ["Contact", "/contact"],

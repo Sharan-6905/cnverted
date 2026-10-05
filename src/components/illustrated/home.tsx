@@ -26,7 +26,7 @@ export function IllustratedHome() {
             description="Find the companies that fit, understand why now, and turn that context into your next outreach."
           >
             <DesignLink href={DEMO_PATH} arrow>
-              Book a demo
+              Book a call
             </DesignLink>
           </IllustratedHero>
           <a className="design-story-cue" href="#signals-title">

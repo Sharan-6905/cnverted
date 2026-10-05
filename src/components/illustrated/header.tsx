@@ -108,7 +108,7 @@ export function IllustratedHeader() {
           href="https://beta.cnvrted.com"
           className="design-button design-button-solid design-nav-cta"
         >
-          Start free
+          Get Started
         </a>
         <Button
           ref={mobileTrigger}

@@ -13,7 +13,7 @@ type CalendlyAPI = {
 };
 
 /** Live availability and invitee details stay in the existing Calendly event. */
-export function ContactCalendar({ nonce }: { nonce?: string }) {
+export function ContactCalendar({ nonce, compactOnMobile = false }: { nonce?: string; compactOnMobile?: boolean }) {
   const container = useRef<HTMLDivElement>(null);
   const [scriptReady, setScriptReady] = useState(false);
   const [status, setStatus] = useState<"loading" | "ready" | "unavailable">("loading");
@@ -45,14 +45,20 @@ export function ContactCalendar({ nonce }: { nonce?: string }) {
     };
     window.addEventListener("message", onMessage);
 
-    calendly.initInlineWidget({ url: BOOKING_URL, parentElement: element, resize: true });
+    const url = new URL(BOOKING_URL);
+    // The branded demo page already shows the title, duration, and agenda.
+    // Choose the layout once so resizing never clears an in-progress booking.
+    if (compactOnMobile && window.matchMedia("(max-width: 767px)").matches) {
+      url.searchParams.set("hide_event_type_details", "1");
+    }
+    calendly.initInlineWidget({ url: url.toString(), parentElement: element, resize: true });
     const iframe = element.querySelector("iframe");
     if (iframe) iframe.title = "Cnvrted GTM Demo — choose a time";
     return () => {
       window.removeEventListener("message", onMessage);
       element.replaceChildren();
     };
-  }, [scriptReady]);
+  }, [scriptReady, compactOnMobile]);
 
   return (
     <section className="contact-booking" aria-label="Book a demo">

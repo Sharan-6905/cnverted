@@ -55,7 +55,7 @@ export default async function BookDemoPage() {
         </p>
       </header>
 
-      <ContactCalendar nonce={nonce} />
+      <ContactCalendar nonce={nonce} compactOnMobile />
 
       <section className="demo-agenda design-container" aria-labelledby="demo-agenda-title">
         <span className="marketing-eyebrow">A conversation about your business</span>

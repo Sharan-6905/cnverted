@@ -136,6 +136,7 @@
   transition: background 180ms, transform 180ms;
 }
 .pricing-plan-cta:hover { background: #576616; transform: translateY(-2px); }
+.pricing-plan-cta:active { transform: translateY(0); }
 .design-pricing-page .design-faq { padding-top: 80px; }
 @media (min-width: 901px) and (max-width: 1100px) {
   .pricing-plans { gap: 16px; }
@@ -144,27 +145,45 @@
   .pricing-plan-dominion .pricing-plan-price > span { font-size: 34px; }
 }
 @media (max-width: 900px) {
-  .pricing-hero { height: 525px; }
-  .pricing-hero-copy { padding-top: 170px; }
+  .pricing-hero { height: auto; padding-bottom: 68px; }
+  .pricing-hero-copy { padding-top: 158px; }
   .pricing-plans {
     max-width: 560px;
     grid-template-columns: minmax(0, 1fr);
-    gap: 130px;
-    margin-top: -115px;
+    gap: 20px;
+    margin-top: -28px;
   }
-  .pricing-plan { min-height: 0; padding: 46px 32px 36px; }
+  .pricing-plan { min-height: 0; padding: 28px; border-radius: 22px; }
+  .pricing-plan-surge { border-color: #bdc995; box-shadow: inset 0 0 0 1px #bdc995, -4px 4px 20px #0000000b; }
+  .pricing-plan .pricing-plan-art {
+    width: 126px;
+    height: 112px;
+    top: 6px;
+    right: 8px;
+    opacity: .88;
+    zoom: 1;
+  }
+  .pricing-plan-dominion .pricing-plan-art { width: 136px; height: 124px; top: 0; right: 4px; }
+  .figma-site .pricing-plan h2 { max-width: calc(100% - 100px); font-size: 32px; }
+  .pricing-plan-credits { position: relative; max-width: calc(100% - 98px); min-height: 24px; font-size: 15px; }
+  .pricing-plan-price { margin-block: 24px 18px; }
+  .pricing-plan-cta { min-height: 50px; }
+  .pricing-plan-note { min-height: 0; }
 }
 @media (max-width: 600px) {
-  .pricing-hero { height: 470px; }
-  .pricing-hero-copy { padding-top: 155px; }
+  .pricing-hero-copy { padding: 128px 20px 0; }
+  .figma-site .pricing-hero h1 { font-size: clamp(40px, 11.5vw, 48px); }
   .pricing-hero-copy p { font-size: 17px; line-height: 27px; }
   .pricing-hero .design-hero-landscape > .illustration { min-width: 1000px; }
-  .pricing-plans { margin-top: -100px; gap: 112px; }
-  .pricing-plan { padding: 42px 24px 32px; }
-  .pricing-plan-art { zoom: .8; }
-  .pricing-plan-price > span { font-size: 38px; }
-  .pricing-plan-credits { font-size: 16px; }
+  .pricing-plan { padding: 24px; }
+  .pricing-plan-price > span { font-size: 36px; }
   .design-pricing-page .design-faq { padding-top: 56px; }
+}
+@media (max-width: 359px) {
+  .pricing-plan { padding-inline: 20px; }
+  .pricing-plan .pricing-plan-art { width: 104px; height: 96px; }
+  .figma-site .pricing-plan h2 { max-width: calc(100% - 76px); font-size: 30px; }
+  .pricing-plan-credits { max-width: calc(100% - 68px); font-size: 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .pricing-plan-cta { transition: none; }

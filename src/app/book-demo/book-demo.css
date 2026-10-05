@@ -65,8 +65,17 @@
 
 @media (max-width: 767px) {
   .demo-heading.marketing-page-heading {
-    padding-block: 136px 28px;
+    padding-block: 124px 24px;
   }
+
+  .demo-heading.marketing-page-heading h1 { font-size: clamp(38px, 10.5vw, 48px); text-wrap: balance; }
+  .demo-heading.marketing-page-heading > p { margin-top: 16px; font-size: 17px; line-height: 1.6; }
+  .design-demo-page .contact-booking { width: calc(100% - 32px); }
+  .design-demo-page .contact-calendar { height: 690px; }
+  .design-demo-page .contact-calendar-stage[data-state="ready"] { border: 1px solid #e4e1d7; border-radius: 18px; overflow: hidden; }
+  .design-demo-page .contact-calendar-fallback { margin-inline: 0; padding-inline: 20px; }
+  .design-demo-page .contact-booking-alternative { margin-inline: 0; gap: 6px 16px; }
+  .design-demo-page .contact-booking-alternative > a { display: inline-flex; align-items: center; min-height: 44px; }
 
   .demo-agenda {
     padding-top: 56px;
@@ -75,5 +84,14 @@
   .demo-agenda ol {
     grid-template-columns: 1fr;
     gap: 24px;
+    margin-top: 24px;
   }
+
+  .demo-before > div { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 359px) {
+  .design-demo-page .contact-booking { width: 100%; }
+  .design-demo-page .contact-calendar-stage[data-state="ready"] { border-inline: 0; border-radius: 0; }
+  .design-demo-page .contact-calendar-fallback { margin-inline: 16px; }
 }

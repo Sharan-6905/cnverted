@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { BOOKING_URL } from "@/lib/booking";
+import Link from "next/link";
+import { DEMO_PATH } from "@/lib/booking";
 import { BlogLandscape } from "./artwork";
 import { ScaledArtwork } from "./scaled-artwork";
 import type { FAQItem } from "./faq";
@@ -32,7 +33,7 @@ const plans = [
       height: 1188,
     },
     cta: "Book a demo",
-    href: BOOKING_URL,
+    href: DEMO_PATH,
   },
   {
     id: "dominion",
@@ -46,7 +47,7 @@ const plans = [
       height: 1199,
     },
     cta: "Book a demo",
-    href: BOOKING_URL,
+    href: DEMO_PATH,
   },
 ] as const;
 
@@ -78,7 +79,7 @@ export const pricingFAQs: FAQItem[] = [
     question: "Can you help us choose a plan?",
     answer: (
       <>
-        <a href={BOOKING_URL}>Book a demo</a> and we’ll help you find the right
+        <Link href={DEMO_PATH}>Book a demo</Link> and we’ll help you find the right
         fit.
       </>
     ),
@@ -118,7 +119,7 @@ export function IllustratedPricing() {
                 src={plan.image.src}
                 width={plan.image.width}
                 height={plan.image.height}
-                sizes="(max-width: 767px) 200px, 250px"
+                sizes="(max-width: 900px) 140px, 250px"
                 alt=""
               />
             </div>
@@ -129,13 +130,13 @@ export function IllustratedPricing() {
                 <span>{plan.price}</span>
                 {plan.period ? <small>{plan.period}</small> : null}
               </p>
-              <a
+              <Link
                 href={plan.href}
                 className="pricing-plan-cta"
                 aria-label={`${plan.cta} with ${plan.name}`}
               >
                 {plan.cta}
-              </a>
+              </Link>
               {plan.id === "surge" && (
                 <p className="pricing-plan-note">
                   Contact us to confirm the monthly credit allowance.
@@ -152,7 +153,7 @@ export function IllustratedPricing() {
         <h2 id="credit-guide-title">A plan for your usage.</h2>
         <p>
           Credits are your usage allowance in Cnvrted. Spark gives you 40 to get
-          started. For a paid plan, <a href={BOOKING_URL}>talk to our team</a>{" "}
+          started. For a paid plan, <Link href={DEMO_PATH}>talk to our team</Link>{" "}
           to confirm what each action costs and how many credits your workflow
           needs.
         </p>

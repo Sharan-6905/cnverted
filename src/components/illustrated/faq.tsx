@@ -1,6 +1,6 @@
 import { HOME_FAQS } from "@/lib/home-faqs";
 import Link from "next/link";
-import { BOOKING_URL } from "@/lib/booking";
+import { DEMO_PATH } from "@/lib/booking";
 import Image from "next/image";
 import { assets } from "./assets";
 import type { ReactNode } from "react";
@@ -27,7 +27,7 @@ const faqs: readonly FAQItem[] = HOME_FAQS.map((faq) => {
       answer: (
         <>
           Tell us which CRM, outreach, and collaboration tools you use.{" "}
-          <Link href={BOOKING_URL}>Book a demo</Link> to check integration
+          <Link href={DEMO_PATH}>Book a demo</Link> to check integration
           availability and the setup for your workflow.
         </>
       ),

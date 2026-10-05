@@ -10,6 +10,7 @@ export function ProductExampleLink() {
         <h2 id="example-preview-title">What would you actually say?</h2>
         <p>Choose a design studio, RevOps consultancy, or recruiting agency. Explore the fit, the signal, and a first message with a reason behind it.</p>
         <Link className="marketing-text-link" href={PRODUCT_EXAMPLE_PATH}>Try the interactive example <span aria-hidden="true">↗</span></Link>
+        <p>Still narrowing your audience? <Link href="/learn/ideal-customer-profile" className="marketing-text-link">Start with your ICP <span aria-hidden="true">↗</span></Link></p>
       </div>
       <div className="example-preview-note">
         <span className="example-sample-label">Sample data · AsterOps</span>

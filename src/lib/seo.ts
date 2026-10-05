@@ -24,6 +24,7 @@ export function pageMetadata({
   image = DEFAULT_SOCIAL_IMAGE.url,
   imageAlt = image === DEFAULT_SOCIAL_IMAGE.url ? DEFAULT_SOCIAL_IMAGE.alt : title,
   publishedTime,
+  modifiedTime,
 }: {
   title: string;
   description: string;
@@ -31,6 +32,7 @@ export function pageMetadata({
   image?: string;
   imageAlt?: string;
   publishedTime?: string;
+  modifiedTime?: string;
 }): Metadata {
   const socialImage = {
     ...(image === DEFAULT_SOCIAL_IMAGE.url ? DEFAULT_SOCIAL_IMAGE : {}),
@@ -51,6 +53,7 @@ export function pageMetadata({
       description,
       images: [socialImage],
       ...(publishedTime ? { publishedTime } : {}),
+      ...(publishedTime && modifiedTime ? { modifiedTime } : {}),
     },
     twitter: {
       card: "summary_large_image",

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { BOOKING_URL } from "@/lib/booking";
+import { DEMO_PATH } from "@/lib/booking";
 import Image from "next/image";
 import { BlogLandscape, AboutLandscape, CareerLandscape } from "./artwork";
 import { ScaledArtwork } from "./scaled-artwork";
@@ -74,7 +74,7 @@ export function IllustratedHero({
               <DesignLink href="https://beta.cnvrted.com" secondary>
                 Start free
               </DesignLink>
-              <DesignLink href={BOOKING_URL} arrow>
+              <DesignLink href={DEMO_PATH} arrow>
                 Book a demo
               </DesignLink>
             </>

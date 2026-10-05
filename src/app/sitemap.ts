@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: SITE_URL,
-      lastModified: "2026-10-05",
+      lastModified: "2026-10-06",
       changeFrequency: "weekly",
       priority: 1,
     },
@@ -54,9 +54,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    { url: `${SITE_URL}/learn`, lastModified: "2026-10-05", changeFrequency: "monthly", priority: 0.6 },
-    { url: `${SITE_URL}/learn/buying-signals`, lastModified: "2026-10-05", changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/learn/signal-to-outreach`, lastModified: "2026-10-05", changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/learn`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/learn/ideal-customer-profile`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/learn/buying-signals`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/learn/signal-to-outreach`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },
     ...CASE_STUDIES.map((story) => ({
       url: `${SITE_URL}/case-studies/${story.slug}`,
       images: [absoluteUrl(story.cover.src)],

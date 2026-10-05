@@ -43,6 +43,10 @@ const nextConfig: NextConfig = {
         headers: [{ key: "X-Robots-Tag", value: "noindex" }],
       },
       {
+        source: "/downloads/:path*",
+        headers: [{ key: "X-Robots-Tag", value: "noindex" }],
+      },
+      {
         // form endpoints should never sit in a shared or browser cache
         source: "/api/:path*",
         headers: [

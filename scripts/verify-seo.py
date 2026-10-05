@@ -1,5 +1,7 @@
 """Audit rendered SEO output: python3 scripts/verify-seo.py http://localhost:3020"""
 import concurrent.futures
+import csv
+import io
 import json
 import sys
 import urllib.error
@@ -103,6 +105,11 @@ def audit(path):
     if path.startswith(("/blogs/", "/case-studies/", "/learn/")):
         assert "Article" in types or "BlogPosting" in types, (path, "missing article")
         assert "BreadcrumbList" in types, (path, "missing breadcrumb")
+        article = next(node for node in page.jsonld if node.get("@type") in ("Article", "BlogPosting"))
+        assert article.get("image"), (path, "missing article image")
+        assert article.get("datePublished") == page.meta.get("article:published_time"), (path, "publication metadata mismatch")
+        if article.get("dateModified") and article["dateModified"] != article["datePublished"]:
+            assert article["dateModified"] == page.meta.get("article:modified_time"), (path, "revision metadata mismatch")
     if path in ("/", "/pricing"):
         assert "SoftwareApplication" in types
     else:
@@ -149,9 +156,25 @@ for path, page in pages.items():
         if destination in pages and target.fragment:
             assert urllib.parse.unquote(target.fragment) in pages[destination].ids, (path, "broken anchor", href)
         elif destination not in pages:
-            assert destination.startswith("/images/"), (path, "internal link missing from sitemap", href)
+            assert destination.startswith("/images/") or destination == "/downloads/cnvrted-icp-worksheet.csv", (path, "internal link missing from sitemap", href)
 for source in ("/", "/learn", "/blogs/apollo-vs-cnvrted", "/blogs/what-is-a-gtm-play"):
     assert "/learn/buying-signals" in pages[source].links, (source, "guide not discoverable")
+for source in ("/", "/learn", "/learn/buying-signals", "/learn/signal-to-outreach"):
+    assert "/learn/ideal-customer-profile" in pages[source].links, (source, "ICP guide not discoverable")
+for source in ("/", "/about", "/pricing", "/help-center", "/blogs", "/careers"):
+    assert "/book-demo" in pages[source].links
+    assert "https://calendly.com/cnvrted/30min" not in pages[source].links, (source, "CTA bypasses branded booking page")
+guide = pages["/learn/ideal-customer-profile"]
+assert "/downloads/cnvrted-icp-worksheet.csv" in guide.links
+assert {"icp-worksheet", "icp-examples", "validate-your-icp"}.issubset(guide.ids)
+for business in ("Design studio", "RevOps consultancy", "Recruiting agency"):
+    assert business in " ".join(guide.text), (business, "ICP example absent from server HTML")
+with urllib.request.urlopen(BASE + "/downloads/cnvrted-icp-worksheet.csv", timeout=30) as response:
+    assert response.status == 200 and "noindex" in response.headers.get("X-Robots-Tag", "")
+    worksheet = list(csv.reader(io.StringIO(response.read().decode("utf-8-sig"))))
+assert worksheet[2] == ["Field", "Prompt", "Your answer", "Worked example: design studio"]
+assert len(worksheet) == 11 and all(len(row) == 4 for row in worksheet)
+assert all(row[2] == "" for row in worksheet[3:]), "Worksheet answer column is not blank"
 status, robots = fetch("/robots.txt")
 assert status == 200
 parser = urllib.robotparser.RobotFileParser()

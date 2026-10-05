@@ -13,7 +13,7 @@
 
 ## Verification
 
-Run `npm run build -- --webpack`, start the site, then run:
+Run `npm run build`, start the production server, then run:
 
 ```sh
 python3 scripts/verify-seo.py http://localhost:3020
@@ -162,3 +162,16 @@ Rolling field Core Web Vitals still fail (mobile field LCP 3.4 s). Those 28-day 
 - Search Console confirms `/book-demo` is indexed with one valid breadcrumb item. The sitemap report now shows **Success**, last read 5 October, with 25 discovered pages; the earlier “Couldn't fetch” report has resolved. The site currently lists 26 pages, so this is not a claim that Google has processed every new URL.
 
 [Google's sitelinks guidance](https://developers.google.com/search/docs/appearance/sitelinks) recommends clear titles, headings, internal anchors, and logical navigation. Sitelinks and their ordering are automated; these changes improve prominence and clarity but do not set a search-result position.
+
+## ICP guide and discovery follow-up — 6 October 2026
+
+- Added `/learn/ideal-customer-profile` with a direct definition, ICP/persona/signal distinctions, six-field worksheet, three explicitly fictional examples, a validation checklist and five matching visible FAQs. The complete guide renders on the server.
+- Added a downloadable CSV worksheet with a blank answer column and a worked example. The guide is the indexable resource; the CSV sends `X-Robots-Tag: noindex` and stays out of the sitemap.
+- Connected the guide to the homepage example, Learn, buying-signals guide and interactive demo. Learn now introduces the sequence: define fit, understand timing, try the example.
+- Added article images to the Learn guides and aligned revised article dates across visible bylines, Open Graph metadata, JSON-LD and sitemap. Dates reflect editorial changes, not build time.
+- Routed the remaining active About, Help Center, shared hero and homepage FAQ demo links through `/book-demo`. The calendar embed and its direct Calendly fallback remain available.
+- Expanded the repeatable audit to check article image/date metadata, guide discoverability, server-rendered examples, CSV structure and noindex header, and branded booking destinations. The sitemap now contains 27 canonical pages.
+- Search Console's sitemap report remains successful, last read 5 October with 25 discovered pages. That processing snapshot predates the new guide; no duplicate sitemap was submitted.
+- Google AI eligibility continues to rely on accessible, useful HTML and ordinary SEO. No AI-only content, special ranking markup, fabricated third-party proof or changes to training-bot permissions were added.
+
+References: [Google AI features](https://developers.google.com/search/docs/appearance/ai-features), [OpenAI search crawler controls](https://developers.openai.com/api/docs/bots), [IndexNow protocol](https://www.indexnow.org/documentation).

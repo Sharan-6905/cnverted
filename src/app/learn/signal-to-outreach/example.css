@@ -175,3 +175,9 @@
   .demo-enter { animation: none; }
   .demo-business-card, .demo-message-notes > summary > span { transition: none; }
 }
+
+.example-editorial-note { margin-top: 18px; font-size: 13px; line-height: 1.8; color: #66645d; }
+.example-editorial-note a { text-decoration: underline; text-underline-offset: 3px; }
+.example-guide-links { display: flex; flex-wrap: wrap; gap: 12px 28px; border-block: 1px solid #e8e5dc; padding-block: 24px; margin-top: 40px; font-size: 15px; }
+.example-guide-links p { flex-basis: 100%; color: #66645d; }
+.example-guide-links a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; }

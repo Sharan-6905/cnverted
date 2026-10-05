@@ -2,7 +2,7 @@ import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { BOOKING_URL } from "@/lib/booking";
+import { DEMO_PATH } from "@/lib/booking";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { IllustratedShell } from "@/components/illustrated/shell";
 import { IllustratedHero, DesignLink } from "@/components/illustrated/hero";
@@ -40,7 +40,7 @@ export default function AboutPage() {
         title={<>A better reason<br />to reach out.</>}
         description="Good outreach starts with something worth saying. We’re building Cnvrted to help you find the people, the context, and the moment that make a conversation matter."
       >
-        <DesignLink href={BOOKING_URL} secondary>
+        <DesignLink href={DEMO_PATH} secondary>
           Book a demo
         </DesignLink>
         <DesignLink href="#founders-title" arrow>

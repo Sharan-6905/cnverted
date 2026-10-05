@@ -4,7 +4,7 @@ import { ClosingCTA } from "@/components/illustrated/closing-cta";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { FAQSchema } from "@/components/faq-schema";
 import { JsonLd } from "@/components/json-ld";
-import { pageMetadata, absoluteUrl, SITE_URL } from "@/lib/seo";
+import { pageMetadata, absoluteUrl, SITE_URL, DEFAULT_SOCIAL_IMAGE } from "@/lib/seo";
 import "@/components/illustrated/article.css";
 import "./guide.css";
 
@@ -26,7 +26,8 @@ const examples = [
   { title: "A technology or vendor change", signal: "A team publicly discusses moving away from an existing system.", check: "Identify the actual constraint, the person involved, and the timing. Make sure your product addresses that problem before proposing a replacement." },
 ];
 
-export const metadata = pageMetadata({ title: "B2B Buying Signals: Examples & Qualification | Cnvrted", description, path, publishedTime: published });
+const modified = "2026-10-06";
+export const metadata = pageMetadata({ title: "B2B Buying Signals: Examples & Qualification | Cnvrted", description, path, publishedTime: published, modifiedTime: modified });
 
 export default function BuyingSignalsGuide() {
   return (
@@ -35,7 +36,8 @@ export default function BuyingSignalsGuide() {
       <FAQSchema path={path} items={faqs} />
       <JsonLd data={{
         "@context": "https://schema.org", "@type": "Article", "@id": absoluteUrl(`${path}#article`),
-        headline: title, description, inLanguage: "en", datePublished: published, dateModified: "2026-10-05",
+        headline: title, description, inLanguage: "en", datePublished: published, dateModified: modified,
+        image: absoluteUrl(DEFAULT_SOCIAL_IMAGE.url),
         author: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Cnvrted", url: `${SITE_URL}/about` },
         publisher: { "@id": `${SITE_URL}/#organization` }, mainEntityOfPage: absoluteUrl(path),
       }} />
@@ -45,7 +47,7 @@ export default function BuyingSignalsGuide() {
           <p className="marketing-eyebrow">The prospecting field guide</p>
           <h1 id="guide-title">{title}</h1>
           <p className="design-article-dek">A useful clue. A little context. A better reason to start a conversation.</p>
-          <div className="design-article-byline"><p>By <Link href="/about">the Cnvrted team</Link> · <time dateTime={published}>October 4, 2026</time></p></div>
+          <div className="design-article-byline"><p>By <Link href="/about">the Cnvrted team</Link> · <time dateTime={published}>October 4, 2026</time><br />Updated <time dateTime={modified}>October 6, 2026</time></p></div>
         </header>
         <div className="design-article-content design-article-prose">
           <p className="signal-guide-answer"><strong>A B2B buying signal is an observable action or change that suggests a company may need a solution.</strong> It could be a public request for recommendations, a relevant job opening, or a change in technology. It becomes useful when you can connect the event to the problem your product solves.</p>
@@ -68,7 +70,7 @@ export default function BuyingSignalsGuide() {
             <ol className="signal-guide-checklist">
               <li><strong>Source:</strong> Open the original post, job listing, or announcement. Make sure it says what the summary claims.</li>
               <li><strong>Timing:</strong> Record the event date and when you checked it. Look for updates that change the situation.</li>
-              <li><strong>Fit:</strong> Compare the company’s size, industry, location, and needs with your ideal customer profile.</li>
+              <li><strong>Fit:</strong> Compare the company’s size, industry, location, and needs with your <Link href="/learn/ideal-customer-profile">ideal customer profile</Link>. Define the profile before evaluating the signal so a recent event does not override a poor fit.</li>
               <li><strong>Relevance:</strong> Write one sentence connecting the event to a problem you solve. If the connection needs several assumptions, investigate further.</li>
               <li><strong>Next step:</strong> Choose a suitable person and a useful question. Skip the outreach if the evidence is weak or the offer is not relevant.</li>
             </ol>

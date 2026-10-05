@@ -13,8 +13,21 @@
 .signal-guide-checklist { list-style: decimal; padding-left: 24px; }
 .signal-guide-checklist li + li { margin-top: 12px; }
 .signal-guide .design-article-prose blockquote { padding: 20px 24px; border-left: 2px solid #7a7f52; background: #faf9f5; margin-block: 24px; }
+.guide-comparison { display: grid; gap: 0; margin-block: 24px; }
+.guide-comparison > div { padding-block: 20px; border-top: 1px solid #e8e5dc; }
+.guide-comparison dt { font-weight: 600; margin-bottom: 6px; }
+.guide-comparison dd { margin: 0; color: #5f5f5f; }
+.guide-download { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px; margin-block: 32px; border: 1px solid #e8e5dc; border-radius: 16px; background: #faf9f5; }
+.figma-site .guide-download h3 { margin: 0 0 8px; font-size: 24px; }
+.guide-download p { font-size: 15px; }
+.guide-download a { flex-shrink: 0; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; }
+.guide-profile-list { margin-block: 24px; }
+.guide-profile-list section { border-top: 1px solid #e8e5dc; padding-block: 24px; }
+.figma-site .guide-profile-list h3 { margin: 0 0 12px; font-size: 25px; }
+.guide-profile-list p + p { margin-top: 10px; }
 @media (max-width: 767px) {
   .signal-guide.design-article { padding-top: 142px; }
   .signal-guide-examples { grid-template-columns: minmax(0, 1fr); gap: 20px; }
   .signal-guide-answer { font-size: 18px; }
+  .guide-download { align-items: flex-start; flex-direction: column; padding: 22px; gap: 14px; }
 }

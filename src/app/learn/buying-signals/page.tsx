@@ -35,7 +35,7 @@ export default function BuyingSignalsGuide() {
       <FAQSchema path={path} items={faqs} />
       <JsonLd data={{
         "@context": "https://schema.org", "@type": "Article", "@id": absoluteUrl(`${path}#article`),
-        headline: title, description, inLanguage: "en", datePublished: published, dateModified: published,
+        headline: title, description, inLanguage: "en", datePublished: published, dateModified: "2026-10-05",
         author: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Cnvrted", url: `${SITE_URL}/about` },
         publisher: { "@id": `${SITE_URL}/#organization` }, mainEntityOfPage: absoluteUrl(path),
       }} />
@@ -79,6 +79,7 @@ export default function BuyingSignalsGuide() {
             <p>Imagine you offer product-design support. You find a software company advertising two design roles. The roles match the kind of product you work on, but you do not yet know whether the company wants outside help.</p>
             <blockquote><p>“I saw the product-design openings on your careers page. Are you looking only for permanent hires, or would short-term help with the backlog be useful while you recruit?”</p></blockquote>
             <p>The message identifies the source, offers a relevant possibility, and leaves room for the answer to be no. It does not claim to know their budget or hiring difficulties.</p>
+            <p><Link href="/learn/signal-to-outreach">Follow the complete product example</Link> for a sample company profile, source extracts, ICP checks, and an annotated outreach draft.</p>
             <p>To make this repeatable, connect your trigger, target segment, outreach motion, and intended outcome. That is the basis of a <Link href="/blogs/what-is-a-gtm-play">GTM play</Link>.</p>
           </section>
           <section aria-labelledby="cnvrted-workflow">

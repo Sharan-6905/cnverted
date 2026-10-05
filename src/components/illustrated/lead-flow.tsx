@@ -597,7 +597,15 @@ function FlowScene({ mobile = false }: { mobile?: boolean }) {
 
 export function LeadFlow() {
   const root = useRef<HTMLDivElement>(null);
+  const [mobile, setMobile] = useState<boolean | null>(null);
   const [running, setRunning] = useState(false);
+  useEffect(() => {
+    const breakpoint = window.matchMedia("(max-width: 1023px)");
+    const update = () => setMobile(breakpoint.matches);
+    update();
+    breakpoint.addEventListener("change", update);
+    return () => breakpoint.removeEventListener("change", update);
+  }, []);
   useEffect(() => {
     const element = root.current;
     if (!element) return;
@@ -632,8 +640,7 @@ export function LeadFlow() {
       role="img"
       aria-label="An animated lead discovery flow: LinkedIn, X, Reddit, Product Hunt, GitHub, G2, Crunchbase, YouTube, and company sites supply signals such as funding, hiring, expansion, product launches, new tools, and leadership changes. Cnvrted uses LLMs including Claude, ChatGPT, Kimi, and Gemini to evaluate ICP fit, intent, and timing. Low-fit leads are filtered out; qualified leads are scored and ranked for your workflow."
     >
-      <FlowScene />
-      <FlowScene mobile />
+      {mobile !== null && <FlowScene key={String(mobile)} mobile={mobile} />}
     </div>
   );
 }

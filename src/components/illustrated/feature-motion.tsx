@@ -95,7 +95,7 @@ export function FeatureModelCycle({ step }: { step: number }) {
               height={29}
               alt=""
               unoptimized
-              loading="eager"
+              loading="lazy"
             />
             <span>{model.name}</span>
           </div>
@@ -173,7 +173,7 @@ export function FeatureRecipeCards() {
                         width={192}
                         height={128}
                         sizes="120px"
-                        loading="eager"
+                        loading="lazy"
                         alt=""
                         style={{
                           objectPosition: recipe.focus,

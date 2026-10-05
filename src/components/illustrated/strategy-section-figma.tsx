@@ -1,4 +1,4 @@
-import { ProductCanvasDemo } from "./product-canvas-demo";
+import { DeferredVisual } from "./deferred-visual";
 import "./homepage-canvas.css";
 
 export function StrategySection() {
@@ -14,7 +14,7 @@ export function StrategySection() {
           and shortlist it builds on your canvas.
         </p>
       </div>
-      <ProductCanvasDemo />
+      <DeferredVisual kind="canvas" />
     </section>
   );
 }

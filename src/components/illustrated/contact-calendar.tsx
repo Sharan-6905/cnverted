@@ -47,7 +47,7 @@ export function ContactCalendar({ nonce }: { nonce?: string }) {
 
     calendly.initInlineWidget({ url: BOOKING_URL, parentElement: element, resize: true });
     const iframe = element.querySelector("iframe");
-    if (iframe) iframe.title = "Book a 30-minute call with Cnvrted";
+    if (iframe) iframe.title = "Cnvrted GTM Demo — choose a time";
     return () => {
       window.removeEventListener("message", onMessage);
       element.replaceChildren();
@@ -68,8 +68,8 @@ export function ContactCalendar({ nonce }: { nonce?: string }) {
         {status !== "ready" && (
           <div className="contact-calendar-fallback">
             <span className="contact-calendar-kicker">30 minutes · Online call</span>
-            <h2>Let’s talk GTM.</h2>
-            <p>Choose a time to talk about your team and your next stage of growth.</p>
+            <h2>Cnvrted GTM Demo</h2>
+            <p>Explore your ICP, buying signals, and the context behind your next outreach.</p>
             <div className="contact-calendar-actions">
               <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer">Book a demo</a>
               {status === "unavailable" && <button type="button" onClick={() => window.location.reload()}>Retry calendar</button>}

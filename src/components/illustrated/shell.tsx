@@ -28,11 +28,13 @@ const openSans = Open_Sans({
   subsets: ["latin"],
   variable: "--font-open-sans",
   weight: ["400", "600"],
+  preload: false,
 });
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   weight: ["400", "500"],
+  preload: false,
 });
 const spartan = League_Spartan({
   subsets: ["latin"],

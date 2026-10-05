@@ -118,3 +118,13 @@ Remaining external or longer-term work:
 - Small animated-diagram contrast and sprite aspect-ratio rounding warnings remain in Lighthouse. The 256×171 optimized sprite is displayed at a 3:2 ratio; this is a minor rounding difference, not the earlier runtime failure.
 - Confirm paid-plan allowances and credit costs with the product owner before publishing specific numbers.
 - Search rankings, sitelinks, and AI citations are selected by the platforms. No four-to-five-result promise, FAQ rich-result promise, or indexing deadline is made.
+
+## Demo booking, worked example, and mobile loading — 5 October 2026
+
+- Renamed the live Calendly event to **Cnvrted GTM Demo**, retaining `/cnvrted/30min` and its 30-minute duration. Added an agenda covering the visitor's ICP, buying signals and outreach context, the product walkthrough, questions, and next steps. Verified the public event and the website embed.
+- Added `/learn/signal-to-outreach`, a detailed, explicitly fictional AsterOps example. It connects two dated sample signals to an ICP assessment, distinguishes evidence from inference, identifies unknowns, and shows a reviewable first email. Linked it from the homepage, Learn, the buying-signals guide, and booking page; included Article/Breadcrumb data and the sitemap.
+- Deferred the signal visualization and interactive canvas (including their code, styles, and artwork) until visitors approach them. Reserved responsive layout space, retained automatic playback and manual loading/retry controls, and provided a readable fallback.
+- Render only the matching mobile or desktop signal scene. Replaced the logo strip's animation-library dependency with native animations that pause offscreen, when hidden, and for reduced motion. Secondary fonts no longer preload; below-fold feature images load lazily; the responsive hero poster uses quality 60.
+- TypeScript, the default Turbopack production build, and the 26-page SEO audit pass. Verified 320/390-pixel layouts, the deferred animations, canvas chat/pause controls, and the booking embed. Initial homepage DOM decreased from roughly 1,898 to 880 elements.
+
+Fresh before-change [PageSpeed report](https://pagespeed.web.dev/analysis/https-www-cnvrted-com/rhrt6fxudq?form_factor=mobile), captured at 11:03 IST: mobile Performance **84**, Accessibility 96, Best Practices 96, SEO 100; FCP 1.5 s, LCP 3.7 s, TBT 100 ms, CLS 0, Speed Index 5.6 s. The LCP element was the hero supporting paragraph. The previous day's 80/97 scores remain recorded above; lab runs vary. A post-deployment report is required before claiming a measured improvement. Rolling field Core Web Vitals have not yet passed.

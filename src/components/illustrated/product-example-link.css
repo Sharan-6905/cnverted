@@ -1,0 +1,13 @@
+.example-preview { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 88px); align-items: center; margin-top: 112px; padding-block: 44px; border-top: 1px solid #e9e6df; border-bottom: 1px solid #e9e6df; }
+.figma-site .example-preview h2 { max-width: 440px; margin-top: 16px; font: 400 clamp(34px, 4vw, 52px)/1.12 var(--font-editorial), Georgia, serif; letter-spacing: -.025em; }
+.example-preview-intro > p { max-width: 430px; margin-block: 20px; color: #62635d; font-size: 17px; line-height: 1.7; }
+.example-preview-note { padding: 28px 32px; background: #faf8f2; border: 1px solid #e7e2d7; border-radius: 6px 24px 6px 6px; }
+.example-sample-label { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: #706449; }
+.example-preview-note ol { list-style: none; margin-top: 20px; padding: 0; }
+.example-preview-note li + li { border-top: 1px solid #e5e0d5; margin-top: 18px; padding-top: 18px; }
+.example-preview-note li > span { font-size: 12px; color: #686a57; }
+.example-preview-note li > p { margin-top: 6px; color: #323630; font-size: 16px; line-height: 1.55; }
+@media (max-width: 767px) {
+  .example-preview { grid-template-columns: 1fr; gap: 26px; margin-top: 64px; padding-block: 32px; }
+  .example-preview-note { padding: 24px; }
+}

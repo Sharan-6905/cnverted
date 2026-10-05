@@ -30,7 +30,7 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    qualities: [75, 95],
+    qualities: [60, 75, 95],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",

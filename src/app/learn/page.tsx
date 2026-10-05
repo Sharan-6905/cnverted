@@ -6,6 +6,7 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { IllustratedShell } from "@/components/illustrated/shell";
 import { ClosingCTA } from "@/components/illustrated/closing-cta";
 import { BLOG_POSTS } from "@/lib/blog-posts";
+import { ProductExampleLink } from "@/components/illustrated/product-example-link";
 
 export const metadata: Metadata = pageMetadata({
   title: "Learn — Buying Signals & GTM Playbooks | Cnvrted",
@@ -48,6 +49,7 @@ export default function LearnPage() {
           Read the field guide <span aria-hidden="true">↗</span>
         </Link>
       </aside>
+      <ProductExampleLink />
       <div className="resource-grid design-container">
         {guides.map((post) => (
           <article className="resource-card" key={post.slug}>

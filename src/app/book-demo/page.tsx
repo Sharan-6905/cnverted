@@ -10,7 +10,7 @@ import "@/components/illustrated/contact.css";
 import "./book-demo.css";
 
 export const metadata = pageMetadata({
-  title: "Book a Cnvrted Demo | 30-Minute GTM Walkthrough",
+  title: "Cnvrted GTM Demo | Book a 30-Minute Walkthrough",
   description:
     "Book a 30-minute Cnvrted demo. Explore buying signals, ICP matching, and your GTM workflow with the team. Choose an available time in our live calendar.",
   path: DEMO_PATH,
@@ -48,7 +48,7 @@ export default async function BookDemoPage() {
       <FAQSchema path={DEMO_PATH} items={demoFAQs} />
       <header className="marketing-page-heading demo-heading design-container">
         <span className="marketing-eyebrow">30 minutes · Your GTM, in focus</span>
-        <h1>Book a Cnvrted demo.</h1>
+        <h1>Cnvrted GTM Demo</h1>
         <p>
           Bring the customers you want to reach. We’ll explore the signals,
           context, and workflow that could help you make your next move.
@@ -82,6 +82,7 @@ export default async function BookDemoPage() {
       <aside className="demo-before design-container" aria-label="Explore before your demo">
         <p>Want a little context before we meet?</p>
         <div>
+          <Link className="marketing-text-link" href="/learn/signal-to-outreach">Follow a product example <span aria-hidden="true">↗</span></Link>
           <Link className="marketing-text-link" href="/case-studies">Read the case studies <span aria-hidden="true">↗</span></Link>
           <Link className="marketing-text-link" href="/pricing">Explore pricing <span aria-hidden="true">↗</span></Link>
           <Link className="marketing-text-link" href="/contact">Meet the team <span aria-hidden="true">↗</span></Link>

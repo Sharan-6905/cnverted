@@ -1,0 +1,19 @@
+.deferred-visual { display: flow-root; position: relative; }
+.deferred-visual-flow { width: 100%; max-width: 1800px; margin-inline: auto; aspect-ratio: 1440 / 690; }
+.deferred-visual-flow > .deferred-visual-poster { position: absolute; inset: 0; }
+.deferred-visual-poster { display: grid; place-items: center; padding: 32px; text-align: center; background: radial-gradient(#eeece7 1px, transparent 1px) 0 0 / 28px 28px, #fdfcf9; border-radius: 16px; }
+.deferred-visual-poster > div { max-width: 440px; }
+.figma-site .deferred-visual-poster h3 { margin-block: 18px 12px; font: 400 clamp(26px, 3vw, 40px)/1.15 var(--font-editorial), Georgia, serif; }
+.deferred-visual-poster p { color: #64645c; font-size: 15px; line-height: 1.7; }
+.deferred-visual-poster button { min-height: 44px; margin-top: 22px; padding: 10px 20px; border: 1px solid #d7d8cc; border-radius: 100px; background: #fff; color: #46502b; font-size: 14px; }
+.deferred-visual-poster button:focus-visible { outline: 2px solid var(--olive); outline-offset: 4px; }
+.deferred-visual-poster button:disabled { cursor: progress; }
+.deferred-visual-poster a { text-decoration: underline; text-underline-offset: 3px; }
+.deferred-visual-canvas > .deferred-visual-poster { margin-top: 34px; height: calc(clamp(620px, 55vw, 760px) + 197px); border: 1px solid #e1e1dc; }
+@media (max-width: 1023px) {
+  .deferred-visual-flow { max-width: 520px; aspect-ratio: 480 / 1640; }
+  .deferred-visual-canvas > .deferred-visual-poster { height: 957px; }
+}
+@media (max-width: 767px) {
+  .deferred-visual-canvas > .deferred-visual-poster { margin: 24px -8px 0; height: calc(min((100vw - 44px) * 2.5, 920px) + 322px); }
+}

@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
-import { useAnimate, type AnimationPlaybackControls, type AnimationSequence } from "framer-motion";
+import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 import styles from "./feature-block-animated-card.module.css";
 
@@ -31,7 +30,7 @@ export function AnimatedCard({
   className, title, description, variant = "card", autoScroll = false, scrollDirection = "left", icons = [],
   ariaLabel = "Connected tools. Scroll horizontally to explore.",
 }: AnimatedCardProps) {
-  const [scope, animate] = useAnimate<HTMLDivElement>();
+  const scope = useRef<HTMLDivElement>(null);
   const iconCount = icons.length;
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export function AnimatedCard({
     if (!root || !iconCount) return;
 
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let controls: AnimationPlaybackControls | undefined;
+    let controls: Animation[] = [];
     let inView = false;
     let hovered = false;
     let focused = false;
@@ -47,28 +46,42 @@ export function AnimatedCard({
     const syncPlayback = () => {
       const running = inView && !document.hidden && !hovered && !focused && !reducedMotion.matches;
       root.dataset.motion = running ? "running" : "paused";
-      if (running) controls?.play();
-      else controls?.pause();
+      if (running && !controls.length) buildSequence();
+      controls.forEach((animation) => running ? animation.play() : animation.pause());
     };
 
     const buildSequence = () => {
-      controls?.stop();
-      controls = undefined;
-      if (!reducedMotion.matches) {
-        const step = 0.46;
-        const sequence: AnimationSequence = Array.from({ length: iconCount }, (_, index) => [
-          `[data-animated-icon="${index}"]`,
-          { y: [0, -9, 0], scale: [1, 1.055, 1] },
-          { at: index * step, duration: 0.92, ease: "easeInOut" },
-        ]);
-        sequence.push(
-          ["[data-signal-sweep]", { x: ["0%", "12%", "88%", "100%"], opacity: [0, 0.75, 0.75, 0] },
-            { at: 0.2, duration: iconCount * step, ease: "linear", times: [0, 0.12, 0.88, 1] }],
-          // A quiet beat makes the loop settle before the next signal passes.
-          ["[data-signal-sweep]", { opacity: 0 }, { at: iconCount * step + 1.2, duration: 0 }],
-        );
-        controls = animate(sequence, { repeat: Infinity });
-      }
+      // Native transform animations preserve the sequence without shipping the
+      // canvas animation library to visitors who only see the first screen.
+      const step = 460;
+      const duration = iconCount * step + 1200;
+      root.querySelectorAll<HTMLElement>("[data-animated-icon]").forEach((icon) => {
+        const index = Number(icon.dataset.animatedIcon);
+        const animation = icon.animate([
+          { transform: "translateY(0) scale(1)", offset: 0 },
+          { transform: "translateY(-9px) scale(1.055)", offset: step / duration },
+          { transform: "translateY(0) scale(1)", offset: step * 2 / duration },
+          { transform: "translateY(0) scale(1)", offset: 1 },
+        ], { duration, delay: index * step, iterations: Infinity, easing: "ease-in-out" });
+        animation.pause();
+        controls.push(animation);
+      });
+      const travel = iconCount * step / duration;
+      root.querySelectorAll<HTMLElement>("[data-signal-sweep]").forEach((sweep) => {
+        const animation = sweep.animate([
+          { transform: "translateX(0%)", opacity: 0, offset: 0 },
+          { transform: "translateX(12%)", opacity: 0.75, offset: travel * 0.12 },
+          { transform: "translateX(88%)", opacity: 0.75, offset: travel * 0.88 },
+          { transform: "translateX(100%)", opacity: 0, offset: travel },
+          { transform: "translateX(100%)", opacity: 0, offset: 1 },
+        ], { duration, delay: 200, iterations: Infinity, easing: "linear" });
+        animation.pause();
+        controls.push(animation);
+      });
+    };
+    const preferenceChanged = () => {
+      controls.forEach((animation) => animation.cancel());
+      controls = [];
       syncPlayback();
     };
 
@@ -84,25 +97,24 @@ export function AnimatedCard({
       syncPlayback();
     };
 
-    buildSequence();
     observer.observe(root);
     document.addEventListener("visibilitychange", syncPlayback);
-    reducedMotion.addEventListener("change", buildSequence);
+    reducedMotion.addEventListener("change", preferenceChanged);
     root.addEventListener("pointerenter", enter);
     root.addEventListener("pointerleave", leave);
     root.addEventListener("focusin", focus);
     root.addEventListener("focusout", blur);
     return () => {
-      controls?.stop();
+      controls.forEach((animation) => animation.cancel());
       observer.disconnect();
       document.removeEventListener("visibilitychange", syncPlayback);
-      reducedMotion.removeEventListener("change", buildSequence);
+      reducedMotion.removeEventListener("change", preferenceChanged);
       root.removeEventListener("pointerenter", enter);
       root.removeEventListener("pointerleave", leave);
       root.removeEventListener("focusin", focus);
       root.removeEventListener("focusout", blur);
     };
-  }, [animate, autoScroll, iconCount, scope]);
+  }, [autoScroll, iconCount]);
 
   return (
     <div ref={scope} className={cn(styles.root, variant === "card" && styles.card, autoScroll && styles.marquee, className)} data-motion="paused" data-scroll-direction={scrollDirection}>

@@ -100,6 +100,7 @@ export function HomeHeroVideo() {
         height={2160}
         loading="eager"
         fetchPriority="high"
+        quality={60}
         sizes="(max-width: 767px) 800px, 100vw"
       />
     </div>

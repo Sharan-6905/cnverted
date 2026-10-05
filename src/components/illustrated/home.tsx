@@ -6,12 +6,13 @@ import {
   WorkflowArtwork,
 } from "./artwork";
 import { ScaledArtwork } from "./scaled-artwork";
-import { LeadFlow } from "./lead-flow";
+import { DeferredVisual } from "./deferred-visual";
 import { HomeScrollExperience } from "./scroll-experience";
 import { LiveHeadline } from "./live-headline";
 import { StrategySection } from "./strategy-section-figma";
 import { IntegrationsStrip } from "./integrations-strip";
 import { CustomerStories, ClientProof } from "./customer-stories";
+import { ProductExampleLink } from "./product-example-link";
 
 export function IllustratedHome() {
   return (
@@ -59,7 +60,7 @@ export function IllustratedHome() {
                 What makes a useful buying signal? <span aria-hidden="true">↗</span>
               </a>
             </div>
-            <LeadFlow />
+            <DeferredVisual kind="flow" />
           </section>
         </div>
       </div>
@@ -134,6 +135,7 @@ export function IllustratedHome() {
         </section>
       </div>
       <StrategySection />
+      <ProductExampleLink />
       <IntegrationsStrip />
       <CustomerStories />
     </>

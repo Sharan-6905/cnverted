@@ -127,4 +127,28 @@ Remaining external or longer-term work:
 - Render only the matching mobile or desktop signal scene. Replaced the logo strip's animation-library dependency with native animations that pause offscreen, when hidden, and for reduced motion. Secondary fonts no longer preload; below-fold feature images load lazily; the responsive hero poster uses quality 60.
 - TypeScript, the default Turbopack production build, and the 26-page SEO audit pass. Verified 320/390-pixel layouts, the deferred animations, canvas chat/pause controls, and the booking embed. Initial homepage DOM decreased from roughly 1,898 to 880 elements.
 
-Fresh before-change [PageSpeed report](https://pagespeed.web.dev/analysis/https-www-cnvrted-com/rhrt6fxudq?form_factor=mobile), captured at 11:03 IST: mobile Performance **84**, Accessibility 96, Best Practices 96, SEO 100; FCP 1.5 s, LCP 3.7 s, TBT 100 ms, CLS 0, Speed Index 5.6 s. The LCP element was the hero supporting paragraph. The previous day's 80/97 scores remain recorded above; lab runs vary. A post-deployment report is required before claiming a measured improvement. Rolling field Core Web Vitals have not yet passed.
+Fresh before-change [PageSpeed report](https://pagespeed.web.dev/analysis/https-www-cnvrted-com/rhrt6fxudq?form_factor=mobile), captured at 11:03 IST: mobile Performance **84**, Accessibility 96, Best Practices 96, SEO 100; FCP 1.5 s, LCP 3.7 s, TBT 100 ms, CLS 0, Speed Index 5.6 s. The LCP element was the hero supporting paragraph. The previous day's 80/97 scores remain recorded above; lab runs vary.
+
+### Verified deployment and performance
+
+Commit `14dab4f` deployed successfully through the existing Git integration. The live 26-page SEO, crawler, structured-data, link, and 404 audit passes. The new example and renamed Calendly event are publicly accessible.
+
+[Post-deployment PageSpeed report](https://pagespeed.web.dev/analysis/https-www-cnvrted-com/7sj13mtgsd?form_factor=mobile), captured at 11:19 IST:
+
+| Lighthouse lab metric | Mobile | Desktop |
+| --- | --- | --- |
+| Performance | 89 | 98 |
+| Accessibility | 100 | 100 |
+| Best Practices | 100 | 100 |
+| SEO | 100 | 100 |
+| FCP | 2.1 s | 0.4 s |
+| LCP | 3.2 s | 0.6 s |
+| Total blocking time | 50 ms | 20 ms |
+| CLS | 0 | 0 |
+| Speed Index | 4.4 s | 1.5 s |
+
+The mobile score improved from today's 84 baseline (80 in the prior report), with lower LCP, blocking time, and Speed Index. FCP varied upward in this run; do not claim every metric improved. Accessibility/Best Practices scores describe the initial viewport audit; deferred interactive content was separately checked manually and these scores are not a whole-site accessibility certification.
+
+Remaining mobile delay is chiefly render-blocking CSS. Tested alternative stylesheet grouping locally without a bundle-count improvement. Also tested inline CSS: it removed stylesheet requests but increased compressed HTML from about 32 KB to 132 KB, versus roughly 36 KB of separately cached compressed CSS. Neither experiment was retained or deployed. Existing cacheable CSS and the smaller HTML response remain.
+
+Rolling field Core Web Vitals still fail (mobile field LCP 3.4 s). Those 28-day measurements cannot reflect a fresh deployment immediately. The lab result does not guarantee a field pass, a ranking change, or identical timings on every visit.

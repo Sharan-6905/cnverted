@@ -6,10 +6,10 @@ export function ProductExampleLink() {
   return (
     <section className="example-preview design-container" aria-labelledby="example-preview-title">
       <div className="example-preview-intro">
-        <span className="marketing-eyebrow">One signal, followed through</span>
+        <span className="marketing-eyebrow">Try it for your kind of business</span>
         <h2 id="example-preview-title">What would you actually say?</h2>
-        <p>A hiring post is a clue. Here’s how the context behind it becomes a relevant first message.</p>
-        <Link className="marketing-text-link" href={PRODUCT_EXAMPLE_PATH}>Follow the worked example <span aria-hidden="true">↗</span></Link>
+        <p>Choose a design studio, RevOps consultancy, or recruiting agency. Explore the fit, the signal, and a first message with a reason behind it.</p>
+        <Link className="marketing-text-link" href={PRODUCT_EXAMPLE_PATH}>Try the interactive example <span aria-hidden="true">↗</span></Link>
       </div>
       <div className="example-preview-note">
         <span className="example-sample-label">Sample data · AsterOps</span>

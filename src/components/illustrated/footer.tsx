@@ -18,6 +18,7 @@ const columns = [
   {
     title: "Resources",
     links: [
+      ["Product", "/product"],
       ["Pricing", "/pricing"],
       ["Blogs", "/blogs"],
       ["Case Studies", "/case-studies"],

@@ -98,7 +98,8 @@ export function StructuredData() {
   );
 }
 
-// Product offers belong on product/pricing pages, not every article or error page.
-export function SoftwareSchema() {
-  return <JsonLd data={softwareSchema} />;
+// Include offers only where the prices are also visible on the page.
+export function SoftwareSchema({ includeOffers = true }: { includeOffers?: boolean } = {}) {
+  const { offers, ...application } = softwareSchema;
+  return <JsonLd data={{ ...application, ...(includeOffers ? { offers } : {}) }} />;
 }

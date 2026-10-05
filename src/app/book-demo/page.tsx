@@ -84,6 +84,7 @@ export default async function BookDemoPage() {
         <div>
           <Link className="marketing-text-link" href="/learn/signal-to-outreach">Follow a product example <span aria-hidden="true">↗</span></Link>
           <Link className="marketing-text-link" href="/case-studies">Read the case studies <span aria-hidden="true">↗</span></Link>
+          <Link className="marketing-text-link" href="/product">See how Cnvrted works <span aria-hidden="true">↗</span></Link>
           <Link className="marketing-text-link" href="/pricing">Explore pricing <span aria-hidden="true">↗</span></Link>
           <Link className="marketing-text-link" href="/contact">Meet the team <span aria-hidden="true">↗</span></Link>
         </div>

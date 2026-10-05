@@ -25,6 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${SITE_URL}/product`,
+      lastModified: "2026-10-06",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${SITE_URL}/about`,
       lastModified: "2026-10-04",
       changeFrequency: "monthly",
@@ -60,6 +66,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/learn/signal-to-outreach`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },
     ...CASE_STUDIES.map((story) => ({
       url: `${SITE_URL}/case-studies/${story.slug}`,
+      ...(story.updated ? { lastModified: story.updated } : {}),
       images: [absoluteUrl(story.cover.src)],
       changeFrequency: "monthly" as const,
       priority: 0.7,

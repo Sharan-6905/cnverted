@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     image: story.cover.src,
     imageAlt: story.cover.alt,
     publishedTime: story.date,
+    modifiedTime: story.updated,
   });
 }
 
@@ -49,6 +50,7 @@ export default async function CaseStudyPage({ params }: Props) {
         description: story.description,
         image: absoluteUrl(story.cover.src),
         datePublished: story.date,
+        ...(story.updated ? { dateModified: story.updated } : {}),
         inLanguage: "en",
         author: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Cnvrted", url: SITE_URL },
         publisher: { "@id": `${SITE_URL}/#organization` },
@@ -64,7 +66,12 @@ export default async function CaseStudyPage({ params }: Props) {
             <p className="marketing-eyebrow">{story.results ? "Customer story · Email outreach" : "Inside Cnvrted"}</p>
             <h1 id="article-title" style={{ maxWidth: 704 }}>{story.title}</h1>
             <p className="design-article-dek">{story.description}</p>
-            <div className="design-article-tags"><time dateTime={story.date}>{formatPostDate(story.date)}</time><span>{story.readTime} min read</span></div>
+            <div className="design-article-tags">
+              <Link href="/about">By Cnvrted</Link>
+              <span>Published <time dateTime={story.date}>{formatPostDate(story.date)}</time></span>
+              {story.updated && <span>Updated <time dateTime={story.updated}>{formatPostDate(story.updated)}</time></span>}
+              <span>{story.readTime} min read</span>
+            </div>
           </header>
           <div className="design-article-content">
             {story.results && <CaseStudyResults results={story.results} />}
@@ -77,6 +84,7 @@ export default async function CaseStudyPage({ params }: Props) {
                     <li key={section.heading}><a href={`#case-section-${index + 1}`}>{section.heading}</a></li>
                   ))}
                   {story.comparison && <li><a href="#case-study-numbers">Results at a glance</a></li>}
+                  {story.measurementNotes && <li><a href="#case-measurement-notes">How to read these results</a></li>}
                 </ol>
                 <Link className="case-study-demo-link" href="/#strategy-title">Explore the product demo <span aria-hidden="true">↗</span></Link>
               </nav>
@@ -109,11 +117,25 @@ export default async function CaseStudyPage({ params }: Props) {
                     <p className="case-study-method-note">{story.comparison.note}</p>
                   </section>
                 ) : null}
+                {story.measurementNotes && (
+                  <section className="case-study-measurement" aria-labelledby="case-measurement-notes">
+                    <h2 id="case-measurement-notes">How to read these results</h2>
+                    <p>{story.measurementNotes.introduction}</p>
+                    <dl>{story.measurementNotes.metrics.map(({ label, definition }) => (
+                      <div key={label}><dt>{label}</dt><dd>{definition}</dd></div>
+                    ))}</dl>
+                    <p className="case-study-reporting-note">{story.measurementNotes.limitations}</p>
+                  </section>
+                )}
                 <aside className="case-study-next" aria-labelledby="case-next-title">
                   <span className="marketing-eyebrow">Put it into practice</span>
                   <h2 id="case-next-title">Give each signal a next step.</h2>
-                  <p>See how to connect a trigger, a relevant message, and a clear action in a GTM play.</p>
-                  <Link href="/blogs/what-is-a-gtm-play">Read the GTM play guide <span aria-hidden="true">↗</span></Link>
+                  <p>Follow a sample business from ICP to buying signal to outreach, then explore how the workflow fits together in Cnvrted.</p>
+                  <div className="case-study-next-links">
+                    <Link href="/learn/signal-to-outreach">Try the interactive example <span aria-hidden="true">↗</span></Link>
+                    <Link href="/product">Explore the product <span aria-hidden="true">↗</span></Link>
+                    <Link href="/blogs/what-is-a-gtm-play">Read the GTM play guide <span aria-hidden="true">↗</span></Link>
+                  </div>
                 </aside>
               </div>
             </div>

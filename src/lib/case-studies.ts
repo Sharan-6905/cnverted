@@ -6,6 +6,7 @@ export interface CaseStudySummary {
   description: string;
   excerpt: string;
   date: string;
+  updated?: string;
   readTime: number;
   cover: { src: string; alt: string };
   results?: readonly { value: string; label: string }[];
@@ -13,6 +14,11 @@ export interface CaseStudySummary {
 
 interface CaseStudy extends CaseStudySummary {
   overview?: readonly { label: string; value: string }[];
+  measurementNotes?: {
+    introduction: string;
+    metrics: readonly { label: string; definition: string }[];
+    limitations: string;
+  };
   paragraphs: string[];
   sections: { heading: string; items?: string[]; paragraph?: string; paragraphs?: string[] }[];
   comparison?: {
@@ -27,13 +33,14 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     "slug": "from-cold-emails-to-warm-conversations",
     "title": "From 200 cold emails to 11 warm ones. 6 replied.",
     "description": "A founder moved from 200 generic emails a day to 11 messages based on recent buying signals. Six prospects replied, and three booked demos that week.",
-    "excerpt": "A founder replaced a daily 200-email routine with 11 messages grounded in recent buying signals. Here’s how those conversations led to three demos in a week.",
+    "excerpt": "A founder replaced a daily 200-email routine with 11 messages grounded in recent buying signals. The campaign reported six replies and three demo bookings in a week.",
     "date": "2026-07-23",
-    "readTime": 4,
+    updated: "2026-10-06",
+    "readTime": 5,
     results: [
       { value: "11", label: "targeted emails" },
       { value: "6", label: "replies" },
-      { value: "3", label: "demo calls" },
+      { value: "3", label: "demo bookings" },
     ],
     "cover": {
       "src": "/images/case-studies/cold-emails-warm-conversations.webp",
@@ -42,7 +49,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     overview: [
       { label: "The challenge", value: "Find the prospects who had a reason to talk now, within an already defined ideal customer profile." },
       { label: "The workflow", value: "Review recent buying signals, check the original source, and write a relevant email to each prospect." },
-      { label: "The result", value: "One batch of 11 emails produced six replies and three demo calls that week. One deal closed within the month." },
+      { label: "The reported result", value: "One batch of 11 emails received six replies and three demo bookings that week. One deal closed within the month." },
     ],
     "paragraphs": [
       "A founder already knew which companies were a good fit for his product. The harder question was who had a reason to talk that week.",
@@ -81,7 +88,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       {
         heading: "What happened after the 11 emails",
         paragraphs: [
-          "Six prospects replied: six out of 11, or about 55%. Three of those conversations became demo calls in the same week. One deal closed within the month.",
+          "The campaign reported six replies from 11 emails sent: a reply rate of 54.5%. Three prospects booked demos in the same week. One deal closed within the month.",
           "The founder reported spending about 20 minutes on prospecting for the targeted batch, compared with nearly three hours on the previous daily routine.",
           "These figures describe the batch in this story. The previous process was an ongoing daily routine; the new results came from one smaller campaign."
         ]
@@ -104,11 +111,21 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
         { metric: "Emails sent", before: "Around 200 per day", after: "11 in the targeted batch" },
         { metric: "Replies", before: "Typically 2–3 from 200 emails", after: "6 from 11 emails" },
         { metric: "Time spent", before: "Nearly 3 hours per day", after: "About 20 minutes for the batch" },
-        { metric: "Demo calls", before: "Most weeks, none", after: "3 that week" },
+        { metric: "Demo bookings", before: "Most weeks, no meetings", after: "3 that week" },
         { metric: "Closed deals", before: "Not stated", after: "1 within the month" }
       ],
-      note: "The baseline describes the founder’s previous daily routine. The new results cover one batch of 11 emails."
-    }
+      note: "The baseline describes the founder’s previous daily routine. The new results cover one batch of 11 emails. These are different scopes, not a controlled test of the two approaches."
+    },
+    measurementNotes: {
+      introduction: "These figures come from the campaign account published by Cnvrted. Read them as one founder’s reported experience, rather than a benchmark for all campaigns.",
+      metrics: [
+        { label: "Reply rate", definition: "Six replies divided by 11 emails sent equals 54.5%. The account does not provide a delivered-email count or distinguish positive replies from other responses." },
+        { label: "Demo bookings", definition: "Three demos were booked in the week of the outreach. A booking is not a completed meeting; meeting attendance is not reported here." },
+        { label: "Closed deal", definition: "One deal was reported within the month. The account does not state its value or include an attribution breakdown." },
+        { label: "Prospecting time", definition: "About 20 minutes was reported for this batch, compared with nearly three hours for the former daily routine. The work and time windows differ, so this is not a measured percentage improvement." },
+      ],
+      limitations: "The customer’s name and exact campaign dates are not published. July 23, 2026 is the article’s publication date. This page does not include the underlying email or CRM records or an independent verification of the results. The small batch and different comparison periods do not establish what caused the change or predict another team’s results.",
+    },
   },
   {
     "slug": "how-cnvrted-finds-its-customers",

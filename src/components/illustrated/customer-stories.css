@@ -52,7 +52,7 @@
 .case-study-reading-grid .design-article-prose > :first-child { margin-top: 0; }
 .case-study-reading-grid .design-article-prose section > p + p,
 .case-study-reading-grid .design-article-prose section > ul + p { margin-top: 16px; }
-.case-study-reading-grid h2 { scroll-margin-top: 36px; }
+.case-study-reading-grid h2 { scroll-margin-top: 120px; }
 .case-study-contents { grid-column: 2; grid-row: 1; position: sticky; top: 128px; padding-left: 24px; border-left: 1px solid #e5e1d8; color: #68675e; font-size: 13px; line-height: 1.6; }
 .case-study-contents > p { color: #34342d; font-weight: 500; }
 .case-study-contents ol { display: grid; gap: 14px; margin: 18px 0 24px; padding: 0; list-style: none; }
@@ -69,6 +69,13 @@
 .figma-site .case-study-next h2 { margin-top: 12px; font-size: 28px; }
 .case-study-next p { margin: 12px 0 18px; color: #64645c; }
 .case-study-next a { display: inline-block; padding-block: 8px; }
+.case-study-next-links { display: flex; flex-wrap: wrap; gap: 8px 24px; }
+.case-study-next-links a { min-height: 44px; }
+.case-study-measurement dl { margin-block: 24px; }
+.case-study-measurement dl > div { padding-block: 18px; border-top: 1px solid #e5e1d8; }
+.case-study-measurement dt { margin-bottom: 6px; font-weight: 500; color: #34342d; }
+.case-study-measurement dd { margin: 0; color: #62625a; }
+.case-study-reporting-note { padding: 20px 24px; border-left: 2px solid #bbb6a9; background: #f8f7f3; font-size: 14px; line-height: 1.8; }
 
 @media (max-width: 1023px) {
   .case-study-reading-grid { grid-template-columns: minmax(0, 1fr); gap: 32px; margin-top: 32px; }
@@ -80,7 +87,8 @@
 @media (max-width: 480px) {
   .case-study-contents { padding: 20px; }
   .case-study-contents ol { grid-template-columns: 1fr; gap: 4px; }
-  .case-study-comparison { font-size: 14px; line-height: 1.6; }
+  .case-study-comparison { font-size: 14px; line-height: 1.6; overflow-wrap: normal; }
+  .case-study-comparison tbody th { width: 30%; }
   .case-study-comparison th, .case-study-comparison td { padding: 12px 6px; font-size: inherit; }
   .case-study-next { padding: 22px; }
 }

@@ -36,7 +36,7 @@ export default function LearnPage() {
         </h1>
         <p>
           Practical reading on buying signals, prospecting, and planning your
-          next GTM play.
+          next GTM play. New to Cnvrted? <Link href="/product" className="marketing-text-link">See how the product works</Link>.
         </p>
       </header>
       <aside className="resource-help design-container">

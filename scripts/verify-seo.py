@@ -110,12 +110,12 @@ def audit(path):
         assert article.get("datePublished") == page.meta.get("article:published_time"), (path, "publication metadata mismatch")
         if article.get("dateModified") and article["dateModified"] != article["datePublished"]:
             assert article["dateModified"] == page.meta.get("article:modified_time"), (path, "revision metadata mismatch")
-    if path in ("/", "/pricing"):
+    if path in ("/", "/pricing", "/product"):
         assert "SoftwareApplication" in types
     else:
         assert "SoftwareApplication" not in types, (path, "irrelevant product offers")
     if path == "/":
-        for destination in ("/pricing", "/about", "/customers", "/case-studies", "/blogs", "/contact", "/book-demo"):
+        for destination in ("/product", "/pricing", "/about", "/customers", "/case-studies", "/blogs", "/contact", "/book-demo"):
             assert destination in page.links, (path, "missing crawlable link", destination)
         assert "FAQPage" in types
     if path == "/book-demo":
@@ -125,6 +125,11 @@ def audit(path):
     if path == "/help-center":
         assert "FAQPage" in types
         assert "Which AI models does Cnvrted work with?" in html, "Paginated help missing from HTML"
+    if path == "/product":
+        assert "FAQPage" in types and "BreadcrumbList" in types and "WebPage" in types
+        software = next(node for node in page.jsonld if node.get("@type") == "SoftwareApplication")
+        assert "offers" not in software, "Product schema includes prices absent from visible content"
+        assert {"product-workflow", "product-audience", "product-evidence", "product-story"}.issubset(page.ids)
     assert all("alt" in image for image in page.images), (path, "image missing alt attribute")
     visible_text = " ".join("".join(page.text).split())
     for node in page.jsonld:
@@ -161,6 +166,16 @@ for source in ("/", "/learn", "/blogs/apollo-vs-cnvrted", "/blogs/what-is-a-gtm-
     assert "/learn/buying-signals" in pages[source].links, (source, "guide not discoverable")
 for source in ("/", "/learn", "/learn/buying-signals", "/learn/signal-to-outreach"):
     assert "/learn/ideal-customer-profile" in pages[source].links, (source, "ICP guide not discoverable")
+for source in ("/", "/book-demo", "/learn", "/case-studies/from-cold-emails-to-warm-conversations"):
+    assert "/product" in pages[source].links, (source, "product overview not discoverable")
+for destination in ("/learn/ideal-customer-profile", "/learn/buying-signals", "/learn/signal-to-outreach", "/book-demo", "/case-studies/from-cold-emails-to-warm-conversations"):
+    assert destination in pages["/product"].links, (destination, "missing product next step")
+case = pages["/case-studies/from-cold-emails-to-warm-conversations"]
+assert "case-measurement-notes" in case.ids
+assert case.meta.get("article:modified_time") == "2026-10-06"
+assert "54.5%" in " ".join(case.text) and "Updated" in " ".join(case.text)
+case_entry = next(entry for entry in entries if entry.find("{*}loc").text.endswith("/case-studies/from-cold-emails-to-warm-conversations"))
+assert case_entry.find("{*}lastmod").text == case.meta["article:modified_time"]
 for source in ("/", "/about", "/pricing", "/help-center", "/blogs", "/careers"):
     assert "/book-demo" in pages[source].links
     assert "https://calendly.com/cnvrted/30min" not in pages[source].links, (source, "CTA bypasses branded booking page")

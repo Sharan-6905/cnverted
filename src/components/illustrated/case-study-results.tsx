@@ -17,7 +17,7 @@ export function CaseStudyResults({
           </div>
         ))}
       </dl>
-      <p>Results from the campaign described in this story.</p>
+      <p>Reported results from one campaign.</p>
     </div>
   );
 }

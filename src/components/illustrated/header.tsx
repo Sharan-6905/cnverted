@@ -57,6 +57,7 @@ export function IllustratedHeader() {
         </Link>
         <div className="design-desktop-nav">
           <Link href={DEMO_PATH}>Book a call</Link>
+          <Link href="/product">Product</Link>
           <Link href="/pricing">Pricing</Link>
           <div
             className="design-resources"
@@ -136,6 +137,7 @@ export function IllustratedHeader() {
         {[
           { label: "Home", href: "/" },
           { label: "Book a call", href: DEMO_PATH },
+          { label: "Product", href: "/product" },
           { label: "Pricing", href: "/pricing" },
           ...links,
           { label: "Careers", href: "/careers" },

@@ -1,4 +1,5 @@
 import { DEMO_PATH } from "@/lib/booking";
+import Link from "next/link";
 import { IllustratedHero, DesignLink } from "./hero";
 import {
   BrainArtwork,
@@ -23,7 +24,7 @@ export function IllustratedHome() {
           <IllustratedHero
             kind="home"
             title={<LiveHeadline />}
-            description="Find the companies that fit, understand why now, and turn that context into your next outreach."
+            description="Cnvrted AI helps your GTM team find buying signals, identify companies that fit your ICP, and reach out with relevant context."
           >
             <DesignLink href={DEMO_PATH} arrow>
               Book a call
@@ -124,6 +125,9 @@ export function IllustratedHome() {
                   research a market, find buying signals, and build a shortlist
                   you can review before reaching out.
                 </p>
+                <Link className="marketing-text-link" href="/learn/go-to-market-strategy">
+                  How to build a GTM strategy <span aria-hidden="true">↗</span>
+                </Link>
               </div>
               <ScaledArtwork width={613} height={325} animated>
                 <div className="relative left-[-613px]">

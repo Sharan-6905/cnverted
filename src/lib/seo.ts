@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const SITE_URL = "https://www.cnvrted.com";
-export const SITE_TITLE = "Cnvrted | AI GTM Intelligence & Buying Signals";
+export const SITE_TITLE = "Cnvrted AI | GTM Intelligence & Buying Signals";
 export const SITE_DESCRIPTION =
-  "Build your next go-to-market move with Cnvrted. Discover buying signals, find companies that match your ICP, and reach out with relevant context.";
+  "Cnvrted AI helps B2B teams find buying signals, identify companies that fit their ICP, and plan relevant outreach. Explore the AI GTM platform or book a demo.";
 export const DEFAULT_SOCIAL_IMAGE = {
   url: "/cnvrted-link-preview.png",
   width: 1200,

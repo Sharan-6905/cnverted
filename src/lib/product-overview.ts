@@ -1,5 +1,5 @@
 export const PRODUCT_PATH = "/product";
-export const PRODUCT_DESCRIPTION = "Cnvrted is an AI go-to-market intelligence platform for founders and B2B sales teams. Find public buying signals, check ICP fit, and use the source and context to plan relevant outreach.";
+export const PRODUCT_DESCRIPTION = "Cnvrted AI is a go-to-market intelligence platform for founders and B2B sales teams. Find public buying signals, check ICP fit, and use the source and context to plan relevant outreach.";
 
 export const PRODUCT_FAQS = [
   { question: "What does Cnvrted do?", answer: PRODUCT_DESCRIPTION },
@@ -9,6 +9,7 @@ export const PRODUCT_FAQS = [
   { question: "How is Cnvrted different from a contact database?", answer: "A contact database helps you find company and person records. Cnvrted focuses on connecting a prospect to what changed, why it may be relevant to your offer, and how well the company fits your ICP. Contact information and buying context answer different questions." },
   { question: "Does a buying signal mean a prospect wants to buy?", answer: "No. A signal suggests a reason to investigate. It does not establish budget, purchasing authority, a need for an outside partner, or a commitment to buy. Separate what the source says from what you infer." },
   { question: "How can I try Cnvrted?", answer: "Spark includes 40 free credits in the Cnvrted beta. You can also book a 30-minute GTM demo to discuss your market, workflow, pricing, credit usage, and integration availability." },
+  { question: "How do you spell Cnvrted AI?", answer: "The brand is Cnvrted, spelled C-n-v-r-t-e-d. Cnvrted AI refers to the same GTM platform. If you typed “cnverted ai” or “converted ai” while looking for us, our official website is cnvrted.com. Those search phrases can also return unrelated businesses." },
 ] as const;
 
 export const PRODUCT_STEPS = [

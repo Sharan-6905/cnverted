@@ -8,6 +8,15 @@ import type { ReactNode } from "react";
 export type FAQItem = { question: string; answer: ReactNode };
 
 const faqs: readonly FAQItem[] = HOME_FAQS.map((faq) => {
+  if (faq.question === "What does GTM mean?") {
+    return {
+      ...faq,
+      answer: <>
+        GTM stands for go-to-market: the choices a business makes about which customers to serve, what to offer, and how to reach and win them. Cnvrted supports the research and prospecting part of that process. Read our{" "}
+        <Link href="/learn/go-to-market-strategy">go-to-market strategy guide</Link> for a practical starting point.
+      </>,
+    };
+  }
   if (faq.question === "Can I try Cnvrted for free?") {
     return {
       ...faq,

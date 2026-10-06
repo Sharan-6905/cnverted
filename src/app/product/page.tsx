@@ -11,7 +11,7 @@ import { pageMetadata, SITE_URL, absoluteUrl } from "@/lib/seo";
 import "./product.css";
 
 export const metadata = pageMetadata({
-  title: "Cnvrted Product — AI GTM Intelligence & Buying Signals",
+  title: "AI GTM Platform for B2B Sales | Cnvrted AI",
   description: PRODUCT_DESCRIPTION,
   path: PRODUCT_PATH,
 });
@@ -29,7 +29,7 @@ export default function ProductPage() {
       }} />
       <header className="product-intro design-container">
         <div className="product-intro-copy">
-          <p className="marketing-eyebrow">Meet Cnvrted</p>
+          <p className="marketing-eyebrow">Cnvrted AI · GTM intelligence</p>
           <h1>A reason to<br />reach out.</h1>
           <p className="product-definition">{PRODUCT_DESCRIPTION}</p>
           <div className="product-actions">
@@ -53,7 +53,7 @@ export default function ProductPage() {
       </nav>
 
       <section className="product-section design-container" aria-labelledby="product-workflow">
-        <div className="product-section-heading"><span className="marketing-eyebrow">The workflow</span><h2 id="product-workflow">Fit. Timing. Context.</h2><p>Three connected decisions, with evidence at the centre.</p></div>
+        <div className="product-section-heading"><span className="marketing-eyebrow">The workflow</span><h2 id="product-workflow">Fit. Timing. Context.</h2><p>Three connected decisions, with evidence at the centre. Start with a <Link href="/learn/go-to-market-strategy" className="marketing-text-link">go-to-market strategy</Link>, then use the research to choose your next conversation.</p></div>
         <div className="product-steps">{PRODUCT_STEPS.map((step, i) => <section key={step.id}>
           <span className="product-step-number" aria-hidden="true">0{i + 1}</span><h3>{step.title}</h3><p>{step.description}</p>
           <div className="product-review-note"><span>Worth checking</span><p>{step.check}</p></div>

@@ -9,8 +9,8 @@ import { BLOG_POSTS } from "@/lib/blog-posts";
 import { ProductExampleLink } from "@/components/illustrated/product-example-link";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Learn — ICP, Buying Signals & GTM Playbooks | Cnvrted",
-  description: "Define your ICP, qualify buying signals, and build a GTM play. Explore practical guides, a free ICP worksheet, and an interactive outreach example.",
+  title: "GTM Guides: Strategy, ICP & Buying Signals | Cnvrted",
+  description: "Build a go-to-market strategy, define your ICP, and qualify buying signals. Explore practical GTM guides, a free ICP worksheet, and an interactive outreach example.",
   path: "/learn",
 });
 
@@ -41,7 +41,17 @@ export default function LearnPage() {
       </header>
       <aside className="resource-help design-container">
         <div>
-          <span className="marketing-eyebrow">01 / Find the fit</span>
+          <span className="marketing-eyebrow">01 / Choose your approach</span>
+          <h2>What’s your go-to-market strategy?</h2>
+          <p>Six decisions, a sample B2B plan, and the measures that show whether it is working.</p>
+        </div>
+        <Link className="marketing-text-link" href="/learn/go-to-market-strategy">
+          Build a GTM strategy <span aria-hidden="true">↗</span>
+        </Link>
+      </aside>
+      <aside className="resource-help design-container">
+        <div>
+          <span className="marketing-eyebrow">02 / Find the fit</span>
           <h2>Who is your ideal customer?</h2>
           <p>A six-field ICP worksheet, three example profiles, and a way to test your assumptions.</p>
         </div>
@@ -51,7 +61,7 @@ export default function LearnPage() {
       </aside>
       <aside className="resource-help design-container">
         <div>
-          <span className="marketing-eyebrow">02 / Understand the timing</span>
+          <span className="marketing-eyebrow">03 / Understand the timing</span>
           <h2>What makes a buying signal useful?</h2>
           <p>Four examples, a five-step qualification checklist, and a worked outreach example.</p>
         </div>

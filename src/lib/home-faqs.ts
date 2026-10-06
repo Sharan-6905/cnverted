@@ -3,7 +3,12 @@ export const HOME_FAQS = [
   {
     question: "What is Cnvrted?",
     answer:
-      "Cnvrted is an AI go-to-market (GTM) intelligence platform for founders and sales teams. It finds public buying signals, matches prospects to your ideal customer profile, and brings the source and context into your outreach.",
+      "Cnvrted AI is a go-to-market (GTM) intelligence platform for founders and B2B sales teams. It finds public buying signals, matches prospects to your ideal customer profile, and brings the source and context into your outreach.",
+  },
+  {
+    question: "What does GTM mean?",
+    answer:
+      "GTM stands for go-to-market: the choices a business makes about which customers to serve, what to offer, and how to reach and win them. Cnvrted supports the research and prospecting part of that process. Read our go-to-market strategy guide for a practical starting point.",
   },
   {
     question: "What counts as a buying signal?",

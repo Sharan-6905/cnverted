@@ -94,6 +94,7 @@ def audit(path):
     expected = CANONICAL + path
     assert page.canonical and page.canonical.rstrip("/") == expected.rstrip("/"), (path, "canonical", page.canonical)
     assert page.title and page.meta.get("description"), (path, "missing title/description")
+    assert "keywords" not in page.meta, (path, "obsolete keyword-list metadata")
     assert page.h1_count == 1, (path, "heading count", page.h1_count)
     assert "noindex" not in page.meta.get("robots", ""), (path, "noindex")
     assert page.meta.get("og:url", "").rstrip("/") == expected.rstrip("/"), (path, "wrong social URL")
@@ -115,6 +116,11 @@ def audit(path):
     else:
         assert "SoftwareApplication" not in types, (path, "irrelevant product offers")
     if path == "/":
+        assert page.title.startswith("Cnvrted AI |")
+        entities = [entity for node in page.jsonld for entity in node.get("@graph", [])]
+        for entity_type in ("Organization", "WebSite"):
+            entity = next(entity for entity in entities if entity.get("@type") == entity_type)
+            assert entity.get("name") == "Cnvrted" and entity.get("alternateName") == "Cnvrted AI"
         for destination in ("/product", "/pricing", "/about", "/customers", "/case-studies", "/blogs", "/contact", "/book-demo"):
             assert destination in page.links, (path, "missing crawlable link", destination)
         assert "FAQPage" in types
@@ -128,6 +134,7 @@ def audit(path):
     if path == "/product":
         assert "FAQPage" in types and "BreadcrumbList" in types and "WebPage" in types
         software = next(node for node in page.jsonld if node.get("@type") == "SoftwareApplication")
+        assert software.get("alternateName") == "Cnvrted AI", "Misleading product aliases"
         assert "offers" not in software, "Product schema includes prices absent from visible content"
         assert {"product-workflow", "product-audience", "product-evidence", "product-story"}.issubset(page.ids)
     assert all("alt" in image for image in page.images), (path, "image missing alt attribute")
@@ -168,6 +175,15 @@ for source in ("/", "/learn", "/learn/buying-signals", "/learn/signal-to-outreac
     assert "/learn/ideal-customer-profile" in pages[source].links, (source, "ICP guide not discoverable")
 for source in ("/", "/book-demo", "/learn", "/case-studies/from-cold-emails-to-warm-conversations"):
     assert "/product" in pages[source].links, (source, "product overview not discoverable")
+for source in ("/", "/product", "/learn", "/learn/ideal-customer-profile"):
+    assert "/learn/go-to-market-strategy" in pages[source].links, (source, "GTM guide not discoverable")
+gtm = pages["/learn/go-to-market-strategy"]
+assert {"gtm-decisions", "gtm-example", "gtm-measures", "ai-gtm"}.issubset(gtm.ids)
+assert "fictional planning example" in " ".join(gtm.text), "Sample GTM plan is not labelled"
+for destination in ("/product", "/learn/ideal-customer-profile", "/learn/buying-signals", "/learn/signal-to-outreach", "/blogs/what-is-a-gtm-play", "/book-demo"):
+    assert destination in gtm.links, (destination, "missing GTM resource link")
+for variant in ("cnverted ai", "converted ai"):
+    assert variant in " ".join(pages["/product"].text).lower(), (variant, "missing visible spelling clarification")
 for destination in ("/learn/ideal-customer-profile", "/learn/buying-signals", "/learn/signal-to-outreach", "/book-demo", "/case-studies/from-cold-emails-to-warm-conversations"):
     assert destination in pages["/product"].links, (destination, "missing product next step")
 case = pages["/case-studies/from-cold-emails-to-warm-conversations"]

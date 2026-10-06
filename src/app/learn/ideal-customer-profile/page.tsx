@@ -103,6 +103,7 @@ export default function IdealCustomerProfileGuide() {
           </section>
           <section aria-labelledby="icp-next-step">
             <h2 id="icp-next-step">Turn the profile into a GTM play.</h2>
+            <p>Your ICP is one part of your <Link href="/learn/go-to-market-strategy">go-to-market strategy</Link>. Connect it to an offer, acquisition channel, sales process, and a way to measure what you learn.</p>
             <p>Use the ICP to set the account boundaries, a signal to investigate timing, and a relevant question to open the conversation. Our <Link href="/blogs/what-is-a-gtm-play">GTM play guide</Link> connects those pieces into a repeatable process.</p>
             <p>In Cnvrted, describe your target customer to Orka and review the companies and context it returns. Check the evidence before choosing whom to contact. <Link href="/book-demo">Book a GTM demo</Link> if you want to work through your own market with the team.</p>
           </section>

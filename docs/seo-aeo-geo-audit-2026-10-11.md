@@ -68,8 +68,13 @@ Google says the usual SEO foundations apply to AI Overviews/AI Mode and no speci
 
 - Production build and TypeScript check passed. One existing Google Sans Flex fallback-font warning remains; it does not fail the build.
 - Rendered audit: all 29 pages pass locally, including canonical/metadata uniqueness, JSON-LD, matching visible FAQs, internal links/anchors, crawler access, expected noindex/404 handling, and favicon fallback.
-- Responsive visual checks: learning hub and changed copy checked at mobile and desktop widths; final live verification recorded below.
-- Submission receipts and production checks will be recorded after deployment.
+- Responsive visual checks: mobile 390px, tablet 820px, and desktop 1440px. No horizontal overflow in the changed layouts. The live learning hub also passed at the browser’s normal 777px viewport.
+- Release `660c841` pushed to `main`; both Vercel checks succeeded. All 29 pages passed the same audit on https://www.cnvrted.com.
+- IndexNow returned HTTP 200 for all 29 canonical URLs: received successfully, not a guarantee of indexing. See `seo-indexnow-receipt-2026-10-11.json`.
+- Fresh Google URL Inspection reports both `/product` and `/learn/signal-to-outreach` are already indexed, despite their older exclusion-report status. This does not attribute their indexing to this release.
+- Google accepted priority recrawl requests for `/product` and `/learn/signal-to-outreach` (both displayed “Indexing requested”).
+- Google confirmed “Sitemap submitted successfully”. The table now shows submitted 11 October 2026, Success, 29 discovered pages; last-read date still 7 October, so processing of the new version is not yet confirmed.
+- Proof screenshots are saved beside the repository: `cnvrted-sitemap-submitted.png`, `cnvrted-google-indexing-request.png`, and `cnvrted-seo-live.png`.
 
 ## Remaining work that depends on evidence over time
 

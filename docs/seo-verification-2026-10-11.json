@@ -1,0 +1,392 @@
+{
+  "base": "https://www.cnvrted.com",
+  "pages": [
+    {
+      "path": "/",
+      "title": "Cnvrted AI | GTM Intelligence & Buying Signals",
+      "description": "Cnvrted AI helps B2B teams find buying signals, identify companies that fit their ICP, and plan relevant outreach. Explore the AI GTM platform or book a demo.",
+      "title_length": 46,
+      "description_length": 158,
+      "schema_types": [
+        null,
+        "WebPage",
+        "SoftwareApplication",
+        "FAQPage"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/product",
+      "title": "AI GTM Platform for B2B Sales | Cnvrted AI",
+      "description": "Find ICP-fit accounts, investigate public buying signals, and plan relevant outreach with Cnvrted AI. Explore the GTM workflow, examples, and product FAQs.",
+      "title_length": 42,
+      "description_length": 155,
+      "schema_types": [
+        null,
+        "BreadcrumbList",
+        "FAQPage",
+        "SoftwareApplication",
+        "WebPage"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/about",
+      "title": "About Cnvrted AI | Founders & GTM Mission",
+      "description": "Meet the Bengaluru team behind Cnvrted AI. Learn why we build GTM intelligence around public buying signals, customer fit, and relevant conversations.",
+      "title_length": 41,
+      "description_length": 150,
+      "schema_types": [
+        null,
+        "AboutPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/pricing",
+      "title": "Cnvrted Pricing | Free GTM Credits & Paid Plans",
+      "description": "Compare Cnvrted GTM plans: Spark includes 40 free credits, Surge costs $119 per month, and Dominion offers custom credits. Find the right plan for your team.",
+      "title_length": 47,
+      "description_length": 157,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList",
+        "SoftwareApplication"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/book-demo",
+      "title": "Book an AI GTM Demo | Cnvrted",
+      "description": "Book a Cnvrted demo to explore ICP research, public buying signals, and outreach planning. Bring your target market and discuss a workflow for your team.",
+      "title_length": 29,
+      "description_length": 153,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/blogs",
+      "title": "B2B Prospecting Blog | GTM Plays & Tool Comparisons",
+      "description": "Explore B2B prospecting articles from Cnvrted: compare Apollo and Cnvrted, and learn how to turn buying signals into an actionable GTM play.",
+      "title_length": 51,
+      "description_length": 140,
+      "schema_types": [
+        null,
+        "CollectionPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/blogs/apollo-vs-cnvrted",
+      "title": "Apollo vs Cnvrted | Prospecting & Buying Signals",
+      "description": "Compare Apollo\u2019s prospecting and intent tools with Cnvrted\u2019s approach to public buying signals. Choose based on evidence, workflow, and your team\u2019s needs.",
+      "title_length": 48,
+      "description_length": 154,
+      "schema_types": [
+        null,
+        "BlogPosting",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/blogs/what-is-a-gtm-play",
+      "title": "What Is a GTM Play? Signal-to-Outreach Guide | Cnvrted",
+      "description": "A go-to-market play is the smallest unit of GTM that actually compounds \u2014 trigger, segment, motion, outcome. Here's the anatomy, and why signals and plays only work together.",
+      "title_length": 54,
+      "description_length": 174,
+      "schema_types": [
+        null,
+        "BlogPosting",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/customers",
+      "title": "Cnvrted Customers | Teams Using Buying Signals",
+      "description": "Meet the studios and technology teams using Cnvrted for prospecting. Explore the customer directory and read the evidence behind our outreach case studies.",
+      "title_length": 46,
+      "description_length": 155,
+      "schema_types": [
+        null,
+        "CollectionPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/case-studies",
+      "title": "GTM Case Studies | Signal-Led Outreach Results | Cnvrted",
+      "description": "Explore Cnvrted GTM case studies: a targeted email campaign and our own customer acquisition workflow. Read the results, methods, and measurement limits.",
+      "title_length": 56,
+      "description_length": 153,
+      "schema_types": [
+        null,
+        "CollectionPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/learn",
+      "title": "GTM Guides & Templates | Strategy, ICP & Buying Signals",
+      "description": "Build your GTM strategy, define an ideal customer profile, and qualify buying signals. Use practical examples, a free ICP worksheet, and an interactive demo.",
+      "title_length": 55,
+      "description_length": 157,
+      "schema_types": [
+        null,
+        "CollectionPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/learn/go-to-market-strategy",
+      "title": "Go-to-Market (GTM) Strategy: Guide & Example | Cnvrted",
+      "description": "Build a B2B go-to-market strategy: define your ICP, offer, channels, sales process, and success measures. Includes a sample GTM plan and where AI can help.",
+      "title_length": 54,
+      "description_length": 155,
+      "schema_types": [
+        null,
+        "BreadcrumbList",
+        "FAQPage",
+        "Article"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/learn/ideal-customer-profile",
+      "title": "Ideal Customer Profile (ICP): Examples & Template | Cnvrted",
+      "description": "Define your B2B ideal customer profile with a six-field worksheet, three sample ICPs, and a practical way to separate company fit from buying signals.",
+      "title_length": 59,
+      "description_length": 150,
+      "schema_types": [
+        null,
+        "BreadcrumbList",
+        "FAQPage",
+        "Article"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/learn/buying-signals",
+      "title": "B2B Buying Signals: Examples & Qualification | Cnvrted",
+      "description": "Buying signals are observable actions or changes that suggest a company may need a solution. Learn how to check the source, timing, and fit before reaching out.",
+      "title_length": 54,
+      "description_length": 160,
+      "schema_types": [
+        null,
+        "BreadcrumbList",
+        "FAQPage",
+        "Article"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/learn/signal-to-outreach",
+      "title": "Interactive GTM Demo: Signal to Outreach | Cnvrted",
+      "description": "Try three signal-led outreach examples for design, RevOps, and recruiting. Connect ICP fit to buying evidence and a relevant first message using fictional data.",
+      "title_length": 50,
+      "description_length": 160,
+      "schema_types": [
+        null,
+        "BreadcrumbList",
+        "Article"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/case-studies/from-cold-emails-to-warm-conversations",
+      "title": "Signal-Led Cold Email Case Study | Cnvrted",
+      "description": "A founder moved from 200 generic emails a day to 11 messages based on recent buying signals. Six prospects replied, and three booked demos that week.",
+      "title_length": 42,
+      "description_length": 149,
+      "schema_types": [
+        null,
+        "BreadcrumbList",
+        "Article"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/case-studies/how-cnvrted-finds-its-customers",
+      "title": "Founder-Led Customer Acquisition Workflow | Cnvrted",
+      "description": "A look at how our team uses Cnvrted to research accounts, review buying signals, and prepare relevant outreach.",
+      "title_length": 51,
+      "description_length": 111,
+      "schema_types": [
+        null,
+        "BreadcrumbList",
+        "Article"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/help-center",
+      "title": "Cnvrted Help Center | ICP, Signals, Credits & Setup",
+      "description": "Get answers about Cnvrted setup, ideal customer profiles, buying signals, plans, and credits. Browse product help or contact the team for your workflow.",
+      "title_length": 51,
+      "description_length": 152,
+      "schema_types": [
+        null,
+        "CollectionPage",
+        "BreadcrumbList",
+        "FAQPage"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/join-slack",
+      "title": "GTM Slack Community | Join Cnvrted",
+      "description": "Request an invitation to the Cnvrted Slack community. Share your GTM workflow, learn with other builders, and discuss prospecting and buying signals.",
+      "title_length": 34,
+      "description_length": 149,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/careers",
+      "title": "Cnvrted Careers | AI, Engineering & GTM Jobs",
+      "description": "Explore roles at Cnvrted in AI engineering, GTM, marketing, and the founders\u2019 office. Review responsibilities, location, and application details.",
+      "title_length": 44,
+      "description_length": 145,
+      "schema_types": [
+        null,
+        "CollectionPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/careers/marketing-lead",
+      "title": "Marketing Lead \u2014 Bengaluru | Cnvrted Careers",
+      "description": "Apply for the Marketing Lead role at Cnvrted. Full-time, Bengaluru. Explore responsibilities, the team, and how to apply.",
+      "title_length": 44,
+      "description_length": 121,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/careers/ai-ml-engineer",
+      "title": "AI/ML Engineer \u2014 Remote | Cnvrted Careers",
+      "description": "Apply for the AI/ML Engineer role at Cnvrted. Full-time, Remote. Explore responsibilities, the team, and how to apply.",
+      "title_length": 41,
+      "description_length": 118,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/careers/gtm-engineer",
+      "title": "GTM Engineer \u2014 Remote | Cnvrted Careers",
+      "description": "Apply for the GTM Engineer role at Cnvrted. Full-time, Remote. Explore responsibilities, the team, and how to apply.",
+      "title_length": 39,
+      "description_length": 116,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/careers/gtm-lead",
+      "title": "GTM Lead \u2014 Remote | Cnvrted Careers",
+      "description": "Apply for the GTM Lead role at Cnvrted. Full-time, Remote. Explore responsibilities, the team, and how to apply.",
+      "title_length": 35,
+      "description_length": 112,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/careers/founders-office-intern",
+      "title": "Founders\u2019 Office Intern \u2014 Remote | Cnvrted Careers",
+      "description": "Apply for the Founders\u2019 Office Intern role at Cnvrted. Internship, Remote. Explore responsibilities, the team, and how to apply.",
+      "title_length": 50,
+      "description_length": 128,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/contact",
+      "title": "Contact Cnvrted | Product Support & Partnerships",
+      "description": "Contact Cnvrted for product support, partnership enquiries, or questions about your GTM workflow. Reach the team at info@cnvrted.com.",
+      "title_length": 48,
+      "description_length": 133,
+      "schema_types": [
+        null,
+        "ContactPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/early-access",
+      "title": "Cnvrted Early Access | AI GTM Waitlist",
+      "description": "Join the Cnvrted early-access waitlist and tell us about your GTM workflow. Looking to try the current beta? Start with Spark and 40 free credits.",
+      "title_length": 38,
+      "description_length": 146,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/privacy",
+      "title": "Cnvrted Privacy Policy | Data Use & Your Rights",
+      "description": "Read how Cnvrted collects, uses, retains, and protects personal information, including connected account data, and how to request access or deletion.",
+      "title_length": 47,
+      "description_length": 149,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    },
+    {
+      "path": "/terms",
+      "title": "Cnvrted Terms of Service | Platform Use & Accounts",
+      "description": "Read the terms governing Cnvrted accounts, platform use, subscriptions, acceptable use, and responsibilities. Contact the team if you have questions.",
+      "title_length": 50,
+      "description_length": 149,
+      "schema_types": [
+        null,
+        "WebPage",
+        "BreadcrumbList"
+      ],
+      "status": 200
+    }
+  ],
+  "result": "PASS: 29 pages, structured data, crawlers, sitemap and four 404 routes"
+}

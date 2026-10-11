@@ -154,7 +154,7 @@
 .feature-pause:focus-visible { outline:2px solid #222; outline-offset:3px; }
 .redesign-home .redesign-panel-brain .redesign-feature-intro { position:relative; left:auto; bottom:auto; max-width:78%; }
 .redesign-home .redesign-panel-brain .redesign-feature-intro :is(h3,p) { color:#302446; }
-.redesign-panel-strategy { background-image:linear-gradient(#164d3733,#164d3733),url('/figma/redesign/paper-texture.webp'); }
+.redesign-panel-strategy { background-image:linear-gradient(#164d3733,#164d3733),image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")); }
 @keyframes workflow-stream { to { stroke-dashoffset:-600; } }
 @media(max-width:900px) {
  .feature-workflow { grid-template-columns:minmax(0,1fr) 100px minmax(0,1fr); padding:4px 22px 24px; }

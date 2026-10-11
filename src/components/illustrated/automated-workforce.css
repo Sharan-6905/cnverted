@@ -5,7 +5,7 @@
 .workforce-heading p { margin: 12px auto 0; color: #5f5f5f; font-size: 16px; line-height: 1.6; }
 .workforce-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); align-items: start; gap: 14px; margin-top: 34px; }
 .workforce-grid > article { min-width: 0; }
-.workforce-frame { padding: 14px; border-radius: 19px; background-image: url('/figma/redesign/paper-texture.webp'); background-size: cover; background-blend-mode: soft-light; box-shadow: inset 0 1px 0 #ffffff80; }
+.workforce-frame { padding: 14px; border-radius: 19px; background-image: image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")); background-size: cover; background-blend-mode: soft-light; box-shadow: inset 0 1px 0 #ffffff80; }
 .workforce-violet { background-color: #6465ff; }
 .workforce-green { background-color: #218e5f; }
 .workforce-lavender { background-color: #b895e5; }

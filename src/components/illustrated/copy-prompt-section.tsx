@@ -3,7 +3,12 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { Check, Copy } from "lucide-react";
 import "./copy-prompt-section.css";
-import { CopyPromptWalkthrough, promptAssistants } from "./copy-prompt-walkthrough";
+import dynamic from "next/dynamic";
+import { promptAssistants } from "./prompt-assistants";
+
+const CopyPromptWalkthrough = dynamic(() => import("./copy-prompt-walkthrough").then(module => module.CopyPromptWalkthrough), {
+  loading: () => <p role="status">Loading your walkthrough…</p>,
+});
 
 const SETUP_PROMPT = `I use a B2B lead-generation tool named Cnvrted. It identifies companies that may be in the market to purchase from me by monitoring real-world signals such as funding rounds, job postings, product launches, and public inquiries about my offerings. It then matches these signals with a comprehensive profile of my business.
 

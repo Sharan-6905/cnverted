@@ -10,7 +10,7 @@
 .redesign-site .design-nav-cta { margin-left: 24px; white-space: nowrap; }
 .redesign-site .design-resource-links { width: 210px; background: #fffefb; }
 .redesign-site .design-button-solid { position: relative; overflow: hidden; isolation: isolate; background: var(--redesign-violet); border: 0; box-shadow: -2px 3px 0 #10111a, inset 2px 4px 9px #ffffff40; color: #fff; }
-.redesign-site .design-button-solid::before { content: ""; position: absolute; inset: -60px -30px; z-index: -1; background: url('/figma/redesign/paper-texture.webp') center / cover; opacity: .6; mix-blend-mode: soft-light; pointer-events: none; }
+.redesign-site .design-button-solid::before { content: ""; position: absolute; inset: -60px -30px; z-index: -1; background: image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")) center / cover; opacity: .6; mix-blend-mode: soft-light; pointer-events: none; }
 .redesign-site .design-button-solid:hover { background-color: #4053d6; transform: translateY(-2px); }
 .redesign-site .design-button-outline { border-color: #6265a4; background: #ffffffb3; box-shadow: -2px 3px 0 #171723; color: #29283a; }
 .redesign-site .design-button-outline:hover { background: #f1f1ff; }
@@ -55,7 +55,7 @@
 .redesign-site .design-article-prose a:hover { color: #3545b6; }
 .redesign-site .pricing-plan { --plan-surface: #fff; border: 1px solid #e1e3ec; box-shadow: 0 6px 24px #25254b08; padding-top: 32px; }
 .redesign-site .pricing-plan-art { display: none; }
-.redesign-site .pricing-plan-surge { --plan-surface: #6068fa; border-color: #6068fa; color: #fff; background: var(--plan-surface) url('/figma/redesign/paper-texture.webp') center/cover; background-blend-mode: soft-light; }
+.redesign-site .pricing-plan-surge { --plan-surface: #6068fa; border-color: #6068fa; color: #fff; background: var(--plan-surface) image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")) center/cover; background-blend-mode: soft-light; }
 .redesign-site .pricing-plan-surge :is(.pricing-plan-credits,.pricing-plan-price small,.pricing-plan-note) { color: #fff; }
 .redesign-site .pricing-plan-cta { background: #6068fa; box-shadow: -2px 3px 0 #10111a; }
 .redesign-site .pricing-plan-cta:hover { background: #4353d6; }

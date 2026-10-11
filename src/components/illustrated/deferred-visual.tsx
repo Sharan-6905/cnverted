@@ -18,7 +18,7 @@ export function DeferredVisual({ kind }: { kind: "flow" | "canvas" }) {
       if (!entry.isIntersecting) return;
       setRequested(true);
       observer.disconnect();
-    }, { rootMargin: kind === "flow" ? "120px" : "600px" });
+    }, { rootMargin: "120px" });
     observer.observe(element);
     return () => observer.disconnect();
   }, [kind]);

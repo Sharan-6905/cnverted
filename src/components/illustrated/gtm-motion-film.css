@@ -20,7 +20,7 @@
   inset:0;
   z-index:-1;
   opacity:.13;
-  background:url('/figma/redesign/paper-texture.webp') center/cover;
+  background:image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")) center/cover;
   mix-blend-mode:multiply;
   pointer-events:none;
 }
@@ -750,7 +750,7 @@
   display:flex;
   align-items:center;
   gap:8px;
-  background:var(--gm-violet) url('/figma/redesign/paper-texture.webp') center/cover;
+  background:var(--gm-violet) image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")) center/cover;
   background-blend-mode:soft-light;
   color:#fff;
   border-radius:20px;

@@ -4,14 +4,14 @@ import { AnimatedCard } from "@/components/ui/feature-block-animated-card";
 
 const art = homepageCanvasAssets.integrations;
 const logos = [
-  { name: "HeyReach", asset: art.imgImage56, crop: true, width: 60, height: 50 },
+  { name: "HeyReach", asset: { ...art.imgImage56, src: "/brands/heyreach-optimized.webp" }, crop: true, width: 60, height: 50 },
   { name: "Slack", asset: art.imgSlackIcon20191 },
-  { name: "Instantly", asset: art.imgImage57, width: 64, height: 64 },
+  { name: "Instantly", asset: { ...art.imgImage57, src: "/brands/instantly-optimized.webp" }, width: 64, height: 64 },
   { name: "HubSpot", asset: art.imgHubspotIcon1 },
   { name: "Salesforce", asset: art.imgGroup },
   { name: "Microsoft Copilot", asset: art.imgCopilotIcon1 },
   { name: "Zapier", asset: art.imgCdnlogoComZapierLogo1 },
-  { name: "Outreach", asset: art.imgImage58, width: 75, height: 75 },
+  { name: "Outreach", asset: { ...art.imgImage58, src: "/brands/outreach-optimized.webp" }, width: 75, height: 75 },
   { name: "Composio", asset: { src: "/brands/composio.png", width: 180, height: 180 }, width: 60, height: 60 },
 ];
 

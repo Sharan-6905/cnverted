@@ -411,7 +411,7 @@
   --success-tint: #edf6ef;
   --lavender: #ac89e8;
   --lavender-tint: #f3edfc;
-  --paper-texture: url('/figma/redesign/paper-texture.webp');
+  --paper-texture: image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp"));
 }
 .market-story-artwork .pin {
   background-image: radial-gradient(#85754c1c 1px, transparent 1.3px);

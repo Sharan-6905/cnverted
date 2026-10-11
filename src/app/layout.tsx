@@ -44,7 +44,13 @@ export const metadata: Metadata = {
   creator: "Cnvrted",
   publisher: "Cnvrted",
   verification: { google: "a75IvLpxbTPDRrbkfayrxglnfwi7ukJnVAUkMWMiQ1k" },
-  icons: { icon: "/favicon.png", apple: "/favicon.png" },
+  icons: {
+    icon: [
+      { url: "/favicon-brand-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-brand-48.png", sizes: "48x48", type: "image/png" },
+    ],
+    apple: { url: "/apple-touch-icon-brand.png", sizes: "180x180", type: "image/png" },
+  },
   openGraph: {
     type: "website",
     siteName: "Cnvrted",

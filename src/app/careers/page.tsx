@@ -1,3 +1,5 @@
+import { CAREER_ROLES } from "@/lib/careers";
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import { careerFAQs } from "@/components/illustrated/faq";
 import type { Metadata } from "next";
@@ -7,13 +9,14 @@ import { IllustratedHero, DesignLink } from "@/components/illustrated/hero";
 import { RoleList } from "@/components/illustrated/role-list";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Careers — Cnvrted",
-  description: "Join the Cnvrted team. Explore open roles in marketing, engineering, go-to-market and operations.",
+  title: "Cnvrted Careers | AI, Engineering & GTM Jobs",
+  description: "Explore roles at Cnvrted in AI engineering, GTM, marketing, and the founders’ office. Review responsibilities, location, and application details.",
   path: "/careers",
 });
 export default function CareersPage() {
   return (
     <IllustratedShell faqItems={careerFAQs} className="design-careers-page">
+      <PageSchema path="/careers" metadata={metadata} type="CollectionPage" items={CAREER_ROLES.map(role => ({ name: role.title, path: `/careers/${role.slug}` }))} />
       <BreadcrumbSchema trail={[{ name: "Careers" }]} />
       <IllustratedHero
         kind="careers"

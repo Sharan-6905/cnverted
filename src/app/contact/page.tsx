@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
@@ -9,8 +10,8 @@ import type { FAQItem } from "@/components/illustrated/faq";
 import { DEMO_PATH } from "@/lib/booking";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact Cnvrted | Support & Founding Team",
-  description: "Get product support at info@cnvrted.com, discuss a partnership, or contact Cnvrted’s founding team directly. Find the right person for your question.",
+  title: "Contact Cnvrted | Product Support & Partnerships",
+  description: "Contact Cnvrted for product support, partnership enquiries, or questions about your GTM workflow. Reach the team at info@cnvrted.com.",
   path: "/contact",
 });
 
@@ -28,6 +29,7 @@ export default async function ContactPage() {
   const nonce = (await headers()).get("x-nonce") ?? undefined;
   return (
     <IllustratedShell className="design-contact-page" faqItems={contactFAQs}>
+      <PageSchema path="/contact" metadata={metadata} type="ContactPage" />
       <BreadcrumbSchema trail={[{ name: "Contact" }]} />
       <IllustratedContact nonce={nonce} />
     </IllustratedShell>

@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { IllustratedLegalPage } from "@/components/illustrated/legal-page";
@@ -5,8 +6,8 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { Clause, Bullets, Mail, Caps } from "@/components/legal";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Terms & Conditions — Cnvrted",
-  description: "The terms that govern your use of the Cnvrted platform.",
+  title: "Cnvrted Terms of Service | Platform Use & Accounts",
+  description: "Read the terms governing Cnvrted accounts, platform use, subscriptions, acceptable use, and responsibilities. Contact the team if you have questions.",
   path: "/terms",
 });
 
@@ -30,6 +31,7 @@ export default function TermsPage() {
             </p>
       )}
     >
+      <PageSchema path="/terms" metadata={metadata} type="WebPage" />
       <BreadcrumbSchema trail={[{ name: "Terms & Conditions" }]} />
 
             <Clause n={1} title="What Cnvrted does">

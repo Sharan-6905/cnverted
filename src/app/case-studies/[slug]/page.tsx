@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const story = CASE_STUDIES.find((item) => item.slug === slug);
   if (!story) notFound();
   return pageMetadata({
-    title: `${story.title} — Cnvrted`,
+    title: story.searchTitle ?? `${story.title} | Cnvrted`,
     description: story.description,
     path: `/case-studies/${story.slug}`,
     image: story.cover.src,

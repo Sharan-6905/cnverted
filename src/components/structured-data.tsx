@@ -8,7 +8,7 @@ const organizationSchema = {
   name: "Cnvrted",
   alternateName: "Cnvrted AI",
   url: SITE_URL,
-  logo: `${SITE_URL}/cnvrted-logo.png`,
+  logo: `${SITE_URL}/favicon.png`,
   description: SITE_DESCRIPTION,
   founder: [
     {

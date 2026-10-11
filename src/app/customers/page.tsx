@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -12,8 +13,8 @@ import { CASE_STUDIES } from "@/lib/case-studies";
 import "./customers.css";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Our Customers — Cnvrted",
-  description: "Meet the teams using Cnvrted, from creative studios to technology companies. Explore our customer community and read practical case studies.",
+  title: "Cnvrted Customers | Teams Using Buying Signals",
+  description: "Meet the studios and technology teams using Cnvrted for prospecting. Explore the customer directory and read the evidence behind our outreach case studies.",
   path: "/customers",
 });
 
@@ -31,6 +32,7 @@ export default function CustomersPage() {
       faqItems={[]}
       closingCTA={<ClosingCTA />}
     >
+      <PageSchema path="/customers" metadata={metadata} type="CollectionPage" />
       <BreadcrumbSchema trail={[{ name: "Our Customers" }]} />
       <header className="customers-hero design-container">
         <span className="marketing-eyebrow">Our customers</span>

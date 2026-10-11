@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -6,14 +7,15 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { IllustratedShell } from "@/components/illustrated/shell";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Join the waitlist — Cnvrted",
-  description: "Tell the Cnvrted team about your workflow and join the early-access waitlist. You can also start with 40 free credits in the beta today.",
+  title: "Cnvrted Early Access | AI GTM Waitlist",
+  description: "Join the Cnvrted early-access waitlist and tell us about your GTM workflow. Looking to try the current beta? Start with Spark and 40 free credits.",
   path: "/early-access",
 });
 
 export default function EarlyAccessPage() {
   return (
     <IllustratedShell className="design-early-access-page" faqItems={[]}>
+      <PageSchema path="/early-access" metadata={metadata} type="WebPage" />
       <BreadcrumbSchema trail={[{ name: "Early Access" }]} />
       <header className="marketing-page-heading design-container">
         <span className="marketing-eyebrow">Early access</span>

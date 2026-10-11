@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { FAQSchema } from "@/components/faq-schema";
 import { HOME_FAQS } from "@/lib/home-faqs";
 import { pageMetadata, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/seo";
@@ -14,7 +15,8 @@ export const metadata = pageMetadata({
 export default function Home() {
   return (
     <IllustratedShell className="redesign-home" redesign>
-      <SoftwareSchema />
+      <PageSchema path="/" metadata={metadata} />
+      <SoftwareSchema includeOffers={false} />
       <FAQSchema path="/" items={HOME_FAQS} />
       <RedesignHome />
     </IllustratedShell>

@@ -15,7 +15,7 @@ import {
   type Block,
 } from "@/lib/blog-posts";
 import { JsonLd } from "@/components/json-ld";
-import { SITE_URL } from "@/lib/seo";
+import { SITE_URL, pageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return BLOG_POSTS.map((post) => ({ slug: post.slug }));
@@ -30,26 +30,16 @@ export async function generateMetadata({
   const post = getPostBySlug(slug);
   if (!post) notFound();
   return {
-    title: `${post.title} — Cnvrted`,
-    description: post.excerpt,
-    authors: [{ name: post.author.name, url: post.author.linkedin }],
-    alternates: { canonical: `https://www.cnvrted.com/blogs/${post.slug}` },
-    openGraph: {
-      type: "article",
-      title: post.title,
+    ...pageMetadata({
+      title: post.searchTitle,
       description: post.excerpt,
-      url: `https://www.cnvrted.com/blogs/${post.slug}`,
+      path: `/blogs/${post.slug}`,
+      image: post.cover,
+      imageAlt: post.title,
       publishedTime: post.date,
-      ...(post.updated ? { modifiedTime: post.updated } : {}),
-      authors: [post.author.name],
-      images: [{ url: post.cover, width: 1023, height: 437, alt: post.title }],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: post.title,
-      description: post.excerpt,
-      images: [post.cover],
-    },
+      modifiedTime: post.updated,
+    }),
+    authors: [{ name: post.author.name, url: post.author.linkedin }],
   };
 }
 
@@ -74,7 +64,7 @@ async function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
       "@id": `${SITE_URL}/#organization`,
       "@type": "Organization",
       name: "Cnvrted",
-      logo: { "@type": "ImageObject", url: "https://www.cnvrted.com/cnvrted-logo.png" },
+      logo: { "@type": "ImageObject", url: "https://www.cnvrted.com/favicon.png" },
     },
     mainEntityOfPage: `https://www.cnvrted.com/blogs/${post.slug}`,
   };

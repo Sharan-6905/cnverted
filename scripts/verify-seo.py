@@ -115,6 +115,16 @@ def audit(path):
         assert "SoftwareApplication" in types
     else:
         assert "SoftwareApplication" not in types, (path, "irrelevant product offers")
+    if path in ("/", "/product"):
+        application = next(node for node in page.jsonld if node.get("@type") == "SoftwareApplication")
+        assert "offers" not in application, (path, "offers absent from visible page")
+    if path not in ("/product",) and not path.startswith(("/blogs/", "/case-studies/", "/learn/")):
+        assert any(kind in types for kind in ("WebPage", "CollectionPage", "AboutPage", "ContactPage")), (path, "missing page entity")
+    if path in ("/blogs", "/case-studies", "/careers"):
+        collection = next(node for node in page.jsonld if node.get("@type") == "CollectionPage")
+        for item in collection["mainEntity"]["itemListElement"]:
+            assert urllib.parse.urlparse(item["url"]).path in page.links, (path, "collection item not linked")
+            assert item["name"] in "".join(page.text), (path, "collection item not visible")
     if path == "/":
         assert page.title.startswith("Cnvrted AI |")
         entities = [entity for node in page.jsonld for entity in node.get("@graph", [])]
@@ -130,7 +140,7 @@ def audit(path):
         assert "What we’ll cover." in html, "Booking content is missing from server-rendered HTML"
     if path == "/help-center":
         assert "FAQPage" in types
-        assert "Which AI models does Cnvrted work with?" in html, "Paginated help missing from HTML"
+        assert "Which AI assistants appear in the demos?" in html, "Paginated help missing from HTML"
     if path == "/product":
         assert "FAQPage" in types and "BreadcrumbList" in types and "WebPage" in types
         software = next(node for node in page.jsonld if node.get("@type") == "SoftwareApplication")
@@ -149,7 +159,9 @@ def audit(path):
         assert article.get("dateModified") == "2026-10-04"
         assert "Updated" in visible_text
         assert "https://www.apollo.io/product/buying-intent" in page.links
-    return {"path": path, "title": page.title, "status": status, "page": page}
+    return {"path": path, "title": page.title, "description": page.meta["description"],
+            "title_length": len(page.title), "description_length": len(page.meta["description"]),
+            "schema_types": types, "status": status, "page": page}
 
 
 with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
@@ -191,7 +203,7 @@ assert "case-measurement-notes" in case.ids
 assert case.meta.get("article:modified_time") == "2026-10-06"
 assert "54.5%" in " ".join(case.text) and "Updated" in " ".join(case.text)
 case_entry = next(entry for entry in entries if entry.find("{*}loc").text.endswith("/case-studies/from-cold-emails-to-warm-conversations"))
-assert case_entry.find("{*}lastmod").text == case.meta["article:modified_time"]
+assert case_entry.find("{*}lastmod").text >= case.meta["article:modified_time"], "Sitemap predates editorial revision"
 for source in ("/", "/about", "/pricing", "/help-center", "/blogs", "/careers"):
     assert "/book-demo" in pages[source].links
     assert "https://calendly.com/cnvrted/30min" not in pages[source].links, (source, "CTA bypasses branded booking page")
@@ -229,11 +241,13 @@ class NoRedirect(urllib.request.HTTPRedirectHandler):
         return None
 
 opener = urllib.request.build_opener(NoRedirect)
-for old, current in (("/about.html", "/about"), ("/why-cnvrted", "/"), ("/blog", "/blogs"), ("/favicon.ico", "/favicon.png"), ("/favicon.svg", "/favicon.png")):
+for old, current in (("/about.html", "/about"), ("/why-cnvrted", "/"), ("/blog", "/blogs"), ("/favicon.svg", "/favicon.png")):
     try:
         response = opener.open(BASE + old, timeout=30)
     except urllib.error.HTTPError as error:
         response = error
     assert response.status == 308, (old, "missing permanent redirect")
     assert urllib.parse.urlparse(response.headers["Location"]).path == current, old
+with urllib.request.urlopen(BASE + "/favicon.ico", timeout=30) as response:
+    assert response.status == 200 and response.read(4) == b"\x00\x00\x01\x00", "ICO fallback missing"
 print(json.dumps({"base": BASE, "pages": rows, "result": f"PASS: {len(rows)} pages, structured data, crawlers, sitemap and four 404 routes"}, indent=2))

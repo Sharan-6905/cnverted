@@ -3,6 +3,7 @@
 export interface CaseStudySummary {
   slug: string;
   title: string;
+  searchTitle?: string;
   description: string;
   excerpt: string;
   date: string;
@@ -31,6 +32,7 @@ interface CaseStudy extends CaseStudySummary {
 export const CASE_STUDIES: readonly CaseStudy[] = [
   {
     "slug": "from-cold-emails-to-warm-conversations",
+    searchTitle: "Signal-Led Cold Email Case Study | Cnvrted",
     "title": "From 200 cold emails to 11 warm ones. 6 replied.",
     "description": "A founder moved from 200 generic emails a day to 11 messages based on recent buying signals. Six prospects replied, and three booked demos that week.",
     "excerpt": "A founder replaced a daily 200-email routine with 11 messages grounded in recent buying signals. The campaign reported six replies and three demo bookings in a week.",
@@ -129,6 +131,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   },
   {
     "slug": "how-cnvrted-finds-its-customers",
+    searchTitle: "Founder-Led Customer Acquisition Workflow | Cnvrted",
     "title": "We use Cnvrted to find Cnvrted’s customers.",
     "description": "A look at how our team uses Cnvrted to research accounts, review buying signals, and prepare relevant outreach.",
     "excerpt": "Our team uses Cnvrted to research accounts, review buying signals, and prepare outreach. Here is how that workflow helps us decide who to contact and what to say.",

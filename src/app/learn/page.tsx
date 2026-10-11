@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -9,8 +10,8 @@ import { BLOG_POSTS } from "@/lib/blog-posts";
 import { ProductExampleLink } from "@/components/illustrated/product-example-link";
 
 export const metadata: Metadata = pageMetadata({
-  title: "GTM Guides: Strategy, ICP & Buying Signals | Cnvrted",
-  description: "Build a go-to-market strategy, define your ICP, and qualify buying signals. Explore practical GTM guides, a free ICP worksheet, and an interactive outreach example.",
+  title: "GTM Guides & Templates | Strategy, ICP & Buying Signals",
+  description: "Build your GTM strategy, define an ideal customer profile, and qualify buying signals. Use practical examples, a free ICP worksheet, and an interactive demo.",
   path: "/learn",
 });
 
@@ -26,17 +27,18 @@ export default function LearnPage() {
       faqItems={[]}
       closingCTA={<ClosingCTA />}
     >
+      <PageSchema path="/learn" metadata={metadata} type="CollectionPage" />
       <BreadcrumbSchema trail={[{ name: "Learn" }]} />
       <header className="marketing-page-heading design-container">
         <span className="marketing-eyebrow">The field notes</span>
         <h1>
-          Better context.
+          Your GTM field guide.
           <br />
-          Better conversations.
+          From strategy to outreach.
         </h1>
         <p>
-          Practical reading on buying signals, prospecting, and planning your
-          next GTM play. New to Cnvrted? <Link href="/product" className="marketing-text-link">See how the product works</Link>.
+          Define your market, build your ideal customer profile, and qualify
+          buying signals with practical guides and a free ICP worksheet. New to Cnvrted? <Link href="/product" className="marketing-text-link">See how the product works</Link>.
         </p>
       </header>
       <aside className="resource-help design-container">

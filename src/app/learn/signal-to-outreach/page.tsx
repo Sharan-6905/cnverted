@@ -7,10 +7,10 @@ import { ProductExampleDemo } from "@/components/illustrated/product-example-dem
 import { pageMetadata, absoluteUrl, SITE_URL, DEFAULT_SOCIAL_IMAGE } from "@/lib/seo";
 import "./example.css";
 
-const title = "Your market. Your next conversation.";
-const description = "Choose a sample business and explore its ideal customer, buying signals, and outreach draft. Try three interactive Cnvrted examples with clearly labelled fictional data.";
+const title = "From buying signal to outreach.";
+const description = "Try three signal-led outreach examples for design, RevOps, and recruiting. Connect ICP fit to buying evidence and a relevant first message using fictional data.";
 const published = "2026-10-05";
-const modified = "2026-10-06";
+const modified = "2026-10-11";
 
 export const metadata = pageMetadata({ title: "Interactive GTM Demo: Signal to Outreach | Cnvrted", description, path, publishedTime: published, modifiedTime: modified });
 
@@ -29,12 +29,21 @@ export default function SignalToOutreachExample() {
         <header className="worked-example-heading">
           <Link href="/learn" className="marketing-text-link">← All field notes</Link>
           <p className="marketing-eyebrow">An interactive product example</p>
-          <h1>Your market.<br />Your next conversation.</h1>
-          <p className="worked-example-dek">Choose a business. Find the fit, follow the signal, and see what you could say next.</p>
+          <h1>From buying signal<br />to outreach.</h1>
+          <p className="worked-example-dek">Signal-led outreach connects a company’s fit with recent evidence of a need. Choose a sample business below to see how that evidence becomes a relevant first message.</p>
           <p className="worked-example-disclosure"><strong>Sample data</strong> {EXAMPLE_DISCLOSURE}</p>
-          <p className="example-editorial-note">By <Link href="/about">the Cnvrted team</Link> · Published <time dateTime={published}>October 5, 2026</time> · Updated <time dateTime={modified}>October 6, 2026</time></p>
+          <p className="example-editorial-note">By <Link href="/about">the Cnvrted team</Link> · Published <time dateTime={published}>October 5, 2026</time> · Updated <time dateTime={modified}>October 11, 2026</time></p>
         </header>
         <ProductExampleDemo />
+        <section className="example-method" aria-labelledby="example-method-title">
+          <h2 id="example-method-title">How do you turn a signal into an outreach message?</h2>
+          <ol>
+            <li><strong>Check the fit.</strong> Compare the company’s size, market, and problem with your ideal customer profile.</li>
+            <li><strong>Verify the signal.</strong> Read the original source and date. Separate what happened from what you think it could mean.</li>
+            <li><strong>Ask a relevant question.</strong> Connect the change to a problem you can help with. Give the recipient room to correct your assumption.</li>
+          </ol>
+          <p>For example, a live design vacancy may justify asking whether onboarding work needs outside support while the team hires. It does not prove that the company wants an agency. The examples above illustrate this reasoning; they do not send messages or use live prospect data.</p>
+        </section>
         <aside className="example-guide-links" aria-label="Related field guides">
           <p>Build the reasoning behind your next conversation.</p>
           <Link href="/learn/ideal-customer-profile">Define your ideal customer profile <span aria-hidden="true">↗</span></Link>

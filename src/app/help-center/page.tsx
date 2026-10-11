@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { FAQSchema } from "@/components/faq-schema";
 import { HELP_ARTICLES } from "@/lib/help-center";
 import { pageMetadata } from "@/lib/seo";
@@ -11,8 +12,8 @@ import { DEMO_PATH } from "@/lib/booking";
 import { HELP_SUPPORT_EMAIL } from "@/lib/help-center";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Help Center — Cnvrted",
-  description: "Find answers about Cnvrted’s buying signals, AI qualification, ICP, plans, and credits. Search by topic or contact our team.",
+  title: "Cnvrted Help Center | ICP, Signals, Credits & Setup",
+  description: "Get answers about Cnvrted setup, ideal customer profiles, buying signals, plans, and credits. Browse product help or contact the team for your workflow.",
   path: "/help-center",
 });
 
@@ -28,6 +29,7 @@ const helpFAQs: FAQItem[] = [
 export default function HelpCenterPage() {
   return (
     <IllustratedShell className="design-help-page" faqItems={helpFAQs}>
+      <PageSchema path="/help-center" metadata={metadata} type="CollectionPage" />
       <BreadcrumbSchema trail={[{ name: "Help Center" }]} />
       <FAQSchema path="/help-center" items={HELP_ARTICLES} />
       <IllustratedHelpCenter />

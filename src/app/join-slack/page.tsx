@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -9,8 +10,8 @@ import { CommunityForm } from "@/components/illustrated/community-form";
 import "@/components/illustrated/community.css";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Join our Slack community — Cnvrted",
-  description: "Connect with the Cnvrted community on Slack. Tell us a little about yourself to get started.",
+  title: "GTM Slack Community | Join Cnvrted",
+  description: "Request an invitation to the Cnvrted Slack community. Share your GTM workflow, learn with other builders, and discuss prospecting and buying signals.",
   path: "/join-slack",
 });
 
@@ -56,6 +57,7 @@ const communityFaqs: readonly FAQItem[] = [
 export default function JoinSlackPage() {
   return (
     <IllustratedShell className="design-community-page" faqItems={communityFaqs}>
+      <PageSchema path="/join-slack" metadata={metadata} type="WebPage" />
       <BreadcrumbSchema trail={[{ name: "Join Slack" }]} />
       <div className="community-content">
         <SupportArtwork variant="slack" />

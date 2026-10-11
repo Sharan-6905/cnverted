@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { headers } from "next/headers";
 import Link from "next/link";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
@@ -10,9 +11,8 @@ import "@/components/illustrated/contact.css";
 import "./book-demo.css";
 
 export const metadata = pageMetadata({
-  title: "Book a Call | Cnvrted GTM Demo",
-  description:
-    "Book a 30-minute GTM demo with the Cnvrted team. Explore buying signals, ICP fit, and outreach for your business. Choose a time in our live calendar.",
+  title: "Book an AI GTM Demo | Cnvrted",
+  description: "Book a Cnvrted demo to explore ICP research, public buying signals, and outreach planning. Bring your target market and discuss a workflow for your team.",
   path: DEMO_PATH,
 });
 
@@ -44,6 +44,7 @@ export default async function BookDemoPage() {
 
   return (
     <IllustratedShell className="design-demo-page" faqItems={demoFAQs}>
+      <PageSchema path="/book-demo" metadata={metadata} type="WebPage" />
       <BreadcrumbSchema trail={[{ name: "Book a call" }]} />
       <FAQSchema path={DEMO_PATH} items={demoFAQs} />
       <header className="marketing-page-heading demo-heading design-container">

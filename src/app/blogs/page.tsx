@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -9,26 +10,27 @@ import { IllustratedHero } from "@/components/illustrated/hero";
 import { assets } from "@/components/illustrated/assets";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Cnvrted Blog — Buying Signals & GTM Guides",
-  description: "Insights on outbound, buying intent, and go-to-market from the Cnvrted team.",
+  title: "B2B Prospecting Blog | GTM Plays & Tool Comparisons",
+  description: "Explore B2B prospecting articles from Cnvrted: compare Apollo and Cnvrted, and learn how to turn buying signals into an actionable GTM play.",
   path: "/blogs",
 });
 export default function BlogsPage() {
   return (
     <IllustratedShell faqItems={[]} className="design-blog-page">
+      <PageSchema path="/blogs" metadata={metadata} type="CollectionPage" items={BLOG_POSTS.map(post => ({ name: post.title, path: `/blogs/${post.slug}` }))} />
       <BreadcrumbSchema trail={[{ name: "Blog" }]} />
       <IllustratedHero
         kind="blogs"
-        title="Cnvrted Blogs"
-        description="Practical guides to buying signals, sales prospecting, and go-to-market strategy, written by Dhruv Pradeep."
+        title="Prospecting notes"
+        description="B2B prospecting perspectives, tool comparisons, and GTM plays, written by Dhruv Pradeep."
       />
       <section
         className="design-blog-list design-container"
         aria-labelledby="blogs-title"
       >
         <div className="design-section-heading">
-          <h2 id="blogs-title">Read Blogs</h2>
-          <p>Read how Cnvrted helps businesses grow</p>
+          <h2 id="blogs-title">Ideas for your next GTM play</h2>
+          <p>Compare approaches and turn research into a focused next step.</p>
         </div>
         <div className="design-blog-cards">
           {BLOG_POSTS.map((post) => (

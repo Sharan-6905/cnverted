@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -10,8 +11,8 @@ import { formatPostDate } from "@/lib/blog-posts";
 import { CaseStudyResults } from "@/components/illustrated/case-study-results";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Case Studies — Cnvrted",
-  description: "See how a founder turned 11 targeted emails into six replies, and how Cnvrted uses buying signals to find its own customers.",
+  title: "GTM Case Studies | Signal-Led Outreach Results | Cnvrted",
+  description: "Explore Cnvrted GTM case studies: a targeted email campaign and our own customer acquisition workflow. Read the results, methods, and measurement limits.",
   path: "/case-studies",
 });
 
@@ -22,6 +23,7 @@ export default function CaseStudiesPage() {
       faqItems={[]}
       closingCTA={<ClosingCTA />}
     >
+      <PageSchema path="/case-studies" metadata={metadata} type="CollectionPage" items={CASE_STUDIES.map(story => ({ name: story.title, path: `/case-studies/${story.slug}` }))} />
       <BreadcrumbSchema trail={[{ name: "Case Studies" }]} />
       <header className="marketing-page-heading design-container">
         <span className="marketing-eyebrow">In practice</span>

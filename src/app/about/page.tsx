@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -26,14 +27,15 @@ const neighborhoods = [
 ] as const;
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Cnvrted — Meet the Founding Team",
-  description: "A better reason to reach out. Meet the team building Cnvrted in Bengaluru, and discover our approach to buying signals, context, and better conversations.",
+  title: "About Cnvrted AI | Founders & GTM Mission",
+  description: "Meet the Bengaluru team behind Cnvrted AI. Learn why we build GTM intelligence around public buying signals, customer fit, and relevant conversations.",
   path: "/about",
 });
 
 export default function AboutPage() {
   return (
     <IllustratedShell className="design-about-page" faqItems={[]}>
+      <PageSchema path="/about" metadata={metadata} type="AboutPage" />
       <BreadcrumbSchema trail={[{ name: "About Us" }]} />
       <IllustratedHero
         kind="about"

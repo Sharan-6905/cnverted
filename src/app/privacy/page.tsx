@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
 import { IllustratedLegalPage } from "@/components/illustrated/legal-page";
@@ -5,8 +6,8 @@ import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { Clause, Bullets, Mail } from "@/components/legal";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Privacy Policy — Cnvrted",
-  description: "What Cnvrted collects, why, who sees it, and how to get your information removed.",
+  title: "Cnvrted Privacy Policy | Data Use & Your Rights",
+  description: "Read how Cnvrted collects, uses, retains, and protects personal information, including connected account data, and how to request access or deletion.",
   path: "/privacy",
 });
 
@@ -44,6 +45,7 @@ export default function PrivacyPage() {
             </p>
       )}
     >
+      <PageSchema path="/privacy" metadata={metadata} type="WebPage" />
       <BreadcrumbSchema trail={[{ name: "Privacy Policy" }]} />
 
             <Clause n={1} title="The short version">

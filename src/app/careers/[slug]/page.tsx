@@ -1,3 +1,4 @@
+import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import { careerFAQs } from "@/components/illustrated/faq";
 import type { Metadata } from "next";
@@ -16,8 +17,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const role = CAREER_ROLES.find((role) => role.slug === slug);
   if (!role) notFound();
   return pageMetadata({
-    title: `${role.title} — Careers at Cnvrted`,
-    description: role.description,
+    title: `${role.title} — ${role.location} | Cnvrted Careers`,
+    description: `Apply for the ${role.title} role at Cnvrted. ${role.type}, ${role.location}. Explore responsibilities, the team, and how to apply.`,
     path: `/careers/${slug}`,
   });
 }
@@ -28,6 +29,7 @@ export default async function CareerDetailPage({ params }: Props) {
   const details = CAREER_DETAILS[role.slug];
   return (
     <IllustratedShell faqItems={careerFAQs} className="design-role-page">
+      <PageSchema path={`/careers/${role.slug}`} metadata={{ title: role.title, description: role.description }} />
       <BreadcrumbSchema
         trail={[{ name: "Careers", path: "/careers" }, { name: role.title }]}
       />

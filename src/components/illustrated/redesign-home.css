@@ -323,3 +323,6 @@
  .redesign-home .integrations-logo-row { grid-template-columns:80px minmax(0,1fr); gap:8px; margin-top:24px; padding-inline:16px; }
  .redesign-home .integrations-logo-row .integrations-toucan { width:80px; }
 }
+
+.redesign-guide-link { color: inherit; text-decoration: underline; text-underline-offset: .2em; text-decoration-thickness: 1px; }
+.redesign-guide-link:hover { color: var(--redesign-ink, #252d29); }

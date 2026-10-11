@@ -12,7 +12,7 @@ import "./product.css";
 
 export const metadata = pageMetadata({
   title: "AI GTM Platform for B2B Sales | Cnvrted AI",
-  description: PRODUCT_DESCRIPTION,
+  description: "Find ICP-fit accounts, investigate public buying signals, and plan relevant outreach with Cnvrted AI. Explore the GTM workflow, examples, and product FAQs.",
   path: PRODUCT_PATH,
 });
 

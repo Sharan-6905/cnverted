@@ -25,6 +25,7 @@ export const DHRUV_PRADEEP: Author = {
 export interface BlogPost {
   slug: string;
   title: string;
+  searchTitle: string;
   excerpt: string;
   /** Short deck shown under the title on the article page. */
   dek: string;
@@ -42,6 +43,7 @@ export interface BlogPost {
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "apollo-vs-cnvrted",
+    searchTitle: "Apollo vs Cnvrted | Prospecting & Buying Signals",
     title: "Cnvrted vs Apollo: Names vs. Buyers",
     excerpt:
       "Compare Apollo’s prospecting and intent tools with Cnvrted’s approach to public buying signals. Choose based on evidence, workflow, and your team’s needs.",
@@ -143,6 +145,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "what-is-a-gtm-play",
+    searchTitle: "What Is a GTM Play? Signal-to-Outreach Guide | Cnvrted",
     title: "What Is a GTM Play (and Why Your Signals Are Useless Without One)",
     excerpt:
       "A go-to-market play is the smallest unit of GTM that actually compounds — trigger, segment, motion, outcome. Here's the anatomy, and why signals and plays only work together.",

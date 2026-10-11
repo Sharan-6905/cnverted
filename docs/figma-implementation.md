@@ -166,3 +166,11 @@ The page composes the current illustrated shell, keeping the approved navigation
 Unknown top-level URLs and missing blog, career, and case-study slugs return HTTP 404 with noindex metadata. The Go Home link returns to `/`. Desktop and mobile checks cover artwork loading and geometry, responsive overflow, navigation, and the FAQ accordion.
 
 At the user's request, the 404 now has a charcoal palette and a warm canvas spotlight over the original landscape. The light follows pointer input and drifts gently when idle, including on touch devices. Copy and recovery controls stay above the darkness overlay. The effect is scoped to this scene, pauses offscreen or in hidden tabs, renders a still light for reduced-motion preferences, and cleans up its observers and listeners on unmount. Dark navigation and FAQ styles are scoped to this page.
+
+## Ocean footer — October 11
+
+The Commercial homepage footer now uses the original image fill from Figma node `542:5185` (artwork group `542:5184`) saved as `public/figma/redesign/footer-island-wordmark.png`. The full-width crop keeps all stone letters visible at each breakpoint and blends directly into the charcoal footer through a long, eased dark-to-transparent fade, with no white strip or section gap. Existing links, legal text, and the light footer logo are preserved.
+
+`footer-water.tsx` adds pointer-driven WebGL refraction, masked by the turquoise water colors so the island lettering stays steady. Waves expire after 2.6 seconds, rendering stops when idle/offscreen/hidden, and coarse pointers, reduced motion, unavailable WebGL, and context loss retain the static image. The image remains lazy-loaded through Next Image. No animation library was added.
+
+Verified at 390, 820, and 1440 CSS pixels with no page overflow; desktop pointer movement creates visible waves without browser errors. TypeScript and the production webpack build pass.

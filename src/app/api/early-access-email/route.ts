@@ -36,7 +36,7 @@ export async function POST(req: Request) {
     from: "Cnvrted <work@cnvrted.com>",
     to: email,
     subject: "We've got your early-access request",
-    html: `<p>Hi ${escapeHtml(fullName)},</p><p>A founder reads this within 24 hours and emails you directly to lock a demo slot.</p>`,
+    html: `<p>Hi ${escapeHtml(fullName)},</p><p>Our team will review your request and follow up about access and the right setup for your workflow.</p>`,
   });
 
   if (error) {

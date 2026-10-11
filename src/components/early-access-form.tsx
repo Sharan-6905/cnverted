@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,7 +19,7 @@ type Errors = Partial<Record<keyof EarlyAccessData, string>>;
 function validate(data: EarlyAccessData): Errors {
   const errors: Errors = {};
   if (data.fullName.trim().length < 2) errors.fullName = "Add your name so we know who to reply to.";
-  if ((data.phone.match(/\d/g) ?? []).length < 8) errors.phone = "That looks short — include your country code.";
+  if (data.phone.trim() && (data.phone.match(/\d/g) ?? []).length < 8) errors.phone = "That looks short — include your country code.";
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) errors.email = "That does not look like an email address.";
   if (data.role.trim().length < 2) errors.role = "Your role helps us shape the demo.";
   if (!data.teamSize) errors.teamSize = "Pick the closest fit.";
@@ -48,10 +48,10 @@ function FieldLabel({ htmlFor, children }: { htmlFor: string; children: React.Re
   );
 }
 
-function FieldError({ message }: { message?: string }) {
+function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
   return (
-    <p className="mt-1.5 text-xs text-red-600" role="alert">
+    <p id={id} className="mt-1.5 text-xs text-red-600" role="alert">
       {message}
     </p>
   );
@@ -90,9 +90,16 @@ export function EarlyAccessForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const pending = useRef(false);
+  const successHeading = useRef<HTMLHeadingElement>(null);
+
+  useEffect(() => {
+    if (sent) successHeading.current?.focus({ preventScroll: true });
+  }, [sent]);
 
   function set<K extends keyof EarlyAccessData>(key: K, value: EarlyAccessData[K]) {
     setData((d) => ({ ...d, [key]: value }));
+    setErrors((previous) => ({ ...previous, [key]: undefined }));
   }
 
   function toggleTool(tool: string) {
@@ -104,58 +111,68 @@ export function EarlyAccessForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (pending.current) return;
     const nextErrors = validate(data);
     setErrors(nextErrors);
 
     const firstInvalid = Object.keys(nextErrors)[0];
     if (firstInvalid) {
-      const el = formRef.current?.querySelector<HTMLElement>(`[name="${firstInvalid}"]`);
-      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+      const el = formRef.current?.querySelector<HTMLElement>(
+        `[name="${firstInvalid}"]:not([type="hidden"]), [data-field="${firstInvalid}"] button`,
+      );
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      el?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "center" });
       el?.focus({ preventScroll: true });
       return;
     }
 
+    pending.current = true;
     setSubmitting(true);
     setSubmitError(null);
 
-    const { error } = await supabase.from("registration").insert({
-      full_name: data.fullName,
-      phone: data.phone,
-      email: data.email,
-      company: data.company || null,
-      role: data.role,
-      what_you_do: data.whatYouDo || null,
-      team_size: data.teamSize,
-      location: data.location,
-      used_sales_tool: data.usedSalesTool,
-      tools: data.tools,
-      tools_feedback: data.toolsFeedback || null,
-      finding_accounts_today: data.findingAccountsToday || null,
-      biggest_challenge: data.biggestChallenge || null,
-      intent: data.intent,
-      demo_time: data.demoTime || null,
-    });
+    try {
+      const { error } = await supabase.from("registration").insert({
+        full_name: data.fullName,
+        phone: data.phone,
+        email: data.email,
+        company: data.company || null,
+        role: data.role,
+        what_you_do: data.whatYouDo || null,
+        team_size: data.teamSize,
+        location: data.location,
+        used_sales_tool: data.usedSalesTool,
+        tools: data.tools,
+        tools_feedback: data.toolsFeedback || null,
+        finding_accounts_today: data.findingAccountsToday || null,
+        biggest_challenge: data.biggestChallenge || null,
+        intent: data.intent,
+        demo_time: data.demoTime || null,
+      });
 
-    if (error) {
-      setSubmitError(
-        error.code === "23505"
-          ? "That email has already registered — we've got it."
-          : "Something went wrong — please try again."
-      );
+      if (error) {
+        setSubmitError(
+          error.code === "23505"
+            ? "That email has already registered — we've got it."
+            : "Something went wrong — please try again."
+        );
+        return;
+      }
+
+      // Confirmation email is best-effort — a failure here shouldn't block the
+      // success screen, since the submission is already saved.
+      fetch("/api/early-access-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: data.email, fullName: data.fullName }),
+      }).catch(() => {});
+
+      setSent(true);
+    } catch {
+      setSubmitError("We couldn’t send your request. Please try again or email info@cnvrted.com.");
+    } finally {
+      pending.current = false;
       setSubmitting(false);
-      return;
     }
-
-    // Confirmation email is best-effort — a failure here shouldn't block the
-    // success screen, since the submission is already saved.
-    fetch("/api/early-access-email", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: data.email, fullName: data.fullName }),
-    }).catch(() => {});
-
-    setSent(true);
-    setSubmitting(false);
   }
 
   if (sent) {
@@ -164,7 +181,7 @@ export function EarlyAccessForm() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-intent-high-bg">
           <Check className="h-6 w-6 text-intent-high" />
         </div>
-        <h2 className="mt-6 font-display text-2xl font-semibold tracking-tight text-ink">We&rsquo;ve got it.</h2>
+        <h2 ref={successHeading} tabIndex={-1} className="mt-6 font-display text-2xl font-semibold tracking-tight text-ink">We&rsquo;ve got it.</h2>
         <p className="mx-auto mt-3 max-w-[420px] text-[15px] leading-relaxed text-body">
           You’re on the waitlist. Our team will email you about access and the right setup for your workflow.
         </p>
@@ -173,7 +190,7 @@ export function EarlyAccessForm() {
   }
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit} noValidate className="early-access-form rounded-3xl border border-hairline bg-canvas shadow-soft">
+    <form ref={formRef} onSubmit={handleSubmit} noValidate aria-busy={submitting} className="early-access-form rounded-3xl border border-hairline bg-canvas shadow-soft">
       {/* Step 1 — Who you are */}
       <section className="px-6 py-9 sm:px-11 sm:py-11">
         <StepHeading number={1} title="Who you are" />
@@ -183,37 +200,45 @@ export function EarlyAccessForm() {
             <Input
               id="fullName"
               name="fullName"
+              required
+              aria-invalid={Boolean(errors.fullName)}
+              aria-describedby={errors.fullName ? "fullName-error" : undefined}
               autoComplete="name"
               value={data.fullName}
               onChange={(e) => set("fullName", e.target.value)}
             />
-            <FieldError message={errors.fullName} />
+            <FieldError id="fullName-error" message={errors.fullName} />
           </div>
           <div>
-            <FieldLabel htmlFor="phone">Phone number</FieldLabel>
+            <FieldLabel htmlFor="phone">Phone number (optional)</FieldLabel>
             <Input
               id="phone"
               name="phone"
+              aria-invalid={Boolean(errors.phone)}
+              aria-describedby={errors.phone ? "phone-error" : undefined}
               type="tel"
               autoComplete="tel"
               value={data.phone}
               onChange={(e) => set("phone", e.target.value)}
             />
             <p className="mt-1.5 text-xs text-muted-soft">Include your country code.</p>
-            <FieldError message={errors.phone} />
+            <FieldError id="phone-error" message={errors.phone} />
           </div>
           <div>
             <FieldLabel htmlFor="email">Email</FieldLabel>
             <Input
               id="email"
               name="email"
+              required
+              aria-invalid={Boolean(errors.email)}
+              aria-describedby={errors.email ? "email-error" : undefined}
               type="email"
               autoComplete="email"
               placeholder="you@example.com"
               value={data.email}
               onChange={(e) => set("email", e.target.value)}
             />
-            <FieldError message={errors.email} />
+            <FieldError id="email-error" message={errors.email} />
           </div>
         </div>
       </section>
@@ -242,12 +267,15 @@ export function EarlyAccessForm() {
               <Input
                 id="role"
                 name="role"
+                required
+                aria-invalid={Boolean(errors.role)}
+                aria-describedby={errors.role ? "role-error" : undefined}
                 autoComplete="organization-title"
                 placeholder="Founder, Head of Sales, SDR lead…"
                 value={data.role}
                 onChange={(e) => set("role", e.target.value)}
               />
-              <FieldError message={errors.role} />
+              <FieldError id="role-error" message={errors.role} />
             </div>
           </div>
 
@@ -267,8 +295,8 @@ export function EarlyAccessForm() {
           </div>
 
           <div>
-            <p className="mb-1.5 text-sm font-medium text-ink">Team size</p>
-            <div className="flex flex-wrap gap-2">
+            <p id="teamSize-label" className="mb-1.5 text-sm font-medium text-ink">Team size</p>
+            <div data-field="teamSize" role="group" aria-labelledby="teamSize-label" aria-describedby={errors.teamSize ? "teamSize-error" : undefined} className="flex flex-wrap gap-2">
               {TEAM_SIZES.map((size) => (
                 <PillOption
                   key={size}
@@ -279,7 +307,7 @@ export function EarlyAccessForm() {
               ))}
             </div>
             <input type="hidden" name="teamSize" value={data.teamSize} />
-            <FieldError message={errors.teamSize} />
+            <FieldError id="teamSize-error" message={errors.teamSize} />
           </div>
 
           <div>
@@ -287,11 +315,14 @@ export function EarlyAccessForm() {
             <Input
               id="location"
               name="location"
+              required
+              aria-invalid={Boolean(errors.location)}
+              aria-describedby={errors.location ? "location-error" : undefined}
               placeholder="City, country"
               value={data.location}
               onChange={(e) => set("location", e.target.value)}
             />
-            <FieldError message={errors.location} />
+            <FieldError id="location-error" message={errors.location} />
           </div>
         </div>
       </section>
@@ -303,8 +334,8 @@ export function EarlyAccessForm() {
         <StepHeading number={3} title="Your current tooling" />
         <div className="mt-6 space-y-5">
           <div>
-            <p className="mb-1.5 text-sm font-medium text-ink">Have you used any sales tool before?</p>
-            <div className="flex flex-wrap gap-2">
+            <p id="usedSalesTool-label" className="mb-1.5 text-sm font-medium text-ink">Have you used any sales tool before?</p>
+            <div data-field="usedSalesTool" role="group" aria-labelledby="usedSalesTool-label" aria-describedby={errors.usedSalesTool ? "usedSalesTool-error" : undefined} className="flex flex-wrap gap-2">
               {(["yes", "no"] as const).map((option) => (
                 <PillOption
                   key={option}
@@ -315,7 +346,7 @@ export function EarlyAccessForm() {
               ))}
             </div>
             <input type="hidden" name="usedSalesTool" value={data.usedSalesTool} />
-            <FieldError message={errors.usedSalesTool} />
+            <FieldError id="usedSalesTool-error" message={errors.usedSalesTool} />
           </div>
 
           {data.usedSalesTool === "yes" && (
@@ -390,10 +421,10 @@ export function EarlyAccessForm() {
         <StepHeading number={5} title="Fit and timing" />
         <div className="mt-6 space-y-5">
           <div>
-            <p className="mb-1.5 text-sm font-medium text-ink">
+            <p id="intent-label" className="mb-1.5 text-sm font-medium text-ink">
               Are you actively looking for something like this right now?
             </p>
-            <div className="flex flex-wrap gap-2">
+            <div data-field="intent" role="group" aria-labelledby="intent-label" aria-describedby={errors.intent ? "intent-error" : undefined} className="flex flex-wrap gap-2">
               {INTENT_OPTIONS.map((option) => (
                 <PillOption
                   key={option}
@@ -404,7 +435,7 @@ export function EarlyAccessForm() {
               ))}
             </div>
             <input type="hidden" name="intent" value={data.intent} />
-            <FieldError message={errors.intent} />
+            <FieldError id="intent-error" message={errors.intent} />
           </div>
 
           <div>
@@ -429,7 +460,7 @@ export function EarlyAccessForm() {
         <Button type="submit" variant="accent" size="lg" disabled={submitting}>
           {submitting ? "Sending…" : "Join the waitlist"}
         </Button>
-        {submitError && <p className="mt-3 text-xs text-red-600">{submitError}</p>}
+        {submitError && <p role="alert" className="mt-3 text-xs text-red-600">{submitError}</p>}
         <p className="mt-3 text-xs text-muted-soft">No spam. Ever.</p>
       </div>
     </form>

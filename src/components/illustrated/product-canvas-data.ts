@@ -1,4 +1,4 @@
-export const PRODUCT_MODELS = ["Opus 5.5", "Sonnet", "Gemini"];
+export const PRODUCT_MODELS = ["Claude", "ChatGPT", "Gemini"];
 
 export const PRODUCT_PROMPTS = [
   "Find new markets I can grow into",
@@ -112,5 +112,17 @@ export const PRODUCT_PHASES = [
   "Qualifying the shortlist",
   "Your shortlist is ready for approval",
   "11 example companies, ready to explore",
+  "Opening your lead list",
+  "Ask Orka to find the decision makers",
+  "Profiles, LinkedIn and work emails added",
+  "Ask Orka to run cold emails",
+  "Personalised outreach drafted",
+  "Sample sending approval",
+  "Outreach sent · simulated delivery",
+  "Add a booking link and follow-ups",
+  "Review the sample follow-up sequence",
+  "Day 3 · first follow-up sent in demo",
+  "Day 7 · second follow-up sent in demo",
+  "Reply received · follow-ups stopped",
   "Skipped · try another prompt",
 ];

@@ -1,0 +1,331 @@
+.canvas-outreach { position:absolute; z-index:4; inset:20px 16px; align-self:start; background:#fff; border:1px solid #e4e4e8; border-radius:14px; box-shadow:0 12px 40px #36344e12; padding:14px; color:#30313b; }
+.canvas-outreach-heading { display:flex; align-items:center; gap:9px; margin-bottom:14px; }
+.canvas-outreach-heading > button { padding:5px; color:#92929d; }
+.canvas-outreach-heading > svg { color:#747991; }
+.product-demo .canvas-outreach-heading h3 { font-size:14px; font-weight:500; line-height:1.4; }
+.canvas-outreach-heading small { display:block; font-size:9px; color:#91929d; margin-top:2px; }
+.canvas-outreach-heading > span { margin-left:auto; font-size:8px; text-transform:uppercase; letter-spacing:.04em; color:#9a9ba4; white-space:nowrap; }
+.canvas-outreach-table table { border-collapse:collapse; width:100%; table-layout:fixed; font-size:10px; text-align:left; }
+.canvas-outreach-table th { font-size:9px; font-weight:400; color:#9194a0; background:#f7f8fb; padding:8px 5px; }
+.canvas-outreach-table th:first-child { width:24px; }
+.canvas-outreach-table th:nth-child(2) { width:23%; }
+.canvas-outreach-table th:nth-child(3) { width:35%; }
+.canvas-outreach-table td { padding:10px 5px; border-bottom:1px solid #eeeef2; overflow-wrap:anywhere; }
+.canvas-outreach-table input { width:12px; height:12px; accent-color:#7972bd; }
+.canvas-outreach-table b { display:block; font-weight:500; }
+.canvas-outreach-table small { display:block; font-size:8px; color:#9496a1; margin-top:3px; }
+.canvas-contact-person { display:flex; gap:7px; align-items:center; }
+.canvas-contact-person img { width:30px; height:30px; border-radius:50%; flex-shrink:0; background:#f2f0f7; }
+.canvas-contact-links { display:grid; gap:6px; animation:contact-reveal .4s ease-out; }
+.canvas-contact-links button { display:flex; align-items:center; gap:5px; color:#687293; text-align:left; font-size:8px; min-width:0; }
+.canvas-contact-links button:first-child { color:#0a66c2; }
+.canvas-contact-links svg { flex-shrink:0; }
+.canvas-contact-links span { overflow-wrap:anywhere; }
+.canvas-contact-pending { display:flex; align-items:center; gap:3px; color:#9b9ba6; font-size:8px; }
+.canvas-outreach-table-footer { display:flex; align-items:center; justify-content:space-between; margin:7px 0 12px; color:#999ba5; font-size:8px; }
+.canvas-outreach-table-footer > div { display:flex; gap:5px; }
+.canvas-outreach-table-footer button { display:grid; place-items:center; width:24px; height:24px; border:1px solid #ebebef; border-radius:5px; }
+.product-demo .canvas-outreach-primary { display:flex; align-items:center; justify-content:center; gap:6px; padding:9px 11px; background:#615b9c; color:white; border-radius:7px; font-size:10px; white-space:nowrap; }
+.product-demo .canvas-outreach-primary:disabled { opacity:.4; }
+.canvas-outreach-next { display:flex; align-items:center; flex-wrap:wrap; gap:10px; padding:16px 12px; border:1px solid #ededf3; border-radius:10px; background:#fafaff; }
+.canvas-outreach-next > svg { color:#8580ae; }
+.product-demo .canvas-outreach-next p { flex:1; min-width:130px; font-size:11px; color:#7c7d8d; line-height:1.6; }
+.canvas-email-card { border:1px solid #e7e7ef; border-radius:10px; padding:12px; background:#fff; box-shadow:0 4px 18px #514b7506; }
+.canvas-email-card > header { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.canvas-mail-mark { display:grid; place-items:center; width:28px; height:28px; border-radius:7px; background:#f2f0fa; color:#8780b6; }
+.product-demo .canvas-email-card h4 { font-size:12px; font-weight:500; }
+.canvas-email-card small { font-size:8px; color:#8f919f; }
+.canvas-delivered { color:#7f9c7c; margin-left:auto; }
+.canvas-email-meta { display:flex; gap:7px; flex-wrap:wrap; color:#999aa5; font-size:9px; border-bottom:1px solid #f0f0f5; padding-bottom:8px; }
+.canvas-email-meta b { font-weight:400; color:#737395; }
+.canvas-email-subject { width:100%; color:#545665; }
+.canvas-email-card textarea { display:block; width:100%; border:0; background:transparent; resize:none; height:123px; padding:10px 0; color:#626474; font-size:10px; line-height:1.7; }
+.canvas-email-card footer { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px; margin-top:5px; }
+.canvas-email-card footer > span { display:flex; gap:5px; align-items:center; font-size:8px; color:#989aa7; }
+.canvas-email-card footer .canvas-sent-badge { color:#698a68; background:#f0f6ef; padding:7px 10px; border-radius:6px; }
+.product-demo .canvas-outreach-sample-note { margin-top:10px; font-size:8px; text-align:center; color:#9c9eaa; }
+.canvas-profile-note { display:flex; justify-content:space-between; align-items:center; gap:8px; padding:8px 10px; border-radius:7px; background:#f4f7fd; color:#61769b; font-size:10px; overflow-wrap:anywhere; margin-bottom:10px; }
+.canvas-profile-note small { display:block; font-size:8px; color:#909bac; }
+.canvas-profile-note button { font-size:9px; }
+.product-followup-prompt { margin-top:18px; }
+.product-followup-reply { padding-top:8px; }
+.product-followup-reply > p { margin-top:8px; }
+.product-followup-reply button { margin-top:10px; }
+.product-demo[data-outreach="true"] .product-canvas-caption { display:none; }
+.product-demo[data-outreach="true"] .product-graph-viewport { opacity:.24; pointer-events:none; }
+@keyframes contact-reveal { from { opacity:0; transform:translateY(4px); } to { opacity:1; transform:none; } }
+@media(max-width:1023px) {
+ .canvas-outreach { inset:12px 8px; padding:10px; }
+ .canvas-contact-person { gap:4px; }
+ .canvas-contact-person img { width:24px; height:24px; }
+ .canvas-contact-links span { font-size:7px; }
+ .canvas-outreach-table th:nth-child(2) { width:22%; }
+}
+@media(max-width:767px) {
+ .product-demo[data-outreach="true"] .product-canvas { height:auto!important; min-height:740px; }
+ .product-demo[data-outreach="true"] .product-canvas-stage { height:auto; min-height:740px; }
+ .canvas-outreach { position:relative; inset:auto; margin:12px 6px; padding:10px; min-height:690px; }
+ .canvas-outreach-heading { gap:5px; }
+ .canvas-outreach-heading > span { display:none; }
+ .canvas-outreach-table th { font-size:8px; padding:8px 3px; }
+ .canvas-outreach-table td { padding:10px 3px; font-size:9px; }
+ .canvas-outreach-table th:first-child { width:19px; }
+ .canvas-outreach-table th:nth-child(2) { width:23%; }
+ .canvas-outreach-table th:nth-child(3) { width:34%; }
+ .canvas-contact-person { flex-direction:column; align-items:flex-start; }
+ .canvas-contact-links button { min-height:24px; gap:3px; }
+ .canvas-contact-links span { font-size:8px; }
+ .canvas-contact-links button:first-child span { display:none; }
+ .canvas-outreach-table-footer button { width:32px; height:32px; }
+ .canvas-email-card { padding:10px; }
+ .canvas-email-card textarea { height:225px; font-size:11px; }
+ .canvas-email-card footer { align-items:flex-start; }
+ .product-demo .canvas-outreach-primary { min-height:40px; font-size:10px; }
+ .product-demo .canvas-outreach-sample-note { line-height:1.6; }
+}
+@media(prefers-reduced-motion:reduce) { .canvas-contact-links { animation:none; } }
+/* The result stays inside the canvas, but the page can grow instead of clipping it. */
+.product-demo[data-outreach="true"] .product-canvas { height:auto!important; min-height:680px; }
+.product-demo[data-outreach="true"] .product-canvas-stage { height:auto; min-height:680px; }
+.product-demo[data-outreach="true"] .product-chat { height:680px!important; min-height:593px; }
+.canvas-outreach { position:relative; inset:auto; margin:20px 16px; }
+@media(max-width:767px) {
+ .product-demo[data-outreach="true"] .product-canvas,.product-demo[data-outreach="true"] .product-canvas-stage { min-height:740px; }
+ .product-demo[data-outreach="true"] .product-chat { height:620px!important; }
+ .canvas-outreach { margin:12px 6px; }
+}
+.canvas-booking-link { display:flex; align-items:center; gap:8px; padding:9px 10px; margin:5px 0 11px; background:#f5f7fd; border:1px solid #e8ecf7; border-radius:7px; color:#637ba5; }
+.canvas-booking-link > svg { flex-shrink:0; }
+.canvas-booking-link b { display:block; font-size:10px; font-weight:500; }
+.canvas-booking-link span { display:block; font-size:9px; margin-top:2px; overflow-wrap:anywhere; }
+.canvas-booking-link small { display:block; font-size:8px; margin-top:3px; color:#949eaf; }
+.product-demo .canvas-followup-start { display:flex; align-items:center; justify-content:center; gap:7px; width:100%; margin-top:12px; padding:12px; border:1px solid #e5e1f1; border-radius:9px; color:#77679d; background:#faf8ff; font-size:11px; }
+.canvas-followup-sequence { margin-top:14px; padding:12px; border:1px solid #e9e6f2; border-radius:10px; background:#fcfbff; }
+.canvas-followup-sequence > header { display:flex; justify-content:space-between; align-items:center; gap:10px; margin-bottom:12px; }
+.product-demo .canvas-followup-sequence h4 { font-size:12px; font-weight:500; color:#625977; }
+.canvas-followup-sequence header small { display:block; font-size:8px; color:#9790a3; margin-top:3px; }
+.canvas-followup-sequence header > span { font-size:8px; color:#887d9c; }
+.canvas-followup-sequence article { padding:10px; border:1px solid #eae7f0; background:white; border-radius:8px; margin-top:8px; }
+.canvas-followup-sequence article > div { display:flex; align-items:center; justify-content:space-between; gap:8px; color:#8a8099; font-size:9px; }
+.canvas-followup-sequence article b { display:flex; align-items:center; gap:4px; font-size:8px; font-weight:400; }
+.canvas-followup-sequence article[data-delivered="true"] b { color:#75926e; }
+.product-demo .canvas-followup-sequence article p { margin:8px 0; font-size:10px; line-height:1.65; color:#747080; }
+.canvas-followup-booking { display:flex; align-items:center; gap:5px; color:#8491b0; font-size:8px; overflow-wrap:anywhere; }
+.canvas-followup-booking svg { flex-shrink:0; }
+.canvas-followup-sequence > button { margin-top:12px; }
+.canvas-followup-reply { display:flex; gap:8px; padding:12px; margin-top:12px; border-radius:8px; background:#f0f6ee; color:#72896c; }
+.canvas-followup-reply > svg { flex-shrink:0; }
+.canvas-followup-reply b { font-size:10px; font-weight:500; }
+.product-demo .canvas-followup-reply p { font-size:10px; margin:5px 0; line-height:1.6; }
+.canvas-followup-reply small { display:block; font-size:8px; color:#8d9d87; }
+@media(max-width:767px) {
+ .canvas-email-card textarea { height:260px; }
+ .canvas-followup-sequence > header { align-items:flex-start; flex-direction:column; gap:5px; }
+ .canvas-followup-booking { display:block; }
+ .canvas-followup-booking svg { display:inline; margin-right:4px; }
+}
+.canvas-email-card textarea { height:155px; }
+@media(max-width:767px) { .canvas-email-card textarea { height:300px; } }
+/* Tablet/phone layouts use a vertical workspace rather than stretching two columns. */
+@media(max-width:1023px) {
+ .product-demo .product-demo-layout { display:block; }
+ .product-demo .product-app-rail { display:none; }
+ .product-demo .product-app-main { padding:0 12px 12px; }
+ .product-demo .product-breadcrumb { display:none; }
+ .product-demo .product-workspace { display:grid; grid-template-columns:minmax(0,1fr); align-items:start; gap:14px; }
+ .product-demo .product-mobile-tabs,.product-demo .product-mobile-narration { display:none; }
+ .product-demo .product-workspace[data-view] .product-chat { display:flex; height:340px!important; min-height:0; padding:12px; }
+ .product-demo .product-workspace[data-view] .product-canvas { display:flex; flex-direction:column; width:100%; height:auto!important; min-height:0; }
+ .product-demo .product-canvas-tools { display:flex; flex-direction:row; align-items:center; justify-content:space-between; min-height:44px; padding:3px 8px; border-right:0; border-bottom:1px solid #e9ece3; }
+ .product-demo .product-canvas-tools > div { flex-direction:row; gap:5px; }
+ .product-demo .product-canvas-tools button { width:36px; height:38px; }
+ .product-demo .product-canvas-stage { height:650px; min-height:0; flex:none; }
+ .product-demo[data-outreach="true"] .product-canvas-stage { height:auto; min-height:0; }
+ .product-demo .canvas-outreach { min-height:0; width:auto; margin:12px; padding:16px; }
+ .product-demo .product-demo-controls { position:static; margin-top:12px; margin-bottom:0; }
+ .product-demo { display:flex; flex-direction:column; }
+ .product-demo-surface { order:1; }
+ .product-demo-controls { order:2; }
+ .product-demo-disclaimer { order:3; }
+ .product-demo .canvas-outreach-heading h3 { font-size:16px; }
+ .canvas-outreach-heading small { font-size:11px; }
+ .canvas-outreach-table table { font-size:12px; }
+ .canvas-outreach-table th { font-size:11px; padding:10px 7px; }
+ .canvas-outreach-table td { padding:12px 7px; }
+ .canvas-outreach-table small,.canvas-contact-links span { font-size:10px; }
+ .canvas-contact-person { flex-direction:row; gap:9px; }
+ .canvas-contact-person img { width:36px; height:36px; }
+ .canvas-contact-links button { min-height:30px; gap:7px; font-size:11px; }
+ .canvas-outreach-table-footer { font-size:10px; margin-block:10px 14px; }
+ .canvas-outreach-table-footer button { width:36px; height:36px; }
+ .product-demo .canvas-outreach-primary { min-height:42px; font-size:12px; white-space:normal; }
+ .canvas-email-card { padding:16px; }
+ .product-demo .canvas-email-card h4,.product-demo .canvas-followup-sequence h4 { font-size:14px; }
+ .canvas-email-card small,.canvas-email-meta,.canvas-email-card footer > span { font-size:11px; }
+ .canvas-email-card textarea { font-size:13px; line-height:1.7; }
+ .canvas-booking-link b { font-size:12px; }
+ .canvas-booking-link span { font-size:11px; }
+ .canvas-booking-link small { font-size:10px; }
+ .canvas-followup-sequence { padding:16px; }
+ .canvas-followup-sequence header small,.canvas-followup-sequence header > span { font-size:10px; }
+ .canvas-followup-sequence article { padding:14px; }
+ .canvas-followup-sequence article > div { font-size:11px; }
+ .canvas-followup-sequence article b { font-size:10px; }
+ .product-demo .canvas-followup-sequence article p,.product-demo .canvas-followup-reply p { font-size:12px; }
+ .canvas-followup-booking,.canvas-followup-reply small { font-size:10px; }
+ .canvas-followup-reply b { font-size:12px; }
+ .product-demo .canvas-outreach-sample-note { font-size:10px; line-height:1.6; }
+}
+@media(max-width:767px) {
+ .product-demo .product-canvas-stage { height:min(calc((100vw - 44px) * 2.5),920px); }
+ .product-demo .product-app-main { padding:0 8px 8px; }
+ .product-demo .product-workspace[data-view] .product-chat { height:360px!important; }
+ .product-demo .canvas-outreach { margin:8px; padding:12px; }
+ .product-demo .canvas-outreach-heading > span { display:none; }
+ .canvas-outreach-heading { gap:7px; margin-bottom:16px; }
+ .canvas-outreach-heading small { font-size:10px; }
+ .canvas-outreach-table table,.canvas-outreach-table tbody { display:block; }
+ .canvas-outreach-table thead { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+ .canvas-outreach-table tbody { display:grid; gap:10px; }
+ .canvas-outreach-table tr { display:grid; grid-template-columns:20px minmax(0,1fr); gap:9px 8px; padding:12px; background:#fafbfe; border:1px solid #ececf3; border-radius:10px; }
+ .canvas-outreach-table td { padding:0; border:0; min-width:0; font-size:13px; }
+ .canvas-outreach-table td:first-child { grid-column:1; grid-row:1 / span 3; padding-top:3px; }
+ .canvas-outreach-table td:nth-child(2),.canvas-outreach-table td:nth-child(3),.canvas-outreach-table td:nth-child(4) { grid-column:2; }
+ .canvas-outreach-table input { width:17px; height:17px; }
+ .canvas-outreach-table small { font-size:11px; }
+ .canvas-contact-person { flex-direction:row; gap:8px; }
+ .canvas-contact-person img { width:34px; height:34px; }
+ .canvas-contact-links { gap:0; }
+ .canvas-contact-links button { min-height:34px; }
+ .canvas-contact-links span { font-size:11px; }
+ .canvas-contact-links button:first-child span { display:inline; }
+ .canvas-contact-links svg { width:14px; height:14px; }
+ .canvas-email-card,.canvas-followup-sequence { padding:12px; }
+ .canvas-email-card footer { align-items:stretch; flex-direction:column; gap:10px; }
+ .canvas-email-card footer .canvas-sent-badge { align-self:flex-start; }
+ .canvas-email-meta { gap:5px; overflow-wrap:anywhere; }
+ .canvas-followup-sequence > header { align-items:flex-start; flex-direction:column; }
+ .canvas-followup-sequence article { padding:12px; }
+ .canvas-followup-sequence article > div { align-items:flex-start; flex-wrap:wrap; }
+ .canvas-followup-booking { display:block; }
+ .canvas-followup-booking svg { display:inline; margin-right:4px; }
+ .canvas-booking-link { padding:10px; align-items:flex-start; }
+ .canvas-booking-link > svg { margin-top:2px; }
+ .canvas-booking-link span { word-break:break-word; }
+ .product-demo .product-playback-button { min-width:110px; }
+}
+.canvas-email-card textarea { min-height:100px; overflow:hidden; }
+
+/* Outreach continues as connected nodes on the original canvas. */
+.product-demo[data-outreach="true"] .product-graph-viewport { visibility:hidden; }
+.product-demo[data-outreach="true"] .product-canvas { height:680px!important; min-height:0; }
+.product-demo[data-outreach="true"] .product-canvas-stage { height:100%; min-height:0; background:radial-gradient(circle,#dadeda 1px,transparent 1px) 12px 12px / 28px 28px,#fcfdfb; }
+.product-demo .canvas-outreach { position:absolute; inset:0; margin:0; padding:18px 22px; min-height:0; border:0; border-radius:0; box-shadow:none; background:transparent; width:auto; }
+.product-demo .canvas-workflow-back { display:flex; align-items:center; gap:6px; color:#848a83; font-size:10px; margin-bottom:20px; padding:3px 0; }
+.canvas-workflow-nodes { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:26px; max-width:590px; margin:auto; }
+.product-demo .canvas-workflow-node { position:relative; display:flex; flex-direction:column; gap:10px; min-width:0; min-height:98px; padding:12px; text-align:left; border:1px solid #dedfdc; border-radius:10px; background:#fff; box-shadow:0 5px 12px #2026260d; color:#303736; }
+.canvas-workflow-node:not(:last-child)::after { content:""; position:absolute; left:100%; top:50%; width:27px; height:1px; background:#cbd0cf; }
+.canvas-workflow-node::before { content:""; position:absolute; width:5px; height:5px; right:-3px; top:calc(50% - 2px); background:#fff; border:1px solid #cbd0cf; border-radius:50%; z-index:1; }
+.canvas-workflow-node-title { display:flex; align-items:center; gap:6px; font-size:10px; }
+.canvas-workflow-node-title > svg:last-child { margin-left:auto; color:#abb1ad; }
+.canvas-workflow-node-detail { font-size:11px; line-height:1.4; }
+.canvas-workflow-node small { display:flex; align-items:center; gap:4px; font-size:8px; color:#879580; margin-top:auto; }
+.product-demo .canvas-workflow-node[data-active="true"] { background:#252c2d; border-color:#252c2d; color:#fff; box-shadow:0 6px 16px #20262620; }
+.canvas-workflow-node[data-active="true"] small { color:#b3c3a8; }
+.product-demo .canvas-workflow-node:disabled { opacity:.5; }
+.canvas-workflow-wire { position:relative; width:1px; height:24px; margin:auto; background:#cbd0cf; }
+.canvas-workflow-wire::after { content:""; position:absolute; width:6px; height:6px; bottom:-3px; left:-2.5px; background:#fff; border:1px solid #cbd0cf; border-radius:50%; z-index:2; }
+.canvas-workflow-detail { max-width:640px; margin:auto; padding:16px; border:1px solid #dedfdc; border-radius:12px; background:#fff; box-shadow:0 6px 18px #2026260d; }
+.canvas-workflow-detail .canvas-outreach-heading h3 { font:400 15px/1.4 var(--font-editorial),Georgia,serif; }
+.canvas-workflow-detail .canvas-email-card,.canvas-workflow-detail .canvas-followup-sequence { border:0; padding:0; box-shadow:none; background:transparent; margin:0; }
+.product-demo .canvas-workflow-detail h4 { font-size:12px; color:#303736; }
+.product-demo .canvas-workflow-detail .canvas-outreach-primary { background:#252c2d; color:#fff; font-size:10px; min-height:32px; }
+.product-demo .canvas-workflow-detail .canvas-outreach-next { padding:10px 0 0; border:0; background:transparent; }
+.product-demo .canvas-workflow-detail .canvas-outreach-next p { font-size:10px; color:#7b837d; }
+.product-demo .canvas-workflow-detail .canvas-followup-start { background:#f6f7f4; color:#424b3c; border-color:#e0e4db; padding:9px; margin-top:10px; }
+.canvas-workflow-detail .canvas-booking-link { background:#f7f8f5; border-color:#e8ebe5; color:#75856c; padding:8px; }
+.canvas-workflow-detail .canvas-followup-sequence article { padding:10px; border-color:#e6e8e3; }
+.product-demo .canvas-workflow-detail .canvas-followup-sequence article p { font-size:10px; }
+.canvas-workflow-detail .canvas-followup-reply { padding:10px; }
+.product-demo .canvas-outreach-sample-note { font-size:8px; margin:12px auto 0; max-width:640px; }
+@media(min-width:768px) and (max-width:1023px) {
+ .product-demo[data-outreach="true"] .product-workspace .product-canvas { height:726px!important; }
+ .product-demo[data-outreach="true"] .product-canvas-stage { height:680px; }
+ .canvas-workflow-detail .canvas-outreach-table td { padding:10px 7px; }
+ .canvas-workflow-detail .canvas-outreach-table small,.canvas-workflow-detail .canvas-contact-links span { font-size:9px; }
+ .canvas-workflow-detail .canvas-followup-sequence header small,.canvas-workflow-detail .canvas-followup-sequence header > span { font-size:9px; }
+ .canvas-workflow-detail .canvas-followup-sequence article b,.canvas-workflow-detail .canvas-followup-booking { font-size:9px; }
+}
+@media(max-width:767px) {
+ .product-demo[data-outreach="true"] .product-workspace .product-canvas { height:auto!important; }
+ .product-demo[data-outreach="true"] .product-canvas-stage { height:auto; }
+ .product-demo .canvas-outreach { position:relative; padding:16px 10px; }
+ .canvas-workflow-nodes { gap:12px; }
+ .product-demo .canvas-workflow-node { padding:9px 6px; min-height:94px; gap:8px; border-radius:8px; }
+ .canvas-workflow-node-title { font-size:9px; flex-wrap:wrap; gap:4px; }
+ .canvas-workflow-node-title > svg:last-child { display:none; }
+ .canvas-workflow-node-detail { font-size:10px; }
+ .canvas-workflow-node small { font-size:8px; line-height:1.4; }
+ .canvas-workflow-node:not(:last-child)::after { width:13px; }
+ .canvas-workflow-detail { padding:12px; }
+ .canvas-workflow-detail .canvas-outreach-next { flex-wrap:wrap; }
+ .product-demo .canvas-workflow-detail .canvas-outreach-primary { min-height:40px; font-size:11px; }
+ .product-demo .canvas-workflow-detail .canvas-followup-sequence article p { font-size:12px; }
+ .canvas-workflow-detail .canvas-followup-start { min-height:40px; }
+}
+/* Use a consistent viewport while scenes change; scroll the detailed canvas, not tiny text. */
+.product-demo .canvas-pause-control { padding:6px 12px; min-height:36px; border:1px solid #e4e4df; border-radius:18px; color:#454c43; background:#fff; font-size:12px; }
+.product-demo .product-demo-label { font-size:11px; }
+.product-demo .canvas-outreach { overflow-y:auto; scrollbar-width:thin; }
+.product-demo .canvas-outreach :is(small,.canvas-contact-links span,.canvas-contact-links button,.canvas-booking-link span,.canvas-booking-link small,.canvas-followup-booking,.canvas-email-meta,.canvas-outreach-table-footer,.canvas-email-card footer > span) { font-size:12px; line-height:1.5; color:#62676d; }
+.product-demo .canvas-outreach :is(th,td,.canvas-email-card textarea,.canvas-followup-sequence article p,.canvas-followup-reply p,.canvas-workflow-node-title,.canvas-workflow-node-detail) { font-size:13px; }
+.product-demo .canvas-outreach :is(h3,h4) { font-size:17px; }
+.product-demo .canvas-outreach-table input { width:20px; height:20px; }
+.product-demo .canvas-contact-links button { min-height:32px; }
+.product-demo .canvas-outreach .canvas-outreach-primary { min-height:40px; font-size:13px; }
+.product-demo .canvas-outreach-sample-note { font-size:12px; color:#666c63; }
+.product-demo .canvas-workflow-nodes { gap:14px; }
+.product-demo .canvas-workflow-node { min-height:106px; padding:10px; }
+.product-demo .canvas-workflow-node::after { width:15px; }
+@media(min-width:1024px) {
+ .redesign-home .product-demo .product-chat, .redesign-home .product-demo .product-canvas { height:clamp(440px,calc(100svh - 220px),600px)!important; min-height:0; }
+ .redesign-home .product-demo .product-canvas-stage { height:100%; min-height:0; }
+ .redesign-home .deferred-visual-canvas > .deferred-visual-poster { height:calc(clamp(440px,100svh - 220px,600px) + 73px); }
+ .product-demo .product-breadcrumb { display:none; }
+}
+@media(max-width:1023px) {
+ .product-demo .product-app-header { gap:7px; flex-wrap:wrap; }
+ .product-demo .product-app-title { font-size:20px; }
+ .product-demo .product-workspace[data-view] .product-canvas, .product-demo[data-outreach="true"] .product-workspace[data-view] .product-canvas { height:640px!important; min-height:0; }
+ .product-demo .product-workspace[data-view] .product-canvas-stage { height:calc(100% - 44px); min-height:0; flex:1; }
+ .product-demo .canvas-outreach { position:absolute; inset:0; min-height:0; overflow-y:auto; }
+ .redesign-home .deferred-visual-canvas > .deferred-visual-poster { height:1065px; margin:0; }
+}
+@media(max-width:600px) {
+ .product-demo .canvas-workflow-node-detail, .product-demo .canvas-workflow-node small { display:none; }
+ .product-demo .canvas-workflow-node { min-height:54px; padding:8px; }
+ .product-demo .canvas-workflow-node-title { font-size:12px; }
+ .product-demo .canvas-workflow-nodes { gap:8px; }
+ .product-demo .canvas-workflow-node::after { width:9px; }
+ .product-demo .canvas-workflow-back { font-size:12px; min-height:36px; margin-bottom:10px; }
+ .product-demo .canvas-outreach-table table, .product-demo .canvas-outreach-table tbody { display:block; }
+ .product-demo .canvas-outreach-table thead { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+ .product-demo .canvas-outreach-table tr { display:grid; grid-template-columns:28px minmax(0,1fr); gap:5px 6px; padding:12px 0; border-bottom:1px solid #e8e8e3; }
+ .product-demo .canvas-outreach-table td { display:block; border:0; padding:2px; }
+ .product-demo .canvas-outreach-table td:first-child { grid-row:1 / 4; }
+ .product-demo .canvas-outreach-table td:not(:first-child) { grid-column:2; }
+ .product-demo .canvas-contact-person { flex-direction:row; align-items:center; }
+ .product-demo .canvas-contact-links button:first-child span { display:inline; }
+ .product-demo .canvas-contact-links { gap:0; }
+ .product-demo .canvas-email-card textarea { font-size:14px; height:290px; }
+ .product-demo .canvas-email-card footer { gap:10px; }
+}
+/* Explicit height is needed: align-self:start otherwise lets absolute panels grow past the canvas. */
+.product-demo .canvas-outreach { height:100%; max-height:100%; box-sizing:border-box; }
+.product-demo .canvas-contact-pending, .product-demo .canvas-outreach-heading > span { font-size:12px; color:#646a67; }
+@media(min-width:1024px) and (max-height:800px) {
+ .product-demo .canvas-workflow-node { min-height:54px; padding:9px 10px; }
+ .product-demo .canvas-workflow-node-detail, .product-demo .canvas-workflow-node small { display:none; }
+ .product-demo .canvas-workflow-nodes { margin-bottom:20px; }
+ .product-demo .canvas-workflow-back { margin-bottom:12px; }
+}

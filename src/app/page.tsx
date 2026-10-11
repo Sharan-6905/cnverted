@@ -3,8 +3,7 @@ import { HOME_FAQS } from "@/lib/home-faqs";
 import { pageMetadata, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/seo";
 import { SoftwareSchema } from "@/components/structured-data";
 import { IllustratedShell } from "@/components/illustrated/shell";
-import { IllustratedHome } from "@/components/illustrated/home";
-import { ClosingCTA } from "@/components/illustrated/closing-cta";
+import { RedesignHome } from "@/components/illustrated/redesign-home";
 
 export const metadata = pageMetadata({
   title: SITE_TITLE,
@@ -14,10 +13,10 @@ export const metadata = pageMetadata({
 
 export default function Home() {
   return (
-    <IllustratedShell closingCTA={<ClosingCTA />}>
+    <IllustratedShell className="redesign-home" redesign>
       <SoftwareSchema />
       <FAQSchema path="/" items={HOME_FAQS} />
-      <IllustratedHome />
+      <RedesignHome />
     </IllustratedShell>
   );
 }

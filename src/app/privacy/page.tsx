@@ -38,7 +38,7 @@ export default function PrivacyPage() {
               registered office at #41, VJ Infinity, 2nd Cross, Doctors Layout, B.
               Channasandra, Bengaluru, Karnataka 560043. Read it alongside our{" "}
               <a href="/terms" className="text-ink underline underline-offset-2">
-                Terms of Service
+                Terms &amp; Conditions
               </a>
               .
             </p>
@@ -96,7 +96,7 @@ export default function PrivacyPage() {
                   <>
                     <strong className="font-semibold text-ink">Content you put in.</strong> Lead
                     lists, target lists, notes, pipeline records, uploaded files, and anything
-                    you type into the product, including into ORKA.
+                    you type into the product, including into Orka.
                   </>,
                   <>
                     <strong className="font-semibold text-ink">Usage data.</strong> Which
@@ -110,7 +110,7 @@ export default function PrivacyPage() {
                 ]}
               />
               <p>
-                If and when we begin charging for the Services, billing details will be handled
+                For paid Services, billing details are handled
                 by a third-party payment processor and we will not store full card or bank
                 numbers on our systems.
               </p>
@@ -242,7 +242,7 @@ export default function PrivacyPage() {
             <Clause n={4} title="AI and automated processing">
               <p>Cnvrted is an AI product. Being specific about that:</p>
               <p>
-                <strong className="font-semibold text-ink">What our AI does.</strong> ORKA and
+                <strong className="font-semibold text-ink">What our AI does.</strong> Orka and
                 our underlying pipeline use AI to classify signals, infer firmographic and
                 intent attributes, score and prioritise accounts, summarise research, and draft
                 outreach copy for a user to review, edit and send.

@@ -6,11 +6,13 @@ import {
   Inter,
   League_Spartan,
 } from "next/font/google";
+import { SectionAnchor } from "./section-anchor";
 import { IllustratedHeader } from "./header";
 import { IllustratedFooter } from "./footer";
 import { FAQ, type FAQItem } from "./faq";
 import "./illustrated.css";
 import "./marketing.css";
+import "./redesign-shared.css";
 
 const editorial = Fraunces({
   subsets: ["latin"],
@@ -48,23 +50,26 @@ export function IllustratedShell({
   className = "",
   faqItems,
   closingCTA,
+  redesign = true,
 }: {
   children: ReactNode;
   className?: string;
   faqItems?: readonly FAQItem[];
   closingCTA?: ReactNode;
+  redesign?: boolean;
 }) {
   return (
     <div
-      className={`figma-site ${editorial.variable} ${sans.variable} ${openSans.variable} ${inter.variable} ${spartan.variable} ${className}`}
+      className={`figma-site ${redesign ? "redesign-site" : ""} ${editorial.variable} ${sans.variable} ${openSans.variable} ${inter.variable} ${spartan.variable} ${className}`}
     >
-      <IllustratedHeader />
+      <IllustratedHeader redesign={redesign} />
+      <SectionAnchor />
       <main id="main-content">
         {children}
         {faqItems?.length !== 0 && <FAQ items={faqItems} />}
         {closingCTA}
       </main>
-      <IllustratedFooter />
+      <IllustratedFooter redesign={redesign} />
     </div>
   );
 }

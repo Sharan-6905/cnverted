@@ -23,8 +23,9 @@ export default function EarlyAccessPage() {
           GTM workflow with us.
         </h1>
         <p>
-          Join the waitlist and tell us what your team needs. We’ll use your
-          answers to follow up about access and the right setup.
+          Tell us about the workflow you want to build. We’ll follow up about
+          future access and the right setup. The existing beta is available now;
+          you do not need to join this list to try it.
         </p>
         <a className="marketing-text-link" href="https://beta.cnvrted.com">
           Want to explore now? Start free with 40 credits{" "}

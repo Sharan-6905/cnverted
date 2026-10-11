@@ -77,7 +77,7 @@ export default function AboutPage() {
           </p>
           <Link
             className="marketing-text-link"
-            href="/#strategy-title"
+            href="/#gtm-demo"
           >
             See it in action <span aria-hidden="true">↗</span>
           </Link>

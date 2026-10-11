@@ -1,0 +1,53 @@
+.design-footer.footer-ocean-theme { --footer-water-shore: #1c1c1c; background: var(--footer-water-shore); color: #fafaf4; }
+.footer-ocean-theme .redesign-footer-logo img:last-child,
+.footer-ocean-theme .design-social img { filter: brightness(0) invert(1); }
+.redesign-site .design-footer.footer-ocean-theme a:hover { color: #c7cdff; }
+
+.footer-water {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 18 / 5;
+  margin-top: 0;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--footer-water-shore, #1c1c1c);
+}
+
+.footer-water > .footer-water-image {
+  position: absolute;
+  width: 124%;
+  max-width: none;
+  height: auto;
+  left: -12%;
+  top: -28%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.footer-water > canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.footer-water::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom,
+    var(--footer-water-shore, #1c1c1c) 0%,
+    rgb(28 28 28 / 98%) 6%,
+    rgb(28 28 28 / 87%) 15%,
+    rgb(28 28 28 / 62%) 25%,
+    rgb(28 28 28 / 30%) 37%,
+    rgb(28 28 28 / 8%) 49%,
+    transparent 62%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer-water > canvas { display: none; }
+}

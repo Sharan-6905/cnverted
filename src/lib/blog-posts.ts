@@ -104,7 +104,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         type: "p",
-        text: "**Cnvrted is a bet on timing.** We read LinkedIn, Reddit, and X in real time and surface actual buying-intent signals — a specific person complaining about their current vendor, a founder posting three times this week about the exact pain you solve, a leadership hire that just unlocked a mandate. Not “this account is probably researching your category.” *This person, this post, this window, right now.*",
+        text: "**Cnvrted is a bet on timing.** We look for public buying signals across LinkedIn, Reddit, and X and surface actual buying-intent signals — a specific person complaining about their current vendor, a founder posting three times this week about the exact pain you solve, a leadership hire that just unlocked a mandate. Not “this account is probably researching your category.” *This person, this post, this window, right now.*",
       },
       {
         type: "p",
@@ -234,7 +234,7 @@ export const BLOG_POSTS: BlogPost[] = [
       },
       {
         type: "p",
-        text: "This is the entire premise behind **Cnvrted**. We read LinkedIn, Reddit, and X in real time and surface the buying-intent signals — so every play in your library has a trigger to fire on. Buyers, not names. Think of it as a Bloomberg terminal for buying intent: not a directory of who exists, but a live feed of who's in motion.",
+        text: "This is the entire premise behind **Cnvrted**. We look for public buying signals across LinkedIn, Reddit, and X and surface the buying-intent signals — so every play in your library has a trigger to fire on. Buyers, not names. Think of it as a Bloomberg terminal for buying intent: not a directory of who exists, but a live feed of who's in motion.",
       },
       {
         type: "p",
@@ -275,7 +275,7 @@ export const BLOG_POSTS: BlogPost[] = [
       { type: "p", text: "That's the part we built." },
       {
         type: "cta",
-        text: "Cnvrted surfaces real-time buying-intent signals from LinkedIn, Reddit, and X, so your GTM plays fire on buyers who are actually moving — not names on a list. [Buyers, not names.](https://cnvrted.com/)",
+        text: "Cnvrted surfaces public buying-intent signals from LinkedIn, Reddit, and X, so your GTM plays fire on buyers who are actually moving — not names on a list. [Buyers, not names.](https://cnvrted.com/)",
       },
     ],
   },

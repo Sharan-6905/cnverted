@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { DEMO_PATH } from "@/lib/booking";
-import { BlogLandscape } from "./artwork";
+import { HelpPageArtwork } from "./redesign-page-artwork";
 import { ScaledArtwork } from "./scaled-artwork";
 import type { FAQItem } from "./faq";
 import "./pricing.css";
@@ -24,7 +24,7 @@ const plans = [
   {
     id: "surge",
     name: "Surge",
-    credits: "Monthly credit plan",
+    credits: "Team-managed plan",
     price: "$119",
     period: "/ month",
     image: {
@@ -90,9 +90,9 @@ export function IllustratedPricing() {
   return (
     <>
       <section className="pricing-hero" aria-labelledby="pricing-title">
-        <div className="design-hero-landscape" aria-hidden="true">
+        <div className="design-hero-landscape redesign-page-scene" aria-hidden="true">
           <ScaledArtwork width={1440} height={641}>
-            <BlogLandscape />
+            <HelpPageArtwork />
           </ScaledArtwork>
         </div>
         <div className="pricing-hero-copy">
@@ -139,7 +139,7 @@ export function IllustratedPricing() {
               </Link>
               {plan.id === "surge" && (
                 <p className="pricing-plan-note">
-                  Contact us to confirm the monthly credit allowance.
+                  Arranged with our team. Confirm credits, action costs, seats, and included features before subscribing.
                 </p>
               )}
             </div>
@@ -154,8 +154,7 @@ export function IllustratedPricing() {
         <p>
           Credits are your usage allowance in Cnvrted. Spark gives you 40 to get
           started. For a paid plan, <Link href={DEMO_PATH}>talk to our team</Link>{" "}
-          to confirm what each action costs and how many credits your workflow
-          needs.
+          to agree on your allowance, action costs, seats, and included features before subscribing. Credit use varies by action; 40 credits does not necessarily mean 40 leads.
         </p>
       </section>
     </>

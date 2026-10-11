@@ -4,6 +4,8 @@ import { assets } from "./assets";
 import { ScaledArtwork } from "./scaled-artwork";
 import { FooterSpotlight } from "./footer-spotlight";
 import { DEMO_PATH } from "@/lib/booking";
+import { RedesignFooterArtwork } from "./redesign-artwork";
+import { redesignAssets } from "./redesign-assets";
 
 const columns = [
   {
@@ -11,7 +13,7 @@ const columns = [
     links: [
       ["About us", "/about"],
       ["Careers", "/careers"],
-      ["Partners", "/contact"],
+      ["Partnership enquiries", "/contact#partnerships"],
       ["Our customers", "/customers"],
     ],
   },
@@ -50,18 +52,18 @@ const social = [
     image: assets.home.imgIcon5,
   },
 ];
-export function IllustratedFooter() {
+export function IllustratedFooter({ redesign = false }: { redesign?: boolean }) {
   return (
-    <footer className="design-footer">
+    <footer className={`design-footer${redesign ? " footer-ocean-theme" : ""}`}>
       <div className="design-footer-columns design-container">
         <div className="design-footer-brand">
           <Link href="/" aria-label="Cnvrted home">
-            <Image
+            {redesign ? <span className="redesign-footer-logo"><Image {...redesignAssets["505-1431-imgImage93"]} alt="" sizes="60px" /><img {...redesignAssets["499-651-imgVector"]} alt="Cnvrted" /></span> : <Image
               src={assets.home.imgCnvrted}
               alt="Cnvrted"
               width={193}
               height={40}
-            />
+            />}
           </Link>
           <p>
             Cnvrted turns buying signals into the right conversations. Find your
@@ -98,7 +100,7 @@ export function IllustratedFooter() {
       <div className="design-footer-legal design-container">
         <Link href="/" className="design-footer-signature">
           <Image
-            src={assets.home.imgImageCnvrted}
+            src={redesign ? redesignAssets["505-1431-imgImage93"].src : assets.home.imgImageCnvrted}
             alt=""
             width={40}
             height={32}
@@ -109,7 +111,7 @@ export function IllustratedFooter() {
           © {new Date().getFullYear()} Cnvrted. All rights reserved.
         </small>
       </div>
-      <FooterSpotlight>
+      {redesign ? <RedesignFooterArtwork /> : <FooterSpotlight>
         <ScaledArtwork width={1440} height={465}>
           <Image
             src={assets.home.imgImage53}
@@ -135,7 +137,7 @@ export function IllustratedFooter() {
             className="design-footer-wordmark absolute max-w-none left-[483px] top-[87px]"
           />
         </ScaledArtwork>
-      </FooterSpotlight>
+      </FooterSpotlight>}
     </footer>
   );
 }

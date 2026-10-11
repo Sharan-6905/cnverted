@@ -86,7 +86,7 @@ export default async function CaseStudyPage({ params }: Props) {
                   {story.comparison && <li><a href="#case-study-numbers">Results at a glance</a></li>}
                   {story.measurementNotes && <li><a href="#case-measurement-notes">How to read these results</a></li>}
                 </ol>
-                <Link className="case-study-demo-link" href="/#strategy-title">Explore the product demo <span aria-hidden="true">↗</span></Link>
+                <Link className="case-study-demo-link" href="/#gtm-demo">Explore the product demo <span aria-hidden="true">↗</span></Link>
               </nav>
               <div className="design-article-prose">
                 {story.overview && (

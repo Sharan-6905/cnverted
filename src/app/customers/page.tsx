@@ -67,7 +67,7 @@ export default function CustomersPage() {
           </span>
         </div>
         <ul className="customer-grid">
-          {CUSTOMERS.map((customer) => (
+          {CUSTOMERS.filter(customer => customer.description).map((customer) => (
             <li className="customer-card" key={customer.name}>
               <div className="customer-logo-space">
                 <Image
@@ -105,6 +105,7 @@ export default function CustomersPage() {
             </li>
           ))}
         </ul>
+        <div className="customer-logo-roster" aria-label="More customers">{CUSTOMERS.filter(customer => !customer.description).map(customer => <figure key={customer.name}><Image src={`/figma/side-story/${customer.file}`} alt="" width={customer.width} height={customer.height}/><figcaption>{customer.name}</figcaption></figure>)}</div>
       </section>
 
       <section

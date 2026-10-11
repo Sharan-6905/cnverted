@@ -59,7 +59,7 @@ export default function ProductPage() {
           <div className="product-review-note"><span>Worth checking</span><p>{step.check}</p></div>
           <Link className="marketing-text-link" href={step.link.href}>{step.link.label} <span aria-hidden="true">↗</span></Link>
         </section>)}</div>
-        <div className="product-orka"><div><h3>Start the conversation with Orka.</h3><p>Describe your target customer in plain language, then review the research and workflow in the GTM canvas.</p></div><Link className="marketing-text-link" href="/#strategy-title">Watch the canvas demo <span aria-hidden="true">↗</span></Link></div>
+        <div className="product-orka"><div><h3>Start the conversation with Orka.</h3><p>Describe your target customer in plain language, then review the research and workflow in the GTM canvas.</p></div><Link className="marketing-text-link" href="/#gtm-demo">Watch the canvas demo <span aria-hidden="true">↗</span></Link></div>
       </section>
 
       <section className="product-section product-audience design-container" aria-labelledby="product-audience">

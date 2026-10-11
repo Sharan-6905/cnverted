@@ -40,7 +40,7 @@ function buildCsp(nonce: string, isDev: boolean) {
     .replace(/\s{2,}/g, " ");
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const nonce = crypto.randomUUID().replace(/-/g, "");
   const csp = buildCsp(nonce, process.env.NODE_ENV === "development");
 

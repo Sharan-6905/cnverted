@@ -38,7 +38,7 @@ export default function TermsPage() {
                 business information, detects buying-intent signals, scores and ranks accounts
                 against a profile you configure, and helps your team act on them. Depending on
                 your plan that includes the signal feed, ICP configuration, lead and pipeline
-                management, our AI assistant (ORKA), outreach sent from a Google account you
+                management, our AI assistant (Orka), outreach sent from a Google account you
                 connect, and export to Notion.
               </p>
               <p>
@@ -144,7 +144,7 @@ export default function TermsPage() {
 
             <Clause n={7} title="AI features">
               <p>
-                ORKA and our scoring pipeline generate suggestions: scores, summaries, research
+                Orka and our scoring pipeline generate suggestions: scores, summaries, research
                 and draft outreach copy. They are decision support, not decisions. AI output can
                 be wrong, out of date, or confidently mistaken about a company, and you should
                 read and edit anything before you rely on it or send it.
@@ -196,7 +196,7 @@ export default function TermsPage() {
 
             <Clause n={9} title="Intellectual property">
               <p>
-                The Platform — its code, models, AI agents including ORKA, interface, design,
+                The Platform — its code, models, AI agents including Orka, interface, design,
                 branding and documentation — belongs to Cnvrted. You get a limited,
                 non-exclusive, non-transferable, revocable licence to use it for your own
                 business purposes under these Terms.

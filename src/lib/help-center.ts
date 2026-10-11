@@ -9,11 +9,15 @@ export const HELP_CATEGORIES = [
 ] as const;
 
 export const HELP_ARTICLES = [
+  { id: "account-access", category: "Account & support", question: "I can’t sign in or need to reset my password. What should I do?", answer: "Open the beta using the same sign-in method and email you used to register. If you still cannot access your account, email support with your account email and the error message. Never send your password or sign-in codes.", link: { label: "Get account help", href: "mailto:info@cnvrted.com" } },
+  { id: "credit-usage", category: "Plans & credits", question: "My credits are low or a charge looks wrong. What should I do?", answer: "Before repeating an action, check your remaining allowance in the beta. Ask support to review the action, approximate time, and any error shown. Confirm action costs and your allowance with the team before moving to a paid plan.", link: { label: "Ask about credits", href: "mailto:info@cnvrted.com" } },
+  { id: "gmail-connection", category: "Account & support", question: "Gmail disconnected or a reply is missing. What should I do?", answer: "Check that the message or reply is present in the Google mailbox you connected. If Cnvrted reports a connection error or does not show the reply, contact support with the error and approximate time. Avoid repeatedly sending the same email while the issue is being checked.", link: { label: "Get connection help", href: "mailto:info@cnvrted.com" } },
+  { id: "export-help", category: "Account & support", question: "My Notion export failed. What should I do?", answer: "Check whether the records arrived before retrying, so you do not create duplicate entries. If the export is missing or incomplete, send support the destination name, approximate time, and any error message. Leave private lead data out of screenshots.", link: { label: "Get export help", href: "mailto:info@cnvrted.com" } },
   {
     id: "buying-signals",
     category: "Signals & leads",
     question: "How does Cnvrted find buying signals?",
-    answer: "We look across the open web and social platforms for funding, hiring, expansion, new tools, and leadership changes that reveal buying intent.",
+    answer: "We look across the open web and social platforms for funding, hiring, expansion, new tools, and leadership changes that may indicate a relevant business need.",
   },
   {
     id: "lead-database",
@@ -56,8 +60,8 @@ export const HELP_ARTICLES = [
   {
     id: "models",
     category: "AI & strategy",
-    question: "Which AI models does Cnvrted work with?",
-    answer: "Cnvrted’s AI workflows bring together models such as Claude, ChatGPT, Kimi, and Gemini to interpret signals and help qualify leads.",
+    question: "Which AI assistants appear in the demos?",
+    answer: "Our illustrative workflows show Claude, ChatGPT, Kimi, and Gemini. The examples do not guarantee that each assistant or model is included in your plan. Ask our team about the current production options.",
   },
   {
     id: "privacy",
@@ -77,7 +81,7 @@ export const HELP_ARTICLES = [
     id: "community",
     category: "Account & support",
     question: "How can I join the Cnvrted Slack community?",
-    answer: "Tell us your name, email, business name, and industry. You can add a website too. Once your answers reach our team, you’ll get a link to join Slack.",
+    answer: "Tell us your name, email, business name, and industry. You can add a website too. After submitting, select “Join Slack” on the confirmation screen to finish joining.",
     link: { label: "Join our Slack community", href: "/join-slack" },
   },
   {

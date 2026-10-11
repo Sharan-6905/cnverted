@@ -89,11 +89,11 @@ export function AnimatedCard({
       inView = entry.isIntersecting;
       syncPlayback();
     }, { threshold: 0.1 });
-    const enter = (event: PointerEvent) => { hovered = !autoScroll && event.pointerType === "mouse"; syncPlayback(); };
+    const enter = (event: PointerEvent) => { hovered = event.pointerType === "mouse"; syncPlayback(); };
     const leave = () => { hovered = false; syncPlayback(); };
-    const focus = () => { focused = !autoScroll; syncPlayback(); };
+    const focus = () => { focused = true; syncPlayback(); };
     const blur = (event: FocusEvent) => {
-      focused = !autoScroll && root.contains(event.relatedTarget as Node | null);
+      focused = root.contains(event.relatedTarget as Node | null);
       syncPlayback();
     };
 

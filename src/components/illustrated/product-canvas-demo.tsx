@@ -18,9 +18,6 @@ import {
   Maximize2,
   MessageSquare,
   Workflow,
-  Pause,
-  Play,
-  RotateCcw,
   Search,
   X,
 } from "lucide-react";
@@ -31,6 +28,7 @@ import {
   DemoModelIcon,
 } from "./product-canvas-chat";
 import { ProductIcon } from "./product-canvas-icon";
+import { CanvasOutreach } from "./product-canvas-outreach";
 import { ProductCanvasGraph } from "./product-canvas-graph";
 import {
   DEFAULT_PRODUCT_PROMPT,
@@ -54,7 +52,7 @@ type Run = {
 };
 type HistoryItem = Pick<Run, "prompt" | "scenario" | "model">;
 type Panel = "history" | "leads" | "node" | null;
-const PHASE_DELAYS = [2900, 1100, 1900, 1800, 2300, 1700, 6500, 3500];
+const PHASE_DELAYS = [2900, 1100, 1900, 1800, 2300, 1700, 3200, 2200, 3000, 5000, 3200, 6000, 2500, 4000, 3200, 4500, 4500, 4500, 6500, 3500];
 const LOOP_PROMPTS = [
   DEFAULT_PRODUCT_PROMPT,
   "Find new markets for teams expanding their offices",
@@ -254,7 +252,8 @@ export function ProductCanvasDemo() {
   const [pageVisible, setPageVisible] = useState(true);
   const reducedMotion = useReducedMotion();
   const nodes = useMemo(() => productNodes(run.scenario), [run.scenario]);
-  const busy = run.phase < 5;
+  const busy = run.phase < 5 || (run.phase >= 7 && run.phase < 18);
+  const followupPrompt = run.phase === 8 ? "Find the decision makers in these leads." : run.phase === 10 ? "Run cold emails for these leads." : run.phase === 14 ? "Add my booking link and run follow-ups." : run.prompt;
   const running =
     (automatic || busy) &&
     !paused &&
@@ -307,7 +306,7 @@ export function ProductCanvasDemo() {
       onComplete: () =>
         setRun((current) => {
           if (reducedMotion) return { ...current, phase: 6 };
-          if (current.phase >= 6 && automatic) {
+          if (current.phase >= 18 && automatic) {
             const nextPrompt =
               LOOP_PROMPTS[(current.cycle + 1) % LOOP_PROMPTS.length];
             return {
@@ -341,12 +340,16 @@ export function ProductCanvasDemo() {
 
   useEffect(() => {
     const element = conversation.current;
-    if (element)
-      element.scrollTo({
-        top: run.phase === 0 ? 0 : element.scrollHeight,
-        behavior: reducedMotion ? "instant" : "smooth",
-      });
-  }, [run.phase, run.cycle, reducedMotion, view]);
+    if (!element) return;
+    const revealLatest = () => element.scrollTo({
+      top: run.phase === 0 ? 0 : element.scrollHeight,
+      behavior: reducedMotion ? "instant" : "smooth",
+    });
+    revealLatest();
+    const observer = new ResizeObserver(revealLatest);
+    if (element.lastElementChild) observer.observe(element.lastElementChild);
+    return () => observer.disconnect();
+  }, [run.phase, run.cycle, reducedMotion, view, mobile]);
 
   useEffect(() => {
     if (!settings) return;
@@ -366,6 +369,11 @@ export function ProductCanvasDemo() {
   function start(message: string, chosenModel = model, autoplay = false) {
     const clean = message.trim();
     if (!clean) return;
+    if (!autoplay && run.phase >= 6 && /cold|outreach|follow.?up|find.*contact|decision maker/i.test(clean)) {
+      setRun(current => ({ ...current, phase: /follow.?up/i.test(clean) ? (reducedMotion ? 15 : 14) : /cold|outreach/i.test(clean) ? (reducedMotion ? 11 : 10) : (reducedMotion ? 9 : 8) }));
+      setPrompt(""); setComposing(false); composer.current?.blur(); setPaused(false); setAutomatic(false); setView("canvas"); setPanel(null);
+      return;
+    }
     const scenario = productScenario(clean);
     setRun((current) => ({
       prompt: clean,
@@ -396,6 +404,11 @@ export function ProductCanvasDemo() {
     start(prompt);
   }
   function openPanel(next: Exclude<Panel, null>) {
+    if (next === "leads") {
+      setPanel(null); setSettings(false); setSearchOpen(false); setView("canvas"); setPaused(false);
+      setRun(current => ({ ...current, phase: 7 }));
+      return;
+    }
     lastFocus.current = document.activeElement as HTMLElement;
     setSettings(false);
     setPanel(next);
@@ -424,6 +437,7 @@ export function ProductCanvasDemo() {
       data-running={running}
       data-cycle={run.cycle}
       data-automatic={automatic}
+      data-outreach={run.phase >= 7 && run.phase <= 18}
       onKeyDown={(event) => {
         if (
           (event.metaKey || event.ctrlKey) &&
@@ -440,66 +454,8 @@ export function ProductCanvasDemo() {
         }
       }}
     >
-      <div className="product-demo-controls" data-panel-open={!!panel}>
-        <div className="product-demo-footer">
-          <div className="product-playback-status">
-            <span className="product-playback-eyebrow">
-              <i data-busy={running} />
-              {automatic ? "Product walkthrough" : "Your playground"}
-              <small>
-                {String(Math.min(run.phase + 1, 7)).padStart(2, "0")} / 07
-              </small>
-            </span>
-            <span className="product-run-status" role="status">
-              {paused ? "Paused · make it your own" : PRODUCT_PHASES[run.phase]}
-            </span>
-          </div>
-          <button
-            type="button"
-            className="product-playback-button"
-            data-paused={paused}
-            aria-label={
-              automatic || busy
-                ? paused
-                  ? "Play demo"
-                  : "Pause demo"
-                : "Replay demo"
-            }
-            onClick={() => (automatic || busy ? setPaused(!paused) : replay())}
-          >
-            <span className="product-playback-icon">
-              {automatic || busy ? (
-                paused ? (
-                  <Play size={15} fill="currentColor" />
-                ) : (
-                  <Pause size={15} fill="currentColor" />
-                )
-              ) : (
-                <RotateCcw size={16} />
-              )}
-            </span>
-            <span>
-              {automatic || busy
-                ? paused
-                  ? "Play demo"
-                  : "Pause demo"
-                : "Replay demo"}
-            </span>
-          </button>
-        </div>
-        <div className="product-timeline" aria-hidden="true">
-          {PHASE_DELAYS.slice(0, 7).map((_, index) => (
-            <span key={index}>
-              <motion.i
-                style={{
-                  scaleX:
-                    run.phase === index ? progress : run.phase > index ? 1 : 0,
-                }}
-              />
-            </span>
-          ))}
-        </div>
-        {!automatic && run.phase === 5 && (
+      {!automatic && run.phase === 5 && (
+        <div className="product-demo-controls" data-panel-open={!!panel}>
           <button
             type="button"
             className="product-mobile-approve"
@@ -510,8 +466,8 @@ export function ProductCanvasDemo() {
           >
             Review & approve shortlist <ArrowRight size={14} />
           </button>
-        )}
-      </div>
+        </div>
+      )}
       <div className="product-demo-surface" ref={setPortal}>
         <div className="product-demo-layout">
           <aside
@@ -564,8 +520,9 @@ export function ProductCanvasDemo() {
               </span>
               <span className="product-demo-label">
                 <i data-playing={running} />
-                {automatic ? "Live demo" : "Your playground"}
+                {automatic ? "Interactive demo" : "Your playground"}
               </span>
+              <button type="button" className="canvas-pause-control" aria-pressed={paused} onClick={() => setPaused(value => !value)}>{paused ? "Play" : "Pause"}</button>
             </header>
             <div className="product-mobile-tabs" aria-label="Demo view">
               <button
@@ -662,7 +619,7 @@ export function ProductCanvasDemo() {
                                   <DemoTypewriter
                                     key={`result-${run.cycle}`}
                                     text={
-                                      run.phase === 7
+                                      run.phase === 19
                                         ? "Skipped. Try another brief whenever you’re ready."
                                         : "11 companies fit your brief. Here’s your shortlist."
                                     }
@@ -685,7 +642,7 @@ export function ProductCanvasDemo() {
                                         onClick={() =>
                                           setRun((current) => ({
                                             ...current,
-                                            phase: 7,
+                                            phase: 19,
                                           }))
                                         }
                                       >
@@ -717,7 +674,7 @@ export function ProductCanvasDemo() {
                                     )}
                                   </div>
                                 )}
-                                {run.phase === 6 && (
+                                {run.phase >= 6 && run.phase < 19 && (
                                   <>
                                     <button
                                       type="button"
@@ -768,6 +725,12 @@ export function ProductCanvasDemo() {
                         )}
                       </motion.div>
                     )}
+                    {run.phase >= 9 && run.phase < 19 && <motion.div className="product-followup-prompt product-user-message" key={`contacts-${run.cycle}`} initial={{opacity:0,y:6}} animate={{opacity:1,y:0}}><p>Find the decision makers in these leads.</p><img src={productCanvasAssets.imgImage.src} alt="" /></motion.div>}
+                    {run.phase >= 9 && run.phase < 19 && <div className="product-followup-reply" key={`contact-answer-${run.cycle}`}><Orka/><p><DemoTypewriter key={`enrich-${run.cycle}`} text="Contacts found. I’ve added their profile pictures, sample LinkedIn profiles and work emails to your lead list." playing={!paused && inView} speed={16}/></p>{run.phase < 11 && <button className="product-lead-link" onClick={()=>{setPaused(false);setRun(current=>({...current,phase:reducedMotion ? 11 : 10}));}}>Run cold emails <ArrowRight size={14}/></button>}</div>}
+                    {run.phase >= 11 && run.phase < 19 && <motion.div className="product-followup-prompt product-user-message" key={`cold-${run.cycle}`} initial={{opacity:0,y:6}} animate={{opacity:1,y:0}}><p>Run cold emails for these leads.</p><img src={productCanvasAssets.imgImage.src} alt="" /></motion.div>}
+                    {run.phase >= 11 && run.phase < 19 && <div className="product-followup-reply" key={`outreach-answer-${run.cycle}`}><Orka/><p><DemoTypewriter key={`outreach-${run.cycle}-${run.phase >= 13}`} text={run.phase >= 13 ? "Outreach sent in the demo. Each email uses the company’s buying signal. No real messages were sent." : "I’ve drafted a personalised first email for each selected contact. Review it on the canvas before sending."} playing={!paused && inView} speed={18}/></p>{run.phase === 12 && <p className="product-auto-approval">Sample approval: “Looks good. Send it.”</p>}</div>}
+                    {run.phase >= 15 && run.phase < 19 && <motion.div className="product-followup-prompt product-user-message" key={`sequence-${run.cycle}`} initial={{opacity:0,y:6}} animate={{opacity:1,y:0}}><p>Add my booking link and run follow-ups.</p><img src={productCanvasAssets.imgImage.src} alt="" /></motion.div>}
+                    {run.phase >= 15 && run.phase < 19 && <div className="product-followup-reply" key={`sequence-answer-${run.cycle}`}><Orka/><p><DemoTypewriter key={`sequence-reply-${run.cycle}-${run.phase}`} text={run.phase === 18 ? "A sample reply came in. The sequence is stopped for this contact—no more follow-ups. Your booking link stays in the conversation." : run.phase === 17 ? "The day-seven follow-up is sent in the demo. A short final check-in, with your sample booking link." : run.phase === 16 ? "Day three: the first follow-up is sent in the demo. It adds context and includes your sample booking link." : "Here’s a two-email follow-up sequence for days three and seven. Review it before approving. We’ll stop it as soon as someone replies."} playing={!paused && inView} speed={15}/></p></div>}
                   </AnimatePresence>
                 </div>
                 <div className="product-composer-wrap">
@@ -827,7 +790,7 @@ export function ProductCanvasDemo() {
                       ref={composer}
                       aria-label="Chat with Orka in the demo"
                       placeholder={
-                        automatic && run.phase === 0 && !composing
+                        (automatic && run.phase === 0 || run.phase === 8 || run.phase === 10 || run.phase === 14) && !composing
                           ? ""
                           : "Ask Orka anything…"
                       }
@@ -848,14 +811,14 @@ export function ProductCanvasDemo() {
                         }
                       }}
                     />
-                    {automatic && run.phase === 0 && !composing && !prompt && (
+                    {(automatic && run.phase === 0 || run.phase === 8 || run.phase === 10 || run.phase === 14) && !composing && !prompt && (
                       <div
                         className="product-composer-preview"
                         aria-hidden="true"
                       >
                         <DemoTypewriter
-                          key={run.cycle}
-                          text={run.prompt}
+                          key={`${run.cycle}-${run.phase}`}
+                          text={followupPrompt}
                           playing={running}
                           speed={32}
                         />
@@ -867,7 +830,7 @@ export function ProductCanvasDemo() {
                         <span>{model}</span>
                         <ChevronDown size={10} />
                         <select
-                          aria-label="Demo AI model"
+                          aria-label="Demo AI assistant"
                           value={model}
                           onChange={(event) => setModel(event.target.value)}
                         >
@@ -1009,7 +972,7 @@ export function ProductCanvasDemo() {
                   <ProductCanvasGraph
                     running={running}
                     onInteract={() => setPaused(true)}
-                    phase={run.phase}
+                    phase={Math.min(run.phase, 6)}
                     cycle={run.cycle}
                     nodes={nodes}
                     zoom={zoom}
@@ -1017,10 +980,11 @@ export function ProductCanvasDemo() {
                     onNode={(index) => {
                       setNode(index);
                       openPanel(
-                        index === 4 && run.phase === 6 ? "leads" : "node",
+                        index === 4 && run.phase >= 6 ? "leads" : "node",
                       );
                     }}
                   />
+                  {run.phase >= 7 && run.phase <= 18 && <CanvasOutreach key={run.cycle} phase={run.phase} scenario={run.scenario} onInteract={()=>setPaused(true)} onAdvance={phase=>{setPaused(false);setRun(current=>({...current,phase: reducedMotion && (phase === 8 || phase === 10 || phase === 14) ? phase + 1 : phase}));}} onBack={()=>{setPaused(true);setRun(current=>({...current,phase:6}));}} />}
                   <div className="product-canvas-caption">
                     {zoom > 1
                       ? `${Math.round(zoom * 100)}% · scroll to explore`
@@ -1154,7 +1118,7 @@ export function ProductCanvasDemo() {
                           className="product-black-button"
                           onClick={() => {
                             approve();
-                            setPanel("leads");
+                            openPanel("leads");
                           }}
                         >
                           Approve & open lead list <ArrowRight size={15} />
@@ -1168,9 +1132,6 @@ export function ProductCanvasDemo() {
           )}
         </Dialog.Root>
       </div>
-      <p className="product-demo-disclaimer">
-        Interactive preview · sample data and simulated AI.
-      </p>
     </div>
   );
 }

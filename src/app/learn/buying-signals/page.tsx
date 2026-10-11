@@ -87,7 +87,7 @@ export default function BuyingSignalsGuide() {
           <section aria-labelledby="cnvrted-workflow">
             <h2 id="cnvrted-workflow">Where does Cnvrted fit?</h2>
             <p>Cnvrted helps founders and B2B sales teams find public buying signals, match prospects to an ICP, and review the source and context before reaching out. Describe your target customer to Orka, inspect the research it produces, and decide which conversations to pursue.</p>
-            <p><Link href="/#strategy-title">Explore the product demo</Link> to see the workflow. Our <Link href="/case-studies/from-cold-emails-to-warm-conversations">customer case study</Link> describes one batch of 11 emails that received six replies. That small campaign is an example, not a general reply-rate benchmark or a promise of results.</p>
+            <p><Link href="/#gtm-demo">Explore the product demo</Link> to see the workflow. Our <Link href="/case-studies/from-cold-emails-to-warm-conversations">customer case study</Link> describes one batch of 11 emails that received six replies. That small campaign is an example, not a general reply-rate benchmark or a promise of results.</p>
             <p>For plans and credit details, use the <Link href="/pricing">current pricing page</Link>. For available integrations and your specific workflow, <Link href="/contact">talk to the team</Link>.</p>
           </section>
         </div>

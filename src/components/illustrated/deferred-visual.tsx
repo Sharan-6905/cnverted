@@ -40,7 +40,7 @@ export function DeferredVisual({ kind }: { kind: "flow" | "canvas" }) {
   return (
     <div ref={root} className={`deferred-visual deferred-visual-${kind}`} data-loaded={Boolean(Visual)}>
       {Visual ? <Visual /> : (
-        <div className="deferred-visual-poster">
+        <div className="deferred-visual-poster" aria-busy={requested && !failed}>
           <div>
             <span className="marketing-eyebrow">{kind === "flow" ? "Find · Match · Prioritize" : "Interactive product walkthrough"}</span>
             <h3>{kind === "flow" ? "Follow a signal to your next conversation." : "A brief. A plan. Your next move."}</h3>
@@ -50,7 +50,7 @@ export function DeferredVisual({ kind }: { kind: "flow" | "canvas" }) {
               setRequested(true);
               setAttempt((value) => value + 1);
             }}>
-              {failed ? "Retry walkthrough" : requested ? "Loading walkthrough…" : "Play walkthrough"}
+              {failed ? "Retry walkthrough" : requested ? "Loading walkthrough…" : "Explore the canvas"}
             </button>
             {failed && <p role="status">The animation couldn’t load. You can still <a href="/learn/signal-to-outreach">read the worked example</a>.</p>}
             <noscript><p><a href="/learn/signal-to-outreach">Read the signal-to-outreach example</a>. Enable JavaScript to play the animation.</p></noscript>

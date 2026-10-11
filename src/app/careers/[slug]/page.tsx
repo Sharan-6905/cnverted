@@ -51,7 +51,7 @@ export default async function CareerDetailPage({ params }: Props) {
               changed, why it matters, and when to start a conversation.
             </p>
             <p>
-              We’re a small team from Bangalore, building in public, shipping
+              We’re a small team from Bengaluru, building in public, shipping
               fast, and talking to salespeople, founders, and GTM teams. Our
               question is simple: why buy another list of names when what you
               need is timing?

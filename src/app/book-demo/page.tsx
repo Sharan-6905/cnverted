@@ -50,7 +50,7 @@ export default async function BookDemoPage() {
         <span className="marketing-eyebrow">Book a call · 30 minutes</span>
         <h1>Cnvrted GTM Demo</h1>
         <p>
-          Bring the customers you want to reach. We’ll explore the signals,
+          Bring your website and an example of the customers you want to reach. We’ll explore the signals,
           context, and workflow that could help you make your next move.
         </p>
       </header>

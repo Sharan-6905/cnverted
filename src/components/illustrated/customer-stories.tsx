@@ -16,7 +16,7 @@ export function CustomerStories() {
       >
         <div className="design-section-heading">
           <h2 id="side-story-title">Case Studies</h2>
-          <p>How real teams put Cnvrted to work.</p>
+          <p>A customer campaign and a look inside our own workflow.</p>
         </div>
         <SideStoryCarousel stories={CASE_STUDY_SUMMARIES} />
         <Link
@@ -37,7 +37,7 @@ export function ClientProof() {
       aria-labelledby="clients-title"
     >
       <div className="design-section-heading design-container">
-        <h2 id="clients-title">Our Clients</h2>
+        <h2 id="clients-title">Our customers</h2>
         <p>
           Teams using Cnvrted to find relevant prospects and start better
           conversations.

@@ -1,0 +1,30 @@
+.stacked-cards { --stack-top: 128px; --stack-step: 20px; position: relative; isolation: isolate; }
+/* Entries don't create a containing block: sticky slots share the whole stack. */
+.stacked-card-entry { display: contents; }
+.stacked-card-slot { position: relative; margin-bottom: 32px; z-index: calc(var(--stack-index) + 1); }
+.stacked-card-entry:last-child .stacked-card-slot { margin-bottom: 0; }
+.stacked-cards[data-stacked="true"] { padding-bottom: 80px; }
+.stacked-cards[data-stacked="true"] .stacked-card-slot { position: sticky; top: calc(var(--stack-pin-top, var(--stack-top)) + var(--stack-index) * var(--stack-step)); margin-bottom: clamp(100px, 28svh, 280px); }
+.stacked-cards[data-stacked="true"] .stacked-card-entry:last-child .stacked-card-slot { margin-bottom: 0; }
+[data-stack-surface] { transform-origin: center top; }
+@media (max-width: 767px) { .stacked-cards { --stack-top: 92px; --stack-step: 12px; } }
+@media (prefers-reduced-motion: reduce) {
+  .stacked-cards[data-stacked="true"] { padding-bottom: 0; }
+  .stacked-cards[data-stacked="true"] .stacked-card-slot { position: relative; top: auto; margin-bottom: 32px; }
+  [data-stack-surface] { transform: none !important; }
+}
+/* Reserve stack spacing before GSAP loads so hash targets do not drift. */
+.stacked-cards { padding-bottom:80px; }
+.stacked-card-slot { margin-bottom:clamp(100px,28svh,280px); }
+[data-stack-marker] { scroll-margin-top:124px; }
+@media(max-width:767px) { [data-stack-marker] { scroll-margin-top:98px; } }
+@media(prefers-reduced-motion:reduce) {
+ .stacked-cards { padding-bottom:0; }
+ .stacked-card-slot { margin-bottom:32px; }
+}
+
+@media(max-width:1023px) {
+ .stacked-cards { padding-bottom:0; }
+ .stacked-cards .stacked-card-slot { position:relative; top:auto; margin-bottom:32px; }
+ .stacked-cards [data-stack-surface] { transform:none!important; }
+}

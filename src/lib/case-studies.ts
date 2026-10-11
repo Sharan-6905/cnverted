@@ -130,8 +130,8 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
   {
     "slug": "how-cnvrted-finds-its-customers",
     "title": "We use Cnvrted to find Cnvrted’s customers.",
-    "description": "This is our journey, not just a customer story. Every client and demo call we've secured in recent months has been powered by Cnvrted, the same tool we want you to experience.",
-    "excerpt": "This isn't a customer story. This is our story. Every client we've signed, every enterprise we've onboarded, every demo call we've booked in the last few months was sourced by the same tool we're asking you to try. We don't use a separate prospecting stack for ourselves. We use Cnvrted. The same dashboard, the same signal engine, the same workflow.",
+    "description": "A look at how our team uses Cnvrted to research accounts, review buying signals, and prepare relevant outreach.",
+    "excerpt": "Our team uses Cnvrted to research accounts, review buying signals, and prepare outreach. Here is how that workflow helps us decide who to contact and what to say.",
     "date": "2026-07-23",
     "readTime": 5,
     "cover": {
@@ -140,7 +140,7 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
     },
     "paragraphs": [
       "This isn't a customer story. This is our story.",
-      "Every client we've signed, every enterprise we've onboarded, every demo call we've booked in the last few months was sourced by the same tool we're asking you to try. We don't use a separate prospecting stack for ourselves. We use Cnvrted. The same dashboard, the same signal engine, the same workflow.",
+      "We use Cnvrted to research accounts, review buying signals, and prepare outreach. This is a look at that workflow, from deciding who to contact to finding a relevant reason to start a conversation.",
       "Here's how that actually works day to day.",
       "Every morning, our team opens Cnvrted and checks what fired overnight. The system has been scanning the internet while we slept, looking for people who match our ICP and have shown intent in the last 24 hours. By the time we open the dashboard, there's a feed of leads waiting. Each one with a score, a trigger, and the source attached.",
       "Last month, for example, the system caught a founder on LinkedIn who posted about struggling with outbound. He was venting about low reply rates and asking if anyone had found a tool that actually worked. That post was public for about 12 minutes before Cnvrted flagged it.",
@@ -154,26 +154,26 @@ export const CASE_STUDIES: readonly CaseStudy[] = [
       "The thing that makes this case study different from the others is that we have zero distance from the product. We're not hearing about results secondhand. We're living in the dashboard every day. When something doesn't work, we feel it immediately. When a signal fires and leads to a closed deal, we see the entire chain: the post that triggered it, the outreach that referenced it, the reply, the call, the close.",
       "That feedback loop is why the product keeps getting better. Every deal we close through Cnvrted teaches us which signals actually matter, which outreach angles land, and which ICPs convert. We're not just building a tool. We're using it to build the company that builds the tool.",
       "If that sounds circular, it is. And that's the point.",
-      "We wouldn't ask you to trust a product we don't trust ourselves. Every lead on our pipeline came from the same system you'd be logging into. Same scans. Same scoring. Same outreach drafts.",
-      "The best proof that Cnvrted works isn't a testimonial. It's the fact that you're reading this because Cnvrted found you."
+      "We wouldn't ask you to trust a product we don't trust ourselves. Every lead in our pipeline came from the same system you'd be logging into. Same scans. Same scoring. Same outreach drafts.",
+      "This is the workflow we use to find prospects, start conversations, and learn from the results."
     ],
     "sections": [
       {
         "heading": "How we use our own product",
         "items": [
           "Morning review: access the dashboard to assess overnight signals.",
-          "Communication: ORKA crafts messages based on specific triggers, which we then review and dispatch.",
+          "Communication: Orka crafts messages based on specific triggers, which we then review and dispatch.",
           "Monitoring: we track every reply, call, and deal back to the originating signal.",
           "Insights: understanding which signal types lead to closures helps refine our ideal customer profile, enhancing future targeting."
         ]
       },
       {
-        "heading": "The numbers (our own)",
+        "heading": "How we use it ourselves",
         "items": [
-          "Outreach sourced by Cnvrted: 100% of our pipeline.",
-          "Average time from signal to first outreach: under 1 hour.",
-          "Reply rate on signal-sourced outreach: significantly higher than industry cold benchmarks.",
-          "Enterprise clients acquired through the platform: multiple, and growing."
+          "We use Cnvrted to source and review outreach opportunities.",
+          "We aim to follow up while the signal is still relevant.",
+          "We track replies against the signals that prompted each message.",
+          "This is our own workflow, not a benchmark or a guarantee of customer results."
         ]
       },
       {

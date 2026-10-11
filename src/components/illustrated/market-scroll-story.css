@@ -1,0 +1,28 @@
+.market-story-player { position: relative; margin-top: 24px; }
+.market-story-player .redesign-market-stage {
+  margin-top: 0;
+  padding-block: 28px;
+  padding-inline: max(24px, calc((100% - 1120px) / 2));
+}
+.market-story-player .redesign-market-media {
+  height: auto;
+  min-height: 580px;
+  max-width: 1120px;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+.market-story-fallback { margin: 16px auto; max-width: 640px; padding: 24px; }
+.redesign-home #features-title { scroll-margin-top: 130px; }
+@media (max-width: 950px) and (min-width: 624px) {
+  .market-story-player .redesign-market-media { aspect-ratio: 4 / 3; }
+}
+/* The film stacks below 600px of usable width, after the outer gutters. */
+@media (max-width: 647px) {
+  .market-story-player .redesign-market-stage { padding: 16px 12px; }
+}
+@media (max-width: 623px) {
+  .market-story-player .redesign-market-media { aspect-ratio: auto; height: 720px; }
+}
+@media (max-width: 359px) {
+  .market-story-player .redesign-market-media { height: 760px; }
+}

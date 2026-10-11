@@ -72,6 +72,11 @@ export function IllustratedContact({ nonce }: { nonce?: string }) {
         <p>Product support, partnerships, or a question for the team.</p>
         <Link className="marketing-text-link" href={DEMO_PATH}>Book a call for a GTM demo <span aria-hidden="true">↗</span></Link>
       </header>
+      <section className="contact-intents design-container" aria-label="Contact options">
+        <article><h2>Product support</h2><p>Need help with your account, credits, or a connection?</p><a href="mailto:info@cnvrted.com">Email support</a><Link href="/help-center">Browse the Help Center</Link></article>
+        <article id="partnerships"><h2>Partnerships</h2><p>Tell us about your company and the collaboration you have in mind.</p><a href="mailto:info@cnvrted.com?subject=Partnership%20enquiry">Discuss a partnership</a></article>
+        <article><h2>See the product</h2><p>Explore the workflow, plans, and tools that fit your team.</p><Link href={DEMO_PATH}>Book a 30-minute demo</Link></article>
+      </section>
       <ContactCalendar nonce={nonce} />
       <FoundingTeam />
     </div>

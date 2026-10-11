@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Check } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -23,11 +23,23 @@ export function CareerApplicationForm({
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const pending = useRef(false);
+  const successMessage = useRef<HTMLParagraphElement>(null);
+  const nameInput = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (submitted) successMessage.current?.focus({ preventScroll: true });
+  }, [submitted]);
+
+  useEffect(() => {
+    if (open && !defaultOpen) nameInput.current?.focus({ preventScroll: true });
+  }, [open, defaultOpen]);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!name || !phone || !email || !role) return;
+    if (pending.current || !name.trim() || !phone.trim() || !email.trim() || !role) return;
 
+    pending.current = true;
     setSubmitting(true);
     setSubmitError(null);
 
@@ -45,7 +57,6 @@ export function CareerApplicationForm({
             ? "You've already applied with that email — we've got it."
             : "Something went wrong — please try again.",
         );
-        setSubmitting(false);
         return;
       }
 
@@ -58,11 +69,12 @@ export function CareerApplicationForm({
       }).catch(() => {});
 
       setSubmitted(true);
-      setSubmitting(false);
     } catch {
       setSubmitError(
         "We couldn’t send your application. Please try again or email info@cnvrted.com.",
       );
+    } finally {
+      pending.current = false;
       setSubmitting(false);
     }
   }
@@ -73,8 +85,8 @@ export function CareerApplicationForm({
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-intent-high-bg">
           <Check className="h-6 w-6 text-intent-high" />
         </div>
-        <p className="mt-4 text-[15px] leading-relaxed text-ink">
-          Thank you for filling the form — our team will get in touch with you.
+        <p ref={successMessage} tabIndex={-1} className="mt-4 text-[15px] leading-relaxed text-ink">
+          Thanks for applying. Our team will review your application and contact you about next steps.
         </p>
       </Card>
     );
@@ -101,7 +113,7 @@ export function CareerApplicationForm({
           <h3 className="text-center font-display text-xl font-semibold text-ink">
             Apply for this role
           </h3>
-          <form onSubmit={handleSubmit} className="mt-5 space-y-3">
+          <form onSubmit={handleSubmit} aria-busy={submitting} className="mt-5 space-y-3">
             <div>
               <label
                 htmlFor="career-name"
@@ -111,6 +123,9 @@ export function CareerApplicationForm({
               </label>
               <Input
                 id="career-name"
+                ref={nameInput}
+                name="fullName"
+                autoComplete="name"
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -127,6 +142,8 @@ export function CareerApplicationForm({
               </label>
               <Input
                 id="career-phone"
+                name="phone"
+                autoComplete="tel"
                 type="tel"
                 required
                 value={phone}
@@ -144,6 +161,8 @@ export function CareerApplicationForm({
               </label>
               <Input
                 id="career-email"
+                name="email"
+                autoComplete="email"
                 type="email"
                 required
                 value={email}
@@ -161,6 +180,7 @@ export function CareerApplicationForm({
               </label>
               <select
                 id="career-role"
+                name="role"
                 required
                 value={role}
                 onChange={(e) => setRole(e.target.value)}

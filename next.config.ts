@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 /**
  * Sent on every response. The Content-Security-Policy is not here — it carries
- * a per-request nonce, so it is built in middleware where the request exists.
+ * a per-request nonce, so it is built in Proxy where the request exists.
  */
 const SECURITY_HEADERS = [
   {

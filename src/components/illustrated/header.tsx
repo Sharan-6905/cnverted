@@ -7,6 +7,7 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { assets } from "./assets";
 import { DEMO_PATH } from "@/lib/booking";
+import { redesignAssets } from "./redesign-assets";
 
 const links = [
   { label: "Help Center", href: "/help-center", icon: assets.home.imgInfo },
@@ -25,9 +26,10 @@ const links = [
   },
 ];
 
-export function IllustratedHeader() {
+export function IllustratedHeader({ redesign = false }: { redesign?: boolean }) {
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const header = useRef<HTMLElement>(null);
   const resources = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const mobileTrigger = useRef<HTMLButtonElement>(null);
@@ -46,18 +48,32 @@ export function IllustratedHeader() {
     document.addEventListener("pointerdown", dismiss);
     return () => document.removeEventListener("pointerdown", dismiss);
   }, [resourcesOpen]);
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const dismiss = (event: PointerEvent) => {
+      if (!header.current?.contains(event.target as Node)) setMobileOpen(false);
+    };
+    document.addEventListener("pointerdown", dismiss);
+    return () => document.removeEventListener("pointerdown", dismiss);
+  }, [mobileOpen]);
   return (
-    <header className="illustrated-header">
+    <header ref={header} className="illustrated-header" onBlur={event => {
+      if (!event.currentTarget.contains(event.relatedTarget)) setMobileOpen(false);
+    }} onKeyDown={event => {
+      if (event.key === "Escape" && mobileOpen) {
+        setMobileOpen(false);
+        mobileTrigger.current?.focus();
+      }
+    }}>
       <a href="#main-content" className="design-skip-link">
         Skip to content
       </a>
       <nav className="design-nav" aria-label="Main navigation">
         <Link href="/" className="design-home-link" aria-label="Cnvrted home">
-          <span>Cnvrted</span>
+          {redesign ? <><Image {...redesignAssets["499-651-imgImage93"]} alt="" sizes="60px" /><img {...redesignAssets["499-651-imgVector"]} alt="Cnvrted" /></> : <span>Cnvrted</span>}
         </Link>
         <div className="design-desktop-nav">
-          <Link href={DEMO_PATH}>Book a call</Link>
-          <Link href="/product">Product</Link>
+          {!redesign && <><Link href={DEMO_PATH}>Book a call</Link><Link href="/product">Product</Link></>}
           <Link href="/pricing">Pricing</Link>
           <div
             className="design-resources"
@@ -86,7 +102,7 @@ export function IllustratedHeader() {
               className="design-resource-links"
               hidden={!resourcesOpen}
             >
-              {links.map((link) => (
+              {(redesign ? [{ label: "Product", href: "/product", icon: assets.home.imgInfo }, ...links] : links).map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}

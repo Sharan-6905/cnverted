@@ -1,0 +1,112 @@
+/* The seven-step walkthrough uses local sample data only. */
+.journey-step-nav { display: grid; grid-template-columns: repeat(7,minmax(0,1fr)); gap: 6px; margin-top: 14px; }
+.product-demo .journey-step-nav button { position: relative; overflow: hidden; display: flex; align-items: center; gap: 6px; min-height: 40px; padding: 8px; border-radius: 7px; background: #fff; color: #727782; border: 1px solid #e8e9ef; font-size: 11px; }
+.journey-step-nav button > span { font-size: 9px; opacity: .7; }
+.product-demo .journey-step-nav button[aria-current="step"] { color: #3e4ac2; border-color: #bac2f7; background: #f3f4ff; }
+.journey-step-nav i { position: absolute; inset: auto 0 0; height: 2px; background: #6472ed; transform-origin: left; }
+.product-demo .journey-how { display: block; width: fit-content; color: #5360bf; font-size: 11px; margin-top: 10px; padding: 4px 0; text-decoration: underline; text-underline-offset: 3px; }
+.product-demo .journey-view-switch { position: absolute; top: 10px; right: 10px; display: flex; gap: 2px; z-index: 3; padding: 3px; background: #f3f4f8; border: 1px solid #e8e9ee; border-radius: 8px; }
+.journey-view-switch button { padding: 5px 8px; font-size: 10px; border-radius: 5px; color: #737887; }
+.journey-view-switch button[aria-pressed="true"] { color: #282e42; background: white; box-shadow: 0 1px 3px #15182c12; }
+.journey-workspace { position: absolute; inset: 48px 0 0; overflow: auto; overscroll-behavior: contain; }
+.journey-workspace[hidden] { display: none; }
+.product-journey { min-height: 100%; padding: 14px 20px 22px; background: #fafbfeee; }
+.journey-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 10px; color: #5962a4; letter-spacing: .06em; text-transform: uppercase; }
+.journey-heading small { color: #8a8e9a; font-size: 9px; white-space: nowrap; letter-spacing: 0; }
+.journey-content { animation: journey-reveal .3s ease-out; }
+.product-demo .journey-content h3 { font: 400 27px/1.2 var(--font-editorial),serif; margin: 16px 0 8px; letter-spacing: -.025em; color: #222738; }
+.product-demo .journey-subtitle { color: #717785; font-size: 12px; line-height: 1.55; margin-bottom: 18px; }
+.product-demo .journey-primary { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 11px 15px; min-height: 42px; border-radius: 9px; background: #4f60d9; color: #fff; font-size: 12px; margin-top: 16px; box-shadow: 0 2px 5px #3847981a; }
+.product-demo .journey-primary:disabled { background: #e0e3ed; color: #8a8e9b; box-shadow: none; }
+.product-demo .journey-primary:hover:not(:disabled) { background: #3f50c7; }
+.journey-plan-graph { position: relative; overflow: hidden; border-radius: 9px; height: 275px; margin-top: 10px; }
+.product-demo .journey-plan-approval { padding: 14px 16px; background: white; border: 1px solid #e2e5f1; border-radius: 12px; }
+.journey-plan-approval strong { font-size: 14px; font-weight: 500; }
+.product-demo .journey-plan-approval p { font-size: 11px; color: #767c87; margin-top: 5px; }
+.product-demo .journey-plan-approval .journey-primary { margin-top: 10px; }
+.journey-market-count { display: flex; align-items: baseline; gap: 10px; padding: 12px 16px; border-radius: 10px; background: #f0f2ff; color: #4f60b8; margin-bottom: 16px; }
+.journey-market-count strong { font: 400 34px/1.2 var(--font-editorial),serif; }
+.journey-market-count span { font-size: 11px; }
+.journey-places { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.journey-places legend { font-size: 11px; color: #727887; margin-bottom: 6px; }
+.journey-places label { display: flex; align-items: center; gap: 6px; min-height: 36px; padding: 7px 9px; border: 1px solid #e0e3ed; border-radius: 7px; background: white; font-size: 11px; }
+.journey-places label b { margin-left: 2px; color: #727eae; font-size: 10px; }
+.product-journey input[type="checkbox"] { width: 15px; height: 15px; min-height: 0; accent-color: #5666db; }
+.journey-add-place { display: flex; gap: 8px; margin: 10px 0 16px; }
+.journey-add-place input { min-width: 0; flex: 1; }
+.product-demo .journey-add-place button { padding-inline: 12px; border-radius: 7px; background: #edf0fb; color: #5664aa; }
+.journey-filters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.journey-filters label, .journey-email-editor label { display: flex; flex-direction: column; gap: 5px; color: #727887; font-size: 11px; }
+.product-demo .product-journey :is(input:not([type="checkbox"]),select,textarea) { border: 1px solid #dfe2eb; border-radius: 7px; background: white; padding: 9px 10px; min-width: 0; max-width: 100%; color: #32384a; }
+.journey-checklist { margin: 22px 0; padding: 0; list-style: none; display: grid; gap: 12px; color: #606a80; }
+.journey-checklist li { display: flex; align-items: center; gap: 8px; }
+.journey-checklist svg { color: #6574bb; }
+.journey-credit { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 15px; border: 1px solid #e2e5ee; border-radius: 10px; background: #fff; margin-top: 16px; }
+.journey-credit > span { font-size: 12px; }
+.journey-credit small { display: block; font-size: 9px; color: #838999; font-weight: 400; margin-top: 3px; }
+.journey-credit strong { font-size: 23px; color: #4f60b8; text-align: right; white-space: nowrap; }
+.product-demo .journey-approval-note { display: flex; align-items: flex-start; gap: 7px; font-size: 10px; line-height: 1.55; color: #767e90; margin-top: 12px; }
+.journey-approval-note svg { flex-shrink: 0; margin-top: 2px; }
+.journey-table-scroll { max-height: 180px; overflow: auto; border: 1px solid #e4e7ef; border-radius: 10px; background: #fff; }
+.journey-table-scroll table { width: 100%; border-collapse: collapse; font-size: 11px; text-align: left; }
+.journey-table-scroll th { position: sticky; top: 0; background: #f5f6fa; font-size: 9px; color: #818797; font-weight: 500; padding: 9px 10px; z-index: 1; }
+.journey-table-scroll td { padding: 10px; border-top: 1px solid #eef0f5; vertical-align: middle; }
+.journey-table-scroll td:first-child { width: 30px; color: #7889b1; }
+.journey-table-scroll b { display: block; font-weight: 500; }
+.journey-table-scroll small { display: block; color: #8a8e9a; font-size: 9px; margin-top: 3px; }
+.journey-email { display: block; color: #596eb8; font-size: 10px; overflow-wrap: anywhere; }
+.product-demo .journey-notice { color: #7f8492; font-size: 10px; margin-top: 12px; }
+.journey-email-editor { padding: 14px; border: 1px solid #e1e5ed; border-radius: 12px; background: #fff; }
+.journey-email-editor > div { display: flex; gap: 10px; margin-bottom: 12px; font-size: 11px; overflow-wrap: anywhere; }
+.journey-email-editor b { font-weight: 500; color: #5164ab; }
+.journey-email-editor textarea { margin-top: 12px; width: 100%; min-height: 180px; resize: vertical; font-size: 12px; line-height: 1.7; }
+.journey-success { display: flex; flex-direction: column; align-items: flex-start; gap: 15px; padding: 35px 10px; }
+.journey-success > svg { color: #6c7ac4; }
+.product-demo .journey-success h4, .product-demo .journey-learning h4 { font-size: 16px; font-weight: 500; color: #35416b; }
+.journey-success p { font-size: 13px; }
+.journey-success small { color: #868d9c; }
+.journey-replies { display: grid; gap: 12px; }
+.journey-replies article { padding: 16px; border-radius: 10px; border: 1px solid #e3e6ef; background: #fff; }
+.journey-replies article > span { font-size: 10px; color: #6075b8; }
+.product-demo .journey-replies p { margin-top: 10px; font-size: 13px; color: #3c4457; }
+.journey-replies small { display: block; color: #878d9b; font-size: 10px; margin-top: 10px; }
+.journey-learning { padding: 20px; border: 1px solid #dce3f2; background: #f0f4ff; border-radius: 12px; margin-top: 18px; }
+.journey-learning > svg { color: #6577bd; margin-bottom: 10px; }
+.product-demo .journey-learning p { margin-top: 10px; font-size: 12px; color: #66738a; }
+.journey-learning small { display: block; color: #8b92a3; font-size: 10px; margin-top: 12px; }
+.journey-deals { border: 1px solid #e1e5ef; background: white; border-radius: 10px; }
+.journey-deals > div { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px; }
+.journey-deals > div + div { border-top: 1px solid #eef0f5; }
+.journey-deals b { font-weight: 500; }
+.journey-deals small { display: block; color: #9296a1; font-size: 9px; }
+.journey-chat-steps { display: grid; gap: 9px; margin: 16px 0; }
+.journey-chat-steps > div { display: flex; align-items: center; gap: 7px; font-size: 10px; color: #959ca9; }
+.journey-chat-steps > div[data-current="true"] { color: #5866aa; }
+.journey-help-steps { padding-left: 24px; display: grid; gap: 20px; }
+.journey-help-steps li { padding-left: 5px; color: #626b80; }
+.journey-help-steps strong { font-size: 13px; font-weight: 500; color: #333d55; }
+.product-demo .journey-help-steps p { font-size: 12px; margin-top: 5px; }
+.product-panel-help { width: 520px; }
+@keyframes journey-reveal { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@media(max-width:1023px) { .product-journey { padding: 12px 14px 20px; } .product-demo .journey-content h3 { font-size: 23px; } .journey-filters { grid-template-columns: 1fr; } }
+@media(max-width:767px) {
+ .journey-step-nav { gap: 4px; }
+ .product-demo .journey-step-nav button { flex-direction: column; gap: 1px; padding: 5px 1px; min-height: 44px; font-size: 9px; }
+ .product-demo .journey-how { font-size: 10px; }
+ .journey-plan-graph { height: 360px; }
+ .product-journey { padding: 12px 12px 24px; }
+ .journey-filters { grid-template-columns: 1fr; }
+ .journey-credit { padding: 12px; }
+ .journey-table-scroll { max-height: 200px; }
+ .journey-table-scroll td { padding: 8px; }
+ .journey-table-scroll td:nth-child(2) { min-width: 90px; }
+ .journey-table-scroll td:nth-child(3) { min-width: 110px; }
+ .journey-credit > span { font-size: 11px; }
+ .product-demo .journey-primary { width: 100%; font-size: 11px; }
+ .journey-deals > div { padding: 12px 8px; gap: 5px; }
+ .journey-deals small { max-width: 110px; }
+ .journey-workspace { overflow-y: auto; }
+}
+@media(prefers-reduced-motion:reduce) { .journey-content { animation: none; } }
+
+.journey-sent-draft { white-space: pre-wrap; padding: 12px; background: #fff; border: 1px solid #e4e7ef; border-radius: 8px; }

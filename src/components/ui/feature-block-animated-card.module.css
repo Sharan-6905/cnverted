@@ -32,3 +32,5 @@
   .sweepWindow { display: none; }
   .sparkles > span { animation: none; }
 }
+.pause { display:block; margin:0 auto; min-height:36px; padding:7px 13px; font:inherit; font-size:12px; color:#505565; background:#fff; border:1px solid #e0e1e5; border-radius:20px; cursor:pointer; }
+.pause:focus-visible { outline:2px solid #4f65f5; outline-offset:3px; }

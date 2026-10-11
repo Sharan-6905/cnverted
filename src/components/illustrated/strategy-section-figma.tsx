@@ -10,8 +10,8 @@ export function StrategySection() {
       <div className="design-section-heading">
         <h2 id="strategy-title">GTM Strategies</h2>
         <p>
-          Tell Orka who you want to reach. Follow the research, buying signals,
-          and shortlist it builds on your canvas.
+          Tell Orka who you sell to. Follow the plan, company search, contacts,
+          emails and deal progress—with your approval at each paid or sending step.
         </p>
       </div>
       <DeferredVisual kind="canvas" />

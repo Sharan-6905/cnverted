@@ -1,0 +1,122 @@
+.prompt-walkthrough { color: #24243a; min-width: 0; }
+.prompt-walkthrough button { font: inherit; cursor: pointer; }
+.prompt-walkthrough button:disabled { cursor: default; opacity: .55; }
+.prompt-walkthrough-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; color: #747184; font-size: 12px; }
+.prompt-walkthrough-toolbar button, .prompt-replay { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 12px; border: 1px solid #e6e3ee; border-radius: 12px; background: #fff; color: #514a69; }
+.prompt-walkthrough-scene { animation: promptSceneIn .5s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes promptSceneIn { from { opacity: 0; transform: translateY(14px) scale(.985); } to { opacity: 1; transform: none; } }
+.prompt-browser { border: 1px solid #e4e1ec; border-radius: 22px; overflow: hidden; background: var(--assistant-bg); box-shadow: 0 26px 60px -42px #3c305b66; min-height: 568px; display: flex; flex-direction: column; }
+.prompt-browser-chrome { display: flex; align-items: center; gap: 16px; padding: 12px 18px; background: #f3f2f7; border-bottom: 1px solid #e9e5ee; }
+.prompt-window-dots { display: flex; gap: 6px; }
+.prompt-window-dots i { width: 9px; height: 9px; border-radius: 50%; background: #eab5aa; }
+.prompt-window-dots i:nth-child(2) { background: #e9d198; }
+.prompt-window-dots i:nth-child(3) { background: #b6cfaa; }
+.prompt-address { display: flex; gap: 8px; align-items: center; width: 60%; margin: auto; min-height: 30px; padding: 5px 12px; border: 1px solid #ebe7ef; border-radius: 8px; background: #fff; font-size: 12px; }
+.prompt-browser-demo { font-size: 11px; color: #797183; }
+.prompt-ai-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; }
+.redesign-home .prompt-ai-header h3 { display: flex; align-items: center; gap: 10px; font: 500 15px/1.4 var(--font-design-sans),sans-serif; }
+.prompt-ai-header img,.prompt-ai-greeting img { object-fit: contain; }
+.prompt-user-avatar { display: grid; place-items: center; width: 30px; height: 30px; background: #eee9f5; color: #66557e; border-radius: 50%; font-size: 11px; }
+.prompt-chat-content { flex: 1; padding: 0 28px 22px; }
+.prompt-ai-greeting { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 260px; gap: 20px; }
+.prompt-ai-greeting p { margin: 0; font-size: clamp(22px,3vw,30px); line-height: 1.3; text-align: center; color: var(--assistant-accent); }
+.prompt-composer-wrap { padding: 0 28px 28px; max-width: 720px; width: 100%; margin: auto; }
+.prompt-coach { margin: 0 0 15px; font-size: 12px; color: #6c627d; text-align: center; }
+.prompt-composer { display: flex; flex-direction: column; gap: 12px; width: 100%; padding: 16px; border-radius: 20px; background: #fff; border: 1px solid #ded9e4; text-align: left; box-shadow: 0 5px 20px -14px #50456055; }
+.prompt-composer:not(:disabled):hover { border-color: #ac89e8; }
+.prompt-composer-line { display: flex; align-items: center; justify-content: space-between; gap: 15px; width: 100%; font-size: 14px; color: #817b88; }
+.prompt-send { width: 34px; height: 34px; display: grid; place-items: center; flex: none; border-radius: 50%; color: #fff; background: var(--assistant-accent); }
+.prompt-pasted-file { display: inline-flex; align-items: center; gap: 10px; border: 1px solid #e6e0ee; border-radius: 12px; padding: 12px; width: fit-content; font-size: 12px; color: #504364; }
+.prompt-pasted-file small { display: block; margin-top: 4px; color: #177c5a; }
+.prompt-answer { max-width: 680px; margin: 0 auto; }
+.prompt-answer > p { font-size: 14px; line-height: 1.65; margin: 18px 0; }
+.prompt-user-message { display: flex; align-items: center; gap: 10px; width: fit-content; margin-left: auto; padding: 12px 16px; border-radius: 14px 14px 4px 14px; background: #efedf4; font-size: 12px; }
+.prompt-profile-document { border: 1px solid #e4dfeb; border-radius: 16px; overflow: hidden; background: #fff; }
+.prompt-document-title { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid #eeebf2; }
+.prompt-document-title strong { font-weight: 500; font-size: 13px; }
+.prompt-document-title span { display: block; font-size: 11px; color: #84798c; margin-top: 4px; }
+.prompt-document-blocks { padding: 14px 18px; min-height: 265px; background: #fdfbff; display: grid; gap: 12px; }
+.prompt-document-blocks strong { font-size: 12px; font-weight: 600; }
+.prompt-document-blocks p { margin: 3px 0 0; font-size: 12px; line-height: 1.6; color: #6c6377; }
+.prompt-reveal { animation: promptSceneIn .45s ease both; }
+.prompt-answer-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 18px; }
+.prompt-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 12px 20px; border: 0; border-radius: 14px; background: var(--redesign-violet,#4f65f5); color: #fff; font-size: 14px !important; box-shadow: 0 6px 20px -12px #4f65f5; }
+.prompt-primary:hover:not(:disabled) { background: #4054df; }
+.prompt-cnvrted-scene { min-height: 568px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; text-align: center; }
+.prompt-orka-icon { display: grid; place-items: center; width: 76px; height: 76px; background: #e9edcf; border-radius: 24px; color: #697d18; box-shadow: 0 16px 30px -22px #697d18; }
+.redesign-home .prompt-cnvrted-scene h3,.redesign-home .prompt-recipe-title h3 { font: 400 30px/1.25 var(--font-editorial),serif; margin: 0; color: #23202a; }
+.prompt-cnvrted-scene > p { margin: 0; max-width: 440px; font-size: 14px; line-height: 1.6; color: #706979; }
+.prompt-paste-target { width: 100%; max-width: 620px; min-height: 190px; border: 2px dashed #c2b5d8; border-radius: 22px; background: #fff; color: #695487; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px; }
+.prompt-paste-target strong { color: #30253e; font-size: 16px; font-weight: 500; }
+.prompt-paste-target span { font-size: 12px; color: #766d80; }
+.prompt-pasted-profile { width: 100%; max-width: 620px; padding: 22px; background: #f8f5fc; border: 1px solid #d9cdeb; border-radius: 20px; text-align: left; }
+.prompt-pasted-profile > div { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 13px; }
+.prompt-pasted-profile > div > span { display: flex; align-items: center; gap: 4px; margin-left: auto; font-size: 10px; color: #177c5a; background: #edf6ef; border-radius: 20px; padding: 5px 8px; }
+.prompt-pasted-profile p { margin: 12px 0 0; font-size: 12px; line-height: 1.6; color: #6c6377; }
+.prompt-building { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; text-align: left; font-size: 13px; }
+.prompt-building li { display: flex; align-items: center; gap: 10px; color: #81798a; transition: color .3s; }
+.prompt-building svg { opacity: .2; }
+.prompt-building li[data-done="true"] { color: #177c5a; }
+.prompt-building li[data-done="true"] svg { opacity: 1; }
+.prompt-recipe-scene { min-height: 568px; padding: 28px 0; display: flex; flex-direction: column; justify-content: center; gap: 30px; }
+.prompt-recipe-title { display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.prompt-ready-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; background: #edf6ef; color: #177c5a; border-radius: 20px; font-size: 11px; margin-bottom: 16px; }
+.prompt-recipe-title p { color: #706979; font-size: 14px; margin: 12px 0 0; }
+.prompt-replay { flex: none; font-size: 12px !important; }
+.prompt-recipe-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+.prompt-recipe-card { padding: 22px; border: 1px solid #e6e0ec; border-radius: 22px; background: #fff; box-shadow: 0 22px 40px -32px #51436666; animation: promptSceneIn .6s both; }
+.prompt-recipe-card > div { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 10px; letter-spacing: .07em; color: #6c5389; }
+.prompt-recipe-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 14px; background: #f1eaf9; color: #80609f; }
+.prompt-recipe-card:nth-child(2) .prompt-recipe-icon { background: #edf6ef; color: #177c5a; }
+.prompt-recipe-card:nth-child(3) .prompt-recipe-icon { background: #fff4e3; color: #a97433; }
+.redesign-home .prompt-recipe-card h4 { margin: 22px 0; font: 500 17px/1.5 var(--font-design-sans),sans-serif; color: #2e2638; }
+.prompt-recipe-card ul { padding: 0; margin: 0; display: grid; gap: 14px; list-style: none; font-size: 12px; line-height: 1.65; color: #746b7b; }
+.prompt-recipe-card li { display: flex; align-items: flex-start; gap: 8px; }
+.prompt-recipe-card li svg { flex: none; margin-top: 3px; color: #87966a; }
+.copy-prompt-panel[data-walkthrough="true"] { padding: 28px; }
+@media(max-width:900px) { .prompt-recipe-grid { gap: 10px; } .prompt-recipe-card { padding: 16px; } }
+@media(max-width:640px) {
+  .copy-prompt-panel[data-walkthrough="true"] { padding: 14px; }
+  .prompt-walkthrough-toolbar { gap: 8px; margin-bottom: 14px; font-size: 10px; }
+  .prompt-walkthrough-toolbar button { padding: 8px; }
+  .prompt-browser { min-height: 540px; border-radius: 16px; }
+  .prompt-browser-chrome { padding: 10px; gap: 8px; }
+  .prompt-address { width: auto; flex: 1; font-size: 10px; padding: 5px 8px; }
+  .prompt-window-dots { gap: 3px; } .prompt-window-dots i { width: 6px; height: 6px; }
+  .prompt-browser-demo { display: none; }
+  .prompt-ai-header { padding: 14px; }
+  .prompt-chat-content { padding: 0 14px 18px; }
+  .prompt-composer-wrap { padding: 0 14px 22px; }
+  .prompt-composer { padding: 12px; }
+  .prompt-composer-line { font-size: 12px; }
+  .prompt-ai-greeting { min-height: 260px; }
+  .prompt-document-title { padding: 12px; } .prompt-document-title strong { font-size: 12px; }
+  .prompt-document-blocks { padding: 12px; min-height: 340px; }
+  .prompt-answer-actions .prompt-primary { width: 100%; font-size: 12px !important; padding: 12px; }
+  .prompt-cnvrted-scene { padding: 24px 0; min-height: 540px; }
+  .redesign-home .prompt-cnvrted-scene h3,.redesign-home .prompt-recipe-title h3 { font-size: 25px; }
+  .prompt-pasted-profile { padding: 16px; }
+  .prompt-pasted-profile > div > span { margin-left: 0; }
+  .prompt-recipe-title { flex-direction: column; align-items: flex-start; }
+  .prompt-recipe-grid { grid-template-columns: 1fr; gap: 16px; }
+  .prompt-recipe-scene { padding: 12px 0; gap: 22px; }
+  .prompt-recipe-card { padding: 24px; }
+}
+@media(prefers-reduced-motion:reduce) { .prompt-walkthrough *, .prompt-walkthrough *::after { animation: none !important; transition: none !important; } }
+
+/* Keep real walkthrough text readable between phone and desktop widths. */
+.prompt-walkthrough-toolbar > *, .prompt-composer-line > span,
+.prompt-pasted-file > div, .prompt-document-title > div { min-width: 0; }
+.prompt-address { min-width: 0; overflow-wrap: anywhere; }
+.prompt-recipe-card { min-width: 0; }
+@media (min-width: 641px) and (max-width: 900px) {
+  .prompt-recipe-grid { grid-template-columns: 1fr; gap: 16px; }
+  .prompt-recipe-card { padding: 24px; }
+  .prompt-recipe-card ul { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+}
+@media (max-width: 374px) {
+  .prompt-walkthrough-toolbar { flex-wrap: wrap; }
+  .prompt-pasted-file { max-width: 100%; padding: 10px; gap: 7px; overflow-wrap: anywhere; }
+  .prompt-pasted-file > svg, .prompt-document-title > svg { flex-shrink: 0; }
+  .prompt-document-title { gap: 7px; }
+}

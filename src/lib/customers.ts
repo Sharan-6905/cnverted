@@ -18,7 +18,7 @@ export const CUSTOMERS: readonly Customer[] = [
     height: 115,
     category: "Film & creative",
     description:
-      "An AI-native film studio in Bangalore, taking stories from the first idea to the final frame.",
+      "An AI-native film studio in Bengaluru, taking stories from the first idea to the final frame.",
     website: "https://www.11fps.com/",
   },
   {

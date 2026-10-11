@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { DEMO_PATH } from "@/lib/booking";
 import Image from "next/image";
-import { BlogLandscape, AboutLandscape, CareerLandscape } from "./artwork";
+import { BlogsPageArtwork, AboutPageArtwork, CareersPageArtwork, RolePageArtwork } from "./redesign-page-artwork";
 import { ScaledArtwork } from "./scaled-artwork";
 import { assets } from "./assets";
 import { HomeHeroVideo } from "./home-hero-video";
@@ -34,10 +34,10 @@ export function DesignLink({
 }
 
 const landscapes = {
-  blogs: BlogLandscape,
-  about: AboutLandscape,
-  careers: CareerLandscape,
-  role: CareerLandscape,
+  blogs: BlogsPageArtwork,
+  about: AboutPageArtwork,
+  careers: CareersPageArtwork,
+  role: RolePageArtwork,
 };
 export function IllustratedHero({
   kind,
@@ -57,7 +57,7 @@ export function IllustratedHero({
       aria-labelledby="hero-title"
     >
       {Landscape ? (
-        <div className="design-hero-landscape">
+        <div className="design-hero-landscape redesign-page-scene">
           <ScaledArtwork width={1440} height={641}>
             <Landscape />
           </ScaledArtwork>

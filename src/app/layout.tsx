@@ -46,9 +46,11 @@ export const metadata: Metadata = {
   verification: { google: "a75IvLpxbTPDRrbkfayrxglnfwi7ukJnVAUkMWMiQ1k" },
   icons: {
     icon: [
-      { url: "/favicon-brand-32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-brand-48.png", sizes: "48x48", type: "image/png" },
+      { url: "/favicon.ico?v=20261011", sizes: "16x16 32x32 48x48", type: "image/x-icon" },
+      { url: "/favicon-brand-32.png?v=20261011", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-brand-48.png?v=20261011", sizes: "48x48", type: "image/png" },
     ],
+    shortcut: "/favicon.ico?v=20261011",
     apple: { url: "/apple-touch-icon-brand.png", sizes: "180x180", type: "image/png" },
   },
   openGraph: {

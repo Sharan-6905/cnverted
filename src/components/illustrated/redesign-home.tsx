@@ -20,7 +20,7 @@ export function RedesignHome() {
       <div className="redesign-hero-copy">
         <h1 id="hero-title">Reinventing GTM</h1>
         <p>Find the right buyers. Turn signals into sales.</p>
-        <div className="redesign-hero-actions"><DesignLink href="https://beta.cnvrted.com" secondary>Start free</DesignLink><DesignLink href={DEMO_PATH} arrow>Book a call</DesignLink></div>
+        <div className="redesign-hero-actions"><DesignLink href={DEMO_PATH} arrow>Book a call</DesignLink></div>
       <small className="hero-credit-note">40 free credits to explore Cnvrted.</small>
       </div>
     </section>

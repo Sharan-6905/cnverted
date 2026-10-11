@@ -42,7 +42,7 @@ export function StackedCards({ cards, className }: { cards: readonly StackedCard
           // Tall cards scroll into view completely before they stick, even on short screens.
           const pinTop = Math.min(top, window.innerHeight - height - step * (cards.length - 1) - 20);
           element.style.setProperty("--stack-pin-top", `${pinTop}px`);
-          const enabled = !reducedMotion.matches && window.innerWidth >= 1024;
+          const enabled = !reducedMotion.matches;
           element.dataset.stacked = String(enabled);
           if (!enabled) return;
           context = gsap.context(() => {

@@ -23,8 +23,6 @@
  .stacked-card-slot { margin-bottom:32px; }
 }
 
-@media(max-width:1023px) {
- .stacked-cards { padding-bottom:0; }
- .stacked-cards .stacked-card-slot { position:relative; top:auto; margin-bottom:32px; }
- .stacked-cards [data-stack-surface] { transform:none!important; }
+@media(min-width:768px) and (max-width:1023px) {
+ .stacked-cards { --stack-top:112px; --stack-step:16px; }
 }

@@ -30,7 +30,8 @@
 .redesign-hero-copy { position: relative; text-align: center; padding-inline: 24px; }
 .redesign-signal-badge { display: inline-flex; gap: 6px; align-items: center; justify-content: center; min-height: 39px; padding: 6px 20px; border-radius: 4px 16px; background: #e8edce; border: .36px solid #707a321a; font: 400 16px/1.2 var(--font-design-sans),sans-serif; color: #465522; }
 .redesign-signal-badge > span { display: grid; place-items: center; width: 19px; height: 19px; background: #ffffff60; border: 1px solid #ffffff70; border-radius: 5px; }
-.redesign-home .redesign-hero h1 { font-size: clamp(60px, 5.695vw, 82px); line-height: 1.23; letter-spacing: -.045em; margin-top: 6px; }
+.redesign-home .redesign-hero h1 { font-size: clamp(60px, 5.695vw, 82px); line-height: 1.23; letter-spacing: -.045em; max-width: 1050px; margin: 6px auto 0; text-wrap: balance; }
+.redesign-hero h1 > span { display: block; }
 .redesign-hero-copy > p { max-width: 517px; margin: 9px auto 0; font: 400 16px/20px var(--font-design-sans),sans-serif; color: var(--redesign-muted); }
 .redesign-hero-actions { display: flex; justify-content: center; gap: 16px; margin-top: 24px; }
 .redesign-hero-demo { position: relative; width: min(1112px,calc(100% - 48px)); margin: 64px auto 0; }
@@ -153,7 +154,7 @@
   .redesign-bird-left, .redesign-bird-right { display: none; }
   .redesign-hero-copy { padding-inline: 20px; }
   .redesign-signal-badge { font-size: 13px; min-height: 32px; padding: 5px 14px; }
-  .redesign-home .redesign-hero h1 { font-size: clamp(38px,9.8vw,65px); line-height: 1.13; margin-top: 14px; letter-spacing: -.045em; }
+  .redesign-home .redesign-hero h1 { font-size: clamp(32px,9.4vw,65px); line-height: 1.13; margin-top: 14px; letter-spacing: -.045em; }
   .redesign-hero-copy > p { font-size: 15px; line-height: 1.5; margin-top: 16px; max-width: 370px; }
   .redesign-hero-actions { gap: 12px; margin-top: 24px; }
   .redesign-home .redesign-hero-actions .design-button { padding-inline: 22px; font-size: 15px; }

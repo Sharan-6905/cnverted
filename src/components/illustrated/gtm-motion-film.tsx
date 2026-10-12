@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { gsap } from "gsap";
-import { ArrowRight, ArrowUpRight, CalendarDays, Check, CheckCheck, Globe2, Flower2, Mail, MessageSquare, MousePointer2, Repeat2, ShieldCheck, Sparkles, Target, Users, Zap } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CalendarDays, Check, CheckCheck, Globe2, Flower2, Mail, MessageSquare, MousePointer2, Repeat2, ShieldCheck, Sparkles, Target, Users } from "lucide-react";
 
 const CUES = [0, 7, 15, 23, 32, 40, 49, 57, 64, 72];
 const LENGTH = 81;
@@ -13,7 +13,7 @@ const PEOPLE = [
   { name: "Priya Nair", role: "CX Lead", company: "Kettle & Co", mail: "priya@kettle.example", score: 82, avatar: 3 },
 ];
 function Logo({ name, src }: { name: string; src: string }) { return <img className="gm-logo" src={src} alt={name} width={24} height={24} />; }
-function Portrait({ index = 2 }: { index?: number }) { return <img className="gm-portrait" src={`/avatars/lead-${index}.svg`} alt="" width={40} height={40} />; }
+function Portrait({ index = 2 }: { index?: number }) { return <img className="gm-portrait" src={index === 2 ? "/avatars/maya-demo.webp" : `/avatars/lead-${index}.svg`} alt="" width={40} height={40} />; }
 function Badge({ children, green = false }: { children: ReactNode; green?: boolean }) { return <span className={`gm-badge${green ? " gm-green" : ""}`}>{children}</span>; }
 function Card({ children, className = "" }: { children: ReactNode; className?: string }) { return <div className={`gm-card ${className}`}>{children}</div>; }
 function Bloom({ small = false }: { small?: boolean }) { return <span className={`gm-bloom ${small ? "small" : ""}`}><span><Flower2 aria-hidden="true" /></span> Bloomcart</span>; }
@@ -66,8 +66,10 @@ export default function GTMMotionFilm() {
       reveal(".gm-brief .gm-field", 1.2, .5);
       tl.fromTo(q(".gm-brief-arrow"), { autoAlpha: 0, x: -20 }, { autoAlpha: 1, x: 0, duration: .6 }, 2.4);
       reveal(".gm-brief .gm-icp-result", 2.8);
-      reveal(".gm-deep .gm-satellite", 8.4, .65);
-      tl.fromTo(q(".gm-deep .gm-orbit-line"), { scale: .3, autoAlpha: 0 }, { scale: 1, autoAlpha: 1, duration: 1.8 }, 8);
+      reveal(".gm-research-source", 8.1, .75);
+      tl.fromTo(q(".gm-evidence-highlight"), { backgroundSize: "0% 100%" }, { backgroundSize: "100% 100%", duration: 1.1, ease: "power2.out" }, 10.1);
+      reveal(".gm-research-takeaway", 11.4);
+      reveal(".gm-refined-trait", 11.8, .3);
       reveal(".gm-targets tbody tr", 16.2, .4);
       tl.to(q(".gm-rejected"), { opacity: .5, duration: .8 }, 19.8);
       reveal(".gm-target-result", 20.3);
@@ -144,12 +146,28 @@ export default function GTMMotionFilm() {
           <Card className="gm-icp-result gm-lavender"><div className="gm-card-title"><span className="gm-icon"><Target /></span><strong>Your ideal customer</strong><Badge>v1</Badge></div><div className="gm-field"><span>INDUSTRY</span><p>DTC home & lifestyle</p></div><div className="gm-field"><span>COMPANY SIZE</span><p>50–200 people</p></div><div className="gm-field"><span>BUYER</span><p>Head of Customer Experience</p></div><div className="gm-note"><Check size={15} /> A focused place to start</div></Card>
         </div>
       </Scene>
-      <Scene name="deep" title="Go beyond a job title." sub="Understand the pain, the people and the reason to buy.">
-        <div className="gm-constellation"><div className="gm-orbit-line" /><Card className="gm-icp-core gm-enter"><Target /><span>IDEAL CUSTOMER</span><h4>Growing brands.<br />{" "}Overstretched CX teams.</h4><Badge>Halcyon · ICP v1</Badge></Card>
-        <Card className="gm-satellite gm-pain"><Zap /><div><b>What hurts</b><p>Launch-week ticket spikes.<br />{" "}Slow first responses.</p></div></Card>
-        <Card className="gm-satellite gm-tools"><Globe2 /><div><b>What they use</b><p>Online storefront + helpdesk.<br />{" "}Repetitive order questions.</p></div></Card>
-        <Card className="gm-satellite gm-buyer"><Users /><div><b>Who buys</b><p>Head of CX champions it.<br />{" "}VP Operations approves.</p></div></Card>
-        <Card className="gm-satellite gm-fit"><ShieldCheck /><div><b>What makes a fit</b><p>Growing order volume.<br />{" "}A team ready to automate.</p></div></Card></div>
+      <Scene name="deep" title="Meet the business behind the brief." sub="Research the account. Find the people. Sharpen the fit.">
+        <div className="gm-research-desk gm-enter">
+          <div className="gm-desk-toolbar"><span><span className="gm-desk-dot" /> Halcyon <span>/</span> ICP research</span><span className="gm-desk-sample">SAMPLE ACCOUNT</span></div>
+          <div className="gm-desk-body">
+            <div className="gm-account-dossier">
+              <div className="gm-bloom-cover"><Flower2 /><span>Everyday things.<br /><em>A little more considered.</em></span><small>BLOOMCART · HOME & LIVING</small></div>
+              <div className="gm-dossier-identity"><Bloom /><span>bloomcart.example <ArrowUpRight /></span></div>
+              <div className="gm-dossier-facts"><span><b>84</b> people</span><span><b>DTC</b> home goods</span></div>
+              <div className="gm-tool-evidence gm-research-source"><span className="gm-research-label">EXAMPLE TECH STACK</span><div><span><Logo name="Shopify" src="/brands/shopify.svg" /> Shopify</span><span><Logo name="Zendesk" src="/brands/zendesk.svg" /> Zendesk</span></div></div>
+            </div>
+            <div className="gm-research-evidence">
+              <div className="gm-research-source gm-team-note">
+                <div className="gm-evidence-header"><span><Logo name="LinkedIn" src="/brands/linkedin.svg" /> From the CX team</span><small>Example post</small></div>
+                <div className="gm-post-author"><Portrait /><span><b>Maya Chen</b><small>Head of Customer Experience · Bloomcart</small></span></div>
+                <blockquote>“New collection, busy inbox. We want our team helping customers, <span className="gm-evidence-highlight">not answering the same order questions.</span>”</blockquote>
+                <div className="gm-source-caption">Research note <span>Support capacity is the constraint.</span></div>
+              </div>
+              <div className="gm-research-source gm-buying-team"><div className="gm-buyer-route"><Users /><span><b>Who brings it forward?</b><small>Maya champions it. VP Operations approves.</small></span></div><span className="gm-buyer-role">Buyer mapped <Check /></span></div>
+            </div>
+          </div>
+          <div className="gm-research-takeaway"><div><span className="gm-refined-icon"><Check /></span><span><small>ICP, REFINED</small><b>Commerce brands with a stretched CX team.</b></span></div><div className="gm-refined-traits"><span className="gm-refined-trait">50–200 people</span><span className="gm-refined-trait">Repeat order questions</span><span className="gm-refined-trait">Head of CX</span></div></div>
+        </div>
       </Scene>
       <Scene name="targets" title="Find your corner of the market." sub="Turn the profile into a focused list. Keep fit separate from intent.">
         <div className="gm-research-layout"><Card className="gm-reference gm-enter"><div className="gm-card-title"><Logo name="LinkedIn" src="/brands/linkedin.svg" /><span>Public profile reference</span></div><div className="gm-blueland">BLUELAND</div><p>Refillable cleaning essentials</p><div className="gm-reference-facts"><span>Retail · New York</span><span>51–200 employees</span><span>Sarah Paiji Yoo<br />{" "}<small>Co-founder & CEO</small></span></div><div className="gm-source-links"><a tabIndex={-1} href="https://www.linkedin.com/company/liveblueland" target="_blank" rel="noreferrer">Company profile <ArrowUpRight /></a><a tabIndex={-1} href="https://www.blueland.com/pages/about-us" target="_blank" rel="noreferrer">Official website <ArrowUpRight /></a></div><small>Segment reference, not a customer claim</small></Card>
@@ -185,7 +203,7 @@ export default function GTMMotionFilm() {
         <div className="gm-crm-layout"><Card className="gm-crm-record gm-enter"><div className="gm-card-title"><Logo name="HubSpot" src="/figma/home-imgHubspotIcon1.svg" /><strong>HubSpot</strong><Badge green>Deal record</Badge></div><Bloom /><div className="gm-crm-field"><span>CONTACT</span><b>Maya Chen</b></div><div className="gm-crm-field"><span>STAGE</span><b>Closed won <Check /></b></div><div className="gm-crm-field"><span>AMOUNT</span><b>$18,000 / year</b></div><div className="gm-crm-field"><span>HISTORY</span><b>Signals, emails & meeting notes</b></div><div className="gm-crm-synced gm-note"><CheckCheck /> CRM updated · demo</div></Card><div className="gm-loop-arrow"><Repeat2 /></div><Card className="gm-learning gm-lavender"><div className="gm-card-title"><Target /><strong>A sharper ICP</strong><Badge>v2</Badge></div><h4>More brands like<br />{" "}your best customer.</h4><div className="gm-learning-rule"><Check /><span>DTC home & lifestyle</span></div><div className="gm-learning-rule"><Check /><span>New collection launching</span></div><div className="gm-learning-rule"><Check /><span>Investing in customer experience</span></div><div className="gm-next-cycle"><Sparkles /><span>The next cycle starts here.</span><ArrowRight /></div></Card></div>
       </Scene>
     </div>
-    <div className="gm-accessible-summary"><h3>From ideal customer to closed deal</h3><p>Halcyon defines its ICP, researches accounts and connects buying signals from LinkedIn, Reddit and company websites. A qualified buyer becomes an approved email, a reply, a booked meeting and a won deal. The CRM sync feeds learning back into the next target list.</p><div>ICP <ArrowRight /> Signals <ArrowRight /> Outreach <ArrowRight /> Meeting <ArrowRight /> Won <Repeat2 /></div></div>
+    <div className="gm-accessible-summary"><h3>From ideal customer to closed deal</h3><p>Halcyon refines its ICP using a sample account’s commerce tools, support-team needs and buying roles, then connects buying signals from LinkedIn, Reddit and company websites. A qualified buyer becomes an approved email, a reply, a booked meeting and a won deal. The CRM sync feeds learning back into the next target list.</p><div>ICP <ArrowRight /> Signals <ArrowRight /> Outreach <ArrowRight /> Meeting <ArrowRight /> Won <Repeat2 /></div></div>
     <span className="gm-footnote">Halcyon & Bloomcart are fictional. Outreach and outcomes are simulated.</span>
     <button type="button" className="gm-pause" onClick={() => toggle.current()} aria-label={paused ? "Play GTM animation" : "Pause GTM animation"}>{paused ? "Play animation" : "Pause animation"}</button>
   </div>;

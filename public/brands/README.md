@@ -10,3 +10,5 @@
 All SVGs are served locally. Brand marks identify the platforms and models described by the site owner; they do not indicate endorsement.
 
 - Grok: Lobe Icons monochrome SVG, downloaded October 10, 2026 from `https://unpkg.com/@lobehub/icons-static-svg@latest/icons/grok.svg`; covered by the MIT license above.
+
+- Shopify and Zendesk: Simple Icons SVGs (CC0), downloaded October 12, 2026 from the project’s official GitHub repository (`icons/shopify.svg`, `icons/zendesk.svg`). Used to identify an explicitly fictional example tech stack; no customer or integration claim.

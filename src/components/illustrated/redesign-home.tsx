@@ -19,8 +19,8 @@ export function RedesignHome() {
     <section className="redesign-hero" aria-labelledby="hero-title">
       <RedesignHeroArtwork />
       <div className="redesign-hero-copy">
-        <h1 id="hero-title">Reinventing GTM</h1>
-        <p>Find the right buyers. Turn signals into sales.</p>
+        <h1 id="hero-title"><span>Run GTM on signals,</span>{" "}<span>not spreadsheets.</span></h1>
+        <p>Every play starts with proof someone’s ready.</p>
         <div className="redesign-hero-actions"><DesignLink href={DEMO_PATH} arrow>Book a call</DesignLink></div>
       <small className="hero-credit-note">40 free credits to explore Cnvrted.</small>
       </div>

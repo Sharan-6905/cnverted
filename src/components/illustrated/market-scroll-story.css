@@ -6,21 +6,21 @@
 }
 .market-story-player .redesign-market-media {
   height: auto;
-  min-height: 580px;
+  min-height: 660px;
   max-width: 1120px;
   aspect-ratio: 16 / 10;
   overflow: hidden;
 }
 .market-story-fallback { margin: 16px auto; max-width: 640px; padding: 24px; }
 .redesign-home #features-title { scroll-margin-top: 130px; }
-@media (max-width: 950px) and (min-width: 624px) {
+@media (max-width: 950px) and (min-width: 648px) {
   .market-story-player .redesign-market-media { aspect-ratio: 4 / 3; }
 }
 /* The film stacks below 600px of usable width, after the outer gutters. */
 @media (max-width: 647px) {
   .market-story-player .redesign-market-stage { padding: 16px 12px; }
 }
-@media (max-width: 623px) {
+@media (max-width: 647px) {
   .market-story-player .redesign-market-media { aspect-ratio: auto; height: 720px; }
 }
 @media (max-width: 359px) {

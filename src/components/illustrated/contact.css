@@ -29,7 +29,7 @@
 .contact-founders-glow { position: absolute; top: 45px; left: 50%; transform: translateX(-50%); width: 100%; max-width: 1440px; pointer-events: none; }
 .contact-founders-glow img { position: absolute; left: -32.2px; max-width: none; }
 .contact-founder-grid { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: stretch; gap: 24px; max-width: 1176px; margin-top: 24px; }
-.contact-founder { min-width: 0; display: flex; flex-direction: column; overflow: hidden; padding-bottom: 16px; border: 1px solid #eaecf0; border-radius: 12px; background: #fff; box-shadow: 0 0 12.5px #0000000d; }
+.contact-founder { position: relative; min-width: 0; display: flex; flex-direction: column; overflow: hidden; padding-bottom: 16px; border: 1px solid #eaecf0; border-radius: 12px; background: #fff; box-shadow: 0 0 12.5px #0000000d; }
 .contact-founder-photo { position: relative; overflow: hidden; padding: 10px; }
 .contact-founder-crop { position: relative; aspect-ratio: 290 / 181; background: #d9d9d9; }
 .contact-founder-crop > img { position: absolute; max-width: none; height: auto; }
@@ -46,8 +46,26 @@
 .contact-founder-socials a { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #f2f4f7; }
 .contact-founder-socials a:hover { background: #e9eddb; }
 .design-contact-page .design-faq { padding-top: 112px; }
-@media (min-width: 768px) and (max-width: 1100px) {
-  .contact-founder-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 760px; }
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .contact-founder-grid { gap: 16px; }
+  .contact-founder-content { padding-inline: 12px; }
+  .figma-site .contact-founder h3 { font-size: 21px; }
+  .contact-founder-email { font-size: 14px; }
+  .contact-founder-mascot { transform: scale(.85); transform-origin: right bottom; }
+}
+@media (max-width: 1023px) {
+  .contact-founder-grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: clamp(272px, 42vw, 340px);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x proximity;
+    padding: 4px 0 16px;
+    scrollbar-width: thin;
+    scrollbar-color: #b8bcda transparent;
+  }
+  .contact-founder { scroll-snap-align: start; }
 }
 @media (max-width: 1023px) {
   .contact-hero { padding-top: 200px; }
@@ -68,7 +86,7 @@
   .contact-booking-alternative > span:last-child { flex-basis: 100%; }
   .contact-founders { padding-top: 48px; }
   .contact-founders-heading > p { max-width: 340px; font-size: 17px; line-height: 27px; }
-  .contact-founder-grid { grid-template-columns: minmax(0, 1fr); max-width: 400px; gap: 24px; margin-top: 28px; }
+  .contact-founder-grid { grid-auto-columns: min(340px, 100%); gap: 16px; margin-top: 28px; }
   .contact-founder-content { padding-inline: 20px; }
   .figma-site .contact-founder h3 { font-size: 26px; }
   .contact-founder-email { padding-block: 4px; font-size: 16px; }
@@ -76,3 +94,17 @@
   .contact-founder-socials a { width: 44px; height: 44px; }
   .design-contact-page .design-faq { padding-top: 72px; }
 }
+
+/* Original Figma mascot layers, anchored clear of copy and social links. */
+.contact-founder-content { gap: 70px; }
+.contact-founder-socials { position: relative; z-index: 1; width: fit-content; }
+.contact-founder-mascot { position: absolute; right: 0; bottom: 0; width: 124.452px; height: 124.804px; pointer-events: none; }
+.contact-founder-mascot img { position: absolute; max-width: none; object-fit: cover; }
+.contact-founder-mascot-dhruv { width: 136.135px; height: 113.173px; bottom: 1.85px; right: -1px; overflow: hidden; }
+.contact-founder-mascot-dhruv img { width: 97.1%; height: 116.8%; top: 0; left: .26%; }
+.contact-founder-mascot-kailas .mascot-kailas-background { width: 103.346%; height: 103.052%; left: -4.373%; top: -3.052%; transform: scaleX(-1); }
+.contact-founder-mascot-kailas .mascot-kailas-toys { width: 66.27%; height: 42.172%; left: 1.93%; top: 41.383%; transform: scaleX(-1); }
+.contact-founder-mascot-saran { width: 101.161px; height: 156.615px; right: 1.64px; bottom: -36.31px; }
+.contact-founder-mascot-saran img { width: 156.615px; height: 101.161px; left: 50%; top: 50%; transform: translate(-50%, -50%) rotate(90deg); }
+.contact-founder-mascot-anupam { width: 129.899px; height: 130.682px; bottom: -6px; }
+.contact-founder-mascot-anupam img { width: 100%; height: 100%; transform: scaleX(-1); }

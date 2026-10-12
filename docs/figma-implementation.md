@@ -174,3 +174,11 @@ The Commercial homepage footer now uses the original image fill from Figma node 
 `footer-water.tsx` adds pointer-driven WebGL refraction, masked by the turquoise water colors so the island lettering stays steady. Waves expire after 2.6 seconds, rendering stops when idle/offscreen/hidden, and coarse pointers, reduced motion, unavailable WebGL, and context loss retain the static image. The image remains lazy-loaded through Next Image. No animation library was added.
 
 Verified at 390, 820, and 1440 CSS pixels with no page overflow; desktop pointer movement creates visible waves without browser errors. TypeScript and the production webpack build pass.
+
+## Founder mascots and illustrated navigation — 2026-10-12
+
+Used Commercial 0.2 contact frame `499:5522` and Resources dropdown `636:1189` in the original Figma file. Original PNG exports are stored in `public/figma/contact/mascot-*.png` and `public/figma/navigation/`. Dhruv, Kailas (two layers), Sharan and Anupam retain the design crops, mirroring and rotation. The shared founding-team component renders them on About and Contact, with space below the real copy and clear of social links. Next Image serves responsive optimized versions.
+
+Resources uses all seven original illustrations, a 230px panel, bounded vertical scrolling and the existing keyboard/outside-click dismissal. Mobile navigation uses the same art. Both navigation states close when crossing the mobile breakpoint.
+
+Validation: production build passed (existing Google Sans Flex fallback warning); browser checks at 320, 390, 768, 820, 1100, 1199, 1200, 1366 and 1440px found no horizontal overflow or mascot/social-link overlap. Verified asset loads, Escape dismissal, outside-click dismissal and mobile-to-desktop reset. Follow-up: all four founder cards stay in one row at widths of 1024px and above. Below 1024px the same row scrolls horizontally with readable card widths. Checked 320, 390, 820, 1024 and 1440px: one row at every size, no page overflow.

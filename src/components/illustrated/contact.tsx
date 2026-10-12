@@ -167,6 +167,12 @@ export function FoundingTeam({
                 ) : null}
               </div>
             </div>
+            <div className={`contact-founder-mascot contact-founder-mascot-${founder.crop}`} aria-hidden="true">
+              {founder.crop === "kailas" ? <>
+                <Image className="mascot-kailas-background" src="/figma/contact/mascot-kailas-background.png" alt="" width={160} height={160} sizes="140px" />
+                <Image className="mascot-kailas-toys" src="/figma/contact/mascot-kailas-toys.png" alt="" width={100} height={64} sizes="90px" />
+              </> : <Image src={`/figma/contact/mascot-${founder.crop === "saran" ? "sharan" : founder.crop}.png`} alt="" width={160} height={160} sizes="160px" />}
+            </div>
           </article>
         ))}
       </div>

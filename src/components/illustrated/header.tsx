@@ -5,26 +5,24 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { assets } from "./assets";
 import { DEMO_PATH } from "@/lib/booking";
 import { redesignAssets } from "./redesign-assets";
 
+const productLink = { label: "Product", href: "/product", icon: "product", width: 46.413, height: 42.415 };
 const links = [
-  { label: "Help Center", href: "/help-center", icon: assets.home.imgInfo },
-  { label: "Blogs", href: "/blogs", icon: assets.home.imgBookOpenText },
-  {
-    label: "Case Studies",
-    href: "/case-studies",
-    icon: assets.home.imgBookOpenText,
-  },
-  { label: "Learn", href: "/learn", icon: assets.home.imgBookOpenText },
-  { label: "About Us", href: "/about", icon: assets.home.imgInfo },
-  {
-    label: "Join Slack",
-    href: "/join-slack",
-    icon: assets.home.imgGroup1437254394,
-  },
+  { label: "Help Center", href: "/help-center", icon: "help-center", width: 38.563, height: 27.796 },
+  { label: "Blogs", href: "/blogs", icon: "blogs", width: 38.104, height: 35.115 },
+  { label: "Case Studies", href: "/case-studies", icon: "case-studies", width: 53.228, height: 53.228 },
+  { label: "Learn", href: "/learn", icon: "learn", width: 43.892, height: 40.111 },
+  { label: "About Us", href: "/about", icon: "about", width: 41.323, height: 41.323 },
+  { label: "Join Slack", href: "/join-slack", icon: "slack", width: 38.105, height: 38.105 },
 ];
+
+function ResourceIcon({ link }: { link: typeof productLink }) {
+  return <span className="design-resource-icon" aria-hidden="true">
+    <Image src={`/figma/navigation/${link.icon}.png`} alt="" width={Math.ceil(link.width)} height={Math.ceil(link.height)} sizes="54px" style={{ width: link.width, height: link.height }} />
+  </span>;
+}
 
 export function IllustratedHeader({ redesign = false }: { redesign?: boolean }) {
   const [resourcesOpen, setResourcesOpen] = useState(false);
@@ -35,7 +33,7 @@ export function IllustratedHeader({ redesign = false }: { redesign?: boolean }) 
   const mobileTrigger = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     const desktop = window.matchMedia("(min-width: 768px)");
-    const closeMenu = () => setMobileOpen(false);
+    const closeMenu = () => { setMobileOpen(false); setResourcesOpen(false); };
     desktop.addEventListener("change", closeMenu);
     return () => desktop.removeEventListener("change", closeMenu);
   }, []);
@@ -102,7 +100,7 @@ export function IllustratedHeader({ redesign = false }: { redesign?: boolean }) 
               className="design-resource-links"
               hidden={!resourcesOpen}
             >
-              {(redesign ? [{ label: "Product", href: "/product", icon: assets.home.imgInfo }, ...links] : links).map((link) => (
+              {(redesign ? [productLink, ...links] : links).map((link) => (
                 <Link
                   key={link.label}
                   href={link.href}
@@ -111,9 +109,7 @@ export function IllustratedHeader({ redesign = false }: { redesign?: boolean }) 
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
                 >
-                  <span>
-                    <Image src={link.icon} alt="" width={20} height={20} />
-                  </span>
+                  <ResourceIcon link={link} />
                   {link.label}
                 </Link>
               ))}
@@ -153,7 +149,7 @@ export function IllustratedHeader({ redesign = false }: { redesign?: boolean }) 
         {[
           { label: "Home", href: "/" },
           { label: "Book a call", href: DEMO_PATH },
-          { label: "Product", href: "/product" },
+          productLink,
           { label: "Pricing", href: "/pricing" },
           ...links,
           { label: "Careers", href: "/careers" },
@@ -164,6 +160,7 @@ export function IllustratedHeader({ redesign = false }: { redesign?: boolean }) 
             href={link.href}
             onClick={() => setMobileOpen(false)}
           >
+            {"icon" in link && <ResourceIcon link={link} />}
             {link.label}
           </Link>
         ))}

@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Scroll reel: Tailwind 3 uses the existing directives above. */
+@keyframes scroll-reel-char-rise {
+  to { opacity:1; transform:translateY(0); }
+}
+@keyframes scroll-reel-exit {
+  from { opacity:1; transform:translateY(0); }
+  to { opacity:0; transform:translateY(-12px); }
+}
+.scroll-reel-char { display:inline-block; opacity:0; transform:translateY(14px); animation:scroll-reel-char-rise 450ms cubic-bezier(.22,1,.36,1) both; }
+.scroll-reel-exit { animation:scroll-reel-exit 240ms ease-in both; }
+.scroll-reel-exit .scroll-reel-char { animation:none; opacity:1; transform:none; }
+@media(prefers-reduced-motion:reduce) {
+  .scroll-reel-char, .scroll-reel-exit { animation:none!important; opacity:1; transform:none; }
+}
+
 /* Keep mobile form text readable without triggering focus zoom on iOS. */
 @media (max-width: 767px) {
   :is(input, select, textarea):not([type="checkbox"]):not([type="radio"]):not([type="hidden"]) {

@@ -1,0 +1,5 @@
+.user-testimonials { margin-block:40px 112px; scroll-margin-top:130px; }
+.user-testimonials .design-section-heading { margin-bottom:32px; }
+.redesign-home .user-testimonials .design-section-heading h2 { font:400 clamp(30px,3.4vw,46px)/1.15 var(--font-editorial),serif; letter-spacing:-.025em; text-wrap:balance; }
+.redesign-home .user-testimonials .testimonials-subtitle { max-width:640px; margin:16px auto 0; font:400 13px/1.6 var(--font-design-sans),sans-serif; color:#818078; text-wrap:balance; }
+@media(max-width:767px) { .user-testimonials { margin-block:20px 80px; } .user-testimonials .design-section-heading { padding-inline:0; margin-bottom:24px; } .redesign-home .user-testimonials .testimonials-subtitle { font-size:12px; max-width:310px; } }

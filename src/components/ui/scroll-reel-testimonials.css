@@ -1,0 +1,53 @@
+.scroll-reel {
+  position:relative; display:flex; width:100%; max-width:1060px; margin-inline:auto; min-height:370px;
+  overflow:hidden; border:1px solid #e8e5ee; border-radius:20px; background:#fcfbfd;
+  box-shadow:inset 0 2px 0 #fff; font-family:var(--font-design-sans),sans-serif; color:#282c28;
+}
+.scroll-reel:focus-visible, .scroll-reel button:focus-visible { outline:2px solid #7067ef; outline-offset:5px; }
+.scroll-reel-portraits {
+  position:relative; width:380px; flex-shrink:0; overflow:hidden; align-self:stretch;
+  mask-image:linear-gradient(to right,transparent,black 14%,black 86%,transparent),linear-gradient(to bottom,transparent,black 14%,black 86%,transparent);
+  mask-composite:intersect; -webkit-mask-composite:source-in;
+}
+.scroll-reel-columns { position:absolute; inset:0; display:flex; justify-content:center; align-items:center; gap:8px; }
+.scroll-reel-column { display:flex; flex-shrink:0; flex-direction:column; gap:8px; will-change:transform; }
+.scroll-reel-cell { flex-shrink:0; border-radius:12px; border:1px solid #e7e5df; background:linear-gradient(#f0eee9,#faf9f7); filter:blur(1px); box-shadow:0 1px 2px #0000000d,inset 0 2px 0 #fff; }
+.scroll-reel-column:nth-child(3) .scroll-reel-cell { background:linear-gradient(#f0edf6,#faf9fc); }
+.scroll-reel-featured { position:relative; flex-shrink:0; overflow:hidden; border-radius:12px; background:#e7e5de; }
+.scroll-reel-featured img { position:absolute; max-width:none; object-fit:cover; }
+.scroll-reel-content { min-width:0; flex:1; display:flex; flex-direction:column; align-self:stretch; padding:42px 38px 32px 24px; }
+.scroll-reel-quote-mark { width:37px; height:37px; color:#b5abc9; fill:#b5abc933; margin-bottom:14px; stroke-width:1.3; }
+.scroll-reel-text-stage { position:relative; width:100%; overflow:hidden; }
+.scroll-reel-sizing { display:grid; visibility:hidden; }
+.scroll-reel-sizing>div { grid-area:1 / 1; }
+.scroll-reel-text-block { display:flex; flex-direction:column; gap:20px; min-height:150px; }
+.scroll-reel-active { position:absolute; inset:0 0 auto; will-change:transform,opacity; }
+.scroll-reel .scroll-reel-quote { margin:0; font-size:24px; font-weight:400; line-height:1.4; letter-spacing:-.025em; overflow-wrap:anywhere; }
+.scroll-reel .scroll-reel-author { margin:0; color:#797b73; font-size:13px; line-height:1.5; font-weight:400; }
+.scroll-reel-author-name { display:flex; align-items:center; gap:10px; min-height:28px; font-size:15px; font-weight:600; color:#45483f; }
+.scroll-reel-author-name img { flex-shrink:0; width:20px; height:20px; }
+.scroll-reel a.scroll-reel-author-name { width:fit-content; text-decoration:none; }
+.scroll-reel a.scroll-reel-author-name:hover { color:#766296; text-decoration:underline; text-underline-offset:4px; }
+.scroll-reel a.scroll-reel-author-name:focus-visible { outline:2px solid #7067ef; outline-offset:-2px; border-radius:3px; }
+.scroll-reel-author small { display:block; font-size:12px; margin-top:2px; font-weight:400; }
+.scroll-reel-controls { display:flex; align-items:center; gap:8px; margin-top:auto; padding-top:24px; }
+.scroll-reel-controls button { display:grid; place-items:center; width:44px; height:44px; padding:0; border-radius:50%; border:1px solid #dcd9e3; background:#fff; color:#5b5e55; transition:transform .2s,background .2s; cursor:pointer; }
+.scroll-reel-controls button:hover:enabled { transform:translateY(-2px); background:#efebf7; }
+.scroll-reel-controls button:active:enabled { transform:scale(.94); }
+.scroll-reel-controls button:disabled { opacity:.35; cursor:default; }
+.scroll-reel-controls button[aria-disabled="true"] { cursor:default; }
+.scroll-reel-controls svg { width:17px; height:17px; }
+.scroll-reel-controls>span { margin-left:8px; color:#86867f; font-size:11px; font-variant-numeric:tabular-nums; letter-spacing:.05em; }
+.scroll-reel-controls>span>span { color:#ccc8d2; padding-inline:4px; }
+@media(max-width:1000px) and (min-width:768px) { .scroll-reel-portraits { width:310px; } .scroll-reel-content { padding:32px 24px 28px 12px; } .scroll-reel .scroll-reel-quote { font-size:21px; } }
+@media(max-width:767px) {
+  .scroll-reel { flex-direction:column; }
+  .scroll-reel-portraits { width:100%; height:240px; }
+  .scroll-reel-content { padding:6px 24px 26px; }
+  .scroll-reel-quote-mark { width:29px; height:29px; margin-bottom:10px; }
+  .scroll-reel .scroll-reel-quote { font-size:20px; line-height:1.45; }
+  .scroll-reel .scroll-reel-author { font-size:12px; }
+  .scroll-reel-text-block { min-height:140px; gap:16px; }
+  .scroll-reel-controls { padding-top:20px; }
+}
+@media(prefers-reduced-motion:reduce) { .scroll-reel-column { transition:none!important; will-change:auto; } .scroll-reel-controls button { transition:none; } }

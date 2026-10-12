@@ -5,6 +5,7 @@ import { DesignLink } from "./hero";
 import { DeferredVisual } from "./deferred-visual";
 import { IntegrationsStrip } from "./integrations-strip";
 import { CustomerStories, ClientProof } from "./customer-stories";
+import { UserTestimonials } from "./user-testimonials";
 import { ProductExampleLink } from "./product-example-link";
 import { RedesignHeroArtwork } from "./redesign-artwork";
 import { RedesignFeatureDeck } from "./redesign-feature-deck";
@@ -45,6 +46,7 @@ export function RedesignHome() {
     <CopyPromptSection />
     <AutomatedWorkforce />
     <CustomerStories />
+    <UserTestimonials />
     <ProductExampleLink />
   </>;
 }

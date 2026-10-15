@@ -12,3 +12,7 @@ All SVGs are served locally. Brand marks identify the platforms and models descr
 - Grok: Lobe Icons monochrome SVG, downloaded October 10, 2026 from `https://unpkg.com/@lobehub/icons-static-svg@latest/icons/grok.svg`; covered by the MIT license above.
 
 - Shopify and Zendesk: Simple Icons SVGs (CC0), downloaded October 12, 2026 from the project’s official GitHub repository (`icons/shopify.svg`, `icons/zendesk.svg`). Used to identify an explicitly fictional example tech stack; no customer or integration claim.
+
+- Integration cards, October 15, 2026: Google Sheets and Google Calendar use Google's original 96px product icons from `https://www.gstatic.com/images/branding/product/2x/{sheets,calendar}_2020q4_48dp.png`. Zoho, WhatsApp, and Calendly use Simple Icons SVGs (CC0), fetched from the official repository, with their brand fill colors. Instantly reuses the existing local optimized brand asset.
+
+- Apify uses the unmodified SVG favicon from its official site (`https://apify.com/icon0.svg`), downloaded October 15, 2026.

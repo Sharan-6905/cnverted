@@ -42,7 +42,7 @@ export function RedesignHome() {
       <div className="redesign-feature-heading"><h2 id="features-title">From the open web to<br />booked meetings</h2><div><p>Define your <Link className="redesign-guide-link" href="/learn/ideal-customer-profile">ideal customer profile</Link>, understand your buyers’ <Link className="redesign-guide-link" href="/learn/buying-signals">buying signals</Link>, and give your team the context to start the right conversation.</p><DesignLink href={DEMO_PATH} arrow>Book a call</DesignLink></div></div>
       <RedesignFeatureDeck />
     </section>
-    <div className="redesign-logo-section"><IntegrationsStrip decoration={<Image className="integrations-toucan" {...art["499-1460-imgImage106"]} alt="" sizes="(max-width: 767px) 80px, 140px" />} /></div>
+    <div className="redesign-logo-section"><IntegrationsStrip /></div>
     <CopyPromptSection />
     <AutomatedWorkforce />
     <CustomerStories />

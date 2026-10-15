@@ -10,6 +10,7 @@ export interface AnimatedCardProps {
   description?: ReactNode;
   variant?: "card" | "strip";
   autoScroll?: boolean;
+  animateIcons?: boolean;
   scrollDirection?: "left" | "right";
   ariaLabel?: string;
   icons?: Array<{
@@ -27,7 +28,7 @@ const particles = [
 ];
 
 export function AnimatedCard({
-  className, title, description, variant = "card", autoScroll = false, scrollDirection = "left", icons = [],
+  className, title, description, variant = "card", autoScroll = false, animateIcons = true, scrollDirection = "left", icons = [],
   ariaLabel = "Connected tools. Scroll horizontally to explore.",
 }: AnimatedCardProps) {
   const scope = useRef<HTMLDivElement>(null);
@@ -46,7 +47,7 @@ export function AnimatedCard({
     const syncPlayback = () => {
       const running = inView && !document.hidden && !hovered && !focused && !reducedMotion.matches;
       root.dataset.motion = running ? "running" : "paused";
-      if (running && !controls.length) buildSequence();
+      if (running && animateIcons && !controls.length) buildSequence();
       controls.forEach((animation) => running ? animation.play() : animation.pause());
     };
 
@@ -114,7 +115,7 @@ export function AnimatedCard({
       root.removeEventListener("focusin", focus);
       root.removeEventListener("focusout", blur);
     };
-  }, [autoScroll, iconCount]);
+  }, [autoScroll, animateIcons, iconCount]);
 
   return (
     <div ref={scope} className={cn(styles.root, variant === "card" && styles.card, autoScroll && styles.marquee, className)} data-motion="paused" data-scroll-direction={scrollDirection}>
@@ -128,7 +129,7 @@ export function AnimatedCard({
               {icon}
             </div>
           ))}
-          {iconCount > 0 ? (
+          {animateIcons && iconCount > 0 ? (
             <div className={styles.sweepWindow} aria-hidden="true">
               <div className={styles.sweep} data-signal-sweep>
                 <span className={styles.beam} />

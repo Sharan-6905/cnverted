@@ -182,3 +182,15 @@ Used Commercial 0.2 contact frame `499:5522` and Resources dropdown `636:1189` i
 Resources uses all seven original illustrations, a 230px panel, bounded vertical scrolling and the existing keyboard/outside-click dismissal. Mobile navigation uses the same art. Both navigation states close when crossing the mobile breakpoint.
 
 Validation: production build passed (existing Google Sans Flex fallback warning); browser checks at 320, 390, 768, 820, 1100, 1199, 1200, 1366 and 1440px found no horizontal overflow or mascot/social-link overlap. Verified asset loads, Escape dismissal, outside-click dismissal and mobile-to-desktop reset. Follow-up: all four founder cards stay in one row at widths of 1024px and above. Below 1024px the same row scrolls horizontally with readable card widths. Checked 320, 390, 820, 1024 and 1440px: one row at every size, no page overflow.
+
+## Integration cards — 15 October 2026
+
+Replaced the active homepage's toucan/logo strip with the two-row cards from Commercial 0.2 frame `670:1833`. Original Figma logo PNGs are stored in `public/figma/integration-cards/`; labels, image dimensions/crops, repeated Trello tile, rounded cards, shadows, spacing and edge fades follow that frame. Retained the existing integration-specific description rather than the design's generic AI placeholder copy.
+
+The existing AnimatedCard now supports `animateIcons={false}` so these rows scroll in opposite directions without logo bouncing or signal sweeps. Its other callsites retain their default animation. Motion pauses offscreen, in hidden tabs, on hover and keyboard focus; reduced motion disables looping and allows manual scrolling. Keyboard focus also allows manual scrolling. Next Image lazily serves the local logos at responsive sizes.
+
+Validation: TypeScript, production webpack build and whitespace checks passed. Browser geometry checks at 320, 390, 820, 1366 and 1440 CSS pixels found two rows with no horizontal page overflow. Mobile visible logos loaded, keyboard focus paused the selected row, and the integrations toucan is absent. Preview: http://127.0.0.1:3021/#integrations-title. Changes remain local, not published.
+
+### Requested integration list — 15 October 2026
+
+Updated the two-row cards to the owner's 21-platform list: Gmail, LinkedIn, Google Sheets, Slack, Google Calendar, X, HubSpot, Reddit, Salesforce, Google Ads, Zoho, WhatsApp, Cal.com, Calendly, Apify, Icypass, Apollo, Microsoft Excel, Attio, Instantly, and HeyReach. This replaces the original Figma platform selection and duplicate Trello entry while keeping its card layout, edge fades, and opposing marquee motion. Missing logos are served locally; provenance is documented in `public/brands/README.md`.

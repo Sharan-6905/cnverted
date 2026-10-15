@@ -1,3 +1,5 @@
+import { GROWTH_ARTICLES } from "./blog-growth-articles";
+
 // Blog content lives here as structured blocks so the article page can render
 // consistent editorial typography and the listing can pull metadata.
 
@@ -7,10 +9,12 @@ export type Block =
   | { type: "callout"; lines: string[] }
   | { type: "numbered"; items: { title: string; text: string }[] }
   | { type: "bullets"; items: string[] }
+  | { type: "table"; caption: string; headers: string[]; rows: string[][] }
   | { type: "cta"; text: string };
 
 export interface Author {
   name: string;
+  type?: "Person" | "Organization";
   /** Public profiles linked in the byline and Article schema. */
   linkedin: string;
   x: string;
@@ -37,10 +41,15 @@ export interface BlogPost {
   author: Author;
   /** Path to the cover image under /public. */
   cover: string;
+  coverAlt?: string;
+  /** Recorded publication or content/metadata revision for the sitemap. */
+  sitemapModified?: string;
+  showContents?: boolean;
   body: Block[];
 }
 
 export const BLOG_POSTS: BlogPost[] = [
+  ...GROWTH_ARTICLES,
   {
     slug: "apollo-vs-cnvrted",
     searchTitle: "Apollo vs Cnvrted | Prospecting & Buying Signals",

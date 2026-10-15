@@ -1,0 +1,68 @@
+{
+  "researchedAt": "2026-10-15",
+  "method": "Qualitative review of live search results for the five topic clusters, inspection of existing Cnvrted articles and learning guides, and primary-source checks for cited claims.",
+  "limitations": "No keyword-volume, keyword-difficulty, Search Console query export, or ranking forecast was obtained. Targets are editorial hypotheses based on intent and product relevance. Do not present them as proven high-volume or low-competition terms.",
+  "existingContent": {
+    "/blogs/what-is-a-gtm-play": "Keep as the conceptual GTM-play foundation; new agency article covers implementation.",
+    "/learn/buying-signals": "Keep as the broad definition/examples page; new hiring article focuses on reading and verifying vacancies.",
+    "/learn/ideal-customer-profile": "Keep as the ICP definition; new qualification article covers individual account decisions.",
+    "/learn/signal-to-outreach": "Keep as the product walkthrough; new articles cover working methods and measurement.",
+    "/blogs/apollo-vs-cnvrted": "Comparison intent remains separate from the informational guides."
+  },
+  "articles": [
+    {
+      "slug": "first-b2b-customers-buying-signals",
+      "primaryKeyword": "how to find first B2B customers",
+      "supportingKeywords": ["founder-led sales", "buying signals for startups", "first B2B customers using buying signals"],
+      "intent": "Founder wants an executable route from research to a first paid engagement.",
+      "originalContribution": "A bounded research batch, evidence note, fictional routing-service example, discovery questions, and pilot acceptance criteria.",
+      "searchQueries": ["first B2B customers buying signals", "how to get first customers sales founders"],
+      "observedResults": ["https://www.useoperis.com/blog/how-saas-startups-can-find-their-first-b2b-customers", "https://www.brandjet.ai/blog/best-ways-to-get-first-customers-for-b2b/"],
+      "citedSources": ["https://paulgraham.com/ds.html"]
+    },
+    {
+      "slug": "hiring-signals-for-sales",
+      "primaryKeyword": "hiring signals for sales",
+      "supportingKeywords": ["job postings as buying signals", "hiring intent signals", "sales triggers from job openings"],
+      "intent": "Seller wants to decide which vacancies justify relevant outreach.",
+      "originalContribution": "Responsibilities-to-question matrix, three fictional account decisions, and explicit counter-evidence such as backfills or bringing work in-house.",
+      "searchQueries": ["hiring signals for sales", "B2B first customers buying signals prospecting hiring signals sales agency lead generation"],
+      "observedResults": ["https://tomba.io/blog/hiring-signals-for-sales", "https://pointerstrategy.com/blog/signal-job-openings"],
+      "citedSources": [],
+      "sourceNote": "Original recommended workflow, not empirical findings; no vendor conversion claims adopted."
+    },
+    {
+      "slug": "qualify-prospects-before-cold-email",
+      "primaryKeyword": "how to qualify prospects before cold email",
+      "supportingKeywords": ["pre-outreach qualification checklist", "B2B prospect qualification", "qualify leads before outreach"],
+      "intent": "Salesperson wants a defensible contact/research/hold/exclude decision before writing an email.",
+      "originalContribution": "Four gates instead of a compensating score, queue rules, and an example distinguishing observed facts from unknown budget and timing.",
+      "searchQueries": ["qualify prospects before cold email", "lead qualification BANT need budget authority timeline"],
+      "observedResults": ["https://lite14.net/blog/2026/10/08/how-to-qualify-leads-before-sending-a-cold-email/", "https://repco.ai/blog/how-to-qualify-b2b-prospects-before-dm"],
+      "citedSources": ["https://www.salesforce.com/blog/sales/what-is-bant-lead-generation/"]
+    },
+    {
+      "slug": "signal-based-outbound-for-agencies",
+      "primaryKeyword": "signal-based outbound for agencies",
+      "supportingKeywords": ["agency outbound playbook", "outbound lead generation for agencies", "buying signals for agencies"],
+      "intent": "Agency owner wants a repeatable way to connect a specific service to a current client need.",
+      "originalContribution": "Two detailed plays with offer scope, counter-evidence, stop rules, and delivery-team review.",
+      "searchQueries": ["lead generation for agencies outbound playbook"],
+      "observedResults": ["https://agencypro.app/blog/agency-outbound-playbook", "https://www.thatcompany.com/outbound-lead-generation-for-agencies"],
+      "citedSources": [],
+      "sourceNote": "Original fictional plays, clearly labelled; no performance results claimed."
+    },
+    {
+      "slug": "signal-based-outreach-metrics",
+      "primaryKeyword": "signal-based outreach metrics",
+      "supportingKeywords": ["positive reply rate", "cost per qualified meeting", "outbound campaign measurement"],
+      "intent": "Operator wants to assess whether research effort creates useful sales outcomes.",
+      "originalContribution": "Stable account-level denominators, a fully worked fictional funnel, research cost allocation, and checks against unfair cohort comparisons.",
+      "searchQueries": ["signal based outbound metrics positive reply rate qualified meetings", "qualify prospects before cold email signal based outbound metrics"],
+      "observedResults": ["https://d2group.co/insights/b2b-leads/chien-luoc-b2b-outbound-signal-selling"],
+      "citedSources": ["https://mailchimp.com/help/about-open-and-click-rates/"]
+    }
+  ],
+  "editorialChecks": ["Distinct search intent per page", "No invented results or customer attribution", "Fictional examples labelled", "Cnvrted team byline rather than unreviewed personal authorship", "Internal links to relevant guides and companion articles", "Unique title, description, canonical, and cover alt", "BlogPosting and breadcrumb schema", "Sitemap inclusion does not mean indexing"],
+  "afterPublication": "Review indexing, actual query impressions and clicks in Search Console, and meaningful product/demo visits. Refine pages from observed queries and user questions; do not assume adding pages causes rankings."
+}

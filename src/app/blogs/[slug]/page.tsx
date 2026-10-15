@@ -55,7 +55,7 @@ async function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
     datePublished: post.date,
     ...(post.updated ? { dateModified: post.updated } : {}),
     author: {
-      "@type": "Person",
+      "@type": post.author.type ?? "Person",
       name: post.author.name,
       url: post.author.linkedin,
       sameAs: [post.author.linkedin, post.author.x],
@@ -119,14 +119,24 @@ export default async function BlogPostPage({
             <Image
               className="design-article-cover"
               src={post.cover}
-              alt={post.category === "Comparison" ? "Cnvrted’s illustrated windmill and buying signals alongside Apollo." : "Cnvrted go-to-market strategy canvas, with connected strategy and launch nodes."}
+              alt={post.coverAlt ?? (post.category === "Comparison" ? "Cnvrted’s illustrated windmill and buying signals alongside Apollo." : "Cnvrted go-to-market strategy canvas, with connected strategy and launch nodes.")}
               width={1023}
               height={437}
               sizes="(max-width: 767px) calc(100vw - 48px), (max-width: 1206px) calc(100vw - 120px), 1023px"
               loading="eager"
             />
             <div className="design-article-prose">
-              {post.body.map((block, i) => <BlockRenderer key={i} block={block} />)}
+              {post.showContents && (
+                <nav className="design-article-contents" aria-label="In this article">
+                  <p><strong>In this article</strong></p>
+                  <ul>
+                    {post.body.map((block, i) => block.type === "h2" ? (
+                      <li key={i}><a href={`#section-${i}`}>{block.text}</a></li>
+                    ) : null)}
+                  </ul>
+                </nav>
+              )}
+              {post.body.map((block, i) => <BlockRenderer key={i} block={block} id={`section-${i}`} />)}
               <aside aria-label="Related reading">
                 <h2>Keep exploring</h2>
                 <p><Link href="/learn/buying-signals">Buying signals: examples and a qualification checklist</Link></p>
@@ -140,10 +150,10 @@ export default async function BlogPostPage({
   );
 }
 
-function BlockRenderer({ block }: { block: Block }) {
+function BlockRenderer({ block, id }: { block: Block; id: string }) {
   switch (block.type) {
     case "h2":
-      return <h2>{block.text}</h2>;
+      return <h2 id={id}>{block.text}</h2>;
     case "p":
       return <p><RichText text={block.text} /></p>;
     case "numbered":
@@ -165,6 +175,16 @@ function BlockRenderer({ block }: { block: Block }) {
       );
     case "callout":
       return <blockquote>{block.lines.map((line, i) => <p key={i}>{line}</p>)}</blockquote>;
+    case "table":
+      return (
+        <div className="design-article-table" role="region" aria-label={block.caption} tabIndex={0}>
+          <table>
+            <caption>{block.caption}</caption>
+            <thead><tr>{block.headers.map((heading) => <th scope="col" key={heading}>{heading}</th>)}</tr></thead>
+            <tbody>{block.rows.map((row, i) => <tr key={i}>{row.map((cell, j) => j === 0 ? <th key={j} scope="row">{cell}</th> : <td key={j}>{cell}</td>)}</tr>)}</tbody>
+          </table>
+        </div>
+      );
     case "cta":
       return <p className="design-article-closing"><RichText text={block.text} /></p>;
   }

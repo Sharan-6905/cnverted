@@ -36,6 +36,18 @@
 .design-article-prose blockquote { padding: 20px 0; color: #3a3a3a; }
 .design-article-prose blockquote p + p { margin-top: 4px; }
 .design-article-closing { padding-top: 16px; }
+.design-article-contents { padding: 24px; border: 1px solid #e6e5db; border-radius: 16px; background: #faf9f5; }
+.design-article-contents ul { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 8px; }
+.design-article-contents a { display: inline-block; padding: 4px 0; line-height: 1.6; }
+.design-article-prose h2[id] { scroll-margin-top: 160px; }
+.design-article-table { max-width: 100%; overflow-x: auto; border: 1px solid #e6e5db; border-radius: 12px; }
+.design-article-table:focus-visible { outline: 2px solid var(--olive); outline-offset: 4px; }
+.design-article-table table { border-collapse: collapse; width: 100%; text-align: left; font-size: 15px; line-height: 1.65; }
+.design-article-table caption { text-align: left; padding: 16px 20px; font-weight: 600; background: #faf9f5; }
+.design-article-table th, .design-article-table td { padding: 14px 20px; border-top: 1px solid #e6e5db; vertical-align: top; min-width: 125px; }
+.design-article-table thead { background: #f0f2e4; }
+.design-article-table th { font-weight: 600; }
+.design-article-table tbody tr:nth-child(even) { background: #fcfcf9; }
 .design-article-page .design-faq { padding-top: 112px; }
 
 @media (max-width: 1023px) {
@@ -52,6 +64,7 @@
   .design-article-content { margin-top: 28px; }
   .design-article-cover { border-radius: 8px; }
   .design-article-prose { line-height: 29px; }
+  .design-article-table th, .design-article-table td { padding: 12px; min-width: 104px; }
   .figma-site .design-article-prose h2 { font-size: 28px; }
   .design-article-numbered { gap: 20px; }
   .design-article-numbered li { gap: 10px; }

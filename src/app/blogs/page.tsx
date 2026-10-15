@@ -11,7 +11,7 @@ import { assets } from "@/components/illustrated/assets";
 
 export const metadata: Metadata = pageMetadata({
   title: "B2B Prospecting Blog | GTM Plays & Tool Comparisons",
-  description: "Explore B2B prospecting articles from Cnvrted: compare Apollo and Cnvrted, and learn how to turn buying signals into an actionable GTM play.",
+  description: "Practical B2B prospecting guides: find your first customers, research hiring signals, qualify leads, build agency outbound plays, and measure results.",
   path: "/blogs",
 });
 export default function BlogsPage() {
@@ -22,7 +22,7 @@ export default function BlogsPage() {
       <IllustratedHero
         kind="blogs"
         title="Prospecting notes"
-        description="B2B prospecting perspectives, tool comparisons, and GTM plays, written by Dhruv Pradeep."
+        description="Practical guides, worked examples, and GTM plays from the Cnvrted team."
       />
       <section
         className="design-blog-list design-container"

@@ -12,7 +12,7 @@ import { SITE_URL, absoluteUrl } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogs = blogPosts.map((post) => ({
     url: `${SITE_URL}/blogs/${post.slug}`,
-    lastModified: "2026-10-11",
+    lastModified: post.sitemapModified ?? "2026-10-11",
     images: [absoluteUrl(post.cover)],
     changeFrequency: "monthly" as const,
     priority: 0.7,
@@ -47,7 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/blogs`, lastModified: "2026-10-11",
+      url: `${SITE_URL}/blogs`, lastModified: "2026-10-15",
       changeFrequency: "weekly",
       priority: 0.8,
     },
@@ -58,7 +58,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    { url: `${SITE_URL}/learn`, lastModified: "2026-10-11", changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/learn`, lastModified: "2026-10-15", changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/learn/go-to-market-strategy`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/learn/ideal-customer-profile`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/learn/buying-signals`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },

@@ -21,7 +21,7 @@ export default function BlogsPage() {
       <BreadcrumbSchema trail={[{ name: "Blog" }]} />
       <IllustratedHero
         kind="blogs"
-        title="Prospecting notes"
+        title="B2B prospecting notes"
         description="Practical guides, worked examples, and GTM plays from the Cnvrted team."
       />
       <section

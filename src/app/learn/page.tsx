@@ -27,7 +27,13 @@ export default function LearnPage() {
       faqItems={[]}
       closingCTA={<ClosingCTA />}
     >
-      <PageSchema path="/learn" metadata={metadata} type="CollectionPage" />
+      <PageSchema path="/learn" metadata={metadata} type="CollectionPage" items={[
+        { name: "What’s your go-to-market strategy?", path: "/learn/go-to-market-strategy" },
+        { name: "Who is your ideal customer?", path: "/learn/ideal-customer-profile" },
+        { name: "What makes a buying signal useful?", path: "/learn/buying-signals" },
+        { name: "What would you actually say?", path: "/learn/signal-to-outreach" },
+        ...guides.map(post => ({ name: post.title, path: `/blogs/${post.slug}` })),
+      ]} />
       <BreadcrumbSchema trail={[{ name: "Learn" }]} />
       <header className="marketing-page-heading design-container">
         <span className="marketing-eyebrow">The field notes</span>
@@ -65,7 +71,7 @@ export default function LearnPage() {
         <div>
           <span className="marketing-eyebrow">03 / Understand the timing</span>
           <h2>What makes a buying signal useful?</h2>
-          <p>Four examples, a five-step qualification checklist, and a worked outreach example.</p>
+          <p>Buying signals vs intent data, four examples, and a free research worksheet to keep the evidence with each account.</p>
         </div>
         <Link className="marketing-text-link" href="/learn/buying-signals">
           Read the field guide <span aria-hidden="true">↗</span>

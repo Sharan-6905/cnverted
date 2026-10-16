@@ -49,7 +49,7 @@ export default function ProductPage() {
       </header>
 
       <nav className="product-contents design-container" aria-label="On this page">
-        <a href="#product-workflow">How it works</a><a href="#product-audience">Who it’s for</a><a href="#product-evidence">Sources & judgment</a><a href="#product-story">In practice</a><a href="#faq-title">Questions</a>
+        <a href="#product-workflow">How it works</a><a href="#product-audience">Who it’s for</a><a href="#product-evidence">Sources & judgment</a><a href="#product-evaluation">Evaluate the fit</a><a href="#product-story">In practice</a><a href="#faq-title">Questions</a>
       </nav>
 
       <section className="product-section design-container" aria-labelledby="product-workflow">
@@ -80,6 +80,14 @@ export default function ProductPage() {
       </section>
 
       <ProductExampleLink />
+
+      <section className="product-section design-container" aria-labelledby="product-evaluation">
+        <div className="product-section-heading"><span className="marketing-eyebrow">Before choosing a platform</span><h2 id="product-evaluation">Evaluate the workflow<br />with your own accounts.</h2><p>When comparing AI GTM platforms or buying-signal software, bring a few accounts from your actual market. Use the same offer and fit criteria throughout the demo so the comparison stays useful.</p></div>
+        <div className="product-evidence-grid">
+          <section><h3>Can you inspect the evidence?</h3><ul><li>Open the original source and check its date.</li><li>Separate the observed event from the suggested sales angle.</li><li>Try an account that should be excluded as well as one that fits.</li></ul><p>Our <Link href="/learn/buying-signals#signal-worksheet">free buying-signal worksheet</Link> gives you a consistent way to record the findings.</p></section>
+          <section><h3>Does it fit the way you work?</h3><ul><li>Confirm source coverage for your market and geography.</li><li>Ask which steps and integrations are available for your use case.</li><li>Check credit usage, review time, and the next handoff before scaling.</li></ul><p>Review <Link href="/pricing">plans and credits</Link>, then agree on a bounded test. Track usable research and <Link href="/blogs/signal-based-outreach-metrics">qualified conversations</Link>, rather than counting returned names alone.</p></section>
+        </div>
+      </section>
 
       <section className="product-section product-story design-container" aria-labelledby="product-story">
         <div><span className="marketing-eyebrow">One campaign, in context</span><h2 id="product-story">What changed when<br />the outreach had a reason?</h2><p>Our published customer story follows one founder’s batch of 11 targeted emails. It reports six replies and three demo bookings in that week.</p><p className="product-story-note">One reported campaign, with a different scope from the previous daily routine. Read the measurement notes alongside the results.</p><Link className="marketing-text-link" href="/case-studies/from-cold-emails-to-warm-conversations">Read the case study <span aria-hidden="true">↗</span></Link></div>

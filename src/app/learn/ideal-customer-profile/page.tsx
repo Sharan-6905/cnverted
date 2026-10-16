@@ -10,9 +10,10 @@ import "@/components/illustrated/article.css";
 import "../buying-signals/guide.css";
 
 const path = "/learn/ideal-customer-profile";
-const title = "What is an ideal customer profile?";
-const description = "Define your B2B ideal customer profile with a six-field worksheet, three sample ICPs, and a practical way to separate company fit from buying signals.";
+const title = "B2B ideal customer profile: examples and a free template";
+const description = "Build your B2B ideal customer profile with a free ICP template for Excel or Google Sheets. Includes six fields, three examples, and a customer validation checklist.";
 const published = "2026-10-06";
+const modified = "2026-10-16";
 const faqs = [
   { question: "What does ICP mean in sales?", answer: "ICP stands for ideal customer profile. In B2B sales, it describes the kind of company that your offer is suited to, using criteria such as its problem, business model, size, location, and operating requirements." },
   { question: "How is an ICP different from a buyer persona?", answer: "An ICP describes a company. A buyer persona describes a person involved in a decision, including their responsibilities, goals, and concerns. Use the ICP to choose accounts and the persona to understand who to speak with." },
@@ -31,8 +32,8 @@ const fields = [
 ];
 
 export const metadata = pageMetadata({
-  title: "Ideal Customer Profile (ICP): Examples & Template | Cnvrted",
-  description, path, publishedTime: published,
+  title: "B2B ICP Template & Ideal Customer Profile Examples | Cnvrted",
+  description, path, publishedTime: published, modifiedTime: modified,
 });
 
 export default function IdealCustomerProfileGuide() {
@@ -42,7 +43,7 @@ export default function IdealCustomerProfileGuide() {
       <FAQSchema path={path} items={faqs} />
       <JsonLd data={{
         "@context": "https://schema.org", "@type": "Article", "@id": absoluteUrl(`${path}#article`),
-        headline: title, description, inLanguage: "en", datePublished: published, dateModified: published,
+        headline: title, description, inLanguage: "en", datePublished: published, dateModified: modified,
         image: absoluteUrl(DEFAULT_SOCIAL_IMAGE.url),
         author: { "@type": "Organization", "@id": `${SITE_URL}/#organization`, name: "Cnvrted", url: `${SITE_URL}/about` },
         publisher: { "@id": `${SITE_URL}/#organization` }, mainEntityOfPage: absoluteUrl(path),
@@ -53,7 +54,7 @@ export default function IdealCustomerProfileGuide() {
           <p className="marketing-eyebrow">The prospecting field guide</p>
           <h1 id="guide-title">{title}</h1>
           <p className="design-article-dek">Know who you can help. Then look for a reason to talk.</p>
-          <div className="design-article-byline"><p>By <Link href="/about">the Cnvrted team</Link> · <time dateTime={published}>October 6, 2026</time></p></div>
+          <div className="design-article-byline"><p>By <Link href="/about">the Cnvrted team</Link> · <time dateTime={published}>October 6, 2026</time><br />Updated <time dateTime={modified}>October 16, 2026</time></p></div>
         </header>
         <div className="design-article-content design-article-prose">
           <p className="signal-guide-answer"><strong>An ideal customer profile (ICP) describes the kind of company that is a strong fit for your offer.</strong> In B2B sales, it combines the problem you solve with practical criteria such as company size, business model, location, and operating needs. It helps you decide which accounts to research—and which to leave out.</p>
@@ -71,7 +72,7 @@ export default function IdealCustomerProfileGuide() {
             <p>Our <Link href="/learn/buying-signals">buying-signals guide</Link> explains how to check the event, its source, and its relevance before reaching out.</p>
           </section>
           <section aria-labelledby="icp-worksheet">
-            <h2 id="icp-worksheet">A six-field ICP worksheet.</h2>
+            <h2 id="icp-worksheet">Free ICP template for Excel or Google Sheets.</h2>
             <p>Start with the offer, then work outward. The example below is for a fictional design studio selling onboarding sprints; adapt the fields to what you can deliver.</p>
             <div className="signal-guide-examples">{fields.map((field, index) => <section key={field.name}>
               <span className="marketing-eyebrow" aria-hidden="true">0{index + 1}</span>
@@ -81,6 +82,8 @@ export default function IdealCustomerProfileGuide() {
               <div><h3>Make a copy for your team.</h3><p>A blank answer column, the six prompts, and a worked example. Opens in Excel or Google Sheets.</p></div>
               <a href="/downloads/cnvrted-icp-worksheet.csv" download className="marketing-text-link">Download the worksheet <span aria-hidden="true">↓</span><span className="sr-only"> (CSV)</span></a>
             </aside>
+            <p><strong>How to use the template:</strong> Download the CSV, open it in Excel or import it into Google Sheets, and fill in the answer column for one offer. Keep the sample separate from your own evidence. Name the person responsible for checking each assumption and set a review date after your first research batch.</p>
+            <p>Starting without customers? Use the <Link href="/blogs/first-b2b-customers-buying-signals">first B2B customers playbook</Link> to test the profile through research and conversations before expanding the list.</p>
           </section>
           <section aria-labelledby="icp-examples">
             <h2 id="icp-examples">Three offers. Three different profiles.</h2>

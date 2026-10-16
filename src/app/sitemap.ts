@@ -28,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/product`,
-      lastModified: "2026-10-11",
+      lastModified: "2026-10-16",
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -48,7 +48,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/blogs`, lastModified: "2026-10-15",
+      url: `${SITE_URL}/blogs`, lastModified: "2026-10-16",
       changeFrequency: "weekly",
       priority: 0.8,
     },
@@ -59,10 +59,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    { url: `${SITE_URL}/learn`, lastModified: "2026-10-15", changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/learn`, lastModified: "2026-10-16", changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/learn/go-to-market-strategy`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/learn/ideal-customer-profile`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/learn/buying-signals`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/learn/ideal-customer-profile`, lastModified: "2026-10-16", changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/learn/buying-signals`, lastModified: "2026-10-16", changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/learn/signal-to-outreach`, lastModified: "2026-10-11", changeFrequency: "monthly", priority: 0.7 },
     ...CASE_STUDIES.map((story) => ({
       url: `${SITE_URL}/case-studies/${story.slug}`,

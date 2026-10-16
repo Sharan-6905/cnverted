@@ -1,0 +1,866 @@
+{
+  "date": "2026-10-16",
+  "site": "https://www.cnvrted.com",
+  "scope": "Deep qualitative keyword and intent research plus implementation on existing canonical pages",
+  "research": {
+    "search_engine": "Exa",
+    "queries": 7,
+    "requested_results": 50,
+    "returned_results": 50,
+    "expanded_primary_pages": 7,
+    "geography": "English-language B2B; no localized Google ranking simulation",
+    "limits": [
+      "Semantic search results are not Google SERP positions.",
+      "No Keyword Planner, Ahrefs, Semrush or paid volume/difficulty dataset was available. All volume/difficulty values remain unknown.",
+      "Search Console query rows omit some queries; query sums and page sums must not be equated with property totals.",
+      "The five new articles were published 2026-10-15, after the current GSC performance window. They cannot be evaluated from this report."
+    ],
+    "source_inventory": [
+      {
+        "workstream": "commercial",
+        "title": "OutsScale — AI B2B Prospecting Tool With Buying Signals",
+        "url": "https://www.outsscale.com/"
+      },
+      {
+        "workstream": "commercial",
+        "title": "Duo Copilot — AI sales assistant for signal-based selling",
+        "url": "https://www.amplemarket.com/duo"
+      },
+      {
+        "workstream": "commercial",
+        "title": "Signal-Based Selling: Reach Buyers at the Right Time",
+        "url": "https://www.topo.io/products/intent-signals"
+      },
+      {
+        "workstream": "commercial",
+        "title": "SalesSignal — Know who to call. Why today. What to say.",
+        "url": "https://www.sales-signal.com/"
+      },
+      {
+        "workstream": "commercial",
+        "title": "graph8 Signals: buyer motion starts the work",
+        "url": "https://graph8.com/platform/signals/"
+      },
+      {
+        "workstream": "commercial",
+        "title": "Signal - Buyer Visibility Platform",
+        "url": "https://signalb2b.io/"
+      },
+      {
+        "workstream": "commercial",
+        "title": "Gosalify, Turn signals into sales",
+        "url": "https://gosalify.com/"
+      },
+      {
+        "workstream": "commercial",
+        "title": "Agentic SDR — Pipeline That Appears While You Sleep | LaunchCI",
+        "url": "https://launch.ci/products/agentic-sdr"
+      },
+      {
+        "workstream": "practical",
+        "title": "The Outbound Sales Playbook: A Guide for Early Stage B2B Startup Founders - Blume",
+        "url": "https://blume.vc/commentaries/the-outbound-sales-playbook-a-guide-for-early-stage-b2b-startup-founders"
+      },
+      {
+        "workstream": "practical",
+        "title": "B2B Sales Playbook: Founder-Led Sales Guide | The Startup Project",
+        "url": "https://startupproject.org/guides/b2b-sales/"
+      },
+      {
+        "workstream": "practical",
+        "title": "How to Do Founder-Led Sales: A 2026 Outbound Playbook",
+        "url": "https://www.unifygtm.com/explore/how-to-do-founder-led-sales"
+      },
+      {
+        "workstream": "practical",
+        "title": "Startup Prospecting: Finding Early Customers — Gangly Blog",
+        "url": "https://getgangly.com/blog/prospecting-for-startups"
+      },
+      {
+        "workstream": "practical",
+        "title": "Signal-Based Outbound: A Founder's Playbook (2026) | RivoAxis",
+        "url": "https://www.rivoaxis.com/insights/signal-based-outbound-founders-system"
+      },
+      {
+        "workstream": "practical",
+        "title": "Founder-Led Sales: The B2B Playbook for Closing Your First 50 Customers | Embers",
+        "url": "https://useembers.com/blog/founder-led-sales/"
+      },
+      {
+        "workstream": "practical",
+        "title": "Signal-Based Prospecting 2026 | 102 Buying Signals",
+        "url": "https://pointerstrategy.com/guides/signal-based-prospecting"
+      },
+      {
+        "workstream": "practical",
+        "title": "Founder-Led Sales: Win Your First B2B Customers | Startories",
+        "url": "https://startories.com/guides/first-b2b-customers"
+      },
+      {
+        "workstream": "definitions",
+        "title": "Buying signals - B2B Playbook",
+        "url": "https://b2-b-playbook.mintlify.app/playbooks/05-outbound-and-prospecting/buying-signals"
+      },
+      {
+        "workstream": "definitions",
+        "title": "B2B Buying Signals: How to Identify Them and Trigger Outreach at the Right Moment",
+        "url": "https://www.explorium.ai/blog/data-for-gtm/b2b-buying-signals/"
+      },
+      {
+        "workstream": "definitions",
+        "title": "What Are B2B Buying Signals? A Guide for Revenue Teams",
+        "url": "https://www.surfe.com/blog/b2b-buying-signals"
+      },
+      {
+        "workstream": "definitions",
+        "title": "B2B Intent Data: Definition, Sources and Scoring | Blog Rodz",
+        "url": "https://www.rodz.io/en/blog/intent-signals-intent-data-complete-guide/"
+      },
+      {
+        "workstream": "definitions",
+        "title": "Buyer Intent Detection: A B2B Guide (2026) | CatchIntent",
+        "url": "https://catchintent.com/blog/buyer-intent-detection-guide/"
+      },
+      {
+        "workstream": "definitions",
+        "title": "GTM Leader's Guide to Intent Signals & Pipeline Growth",
+        "url": "https://salesintel.io/blog/the-gtm-leaders-guide-to-intent-signals/"
+      },
+      {
+        "workstream": "definitions",
+        "title": "How to Qualify a Lead in Sales: Practical B2B Guide",
+        "url": "https://www.factors.ai/blog/how-to-qualify-a-lead-in-sales"
+      },
+      {
+        "workstream": "definitions",
+        "title": "B2B Intent Data Activation: Signal to Revenue Playbook",
+        "url": "https://houseofmartech.com/blog/b2b-intent-data-activation-playbook-from-signal-detection-to-revenue-pipeline"
+      },
+      {
+        "workstream": "google",
+        "title": "Google's Guide to Optimizing for Generative AI Features on ...",
+        "url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide"
+      },
+      {
+        "workstream": "google",
+        "title": "AI Features and Your Website | Google Search Central",
+        "url": "https://developers.google.com/search/docs/appearance/ai-features"
+      },
+      {
+        "workstream": "google",
+        "title": "AI Features and Your Website | Google Search Central  |  Documentation  |  Google for Developers",
+        "url": "https://developers.google.cn/search/docs/appearance/ai-features"
+      },
+      {
+        "workstream": "google",
+        "title": "Search generative AI control - Search Console Help",
+        "url": "https://support.google.com/webmasters/answer/16908024?hl=en"
+      },
+      {
+        "workstream": "google",
+        "title": "New opportunities, control and insights for website owners",
+        "url": "https://blog.google/products-and-platforms/products/search/new-controls-website-owners/"
+      },
+      {
+        "workstream": "google",
+        "title": "Google Search's Guidance on Generative AI Content on Your Website | Google Search Central  |  Documentation  |  Google for Developers",
+        "url": "https://developers.google.cn/search/docs/fundamentals/using-gen-ai-content"
+      },
+      {
+        "workstream": "google",
+        "title": "Google Search's guidance about AI-generated content  |  Google Search Central Blog  |  Google for Developers",
+        "url": "https://developers.google.cn/search/blog/2023/02/google-search-and-ai-content"
+      },
+      {
+        "workstream": "google",
+        "title": "Our approach to website controls for Search AI features",
+        "url": "https://blog.google/products-and-platforms/products/search/search-ai-features-controls/"
+      },
+      {
+        "workstream": "icp",
+        "title": "Ideal Customer Profile Template",
+        "url": "https://www.hubspot.com/make-my-persona/ideal-customer-profile-template"
+      },
+      {
+        "workstream": "icp",
+        "title": "Ideal Customer Profile Template: Three Starting Points and a Filled Example",
+        "url": "https://www.christianstrunk.com/blog/ideal-customer-profile-template"
+      },
+      {
+        "workstream": "icp",
+        "title": "Ideal Customer Profile Worksheet for Startups (Free Template) | Shilika Jain",
+        "url": "https://www.shilikajain.com/blog/ideal-customer-profile-worksheet-startups"
+      },
+      {
+        "workstream": "icp",
+        "title": "How to create an ideal customer profile for B2B leads (+templates)",
+        "url": "https://clearbit.com/blog/ideal-customer-profile-template"
+      },
+      {
+        "workstream": "icp",
+        "title": "Ideal Customer Profile Template for B2B (+ Examples) | traxy",
+        "url": "https://traxy.ai/blog/ideal-customer-profile-template"
+      },
+      {
+        "workstream": "icp",
+        "title": "► Ideal Customer Profile (ICP) in B2B: Guide & Template",
+        "url": "https://www.leadscraper.de/en/blog/ideal-customer-profile-b2b"
+      },
+      {
+        "workstream": "evaluation",
+        "title": "How to Evaluate Signal Data Platforms in 2026 | Autobound",
+        "url": "https://www.autobound.ai/blog/how-to-evaluate-signal-data-platforms-2026"
+      },
+      {
+        "workstream": "evaluation",
+        "title": "Intent Data Proof of Concept: Test Plan and 5 Platforms",
+        "url": "https://brandwell.ai/blog/intent-data-proof-of-concept-test-plan-scorecard/"
+      },
+      {
+        "workstream": "evaluation",
+        "title": "Intent Data Vendor Due Diligence Checklist",
+        "url": "https://brandwell.ai/blog/intent-data-vendor-due-diligence/"
+      },
+      {
+        "workstream": "evaluation",
+        "title": "Buying Signals Software: A 12-Point Checklist | AxonJay",
+        "url": "https://www.axonjay.ai/articles/buying-signals-software"
+      },
+      {
+        "workstream": "evaluation",
+        "title": "Buyer signal platforms: the complete 2026 guide",
+        "url": "https://www.usergems.com/blog/blog-buyer-signal-platforms-guide"
+      },
+      {
+        "workstream": "evaluation",
+        "title": "The Best Signal-Based Selling Tools in 2026 (Compared) | Salesmotion",
+        "url": "https://salesmotion.io/blog/best-signal-based-selling-tools"
+      },
+      {
+        "workstream": "agency",
+        "title": "Hiring signals",
+        "url": "https://outboundwiki.com/prospecting/hiring-signals/"
+      },
+      {
+        "workstream": "agency",
+        "title": "N/A",
+        "url": "https://deepline.com/docs/plays/signal-hiring"
+      },
+      {
+        "workstream": "agency",
+        "title": "Job Postings Are the Best Free Signal a Dev Agency Has",
+        "url": "https://sentthesystem.com/blog/job-posting-signals-dev-agency-outbound"
+      },
+      {
+        "workstream": "agency",
+        "title": "How to Prioritize Outbound Leads Using Hiring Signals | Braisely",
+        "url": "https://www.braisely.co/blog/a/how-to-prioritize-outbound-leads-using-hiring-signals"
+      },
+      {
+        "workstream": "agency",
+        "title": "Job Postings as Buying Signals · Asphia",
+        "url": "https://asphia.consulting/blog/hiring-signal-outbound-prospecting/"
+      },
+      {
+        "workstream": "agency",
+        "title": "Hiring Signals: What Job Posts Tell You About Buying Intent — SignalGrid Journal",
+        "url": "https://leadking.app/blog/hiring-signals-what-job-posts-tell-you"
+      }
+    ]
+  },
+  "baseline": {
+    "source": "Search Console UI and downloaded CSV export, verified property https://www.cnvrted.com/",
+    "period": "2026-07-30 to 2026-10-13",
+    "observed": "2026-10-16",
+    "clicks": 310,
+    "impressions": 796,
+    "ctr_percent": 38.9,
+    "average_position": 9.2,
+    "known_branded_clicks": 258,
+    "known_branded_minimum_percent": 83.2,
+    "queries": [
+      {
+        "query": "cnvrted",
+        "clicks": 255,
+        "impressions": 388,
+        "position": 1.07
+      },
+      {
+        "query": "cnvrted ai",
+        "clicks": 3,
+        "impressions": 6,
+        "position": 1
+      },
+      {
+        "query": "ai go-to-market",
+        "clicks": 0,
+        "impressions": 3,
+        "position": 9.33
+      },
+      {
+        "query": "icp template",
+        "clicks": 0,
+        "impressions": 2,
+        "position": 98
+      }
+    ],
+    "ai_search": {
+      "source": "Search Console Generative AI features beta, UI read",
+      "period": "2026-07-30 to 2026-10-13",
+      "impressions": 234,
+      "homepage_impressions": 221,
+      "note": "These are impressions, not citations in all AI products, clicks, leads or conversions. Page totals are not additive to property totals."
+    },
+    "raw_export": "Local downloaded GSC ZIP retained outside the repository; query text and complete export not published."
+  },
+  "findings": [
+    {
+      "finding": "Branded discovery dominates measured clicks",
+      "evidence": "258 of310 clicks explicitly attributed to cnvrted and cnvrted ai",
+      "action": "Prioritize relevant non-brand intent on existing product and educational pages."
+    },
+    {
+      "finding": "ICP template has a small measured foothold",
+      "evidence": "2 impressions, no clicks; tiny sample",
+      "action": "Surface the existing usable CSV template in the title, H1, worksheet heading and instructions."
+    },
+    {
+      "finding": "Vendor pages frequently conflate an event with purchase readiness",
+      "evidence": "Qualitative review of commercial and definition result sets",
+      "action": "Keep Cnvrted claims grounded; distinguish observations, inference, fit and buyer-confirmed facts."
+    },
+    {
+      "finding": "Useful task completion offers a clearer contribution than another generic listicle",
+      "evidence": "Template, qualification and evaluation tasks recur across original source pages",
+      "action": "Add original research worksheet and product evaluation checklist; keep detailed execution articles separate."
+    },
+    {
+      "finding": "No hard indexability block found in today's prior audit",
+      "evidence": "docs/indexability-audit-2026-10-16.json and live verification",
+      "action": "Maintain crawlability and contextual internal links. No repeated unchanged URL submissions."
+    }
+  ],
+  "keyword_map": [
+    {
+      "path": "/",
+      "primary": "Cnvrted AI",
+      "secondary": [
+        "Cnvrted",
+        "Cnvrted GTM",
+        "Cnvrted buying signals"
+      ],
+      "intent": "brand/navigation",
+      "priority": "P1",
+      "action": "Keep the approved homepage and clear brand/entity markup; product owns the detailed commercial intent.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/product",
+      "primary": "AI GTM platform",
+      "secondary": [
+        "AI go-to-market platform",
+        "buying signals software",
+        "B2B prospecting platform",
+        "signal based selling software",
+        "GTM intelligence software"
+      ],
+      "intent": "commercial",
+      "priority": "P1",
+      "action": "Added evaluation questions, source checks, credit/workflow checks and contextual guide links. Category opportunity is qualitative.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/learn/ideal-customer-profile",
+      "primary": "B2B ICP template",
+      "secondary": [
+        "ideal customer profile template",
+        "ICP template Excel",
+        "ICP template Google Sheets",
+        "ideal customer profile examples",
+        "ICP vs buyer persona",
+        "ICP for startups"
+      ],
+      "intent": "informational/template",
+      "priority": "P1",
+      "action": "GSC: icp template 2 impressions/0 clicks/position98. Improved title, H1, download heading and instructions. Tiny sample, not a ranking diagnosis.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/learn/buying-signals",
+      "primary": "B2B buying signals",
+      "secondary": [
+        "buying signals examples",
+        "buying signals vs intent data",
+        "buying signal checklist",
+        "buying signal research worksheet",
+        "public buying signals",
+        "first party buying signals"
+      ],
+      "intent": "informational",
+      "priority": "P1",
+      "action": "Added definitions, original research worksheet and onward links. Keep this as the umbrella guide rather than creating duplicate definition URLs.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/blogs/first-b2b-customers-buying-signals",
+      "primary": "how to find first B2B customers",
+      "secondary": [
+        "first customers for B2B startup",
+        "founder led sales prospecting",
+        "find B2B customers using buying signals"
+      ],
+      "intent": "practical/founder",
+      "priority": "P1",
+      "action": "Already published yesterday; add discovery links from ICP and signal guide, allow time for indexing before judging demand.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/blogs/hiring-signals-for-sales",
+      "primary": "hiring signals for sales",
+      "secondary": [
+        "job postings as buying signals",
+        "hiring trigger prospecting",
+        "sales prospecting job openings"
+      ],
+      "intent": "practical/research",
+      "priority": "P1",
+      "action": "Keep source-specific ownership; strengthened link from buying-signal guide.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/blogs/qualify-prospects-before-cold-email",
+      "primary": "qualify prospects before cold email",
+      "secondary": [
+        "pre outreach qualification checklist",
+        "qualify B2B prospects",
+        "prospect fit vs timing"
+      ],
+      "intent": "practical/qualification",
+      "priority": "P1",
+      "action": "Confirmed indexed in today's earlier inspection; new direct contextual link from signal worksheet.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/blogs/signal-based-outbound-for-agencies",
+      "primary": "signal based outbound for agencies",
+      "secondary": [
+        "agency outbound playbook",
+        "buying signals for agencies",
+        "agency prospecting"
+      ],
+      "intent": "practical/agency",
+      "priority": "P1",
+      "action": "Keep agency-specific plays; strengthened link from umbrella guide.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/blogs/signal-based-outreach-metrics",
+      "primary": "signal based outreach metrics",
+      "secondary": [
+        "positive reply rate",
+        "cost per qualified meeting",
+        "outbound funnel metrics",
+        "booked vs held meetings"
+      ],
+      "intent": "practical/measurement",
+      "priority": "P1",
+      "action": "Own the measurement task; linked from product evaluation and signal guide.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/blogs/apollo-vs-cnvrted",
+      "primary": "Apollo vs Cnvrted",
+      "secondary": [
+        "Cnvrted vs Apollo",
+        "Apollo alternative for public buying signals"
+      ],
+      "intent": "comparison",
+      "priority": "P2",
+      "action": "Retain sourced feature comparison; do not extrapolate competitor weakness or update pricing without verification.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/blogs/what-is-a-gtm-play",
+      "primary": "what is a GTM play",
+      "secondary": [
+        "GTM play example",
+        "signal based GTM play",
+        "GTM play vs strategy"
+      ],
+      "intent": "definition/workflow",
+      "priority": "P2",
+      "action": "Own individual play definition; strategy guide owns the broader plan.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/learn/go-to-market-strategy",
+      "primary": "B2B go to market strategy",
+      "secondary": [
+        "GTM strategy example",
+        "go to market plan",
+        "AI go to market strategy",
+        "GTM strategy vs play"
+      ],
+      "intent": "informational/strategy",
+      "priority": "P2",
+      "action": "Existing six decisions and sample plan answer this task; avoid a second general strategy article.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/learn/signal-to-outreach",
+      "primary": "signal to outreach example",
+      "secondary": [
+        "interactive GTM demo",
+        "buying signal outreach example",
+        "ICP to outreach workflow"
+      ],
+      "intent": "product walkthrough",
+      "priority": "P2",
+      "action": "Own interactive example intent; keep sample companies clearly labelled.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/blogs",
+      "primary": "B2B prospecting blog",
+      "secondary": [
+        "B2B prospecting articles",
+        "GTM plays and comparisons"
+      ],
+      "intent": "content hub",
+      "priority": "P1",
+      "action": "GSC397 impressions/1click aggregate; not proof of a poor snippet for any one keyword. Clarified visible heading; article metadata already distinct.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/learn",
+      "primary": "GTM guides and templates",
+      "secondary": [
+        "GTM field guide",
+        "ICP worksheet",
+        "buying signal guides"
+      ],
+      "intent": "learning hub",
+      "priority": "P1",
+      "action": "Added ItemList for visible resources and clarified worksheet description.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/pricing",
+      "primary": "Cnvrted pricing",
+      "secondary": [
+        "Cnvrted credits",
+        "Cnvrted free plan",
+        "Cnvrted paid plans"
+      ],
+      "intent": "commercial/brand",
+      "priority": "P2",
+      "action": "Preserve current actual prices and credits; no invented promotional offers.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/book-demo",
+      "primary": "Cnvrted demo",
+      "secondary": [
+        "book AI GTM demo",
+        "Cnvrted product walkthrough"
+      ],
+      "intent": "transactional/brand",
+      "priority": "P2",
+      "action": "Preserve working booking and crawlable fallback.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/about",
+      "primary": "about Cnvrted",
+      "secondary": [
+        "Cnvrted founders",
+        "Cnvrted team"
+      ],
+      "intent": "brand/trust",
+      "priority": "P2",
+      "action": "Existing team identities and role links support trust; avoid invented editorial credentials.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/customers",
+      "primary": "Cnvrted reviews",
+      "secondary": [
+        "Cnvrted customers",
+        "Cnvrted testimonials"
+      ],
+      "intent": "commercial proof",
+      "priority": "P2",
+      "action": "Use only real supplied reviews; no manufactured ratings markup.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/case-studies",
+      "primary": "Cnvrted case studies",
+      "secondary": [
+        "signal led outreach case study",
+        "GTM campaign examples"
+      ],
+      "intent": "proof hub",
+      "priority": "P2",
+      "action": "Keep scope and limitations alongside campaign results.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/case-studies/from-cold-emails-to-warm-conversations",
+      "primary": "signal led cold email case study",
+      "secondary": [
+        "buying signals outreach results",
+        "targeted email campaign case study"
+      ],
+      "intent": "proof",
+      "priority": "P2",
+      "action": "Report the supplied batch faithfully; no general conversion promises.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/case-studies/how-cnvrted-finds-its-customers",
+      "primary": "Cnvrted customer acquisition workflow",
+      "secondary": [
+        "founder led customer acquisition workflow",
+        "GTM research workflow"
+      ],
+      "intent": "proof/workflow",
+      "priority": "P2",
+      "action": "Distinct from the first-customer how-to article; no invented customer outcomes.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/help-center",
+      "primary": "Cnvrted help",
+      "secondary": [
+        "Cnvrted setup",
+        "Cnvrted credits help",
+        "Cnvrted support"
+      ],
+      "intent": "support",
+      "priority": "P3",
+      "action": "Answer product support intent; keep this separate from educational keyword pages.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/join-slack",
+      "primary": "Cnvrted Slack community",
+      "secondary": [
+        "GTM community Cnvrted"
+      ],
+      "intent": "community",
+      "priority": "P3",
+      "action": "Accurate community navigation; no broad acquisition claims.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/careers",
+      "primary": "Cnvrted careers",
+      "secondary": [
+        "Cnvrted jobs",
+        "AI GTM startup jobs"
+      ],
+      "intent": "recruitment",
+      "priority": "P3",
+      "action": "Do not target product lead-generation queries with recruitment content.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/careers/marketing-lead",
+      "primary": "Cnvrted marketing lead job",
+      "secondary": [
+        "marketing lead Bengaluru Cnvrted"
+      ],
+      "intent": "recruitment",
+      "priority": "P3",
+      "action": "Existing role facts only; do not invent JobPosting dates or salary.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/careers/ai-ml-engineer",
+      "primary": "Cnvrted AI ML engineer job",
+      "secondary": [
+        "AI ML engineer remote Cnvrted"
+      ],
+      "intent": "recruitment",
+      "priority": "P3",
+      "action": "Role-specific search intent.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/careers/gtm-engineer",
+      "primary": "Cnvrted GTM engineer job",
+      "secondary": [
+        "GTM engineer remote Cnvrted"
+      ],
+      "intent": "recruitment",
+      "priority": "P3",
+      "action": "Role-specific search intent.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/careers/gtm-lead",
+      "primary": "Cnvrted GTM lead job",
+      "secondary": [
+        "GTM lead remote Cnvrted"
+      ],
+      "intent": "recruitment",
+      "priority": "P3",
+      "action": "Role-specific search intent.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/careers/founders-office-intern",
+      "primary": "Cnvrted founders office internship",
+      "secondary": [
+        "founders office intern remote Cnvrted"
+      ],
+      "intent": "recruitment",
+      "priority": "P3",
+      "action": "Role-specific search intent.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/contact",
+      "primary": "contact Cnvrted",
+      "secondary": [
+        "Cnvrted support contact",
+        "Cnvrted partnerships"
+      ],
+      "intent": "navigation",
+      "priority": "P3",
+      "action": "Useful contact paths, no keyword padding.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/early-access",
+      "primary": "Cnvrted early access",
+      "secondary": [
+        "Cnvrted waitlist"
+      ],
+      "intent": "transactional/brand",
+      "priority": "P3",
+      "action": "Retain discovery fixes and previously accepted crawl request.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/privacy",
+      "primary": "Cnvrted privacy policy",
+      "secondary": [
+        "Cnvrted data privacy"
+      ],
+      "intent": "legal/navigation",
+      "priority": "P3",
+      "action": "Leave legal language accurate; not a generic traffic target.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    },
+    {
+      "path": "/terms",
+      "primary": "Cnvrted terms of service",
+      "secondary": [
+        "Cnvrted platform terms"
+      ],
+      "intent": "legal/navigation",
+      "priority": "P3",
+      "action": "Leave legal language accurate; not a generic traffic target.",
+      "monthly_search_volume": null,
+      "keyword_difficulty": null
+    }
+  ],
+  "changes": [
+    "Buying signal vs intent/fit/score explanations and matching visible FAQ/schema.",
+    "Original ungated CSV with blank record and three explicitly fictional examples.",
+    "Contextual links from umbrella guide to four practical articles and product evaluation.",
+    "ICP metadata/H1/worksheet discoverability and import instructions.",
+    "Product evaluation section: source inspection, exclusions, coverage, integration availability, credit usage and bounded test.",
+    "Learning-hub ItemList matches visible linked resources; blog hub H1 names B2B prospecting.",
+    "Only actually revised sitemap dates updated; no URL changes or mass-produced articles."
+  ],
+  "roadmap": [
+    {
+      "priority": "Next evidence-led content",
+      "topic": "A real anonymized account-research teardown",
+      "owner": "Expand existing hiring-signals or qualification article",
+      "needed": "User-approved source excerpts, decisions, elapsed research time and outcome; do not invent a customer story."
+    },
+    {
+      "priority": "Next evidence-led content",
+      "topic": "A vendor-evaluation walkthrough",
+      "owner": "Expand /product#product-evaluation",
+      "needed": "Actual supported integration capabilities and a recorded product walkthrough before making additional claims."
+    },
+    {
+      "priority": "After sufficient data",
+      "topic": "Refine snippets and intent ownership",
+      "owner": "Existing pages with repeated non-brand impressions",
+      "needed": "Compare complete 28-day windows after indexing, query plus landing page; tiny samples should be treated cautiously."
+    }
+  ],
+  "measurement": {
+    "first_checkpoint": "2026-11-13",
+    "comparison": "2026-10-16 to 2026-11-12 versus preceding complete28days when available; annotate publication and index dates.",
+    "measures": [
+      "Non-brand query impressions and clicks by landing page",
+      "Relevant guide queries rather than unrelated spelling matches",
+      "Google generative AI feature impressions by page",
+      "Worksheet downloads and completed demo bookings only if actual analytics events are available",
+      "Index status from URL Inspection; never infer from sitemap acceptance"
+    ],
+    "attribution": "No ranking, traffic or revenue lift is claimed at deployment. Do not present a short before/after as causal proof."
+  },
+  "guidance": [
+    {
+      "url": "https://developers.google.com/search/docs/fundamentals/ai-optimization-guide",
+      "application": "Original useful content and conventional SEO fundamentals; no guaranteed AEO/GEO placement."
+    },
+    {
+      "url": "https://developers.google.com/search/docs/appearance/ai-features",
+      "application": "Indexability, visible text, internal links and structured-data parity. Current GSC UI exposes an AI beta report; older documentation may describe combined Web reporting."
+    },
+    {
+      "url": "https://developers.google.com/search/docs/fundamentals/creating-helpful-content",
+      "application": "No scaled generic content, invented expertise or arbitrary word-count targets."
+    }
+  ],
+  "validation": {
+    "build": "PASS: next build and TypeScript",
+    "existing_warning": "Google Sans Flex fallback font metrics warning; unchanged",
+    "local_seo": "PASS: all34 canonical pages, unique titles/descriptions, self-canonicals, schema/visible-FAQ parity, crawlable internal links, redirects, sitemap, crawler rules and four404 routes",
+    "downloads": "PASS: ICP CSV and new research CSV200; noindex response header; fictional examples labelled",
+    "responsive": "Edited pages checked at320,820,1280px; signal guide also390px; no document horizontal overflow; one H1 per page",
+    "react_review": "Server-rendered content; no new client state, effects, libraries, scripts or tracking. Existing styles and shared components reused."
+  }
+}

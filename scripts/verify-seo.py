@@ -120,7 +120,7 @@ def audit(path):
         assert "offers" not in application, (path, "offers absent from visible page")
     if path not in ("/product",) and not path.startswith(("/blogs/", "/case-studies/", "/learn/")):
         assert any(kind in types for kind in ("WebPage", "CollectionPage", "AboutPage", "ContactPage")), (path, "missing page entity")
-    if path in ("/blogs", "/case-studies", "/careers"):
+    if path in ("/blogs", "/case-studies", "/careers", "/learn"):
         collection = next(node for node in page.jsonld if node.get("@type") == "CollectionPage")
         for item in collection["mainEntity"]["itemListElement"]:
             assert urllib.parse.urlparse(item["url"]).path in page.links, (path, "collection item not linked")
@@ -180,7 +180,7 @@ for path, page in pages.items():
         if destination in pages and target.fragment:
             assert urllib.parse.unquote(target.fragment) in pages[destination].ids, (path, "broken anchor", href)
         elif destination not in pages:
-            assert destination.startswith("/images/") or destination == "/downloads/cnvrted-icp-worksheet.csv", (path, "internal link missing from sitemap", href)
+            assert destination.startswith("/images/") or destination in ("/downloads/cnvrted-icp-worksheet.csv", "/downloads/cnvrted-buying-signal-worksheet.csv"), (path, "internal link missing from sitemap", href)
 for source in ("/", "/learn", "/blogs/apollo-vs-cnvrted", "/blogs/what-is-a-gtm-play"):
     assert "/learn/buying-signals" in pages[source].links, (source, "guide not discoverable")
 for source in ("/", "/learn", "/learn/buying-signals", "/learn/signal-to-outreach"):
@@ -241,6 +241,17 @@ with urllib.request.urlopen(BASE + "/downloads/cnvrted-icp-worksheet.csv", timeo
 assert worksheet[2] == ["Field", "Prompt", "Your answer", "Worked example: design studio"]
 assert len(worksheet) == 11 and all(len(row) == 4 for row in worksheet)
 assert all(row[2] == "" for row in worksheet[3:]), "Worksheet answer column is not blank"
+signal_guide = pages["/learn/buying-signals"]
+assert {"signals-and-intent", "signal-worksheet", "signal-next-steps"}.issubset(signal_guide.ids)
+assert "/downloads/cnvrted-buying-signal-worksheet.csv" in signal_guide.links
+assert "product-evaluation" in pages["/product"].ids
+with urllib.request.urlopen(BASE + "/downloads/cnvrted-buying-signal-worksheet.csv", timeout=30) as response:
+    assert response.status == 200 and "noindex" in response.headers.get("X-Robots-Tag", "")
+    signals = list(csv.DictReader(io.StringIO(response.read().decode("utf-8-sig"))))
+assert len(signals) == 4 and signals[0]["Company"] == "", "Blank research row missing"
+assert all(row["Example status"] == "Fictional example" for row in signals[1:]), "Examples must be labelled"
+for path in ("/learn/buying-signals", "/learn/ideal-customer-profile"):
+    assert pages[path].meta.get("article:modified_time") == "2026-10-16"
 status, robots = fetch("/robots.txt")
 assert status == 200
 parser = urllib.robotparser.RobotFileParser()

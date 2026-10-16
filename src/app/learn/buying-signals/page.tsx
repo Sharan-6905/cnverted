@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PaperLinks } from "@/components/illustrated/paper-links";
 import { IllustratedShell } from "@/components/illustrated/shell";
 import { ClosingCTA } from "@/components/illustrated/closing-cta";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
@@ -10,9 +11,10 @@ import "./guide.css";
 
 const path = "/learn/buying-signals";
 const title = "What are B2B buying signals?";
-const description = "Buying signals are observable actions or changes that suggest a company may need a solution. Learn how to check the source, timing, and fit before reaching out.";
+const description = "Learn what B2B buying signals mean, how they differ from intent data, and when to act. Includes examples, a qualification checklist, and a free research worksheet.";
 const published = "2026-10-04";
 const faqs = [
+  { question: "What is the difference between buying signals and intent data?", answer: "A buying signal is an observation, such as a request for recommendations or a relevant job opening. Intent data records or models activity that may indicate interest in a topic or solution. The terms overlap: an intent-data observation can be a signal. Check the provider’s source, timestamp, and whether it identifies an account or a person; neither label establishes a purchase decision." },
   { question: "Is a buying signal the same as a lead?", answer: "No. A lead is a person or company you may contact. A buying signal is evidence of something that happened, such as a relevant job posting or a request for recommendations. Attach the evidence to the lead and check whether it supports a useful conversation." },
   { question: "How are ICP fit and buying intent different?", answer: "An ideal customer profile describes the companies your product is suited to. Buying intent concerns a possible current need or interest. A company can fit your ICP without needing your product now, and a strong signal can come from a company you cannot serve." },
   { question: "How recent should a buying signal be?", answer: "There is no universal expiry date. A request for a recommendation can become outdated quickly; a hiring plan may stay relevant longer. Check the original date and whether the situation is still open before contacting someone." },
@@ -26,7 +28,7 @@ const examples = [
   { title: "A technology or vendor change", signal: "A team publicly discusses moving away from an existing system.", check: "Identify the actual constraint, the person involved, and the timing. Make sure your product addresses that problem before proposing a replacement." },
 ];
 
-const modified = "2026-10-06";
+const modified = "2026-10-16";
 export const metadata = pageMetadata({ title: "B2B Buying Signals: Examples & Qualification | Cnvrted", description, path, publishedTime: published, modifiedTime: modified });
 
 export default function BuyingSignalsGuide() {
@@ -47,12 +49,12 @@ export default function BuyingSignalsGuide() {
           <p className="marketing-eyebrow">The prospecting field guide</p>
           <h1 id="guide-title">{title}</h1>
           <p className="design-article-dek">A useful clue. A little context. A better reason to start a conversation.</p>
-          <div className="design-article-byline"><p>By <Link href="/about">the Cnvrted team</Link> · <time dateTime={published}>October 4, 2026</time><br />Updated <time dateTime={modified}>October 6, 2026</time></p></div>
+          <div className="design-article-byline"><p>By <Link href="/about">the Cnvrted team</Link> · <time dateTime={published}>October 4, 2026</time><br />Updated <time dateTime={modified}>October 16, 2026</time></p></div>
         </header>
         <div className="design-article-content design-article-prose">
           <p className="signal-guide-answer"><strong>A B2B buying signal is an observable action or change that suggests a company may need a solution.</strong> It could be a public request for recommendations, a relevant job opening, or a change in technology. It becomes useful when you can connect the event to the problem your product solves.</p>
           <nav className="signal-guide-contents" aria-label="In this guide">
-            <a href="#signal-examples">Examples</a><a href="#qualify-a-signal">Qualification checklist</a><a href="#signal-to-conversation">A worked example</a><a href="#cnvrted-workflow">Using Cnvrted</a><a href="#faq-title">Common questions</a>
+            <a href="#signal-examples">Examples</a><a href="#signals-and-intent">Signals vs intent data</a><a href="#qualify-a-signal">Qualification checklist</a><a href="#signal-worksheet">Free worksheet</a><a href="#signal-to-conversation">A worked example</a><a href="#cnvrted-workflow">Using Cnvrted</a><a href="#faq-title">Common questions</a>
           </nav>
           <section aria-labelledby="signal-examples">
             <h2 id="signal-examples">Four examples, and what to check.</h2>
@@ -63,6 +65,17 @@ export default function BuyingSignalsGuide() {
                 <h3>{example.title}</h3><p>{example.signal}</p><p><strong>Before reaching out:</strong> {example.check}</p>
               </section>
             ))}</div>
+          </section>
+          <section aria-labelledby="signals-and-intent">
+            <h2 id="signals-and-intent">Buying signals, intent data, and lead scores.</h2>
+            <p>These terms overlap, but they describe different parts of the decision. A useful research record keeps the observation separate from its interpretation.</p>
+            <dl className="guide-comparison">
+              <div><dt>Buying signal: what happened?</dt><dd>A company posts an implementation role, asks for a recommendation, or announces a launch. Save the event and its source before deciding what it means.</dd></div>
+              <div><dt>Intent data: what interest was observed or inferred?</dt><dd>A provider may report research activity associated with a topic or account. Ask what was measured, how recently, and at what level. Account-level interest does not identify a specific employee as the buyer.</dd></div>
+              <div><dt>ICP fit: could we help?</dt><dd>Check the business problem and delivery requirements. A recent event at a company outside your service area may still be a poor prospect.</dd></div>
+              <div><dt>Lead score: how did we prioritise it?</dt><dd>A score summarises selected criteria. Keep the underlying facts available: two accounts can receive the same score for very different reasons.</dd></div>
+            </dl>
+            <p><strong>First-party and public signals also differ.</strong> A demo request received by your business is a direct interaction. A job listing on another company’s site is public evidence of a hiring plan. Both can inform a decision, but they call for different responses. Answer a direct request; investigate the relevance of a public event before approaching someone.</p>
           </section>
           <section aria-labelledby="qualify-a-signal">
             <h2 id="qualify-a-signal">How do you qualify a buying signal?</h2>
@@ -75,6 +88,19 @@ export default function BuyingSignalsGuide() {
               <li><strong>Next step:</strong> Choose a suitable person and a useful question. Skip the outreach if the evidence is weak or the offer is not relevant.</li>
             </ol>
             <p>This is a review framework, not a validated scoring model. A high score in any prospecting tool still needs a human check.</p>
+          </section>
+          <section aria-labelledby="signal-worksheet">
+            <h2 id="signal-worksheet">A buying-signal research worksheet.</h2>
+            <p>Use one row per observation. Record the company, original source URL, event date, date checked, exact observation, fit evidence, unknowns, and next action. Separate the question you want to ask from what the source actually confirms.</p>
+            <aside className="guide-download">
+              <div><h3>Keep the evidence with the account.</h3><p>A blank row and three fictional examples, ready for Excel or Google Sheets. No signup needed.</p></div>
+              <a href="/downloads/cnvrted-buying-signal-worksheet.csv" download className="marketing-text-link">Download the worksheet <span aria-hidden="true">↓</span><span className="sr-only"> (CSV)</span></a>
+            </aside>
+            <div className="signal-guide-examples">
+              <section><h3>Investigate</h3><p>A current implementation role names the workflow you support. The company fits, but its plan for outside help is unknown. Ask the relevant owner about that gap.</p></section>
+              <section><h3>Wait or rule out</h3><p>The announcement looks relevant, but a later update says the project is complete. Record the update and stop using the old event as a reason to pitch.</p></section>
+            </div>
+            <p>These are research decisions, not buyer stages. For the handoff to an actual message, use the <Link href="/blogs/qualify-prospects-before-cold-email">pre-outreach qualification checklist</Link>. For a specific source type, see <Link href="/blogs/hiring-signals-for-sales">how to read hiring signals</Link>.</p>
           </section>
           <section aria-labelledby="signal-to-conversation">
             <h2 id="signal-to-conversation">From a signal to a conversation.</h2>
@@ -90,6 +116,12 @@ export default function BuyingSignalsGuide() {
             <p><Link href="/#gtm-demo">Explore the product demo</Link> to see the workflow. Our <Link href="/case-studies/from-cold-emails-to-warm-conversations">customer case study</Link> describes one batch of 11 emails that received six replies. That small campaign is an example, not a general reply-rate benchmark or a promise of results.</p>
             <p>For plans and credit details, use the <Link href="/pricing">current pricing page</Link>. For available integrations and your specific workflow, <Link href="/contact">talk to the team</Link>.</p>
           </section>
+          <PaperLinks id="signal-next-steps" eyebrow="Put the field notes to work" title="Choose your next step" links={[
+            { href: "/blogs/first-b2b-customers-buying-signals", title: "Find your first B2B customers", description: "Turn a narrow market hypothesis into a manageable research batch." },
+            { href: "/blogs/signal-based-outbound-for-agencies", title: "Build an agency outbound play", description: "Connect a specific service to evidence of a relevant change." },
+            { href: "/blogs/signal-based-outreach-metrics", title: "Measure replies, meetings, and cost", description: "Use consistent denominators and keep small samples in perspective." },
+            { href: "/product#product-evaluation", title: "Evaluate Cnvrted for your workflow", description: "Bring sample accounts, source questions, and a clear success measure." },
+          ]} />
         </div>
       </article>
     </IllustratedShell>

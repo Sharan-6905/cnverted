@@ -5,11 +5,11 @@ export const SITE_TITLE = "Cnvrted AI | GTM Intelligence & Buying Signals";
 export const SITE_DESCRIPTION =
   "Cnvrted AI helps B2B teams find buying signals, identify companies that fit their ICP, and plan relevant outreach. Explore the AI GTM platform or book a demo.";
 export const DEFAULT_SOCIAL_IMAGE = {
-  url: "/cnvrted-link-preview.png",
-  width: 1200,
-  height: 630,
+  url: "/cnvrted-link-preview-20261016.png",
+  width: 4800,
+  height: 2520,
   type: "image/png",
-  alt: "Cnvrted — Your ICP, found in real time.",
+  alt: "Cnvrted — GTM, solved. Paper-style illustrations of buying signals, product launches, and outreach.",
 };
 
 export function absoluteUrl(path: string) {

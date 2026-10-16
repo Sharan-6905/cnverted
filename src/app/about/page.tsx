@@ -1,3 +1,5 @@
+import { PaperLinks } from "@/components/illustrated/paper-links";
+import { CAREER_ROLES } from "@/lib/careers";
 import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -112,6 +114,10 @@ export default function AboutPage() {
         </div>
       </section>
       <FoundingTeam description="Four people bringing product, engineering, design, and go-to-market together. A shared curiosity about what makes a good conversation happen." />
+      <div className="design-container">
+        <PaperLinks id="team-roles-title" eyebrow="Make your mark" title="Build the next chapter with us."
+          links={CAREER_ROLES.map((role) => ({ href: `/careers/${role.slug}`, title: role.title, description: `${role.location} · ${role.type}` }))} />
+      </div>
       <section className="about-neighborhoods design-container" aria-labelledby="location-title">
         <div className="about-neighborhoods-heading">
           <span className="marketing-eyebrow">Our little corner of the city</span>

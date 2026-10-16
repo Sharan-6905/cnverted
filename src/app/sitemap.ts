@@ -12,7 +12,8 @@ import { SITE_URL, absoluteUrl } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogs = blogPosts.map((post) => ({
     url: `${SITE_URL}/blogs/${post.slug}`,
-    lastModified: post.sitemapModified ?? "2026-10-11",
+    // Related reading was added to every article on 16 October.
+    lastModified: [post.sitemapModified ?? "2026-10-11", "2026-10-16"].sort().at(-1),
     images: [absoluteUrl(post.cover)],
     changeFrequency: "monthly" as const,
     priority: 0.7,
@@ -32,7 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/about`, lastModified: "2026-10-11",
+      url: `${SITE_URL}/about`, lastModified: "2026-10-16",
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -88,7 +89,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     })),
     {
-      url: `${SITE_URL}/contact`, lastModified: "2026-10-11",
+      url: `${SITE_URL}/contact`, lastModified: "2026-10-16",
       changeFrequency: "monthly",
       priority: 0.7,
     },

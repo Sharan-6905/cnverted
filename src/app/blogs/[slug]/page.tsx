@@ -1,3 +1,4 @@
+import { PaperLinks } from "@/components/illustrated/paper-links";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -80,6 +81,20 @@ export default async function BlogPostPage({
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
+  const nextSlugs: Record<string, string[]> = {
+    "apollo-vs-cnvrted": ["signal-based-outbound-for-agencies", "signal-based-outreach-metrics"],
+    "what-is-a-gtm-play": ["first-b2b-customers-buying-signals", "hiring-signals-for-sales"],
+    "first-b2b-customers-buying-signals": ["qualify-prospects-before-cold-email", "signal-based-outreach-metrics"],
+    "hiring-signals-for-sales": ["qualify-prospects-before-cold-email", "signal-based-outbound-for-agencies"],
+    "qualify-prospects-before-cold-email": ["hiring-signals-for-sales", "first-b2b-customers-buying-signals"],
+    "signal-based-outbound-for-agencies": ["hiring-signals-for-sales", "signal-based-outreach-metrics"],
+    "signal-based-outreach-metrics": ["qualify-prospects-before-cold-email", "signal-based-outbound-for-agencies"],
+  };
+  const related = (nextSlugs[post.slug] ?? []).flatMap((slug) => {
+    const article = getPostBySlug(slug);
+    return article ? [{ href: `/blogs/${slug}`, title: article.title, description: `${article.category} · ${article.readingMinutes} min read` }] : [];
+  });
+
   return (
     <IllustratedShell faqItems={[]} className="design-article-page">
       <ArticleSchema post={post} />
@@ -137,11 +152,11 @@ export default async function BlogPostPage({
                 </nav>
               )}
               {post.body.map((block, i) => <BlockRenderer key={i} block={block} id={`section-${i}`} />)}
-              <aside aria-label="Related reading">
-                <h2>Keep exploring</h2>
-                <p><Link href="/learn/buying-signals">Buying signals: examples and a qualification checklist</Link></p>
-                <p><Link href="/case-studies/from-cold-emails-to-warm-conversations">See one signal-led outreach campaign and its results</Link></p>
-              </aside>
+              <PaperLinks id="related-reading" eyebrow="The next field notes" title="Keep exploring" links={[
+                ...related,
+                { href: "/learn/buying-signals", title: "Buying signals: examples and a qualification checklist", description: "Check the source, timing, and fit before reaching out." },
+                { href: "/case-studies/from-cold-emails-to-warm-conversations", title: "A signal-led outreach campaign and its results", description: "Read the campaign evidence and its limitations." },
+              ]} />
             </div>
           </div>
         </article>

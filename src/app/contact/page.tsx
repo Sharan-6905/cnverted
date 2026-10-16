@@ -16,6 +16,7 @@ export const metadata: Metadata = pageMetadata({
 });
 
 const contactFAQs: FAQItem[] = [
+  { question: "Can I help shape a future GTM workflow?", answer: <>Tell us what you want to build through the <Link href="/early-access">early-access form</Link>. The current beta is already available; the form is for discussing future workflows with the team.</> },
   { question: "How do I get product support?", answer: <>Browse the <Link href="/help-center">Help Center</Link> or email <a href="mailto:info@cnvrted.com">info@cnvrted.com</a> with your question.</> },
   { question: "What can we discuss on a call?", answer: "Tell us about your business, ideal customers, and GTM goals. We’ll walk through how buying signals, AI qualification, and Cnvrted could fit your workflow." },
   { question: "How long is the call?", answer: "The call is 30 minutes over Google Meet. Calendly sends the meeting details once your booking is confirmed." },

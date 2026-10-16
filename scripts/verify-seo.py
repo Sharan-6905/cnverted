@@ -189,6 +189,29 @@ for source in ("/", "/book-demo", "/learn", "/case-studies/from-cold-emails-to-w
     assert "/product" in pages[source].links, (source, "product overview not discoverable")
 for source in ("/", "/product", "/learn", "/learn/ideal-customer-profile"):
     assert "/learn/go-to-market-strategy" in pages[source].links, (source, "GTM guide not discoverable")
+# Every canonical page must be reachable through rendered HTML links from home.
+reachable, frontier = {"/"}, ["/"]
+while frontier:
+    source = frontier.pop()
+    for href in pages[source].links:
+        target = urllib.parse.urlparse(urllib.parse.urljoin(CANONICAL + source, href or ""))
+        if target.netloc != urllib.parse.urlparse(CANONICAL).netloc:
+            continue
+        destination = target.path or "/"
+        if destination in pages and destination not in reachable:
+            reachable.add(destination)
+            frontier.append(destination)
+assert set(pages) <= reachable, ("Orphan sitemap pages", sorted(set(pages) - reachable))
+assert "/early-access" in pages["/contact"].links, "Early-access form lacks contextual discovery"
+for destination in paths:
+    if destination.startswith("/careers/"):
+        assert destination in pages["/about"].links, (destination, "Role only reachable from careers hub")
+for source, destinations in {
+    "/blogs/what-is-a-gtm-play": ["/blogs/first-b2b-customers-buying-signals", "/blogs/hiring-signals-for-sales"],
+    "/blogs/apollo-vs-cnvrted": ["/blogs/signal-based-outbound-for-agencies", "/blogs/signal-based-outreach-metrics"],
+}.items():
+    assert all(destination in pages[source].links for destination in destinations), (source, "Related reading missing from HTML")
+
 gtm = pages["/learn/go-to-market-strategy"]
 assert {"gtm-decisions", "gtm-example", "gtm-measures", "ai-gtm"}.issubset(gtm.ids)
 assert "fictional planning example" in " ".join(gtm.text), "Sample GTM plan is not labelled"

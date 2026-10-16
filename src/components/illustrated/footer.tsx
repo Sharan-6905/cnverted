@@ -33,6 +33,7 @@ const columns = [
     title: "Company",
     links: [
       ["Book a call", DEMO_PATH],
+      ["Early access", "/early-access"],
       ["Terms & Conditions", "/terms"],
       ["Privacy Policy", "/privacy"],
       ["Contact", "/contact"],

@@ -1,0 +1,369 @@
+{
+  "date": "2026-10-16",
+  "site": "https://www.cnvrted.com",
+  "scope": {
+    "canonical_pages": 34,
+    "pending_pages_at_start": 16
+  },
+  "conclusion": "No hard crawl/indexing block reproduced. One orphan page and weak role/article discovery paths were identified and corrected. Google controls crawl scheduling and indexing selection.",
+  "search_console": {
+    "report_updated": "2026-10-14",
+    "crawl_requests_90_days": 1860,
+    "average_response_ms": 159,
+    "http_200_percent": 98,
+    "discovery_percent": 7,
+    "host_status": "No problems in last 90 days",
+    "manual_actions": "No issues detected",
+    "security_issues": "No issues detected",
+    "sitemap": "Success; 34 URLs; last read 2026-10-16",
+    "live_tests": {
+      "/learn/buying-signals": "URL is available to Google; Page can be indexed; crawl and indexing allowed; fetch successful; self-canonical",
+      "/careers/gtm-engineer": "URL is available to Google; Page can be indexed",
+      "/blogs/first-b2b-customers-buying-signals": "URL is available to Google; Page can be indexed"
+    },
+    "note": "First-customers article advanced from unknown to discovered during this audit, before deployment. Not indexed yet. Historical 404 examples include favicon.ico (now passes) and llms.txt (not required by Google)."
+  },
+  "pending_url_audit": [
+    {
+      "url": "https://www.cnvrted.com/blogs/first-b2b-customers-buying-signals",
+      "final_url": "https://www.cnvrted.com/blogs/first-b2b-customers-buying-signals",
+      "status": 200,
+      "seconds": 0.47,
+      "bytes": 108537,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/blogs/first-b2b-customers-buying-signals"
+      ],
+      "h1_count": 1,
+      "text_words": 1106,
+      "depth": 2,
+      "inlink_count_before": 4,
+      "status_at_start": "unknown_to_google"
+    },
+    {
+      "url": "https://www.cnvrted.com/blogs/hiring-signals-for-sales",
+      "final_url": "https://www.cnvrted.com/blogs/hiring-signals-for-sales",
+      "status": 200,
+      "seconds": 0.57,
+      "bytes": 106862,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/blogs/hiring-signals-for-sales"
+      ],
+      "h1_count": 1,
+      "text_words": 994,
+      "depth": 2,
+      "inlink_count_before": 3,
+      "status_at_start": "unknown_to_google"
+    },
+    {
+      "url": "https://www.cnvrted.com/blogs/signal-based-outbound-for-agencies",
+      "final_url": "https://www.cnvrted.com/blogs/signal-based-outbound-for-agencies",
+      "status": 200,
+      "seconds": 0.55,
+      "bytes": 107542,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/blogs/signal-based-outbound-for-agencies"
+      ],
+      "h1_count": 1,
+      "text_words": 1064,
+      "depth": 2,
+      "inlink_count_before": 4,
+      "status_at_start": "discovered_currently_not_indexed"
+    },
+    {
+      "url": "https://www.cnvrted.com/blogs/signal-based-outreach-metrics",
+      "final_url": "https://www.cnvrted.com/blogs/signal-based-outreach-metrics",
+      "status": 200,
+      "seconds": 0.59,
+      "bytes": 110646,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/blogs/signal-based-outreach-metrics"
+      ],
+      "h1_count": 1,
+      "text_words": 1071,
+      "depth": 2,
+      "inlink_count_before": 5,
+      "status_at_start": "unknown_to_google"
+    },
+    {
+      "url": "https://www.cnvrted.com/customers",
+      "final_url": "https://www.cnvrted.com/customers",
+      "status": 200,
+      "seconds": 0.39,
+      "bytes": 105108,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/customers"
+      ],
+      "h1_count": 1,
+      "text_words": 378,
+      "depth": 1,
+      "inlink_count_before": 33,
+      "status_at_start": "discovered_currently_not_indexed"
+    },
+    {
+      "url": "https://www.cnvrted.com/learn",
+      "final_url": "https://www.cnvrted.com/learn",
+      "status": 200,
+      "seconds": 0.47,
+      "bytes": 98795,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/learn"
+      ],
+      "h1_count": 1,
+      "text_words": 640,
+      "depth": 1,
+      "inlink_count_before": 33,
+      "status_at_start": "discovered_currently_not_indexed"
+    },
+    {
+      "url": "https://www.cnvrted.com/learn/buying-signals",
+      "final_url": "https://www.cnvrted.com/learn/buying-signals",
+      "status": 200,
+      "seconds": 0.56,
+      "bytes": 97429,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/learn/buying-signals"
+      ],
+      "h1_count": 1,
+      "text_words": 1022,
+      "depth": 1,
+      "inlink_count_before": 13,
+      "status_at_start": "unknown_to_google"
+    },
+    {
+      "url": "https://www.cnvrted.com/careers",
+      "final_url": "https://www.cnvrted.com/careers",
+      "status": 200,
+      "seconds": 0.61,
+      "bytes": 92576,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/careers"
+      ],
+      "h1_count": 1,
+      "text_words": 390,
+      "depth": 1,
+      "inlink_count_before": 33,
+      "status_at_start": "discovered_currently_not_indexed"
+    },
+    {
+      "url": "https://www.cnvrted.com/careers/marketing-lead",
+      "final_url": "https://www.cnvrted.com/careers/marketing-lead",
+      "status": 200,
+      "seconds": 0.38,
+      "bytes": 102811,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/careers/marketing-lead"
+      ],
+      "h1_count": 1,
+      "text_words": 679,
+      "depth": 2,
+      "inlink_count_before": 1,
+      "status_at_start": "discovered_currently_not_indexed"
+    },
+    {
+      "url": "https://www.cnvrted.com/careers/ai-ml-engineer",
+      "final_url": "https://www.cnvrted.com/careers/ai-ml-engineer",
+      "status": 200,
+      "seconds": 0.58,
+      "bytes": 102873,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/careers/ai-ml-engineer"
+      ],
+      "h1_count": 1,
+      "text_words": 664,
+      "depth": 2,
+      "inlink_count_before": 1,
+      "status_at_start": "discovered_currently_not_indexed"
+    },
+    {
+      "url": "https://www.cnvrted.com/careers/gtm-engineer",
+      "final_url": "https://www.cnvrted.com/careers/gtm-engineer",
+      "status": 200,
+      "seconds": 0.36,
+      "bytes": 102126,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/careers/gtm-engineer"
+      ],
+      "h1_count": 1,
+      "text_words": 655,
+      "depth": 2,
+      "inlink_count_before": 1,
+      "status_at_start": "unknown_to_google"
+    },
+    {
+      "url": "https://www.cnvrted.com/careers/gtm-lead",
+      "final_url": "https://www.cnvrted.com/careers/gtm-lead",
+      "status": 200,
+      "seconds": 0.42,
+      "bytes": 102582,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/careers/gtm-lead"
+      ],
+      "h1_count": 1,
+      "text_words": 689,
+      "depth": 2,
+      "inlink_count_before": 1,
+      "status_at_start": "discovered_currently_not_indexed"
+    },
+    {
+      "url": "https://www.cnvrted.com/careers/founders-office-intern",
+      "final_url": "https://www.cnvrted.com/careers/founders-office-intern",
+      "status": 200,
+      "seconds": 0.37,
+      "bytes": 102012,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/careers/founders-office-intern"
+      ],
+      "h1_count": 1,
+      "text_words": 635,
+      "depth": 2,
+      "inlink_count_before": 1,
+      "status_at_start": "discovered_currently_not_indexed"
+    },
+    {
+      "url": "https://www.cnvrted.com/early-access",
+      "final_url": "https://www.cnvrted.com/early-access",
+      "status": 200,
+      "seconds": 0.57,
+      "bytes": 82661,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/early-access"
+      ],
+      "h1_count": 1,
+      "text_words": 316,
+      "depth": null,
+      "inlink_count_before": 0,
+      "status_at_start": "discovered_currently_not_indexed"
+    },
+    {
+      "url": "https://www.cnvrted.com/privacy",
+      "final_url": "https://www.cnvrted.com/privacy",
+      "status": 200,
+      "seconds": 0.76,
+      "bytes": 140439,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/privacy"
+      ],
+      "h1_count": 1,
+      "text_words": 2755,
+      "depth": 1,
+      "inlink_count_before": 33,
+      "status_at_start": "discovered_currently_not_indexed"
+    },
+    {
+      "url": "https://www.cnvrted.com/terms",
+      "final_url": "https://www.cnvrted.com/terms",
+      "status": 200,
+      "seconds": 0.7,
+      "bytes": 121151,
+      "x_robots": null,
+      "robots": {
+        "robots": "index, follow",
+        "googlebot": "index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1"
+      },
+      "canonical": [
+        "https://www.cnvrted.com/terms"
+      ],
+      "h1_count": 1,
+      "text_words": 1856,
+      "depth": 1,
+      "inlink_count_before": 33,
+      "status_at_start": "unknown_to_google"
+    }
+  ],
+  "fixes": [
+    "Link early-access from footer and contextual contact FAQ; previously zero HTML inlinks.",
+    "Link all five job pages from already-indexed About page; previously only Careers hub linked them.",
+    "Add useful related reading from existing indexed articles to all four pending new articles.",
+    "Preserve paper texture, editorial serif typography, responsive two-column/one-column cards; no extra client state.",
+    "Update actual modification dates for revised About, Contact, and article pages.",
+    "Add regression check that all canonical pages are reachable from homepage in server HTML."
+  ],
+  "validation": {
+    "production_build": "PASS; existing Google Sans Flex fallback warning",
+    "rendered_local_seo": "PASS: all 34 pages, crawler directives, canonical metadata, schema, links, redirects, 404s, no orphan pages",
+    "http_googlebot_header_checks": "PASS for all 16 pending URLs; these are simulated request headers, not genuine Googlebot",
+    "responsive_widths": [
+      320,
+      390,
+      820,
+      1280
+    ],
+    "horizontal_overflow": false
+  },
+  "indexing_note": "Live test availability and crawl requests are not indexing confirmation. Retain original indexed baseline until URL Inspection explicitly confirms indexing."
+}

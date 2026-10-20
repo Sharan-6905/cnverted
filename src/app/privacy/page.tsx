@@ -11,13 +11,14 @@ export const metadata: Metadata = pageMetadata({
   path: "/privacy",
 });
 
-const LAST_UPDATED = "28 September 2026";
+const LAST_UPDATED = "20 October 2026";
 
 const RETENTION: [string, string][] = [
   ["Account and profile data", "Life of the account, then 90 days"],
   ["Financial and tax records", "8 years, as required by Indian law"],
   ["Customer content (leads, notes, pipeline)", "Life of the account, then 30 days, or on request"],
   ["Connected Google account data", "Until you disconnect, then 30 days"],
+  ["WhatsApp connection and message records", "While needed to provide and support the integration; deletion is available on request. Disconnecting does not erase stored message records."],
   ["Intelligence database records", "Until removal is requested, or the record is no longer accurate"],
   ["Suppression list", "Indefinitely — that is what makes an opt-out stick"],
   ["Server and security logs", "12 months"],
@@ -211,7 +212,34 @@ export default function PrivacyPage() {
                 ]}
               />
 
-              <h3 className="pt-3 font-semibold text-ink">2.5 What we do not collect</h3>
+              <h3 className="pt-3 font-semibold text-ink">2.5 WhatsApp, if you use the integration</h3>
+              <p>
+                Our WhatsApp integration is currently a restricted pilot. We process the
+                phone number you link, your Cnvrted account identifier, messages sent to our
+                business number, message identifiers and timestamps, requested actions,
+                replies and delivery status. We use these to verify the connection, respond
+                to supported commands, prevent duplicate actions and troubleshoot delivery.
+                We do not gain access to your other WhatsApp chats or contacts.
+              </p>
+              <p>
+                Meta/WhatsApp delivers these messages between you and Cnvrted. Information
+                included in our replies, such as account status and lead summaries you request,
+                is transmitted through WhatsApp. Its own terms and privacy policy also apply.
+                The current pilot supports account-scoped information requests; launching
+                scans, AI interpretation of WhatsApp messages and email outreach through
+                WhatsApp are disabled.
+              </p>
+              <p>
+                Send STOP to our business number to disconnect a linked account, or ask
+                us to disconnect it. Disconnecting stops account-linked commands but does
+                not erase previously stored messages or job records. To delete those records
+                or your whole Cnvrted account, follow our{" "}
+                <a href="/data-deletion" className="text-ink underline underline-offset-2">
+                  data deletion instructions
+                </a>. Do not send passwords, access tokens or identity documents in chat.
+              </p>
+
+              <h3 className="pt-3 font-semibold text-ink">2.6 What we do not collect</h3>
               <p>
                 We do not intentionally collect sensitive personal data — health data, financial
                 account data, biometric or genetic data, caste or tribe, religious belief,
@@ -285,7 +313,9 @@ export default function PrivacyPage() {
                     Supabase (database and authentication), Vercel (website hosting), Railway
                     and Cloudflare (application and API infrastructure), Resend (transactional
                     email), Anthropic and OpenAI (scoring, outreach drafting and the in-product
-                    assistant), and Apollo, Serper and Exa (company and contact research and
+                    assistant), Meta/WhatsApp (delivery of messages for the optional WhatsApp
+                    integration), Composio (connected service authentication and API actions),
+                    and Apollo, Serper and Exa (company and contact research and
                     enrichment). Each is bound by contract to process data only on our
                     instructions.
                   </>,
@@ -345,8 +375,12 @@ export default function PrivacyPage() {
               />
               <p>
                 <strong className="font-semibold text-ink">How to exercise them.</strong> Email{" "}
-                <Mail address="work@cnvrted.com" />. Customers can also do most of this from
-                account settings. We may ask for enough information to confirm who you are, but
+                <Mail address="work@cnvrted.com" />. Account deletion currently requires a
+                request to our team; there is no self-service delete-account button.
+                Our <a href="/data-deletion" className="text-ink underline underline-offset-2">
+                  data deletion instructions
+                </a> explain account deletion, connected-service data deletion and verification.
+                We may ask for enough information to confirm who you are, but
                 no more than we need, and we respond within 30 days. If we need longer and the
                 law allows it, we will tell you why before the deadline.
               </p>

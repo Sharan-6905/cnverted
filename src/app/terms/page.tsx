@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/terms",
 });
 
-const LAST_UPDATED = "28 September 2026";
+const LAST_UPDATED = "20 October 2026";
 
 export default function TermsPage() {
   return (
@@ -212,6 +212,22 @@ export default function TermsPage() {
 
             <Clause n={10} title="Third-party services">
               <p>
+                WhatsApp is an optional, restricted pilot delivered through Meta/WhatsApp.
+                Only supported features enabled for your account are available. The current
+                pilot provides account-scoped information and does not launch scans or send
+                email outreach. Linking a number does not authorise access to other
+                customers&apos; accounts. Use a number you control and keep your device secure.
+              </p>
+              <p>
+                Send STOP to disconnect your linked WhatsApp account. Disconnecting is
+                different from deleting stored records or closing your Cnvrted account.
+                You can request either using our{" "}
+                <a href="/data-deletion" className="text-ink underline underline-offset-2">
+                  data deletion instructions
+                </a>. WhatsApp messages and replies are also subject to Meta/WhatsApp&apos;s
+                terms and privacy practices.
+              </p>
+              <p>
                 The Platform works with third-party services — currently Google (Gmail, if you
                 connect it) and Notion (export) — and relies on providers including Anthropic,
                 OpenAI, Apollo, Serper, Exa, Supabase and Resend. Your use of a third-party
@@ -231,6 +247,14 @@ export default function TermsPage() {
             </Clause>
 
             <Clause n={12} title="Termination">
+              <p>
+                Account and connected-service data deletion is handled by our team after
+                verifying your identity and the scope of the request. There is currently no
+                self-service delete-account button. See our{" "}
+                <a href="/data-deletion" className="text-ink underline underline-offset-2">
+                  data deletion instructions
+                </a> for how to request deletion and any retention exceptions.
+              </p>
               <p>
                 You can cancel at any time by contacting us at <Mail address="work@cnvrted.com" />
                 . Cancellation takes effect at the end of your current billing period.

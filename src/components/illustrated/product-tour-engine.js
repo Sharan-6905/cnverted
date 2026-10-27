@@ -2,7 +2,6 @@
  * @param {HTMLElement} root
  */
 export function mountProductTour(root) {
-  const controller = new AbortController();
   const timers = new Set();
   const frames = new Set();
   const setTimeout = (callback, delay) => {
@@ -23,7 +22,7 @@ export function mountProductTour(root) {
   let scale = 1, runId = 0, visible = true;
   const ABORT = {};
 
-  const fit = () => { scale = root.clientWidth / 1280; stage.style.transform = 'scale(' + scale + ')'; };
+  const fit = () => { scale = root.clientWidth / 1200; stage.style.transform = 'scale(' + scale + ')'; };
   const resizeObserver = new ResizeObserver(fit);
   resizeObserver.observe(root); fit();
   const visibilityObserver = new IntersectionObserver(e => { visible = e[0].isIntersecting; }, { threshold: 0.15 });
@@ -31,32 +30,6 @@ export function mountProductTour(root) {
 
   const $ = s => stage.querySelector(s);
   const $$ = (s, c) => [...(c || stage).querySelectorAll(s)];
-
-  /* ---------- logo (from the Cnvrted loader) ---------- */
-  const logo = p => `<svg class="lg" viewBox="-40 -40 692 746" aria-hidden="true"><defs>
-<linearGradient id="${p}gg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7f8a45"/><stop offset=".55" stop-color="#626430"/><stop offset="1" stop-color="#4b4f22"/></linearGradient>
-<linearGradient id="${p}go" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f0c95f"/><stop offset=".5" stop-color="#d1ae58"/><stop offset="1" stop-color="#b8861f"/></linearGradient>
-<radialGradient id="${p}ge" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#55525a"/><stop offset=".6" stop-color="#302d2f"/><stop offset="1" stop-color="#1c1a1b"/></radialGradient>
-<mask id="${p}ml" maskUnits="userSpaceOnUse" x="-40" y="-40" width="692" height="746"><path class="roll roll-l" pathLength="1" d="M-6 26.2A341 306.4 0 0 1 -6 638.9" stroke="#fff" stroke-width="84" fill="none"/></mask>
-<mask id="${p}mr" maskUnits="userSpaceOnUse" x="-40" y="-40" width="692" height="746"><path class="roll roll-r" pathLength="1" d="M617 248.8A222.2 199.7 0 0 0 617 648.1" stroke="#fff" stroke-width="64" fill="none"/></mask></defs>
-<path fill="url(#${p}gg)" mask="url(#${p}ml)" d="M0 665.143C98.1384 665.144 192.257 630.105 261.652 567.736C331.046 505.366 370.031 420.775 370.031 332.572C370.031 244.368 331.046 159.777 261.652 97.4081C192.257 35.0388 98.1385 2.20812e-05 0.000131252 0L0.000103985 52.2584C82.7176 52.2585 162.047 81.7914 220.537 134.36C279.027 186.929 311.887 258.228 311.887 332.572C311.887 406.916 279.027 478.214 220.537 530.783C162.047 583.352 82.7175 612.885 5.08316e-06 612.885L0 665.143Z"/>
-<path fill="url(#${p}gg)" mask="url(#${p}mr)" d="M611.13 231.756C547.187 231.756 485.862 254.586 440.648 295.223C395.433 335.861 370.031 390.978 370.031 448.448C370.031 505.918 395.433 561.035 440.647 601.672C485.862 642.31 547.187 665.14 611.13 665.14L611.13 631.09C557.235 631.09 505.546 611.847 467.436 577.595C429.326 543.343 407.916 496.888 407.916 448.448C407.916 400.008 429.326 353.552 467.436 319.3C505.546 285.048 557.235 265.806 611.13 265.806V231.756Z"/>
-<path fill="url(#${p}go)" d="M388.968 322.338C401.445 221.991 318.039 129.769 274.676 90.1462L607.998 221.991C537.307 206.46 433.331 267.514 388.968 322.338Z"/>
-<path fill="url(#${p}go)" d="M348.071 506.125C368.651 583.103 459.12 643.197 515.932 665.144H100.608C168.9 663.366 320.565 556.474 348.071 506.125Z"/>
-<g class="trk tl"><circle class="eye eye-l" fill="url(#${p}ge)" cx="86.103" cy="332.573" r="86.103"/></g>
-<g class="trk tr"><circle class="eye eye-r" fill="url(#${p}ge)" cx="557.315" cy="449.973" r="53.8177"/></g></svg>`;
-
-  // eyes follow the visitor's pointer, like the loader
-  root.addEventListener('pointermove', ev => {
-    $$('.ov.on .lg').forEach(svg => {
-      const b = svg.getBoundingClientRect(), s = b.width / 692;
-      [['.tl', 86.103, 332.573, 42], ['.tr', 557.315, 449.973, 26]].forEach(([sel, cx, cy, max]) => {
-        const dx = (ev.clientX - (b.left + (cx + 40) * s)) / s, dy = (ev.clientY - (b.top + (cy + 40) * s)) / s;
-        const d = Math.hypot(dx, dy) || 1, k = Math.min(1, d / 400) * max / d;
-        svg.querySelector(sel).style.transform = `translate(${(dx * k).toFixed(1)}px,${(dy * k).toFixed(1)}px)`;
-      });
-    });
-  }, { signal: controller.signal });
 
   /* ---------- data ---------- */
   const T_ROWS = [
@@ -92,7 +65,6 @@ export function mountProductTour(root) {
     int: ['#e8effd','#2563eb','<path d="M9 9.5l-2 2a3.5 3.5 0 0 0 5 5l2-2zM15 14.5l2-2a3.5 3.5 0 0 0-5-5l-2 2z"/>','Integrations'],
   };
   const NAV = { home:'recipe', orka:'ask', target:'recipe', intent:'recipe', comm:'comm', hist:'hist', int:'int' };
-  const CAPS = 8;
 
   const IC = {
     li: '<svg viewBox="0 0 24 24"><rect width="24" height="24" rx="5" fill="#0A66C2"/><path fill="#fff" d="M6.6 9.8h2.6V18H6.6zM7.9 5.6a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zM10.8 9.8h2.5v1.1c.4-.7 1.3-1.3 2.6-1.3 2.2 0 2.9 1.4 2.9 3.4v5h-2.6v-4.4c0-1-.2-1.9-1.3-1.9s-1.5.8-1.5 1.9V18h-2.6z"/></svg>',
@@ -130,8 +102,6 @@ export function mountProductTour(root) {
 
   function build() {
     stage.innerHTML = TEMPLATE;
-    $$('.lgslot').forEach((el, i) => el.dataset.p = 'cm' + i);
-    $('#cm-dots').innerHTML = '<i></i>'.repeat(CAPS);
     $('#cm-gt').insertAdjacentHTML('beforeend', T_ROWS.map((r, i) =>
       `<tr class="rv"><td><div class="co"><span class="lt" style="background:${r[1]};color:${r[2]}">${r[0]}</span>${r[3]}</div></td><td>${r[4]}</td><td>${r[5]}</td><td><span class="ver" data-v="${r[7]}" data-i="${i}">Not enriched</span></td><td style="text-align:right"><span class="fit">${r[8]}%</span></td></tr>`).join(''));
     $('#cm-pg').innerHTML = PEOPLE.map((p, i) =>
@@ -156,16 +126,6 @@ export function mountProductTour(root) {
     const c = CRUMB[name];
     $('#cm-crumb').innerHTML = `<span class="ic" style="background:${c[0]}"><svg viewBox="0 0 24 24" stroke="${c[1]}">${c[2]}</svg></span>${c[3]}`;
   }
-  function caption(i, text) {
-    const cap = $('#cm-cap');
-    cap.classList.add('out');
-    setTimeout(() => {
-      $('#cm-capn').textContent = String(i).padStart(2, '0');
-      $('#cm-capt').textContent = text;
-      $$('#cm-dots i').forEach((d, k) => d.classList.toggle('on', k === i - 1));
-      cap.classList.remove('out');
-    }, 280);
-  }
   function countTo(el, from, to, dur, fmt) {
     const t0 = performance.now(); fmt = fmt || (v => Math.round(v).toLocaleString('en-US'));
     const f = t => { const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(from + (to - from) * e); if (k < 1) requestAnimationFrame(f); };
@@ -186,7 +146,7 @@ export function mountProductTour(root) {
     return [(r.left - s.left) / scale + (ox ?? r.width / scale / 2), (r.top - s.top) / scale + (oy ?? r.height / scale / 2)];
   }
 
-  async function run(first) {
+  async function run() {
     const id = ++runId;
     const s = ms => new Promise((res, rej) => {
       let left = ms;
@@ -206,16 +166,10 @@ export function mountProductTour(root) {
 
     build(); credits = 2480;
     try {
-      /* 0 · loader */
-      if (first) {
-        const ld = $('#cm-load'); ld.querySelector('.lgslot').innerHTML = logo('a'); ld.classList.add('on');
-        await s(2900);
-        ld.classList.remove('on');
-      }
       cur().style.transform = 'translate(760px,520px)';
 
       /* 1 · home */
-      scene('home'); caption(1, 'Pick a recipe. Orka already knows your ICP.');
+      scene('home');
       await s(350);
       await reveal($$('[data-s="home"] .rv'), 110);
       cur().classList.add('on');
@@ -227,7 +181,7 @@ export function mountProductTour(root) {
       await click($('#cm-ask'));
 
       /* 2 · ask orka */
-      scene('orka'); caption(2, 'Ask Orka in plain words');
+      scene('orka');
       await s(700);
       await moveTo($('.comp'), 200, 30, 700);
       $('#cm-ph').style.display = 'none'; $('#cm-caret').style.display = '';
@@ -250,7 +204,7 @@ export function mountProductTour(root) {
       await click($('#cm-open'));
 
       /* 3 · target list */
-      scene('target'); caption(3, 'Target lists in about a minute');
+      scene('target');
       await s(500);
       countTo($('#cm-tcount'), 0, 21, 1200);
       await reveal($$('#cm-gt tr.rv'), 90);
@@ -264,7 +218,7 @@ export function mountProductTour(root) {
       await s(900);
 
       /* 4 · intent list */
-      scene('intent'); caption(4, 'Spot buyers posting a real need, right now');
+      scene('intent');
       await s(500);
       countTo($('#cm-icount'), 0, 6, 900);
       for (const c of $$('#cm-pg .pc')) { c.classList.add('in'); fillRing(c.querySelector('.ring')); await s(160); }
@@ -273,7 +227,7 @@ export function mountProductTour(root) {
       await click($('#cm-reach'));
 
       /* 5 · reach out */
-      caption(5, 'Outreach that mentions what they actually posted');
+
       $('#cm-shade').classList.add('on'); $('#cm-drw').classList.add('on');
       await s(700);
       await moveTo($('#cm-gen'), null, null, 700);
@@ -295,7 +249,7 @@ export function mountProductTour(root) {
       await s(450);
 
       /* 6 · communities */
-      scene('comm'); caption(6, 'Join the rooms where your buyers talk');
+      scene('comm');
       await s(500);
       for (const c of $$('#cm-cg .cc2')) { c.classList.add('in'); fillRing(c.querySelector('.ring')); await s(150); }
       await reveal($$('[data-s="comm"] .cc3'), 110);
@@ -306,7 +260,7 @@ export function mountProductTour(root) {
       await s(700);
 
       /* 7 · history + credits */
-      scene('hist'); caption(7, 'Every chat and every credit, accounted for');
+      scene('hist');
       await s(500);
       await reveal($$('[data-s="hist"] .hr'), 90);
       await moveTo($('#cm-hsel'), 160, null, 800);
@@ -319,7 +273,7 @@ export function mountProductTour(root) {
       await s(2000);
 
       /* 8 · integrations */
-      scene('int'); caption(8, 'Plugs into the tools you already use');
+      scene('int');
       await s(500);
       await reveal($$('[data-s="int"] .rv'), 90);
       let n = 1;
@@ -332,12 +286,9 @@ export function mountProductTour(root) {
       }
       await s(800);
 
-      /* outro */
+      // Return directly to the product UI without a logo intermission.
       cur().classList.remove('on');
-      $('#cm-cap').classList.add('out');
-      const out = $('#cm-out'); out.querySelector('.lgslot').innerHTML = logo('b'); out.classList.add('on');
-      await s(4800);
-      run(false);
+      run();
     } catch (e) { if (e !== ABORT) throw e; }
   }
 
@@ -346,14 +297,12 @@ export function mountProductTour(root) {
     $$('.rv').forEach(e => e.classList.add('in'));
     $$('.ring').forEach(fillRing);
     $('#cm-icount').textContent = '6';
-    $('#cm-cap').classList.remove('out'); $('#cm-capt').textContent = 'Spot buyers posting a real need, right now'; $('#cm-capn').textContent = '04';
   } else {
-    run(true);
+    run();
   }
 
   return () => {
     runId++;
-    controller.abort();
     resizeObserver.disconnect();
     visibilityObserver.disconnect();
     timers.forEach(window.clearTimeout);

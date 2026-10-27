@@ -34,7 +34,7 @@
 .redesign-hero h1 > span { display: block; }
 .redesign-hero-copy > p { max-width: 517px; margin: 9px auto 0; font: 400 16px/20px var(--font-design-sans),sans-serif; color: var(--redesign-muted); }
 .redesign-hero-actions { display: flex; justify-content: center; gap: 16px; margin-top: 24px; }
-.redesign-hero-demo { position: relative; width: min(1112px,calc(100% - 48px)); margin: 64px auto 0; }
+.redesign-hero-demo { position: relative; width: 100%; margin: 64px auto 0; }
 .redesign-home .redesign-hero-demo .deferred-visual-canvas { margin-top: 0; }
 .redesign-home .product-canvas-demo { isolation: isolate; }
 .redesign-signals { margin-top: 164px; position: relative; text-align: center; }
@@ -162,7 +162,7 @@
   .redesign-hero-actions { gap: 12px; margin-top: 24px; }
   .redesign-home .redesign-hero-actions .design-button { padding-inline: 22px; font-size: 15px; }
   .redesign-home .redesign-hero-actions .design-button img { width: 32px; height: auto; }
-  .redesign-hero-demo { width: calc(100% - 24px); margin-top: 42px; }
+  .redesign-hero-demo { width: 100%; margin-top: 42px; }
   .redesign-signals, .redesign-features, .redesign-logo-section, .redesign-home .design-strategies-canvas { margin-top: 88px; }
   .redesign-home .design-section-heading { padding-inline: 24px; }
   .redesign-home .design-section-heading h2, .redesign-home .redesign-feature-heading h2, .redesign-home .redesign-customer-section .design-section-heading h2 { font-size: 35px; line-height: 1.12; }

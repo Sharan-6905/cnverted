@@ -205,10 +205,7 @@ export const productTourMarkup = `<div id="cnv-motion" role="img" aria-label="Cn
     </div>
   </div>
 
-  <div class="cap out" id="cm-cap"><span class="n" id="cm-capn">01</span><span id="cm-capt"></span><span class="dots" id="cm-dots"></span></div>
   <div class="cur" id="cm-cur"><svg viewBox="0 0 24 24"><path d="M4 2.5l15.5 8.6-6.8 1.9-3.1 6.6z" fill="#1f1e1b" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
 
-  <div class="ov" id="cm-load"><div class="lgslot"></div><p class="lbl">Getting your workspace ready…</p></div>
-  <div class="ov" id="cm-out"><div class="lgslot big"></div></div>
 </div>
 </div>`;

@@ -26,7 +26,7 @@ export function RedesignHome() {
       <small className="hero-credit-note">40 free credits to explore Cnvrted.</small>
       </div>
     </section>
-    <section id="gtm-demo" className="redesign-hero-demo" aria-label="Interactive product walkthrough">
+    <section id="gtm-demo" className="redesign-hero-demo" aria-label="Illustrative product tour">
       <Image className="redesign-bird-right" {...art["499-2111-imgImage94"]} alt="" sizes="(max-width: 1024px) 240px, 335px" />
       <DeferredVisual kind="canvas" />
     </section>

@@ -9,11 +9,18 @@
 .deferred-visual-poster button:focus-visible { outline: 2px solid var(--olive); outline-offset: 4px; }
 .deferred-visual-poster button:disabled { cursor: progress; }
 .deferred-visual-poster a { text-decoration: underline; text-underline-offset: 3px; }
-.deferred-visual-canvas > .deferred-visual-poster { margin-top: 34px; height: calc(clamp(620px, 55vw, 760px) + 197px); border: 1px solid #e1e1dc; }
+
 @media (max-width: 1023px) {
   .deferred-visual-flow { max-width: 520px; aspect-ratio: 480 / 1640; }
-  .deferred-visual-canvas > .deferred-visual-poster { height: 957px; }
 }
-@media (max-width: 767px) {
-  .deferred-visual-canvas > .deferred-visual-poster { margin: 24px -8px 0; height: calc(min((100vw - 44px) * 2.5, 920px) + 322px); }
+
+/* Reserve the supplied tour’s 1280 × 800 stage before the lazy module loads. */
+.deferred-visual-canvas { margin:34px auto 0; max-width:1280px; aspect-ratio:1280 / 800; }
+.deferred-visual-canvas > .deferred-visual-poster { position:absolute; inset:0; padding:clamp(12px,3vw,32px); border:1px solid #ebe9e3; overflow:hidden; }
+.deferred-visual-canvas .product-tour { margin-top:0; }
+@media(max-width:767px) {
+ .deferred-visual-canvas { margin-top:24px; }
+ .deferred-visual-canvas .deferred-visual-poster p { display:none; }
+ .figma-site .deferred-visual-canvas .deferred-visual-poster h3 { font-size:20px; margin:8px 0; }
+ .deferred-visual-canvas .deferred-visual-poster button { margin-top:6px; }
 }

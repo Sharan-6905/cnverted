@@ -28,7 +28,7 @@ export function DeferredVisual({ kind }: { kind: "flow" | "canvas" }) {
     let cancelled = false;
     const load = kind === "flow"
       ? import("./lead-flow").then((module) => module.LeadFlow)
-      : import("./product-canvas-demo").then((module) => module.ProductCanvasDemo);
+      : import("./product-tour").then((module) => module.ProductTour);
     load.then((Component) => {
       if (!cancelled) setVisual(() => Component);
     }).catch(() => {
@@ -42,7 +42,7 @@ export function DeferredVisual({ kind }: { kind: "flow" | "canvas" }) {
       {Visual ? <Visual /> : (
         <div className="deferred-visual-poster" aria-busy={requested && !failed}>
           <div>
-            <span className="marketing-eyebrow">{kind === "flow" ? "Find · Match · Prioritize" : "Interactive product walkthrough"}</span>
+            <span className="marketing-eyebrow">{kind === "flow" ? "Find · Match · Prioritize" : "Cnvrted product tour"}</span>
             <h3>{kind === "flow" ? "Follow a signal to your next conversation." : "A brief. A plan. Your next move."}</h3>
             <p>{kind === "flow" ? "Public signals meet ICP fit, intent, and timing. Review the context behind each qualified lead." : "Watch Orka turn a customer brief into a research workflow and a shortlist you can explore."}</p>
             <button type="button" disabled={requested && !failed} onClick={() => {
@@ -50,7 +50,7 @@ export function DeferredVisual({ kind }: { kind: "flow" | "canvas" }) {
               setRequested(true);
               setAttempt((value) => value + 1);
             }}>
-              {failed ? "Retry walkthrough" : requested ? "Loading walkthrough…" : "Explore the canvas"}
+              {failed ? "Retry walkthrough" : requested ? "Loading walkthrough…" : "Watch the product tour"}
             </button>
             {failed && <p role="status">The animation couldn’t load. You can still <a href="/learn/signal-to-outreach">read the worked example</a>.</p>}
             <noscript><p><a href="/learn/signal-to-outreach">Read the signal-to-outreach example</a>. Enable JavaScript to play the animation.</p></noscript>

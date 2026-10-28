@@ -36,7 +36,7 @@ export default function ProductPage() {
             <Link href="/book-demo" className="design-button design-button-solid">Book a GTM demo <span aria-hidden="true">↗</span></Link>
             <Link href="/learn/signal-to-outreach" className="marketing-text-link">Try an example <span aria-hidden="true">↗</span></Link>
           </div>
-          <p className="product-start-note">Start with 40 free credits. <Link href="/pricing">Explore the plans</Link>.</p>
+          <p className="product-start-note">Start with 400 introductory credits. <Link href="/pricing">Explore the plans</Link>.</p>
         </div>
         <aside className="product-flow" aria-label="The Cnvrted workflow">
           <div className="product-flow-heading"><span className="marketing-eyebrow">From research to outreach</span><span className="product-flow-mark" aria-hidden="true">✦</span></div>

@@ -46,7 +46,7 @@
   background: var(--plan-surface);
   box-shadow: -4px 4px 20px #00000012;
 }
-.pricing-plan-surge {
+.pricing-plan-starter {
   --plan-surface: #f0f8ce;
   border-color: #fbd600;
   box-shadow: inset 0 0 0 3px #fbd600, -4px 4px 20px #00000012;
@@ -65,33 +65,33 @@
   position: absolute;
   inset: 0;
 }
-.pricing-plan-spark .pricing-plan-art {
+.pricing-plan-free .pricing-plan-art {
   width: 169px;
   height: 148px;
   top: -47px;
   right: 14px;
   transform: scaleX(-1);
 }
-.pricing-plan-spark .pricing-plan-art::after {
+.pricing-plan-free .pricing-plan-art::after {
   background: linear-gradient(173deg, #fef9d903 61%, var(--plan-surface) 85%);
 }
-.pricing-plan-surge .pricing-plan-art {
+.pricing-plan-starter .pricing-plan-art {
   width: 218px;
   height: 195px;
   top: -85px;
   right: 21px;
   transform: scaleX(-1);
 }
-.pricing-plan-surge .pricing-plan-art::after {
+.pricing-plan-starter .pricing-plan-art::after {
   background: linear-gradient(170deg, #f0f8ce00 45%, var(--plan-surface) 82%);
 }
-.pricing-plan-dominion .pricing-plan-art {
+.pricing-plan-pro .pricing-plan-art {
   width: 247px;
   height: 226px;
   top: -124px;
   right: 8px;
 }
-.pricing-plan-dominion .pricing-plan-art::after {
+.pricing-plan-pro .pricing-plan-art::after {
   background: linear-gradient(18deg, var(--plan-surface) 18%, #fef9d900 29%, #fef9d900 50%);
 }
 .pricing-plan-content { position: relative; }
@@ -142,7 +142,7 @@
   .pricing-plans { gap: 16px; }
   .pricing-plan { padding-inline: 22px; }
   .pricing-plan-art { zoom: .85; }
-  .pricing-plan-dominion .pricing-plan-price > span { font-size: 34px; }
+  .pricing-plan-pro .pricing-plan-price > span { font-size: 34px; }
 }
 @media (max-width: 900px) {
   .pricing-hero { height: auto; padding-bottom: 68px; }
@@ -154,7 +154,7 @@
     margin-top: -28px;
   }
   .pricing-plan { min-height: 0; padding: 28px; border-radius: 22px; }
-  .pricing-plan-surge { border-color: #bdc995; box-shadow: inset 0 0 0 1px #bdc995, -4px 4px 20px #0000000b; }
+  .pricing-plan-starter { border-color: #bdc995; box-shadow: inset 0 0 0 1px #bdc995, -4px 4px 20px #0000000b; }
   .pricing-plan .pricing-plan-art {
     width: 126px;
     height: 112px;
@@ -163,7 +163,7 @@
     opacity: .88;
     zoom: 1;
   }
-  .pricing-plan-dominion .pricing-plan-art { width: 136px; height: 124px; top: 0; right: 4px; }
+  .pricing-plan-pro .pricing-plan-art { width: 136px; height: 124px; top: 0; right: 4px; }
   .figma-site .pricing-plan h2 { max-width: calc(100% - 100px); font-size: 32px; }
   .pricing-plan-credits { position: relative; max-width: calc(100% - 98px); min-height: 24px; font-size: 15px; }
   .pricing-plan-price { margin-block: 24px 18px; }

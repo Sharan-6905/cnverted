@@ -8,7 +8,7 @@ import { IllustratedShell } from "@/components/illustrated/shell";
 
 export const metadata: Metadata = pageMetadata({
   title: "Cnvrted Early Access | AI GTM Waitlist",
-  description: "Join the Cnvrted early-access waitlist and tell us about your GTM workflow. Looking to try the current beta? Start with Spark and 40 free credits.",
+  description: "Join the Cnvrted early-access waitlist and tell us about your GTM workflow. Looking to try the current beta? Start with 400 introductory credits.",
   path: "/early-access",
 });
 
@@ -30,7 +30,7 @@ export default function EarlyAccessPage() {
           you do not need to join this list to try it.
         </p>
         <a className="marketing-text-link" href="https://beta.cnvrted.com">
-          Want to explore now? Start free with 40 credits{" "}
+          Want to explore now? Start free with 400 introductory credits{" "}
           <span aria-hidden="true">↗</span>
         </a>
       </header>

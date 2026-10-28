@@ -8,7 +8,7 @@ import { IllustratedPricing, pricingFAQs } from "@/components/illustrated/pricin
 
 export const metadata: Metadata = pageMetadata({
   title: "Cnvrted Pricing | Free GTM Credits & Paid Plans",
-  description: "Compare Cnvrted GTM plans: Spark includes 40 free credits, Surge costs $119 per month, and Dominion offers custom credits. Find the right plan for your team.",
+  description: "Compare Starter at $49/month with 1,750 credits and Pro at $199/month with 7,250 credits. Start with 400 introductory credits; top up 550 credits for $15.",
   path: "/pricing",
 });
 

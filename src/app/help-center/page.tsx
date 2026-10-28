@@ -19,8 +19,8 @@ export const metadata: Metadata = pageMetadata({
 
 const helpFAQs: FAQItem[] = [
   { question: "How do I get started?", answer: <>Visit the <a href="https://beta.cnvrted.com">Cnvrted beta</a> or <a href={DEMO_PATH}>book a demo</a> with our team.</> },
-  { question: "Can I try Cnvrted for free?", answer: "Yes. Spark includes 40 free credits to explore Cnvrted." },
-  { question: "How do credit plans work?", answer: <>Start with Spark, choose Surge as you grow, or discuss custom credits with Dominion. See our <Link href="/pricing">pricing page</Link> for plan details.</> },
+  { question: "Can I try Cnvrted for free?", answer: "Yes. Verified accounts receive 400 introductory credits once, valid for 14 days, to explore Cnvrted." },
+  { question: "How do credit plans work?", answer: <>Start with 400 introductory credits, then choose Starter or Pro and add top-ups when needed. See our <Link href="/pricing">pricing page</Link> for plan details.</> },
   { question: "Can Cnvrted fit my existing workflow?", answer: <>Tell us about your CRM and the tools your team uses. <a href={DEMO_PATH}>Book a demo</a> to discuss the right setup.</> },
   { question: "Where can I learn about data privacy?", answer: <>Read our <Link href="/privacy">Privacy Policy</Link> for information about data collection, use, and your choices.</> },
   { question: "What if I can’t find the answer I need?", answer: <>Email <a href={`mailto:${HELP_SUPPORT_EMAIL}`}>{HELP_SUPPORT_EMAIL}</a> or visit our <Link href="/contact">contact page</Link>. We read every message.</> },

@@ -8,9 +8,9 @@ import "./pricing.css";
 
 const plans = [
   {
-    id: "spark",
-    name: "Spark",
-    credits: "40 credits",
+    id: "free",
+    name: "Free introduction",
+    credits: "400 credits · valid for 14 days",
     price: "Free",
     period: "",
     image: {
@@ -22,51 +22,50 @@ const plans = [
     href: "https://beta.cnvrted.com",
   },
   {
-    id: "surge",
-    name: "Surge",
-    credits: "Team-managed plan",
-    price: "$119",
+    id: "starter",
+    name: "Starter",
+    credits: "1,750 credits per paid month",
+    price: "$49",
     period: "/ month",
     image: {
       src: "/figma/pricing-pro-windmill.png",
       width: 1324,
       height: 1188,
     },
-    cta: "Book a demo",
-    href: DEMO_PATH,
+    cta: "View plan",
+    href: "https://beta.cnvrted.com/pricing",
   },
   {
-    id: "dominion",
-    name: "Dominion",
-    credits: "Custom credits",
-    price: "Talk to sales",
-    period: "",
+    id: "pro",
+    name: "Pro",
+    credits: "7,250 credits per paid month",
+    price: "$199",
+    period: "/ month",
     image: {
       src: "/figma/pricing-enterprise-windmill.png",
       width: 1312,
       height: 1199,
     },
-    cta: "Book a demo",
-    href: DEMO_PATH,
+    cta: "View plan",
+    href: "https://beta.cnvrted.com/pricing",
   },
 ] as const;
 
 export const pricingFAQs: FAQItem[] = [
   {
     question: "Can I start for free?",
-    answer: "Yes. Spark includes 40 free credits to try Cnvrted.",
+    answer: "Yes. Verified accounts receive 400 introductory credits once, valid for 14 days.",
   },
   {
     question: "Need more credits?",
     answer:
-      "Choose Surge at $119 per month, or talk to us about a custom Dominion plan.",
+      "Choose Starter at $49 for 1,750 monthly credits or Pro at $199 for 7,250. Add 550 credits for each $15 top-up; top-ups expire after three calendar months.",
   },
   {
     question: "How many credits does an action use?",
     answer: (
       <>
-        Contact <a href="mailto:info@cnvrted.com">info@cnvrted.com</a> for the
-        current credit costs and monthly allowance before choosing a paid plan.
+        Credit use varies with the measured cost of each action. Around 100 credits per scan is a planning benchmark, not a fixed charge. A scan that delivers zero new leads returns its held credits. Email <a href="mailto:info@cnvrted.com">info@cnvrted.com</a> with questions.
       </>
     ),
   },
@@ -98,7 +97,7 @@ export function IllustratedPricing() {
         <div className="pricing-hero-copy">
           <h1 id="pricing-title">Our Pricing</h1>
           <p>
-            Start with 40 free credits.
+            Start with 400 free credits.
             <br />
             Grow at your own pace.
           </p>
@@ -137,9 +136,9 @@ export function IllustratedPricing() {
               >
                 {plan.cta}
               </Link>
-              {plan.id === "surge" && (
+              {plan.id !== "free" && (
                 <p className="pricing-plan-note">
-                  Arranged with our team. Confirm credits, action costs, seats, and included features before subscribing.
+                  USD prices. View payment availability and confirm the final amount in the app.
                 </p>
               )}
             </div>
@@ -152,10 +151,12 @@ export function IllustratedPricing() {
       >
         <h2 id="credit-guide-title">A plan for your usage.</h2>
         <p>
-          Credits are your usage allowance in Cnvrted. Spark gives you 40 to get
-          started. For a paid plan, <Link href={DEMO_PATH}>talk to our team</Link>{" "}
-          to agree on your allowance, action costs, seats, and included features before subscribing. Credit use varies by action; 40 credits does not necessarily mean 40 leads.
+          Credits cover research, contact enrichment and Orka. Top up with 550 credits for $15,
+          in multiples of $15, valid for three calendar months. Usage depends on the work an action needs;
+          credit counts are not guaranteed lead counts.
         </p>
+        <p>USD plans renew monthly until cancellation or the end of the authorised mandate. Indian monthly payments require a fresh INR quote and approval each month. Monthly plan credits expire 30 days after their paid cycle ends.</p>
+        <p>Purchases are non-refundable except where required by law. Read the <Link href="/terms">Terms</Link>, <Link href="/refund-policy">Refund &amp; Cancellation Policy</Link> and <Link href="/privacy">Privacy Policy</Link>. Queries: <a href="mailto:info@cnvrted.com">info@cnvrted.com</a>.</p>
       </section>
     </>
   );

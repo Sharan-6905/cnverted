@@ -22,7 +22,7 @@ const faqs: readonly FAQItem[] = HOME_FAQS.map((faq) => {
       ...faq,
       answer: (
         <>
-          Yes. Start with Spark and 40 free credits in the{" "}
+          Yes. Start with 400 introductory credits in the{" "}
           <a href="https://beta.cnvrted.com">Cnvrted beta</a>. See{" "}
           <Link href="/pricing">pricing</Link> for paid plans and credit
           details.

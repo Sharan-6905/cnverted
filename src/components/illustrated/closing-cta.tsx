@@ -12,7 +12,7 @@ export function ClosingCTA() {
       </span>
       <h2 id="closing-cta-title">Find a reason to reach out.</h2>
       <p>
-        Start with 40 free credits, or walk through your workflow with our team.
+        Start with 400 introductory credits, or walk through your workflow with our team.
       </p>
       <div className="design-closing-actions">
         <DesignLink href="https://beta.cnvrted.com" arrow>

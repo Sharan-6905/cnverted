@@ -36,6 +36,7 @@ const columns = [
       ["Early access", "/early-access"],
       ["Terms & Conditions", "/terms"],
       ["Privacy Policy", "/privacy"],
+      ["Refund & Cancellation Policy", "/refund-policy"],
       ["Data deletion", "/data-deletion"],
       ["Contact", "/contact"],
     ],

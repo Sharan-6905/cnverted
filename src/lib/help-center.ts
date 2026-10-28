@@ -47,14 +47,14 @@ export const HELP_ARTICLES = [
     id: "start-free",
     category: "Plans & credits",
     question: "Can I try Cnvrted for free?",
-    answer: "Yes. Spark includes 40 free credits to get started. Visit the beta app to explore Cnvrted.",
+    answer: "Yes. Verified accounts receive 400 introductory credits once, valid for 14 days. Visit the beta app to explore Cnvrted.",
     link: { label: "Start free", href: "https://beta.cnvrted.com" },
   },
   {
     id: "plans",
     category: "Plans & credits",
     question: "Where can I compare plans and credits?",
-    answer: "Compare Spark, Surge, and Dominion on our pricing page. For custom credit needs, talk to our team about Dominion.",
+    answer: "Compare Starter ($49/month, 1,750 credits), Pro ($199/month, 7,250 credits) and $15 top-ups (550 credits, valid three months) on our pricing page.",
     link: { label: "View pricing", href: "/pricing" },
   },
   {

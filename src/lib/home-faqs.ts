@@ -28,7 +28,7 @@ export const HOME_FAQS = [
   {
     question: "Can I try Cnvrted for free?",
     answer:
-      "Yes. Start with Spark and 40 free credits in the Cnvrted beta. See pricing for paid plans and credit details.",
+      "Yes. Start with 400 introductory credits in the Cnvrted beta. See pricing for paid plans and credit details.",
   },
   {
     question: "Will it fit the tools my team already uses?",

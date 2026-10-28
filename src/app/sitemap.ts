@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: `${SITE_URL}/data-deletion`,
-      lastModified: "2026-10-20",
+      lastModified: "2026-10-28",
       changeFrequency: "monthly",
       priority: 0.5,
     },
@@ -105,12 +105,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     },
     {
-      url: `${SITE_URL}/privacy`, lastModified: "2026-10-20",
+      url: `${SITE_URL}/privacy`, lastModified: "2026-10-28",
       changeFrequency: "yearly",
       priority: 0.3,
     },
     {
-      url: `${SITE_URL}/terms`, lastModified: "2026-10-20",
+      url: `${SITE_URL}/refund-policy`, lastModified: "2026-10-28",
+      changeFrequency: "yearly", priority: 0.3,
+    },
+    {
+      url: `${SITE_URL}/terms`, lastModified: "2026-10-28",
       changeFrequency: "yearly",
       priority: 0.3,
     },

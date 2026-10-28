@@ -73,20 +73,22 @@ const softwareSchema = {
   offers: [
     {
       "@type": "Offer",
-      name: "Spark",
+      name: "Free introduction",
       price: "0",
       priceCurrency: "USD",
-      description: "Free Spark access with 40 credits.",
+      description: "400 introductory credits once per verified account, valid for 14 days.",
     },
     {
       "@type": "Offer",
-      name: "Surge",
-      price: "119",
+      name: "Starter",
+      price: "49",
       priceCurrency: "USD",
       url: `${SITE_URL}/pricing`,
       description:
-        "Surge costs $119 per month. Contact the team to confirm the monthly credit allowance.",
+        "Starter costs $49 per month and includes 1,750 credits per paid cycle.",
     },
+    { "@type": "Offer", name: "Pro", price: "199", priceCurrency: "USD", url: `${SITE_URL}/pricing`, description: "Pro costs $199 per month and includes 7,250 credits per paid cycle." },
+    { "@type": "Offer", name: "Credit top-up", price: "15", priceCurrency: "USD", url: `${SITE_URL}/pricing`, description: "550 credits per pack, valid for three calendar months." },
   ],
 };
 

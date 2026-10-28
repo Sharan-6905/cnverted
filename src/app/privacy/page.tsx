@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/privacy",
 });
 
-const LAST_UPDATED = "20 October 2026";
+const LAST_UPDATED = "28 October 2026";
 
 const RETENTION: [string, string][] = [
   ["Account and profile data", "Life of the account, then 90 days"],
@@ -113,9 +113,7 @@ export default function PrivacyPage() {
                 ]}
               />
               <p>
-                For paid Services, billing details are handled
-                by a third-party payment processor and we will not store full card or bank
-                numbers on our systems.
+                Razorpay processes checkout and payment-method details for paid Services. We do not store full card numbers, CVVs or bank authentication credentials. We store the account identifier, purchased plan or credit pack, amount and currency, relevant exchange-rate quote, provider order/payment/subscription/invoice identifiers, payment and refund status, and credit ledger entries. We use these records to map payments to the correct account, deliver credits, reconcile missed notifications, handle billing queries and prevent duplicate or fraudulent claims. Razorpay processes payment information under its own privacy notice. For payment-data queries, contact <Mail address="info@cnvrted.com" />.
               </p>
 
               <h3 className="pt-3 font-semibold text-ink">

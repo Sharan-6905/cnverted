@@ -11,7 +11,7 @@ export const metadata: Metadata = pageMetadata({
   path: "/terms",
 });
 
-const LAST_UPDATED = "20 October 2026";
+const LAST_UPDATED = "28 October 2026";
 
 export default function TermsPage() {
   return (
@@ -73,32 +73,12 @@ export default function TermsPage() {
             </Clause>
 
             <Clause n={4} title="Plans, payment and refunds">
-              <p>
-                Plans and current prices are at{" "}
-                <a href="/pricing" className="text-ink underline underline-offset-2">
-                  cnvrted.com/pricing
-                </a>
-                . Spark includes 40 free credits. Paid prices are quoted in US Dollars;
-                Surge is billed monthly in advance and Dominion is priced by agreement.
-                Paid plans are currently arranged with our team rather than through self-service
-                checkout, and payment terms are confirmed to you in writing before your first
-                invoice.
-              </p>
-              <p>
-                We may change plans and pricing, and will give existing subscribers reasonable
-                notice before a change affects them. Where we offer a trial, its length and
-                price are set out at the time and it is non-refundable.
-              </p>
-              <p>
-                <strong className="font-semibold text-ink">Refunds.</strong> Surge is
-                not refunded for a partial month. For
-                longer commitments we may refund the unused portion at our discretion, less any
-                discount you received for committing.
-              </p>
-              <p>
-                All fees exclude taxes. You are responsible for GST, VAT, sales tax or any other
-                tax your jurisdiction imposes.
-              </p>
+              <p>Current plans are listed at <a href="/pricing" className="text-ink underline underline-offset-2">cnvrted.com/pricing</a> and in the signed-in <a href="https://beta.cnvrted.com/pricing" className="text-ink underline underline-offset-2">Plans &amp; credits page</a>. Verified accounts receive 400 introductory credits once, valid for 14 days; logging in again does not grant another allocation.</p>
+              <p>Starter costs US$49 per month and includes 1,750 credits per paid cycle. Pro costs US$199 per month and includes 7,250 credits per paid cycle. Top-ups cost US$15 for each 550-credit pack, in multiples of US$15, and expire three calendar months after purchase. A top-up does not change your plan or create a subscription.</p>
+              <p>Payments are processed through Razorpay when checkout is available. USD subscriptions renew monthly under the mandate you approve, for the number of cycles disclosed at checkout (currently up to 120). Indian monthly purchases use a fresh USD-to-INR reference-rate quote and require your approval each month; they are not an automatically varying debit. The INR total, reference-rate date and quote expiry are shown before payment. Your bank may apply its own conversion fees.</p>
+              <p>Credits become available after payment confirmation. Monthly plan credits expire 30 days after the paid billing period ends. Credit use varies with the measured cost of the action; estimates are not fixed charges or a guarantee of a number of leads. Credits held for a scan that delivers zero new leads are returned to your balance. Credits are a service allowance, not cash, and cannot be transferred or redeemed for money.</p>
+              <p><strong className="font-semibold text-ink">Refunds.</strong> Subscription payments and credit top-ups are non-refundable, including unused credits, partial billing periods and change-of-mind purchases, except where a refund is required by applicable law. Cancellation does not automatically refund an earlier payment. For billing errors, duplicate charges or other queries, email <Mail address="info@cnvrted.com" /> with your payment reference; do not send card numbers or CVVs. See our <a href="/refund-policy" className="text-ink underline underline-offset-2">Refund &amp; Cancellation Policy</a>.</p>
+              <p>We will give existing subscribers reasonable notice before changes affect their plan or pricing. Any applicable taxes and the amount payable must be disclosed before you approve a purchase.</p>
             </Clause>
 
             <Clause n={5} title="Acceptable use">
@@ -256,8 +236,7 @@ export default function TermsPage() {
                 </a> for how to request deletion and any retention exceptions.
               </p>
               <p>
-                You can cancel at any time by contacting us at <Mail address="work@cnvrted.com" />
-                . Cancellation takes effect at the end of your current billing period.
+                You can stop future USD subscription renewals from Plans &amp; credits, or contact <Mail address="info@cnvrted.com" /> for help. A cancellation is complete when confirmed by the payment provider. Already granted credits retain their existing expiry. For INR monthly purchases, simply do not approve another monthly payment. Account deletion and subscription cancellation are separate requests; cancel an active mandate before closing your account.
               </p>
               <p>
                 We may suspend or end your access if you breach these Terms, if your use harms

@@ -12,3 +12,5 @@ Google references:
 - https://developers.google.com/search/docs/appearance/structured-data/profile-page
 - https://developers.google.com/search/docs/appearance/ai-features
 - https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl
+
+Organization identity references also include the user-supplied Crunchbase and Tracxn company URLs. Crunchbase search results confirm the company identity; Tracxn content could not be independently read. These are company references, not personal founder profiles or endorsements. No funding or product claims were imported.

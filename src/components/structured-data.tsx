@@ -1,6 +1,8 @@
 import { JsonLd } from "@/components/json-ld";
 import { SITE_URL, SITE_DESCRIPTION } from "@/lib/seo";
 
+import { TEAM_PROFILES, personSchema } from "@/lib/team";
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -11,18 +13,7 @@ const organizationSchema = {
   logo: `${SITE_URL}/favicon.png`,
   description: SITE_DESCRIPTION,
   founder: [
-    {
-      "@type": "Person",
-      name: "Dhruv Pradeep",
-      url: "https://www.linkedin.com/in/dhruvprad/",
-      sameAs: ["https://x.com/dhruvprad"],
-    },
-    {
-      "@type": "Person",
-      name: "Kailas S",
-      url: "https://www.linkedin.com/in/kailas-krsna-s-a7855334a/",
-      sameAs: ["https://x.com/kailaskrsna"],
-    },
+    ...TEAM_PROFILES.map(personSchema),
     {
       "@type": "Person",
       name: "Sharan S",

@@ -1,3 +1,4 @@
+import { PaperLinks } from "@/components/illustrated/paper-links";
 import Link from "next/link";
 import { IllustratedShell } from "@/components/illustrated/shell";
 import { ClosingCTA } from "@/components/illustrated/closing-cta";
@@ -93,6 +94,11 @@ export default function ProductPage() {
         <div><span className="marketing-eyebrow">One campaign, in context</span><h2 id="product-story">What changed when<br />the outreach had a reason?</h2><p>Our published customer story follows one founder’s batch of 11 targeted emails. It reports six replies and three demo bookings in that week.</p><p className="product-story-note">One reported campaign, with a different scope from the previous daily routine. Read the measurement notes alongside the results.</p><Link className="marketing-text-link" href="/case-studies/from-cold-emails-to-warm-conversations">Read the case study <span aria-hidden="true">↗</span></Link></div>
         <blockquote><p>“Why this company?”<br />“Why now?”<br />“What could I say?”</p><footer>The questions behind a useful GTM play.</footer></blockquote>
       </section>
+      <div className="design-container"><PaperLinks id="public-product-pages" eyebrow="Explore the features" title="Choose your prospecting workflow" links={[
+        { href: "https://beta.cnvrted.com/leads", title: "Sales leads and prospect research", description: "Explore target accounts, cold prospects and intent leads." },
+        { href: "https://beta.cnvrted.com/communities", title: "Business community discovery", description: "Find relevant groups by topic and review audience fit." },
+        { href: "/team", title: "Meet the team behind Cnvrted", description: "Learn about the founders and how to reach them." },
+      ]} /></div>
     </IllustratedShell>
   );
 }

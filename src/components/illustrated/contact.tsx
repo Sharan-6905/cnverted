@@ -9,6 +9,7 @@ import "./contact.css";
 
 type TeamMember = {
   name: string;
+  profile?: string;
   description: string;
   email: string;
   portrait: string;
@@ -21,6 +22,7 @@ type TeamMember = {
 const foundingTeam: readonly TeamMember[] = [
   {
     name: DHRUV_PRADEEP.name,
+    profile: "/team/dhruv-pradeep",
     description:
       "Talk GTM strategy, partnerships, and getting started with Cnvrted.",
     email: "dhruv@cnvrted.com",
@@ -31,7 +33,8 @@ const foundingTeam: readonly TeamMember[] = [
     x: "https://x.com/dhruvprad",
   },
   {
-    name: "Kailas S",
+    name: "Kailas Krsna",
+    profile: "/team/kailas-krsna",
     description: "Talk product, AI, and connecting Cnvrted to your tools.",
     email: "kailas@cnvrted.com",
     portrait: "/figma/contact/kailas.png",
@@ -121,7 +124,7 @@ export function FoundingTeam({
             </div>
             <div className="contact-founder-content">
               <div>
-                <h3>{founder.name}</h3>
+                <h3>{founder.profile ? <Link href={founder.profile}>{founder.name}</Link> : founder.name}</h3>
                 <p className="contact-founder-description">
                   {founder.description}
                 </p>

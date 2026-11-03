@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { TEAM_PROFILES } from "@/lib/team";
 import { BLOG_POSTS as blogPosts } from "@/lib/blog-posts";
 import { CAREER_ROLES } from "@/lib/careers";
 import { CASE_STUDIES } from "@/lib/case-studies";
@@ -12,14 +13,16 @@ import { SITE_URL, absoluteUrl } from "@/lib/seo";
 export default function sitemap(): MetadataRoute.Sitemap {
   const blogs = blogPosts.map((post) => ({
     url: `${SITE_URL}/blogs/${post.slug}`,
-    // Related reading was added to every article on 16 October.
-    lastModified: [post.sitemapModified ?? "2026-10-11", "2026-10-16"].sort().at(-1),
+    // Related reading: 16 October; named author profile links: 3 November.
+    lastModified: [post.sitemapModified ?? "2026-10-11", post.author.profilePath ? "2026-11-03" : "2026-10-16"].sort().at(-1),
     images: [absoluteUrl(post.cover)],
     changeFrequency: "monthly" as const,
     priority: 0.7,
   }));
 
   return [
+    { url: `${SITE_URL}/team`, lastModified: "2026-11-03" },
+    ...TEAM_PROFILES.map(person => ({ url: `${SITE_URL}/team/${person.slug}`, lastModified: "2026-11-03", images: [absoluteUrl(person.portrait)] })),
     {
       url: `${SITE_URL}/data-deletion`,
       lastModified: "2026-10-28",
@@ -34,12 +37,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/product`,
-      lastModified: "2026-10-16",
+      lastModified: "2026-11-03",
       changeFrequency: "monthly",
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/about`, lastModified: "2026-10-16",
+      url: `${SITE_URL}/about`, lastModified: "2026-11-03",
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -65,7 +68,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    { url: `${SITE_URL}/learn`, lastModified: "2026-10-16", changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/learn`, lastModified: "2026-11-03", changeFrequency: "monthly", priority: 0.6 },
     { url: `${SITE_URL}/learn/go-to-market-strategy`, lastModified: "2026-10-06", changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/learn/ideal-customer-profile`, lastModified: "2026-10-16", changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/learn/buying-signals`, lastModified: "2026-10-16", changeFrequency: "monthly", priority: 0.7 },
@@ -95,7 +98,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.6,
     })),
     {
-      url: `${SITE_URL}/contact`, lastModified: "2026-10-16",
+      url: `${SITE_URL}/contact`, lastModified: "2026-11-03",
       changeFrequency: "monthly",
       priority: 0.7,
     },

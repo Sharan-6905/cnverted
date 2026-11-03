@@ -1,3 +1,4 @@
+import { PaperLinks } from "@/components/illustrated/paper-links";
 import { PageSchema } from "@/components/page-schema";
 import { pageMetadata } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -124,6 +125,11 @@ export default function LearnPage() {
           Visit the Help Center <span aria-hidden="true">↗</span>
         </Link>
       </aside>
+      <div className="design-container"><PaperLinks id="search-starting-points" eyebrow="Practical starting points" title="Find a useful next step" links={[
+        { href: "/blogs/hiring-signals-for-sales", title: "Hiring signals for sales", description: "Interpret job postings and check what a hiring plan actually tells you." },
+        { href: "/learn/ideal-customer-profile", title: "Free ICP template", description: "Use a worksheet and examples to define the companies you can help." },
+        { href: "/blogs/qualify-prospects-before-cold-email", title: "Prospect qualification checklist", description: "Review company fit and source evidence before writing a cold email." },
+      ]} /></div>
     </IllustratedShell>
   );
 }

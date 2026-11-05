@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION, DEFAULT_SOCIAL_IMAGE } from "@/lib/seo";
 import { Raleway, Merriweather } from "next/font/google";
 import { StructuredData } from "@/components/structured-data";
+import { Clarity } from "@/components/clarity";
 import "./globals.css";
 
 const raleway = Raleway({
@@ -81,6 +82,7 @@ export default function RootLayout({
       <body className="min-h-full">
         <StructuredData />
         {children}
+        <Clarity />
       </body>
     </html>
   );

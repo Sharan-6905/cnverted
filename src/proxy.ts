@@ -22,11 +22,12 @@ function buildCsp(nonce: string, isDev: boolean) {
     // dev needs eval for the HMR runtime; production never gets it
     `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ""}`,
     `style-src 'self' 'unsafe-inline'`,
-    `img-src 'self' blob: data: https://api.producthunt.com https://cal.com https://app.cal.com`,
+    // Clarity (components/clarity.tsx) beacons to *.clarity.ms and c.bing.com
+    `img-src 'self' blob: data: https://api.producthunt.com https://cal.com https://app.cal.com https://*.clarity.ms https://c.bing.com`,
     `font-src 'self' data:`,
     // next/font self-hosts, so the third parties here are supabase, cal, and the
     // public understand-website endpoint the homepage widget calls from the browser
-    `connect-src 'self' ${supabase} https://cal.com https://app.cal.com https://api.cnvrted.com${isDev ? " ws: http://localhost:*" : ""}`,
+    `connect-src 'self' ${supabase} https://cal.com https://app.cal.com https://api.cnvrted.com https://*.clarity.ms${isDev ? " ws: http://localhost:*" : ""}`,
     // youtube-nocookie serves the homepage Short; it redirects playback
     // requests to www.youtube.com, so both origins have to be allowed
     `frame-src 'self' https://cal.com https://app.cal.com https://calendly.com https://www.youtube-nocookie.com https://www.youtube.com`,

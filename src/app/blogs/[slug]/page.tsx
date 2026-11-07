@@ -40,7 +40,7 @@ export async function generateMetadata({
       publishedTime: post.date,
       modifiedTime: post.updated,
     }),
-    authors: [{ name: post.author.name, url: post.author.linkedin }],
+    authors: [{ name: post.author.name, url: post.author.profilePath ? `${SITE_URL}${post.author.profilePath}` : post.author.linkedin }],
   };
 }
 
@@ -57,8 +57,9 @@ async function ArticleSchema({ post }: { post: (typeof BLOG_POSTS)[number] }) {
     ...(post.updated ? { dateModified: post.updated } : {}),
     author: {
       "@type": post.author.type ?? "Person",
+      ...(post.author.profilePath ? { "@id": `${SITE_URL}${post.author.profilePath}#person` } : {}),
       name: post.author.name,
-      url: post.author.linkedin,
+      url: post.author.profilePath ? `${SITE_URL}${post.author.profilePath}` : post.author.linkedin,
       sameAs: [post.author.linkedin, post.author.x],
     },
     publisher: {
@@ -119,7 +120,7 @@ export default async function BlogPostPage({
               {post.updated && <time dateTime={post.updated}>Updated {formatPostDate(post.updated)}</time>}
             </div>
             <div className="design-article-byline">
-              <p>Written by <strong>{post.author.name}</strong></p>
+              <p>Written by <strong>{post.author.profilePath ? <Link href={post.author.profilePath}>{post.author.name}</Link> : post.author.name}</strong></p>
               <div className="design-article-author-links">
                 <a href={post.author.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${post.author.name} on LinkedIn (opens in a new tab)`}>
                   <LinkedInIcon width={22} height={22} />

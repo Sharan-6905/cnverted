@@ -14,6 +14,7 @@ export type Block =
 
 export interface Author {
   name: string;
+  profilePath?: string;
   type?: "Person" | "Organization";
   /** Public profiles linked in the byline and Article schema. */
   linkedin: string;
@@ -22,6 +23,7 @@ export interface Author {
 
 export const DHRUV_PRADEEP: Author = {
   name: "Dhruv Pradeep",
+  profilePath: "/team/dhruv-pradeep",
   linkedin: "https://www.linkedin.com/in/dhruvprad/",
   x: "https://x.com/dhruvprad",
 };

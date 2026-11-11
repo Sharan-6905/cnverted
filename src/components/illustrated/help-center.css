@@ -15,7 +15,7 @@
 .help-category-field select[data-selected="true"] { padding-left: 24px; font-size: 16px; }
 .help-questions { display: grid; gap: 18px; }
 .help-question { padding: 24px; border: 1px solid #e7e5dd; border-radius: 24px; background: #fff; box-shadow: 0 1px 1px #1410080a, 0 2px 4px #1410080d; }
-.figma-site .help-question h3 { font-family: var(--font-design-sans), sans-serif; font-size: 20px; line-height: 32px; letter-spacing: 0; }
+.figma-site .help-question h3 { font-family: var(--font-editorial), sans-serif; font-size: 20px; line-height: 32px; letter-spacing: 0; }
 .help-question p { margin-top: 8px; color: #5f5f5f; font-size: 16px; line-height: 24px; }
 .help-article-link, .help-empty a { color: var(--olive); text-decoration: underline; text-underline-offset: 4px; }
 .help-article-link { display: inline-block; margin-top: 12px; }

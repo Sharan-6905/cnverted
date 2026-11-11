@@ -74,16 +74,22 @@
   --ink-window-width: min(100%, calc(74svh * 1213 / 857)); --ink-window-radius: 12px; --ink-paper: #fafafa; }
 .cg-splash-win { position: relative; will-change: transform, opacity; transform-origin: 50% 60%; visibility: hidden; }
 
+.cg-splash { --cg-fade-y: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .03) 3%, rgb(0 0 0 / .1) 6%, rgb(0 0 0 / .22) 9.5%, rgb(0 0 0 / .38) 13%, rgb(0 0 0 / .55) 16.5%, rgb(0 0 0 / .72) 20%, rgb(0 0 0 / .86) 23.5%, rgb(0 0 0 / .95) 27%, #000 30%, #000 70%, rgb(0 0 0 / .95) 73%, rgb(0 0 0 / .86) 76.5%, rgb(0 0 0 / .72) 80%, rgb(0 0 0 / .55) 83.5%, rgb(0 0 0 / .38) 87%, rgb(0 0 0 / .22) 90.5%, rgb(0 0 0 / .1) 94%, rgb(0 0 0 / .03) 97%, transparent 100%); }
 .cg-splash .ink-reveal__ink, .cg-splash .ink-reveal__still {
-  /* soft fade into the page at the top and bottom: no hard edge, no stipple */
-  /* a long eased fade (smoothstep-shaped, 30% of the height) so there's no line where it reaches full strength */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .03) 3%, rgb(0 0 0 / .1) 6%, rgb(0 0 0 / .22) 9.5%, rgb(0 0 0 / .38) 13%, rgb(0 0 0 / .55) 16.5%, rgb(0 0 0 / .72) 20%, rgb(0 0 0 / .86) 23.5%, rgb(0 0 0 / .95) 27%, #000 30%, #000 70%, rgb(0 0 0 / .95) 73%, rgb(0 0 0 / .86) 76.5%, rgb(0 0 0 / .72) 80%, rgb(0 0 0 / .55) 83.5%, rgb(0 0 0 / .38) 87%, rgb(0 0 0 / .22) 90.5%, rgb(0 0 0 / .1) 94%, rgb(0 0 0 / .03) 97%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .03) 3%, rgb(0 0 0 / .1) 6%, rgb(0 0 0 / .22) 9.5%, rgb(0 0 0 / .38) 13%, rgb(0 0 0 / .55) 16.5%, rgb(0 0 0 / .72) 20%, rgb(0 0 0 / .86) 23.5%, rgb(0 0 0 / .95) 27%, #000 30%, #000 70%, rgb(0 0 0 / .95) 73%, rgb(0 0 0 / .86) 76.5%, rgb(0 0 0 / .72) 80%, rgb(0 0 0 / .55) 83.5%, rgb(0 0 0 / .38) 87%, rgb(0 0 0 / .22) 90.5%, rgb(0 0 0 / .1) 94%, rgb(0 0 0 / .03) 97%, transparent 100%); }
-/* the splash reveals the photo, very faintly: the ink is only a mask for it */
-.cg-splash .ink-reveal__ink { opacity: .32; }
-/* without WebGL: the same photo, just as faint, fading in */
-.cg-splash .ink-reveal__still { image-rendering: auto; transition: opacity 1.2s ease; background: url("/crockedglass/splash-photo.webp") center / cover no-repeat; }
-.cg .cg-splash.is-still.is-splashed .ink-reveal__still { opacity: .32; } /* beats the component's own opacity: 1 */
+  /* a long eased fade (smoothstep-shaped, 30% of the height) at the top and bottom: no line where it reaches full strength */
+  -webkit-mask-image: var(--cg-fade-y); mask-image: var(--cg-fade-y); }
+/* the splash reveals the photo, darkened and fairly strong, still sitting behind the window */
+.cg-splash .ink-reveal__ink { opacity: .8; filter: brightness(.7) contrast(1.15) saturate(1.2); }
+/* without WebGL: the same photo, fitted the same way (nearly full height, sides fading), fading in */
+.cg-splash .ink-reveal__still { image-rendering: auto; transition: opacity 1.2s ease; filter: brightness(.7) contrast(1.15) saturate(1.2);
+  background: url("/crockedglass/splash-photo.webp") center / auto 111% no-repeat; }
+.cg .cg-splash.is-still.is-splashed .ink-reveal__still { opacity: .8; } /* beats the component's own opacity: 1 */
+/* the photo is ~148.7svh wide at that height: fade its sides when the screen is wider than that */
+.cg .cg-splash .ink-reveal__still {
+  -webkit-mask-image: var(--cg-fade-y), linear-gradient(to right, transparent calc(50% - 74svh), #000 calc(50% - 64svh), #000 calc(50% + 64svh), transparent calc(50% + 74svh));
+  -webkit-mask-composite: source-in;
+  mask-image: var(--cg-fade-y), linear-gradient(to right, transparent calc(50% - 74svh), #000 calc(50% - 64svh), #000 calc(50% + 64svh), transparent calc(50% + 74svh));
+  mask-composite: intersect; }
 .cg-splash .ink-reveal__window { box-shadow: none !important; transform: none !important; transition: none !important; }
 /* the screenshot: a 12px card like the rest of the page; its content stops mid-card at the bottom, so that edge
    dissolves into the background instead of being cut off */

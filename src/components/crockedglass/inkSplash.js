@@ -205,7 +205,7 @@ uniform vec2 uInkCell;
 uniform vec3 uBlue, uOrange, uPink;
 uniform float uGrain, uDither;
 uniform sampler2D uPhoto;
-uniform float uUsePhoto;
+uniform float uUsePhoto, uSettle;
 uniform vec2 uPhotoScale, uPhotoOffset;
 float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
 float amount(vec2 uv) { vec3 c = texture(uInk, uv).rgb; return c.r + c.g + c.b; }
@@ -213,7 +213,7 @@ void main() {
   vec3 c = max(texture(uInk, vUv).rgb, 0.0);
   float s = c.r + c.g + c.b;
   float a = 1.0 - exp(-6.0 * s);
-  if (a < 0.004) { o = vec4(0.0); return; }
+  if (a < 0.004 && uSettle * uUsePhoto < 0.004) { o = vec4(0.0); return; }
   vec3 w = c / max(s, 1e-4);
   vec3 soft = uBlue * w.r + uOrange * w.g + uPink * w.b;
   vec2 id = floor(gl_FragCoord.xy / uGrain);
@@ -224,12 +224,17 @@ void main() {
   vec3 col = mix(soft, pick, uDither * 0.5);
   col *= 1.0 + (h2 - 0.5) * 0.10 * uDither;
   /* photo mode: the ink is only a mask, the picture underneath supplies the colour */
-  col = mix(col, texture(uPhoto, vUv * uPhotoScale + uPhotoOffset).rgb, uUsePhoto);
+  vec2 puv = vUv * uPhotoScale + uPhotoOffset;
+  col = mix(col, texture(uPhoto, puv).rgb, uUsePhoto);
+  /* where the picture doesn't reach (wide screens), its edges fade out instead of clamping into streaks */
+  float inside = smoothstep(0.0, 0.07, puv.x) * smoothstep(1.0, 0.93, puv.x) * smoothstep(0.0, 0.04, puv.y) * smoothstep(1.0, 0.96, puv.y);
   float dx = amount(vUv + vec2(uInkCell.x, 0.0)) - amount(vUv - vec2(uInkCell.x, 0.0));
   float dy = amount(vUv + vec2(0.0, uInkCell.y)) - amount(vUv - vec2(0.0, uInkCell.y));
   vec3 n = normalize(vec3(-dx * 1.2, -dy * 1.2, 1.0));
   col *= 0.95 + 0.07 * dot(n, normalize(vec3(-0.4, 0.5, 0.75)));
   float aa = mix(a, step(h3 * 0.96 + 0.02, a), uDither);
+  /* once the splash has settled, fill any spots the ink never reached so the picture is whole */
+  aa = mix(aa, max(aa, uSettle) * inside, uUsePhoto);
   o = vec4(clamp(col, 0.0, 1.0) * aa, aa);
 }`;
   const F_COVER = HEAD + `
@@ -514,10 +519,13 @@ void main() {
     gl.uniform1f(u.uGrain, Math.max(1, O.grain * dpr));
     gl.uniform1f(u.uDither, clamp(O.dither, 0, 1));
     gl.uniform1f(u.uUsePhoto, photo ? 1 : 0);
+    gl.uniform1f(u.uSettle, settle);
     if (photo) {
-      /* cover-fit the picture to the section */
+      /* fit by height, cropping at most 10% of it (a full cover crop on a wide screen zooms in and reads as
+         stretched); if the picture is then narrower than the section, its sides fade out in the shader */
       const r = (W / H) / (photo.w / photo.h);
-      const sc = r > 1 ? [1, 1 / r] : [r, 1];
+      const sy = r > 1 ? Math.max(1 / r, 0.9) : 1;
+      const sc = [sy * r, sy];
       gl.uniform2f(u.uPhotoScale, sc[0], sc[1]);
       gl.uniform2f(u.uPhotoOffset, (1 - sc[0]) / 2, (1 - sc[1]) / 2);
       gl.activeTexture(gl.TEXTURE1);
@@ -579,6 +587,7 @@ void main() {
   let lastT = 0;
   let quietSince = 0;
   let phase = 'closed';                   /* closed, waiting, opening, open, closing */
+  let settle = 0;                         /* photo mode: 0 → 1 after the splash fills, to close any gaps */
   const stir = [];
   function wake() {
     if (running || !alive || !gl || !prog) return;
@@ -594,6 +603,8 @@ void main() {
     if (!gl || !vel) { running = false; return; }
     clock += dt;
     schedule(dt);
+    if (phase === 'open') settle = Math.min(1, settle + dt / 1.2);
+    else if (phase === 'closing' || phase === 'closed') settle = Math.max(0, settle - dt / 0.3);
     if (phase === 'opening') {
       if (jetsOn > 0) jets(dt, jetsOn);
       pour(dt);
@@ -608,7 +619,7 @@ void main() {
     if (phase === 'opening') readCover();
     if (phase === 'closed' || phase === 'waiting') { running = false; return; }
     /* settled and left alone, the frames stop */
-    if (phase === 'open' && now - quietSince > 3800) { running = false; return; }
+    if (phase === 'open' && settle >= 1 && now - quietSince > 3800) { running = false; return; }
     raf = requestAnimationFrame(frame);
   }
 

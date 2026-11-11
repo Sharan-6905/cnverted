@@ -1,0 +1,208 @@
+/* Cnvrted header
+   Font: add to <head> if you're not using next/font:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
+*/
+
+.cv-header {
+  /* brand tokens (from cnvrted.com) */
+  --cv-ink: #0c0c0c;
+  --cv-ink-soft: #3f3f46;
+  --cv-blue: #4f65f5;
+  --cv-blue-hover: #4053d6;
+  --cv-btn-shadow: #10111a;
+  --cv-cream: #fffefb;
+
+  --cv-pill-w: 720px; /* width of the condensed glass bar */
+  --cv-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --cv-dur: 340ms;
+  /* how far each half travels inward to meet the pill */
+  --cv-inset: calc(0.5 * (100cqw - min(var(--cv-pill-w), 100cqw - 2rem)));
+
+  container-type: inline-size;
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  font-family: var(--font-bricolage, "Bricolage Grotesque"), system-ui, sans-serif;
+  color: var(--cv-ink);
+  transition: transform var(--cv-dur) var(--cv-ease);
+}
+.cv-header[data-scrolled="true"] { transform: translateY(12px); }
+
+/* glass panel that fades in behind the condensed nav —
+   same family as the floating "Orka at work" cards: translucent white, hairline light border, backdrop blur */
+.cv-pill {
+  position: absolute;
+  inset-block: 0;
+  left: 50%;
+  translate: -50% 0;
+  width: min(var(--cv-pill-w), 100% - 2rem);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.28) 100%);
+  backdrop-filter: blur(18px) saturate(1.8);
+  -webkit-backdrop-filter: blur(18px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.18),
+    0 10px 30px -10px rgba(16, 17, 26, 0.18),
+    0 1px 3px rgba(16, 17, 26, 0.06);
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity var(--cv-dur) var(--cv-ease);
+}
+/* soft specular sheen across the top edge */
+.cv-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 50% 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+  pointer-events: none;
+}
+.cv-header[data-scrolled="true"] .cv-pill { opacity: 1; }
+
+.cv-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  height: 72px;
+  padding-inline: 20px;
+}
+.cv-group {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: translate var(--cv-dur) var(--cv-ease);
+}
+.cv-left { gap: 40px; }
+.cv-right { gap: 32px; }
+/* small inset so content sits off the glass edge */
+.cv-header[data-scrolled="true"] .cv-left  { translate: calc(var(--cv-inset) + 4px) 0; }
+.cv-header[data-scrolled="true"] .cv-right { translate: calc(-1 * var(--cv-inset) - 4px) 0; }
+
+/* logo */
+.cv-brand { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--cv-ink); }
+.cv-brand-mark { width: 44px; height: auto; display: block; }
+.cv-brand-word {
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 96;
+}
+
+/* links */
+.cv-links { display: flex; align-items: center; gap: 28px; }
+.cv-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  background: none;
+  border: 0;
+  font: inherit;
+  font-size: 16px;
+  font-weight: 450;
+  color: var(--cv-ink);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 150ms ease;
+}
+.cv-link:hover, .cv-link:focus-visible { color: var(--cv-blue); outline: none; }
+.cv-trigger svg { color: var(--cv-blue); transition: transform 200ms ease; }
+.cv-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+/* Get Started — cnvrted's blue pill with the offset dark shadow */
+.cv-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 29px;
+  border-radius: 100px;
+  background: var(--cv-blue);
+  color: #fff;
+  font-size: 16.8px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: -2px 3px 0 0 var(--cv-btn-shadow), inset 2px 4px 9px 0 rgba(255, 255, 255, 0.25);
+  transition: transform 200ms ease, background-color 200ms ease, box-shadow 200ms ease;
+}
+/* paper grain overlay — same texture file the live site uses */
+.cv-cta::before {
+  content: "";
+  position: absolute;
+  inset: -60px -30px;
+  z-index: -1;
+  background: url("/figma/redesign/paper-texture.webp") center / cover;
+  mix-blend-mode: soft-light;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.cv-cta:hover {
+  background-color: var(--cv-blue-hover);
+  transform: translateY(-2px);
+  box-shadow: -2px 5px 0 0 var(--cv-btn-shadow), inset 2px 4px 9px 0 rgba(255, 255, 255, 0.25);
+}
+.cv-cta:active { transform: translateY(0); box-shadow: -1px 1px 0 0 var(--cv-btn-shadow); }
+.cv-cta:focus-visible { outline: 2px solid var(--cv-blue); outline-offset: 3px; }
+
+/* Resources dropdown */
+.cv-dropdown { position: relative; }
+.cv-menu {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: -12px;
+  min-width: 200px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: linear-gradient(180deg, rgba(255, 254, 251, 0.82), rgba(255, 254, 251, 0.66));
+  backdrop-filter: blur(18px) saturate(1.8);
+  -webkit-backdrop-filter: blur(18px) saturate(1.8);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 12px 32px -10px rgba(16, 17, 26, 0.2);
+  opacity: 0;
+  translate: 0 -4px;
+  pointer-events: none;
+  transition: opacity 160ms ease, translate 160ms ease;
+}
+.cv-menu[data-open="true"] { opacity: 1; translate: 0 0; pointer-events: auto; }
+.cv-menu-item {
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-size: 15px;
+  color: var(--cv-ink);
+  text-decoration: none;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+.cv-menu-item:hover, .cv-menu-item:focus-visible { background: rgba(79, 101, 245, 0.08); color: var(--cv-blue); outline: none; }
+
+@media (min-width: 768px) {
+  .cv-row { padding-inline: 32px; }
+}
+@media (max-width: 767px) {
+  .cv-left { gap: 20px; }
+  .cv-right { gap: 16px; }
+  .cv-links { gap: 18px; }
+  .cv-hide-sm { display: none; }
+  .cv-brand-mark { width: 36px; }
+  .cv-brand-word { font-size: 21px; }
+  .cv-cta { height: 38px; padding: 0 18px; font-size: 15px; }
+}
+@media (max-width: 479px) {
+  .cv-brand-word { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cv-header, .cv-pill, .cv-group, .cv-menu, .cv-cta { transition: none; }
+}

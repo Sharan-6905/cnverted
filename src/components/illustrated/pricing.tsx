@@ -33,7 +33,7 @@ const plans = [
       height: 1188,
     },
     cta: "View plan",
-    href: "https://beta.cnvrted.com/pricing",
+    href: "https://beta.cnvrted.com/?view=pricing",
   },
   {
     id: "pro",
@@ -47,7 +47,7 @@ const plans = [
       height: 1199,
     },
     cta: "View plan",
-    href: "https://beta.cnvrted.com/pricing",
+    href: "https://beta.cnvrted.com/?view=pricing",
   },
 ] as const;
 

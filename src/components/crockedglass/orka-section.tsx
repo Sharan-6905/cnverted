@@ -11,7 +11,7 @@ const TYPES: FragType[] = ["leads", "email", "social", "lead", "community", "mee
 const SIZES: Record<FragType, [number, number]> = { leads: [316, 124], email: [258, 104], social: [268, 100], lead: [328, 82], community: [356, 96], meeting: [294, 90], enrich: [246, 82] };
 // centre content (face, heading, subtitle, chips + chat box) in a 1440-wide section, padded by 24 px
 const BLOCKED: [number, number, number, number][] = [[597, 97, 246, 174], [516, 233, 408, 141], [456, 336, 528, 96], [296, 436, 848, 244]];
-const ZOOM = 1.2, H = 777;
+const ZOOM = 1.2, BASE_H = 777; // BLOCKED is drawn for a 1440 x 777 section; it's re-centred for the real size
 
 const CHECK = (c = "#b8f2cf") => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12l5 5 9-10" /></svg>;
 
@@ -127,9 +127,10 @@ export function OrkaSection({ appHref }: { appHref: string }) {
 
   const place = useCallback((type: FragType, cur: Partial<Record<FragType, Item>>) => {
     const W = sec.current?.clientWidth ?? 1440;
-    const dx = (W - 1440) / 2;
+    const H = sec.current?.clientHeight ?? BASE_H;
+    const dx = (W - 1440) / 2, dy = (H - BASE_H) / 2;
     const [w, h] = SIZES[type];
-    const rects = BLOCKED.map(([x, y, rw, rh]) => [x + dx, y, rw, rh]);
+    const rects = BLOCKED.map(([x, y, rw, rh]) => [x + dx, y + dy, rw, rh]);
     TYPES.forEach((t) => { const it = cur[t]; if (it?.on) rects.push([it.x - 20, it.y - 20, SIZES[t][0] + 40, SIZES[t][1] + 40]); });
     for (let n = 0; n < 60; n++) {
       const x = 16 + Math.random() * (W - 32 - w), y = 16 + Math.random() * (H - 32 - h);

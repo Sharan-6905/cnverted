@@ -27,3 +27,24 @@ export function usePatch<T extends object>(initial: T) {
 export function prefersReducedMotion() {
   return typeof window !== "undefined" && !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 }
+
+/** Follows `target` with an exponential ease each frame, so scroll-driven progress glides instead of stepping
+ *  with each wheel notch. Snaps straight there with reduced motion. */
+export function useEased(target: number, rate = 0.12) {
+  const [v, setV] = useState(target);
+  const cur = useRef(target);
+  useEffect(() => {
+    if (prefersReducedMotion()) { cur.current = target; setV(target); return; }
+    let raf = 0, last = 0;
+    const tick = (now: number) => {
+      const dt = last ? Math.min(64, now - last) : 16; last = now;
+      cur.current += (target - cur.current) * (1 - Math.pow(1 - rate, dt / 16.7));
+      if (Math.abs(target - cur.current) < 0.0008) cur.current = target;
+      setV(cur.current);
+      if (cur.current !== target) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, rate]);
+  return v;
+}

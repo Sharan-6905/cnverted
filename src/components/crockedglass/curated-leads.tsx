@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ScaleBox } from "./scale-box";
+import { useEased } from "./hooks";
 
 /** Extra scroll distance the section stays pinned for while the story plays from 0 to 1. */
 const PIN = 1700;
@@ -30,7 +31,8 @@ const clamp = (v: number, a: number, b: number) => Math.max(a, Math.min(b, v));
 export function CuratedLeads() {
   const runway = useRef<HTMLDivElement>(null);
   const sticky = useRef<HTMLDivElement>(null);
-  const [P, setP] = useState(0);
+  const [rawP, setP] = useState(0);
+  const P = useEased(rawP, 0.12);
   const [top, setTop] = useState(0);
   const [h, setH] = useState(0);
   const [ui, setUi] = useState({ hover: -1, sel: -1, sent: false, cal: true });

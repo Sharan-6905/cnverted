@@ -2,10 +2,13 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { OrkaPeek } from "./Orka";
+import { useEased } from "./hooks";
 
 const PIN = 700;
 const LEAD = "You can’t build ";
 const REST = "a business on crossed fingers.";
+/** grey (#cecece) to black as a letter's share of the fill goes 0 → 1, so letters fade in rather than flip */
+const ink = (k: number) => { const g = Math.round(206 * (1 - Math.max(0, Math.min(1, k)))); return `rgb(${g},${g},${g})`; };
 
 /** "You can't build a business on crossed fingers." holds still in the middle of the screen while you scroll,
  *  and the grey half fills in black letter by letter; then the page moves on. */
@@ -40,7 +43,8 @@ export function CrossedFingers() {
     return () => { window.removeEventListener("scroll", read); window.removeEventListener("resize", read); };
   }, [top]);
 
-  const filled = p * REST.length;
+  const eased = useEased(p, 0.14);
+  const filled = eased * REST.length;
   return (
     <section ref={runway} className="cg-crossed" aria-labelledby="cg-crossed-title" style={{ height: h ? h + PIN : undefined }}>
       <div ref={sticky} className="cg-crossed-sticky cg-wrap" style={{ top }}>
@@ -50,7 +54,7 @@ export function CrossedFingers() {
         <h2 id="cg-crossed-title" aria-label={LEAD + REST}>
           <span aria-hidden="true">{LEAD}</span>
           {REST.split("").map((ch, i) => (
-            <span key={i} aria-hidden="true" className="cg-fill-ch" style={{ color: i < filled ? "#000" : "#cecece" }}>{ch}</span>
+            <span key={i} aria-hidden="true" className="cg-fill-ch" style={{ color: ink(filled - i) }}>{ch}</span>
           ))}
         </h2>
       </div>

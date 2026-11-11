@@ -67,13 +67,18 @@
 .cg-hero h1 { margin: 0; max-width: 821px; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: normal; color: #000; text-wrap: balance; }
 .cg-hero p { margin-top: 24px; max-width: 532px; font-size: 16px; line-height: 1.5; color: #7c7c7c; }
 .cg-hero .cg-btn { margin-top: 32px; }
-.cg-splash { --ink-window-width: 100%; --ink-window-radius: 14px; --ink-paper: #fafafa; padding: 150px 24px 150px !important; }
+/* one screen, pinned; the window is sized to fit inside it (the screenshot is 1263 x 907) */
+.cg-splash-run { position: relative; }
+.cg-splash-sticky { position: sticky; top: 0; height: 100svh; }
+.cg-splash { height: 100svh; min-height: 0 !important; padding: 12svh 24px !important;
+  --ink-window-width: min(100%, calc(76svh * 1263 / 907)); --ink-window-radius: 14px; --ink-paper: #fafafa; }
+.cg-splash-win { will-change: transform, opacity; transform-origin: 50% 60%; visibility: hidden; }
 /* the ink fades in and out through a stipple, top and bottom, like the design's backdrop: no hard edge against the page */
 .cg-splash .ink-reveal__ink, .cg-splash .ink-reveal__still {
   -webkit-mask: url("/crockedglass/splash-edge-top.png") top / 100% 130px no-repeat, linear-gradient(#000, #000) center / 100% calc(100% - 258px) no-repeat, url("/crockedglass/splash-edge-bottom.png") bottom / 100% 130px no-repeat;
   mask: url("/crockedglass/splash-edge-top.png") top / 100% 130px no-repeat, linear-gradient(#000, #000) center / 100% calc(100% - 258px) no-repeat, url("/crockedglass/splash-edge-bottom.png") bottom / 100% 130px no-repeat; }
-.cg-splash .ink-reveal__window { box-shadow: none !important; }
-.cg-splash-img { display: block; width: 100%; height: auto; border-radius: 14px; }
+.cg-splash .ink-reveal__window { box-shadow: none !important; transform: none !important; transition: none !important; }
+.cg-splash-img { display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 40px 90px -40px rgb(24 22 60 / .45), 0 2px 6px rgb(24 22 60 / .06); }
 
 /* ---------- open web → booked meetings ---------- */
 .cg-feat { margin-top: 98px; }
@@ -169,11 +174,11 @@
 .cg-crossed-sticky { position: sticky; padding-top: 90px; }
 .cg-crossed-line { display: block; width: min(342px, 80%); height: 5px; margin: 0 auto; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.18), rgba(0,0,0,0)); }
 .cg-crossed h2 { margin: 13px auto 0; width: min(823px, 100%); font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: normal; text-align: center; color: #000; text-wrap: balance; }
-.cg-fill-ch { transition: color .25s ease; }
+.cg-fill-ch { }
 
 /* ---------- Orka ---------- */
-.cg-orka { position: relative; z-index: 1; height: 777px; margin-top: 64px; color: #fff; }
-.cg-orka-bg { position: absolute; left: 0; right: 0; top: -100px; height: 977px; width: 100%; object-fit: cover; pointer-events: none; }
+.cg-orka { position: relative; z-index: 1; height: max(100svh, 720px); margin-top: 180px; color: #fff; } /* clear of the crossed-fingers line: the backdrop's soft edge reaches 100px above */
+.cg-orka-bg { position: absolute; left: 0; right: 0; top: -100px; height: calc(100% + 200px); width: 100%; object-fit: cover; pointer-events: none; }
 .cg-frags { position: absolute; inset: 0; pointer-events: none; transition: opacity .5s ease-in-out; }
 .cg-orka.is-focused .cg-frags { opacity: 0; }
 .cg-frag { position: absolute; zoom: 1.2; white-space: nowrap; padding: 10px 12px; color: #fff; font-size: 12px; line-height: 1.35; border-radius: 12px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.24); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
@@ -231,7 +236,7 @@
 .cg-asksend { width: 36px; height: 36px; border: 0; border-radius: 10px; background: #9cc9ad; display: flex; align-items: center; justify-content: center; cursor: pointer; }
 
 /* ---------- case studies ---------- */
-.cg-cases { margin-top: 128px; display: flex; flex-direction: column; gap: 42px; }
+.cg-cases { margin-top: 200px; display: flex; flex-direction: column; gap: 42px; }
 .cg-cases-row { display: flex; gap: 31px; justify-content: center; }
 .cg-case-cell { flex: 1 1 0; max-width: 530px; }
 .cg-case { position: relative; width: 530px; height: 434px; }
@@ -428,7 +433,7 @@
 }
 @media (max-width: 900px) {
   .cg-hero { padding-top: 140px; }
-  .cg-splash { padding: 110px 12px 110px !important; }
+  .cg-splash { padding: 14svh 12px !important; }
   .cg-hero h1, .cg-crossed h2 { font-size: 44px; }
   .cg-h2, .cg-head--center .cg-h2 { font-size: 44px; line-height: 1.15; white-space: normal; }
   .cg-orka-hello h2 { font-size: 44px; }
@@ -437,7 +442,7 @@
   .cg-grid2 { grid-template-columns: 1fr; }
   .cg-ft-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cg-ft-top { flex-direction: column; }
-  .cg-orka { height: auto; min-height: 777px; padding: 80px 0; }
+  .cg-orka { height: auto; min-height: 100svh; padding: 80px 0; }
   .cg-orka-mid { position: relative; left: auto; top: auto; transform: none; margin: 0 auto; }
   .cg-frags { display: none; }
 }

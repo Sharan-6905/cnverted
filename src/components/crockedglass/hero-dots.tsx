@@ -45,7 +45,7 @@ export function HeroDots() {
     // the pointer anywhere over the hero (the dots sit behind the copy, so listen on the section)
     const host = el.parentElement ?? el;
     const move = (e: PointerEvent) => { const r = el.getBoundingClientRect(); pointerAt = performance.now(); glow?.set({ x: e.clientX - r.left, y: e.clientY - r.top }); };
-    const leave = () => { glow?.set(null); };
+    const leave = () => { glow?.set(null); pointerAt = 0; };
     host.addEventListener("pointermove", move);
     host.addEventListener("pointerleave", leave);
 
@@ -58,11 +58,11 @@ export function HeroDots() {
         const t = (performance.now() - t0) / 1000;
         glow.set({ x: W * (0.74 + 0.18 * Math.sin(t * 0.35)), y: H * (0.45 + 0.25 * Math.sin(t * 0.7)) });
       }
-      wander = window.setTimeout(step, 60);
+      wander = requestAnimationFrame(step); // every frame, so the idle splash glides
     };
-    if (!reduce) step();
+    if (!reduce) wander = requestAnimationFrame(step);
 
-    return () => { ro.disconnect(); io.disconnect(); clearTimeout(wander); glow?.stop(); host.removeEventListener("pointermove", move); host.removeEventListener("pointerleave", leave); t0 = 0; };
+    return () => { ro.disconnect(); io.disconnect(); cancelAnimationFrame(wander); glow?.stop(); host.removeEventListener("pointermove", move); host.removeEventListener("pointerleave", leave); t0 = 0; };
   }, []);
 
   return <div ref={box} className="cg-hero-dots" aria-hidden="true"><canvas ref={cvRef} /></div>;

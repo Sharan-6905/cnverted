@@ -15,6 +15,7 @@ import { CgFooter } from "./site-footer";
 import { ScaleBox } from "./scale-box";
 import { UserStories } from "./user-stories";
 import { HeroGlow } from "./hero-glow";
+import { PageDots } from "./page-dots";
 import { ClientPile, type PileClient } from "./client-pile";
 import { CrossedFingers } from "./crossed-fingers";
 import { DEMO_PATH } from "@/lib/booking";
@@ -79,6 +80,7 @@ function CaseCard({ k }: { k: (typeof CASES)[number] }) {
 export function CrockedglassHome() {
   return (
     <div className={`cg ${bricolage.variable} ${inter.variable} ${mono.variable}`}>
+      <PageDots />
       <Header />
       <main id="main-content">
         {/* hero: soft colour fields on the right, clean white behind the copy */}

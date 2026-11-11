@@ -23,11 +23,12 @@ const smooth = (a: number, b: number, v: number) => { const t = Math.max(0, Math
 export function SplashWindow({ children }: { children: ReactNode }) {
   const run = useRef<HTMLDivElement>(null);
   const win = useRef<HTMLDivElement>(null);
+  const glass = useRef<HTMLDivElement>(null);
   const ink = useRef<Handle>(null);
 
   useEffect(() => {
-    const el = run.current, w = win.current;
-    if (!el || !w) return;
+    const el = run.current, w = win.current, g = glass.current;
+    if (!el || !w || !g) return;
     const reduce = !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     let target = 0, shown = 0, raf = 0, played = false;
     const paint = (p: number) => {
@@ -35,6 +36,11 @@ export function SplashWindow({ children }: { children: ReactNode }) {
       w.style.opacity = o.toFixed(3);
       w.style.transform = `translateY(${((1 - z) * 60).toFixed(1)}px) scale(${(1.1 - 0.1 * z).toFixed(4)})`;
       w.style.visibility = o < 0.002 ? "hidden" : "visible";
+      // the glass frosts over the ink a moment before the window lands on it
+      const go = smooth(0.12, 0.45, p);
+      g.style.opacity = go.toFixed(3);
+      g.style.transform = `scale(${(1.04 - 0.04 * go).toFixed(4)})`;
+      g.style.visibility = go < 0.002 ? "hidden" : "visible";
     };
     const read = () => {
       const r = el.getBoundingClientRect(), vh = window.innerHeight;
@@ -69,6 +75,10 @@ export function SplashWindow({ children }: { children: ReactNode }) {
           // the engine's three inks (named blue / orange / pink) carry this palette: a deep indigo base, with
           // violet and soft lavender running through it
           colors={PALETTE} orange={0.42} pink={0.3}>
+          {/* frosted glass behind the window, much larger than it: the ink shows round the edges and softly through
+              it, but no longer competes with the screenshot. A sibling of the window, not inside it, because the
+              window's fade (opacity) would stop anything inside it from blurring what's behind. */}
+          <div ref={glass} className="cg-splash-glass" aria-hidden="true" />
           <div ref={win} className="cg-splash-win">{children}</div>
         </InkSplashReveal>
       </div>

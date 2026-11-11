@@ -84,7 +84,7 @@
   -webkit-mask-image: var(--cg-fade-y); mask-image: var(--cg-fade-y); }
 /* every copy is scaled up the same amount, so they line up and the blurred ones' soft edges sit off-screen */
 .cg-glass-photo { position: absolute; inset: 0; transform: scale(1.12);
-  background: url("/crockedglass/splash-photo.webp") center / cover no-repeat; }
+  background: url("/crockedglass/splash-street.webp") center / cover no-repeat; }
 /* the blur steps: each blurred once (static, so the browser caches it); only their opacity animates */
 .cg-glass-blur { opacity: 1; will-change: opacity; }
 .cg-glass-blur--0 { filter: blur(8px); }

@@ -59,6 +59,8 @@ export default function Header({ threshold = 8 }: { threshold?: number }) {
 
   return (
     <header className="cv-header" data-scrolled={scrolled}>
+      {/* every page using this header has <main id="main-content"> */}
+      <a href="#main-content" className="cv-skip">Skip to content</a>
       <div className="cv-pill" aria-hidden="true" />
       <nav className="cv-row" aria-label="Main">
         <div className="cv-group cv-left">
@@ -84,6 +86,8 @@ export default function Header({ threshold = 8 }: { threshold?: number }) {
                 <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
               </button>
               <div id="cv-resources" className="cv-menu" role="menu" data-open={open}>
+                {/* Pricing sits in the bar on wider screens; on phones the bar hides it, so it lives here */}
+                <a href="/pricing" role="menuitem" className="cv-menu-item cv-show-sm" onClick={() => setOpen(false)}>Pricing</a>
                 {RESOURCES.map((r) => (
                   <a key={r.href} href={r.href} role="menuitem" className="cv-menu-item" onClick={() => setOpen(false)}>
                     {r.label}

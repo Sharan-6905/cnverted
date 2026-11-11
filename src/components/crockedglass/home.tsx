@@ -1,4 +1,5 @@
-import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
+import { bricolage } from "./fonts";
 import Header from "./Header";
 import { SplashWindow } from "./splash-window";
 import { HeroQuote } from "./hero-quote";
@@ -22,7 +23,6 @@ import { DEMO_PATH } from "@/lib/booking";
 import "./home.css";
 
 
-const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage", weight: ["400", "500"] });
 const inter = Inter({ subsets: ["latin"], variable: "--font-cg-inter", weight: ["400", "500", "600"] });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-cg-mono", weight: ["500", "600"], preload: false });
 

@@ -15,7 +15,7 @@
 .product-flow li { display: flex; gap: 20px; align-items: flex-start; padding-bottom: 30px; position: relative; }
 .product-flow li:not(:last-child)::after { content: ""; position: absolute; top: 34px; bottom: 0; left: 16px; border-left: 1px solid #dfdfd5; }
 .product-flow-number { display: grid; place-items: center; width: 34px; height: 34px; flex-shrink: 0; border: 1px solid #dcdfcf; border-radius: 50%; color: #6d7554; background: #f9faf4; font-size: 11px; }
-.figma-site .product-flow h2 { font-family: var(--font-design-sans), sans-serif; font-size: 17px; line-height: 1.5; font-weight: 500; letter-spacing: 0; margin: 2px 0 4px; }
+.figma-site .product-flow h2 { font-family: var(--font-editorial), sans-serif; font-size: 17px; line-height: 1.5; font-weight: 500; letter-spacing: 0; margin: 2px 0 4px; }
 .product-flow li p { font-size: 14px; line-height: 1.7; color: #737367; }
 .product-flow-footnote { display: flex; align-items: center; gap: 16px; border-top: 1px solid #ece9df; padding-top: 18px; font-size: 13px; line-height: 1.7; color: #717364; }
 .product-flow-footnote > span { color: #7b805f; font-size: 24px; }

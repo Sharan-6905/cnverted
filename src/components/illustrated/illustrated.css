@@ -1,4 +1,6 @@
 .figma-site {
+  /* headings and display text: the homepage's Bricolage Grotesque (shell.tsx sets --font-bricolage) */
+  --font-editorial: var(--font-bricolage), "Bricolage Grotesque";
   --olive: #6a7a1d;
   --olive-light: #f3f9d3;
   --header-clearance: 123px;
@@ -16,9 +18,6 @@
 .figma-site h3 {
   font-family: var(--font-editorial), Georgia, serif;
   font-weight: 400;
-  font-variation-settings:
-    "SOFT" 0,
-    "WONK" 1;
   line-height: 1.05;
   letter-spacing: -0.025em;
 }
@@ -702,7 +701,7 @@
   color: #5f5f5f;
 }
 .design-blog-card h3 {
-  font-family: var(--font-design-sans), sans-serif;
+  font-family: var(--font-editorial), sans-serif;
   font-size: 20px;
   font-weight: 500;
   line-height: 1.2;

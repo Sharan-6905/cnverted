@@ -61,8 +61,28 @@
 
 /* ---------- hero ---------- */
 .cg-hero { position: relative; z-index: 2; padding: 220px 0 120px; }
-.cg-hero-dots { position: absolute; inset: 0; pointer-events: none; }
-.cg-hero-dots canvas { display: block; width: 100%; height: 100%; }
+/* hero glow: blurred colour fields on the right; the mask keeps the copy column (left) and the bottom edge clear */
+.cg-hero-glow { position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse 55% 75% at 82% 42%, #000 35%, transparent 100%);
+  mask-image: radial-gradient(ellipse 55% 75% at 82% 42%, #000 35%, transparent 100%); }
+/* each <i> leans towards the pointer (--gx/--gy, set by hero-glow.tsx) by its own --d; its <span> does the drift */
+.cg-hero-glow { --gx: 0; --gy: 0; }
+.cg-hero-glow i { position: absolute; --d: 40px;
+  transform: translate(calc(var(--gx) * var(--d)), calc(var(--gy) * var(--d)));
+  transition: transform 1.4s cubic-bezier(.16, 1, .3, 1); }
+.cg-hero-glow span { display: block; width: 100%; height: 100%; border-radius: 50%; filter: blur(70px); will-change: transform; animation: cgGlowDrift 22s ease-in-out infinite alternate; }
+/* brand accent, then the ink splash's pink and orange (InkSplashReveal.css) */
+.cg-hero-glow .cg-hero-glow-a { --d: 56px; width: 540px; height: 440px; right: 4%; top: 6%; }
+.cg-hero-glow-a span { background: rgb(79 101 245 / .34); }
+.cg-hero-glow .cg-hero-glow-b { --d: 32px; width: 420px; height: 360px; right: 26%; top: 34%; }
+.cg-hero-glow-b span { background: rgb(220 159 178 / .38); animation-duration: 27s; animation-delay: -9s; }
+.cg-hero-glow .cg-hero-glow-c { --d: 80px; width: 380px; height: 320px; right: 0; top: 46%; }
+.cg-hero-glow-c span { background: rgb(255 154 94 / .30); animation-duration: 31s; animation-delay: -17s; }
+@keyframes cgGlowDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-40px, 30px) scale(1.08); }
+  100% { transform: translate(30px, -25px) scale(.95); }
+}
 .cg-hero-copy { position: relative; }
 .cg-hero h1 { margin: 0; max-width: 821px; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: normal; color: #000; text-wrap: balance; }
 .cg-hero p { margin-top: 24px; max-width: 532px; font-size: 16px; line-height: 1.5; color: #7c7c7c; }
@@ -454,6 +474,7 @@
 }
 @media (max-width: 900px) {
   .cg-hero { padding-top: 140px; }
+  .cg-hero-glow { opacity: .45; -webkit-mask-image: radial-gradient(ellipse 80% 45% at 80% 15%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 45% at 80% 15%, #000 30%, transparent 100%); }
   .cg-splash { padding: 14svh 12px; }
   .cg-hero h1, .cg-crossed h2 { font-size: 44px; }
   .cg-h2, .cg-head--center .cg-h2 { font-size: 44px; line-height: 1.15; white-space: normal; }
@@ -483,6 +504,7 @@
 @media (prefers-reduced-motion: reduce) {
   .cg-frag, .cg-frag.out, .cg-swap-out, .cg-swap-in, .cg-bar-fill, .cg-type, .cg-fblink, .cg-wiggle, .cg-sweep, .cg-fpop, .cg-ring, .cg-ping, .cg-slot-pick, .cg-draw, .cg-dot-on {
     animation-duration: .01s !important; animation-iteration-count: 1 !important; animation-delay: 0s !important; }
-  .cg-us-ping, .cg-cl-track, .cg-tree img, .cg-spin, .cg-st-spin, .cg-pulse, .cg-chdot, .cg-caret { animation: none; }
+  .cg-hero-glow span, .cg-us-ping, .cg-cl-track, .cg-tree img, .cg-spin, .cg-st-spin, .cg-pulse, .cg-chdot, .cg-caret { animation: none; }
+  .cg-hero-glow i { transition: none; }
   .cg-lw-row, .cg-wf-n, .cg-ag-cursor, .cg-us-bub, .cg-fill-ch { transition: none; }
 }

@@ -14,7 +14,7 @@ import { CgFaq } from "./faq";
 import { CgFooter } from "./site-footer";
 import { ScaleBox } from "./scale-box";
 import { UserStories } from "./user-stories";
-import { HeroDots } from "./hero-dots";
+import { HeroGlow } from "./hero-glow";
 import { CrossedFingers } from "./crossed-fingers";
 import { DEMO_PATH } from "@/lib/booking";
 import "./home.css";
@@ -81,11 +81,11 @@ export function CrockedglassHome() {
     <div className={`cg ${bricolage.variable} ${inter.variable} ${mono.variable}`}>
       <Header />
       <main id="main-content">
-        {/* hero: the copy sits over the User Stories dot field */}
+        {/* hero: soft colour fields on the right, clean white behind the copy */}
         <section className="cg-hero" aria-labelledby="cg-hero-title">
-          <HeroDots />
+          <HeroGlow />
           <div className="cg-wrap cg-hero-copy">
-            <h1 id="cg-hero-title">Your next client is already looking for an agency like yours.</h1>
+            <h1 id="cg-hero-title">Find 40+ hot leads on your first day with Cnvrted.</h1>
             <p>Cnvrted finds brands that are launching, rebranding and hiring for growth, and tells you why each one needs a creative partner right now.</p>
             <a className="cg-btn cg-btn--sm" href={DEMO_PATH}>Book Call</a>
           </div>

@@ -3,9 +3,9 @@
 import { useEffect, useRef, type ComponentType, type ReactNode, type RefAttributes } from "react";
 import InkSplashRevealJs from "./InkSplashReveal";
 
-type Handle = { play(): void };
+type Handle = { play(): void; reverse(): void };
 // InkSplashReveal is plain JS; give it the props used here.
-const InkSplashReveal = InkSplashRevealJs as unknown as ComponentType<{ children: ReactNode; className?: string; threshold?: number; zoomFrom?: number } & RefAttributes<Handle>>;
+const InkSplashReveal = InkSplashRevealJs as unknown as ComponentType<{ children: ReactNode; className?: string; threshold?: number; zoomFrom?: number; dither?: number; grain?: number; close?: number } & RefAttributes<Handle>>;
 
 /** Extra scroll the section stays pinned for while the window comes in. */
 const PIN = 700;
@@ -15,8 +15,8 @@ const smooth = (a: number, b: number, v: number) => { const t = Math.max(0, Math
 /**
  * The app window, one screen tall and pinned. Nothing shows at first: as you scroll in (from the second wheel
  * notch or so), ink splashes across the screen, then the window rises out of it and settles, all tied to the
- * scroll, and the section lets go. Progress is eased toward the scroll position each frame so it glides
- * instead of stepping with the wheel.
+ * scroll, and the section lets go. Scrolling back up runs it all in reverse. The ink is drawn smooth (no
+ * stipple). Progress is eased toward the scroll position each frame so it glides instead of stepping with the wheel.
  */
 export function SplashWindow({ children }: { children: ReactNode }) {
   const run = useRef<HTMLDivElement>(null);
@@ -38,7 +38,9 @@ export function SplashWindow({ children }: { children: ReactNode }) {
       const r = el.getBoundingClientRect(), vh = window.innerHeight;
       // starts while the section is still coming up the screen (top at 60% of it), ends as the pin releases
       target = Math.max(0, Math.min(1, (vh * 0.6 - r.top) / (vh * 0.6 + PIN)));
+      // ink runs forward as you scroll in, and draws back in if you scroll back up above where it started
       if (!played && target > 0.02) { played = true; ink.current?.play(); }
+      else if (played && target <= 0.005) { played = false; ink.current?.reverse(); }
       if (reduce) { shown = target; paint(shown); return; }
       if (!raf) raf = requestAnimationFrame(tick);
     };
@@ -61,7 +63,7 @@ export function SplashWindow({ children }: { children: ReactNode }) {
     <div ref={run} className="cg-splash-run" style={{ height: `calc(100svh + ${PIN}px)` }}>
       <div className="cg-splash-sticky">
         {/* threshold 0.95: the component's own trigger is only a late fallback; the scroll above starts it */}
-        <InkSplashReveal ref={ink} className="cg-splash" threshold={0.95} zoomFrom={1}>
+        <InkSplashReveal ref={ink} className="cg-splash" threshold={0.95} zoomFrom={1} dither={0} grain={1} close={0.9}>
           <div ref={win} className="cg-splash-win">{children}</div>
         </InkSplashReveal>
       </div>

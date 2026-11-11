@@ -73,10 +73,14 @@
 .cg-splash { height: 100svh; min-height: 0 !important; padding: 12svh 24px !important;
   --ink-window-width: min(100%, calc(76svh * 1263 / 907)); --ink-window-radius: 14px; --ink-paper: #fafafa; }
 .cg-splash-win { will-change: transform, opacity; transform-origin: 50% 60%; visibility: hidden; }
-/* the ink fades in and out through a stipple, top and bottom, like the design's backdrop: no hard edge against the page */
 .cg-splash .ink-reveal__ink, .cg-splash .ink-reveal__still {
-  -webkit-mask: url("/crockedglass/splash-edge-top.png") top / 100% 130px no-repeat, linear-gradient(#000, #000) center / 100% calc(100% - 258px) no-repeat, url("/crockedglass/splash-edge-bottom.png") bottom / 100% 130px no-repeat;
-  mask: url("/crockedglass/splash-edge-top.png") top / 100% 130px no-repeat, linear-gradient(#000, #000) center / 100% calc(100% - 258px) no-repeat, url("/crockedglass/splash-edge-bottom.png") bottom / 100% 130px no-repeat; }
+  /* soft fade into the page at the top and bottom: no hard edge, no stipple */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%); }
+/* the no-WebGL fallback: the same three inks as smooth washes, without the noise texture */
+.cg-splash .ink-reveal__still { image-rendering: auto; transition: opacity 1s ease;
+  background: radial-gradient(55% 45% at 6% 92%, var(--ink-orange), transparent 70%), radial-gradient(50% 50% at 96% 70%, var(--ink-pink), transparent 75%),
+    radial-gradient(60% 55% at 10% 30%, var(--ink-pink), transparent 75%), var(--ink-blue); }
 .cg-splash .ink-reveal__window { box-shadow: none !important; transform: none !important; transition: none !important; }
 .cg-splash-img { display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 40px 90px -40px rgb(24 22 60 / .45), 0 2px 6px rgb(24 22 60 / .06); }
 

@@ -5,7 +5,9 @@ import InkSplashRevealJs from "./InkSplashReveal";
 
 type Handle = { play(): void; reverse(): void };
 // InkSplashReveal is plain JS; give it the props used here.
-const InkSplashReveal = InkSplashRevealJs as unknown as ComponentType<{ children: ReactNode; className?: string; threshold?: number; zoomFrom?: number; dither?: number; grain?: number; close?: number } & RefAttributes<Handle>>;
+const InkSplashReveal = InkSplashRevealJs as unknown as ComponentType<{ children: ReactNode; className?: string; threshold?: number; zoomFrom?: number; dither?: number; grain?: number; close?: number; grid?: number; orange?: number; pink?: number; colors?: { blue?: string; orange?: string; pink?: string } } & RefAttributes<Handle>>;
+
+const PALETTE = { blue: "#1E1B4B", orange: "#6366F1", pink: "#C7D2FE" };
 
 /** Extra scroll the section stays pinned for while the window comes in. */
 const PIN = 700;
@@ -63,7 +65,10 @@ export function SplashWindow({ children }: { children: ReactNode }) {
     <div ref={run} className="cg-splash-run" style={{ height: `calc(100svh + ${PIN}px)` }}>
       <div className="cg-splash-sticky">
         {/* threshold 0.95: the component's own trigger is only a late fallback; the scroll above starts it */}
-        <InkSplashReveal ref={ink} className="cg-splash" threshold={0.95} zoomFrom={1} dither={0} grain={1} close={0.9}>
+        <InkSplashReveal ref={ink} className="cg-splash" threshold={0.95} zoomFrom={1} dither={0} grain={1} close={0.9} grid={176}
+          // the engine's three inks (named blue / orange / pink) carry this palette: a deep indigo base, with
+          // violet and soft lavender running through it
+          colors={PALETTE} orange={0.42} pink={0.3}>
           <div ref={win} className="cg-splash-win">{children}</div>
         </InkSplashReveal>
       </div>

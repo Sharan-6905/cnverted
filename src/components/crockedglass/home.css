@@ -75,8 +75,9 @@
 .cg-splash-win { will-change: transform, opacity; transform-origin: 50% 60%; visibility: hidden; }
 .cg-splash .ink-reveal__ink, .cg-splash .ink-reveal__still {
   /* soft fade into the page at the top and bottom: no hard edge, no stipple */
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 calc(100% - 120px), transparent 100%); }
+  /* a long eased fade (smoothstep-shaped, 30% of the height) so there's no line where it reaches full strength */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .03) 3%, rgb(0 0 0 / .1) 6%, rgb(0 0 0 / .22) 9.5%, rgb(0 0 0 / .38) 13%, rgb(0 0 0 / .55) 16.5%, rgb(0 0 0 / .72) 20%, rgb(0 0 0 / .86) 23.5%, rgb(0 0 0 / .95) 27%, #000 30%, #000 70%, rgb(0 0 0 / .95) 73%, rgb(0 0 0 / .86) 76.5%, rgb(0 0 0 / .72) 80%, rgb(0 0 0 / .55) 83.5%, rgb(0 0 0 / .38) 87%, rgb(0 0 0 / .22) 90.5%, rgb(0 0 0 / .1) 94%, rgb(0 0 0 / .03) 97%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .03) 3%, rgb(0 0 0 / .1) 6%, rgb(0 0 0 / .22) 9.5%, rgb(0 0 0 / .38) 13%, rgb(0 0 0 / .55) 16.5%, rgb(0 0 0 / .72) 20%, rgb(0 0 0 / .86) 23.5%, rgb(0 0 0 / .95) 27%, #000 30%, #000 70%, rgb(0 0 0 / .95) 73%, rgb(0 0 0 / .86) 76.5%, rgb(0 0 0 / .72) 80%, rgb(0 0 0 / .55) 83.5%, rgb(0 0 0 / .38) 87%, rgb(0 0 0 / .22) 90.5%, rgb(0 0 0 / .1) 94%, rgb(0 0 0 / .03) 97%, transparent 100%); }
 /* the no-WebGL fallback: the same three inks as smooth washes, without the noise texture */
 .cg-splash .ink-reveal__still { image-rendering: auto; transition: opacity 1s ease;
   background: radial-gradient(55% 45% at 6% 92%, var(--ink-orange), transparent 70%), radial-gradient(50% 50% at 96% 70%, var(--ink-pink), transparent 75%),

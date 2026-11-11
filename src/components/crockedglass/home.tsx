@@ -93,7 +93,7 @@ export function CrockedglassHome() {
 
         {/* the app window, full width: ink splashes out from behind it once you've scrolled a little way in */}
         <SplashWindow>
-          <img className="cg-splash-img" src="/crockedglass/dashboard.webp" width={1263} height={907}
+          <img className="cg-splash-img" src="/crockedglass/dashboard.webp" width={1213} height={857}
             alt="The Cnvrted app: build a target, cold or intent list, For You recommendations, and communities matched to your ICP" />
         </SplashWindow>
 

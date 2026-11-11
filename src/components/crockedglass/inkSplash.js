@@ -225,9 +225,15 @@ void main() {
   col *= 1.0 + (h2 - 0.5) * 0.10 * uDither;
   /* photo mode: the ink is only a mask, the picture underneath supplies the colour */
   vec2 puv = vUv * uPhotoScale + uPhotoOffset;
-  col = mix(col, texture(uPhoto, puv).rgb, uUsePhoto);
-  /* where the picture doesn't reach (wide screens), its edges fade out instead of clamping into streaks */
-  float inside = smoothstep(0.0, 0.07, puv.x) * smoothstep(1.0, 0.93, puv.x) * smoothstep(0.0, 0.04, puv.y) * smoothstep(1.0, 0.96, puv.y);
+  /* where the picture doesn't reach the sides (wide screens), carry its edge colours out to the edge of the
+     section: the edge column, read from ever-blurrier mipmaps the further out it goes, so it continues as soft
+     colour rather than streaks; just inside the edge the picture eases into that same blur, so there's no seam */
+  float ox = max(-puv.x, puv.x - 1.0);
+  vec3 sharp = texture(uPhoto, puv).rgb;
+  vec3 extended = textureLod(uPhoto, vec2(clamp(puv.x, 0.002, 0.998), puv.y), mix(3.0, 7.0, smoothstep(0.0, 0.3, ox))).rgb;
+  vec3 photoCol = mix(sharp, extended, smoothstep(-0.06, 0.02, ox));
+  col = mix(col, photoCol, uUsePhoto);
+  float inside = smoothstep(0.0, 0.04, puv.y) * smoothstep(1.0, 0.96, puv.y);
   float dx = amount(vUv + vec2(uInkCell.x, 0.0)) - amount(vUv - vec2(uInkCell.x, 0.0));
   float dy = amount(vUv + vec2(0.0, uInkCell.y)) - amount(vUv - vec2(0.0, uInkCell.y));
   vec3 n = normalize(vec3(-dx * 1.2, -dy * 1.2, 1.0));
@@ -365,7 +371,8 @@ void main() {
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
       gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.generateMipmap(gl.TEXTURE_2D);   /* blurred levels, for carrying the edge colours outwards */
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
@@ -522,7 +529,7 @@ void main() {
     gl.uniform1f(u.uSettle, settle);
     if (photo) {
       /* fit by height, cropping at most 10% of it (a full cover crop on a wide screen zooms in and reads as
-         stretched); if the picture is then narrower than the section, its sides fade out in the shader */
+         stretched); if the picture is then narrower than the section, the shader carries its edge colours out */
       const r = (W / H) / (photo.w / photo.h);
       const sy = r > 1 ? Math.max(1 / r, 0.9) : 1;
       const sc = [sy * r, sy];

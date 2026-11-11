@@ -80,16 +80,16 @@
   -webkit-mask-image: var(--cg-fade-y); mask-image: var(--cg-fade-y); }
 /* the splash reveals the photo, darkened and fairly strong, still sitting behind the window */
 .cg-splash .ink-reveal__ink { opacity: .8; filter: brightness(.7) contrast(1.15) saturate(1.2); }
-/* without WebGL: the same photo, fitted the same way (nearly full height, sides fading), fading in */
-.cg-splash .ink-reveal__still { image-rendering: auto; transition: opacity 1.2s ease; filter: brightness(.7) contrast(1.15) saturate(1.2);
-  background: url("/crockedglass/splash-photo.webp") center / auto 111% no-repeat; }
+/* without WebGL: the same photo fitted the same way, fading in. Two layers: a blurred copy stretched to the full
+   width carries the edge colours out to the sides, and the real photo sits centred on top, its sides easing into it */
+.cg-splash .ink-reveal__still { image-rendering: auto; transition: opacity 1.2s ease; filter: brightness(.7) contrast(1.15) saturate(1.2); background: none; overflow: hidden; }
 .cg .cg-splash.is-still.is-splashed .ink-reveal__still { opacity: .8; } /* beats the component's own opacity: 1 */
-/* the photo is ~148.7svh wide at that height: fade its sides when the screen is wider than that */
-.cg .cg-splash .ink-reveal__still {
-  -webkit-mask-image: var(--cg-fade-y), linear-gradient(to right, transparent calc(50% - 74svh), #000 calc(50% - 64svh), #000 calc(50% + 64svh), transparent calc(50% + 74svh));
-  -webkit-mask-composite: source-in;
-  mask-image: var(--cg-fade-y), linear-gradient(to right, transparent calc(50% - 74svh), #000 calc(50% - 64svh), #000 calc(50% + 64svh), transparent calc(50% + 74svh));
-  mask-composite: intersect; }
+.cg-splash .ink-reveal__still::before, .cg-splash .ink-reveal__still::after { content: ""; position: absolute; inset: 0; }
+.cg-splash .ink-reveal__still::before { inset: -60px; background: url("/crockedglass/splash-photo.webp") center / 100% 111% no-repeat; filter: blur(48px); }
+/* the photo is ~148.7svh wide at 111% height: ease its sides into the colour layer when the screen is wider */
+.cg-splash .ink-reveal__still::after { background: url("/crockedglass/splash-photo.webp") center / auto 111% no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent calc(50% - 74svh), #000 calc(50% - 66svh), #000 calc(50% + 66svh), transparent calc(50% + 74svh));
+  mask-image: linear-gradient(to right, transparent calc(50% - 74svh), #000 calc(50% - 66svh), #000 calc(50% + 66svh), transparent calc(50% + 74svh)); }
 .cg-splash .ink-reveal__window { box-shadow: none !important; transform: none !important; transition: none !important; }
 /* the screenshot: a 12px card like the rest of the page; its content stops mid-card at the bottom, so that edge
    dissolves into the background instead of being cut off */

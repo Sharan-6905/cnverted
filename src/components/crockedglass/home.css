@@ -85,11 +85,12 @@
 .cg-splash .ink-reveal__still { image-rendering: auto; transition: opacity 1.2s ease; background: none; overflow: hidden; }
 .cg .cg-splash.is-still.is-splashed .ink-reveal__still { opacity: 1; }
 .cg-splash .ink-reveal__still::before, .cg-splash .ink-reveal__still::after { content: ""; position: absolute; inset: 0; }
-.cg-splash .ink-reveal__still::before { inset: -60px; background: url("/crockedglass/splash-photo.webp") center / 100% 111% no-repeat; filter: blur(48px); }
-/* the photo is ~148.7svh wide at 111% height: ease its sides into the colour layer when the screen is wider */
-.cg-splash .ink-reveal__still::after { background: url("/crockedglass/splash-photo.webp") center / auto 111% no-repeat;
-  -webkit-mask-image: linear-gradient(to right, transparent calc(50% - 74svh), #000 calc(50% - 66svh), #000 calc(50% + 66svh), transparent calc(50% + 74svh));
-  mask-image: linear-gradient(to right, transparent calc(50% - 74svh), #000 calc(50% - 66svh), #000 calc(50% + 66svh), transparent calc(50% + 74svh)); }
+.cg-splash .ink-reveal__still::before { inset: -60px; background: url("/crockedglass/splash-photo.webp") center / 100% 100% no-repeat; filter: blur(48px); }
+/* the picture (2400 x 978) is ~245svh wide at full height: on screens wider than that, ease its sides into the colour
+   layer (on ordinary screens it already covers the width and these stops sit off-screen) */
+.cg-splash .ink-reveal__still::after { background: url("/crockedglass/splash-photo.webp") center / auto 100% no-repeat;
+  -webkit-mask-image: linear-gradient(to right, transparent calc(50% - 122svh), #000 calc(50% - 114svh), #000 calc(50% + 114svh), transparent calc(50% + 122svh));
+  mask-image: linear-gradient(to right, transparent calc(50% - 122svh), #000 calc(50% - 114svh), #000 calc(50% + 114svh), transparent calc(50% + 122svh)); }
 .cg-splash .ink-reveal__window { box-shadow: none !important; transform: none !important; transition: none !important; }
 /* the screenshot: a 12px card like the rest of the page; its content stops mid-card at the bottom, so that edge
    dissolves into the background instead of being cut off */

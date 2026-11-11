@@ -74,41 +74,19 @@
   --ink-window-width: min(100%, calc(74svh * 1213 / 857)); --ink-window-radius: 12px; --ink-paper: #fafafa; }
 .cg-splash-win { position: relative; will-change: transform, opacity; transform-origin: 50% 60%; visibility: hidden; }
 
-/* Frosted pane behind the window, in the page's glass language: the header pill's white gradient, bright inner
-   top edge and top sheen, plus the brain orb's rim (white top-left to warm peach bottom-right), its specular
-   highlight and its soft indigo contact shadow. Reaches to ~72px from the screen edges; a rim of ink stays clear. */
-.cg-splash-glass { position: absolute; z-index: 0; visibility: hidden;
-  top: -6.5svh; bottom: -6.5svh; left: min(-40px, calc((100% - 100vw) / 2 + 96px)); right: min(-40px, calc((100% - 100vw) / 2 + 96px));
-  border-radius: 24px;
-  background:
-    radial-gradient(40% 55% at 14% 0%, rgb(255 255 255 / .5), rgb(255 255 255 / 0) 70%),
-    radial-gradient(35% 45% at 92% 100%, rgb(255 226 196 / .28), rgb(255 226 196 / 0) 70%),
-    linear-gradient(180deg, rgb(255 255 255 / .52) 0%, rgb(255 255 255 / .28) 100%);
-  -webkit-backdrop-filter: blur(40px) saturate(1.8); backdrop-filter: blur(40px) saturate(1.8);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / .85), inset 0 -1px 0 rgb(255 255 255 / .18),
-    /* kept small: the section clips at its edge, and a longer shadow made a hard line there */
-    0 22px 44px -26px rgb(40 24 90 / .3), 0 1px 3px rgb(16 17 26 / .05); }
-/* rim: a 1px gradient stroke, white at the top-left to peach at the bottom-right, as on the orb */
-.cg-splash-glass::before { content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px; pointer-events: none;
-  background: linear-gradient(135deg, rgb(255 255 255 / .95), rgb(255 255 255 / .2) 50%, rgb(255 224 200 / .75));
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
-  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
-/* top sheen, as on the header pill */
-.cg-splash-glass::after { content: ""; position: absolute; inset: 0 0 55% 0; border-radius: 24px 24px 0 0; pointer-events: none;
-  background: linear-gradient(180deg, rgb(255 255 255 / .3), rgb(255 255 255 / 0)); }
-@media (max-width: 640px) { .cg-splash-glass { border-radius: 18px; left: -8px; right: -8px; top: -4svh; bottom: -4svh; } .cg-splash-glass::after { border-radius: 18px 18px 0 0; } }
 .cg-splash .ink-reveal__ink, .cg-splash .ink-reveal__still {
   /* soft fade into the page at the top and bottom: no hard edge, no stipple */
   /* a long eased fade (smoothstep-shaped, 30% of the height) so there's no line where it reaches full strength */
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .03) 3%, rgb(0 0 0 / .1) 6%, rgb(0 0 0 / .22) 9.5%, rgb(0 0 0 / .38) 13%, rgb(0 0 0 / .55) 16.5%, rgb(0 0 0 / .72) 20%, rgb(0 0 0 / .86) 23.5%, rgb(0 0 0 / .95) 27%, #000 30%, #000 70%, rgb(0 0 0 / .95) 73%, rgb(0 0 0 / .86) 76.5%, rgb(0 0 0 / .72) 80%, rgb(0 0 0 / .55) 83.5%, rgb(0 0 0 / .38) 87%, rgb(0 0 0 / .22) 90.5%, rgb(0 0 0 / .1) 94%, rgb(0 0 0 / .03) 97%, transparent 100%);
   mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .03) 3%, rgb(0 0 0 / .1) 6%, rgb(0 0 0 / .22) 9.5%, rgb(0 0 0 / .38) 13%, rgb(0 0 0 / .55) 16.5%, rgb(0 0 0 / .72) 20%, rgb(0 0 0 / .86) 23.5%, rgb(0 0 0 / .95) 27%, #000 30%, #000 70%, rgb(0 0 0 / .95) 73%, rgb(0 0 0 / .86) 76.5%, rgb(0 0 0 / .72) 80%, rgb(0 0 0 / .55) 83.5%, rgb(0 0 0 / .38) 87%, rgb(0 0 0 / .22) 90.5%, rgb(0 0 0 / .1) 94%, rgb(0 0 0 / .03) 97%, transparent 100%); }
-/* the no-WebGL fallback: the same three inks as smooth washes, without the noise texture */
-.cg-splash .ink-reveal__still { image-rendering: auto; transition: opacity 1s ease;
-  background: radial-gradient(55% 45% at 6% 92%, var(--ink-orange), transparent 70%), radial-gradient(50% 50% at 96% 70%, var(--ink-pink), transparent 75%),
-    radial-gradient(60% 55% at 10% 30%, var(--ink-pink), transparent 75%), var(--ink-blue); }
+/* the splash reveals the photo, very faintly: the ink is only a mask for it */
+.cg-splash .ink-reveal__ink { opacity: .32; }
+/* without WebGL: the same photo, just as faint, fading in */
+.cg-splash .ink-reveal__still { image-rendering: auto; transition: opacity 1.2s ease; background: url("/crockedglass/splash-photo.webp") center / cover no-repeat; }
+.cg .cg-splash.is-still.is-splashed .ink-reveal__still { opacity: .32; } /* beats the component's own opacity: 1 */
 .cg-splash .ink-reveal__window { box-shadow: none !important; transform: none !important; transition: none !important; }
 /* the screenshot: a 12px card like the rest of the page; its content stops mid-card at the bottom, so that edge
-   dissolves into the glass instead of being cut off */
+   dissolves into the background instead of being cut off */
 .cg-splash-img { display: block; width: 100%; height: auto; border-radius: 12px;
   -webkit-mask-image: linear-gradient(to bottom, #000 78%, rgb(0 0 0 / .6) 88%, rgb(0 0 0 / .2) 95%, transparent 100%);
   mask-image: linear-gradient(to bottom, #000 78%, rgb(0 0 0 / .6) 88%, rgb(0 0 0 / .2) 95%, transparent 100%); }

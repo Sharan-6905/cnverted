@@ -42,6 +42,7 @@ const InkSplashReveal = forwardRef(function InkSplashReveal(
     grain = 3,
     dither = 0.8,
     grid = 112,             /* simulation cells across the short side (more = finer, smoother ink) */
+    image,                  /* a photo URL: the ink reveals this picture instead of drawing in colour */
     colors,                 /* { blue, orange, pink, paper } as hex, overrides the CSS defaults */
 
     /* the window */
@@ -70,7 +71,7 @@ const InkSplashReveal = forwardRef(function InkSplashReveal(
 
   useEffect(() => {
     engine.current = createInkSplash(rootRef.current, {
-      threshold, delay, once, splash, close, swirl, jets, stir, orange, pink, grain, dither, zoomAt, grid,
+      threshold, delay, once, splash, close, swirl, jets, stir, orange, pink, grain, dither, zoomAt, grid, image,
       onSplash: () => latest.current.onSplash?.(),
       onReveal: () => latest.current.onReveal?.(),
     });
@@ -80,7 +81,7 @@ const InkSplashReveal = forwardRef(function InkSplashReveal(
     };
     /* the engine is rebuilt only when a setting that shapes the simulation changes */
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [threshold, delay, once, splash, close, swirl, jets, stir, orange, pink, grain, dither, zoomAt, grid]);
+  }, [threshold, delay, once, splash, close, swirl, jets, stir, orange, pink, grain, dither, zoomAt, grid, image]);
 
   const vars = {
     '--ink-zoom-from': zoomFrom,

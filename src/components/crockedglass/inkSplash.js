@@ -28,6 +28,7 @@ const DEFAULTS = {
   dither: 0.8,        /* how strong the stipple is, 0 (smooth ink) to 1 */
   grid: 112,          /* cells of the simulation across the short side (fewer is faster) */
   iterations: 18,     /* pressure passes */
+  image: null,        /* optional photo URL: the ink then reveals this picture instead of drawing in colour */
   onSplash: null,     /* called when the ink starts */
   onReveal: null,     /* called when the window starts to zoom out */
 };
@@ -203,6 +204,9 @@ uniform sampler2D uInk;
 uniform vec2 uInkCell;
 uniform vec3 uBlue, uOrange, uPink;
 uniform float uGrain, uDither;
+uniform sampler2D uPhoto;
+uniform float uUsePhoto;
+uniform vec2 uPhotoScale, uPhotoOffset;
 float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
 float amount(vec2 uv) { vec3 c = texture(uInk, uv).rgb; return c.r + c.g + c.b; }
 void main() {
@@ -219,6 +223,8 @@ void main() {
   vec3 pick = h1 < w.g ? uOrange : (h1 < w.g + w.b ? uPink : uBlue);
   vec3 col = mix(soft, pick, uDither * 0.5);
   col *= 1.0 + (h2 - 0.5) * 0.10 * uDither;
+  /* photo mode: the ink is only a mask, the picture underneath supplies the colour */
+  col = mix(col, texture(uPhoto, vUv * uPhotoScale + uPhotoOffset).rgb, uUsePhoto);
   float dx = amount(vUv + vec2(uInkCell.x, 0.0)) - amount(vUv - vec2(uInkCell.x, 0.0));
   float dy = amount(vUv + vec2(0.0, uInkCell.y)) - amount(vUv - vec2(0.0, uInkCell.y));
   vec3 n = normalize(vec3(-dx * 1.2, -dy * 1.2, 1.0));
@@ -241,6 +247,7 @@ void main() {
   let ink;
   let cover;
   let colours = null;
+  let photo = null;                          /* { tex, w, h } once the picture has loaded */
   const made = { programs: [], buffers: [], vaos: [] };
 
   function compile(type, src) {
@@ -341,6 +348,26 @@ void main() {
     made.vaos.push(vao);
     made.buffers.push(buf);
     readColours();
+    if (O.image) loadPhoto(O.image);
+  }
+  function loadPhoto(url) {
+    const img = new Image();
+    img.decoding = 'async';
+    img.onload = () => {
+      if (!alive || !gl) return;
+      const tex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, img);
+      gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      photo = { tex, w: img.naturalWidth, h: img.naturalHeight };
+      wake();
+    };
+    img.src = url;
   }
   function readColours() {
     colours = { blue: rgb('--ink-blue', '5d6cb9'), orange: rgb('--ink-orange', 'ff9a5e'), pink: rgb('--ink-pink', 'dc9fb2') };
@@ -486,6 +513,17 @@ void main() {
     gl.uniform3fv(u.uPink, colours.pink);
     gl.uniform1f(u.uGrain, Math.max(1, O.grain * dpr));
     gl.uniform1f(u.uDither, clamp(O.dither, 0, 1));
+    gl.uniform1f(u.uUsePhoto, photo ? 1 : 0);
+    if (photo) {
+      /* cover-fit the picture to the section */
+      const r = (W / H) / (photo.w / photo.h);
+      const sc = r > 1 ? [1, 1 / r] : [r, 1];
+      gl.uniform2f(u.uPhotoScale, sc[0], sc[1]);
+      gl.uniform2f(u.uPhotoOffset, (1 - sc[0]) / 2, (1 - sc[1]) / 2);
+      gl.activeTexture(gl.TEXTURE1);
+      gl.bindTexture(gl.TEXTURE_2D, photo.tex);
+      gl.uniform1i(u.uPhoto, 1);
+    }
     blit(null);
     u = use(prog.cover);
     gl.uniform1i(u.uInk, ink.read.bind(0));
@@ -764,6 +802,7 @@ void main() {
       cleanups.forEach((undo) => undo());
       if (gl && !gl.isContextLost()) {
         [vel, pressure, divergence, curl, ink, cover].forEach((t) => t && t.drop());
+        if (photo) gl.deleteTexture(photo.tex);
         made.programs.forEach((p) => gl.deleteProgram(p));
         made.buffers.forEach((b) => gl.deleteBuffer(b));
         made.vaos.forEach((v) => gl.deleteVertexArray(v));

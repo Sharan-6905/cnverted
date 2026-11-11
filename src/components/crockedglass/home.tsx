@@ -15,6 +15,7 @@ import { CgFooter } from "./site-footer";
 import { ScaleBox } from "./scale-box";
 import { UserStories } from "./user-stories";
 import { HeroGlow } from "./hero-glow";
+import { ClientPile, type PileClient } from "./client-pile";
 import { CrossedFingers } from "./crossed-fingers";
 import { DEMO_PATH } from "@/lib/booking";
 import "./home.css";
@@ -37,7 +38,7 @@ const CASES = [
     title: "Tiny Bites turned cold lists into warm intros", desc: "A kids’ food brand reached 300 retail buyers on WhatsApp and LinkedIn and closed 12 store partnerships in a quarter." },
 ] as const;
 
-const CLIENTS: { n: string; src: string; h: number; r?: number }[] = [
+const CLIENTS: PileClient[] = [
   { n: "FPS", src: "/crockedglass/client-fps.png", h: 30 },
   { n: "", src: "/crockedglass/client-2.png", h: 48 },
   { n: "Curato", src: "/crockedglass/client-curato.png", h: 44 },
@@ -76,7 +77,6 @@ function CaseCard({ k }: { k: (typeof CASES)[number] }) {
 }
 
 export function CrockedglassHome() {
-  const logos = CLIENTS.concat(CLIENTS, CLIENTS, CLIENTS); // repeated so the marquee loop never shows a gap
   return (
     <div className={`cg ${bricolage.variable} ${inter.variable} ${mono.variable}`}>
       <Header />
@@ -164,16 +164,7 @@ export function CrockedglassHome() {
             <h2 id="cg-clients-title" className="cg-h2">Cnvrted Collaboration</h2>
             <p className="cg-lede">The teams we build pipeline with, from first lead to booked meeting.</p>
           </div>
-          <div className="cg-cl-wall">
-            <div className="cg-cl-track">
-              {logos.map((c, i) => (
-                <div key={i} className="cg-cl-logo" title={c.n || undefined} aria-hidden={i >= CLIENTS.length}>
-                  <img src={c.src} alt={c.n ? `${c.n} logo` : "Client logo"} style={{ height: c.h, borderRadius: c.r }} />
-                  {c.n && <span>{c.n}</span>}
-                </div>
-              ))}
-            </div>
-          </div>
+          <ClientPile clients={CLIENTS} cta={{ label: "Your team next →", href: DEMO_PATH }} />
         </section>
 
         <CgFaq />

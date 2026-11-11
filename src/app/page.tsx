@@ -1,11 +1,12 @@
 import { PageSchema } from "@/components/page-schema";
 import { FAQSchema } from "@/components/faq-schema";
-import { HOME_FAQS } from "@/lib/home-faqs";
 import { pageMetadata, SITE_TITLE, SITE_DESCRIPTION } from "@/lib/seo";
 import { SoftwareSchema } from "@/components/structured-data";
-import { IllustratedShell } from "@/components/illustrated/shell";
-import { RedesignHome } from "@/components/illustrated/redesign-home";
+import { CrockedglassHome } from "@/components/crockedglass/home";
+import { CG_FAQS } from "@/components/crockedglass/faq-data";
 
+// Title/description stay the site-wide ones the old homepage ranked under; the FAQ schema follows the questions
+// actually on this page.
 export const metadata = pageMetadata({
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
@@ -14,11 +15,11 @@ export const metadata = pageMetadata({
 
 export default function Home() {
   return (
-    <IllustratedShell className="redesign-home" redesign>
+    <>
       <PageSchema path="/" metadata={metadata} />
       <SoftwareSchema includeOffers={false} />
-      <FAQSchema path="/" items={HOME_FAQS} />
-      <RedesignHome />
-    </IllustratedShell>
+      <FAQSchema path="/" items={CG_FAQS.map(([question, answer]) => ({ question, answer }))} />
+      <CrockedglassHome />
+    </>
   );
 }

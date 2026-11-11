@@ -26,6 +26,8 @@ const nextConfig: NextConfig = {
       { source: "/blog", destination: "/blogs", permanent: true },
       { source: "/favicon.svg", destination: "/favicon.png", permanent: true },
       { source: "/why-cnvrted", destination: "/", permanent: true },
+      // the 2026 homepage was previewed here before it replaced "/"
+      { source: "/new-home", destination: "/", permanent: true },
     ];
   },
   images: {

@@ -336,7 +336,9 @@ export default function Orka({
     const dx = REST_TARGET.x - eye.cx, dy = REST_TARGET.y - eye.cy;
     const d = Math.hypot(dx, dy);
     const r = eye.r * init.pupil;
-    return { x: (dx / d) * (eye.rx - r * 0.7), y: (dy / d) * (eye.ry - r * 0.55) };
+    // rounded so the server and the browser print the same number (else React reports a hydration mismatch)
+    const k = (v) => Math.round(v * 100) / 100;
+    return { x: k((dx / d) * (eye.rx - r * 0.7)), y: k((dy / d) * (eye.ry - r * 0.55)) };
   });
 
   const boop = () => {

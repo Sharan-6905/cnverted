@@ -84,7 +84,9 @@ export function CgFooter() {
     return () => { cancelAnimationFrame(raf); el.removeEventListener("pointerenter", enter); el.removeEventListener("pointermove", move); el.removeEventListener("pointerleave", leave); };
   }, []);
 
-  const word = { x: 1, y: 306, textLength: 1438, lengthAdjust: "spacingAndGlyphs" as const, fontFamily: "var(--font-bricolage), 'Bricolage Grotesque', sans-serif", fontWeight: 500, fontSize: 380, letterSpacing: -8 };
+  // font-family goes in style: an SVG presentation attribute can't resolve var(--font-bricolage), so the
+  // word fell back to a system font and its letters (the "e" most visibly) came out wrong
+  const word = { x: 1, y: 306, textLength: 1438, lengthAdjust: "spacingAndGlyphs" as const, style: { fontFamily: "var(--font-bricolage), sans-serif", fontWeight: 500, fontSize: 380 } };
   return (
     <footer className="cg-footer">
       <div className="cg-wrap">
@@ -123,10 +125,14 @@ export function CgFooter() {
             <filter id="cg-ft-wisp" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.02" numOctaves={3} seed={7} /><feDisplacementMap in="SourceGraphic" scale={38} xChannelSelector="R" yChannelSelector="G" /></filter>
             <clipPath id="cg-ft-clip"><text {...word}>Cnvrted</text></clipPath>
           </defs>
+          {/* Bricolage's glyphs are drawn from overlapping shapes (the "e"'s crossbar most of all), and a plain
+              outline strokes every inner edge. So: stroke at twice the width, then cover the inside with the
+              footer colour, leaving only the outer half of the stroke; the smoke sits on top, inside the letters. */}
+          <text {...word} className="cg-ft-stroke" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth={3} strokeLinejoin="round" vectorEffect="non-scaling-stroke">Cnvrted</text>
+          <text {...word} fill="#0d0d0d">Cnvrted</text>
           <foreignObject x="0" y="0" width="1440" height="320" clipPath="url(#cg-ft-clip)">
             <canvas ref={cvRef} width={1440} height={320} style={{ display: "block", width: 1440, height: 320, filter: "url(#cg-ft-wisp)" }} />
           </foreignObject>
-          <text {...word} fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth={1.5} vectorEffect="non-scaling-stroke">Cnvrted</text>
         </svg>
       </div>
     </footer>

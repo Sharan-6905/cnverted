@@ -1,8 +1,6 @@
-import type { ComponentType, ReactNode } from "react";
-import { Bricolage_Grotesque, Inter, JetBrains_Mono, Fraunces, Google_Sans_Flex } from "next/font/google";
+import { Bricolage_Grotesque, Inter, JetBrains_Mono } from "next/font/google";
 import Header from "./Header";
-import { OrkaPeek } from "./Orka";
-import InkSplashRevealJs from "./InkSplashReveal";
+import { SplashWindow } from "./splash-window";
 import { HeroQuote } from "./hero-quote";
 import { BrainCard } from "./brain-card";
 import { WorkflowCard } from "./workflow-card";
@@ -15,19 +13,16 @@ import { AgentsCard } from "./agents-card";
 import { CgFaq } from "./faq";
 import { CgFooter } from "./site-footer";
 import { ScaleBox } from "./scale-box";
-import { UserTestimonials } from "@/components/illustrated/user-testimonials";
+import { UserStories } from "./user-stories";
+import { HeroDots } from "./hero-dots";
+import { CrossedFingers } from "./crossed-fingers";
 import { DEMO_PATH } from "@/lib/booking";
 import "./home.css";
 
-// InkSplashReveal is plain JS; give it the props this page passes.
-const InkSplashReveal = InkSplashRevealJs as unknown as ComponentType<{ children: ReactNode; className?: string; threshold?: number; zoomFrom?: number }>;
 
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage", weight: ["400", "500"] });
 const inter = Inter({ subsets: ["latin"], variable: "--font-cg-inter", weight: ["400", "500", "600"] });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-cg-mono", weight: ["500", "600"], preload: false });
-// fonts the carried-over "What our customers say" reel uses
-const editorial = Fraunces({ subsets: ["latin"], variable: "--font-editorial", weight: "variable", preload: false });
-const designSans = Google_Sans_Flex({ subsets: ["latin"], variable: "--font-design-sans", weight: ["400", "500"], adjustFontFallback: false, preload: false });
 
 const APP = "https://beta.cnvrted.com";
 const ARROW = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
@@ -83,21 +78,24 @@ function CaseCard({ k }: { k: (typeof CASES)[number] }) {
 export function CrockedglassHome() {
   const logos = CLIENTS.concat(CLIENTS, CLIENTS, CLIENTS); // repeated so the marquee loop never shows a gap
   return (
-    <div className={`cg ${bricolage.variable} ${inter.variable} ${mono.variable} ${editorial.variable} ${designSans.variable}`}>
+    <div className={`cg ${bricolage.variable} ${inter.variable} ${mono.variable}`}>
       <Header />
       <main id="main-content">
-        {/* hero */}
-        <section className="cg-wrap cg-hero" aria-labelledby="cg-hero-title">
-          <h1 id="cg-hero-title">You can’t build a business on crossed fingers.</h1>
-          <p>Your team deserves better than cold lists, ignored emails, and another quarter spent chasing maybes.</p>
-          <a className="cg-btn cg-btn--sm" href={DEMO_PATH}>Book Call</a>
+        {/* hero: the copy sits over the User Stories dot field */}
+        <section className="cg-hero" aria-labelledby="cg-hero-title">
+          <HeroDots />
+          <div className="cg-wrap cg-hero-copy">
+            <h1 id="cg-hero-title">Your next client is already looking for an agency like yours.</h1>
+            <p>Cnvrted finds brands that are launching, rebranding and hiring for growth, and tells you why each one needs a creative partner right now.</p>
+            <a className="cg-btn cg-btn--sm" href={DEMO_PATH}>Book Call</a>
+          </div>
         </section>
 
-        {/* the app window: ink splashes out from behind it and it zooms out to rest */}
-        <InkSplashReveal className="cg-splash" threshold={0.3} zoomFrom={1.1}>
+        {/* the app window, full width: ink splashes out from behind it once you've scrolled a little way in */}
+        <SplashWindow>
           <img className="cg-splash-img" src="/crockedglass/dashboard.webp" width={1263} height={907}
             alt="The Cnvrted app: build a target, cold or intent list, For You recommendations, and communities matched to your ICP" />
-        </InkSplashReveal>
+        </SplashWindow>
 
         {/* open web → booked meetings */}
         <section className="cg-wrap cg-feat" aria-labelledby="cg-feat-title">
@@ -122,13 +120,8 @@ export function CrockedglassHome() {
           </div>
         </section>
 
-        {/* crossed fingers, with Orka peeking over the line */}
-        <section className="cg-wrap cg-crossed" aria-labelledby="cg-crossed-title">
-          <OrkaPeek width={184} align="center" orkaProps={{ mood: "sleepy", title: "Orka peeking over the line" }}>
-            <span className="cg-crossed-line" style={{ display: "block" }} />
-          </OrkaPeek>
-          <h2 id="cg-crossed-title">You can’t build <span>a business on crossed fingers.</span></h2>
-        </section>
+        {/* crossed fingers: pins while the grey half fills in black */}
+        <CrossedFingers />
 
         <OrkaSection appHref={APP} />
 
@@ -163,8 +156,7 @@ export function CrockedglassHome() {
           </div>
         </section>
 
-        {/* What our customers say — the live site's section, unchanged */}
-        <div className="cg-testimonials redesign-home"><UserTestimonials /></div>
+        <UserStories />
 
         {/* Cnvrted Collaboration */}
         <section className="cg-wrap cg-clients" aria-labelledby="cg-clients-title">

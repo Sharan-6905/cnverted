@@ -31,23 +31,26 @@ const APP = "https://beta.cnvrted.com";
 const ARROW = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 const LINK_ARROW = (c: string) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>;
 
-// The two real stories from /case-studies (src/lib/case-studies.ts): titles, copy, covers and links come from
-// there; the numbers on each card are the ones the story itself reports. Neither customer is named publicly, so the
-// cards don't invent a brand for them.
+// The two real stories from /case-studies (src/lib/case-studies.ts), drawn exactly as the Crockedglass design's
+// case cards: a coloured folder (green, then amber) holding a report sheet, behind a frosted front. The link goes to
+// the story; the numbers are the ones the story reports. The card's title and blurb are a short cut of the story's
+// own (the design fits one line and two lines). Neither customer is named publicly, so no brand is invented.
 const CASE_CARDS = {
-  "from-cold-emails-to-warm-conversations": { mark: "F", brand: "B2B founder", sector: "Customer story", c: "#4f65f5", ink: "#1b2160",
-    k1: ["Targeted emails", "11"], k2: ["Demos that week", "3", 140],
-    // the story's funnel, to scale: 11 emails, 6 replies, 3 demos, 1 closed deal
-    bars: [77, 42, 21, 7], big: "6 of 11", small: "prospects replied" },
-  "how-cnvrted-finds-its-customers": { mark: "C", brand: "Cnvrted", sector: "Inside Cnvrted", c: "#b45309", ink: "#4a2306",
-    k1: ["Post flagged in", "12 min"], k2: ["Founder replied in", "20 min", 140],
-    // the story's timeline, read left to right: flagged, reached out, reply, demo, signup
-    bars: [14, 30, 46, 62, 77], big: "Next day", small: "from a LinkedIn post to a signup" },
+  "from-cold-emails-to-warm-conversations": { mark: "F", brand: "B2B founder", sector: "Customer story", c: "#15803d", ink: "#14532d",
+    img: "/crockedglass/case-luxsoft.webp", k1: ["Targeted emails", "11"], k2: ["Demos that week", "3", 129],
+    bars: [23, 31, 27, 39, 47, 59, 73], big: "6 of 11", small: "prospects replied",
+    title: "From 200 cold emails to 11 warm ones",
+    desc: "A founder swapped 200 generic emails a day for 11 built on recent buying signals. Three booked demos that week." },
+  "how-cnvrted-finds-its-customers": { mark: "C", brand: "Cnvrted", sector: "Inside Cnvrted", c: "#a16207", ink: "#713f12",
+    img: "/crockedglass/case-tinybites.webp", k1: ["Post flagged in", "12 min"], k2: ["Founder replied in", "20 min", 120],
+    bars: [19, 21, 29, 35, 34, 49, 62], big: "Next day", small: "from a LinkedIn post to a signup",
+    title: "We use Cnvrted to find Cnvrted’s customers",
+    desc: "How our own team reads overnight buying signals and reaches out within the hour, with the source in hand." },
 } as const;
 
 const CASES = CASE_STUDIES.flatMap((story) => {
   const card = CASE_CARDS[story.slug as keyof typeof CASE_CARDS];
-  return card ? [{ ...card, slug: story.slug, title: story.title, desc: story.description, img: story.cover.src }] : [];
+  return card ? [{ ...card, slug: story.slug }] : [];
 });
 
 const CLIENTS: PileClient[] = [
@@ -62,7 +65,7 @@ const CLIENTS: PileClient[] = [
 
 function CaseCard({ k }: { k: (typeof CASES)[number] }) {
   return (
-    <ScaleBox width={530} height={500} className="cg-case-cell">
+    <ScaleBox width={530} height={434} className="cg-case-cell">
       <article className="cg-case">
         <img src={k.img} alt="" loading="lazy" decoding="async" />
         <span className="cg-case-back" />
@@ -74,17 +77,15 @@ function CaseCard({ k }: { k: (typeof CASES)[number] }) {
           <p className="cg-case-v" style={{ left: 23, top: 79 }}>{k.k1[1]}</p>
           <p className="cg-case-l" style={{ left: k.k2[2], top: 65 }}>{k.k2[0]}</p>
           <p className="cg-case-v" style={{ left: k.k2[2], top: 81 }}>{k.k2[1]}</p>
-          <div className="cg-case-bars">{k.bars.map((h, i) => <span key={i} style={{ height: h, background: k.c, opacity: 0.35 + i * (0.6 / k.bars.length) }} />)}</div>
+          <div className="cg-case-bars">{k.bars.map((h, i) => <span key={i} style={{ height: h, background: k.c, opacity: 0.35 + i * 0.09 }} />)}</div>
         </div>
         <div className="cg-case-glass" style={{ color: k.ink }}>
           <p className="cg-case-big">{k.big}</p>
           <p className="cg-case-small">{k.small}</p>
           <a className="cg-case-link" href={`/case-studies/${k.slug}`}>Read case study{LINK_ARROW(k.ink)}</a>
         </div>
-        <div className="cg-case-text">
-          <h3>{k.title}</h3>
-          <p className="cg-case-desc">{k.desc}</p>
-        </div>
+        <h3>{k.title}</h3>
+        <p className="cg-case-desc">{k.desc}</p>
       </article>
     </ScaleBox>
   );

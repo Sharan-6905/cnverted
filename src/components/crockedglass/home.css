@@ -34,7 +34,7 @@
 
 /* ---------- shared bits ---------- */
 .cg-btn {
-  position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  position: relative; isolation: isolate; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 10px;
   height: 44px; padding: 0 28.8px; border-radius: 360px; background: var(--cg-accent); color: #fff !important;
   font-size: 16.8px; white-space: nowrap;
   box-shadow: -2px 3px 0 0 #000, inset 2px 4px 9.2px 0 rgba(255,255,255,.25);
@@ -44,6 +44,9 @@
 .cg-btn:active { transform: none; box-shadow: -1px 1px 0 0 #000; }
 .cg-btn:focus-visible { outline: 2px solid var(--cg-accent); outline-offset: 3px; }
 .cg-btn--sm { height: 36px; }
+/* paper grain over the blue, the same texture and blend as the header's Get Started (header.css .cv-cta) */
+.cg-btn::before, .cg-hl::before { content: ""; position: absolute; inset: -60px -30px; z-index: -1; pointer-events: none;
+  background: url("/figma/redesign/paper-texture.webp") center / cover; mix-blend-mode: soft-light; opacity: .6; }
 .cg-h2 { margin: 0; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: 75px; color: #000; }
 .cg-lede { font-size: 20px; line-height: 24px; color: var(--cg-muted); }
 .cg-head { width: min(739px, 100%); display: flex; flex-direction: column; gap: 20px; }
@@ -75,7 +78,12 @@
 /* ---------- hero ---------- */
 .cg-hero { position: relative; z-index: 2; padding: 220px 0 120px; }
 .cg-hero-copy { position: relative; }
-.cg-hero h1 { margin: 0; max-width: 821px; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: normal; color: #000; text-wrap: balance; }
+.cg-hero h1 { margin: 0; max-width: 900px; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: normal; color: #000; text-wrap: balance; }
+/* "40+ hot leads": the CTA's blue pill as a sticker on the headline (accent fill, paper grain, inset light, the
+   offset black shadow), tipped slightly so it reads as stuck on rather than typeset */
+.cg-hl { position: relative; isolation: isolate; overflow: hidden; display: inline-block; padding: 0 .22em .04em;
+  margin: 0 .04em; border-radius: .26em; background: var(--cg-accent); color: #fff; white-space: nowrap;
+  box-shadow: -3px 4px 0 0 #000, inset 2px 4px 9.2px 0 rgba(255,255,255,.25); transform: rotate(-1.5deg); }
 .cg-hero p { margin-top: 24px; max-width: 532px; font-size: 16px; line-height: 1.5; color: #7c7c7c; }
 .cg-hero .cg-btn { margin-top: 32px; }
 /* one screen, pinned; the window is sized to fit inside it (the demo video is 16:9) */
@@ -129,9 +137,6 @@
    undoes the slides' padding so a card is still exactly the column's width */
 .cg-quote-track { display: flex; align-items: stretch; will-change: transform; }
 .cg-quote-slide { flex: 0 0 100%; min-width: 0; padding: 0 8px; display: flex; } /* 16px between cards mid-slide */
-.cg-quote-dots { display: flex; gap: 6px; padding-left: 2px; }
-.cg-quote-dots button { width: 6px; height: 6px; padding: 0; border: 0; border-radius: 3px; background: #d9d6cf; cursor: pointer; transition: width .3s ease, background .3s ease; }
-.cg-quote-dots button.is-on { width: 18px; background: #2b2a26; }
 .cg-quote figure { margin: 0; width: 100%; min-height: 118px; padding: 12px; background: #fbfafa; border-radius: 12px; box-shadow: 0 4px 6px rgba(13,13,13,.04), 0 1px 1px rgba(13,13,13,.05); display: flex; flex-direction: column; gap: 10px; }
 .cg-quote-who { display: flex; align-items: center; gap: 7px; }
 .cg-quote-av { width: 37px; height: 37px; flex: none; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #fdf3e1; color: #a16207; font-weight: 600; font-size: 13px; overflow: hidden; }
@@ -284,8 +289,8 @@
 .cg-cases { margin-top: 200px; display: flex; flex-direction: column; gap: 42px; }
 .cg-cases-row { display: flex; gap: 31px; justify-content: center; }
 .cg-case-cell { flex: 1 1 0; max-width: 530px; }
-.cg-case { position: relative; width: 530px; height: 434px; }
-.cg-case > img { position: absolute; left: 0; top: 0; width: 531px; height: 340px; border-radius: 20px; }
+.cg-case { position: relative; width: 530px; height: 500px; }
+.cg-case > img { position: absolute; left: 0; top: 0; width: 531px; height: 340px; border-radius: 20px; object-fit: cover; }
 .cg-case-back { position: absolute; left: 51px; top: 38px; width: 428px; height: 259px; border-radius: 14px; background: rgba(255,255,255,.7); box-shadow: 0 1px 2px rgba(16,24,40,.06); }
 .cg-case-sheet { position: absolute; left: 33px; top: 48px; width: 464px; height: 258px; border-radius: 14px; background: #fff; box-shadow: 0 1px 1px rgba(16,24,40,.06); }
 .cg-case-sheet > * { position: absolute; }
@@ -300,8 +305,10 @@
 .cg-case-small { left: 24px; top: 129px; font-size: 14px; opacity: .8; }
 .cg-case-link { left: 369px; top: 114px; width: 147px; height: 32px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; border-radius: 16px; background: rgba(255,255,255,.55); font-weight: 500; font-size: 13px; transition: background .2s; }
 .cg-case-link:hover { background: rgba(255,255,255,.85); }
-.cg-case h3 { position: absolute; left: 0; top: 360px; margin: 0; font-family: var(--cg-display); font-weight: 500; font-size: 24px; letter-spacing: -.2px; line-height: normal; color: #1e1e1e; }
-.cg-case-desc { position: absolute; left: 0; top: 390px; width: 492px; font-size: 14px; line-height: 22px; color: #8b8b93; }
+/* the real titles run to two lines, so the title and blurb flow under the cover instead of sitting at fixed offsets */
+.cg-case-text { position: absolute; left: 0; top: 356px; width: 510px; display: flex; flex-direction: column; gap: 8px; }
+.cg-case h3 { margin: 0; font-family: var(--cg-display); font-weight: 500; font-size: 24px; letter-spacing: -.2px; line-height: normal; color: #1e1e1e; }
+.cg-case-desc { width: 492px; font-size: 14px; line-height: 22px; color: #8b8b93; }
 
 /* ---------- curated leads (pinned scroll story) ---------- */
 .cg-cl { position: relative; margin-top: 128px; }

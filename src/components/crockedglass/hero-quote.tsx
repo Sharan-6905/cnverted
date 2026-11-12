@@ -29,8 +29,8 @@ const HOLD_MS = 4200, SLIDE_MS = 700;
  * The quote column beside "From the open web to booked meetings": the site's real testimonials as a slideshow,
  * one card at a time, sliding left to the next every few seconds, forever. A copy of the first card sits after
  * the last, so the slide from the last review lands on that copy and then snaps (unanimated) back to the real
- * first card: the loop always moves left with no rewind. Hover pauses it; the dots jump to a review; reduced
- * motion swaps cards without the slide.
+ * first card: the loop always moves left with no rewind. Hover pauses it; reduced motion swaps cards without the
+ * slide. No dots or counter on purpose: the page shouldn't advertise how many reviews there are.
  */
 export function HeroQuote() {
   const n = CUSTOMER_TESTIMONIALS.length;
@@ -72,12 +72,6 @@ export function HeroQuote() {
           ))}
           <div className="cg-quote-slide" aria-hidden="true"><Card t={CUSTOMER_TESTIMONIALS[0]} /></div>
         </div>
-      </div>
-      <div className="cg-quote-dots">
-        {CUSTOMER_TESTIMONIALS.map((t, k) => (
-          <button key={t.author} type="button" className={k === active ? "is-on" : undefined} aria-label={`Show review from ${t.author}`} aria-current={k === active}
-            onClick={() => { setAnim(!reduce.current); setI(k); }} />
-        ))}
       </div>
     </div>
   );

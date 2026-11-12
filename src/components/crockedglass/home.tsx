@@ -20,6 +20,7 @@ import { PageDots } from "./page-dots";
 import { ClientPile, type PileClient } from "./client-pile";
 import { CrossedFingers } from "./crossed-fingers";
 import { DEMO_PATH } from "@/lib/booking";
+import { CASE_STUDIES } from "@/lib/case-studies";
 import "./home.css";
 
 
@@ -30,14 +31,24 @@ const APP = "https://beta.cnvrted.com";
 const ARROW = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;
 const LINK_ARROW = (c: string) => <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" /></svg>;
 
-const CASES = [
-  { mark: "L", brand: "Luxsoft", sector: "HR software", c: "#15803d", ink: "#14532d", img: "/crockedglass/case-luxsoft.webp",
-    k1: ["Booked demos", "42"], k2: ["Time to first meeting", "6 days", 129], bars: [23, 31, 27, 39, 47, 59, 73], big: "3.2x", small: "more booked demos",
-    title: "Luxsoft booked 42 demos in 60 days", desc: "How an HR software team used buying signals to find teams ready to switch, without adding a single SDR." },
-  { mark: "T", brand: "Tiny Bites", sector: "D2C food", c: "#a16207", ink: "#713f12", img: "/crockedglass/case-tinybites.webp",
-    k1: ["Buyers found", "300"], k2: ["Reply rate", "31%", 120], bars: [19, 21, 29, 35, 34, 49, 62], big: "12", small: "new retail partners",
-    title: "Tiny Bites turned cold lists into warm intros", desc: "A kids’ food brand reached 300 retail buyers on WhatsApp and LinkedIn and closed 12 store partnerships in a quarter." },
-] as const;
+// The two real stories from /case-studies (src/lib/case-studies.ts): titles, copy, covers and links come from
+// there; the numbers on each card are the ones the story itself reports. Neither customer is named publicly, so the
+// cards don't invent a brand for them.
+const CASE_CARDS = {
+  "from-cold-emails-to-warm-conversations": { mark: "F", brand: "B2B founder", sector: "Customer story", c: "#4f65f5", ink: "#1b2160",
+    k1: ["Targeted emails", "11"], k2: ["Demos that week", "3", 140],
+    // the story's funnel, to scale: 11 emails, 6 replies, 3 demos, 1 closed deal
+    bars: [77, 42, 21, 7], big: "6 of 11", small: "prospects replied" },
+  "how-cnvrted-finds-its-customers": { mark: "C", brand: "Cnvrted", sector: "Inside Cnvrted", c: "#b45309", ink: "#4a2306",
+    k1: ["Post flagged in", "12 min"], k2: ["Founder replied in", "20 min", 140],
+    // the story's timeline, read left to right: flagged, reached out, reply, demo, signup
+    bars: [14, 30, 46, 62, 77], big: "Next day", small: "from a LinkedIn post to a signup" },
+} as const;
+
+const CASES = CASE_STUDIES.flatMap((story) => {
+  const card = CASE_CARDS[story.slug as keyof typeof CASE_CARDS];
+  return card ? [{ ...card, slug: story.slug, title: story.title, desc: story.description, img: story.cover.src }] : [];
+});
 
 const CLIENTS: PileClient[] = [
   { n: "FPS", src: "/crockedglass/client-fps.png", h: 30 },
@@ -51,7 +62,7 @@ const CLIENTS: PileClient[] = [
 
 function CaseCard({ k }: { k: (typeof CASES)[number] }) {
   return (
-    <ScaleBox width={530} height={434} className="cg-case-cell">
+    <ScaleBox width={530} height={500} className="cg-case-cell">
       <article className="cg-case">
         <img src={k.img} alt="" loading="lazy" decoding="async" />
         <span className="cg-case-back" />
@@ -63,15 +74,17 @@ function CaseCard({ k }: { k: (typeof CASES)[number] }) {
           <p className="cg-case-v" style={{ left: 23, top: 79 }}>{k.k1[1]}</p>
           <p className="cg-case-l" style={{ left: k.k2[2], top: 65 }}>{k.k2[0]}</p>
           <p className="cg-case-v" style={{ left: k.k2[2], top: 81 }}>{k.k2[1]}</p>
-          <div className="cg-case-bars">{k.bars.map((h, i) => <span key={i} style={{ height: h, background: k.c, opacity: 0.35 + i * 0.09 }} />)}</div>
+          <div className="cg-case-bars">{k.bars.map((h, i) => <span key={i} style={{ height: h, background: k.c, opacity: 0.35 + i * (0.6 / k.bars.length) }} />)}</div>
         </div>
         <div className="cg-case-glass" style={{ color: k.ink }}>
           <p className="cg-case-big">{k.big}</p>
           <p className="cg-case-small">{k.small}</p>
-          <a className="cg-case-link" href="/case-studies">Read case study{LINK_ARROW(k.ink)}</a>
+          <a className="cg-case-link" href={`/case-studies/${k.slug}`}>Read case study{LINK_ARROW(k.ink)}</a>
         </div>
-        <h3>{k.title}</h3>
-        <p className="cg-case-desc">{k.desc}</p>
+        <div className="cg-case-text">
+          <h3>{k.title}</h3>
+          <p className="cg-case-desc">{k.desc}</p>
+        </div>
       </article>
     </ScaleBox>
   );
@@ -90,7 +103,7 @@ export function CrockedglassHome() {
           hero={
             <section className="cg-hero" aria-labelledby="cg-hero-title">
               <div className="cg-wrap cg-hero-copy">
-                <h1 id="cg-hero-title">Find 40+ hot leads on your first day with Cnvrted.</h1>
+                <h1 id="cg-hero-title">Get <span className="cg-hl">40+ hot leads</span> in your first month with Cnvrted.</h1>
                 <p>Cnvrted finds brands that are launching, rebranding and hiring for growth, and tells you why each one needs a creative partner right now.</p>
                 <a className="cg-btn cg-btn--sm" href={DEMO_PATH}>Book Call</a>
               </div>
@@ -134,7 +147,7 @@ export function CrockedglassHome() {
             <h2 id="cg-cases-title" className="cg-h2">Case studies</h2>
             <p className="cg-lede">Real teams, real pipelines, and the conversations Cnvrted started for them.</p>
           </div>
-          <div className="cg-cases-row">{CASES.map((k) => <CaseCard key={k.brand} k={k} />)}</div>
+          <div className="cg-cases-row">{CASES.map((k) => <CaseCard key={k.slug} k={k} />)}</div>
         </section>
 
         {/* curated leads: pins while the story plays */}

@@ -21,7 +21,7 @@ export function BrainCard() {
     const W = 584, H = 481, DPR = cv.width / W, cx = 521, cy = 404, R = 230, N = 72, TAU = Math.PI * 2;
     const reduce = !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
     const img = new Image(); img.src = BG;
-    const off = new Float32Array(N), vel = new Float32Array(N), pts = Array.from({ length: N }, () => ({ x: 0, y: 0 }));
+    const off = new Float32Array(N), vel = new Float32Array(N), tgt = new Float32Array(N), pts = Array.from({ length: N }, () => ({ x: 0, y: 0 }));
     const ptr = { x: -999, y: -999, on: false, inside: false, moved: 0 };
     let emit = 0, hov = 0, core = 0, raf = 0, last = 0, vis = true;
     const cols = ["255,255,255", "255,218,190", "214,222,255", "255,240,222", "232,214,255"];
@@ -96,13 +96,21 @@ export function BrainCard() {
       for (let i = 0; i < N; i++) {
         const th = i / N * TAU;
         const base = (3 * Math.sin(3 * th + t * 1.3) + 2.2 * Math.sin(2 * th - t * 0.9 + 1) + 1.5 * Math.sin(5 * th + t * 2.1)) * (1 + hov * 1.4) * sf;
-        const df = wrap(th - phi), pull = reduce ? 0 : 24 * prox * Math.exp(-df * df / (2 * 0.42 * 0.42));
-        const lap = off[(i + N - 1) % N] + off[(i + 1) % N] - 2 * off[i];
-        vel[i] += ((base + pull - off[i]) * 0.05 + lap * 0.2) * k;
-        vel[i] *= Math.pow(0.88, k);
+        const df = wrap(th - phi);
+        tgt[i] = base + (reduce ? 0 : 24 * prox * Math.exp(-df * df / (2 * 0.42 * 0.42)));
+      }
+      // The edge spring is only stable for steps up to ~2.1 frames. A slow frame (busy first load,
+      // 30fps power-saving browsers) used to blow the orb apart, so step it at most one frame at a time.
+      const steps = Math.ceil(k), h = k / steps, damp = Math.pow(0.88, h);
+      for (let s = 0; s < steps; s++) {
+        for (let i = 0; i < N; i++) {
+          const lap = off[(i + N - 1) % N] + off[(i + 1) % N] - 2 * off[i];
+          vel[i] = (vel[i] + ((tgt[i] - off[i]) * 0.05 + lap * 0.2) * h) * damp;
+        }
+        for (let i = 0; i < N; i++) off[i] += vel[i] * h;
       }
       for (let i = 0; i < N; i++) {
-        off[i] += vel[i] * k;
+        if (!Number.isFinite(off[i])) { off[i] = 0; vel[i] = 0; } // never let one bad frame lose the orb for good
         const th2 = i / N * TAU, rr = R + off[i];
         pts[i].x = cx + Math.cos(th2) * rr; pts[i].y = cy + Math.sin(th2) * rr;
       }

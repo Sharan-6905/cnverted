@@ -15,7 +15,6 @@ import { CgFaq } from "./faq";
 import { CgFooter } from "./site-footer";
 import { ScaleBox } from "./scale-box";
 import { UserStories } from "./user-stories";
-import { HeroGlow } from "./hero-glow";
 import { PageDots } from "./page-dots";
 import { ClientPile, type PileClient } from "./client-pile";
 import { CrossedFingers } from "./crossed-fingers";
@@ -86,10 +85,9 @@ export function CrockedglassHome() {
         {/* hero + app window, one pinned screen: the photo card under the copy opens to full-bleed as you scroll and
             the window rises into it (the save.design reveal) */}
         <SplashWindow
-          // hero: soft colour fields on the right, clean white behind the copy
+          // hero: the copy on plain white
           hero={
             <section className="cg-hero" aria-labelledby="cg-hero-title">
-              <HeroGlow />
               <div className="cg-wrap cg-hero-copy">
                 <h1 id="cg-hero-title">Find 40+ hot leads on your first day with Cnvrted.</h1>
                 <p>Cnvrted finds brands that are launching, rebranding and hiring for growth, and tells you why each one needs a creative partner right now.</p>

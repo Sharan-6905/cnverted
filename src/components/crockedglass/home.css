@@ -13,10 +13,10 @@
   overflow-x: clip; /* clip, not hidden: keeps position: sticky working for the pinned section */
   position: relative; isolation: isolate; /* containing block + stacking context for .cg-page-dots (z-index -1) */
 }
-/* margin dots (page-dots.tsx): the 14px paper-grey grid, shown only in the side margins and fading out at the
-   content column's edge (1184px, as .cg-wrap), so below ~1220px wide there are no margins and nothing shows.
+/* margin dots (page-dots.tsx): the 14px paper-grey grid, full strength from 680px out from the centre and fading
+   to nothing 440px from it, so it reaches in past the content column's edge (1184px, as .cg-wrap) a little.
    The <i> is the same grid in the accent, revealed in a soft circle around the mouse. */
-.cg-page-dots { --gut: linear-gradient(90deg, #000 0, rgb(0 0 0 / .5) calc(50% - 680px), transparent calc(50% - 600px), transparent calc(50% + 600px), rgb(0 0 0 / .5) calc(50% + 680px), #000 100%);
+.cg-page-dots { --gut: linear-gradient(90deg, #000 0, #000 calc(50% - 680px), rgb(0 0 0 / .5) calc(50% - 540px), transparent calc(50% - 440px), transparent calc(50% + 440px), rgb(0 0 0 / .5) calc(50% + 540px), #000 calc(50% + 680px), #000 100%);
   position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: radial-gradient(circle, #cbc7bd 1.2px, transparent 1.6px) 0 0 / 14px 14px;
   -webkit-mask-image: var(--gut); mask-image: var(--gut); }

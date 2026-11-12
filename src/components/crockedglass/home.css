@@ -82,7 +82,15 @@
 /* hero + app window share one pinned screen (splash-window.tsx). The photo card under the copy is clipped by
    --cg-card-clip, which the scroll opens to full-bleed */
 .cg-splash-run { position: relative; }
-.cg-splash-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.cg-splash-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #fafafa; }
+/* the hero's dot field (hero-dots.tsx), after ramp.com's: it fades in from the top so the header sits on clean
+   paper, and fades back into the page over its last 200px, just above the photo card */
+.cg-hero-dots { position: absolute; top: 0; left: 0; right: 0; height: var(--cg-dots-h, 66svh); z-index: 0; pointer-events: none; }
+.cg-hero-dots canvas { display: block; width: 100%; height: 100%; touch-action: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .35) 18%, #000 45%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .35) 18%, #000 45%); }
+.cg-hero-dots::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 200px; pointer-events: none;
+  background: linear-gradient(0deg, #fafafa 10.91%, rgb(250 250 250 / 0) 45%); }
 .cg-splash-hero { position: relative; z-index: 2; will-change: opacity, transform; }
 .cg-splash-hero .cg-hero { padding: 150px 0 0; }
 /* the copy lines up with the photo card's left edge as it starts (52px: splash-window.tsx's 20 + 32px insets) */

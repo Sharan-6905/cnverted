@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { HeroDots } from "./hero-dots";
 
 /** Scroll (in screen heights) over which the photo card opens to full-bleed and the window rises into place. */
 const OPEN = 0.96;
@@ -42,6 +43,8 @@ export function SplashWindow({ hero, children }: { hero: ReactNode; children: Re
       // the card starts just under the copy (its Book Call button), but always leaves a good slice of photo showing
       const textBottom = (cp.querySelector(".cg-btn") ?? cp).getBoundingClientRect().bottom - pn.getBoundingClientRect().top;
       top0 = Math.round(Math.min(textBottom + 48, vh * 0.66));
+      // the dot field runs down to where the card starts; the card covers it as it opens
+      pn.style.setProperty("--cg-dots-h", `${top0}px`);
       side0 = narrow ? 0 : 20;
       panelSide0 = narrow ? 0 : 32;
     };
@@ -83,6 +86,7 @@ export function SplashWindow({ hero, children }: { hero: ReactNode; children: Re
   return (
     <div ref={run} className="cg-splash-run" style={{ height: `calc(100svh + ${(OPEN + HOLD) * 100}svh)` }}>
       <div ref={panel} className="cg-splash-sticky">
+        <HeroDots />
         <div ref={copy} className="cg-splash-hero">{hero}</div>
         <div ref={card} className="cg-splash">
           <div className="cg-splash-photo" aria-hidden="true" />

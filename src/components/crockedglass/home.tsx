@@ -53,7 +53,7 @@ function CaseCard({ k }: { k: (typeof CASES)[number] }) {
   return (
     <ScaleBox width={530} height={434} className="cg-case-cell">
       <article className="cg-case">
-        <img src={k.img} alt="" />
+        <img src={k.img} alt="" loading="lazy" decoding="async" />
         <span className="cg-case-back" />
         <div className="cg-case-sheet" aria-hidden="true">
           <span className="cg-case-mark" style={{ background: k.c }}>{k.mark}</span>
@@ -114,7 +114,7 @@ export function CrockedglassHome() {
           </div>
           <div className="cg-grid3">
             <article className="cg-card cg-card--photo">
-              <img src="/crockedglass/train-brain.webp" alt="" />
+              <img src="/crockedglass/train-brain.webp" alt="" loading="lazy" decoding="async" />
               <h3>Train your cnvrted brain</h3>
             </article>
             <ChatCard />
@@ -152,7 +152,7 @@ export function CrockedglassHome() {
             <StackSphere />
             <AgentsCard />
             <article className="cg-card cg-card--photo">
-              <img src="/crockedglass/train-brain.webp" alt="" />
+              <img src="/crockedglass/train-brain.webp" alt="" loading="lazy" decoding="async" />
               <h3>Meetings booked, CRM updated</h3>
             </article>
           </div>
@@ -171,7 +171,7 @@ export function CrockedglassHome() {
 
         <CgFaq />
 
-        <div className="cg-tree"><img src="/crockedglass/tree.webp" alt="" width={364} height={380} draggable={false} /></div>
+        <div className="cg-tree"><img src="/crockedglass/tree.webp" alt="" width={364} height={380} loading="lazy" decoding="async" draggable={false} /></div>
       </main>
       <CgFooter />
     </div>

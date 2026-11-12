@@ -86,7 +86,7 @@ export function StackSphere() {
         {DOTS.map((_, i) => <span key={`d${i}`} data-i={i} className="cg-sph-pt cg-sph-dot" />)}
         {LOGO_PTS.map((l, i) => (
           <span key={`l${i}`} data-i={i} data-logo="1" className="cg-sph-pt cg-sph-logo">
-            <img src={l.src} alt={i < 7 ? l.name : ""} draggable={false} />
+            <img src={l.src} alt={i < 7 ? l.name : ""} loading="lazy" decoding="async" draggable={false} />
           </span>
         ))}
       </div>

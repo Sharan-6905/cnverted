@@ -45,7 +45,7 @@
 .cg-btn:focus-visible { outline: 2px solid var(--cg-accent); outline-offset: 3px; }
 .cg-btn--sm { height: 36px; }
 /* paper grain over the blue, the same texture and blend as the header's Get Started (header.css .cv-cta) */
-.cg-btn::before, .cg-hl::before { content: ""; position: absolute; inset: -60px -30px; z-index: -1; pointer-events: none;
+.cg-btn::before { content: ""; position: absolute; inset: -60px -30px; z-index: -1; pointer-events: none;
   background: url("/figma/redesign/paper-texture.webp") center / cover; mix-blend-mode: soft-light; opacity: .6; }
 .cg-h2 { margin: 0; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: 75px; color: #000; }
 .cg-lede { font-size: 20px; line-height: 24px; color: var(--cg-muted); }
@@ -79,11 +79,8 @@
 .cg-hero { position: relative; z-index: 2; padding: 220px 0 120px; }
 .cg-hero-copy { position: relative; }
 .cg-hero h1 { margin: 0; max-width: 900px; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: normal; color: #000; text-wrap: balance; }
-/* "40+ hot leads": the CTA's blue pill as a sticker on the headline (accent fill, paper grain, inset light, the
-   offset black shadow), tipped slightly so it reads as stuck on rather than typeset */
-.cg-hl { position: relative; isolation: isolate; overflow: hidden; display: inline-block; padding: 0 .22em .04em;
-  margin: 0 .04em; border-radius: .26em; background: var(--cg-accent); color: #fff; white-space: nowrap;
-  box-shadow: -3px 4px 0 0 #000, inset 2px 4px 9.2px 0 rgba(255,255,255,.25); transform: rotate(-1.5deg); }
+/* "40+ hot leads": just the accent colour, so it stands out without looking like a button */
+.cg-hl { color: var(--cg-accent); }
 .cg-hero p { margin-top: 24px; max-width: 532px; font-size: 16px; line-height: 1.5; color: #7c7c7c; }
 .cg-hero .cg-btn { margin-top: 32px; }
 /* one screen, pinned; the window is sized to fit inside it (the demo video is 16:9) */

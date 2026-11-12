@@ -154,6 +154,8 @@
 }
 .cv-cta:active { transform: translateY(0); box-shadow: -1px 1px 0 0 var(--cv-btn-shadow); }
 .cv-cta:focus-visible { outline: 2px solid var(--cv-blue); outline-offset: 3px; }
+/* home.css's `.cg a { color: inherit }` (0,1,1) outranks `.cv-cta` (0,1,0) and turned the label dark */
+.cg .cv-cta { color: #fff; }
 
 /* Resources dropdown */
 .cv-dropdown { position: relative; }

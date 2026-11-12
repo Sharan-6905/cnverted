@@ -286,8 +286,8 @@
 .cg-cases { margin-top: 200px; display: flex; flex-direction: column; gap: 42px; }
 .cg-cases-row { display: flex; gap: 31px; justify-content: center; }
 .cg-case-cell { flex: 1 1 0; max-width: 530px; }
-.cg-case { position: relative; width: 530px; height: 500px; }
-.cg-case > img { position: absolute; left: 0; top: 0; width: 531px; height: 340px; border-radius: 20px; object-fit: cover; }
+.cg-case { position: relative; width: 530px; height: 434px; }
+.cg-case > img { position: absolute; left: 0; top: 0; width: 531px; height: 340px; border-radius: 20px; }
 .cg-case-back { position: absolute; left: 51px; top: 38px; width: 428px; height: 259px; border-radius: 14px; background: rgba(255,255,255,.7); box-shadow: 0 1px 2px rgba(16,24,40,.06); }
 .cg-case-sheet { position: absolute; left: 33px; top: 48px; width: 464px; height: 258px; border-radius: 14px; background: #fff; box-shadow: 0 1px 1px rgba(16,24,40,.06); }
 .cg-case-sheet > * { position: absolute; }
@@ -302,10 +302,8 @@
 .cg-case-small { left: 24px; top: 129px; font-size: 14px; opacity: .8; }
 .cg-case-link { left: 369px; top: 114px; width: 147px; height: 32px; padding: 0 12px; display: flex; align-items: center; justify-content: space-between; border-radius: 16px; background: rgba(255,255,255,.55); font-weight: 500; font-size: 13px; transition: background .2s; }
 .cg-case-link:hover { background: rgba(255,255,255,.85); }
-/* the real titles run to two lines, so the title and blurb flow under the cover instead of sitting at fixed offsets */
-.cg-case-text { position: absolute; left: 0; top: 356px; width: 510px; display: flex; flex-direction: column; gap: 8px; }
-.cg-case h3 { margin: 0; font-family: var(--cg-display); font-weight: 500; font-size: 24px; letter-spacing: -.2px; line-height: normal; color: #1e1e1e; }
-.cg-case-desc { width: 492px; font-size: 14px; line-height: 22px; color: #8b8b93; }
+.cg-case h3 { position: absolute; left: 0; top: 360px; margin: 0; font-family: var(--cg-display); font-weight: 500; font-size: 24px; letter-spacing: -.2px; line-height: normal; color: #1e1e1e; }
+.cg-case-desc { position: absolute; left: 0; top: 390px; width: 492px; font-size: 14px; line-height: 22px; color: #8b8b93; }
 
 /* ---------- curated leads (pinned scroll story) ---------- */
 .cg-cl { position: relative; margin-top: 128px; }

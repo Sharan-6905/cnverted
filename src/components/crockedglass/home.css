@@ -78,7 +78,7 @@
 .cg-hero h1 { margin: 0; max-width: 821px; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: normal; color: #000; text-wrap: balance; }
 .cg-hero p { margin-top: 24px; max-width: 532px; font-size: 16px; line-height: 1.5; color: #7c7c7c; }
 .cg-hero .cg-btn { margin-top: 32px; }
-/* one screen, pinned; the window is sized to fit inside it (the screenshot is 1213 x 857) */
+/* one screen, pinned; the window is sized to fit inside it (the demo video is 16:9) */
 /* hero + app window share one pinned screen (splash-window.tsx). The photo card under the copy is clipped by
    --cg-card-clip, which the scroll opens to full-bleed */
 .cg-splash-run { position: relative; }
@@ -111,12 +111,14 @@
 .cg-splash-photo { position: absolute; inset: 0; transform: scale(1.1);
   background: url("/crockedglass/splash-night.webp") center / cover no-repeat; }
 .cg-splash-stage { position: relative; height: 100%; display: grid; place-items: center; padding: 13svh 24px; }
-.cg-splash-win { position: relative; width: min(100%, calc(74svh * 1213 / 857)); transform-origin: 50% 100%;
+.cg-splash-win { position: relative; width: min(100%, calc(74svh * 16 / 9)); transform-origin: 50% 100%;
   will-change: transform; }
 
 /* the screenshot: a 12px card like the rest of the page; its content stops mid-card at the bottom, so that edge
    dissolves into the background instead of being cut off */
-.cg-splash-img { display: block; width: 100%; height: auto; border-radius: 12px; }
+/* the app demo video (16:9, app-demo-video.tsx); no player chrome, so nothing on it is clickable */
+.cg-splash-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 12px;
+  object-fit: cover; background: #f3f1ea; pointer-events: none; }
 
 /* ---------- open web → booked meetings ---------- */
 .cg-feat { margin-top: 98px; }

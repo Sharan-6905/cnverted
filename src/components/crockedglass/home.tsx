@@ -2,6 +2,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { bricolage } from "./fonts";
 import Header from "./Header";
 import { SplashWindow } from "./splash-window";
+import { AppDemoVideo } from "./app-demo-video";
 import { HeroQuote } from "./hero-quote";
 import { BrainCard } from "./brain-card";
 import { WorkflowCard } from "./workflow-card";
@@ -96,8 +97,7 @@ export function CrockedglassHome() {
             </section>
           }
         >
-          <img className="cg-splash-img" src="/crockedglass/dashboard.webp" width={1213} height={857}
-            alt="The Cnvrted app: build a target, cold or intent list, For You recommendations, and communities matched to your ICP" />
+          <AppDemoVideo />
         </SplashWindow>
 
         {/* open web → booked meetings */}

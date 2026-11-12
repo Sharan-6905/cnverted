@@ -97,6 +97,14 @@
 .cg-splash-hero .cg-hero-copy { width: auto; margin-inline: 0; padding-inline: 52px; }
 /* under 720px the card is full width from the start (splash-window.tsx), so the copy keeps the page gutter */
 @media (max-width: 719px) { .cg-splash-hero .cg-hero-copy { padding-inline: 16px; } }
+/* the header lines up on the same 52px edge as the copy and the card: the logo's ink (its image has 5px of
+   transparent margin, so 47px) and the Get Started button's right edge. header.css's row is 32px; the condensed
+   pill slides each half in by --cv-inset from that 32px, so take the extra back off its translate */
+@media (min-width: 768px) {
+  .cg .cv-row { padding-inline: 47px 52px; }
+  .cg .cv-header[data-scrolled="true"] .cv-left { translate: calc(var(--cv-inset) + 4px - 15px) 0; }
+  .cg .cv-header[data-scrolled="true"] .cv-right { translate: calc(-1 * var(--cv-inset) - 4px + 20px) 0; }
+}
 .cg-splash { position: absolute; inset: 0; z-index: 1; overflow: hidden; background: #120d0b;
   clip-path: var(--cg-card-clip, inset(100% 0 0 0)); }
 /* the photo stays put; only the clip around it moves */

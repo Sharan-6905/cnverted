@@ -123,17 +123,23 @@
 /* ---------- open web → booked meetings ---------- */
 .cg-feat { margin-top: 98px; }
 .cg-feat-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; }
-.cg-quote { width: 259px; flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
-.cg-quote figure { margin: 0; width: 100%; min-height: 118px; padding: 12px; background: #fbfafa; border-radius: 12px; box-shadow: 0 4px 6px rgba(13,13,13,.04), 0 1px 1px rgba(13,13,13,.05); display: flex; flex-direction: column; gap: 10px; }
+/* the testimonials ticker (hero-quote.tsx): the list twice over, moving up by one copy per loop. Each card carries
+   its own bottom margin (not a flex gap) so both copies are exactly the same height and the loop is seamless */
+.cg-quote { width: 259px; height: 220px; flex: none; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); }
+.cg-quote-track { animation: cgQuoteUp 36s linear infinite; will-change: transform; }
+/* flow-root keeps the last card's bottom margin inside its copy, so both copies (and the -50% step) match */
+.cg-quote-set { display: flow-root; }
+.cg-quote:hover .cg-quote-track { animation-play-state: paused; }
+@keyframes cgQuoteUp { to { transform: translateY(-50%); } }
+.cg-quote figure { margin: 0 0 12px; width: 100%; min-height: 118px; padding: 12px; background: #fbfafa; border-radius: 12px; box-shadow: 0 4px 6px rgba(13,13,13,.04), 0 1px 1px rgba(13,13,13,.05); display: flex; flex-direction: column; gap: 10px; }
 .cg-quote-who { display: flex; align-items: center; gap: 7px; }
 .cg-quote-av { width: 37px; height: 37px; flex: none; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #fdf3e1; color: #a16207; font-weight: 600; font-size: 13px; overflow: hidden; }
 .cg-quote-av img { width: 100%; height: 100%; object-fit: cover; }
 .cg-quote-name { font-family: var(--cg-display); font-size: 16px; line-height: 16px; color: var(--cg-ink); }
 .cg-quote-role { margin-top: 7px !important; font-size: 12px; line-height: 16px; color: #888; }
 .cg-quote blockquote { margin: 0; font-size: 12px; line-height: 16px; color: #2b2a26; }
-.cg-quote-nav { display: flex; gap: 10px; }
-.cg-quote-nav button { width: 44px; height: 44px; border-radius: 22px; border: 1px solid #e2e2e8; background: #fcfcfc; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity .2s; }
-.cg-quote-nav button:disabled { opacity: .3; cursor: default; }
 .cg-feat .cg-grid2 { margin-top: 64px; }
 .cg-feat .cg-grid3 { margin-top: 24px; }
 
@@ -489,7 +495,6 @@
   .cg-h2, .cg-head--center .cg-h2 { font-size: 44px; line-height: 1.15; white-space: normal; }
   .cg-orka-hello h2 { font-size: 44px; }
   .cg-feat-top, .cg-buffed-top { flex-direction: column; align-items: flex-start; }
-  .cg-quote { align-items: flex-start; }
   .cg-grid2 { grid-template-columns: 1fr; }
   .cg-ft-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cg-ft-top { flex-direction: column; }
@@ -513,6 +518,6 @@
 @media (prefers-reduced-motion: reduce) {
   .cg-frag, .cg-frag.out, .cg-swap-out, .cg-swap-in, .cg-bar-fill, .cg-type, .cg-fblink, .cg-wiggle, .cg-sweep, .cg-fpop, .cg-ring, .cg-ping, .cg-slot-pick, .cg-draw, .cg-dot-on {
     animation-duration: .01s !important; animation-iteration-count: 1 !important; animation-delay: 0s !important; }
-  .cg-us-ping, .cg-tree img, .cg-spin, .cg-st-spin, .cg-pulse, .cg-chdot, .cg-caret { animation: none; }
+  .cg-quote-track, .cg-us-ping, .cg-tree img, .cg-spin, .cg-st-spin, .cg-pulse, .cg-chdot, .cg-caret { animation: none; }
   .cg-lw-row, .cg-wf-n, .cg-ag-cursor, .cg-us-bub, .cg-fill-ch { transition: none; }
 }

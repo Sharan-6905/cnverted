@@ -2,6 +2,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import { bricolage } from "./fonts";
 import Header from "./Header";
 import { SplashWindow } from "./splash-window";
+import { AppDemoVideo } from "./app-demo-video";
 import { HeroQuote } from "./hero-quote";
 import { BrainCard } from "./brain-card";
 import { WorkflowCard } from "./workflow-card";
@@ -15,7 +16,6 @@ import { CgFaq } from "./faq";
 import { CgFooter } from "./site-footer";
 import { ScaleBox } from "./scale-box";
 import { UserStories } from "./user-stories";
-import { HeroGlow } from "./hero-glow";
 import { PageDots } from "./page-dots";
 import { ClientPile, type PileClient } from "./client-pile";
 import { CrossedFingers } from "./crossed-fingers";
@@ -83,20 +83,21 @@ export function CrockedglassHome() {
       <PageDots />
       <Header />
       <main id="main-content">
-        {/* hero: soft colour fields on the right, clean white behind the copy */}
-        <section className="cg-hero" aria-labelledby="cg-hero-title">
-          <HeroGlow />
-          <div className="cg-wrap cg-hero-copy">
-            <h1 id="cg-hero-title">Find 40+ hot leads on your first day with Cnvrted.</h1>
-            <p>Cnvrted finds brands that are launching, rebranding and hiring for growth, and tells you why each one needs a creative partner right now.</p>
-            <a className="cg-btn cg-btn--sm" href={DEMO_PATH}>Book Call</a>
-          </div>
-        </section>
-
-        {/* the app window, full width: ink splashes out from behind it once you've scrolled a little way in */}
-        <SplashWindow>
-          <img className="cg-splash-img" src="/crockedglass/dashboard.webp" width={1213} height={857}
-            alt="The Cnvrted app: build a target, cold or intent list, For You recommendations, and communities matched to your ICP" />
+        {/* hero + app window, one pinned screen: the photo card under the copy opens to full-bleed as you scroll and
+            the window rises into it (the save.design reveal) */}
+        <SplashWindow
+          // hero: the copy on plain white
+          hero={
+            <section className="cg-hero" aria-labelledby="cg-hero-title">
+              <div className="cg-wrap cg-hero-copy">
+                <h1 id="cg-hero-title">Find 40+ hot leads on your first day with Cnvrted.</h1>
+                <p>Cnvrted finds brands that are launching, rebranding and hiring for growth, and tells you why each one needs a creative partner right now.</p>
+                <a className="cg-btn cg-btn--sm" href={DEMO_PATH}>Book Call</a>
+              </div>
+            </section>
+          }
+        >
+          <AppDemoVideo />
         </SplashWindow>
 
         {/* open web → booked meetings */}

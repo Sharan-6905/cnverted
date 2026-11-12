@@ -1,86 +1,99 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { HeroDots } from "./hero-dots";
 
-/** Extra scroll the section stays pinned for while the window comes in. */
-const PIN = 700;
+/** Scroll (in screen heights) over which the photo card opens to full-bleed and the window rises into place. */
+const OPEN = 0.96;
+/** Extra pinned scroll after it's fully open, before the section lets go (screen heights). */
+const HOLD = 0.2;
+/** The outer rounded inset closes a little sooner than the card's own (at OPEN / 1.2). */
+const PANEL_RATE = 1.2;
 
 const clamp = (v: number) => Math.max(0, Math.min(1, v));
-const smooth = (a: number, b: number, v: number) => { const t = clamp((v - a) / (b - a)); return t * t * (3 - 2 * t); };
 
 /**
- * The app window, one screen tall and pinned, over a photo seen through frosted glass. All of it is tied to the
- * scroll, in order: frosted glass, already showing below the hero; the photo unblurs; the screenshot rises in over the
- * sharp photo; the photo blurs back to frosted glass before the section lets go. Scrolling back up reverses it.
+ * The hero and the app window share one pinned screen, the same scroll-linked reveal as save.design:
  *
- * The unblur steps through three pre-blurred copies of the photo (8, 20, 40px) stacked on the sharp one, plus a
- * milky tint, so each frame only changes opacities (an animated blur or backdrop-filter would repaint the whole
- * screen every frame).
- * Progress is eased toward the scroll position each frame so it glides instead of stepping with the wheel.
+ * - the hero copy sits on top; the night-street photo is clipped to a rounded card just under it
+ *   (`inset(top side 0 side round r)`)
+ * - as you scroll, the clip opens linearly to full-bleed. The photo itself never moves; the opening clip is what
+ *   carries it up the screen
+ * - the app window rises from below (translateY + scale 0.82, anchored at its bottom edge) to its resting place on
+ *   the same timeline
+ * - the copy fades and lifts away in the first ~100px
+ *
+ * Everything is a pure function of scroll position, so scrolling back reverses it exactly. On narrow screens the
+ * card has no side inset (full width from the start).
  */
-export function SplashWindow({ children }: { children: ReactNode }) {
+export function SplashWindow({ hero, children }: { hero: ReactNode; children: ReactNode }) {
   const run = useRef<HTMLDivElement>(null);
-  const blurs = useRef<(HTMLDivElement | null)[]>([]);
-  const tint = useRef<HTMLDivElement>(null);
+  const panel = useRef<HTMLDivElement>(null);
+  const copy = useRef<HTMLDivElement>(null);
+  const card = useRef<HTMLDivElement>(null);
   const win = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const el = run.current, t = tint.current, w = win.current, layers = blurs.current;
-    if (!el || !t || !w || layers.some((l) => !l)) return;
-    const reduce = !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    let target = 0, shown = 0, raf = 0;
-    const paint = (p: number) => {
-      // 1. the frosted glass is there from the start: the section tucks up under the hero (see .cg-splash-run), so
-      //    its blurred colours already rise from the bottom of the first screen, fading into the page at the top
-      // 2. the photo unblurs (0.08-0.36), 4. and blurs again at the end (0.7-0.95)
-      const blur = 1 - smooth(0.08, 0.36, p) * (1 - smooth(0.7, 0.95, p));
-      // blur 0..1 steps through the pre-blurred copies, each fading in on top of the one below
-      const level = blur * layers.length;
-      layers.forEach((l, i) => { l!.style.opacity = clamp(level - i).toFixed(3); });
-      // the frosted sheen goes with the blur: glassy at both ends, gone while the photo is sharp. Lighter at the
-      // start so the blurred photo's colours already show through; milkier at the end as the section hands off
-      t.style.opacity = (blur * (p < 0.5 ? 0.4 : 0.85)).toFixed(3);
-      // 3. only once the photo is sharp, the screenshot fades and rises in (0.36-0.62)
-      const o = smooth(0.36, 0.56, p), z = smooth(0.36, 0.62, p);
-      w.style.opacity = o.toFixed(3);
-      w.style.transform = `translateY(${((1 - z) * 60).toFixed(1)}px) scale(${(1.1 - 0.1 * z).toFixed(4)})`;
-      w.style.visibility = o < 0.002 ? "hidden" : "visible";
+    const el = run.current, pn = panel.current, cp = copy.current, cd = card.current, w = win.current;
+    if (!el || !pn || !cp || !cd || !w) return;
+
+    let top0 = 400, side0 = 20, panelSide0 = 32, raf = 0;
+    const measure = () => {
+      const vh = window.innerHeight, narrow = window.innerWidth < 720;
+      // the card starts just under the copy (its Book Call button), but always leaves a good slice of photo showing
+      const textBottom = (cp.querySelector(".cg-btn") ?? cp).getBoundingClientRect().bottom - pn.getBoundingClientRect().top;
+      top0 = Math.round(Math.min(textBottom + 48, vh * 0.66));
+      // the dot field runs down to where the card starts; the card covers it as it opens
+      pn.style.setProperty("--cg-dots-h", `${top0}px`);
+      side0 = narrow ? 0 : 20;
+      panelSide0 = narrow ? 0 : 32;
     };
-    const read = () => {
-      const r = el.getBoundingClientRect(), vh = window.innerHeight;
-      // starts while the section is still coming up the screen (top at 60% of it), ends as the pin releases
-      target = clamp((vh * 0.6 - r.top) / (vh * 0.6 + PIN));
-      if (reduce) { shown = target; paint(shown); return; }
-      if (!raf) raf = requestAnimationFrame(tick);
+    const paint = () => {
+      raf = 0;
+      const vh = window.innerHeight;
+      const scrolled = Math.max(0, -el.getBoundingClientRect().top);
+      const p = clamp(scrolled / (vh * OPEN));
+      const q = 1 - p, qp = 1 - clamp(p * PANEL_RATE);
+
+      // save.design clips the panel (rounded, 32px sides) and the card inside it (20px sides) separately; on our white
+      // page the panel's clip only shows on the photo, and would crop the headline, so both insets go on the card
+      const side = (side0 * q + panelSide0 * qp).toFixed(2);
+      cd.style.setProperty("--cg-card-clip", `inset(${(top0 * q).toFixed(2)}px ${side}px 0px ${side}px round ${(12 * qp).toFixed(2)}px)`);
+      w.style.transform = p >= 1 ? "none" : `translateY(${(top0 * 0.7 * q).toFixed(2)}px) scale(${(0.82 + 0.18 * p).toFixed(5)})`;
+
+      // the copy is gone within the first ~100px of scroll
+      const f = clamp(scrolled / 100);
+      cp.style.opacity = (1 - f).toFixed(3);
+      cp.style.transform = f ? `translateY(${(-0.305 * Math.min(scrolled, 100)).toFixed(1)}px)` : "none";
+      cp.style.pointerEvents = f >= 1 ? "none" : "auto";
     };
-    let last = 0;
-    const tick = (now: number) => {
-      const dt = last ? Math.min(64, now - last) : 16; last = now;
-      shown += (target - shown) * (1 - Math.pow(1 - 0.12, dt / 16.7));
-      if (Math.abs(target - shown) < 0.0005) shown = target;
-      paint(shown);
-      raf = shown !== target ? requestAnimationFrame(tick) : (last = 0, 0);
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(paint); };
+    const onResize = () => { measure(); onScroll(); };
+
+    measure();
+    paint();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+    // fonts swap in after first paint and can move the button; re-measure once they're ready
+    document.fonts?.ready.then(onResize).catch(() => {});
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
     };
-    paint(0);
-    read();
-    window.addEventListener("scroll", read, { passive: true });
-    window.addEventListener("resize", read, { passive: true });
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("scroll", read); window.removeEventListener("resize", read); };
   }, []);
 
   return (
-    <div ref={run} className="cg-splash-run" style={{ height: `calc(100svh + ${PIN}px)` }}>
-      <div className="cg-splash-sticky">
-        <section className="cg-splash">
-          <div className="cg-glass" aria-hidden="true">
-            <div className="cg-glass-photo" />
-            {[0, 1, 2].map((i) => (
-              <div key={i} ref={(n) => { blurs.current[i] = n; }} className={`cg-glass-photo cg-glass-blur cg-glass-blur--${i}`} />
-            ))}
-            <div ref={tint} className="cg-glass-tint" />
+    <div ref={run} className="cg-splash-run" style={{ height: `calc(100svh + ${(OPEN + HOLD) * 100}svh)` }}>
+      <div ref={panel} className="cg-splash-sticky">
+        <HeroDots />
+        <div ref={copy} className="cg-splash-hero">{hero}</div>
+        <div ref={card} className="cg-splash">
+          <div className="cg-splash-photo" aria-hidden="true" />
+          <div className="cg-splash-stage">
+            <div ref={win} className="cg-splash-win">{children}</div>
           </div>
-          <div ref={win} className="cg-splash-win">{children}</div>
-        </section>
+        </div>
       </div>
     </div>
   );

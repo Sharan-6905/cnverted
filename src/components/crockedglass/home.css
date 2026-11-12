@@ -13,10 +13,10 @@
   overflow-x: clip; /* clip, not hidden: keeps position: sticky working for the pinned section */
   position: relative; isolation: isolate; /* containing block + stacking context for .cg-page-dots (z-index -1) */
 }
-/* margin dots (page-dots.tsx): the 14px paper-grey grid, shown only in the side margins and fading out at the
-   content column's edge (1184px, as .cg-wrap), so below ~1220px wide there are no margins and nothing shows.
+/* margin dots (page-dots.tsx): the 14px paper-grey grid, full strength from 680px out from the centre and fading
+   to nothing 440px from it, so it reaches in past the content column's edge (1184px, as .cg-wrap) a little.
    The <i> is the same grid in the accent, revealed in a soft circle around the mouse. */
-.cg-page-dots { --gut: linear-gradient(90deg, #000 0, rgb(0 0 0 / .5) calc(50% - 680px), transparent calc(50% - 600px), transparent calc(50% + 600px), rgb(0 0 0 / .5) calc(50% + 680px), #000 100%);
+.cg-page-dots { --gut: linear-gradient(90deg, #000 0, #000 calc(50% - 680px), rgb(0 0 0 / .5) calc(50% - 540px), transparent calc(50% - 440px), transparent calc(50% + 440px), rgb(0 0 0 / .5) calc(50% + 540px), #000 calc(50% + 680px), #000 100%);
   position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: radial-gradient(circle, #cbc7bd 1.2px, transparent 1.6px) 0 0 / 14px 14px;
   -webkit-mask-image: var(--gut); mask-image: var(--gut); }
@@ -74,80 +74,72 @@
 
 /* ---------- hero ---------- */
 .cg-hero { position: relative; z-index: 2; padding: 220px 0 120px; }
-/* hero glow: blurred colour fields on the right; the mask keeps the copy column (left) and the bottom edge clear */
-.cg-hero-glow { position: absolute; inset: 0; overflow: hidden; pointer-events: none;
-  -webkit-mask-image: radial-gradient(ellipse 55% 75% at 82% 42%, #000 35%, transparent 100%);
-  mask-image: radial-gradient(ellipse 55% 75% at 82% 42%, #000 35%, transparent 100%); }
-/* each <i> leans towards the pointer (--gx/--gy, set by hero-glow.tsx) by its own --d; its <span> does the drift */
-.cg-hero-glow { --gx: 0; --gy: 0; }
-.cg-hero-glow i { position: absolute; --d: 40px;
-  transform: translate(calc(var(--gx) * var(--d)), calc(var(--gy) * var(--d)));
-  transition: transform 1.4s cubic-bezier(.16, 1, .3, 1); }
-.cg-hero-glow span { display: block; width: 100%; height: 100%; border-radius: 50%; filter: blur(70px); will-change: transform; animation: cgGlowDrift 22s ease-in-out infinite alternate; }
-/* brand accent, then the ink splash's pink and orange (InkSplashReveal.css) */
-.cg-hero-glow .cg-hero-glow-a { --d: 56px; width: 540px; height: 440px; right: 4%; top: 6%; }
-.cg-hero-glow-a span { background: rgb(79 101 245 / .34); }
-.cg-hero-glow .cg-hero-glow-b { --d: 32px; width: 420px; height: 360px; right: 26%; top: 34%; }
-.cg-hero-glow-b span { background: rgb(220 159 178 / .38); animation-duration: 27s; animation-delay: -9s; }
-.cg-hero-glow .cg-hero-glow-c { --d: 80px; width: 380px; height: 320px; right: 0; top: 46%; }
-.cg-hero-glow-c span { background: rgb(255 154 94 / .30); animation-duration: 31s; animation-delay: -17s; }
-@keyframes cgGlowDrift {
-  0% { transform: translate(0, 0) scale(1); }
-  50% { transform: translate(-40px, 30px) scale(1.08); }
-  100% { transform: translate(30px, -25px) scale(.95); }
-}
 .cg-hero-copy { position: relative; }
 .cg-hero h1 { margin: 0; max-width: 821px; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: normal; color: #000; text-wrap: balance; }
 .cg-hero p { margin-top: 24px; max-width: 532px; font-size: 16px; line-height: 1.5; color: #7c7c7c; }
 .cg-hero .cg-btn { margin-top: 32px; }
-/* one screen, pinned; the window is sized to fit inside it (the screenshot is 1213 x 857) */
+/* one screen, pinned; the window is sized to fit inside it (the demo video is 16:9) */
+/* hero + app window share one pinned screen (splash-window.tsx). The photo card under the copy is clipped by
+   --cg-card-clip, which the scroll opens to full-bleed */
 .cg-splash-run { position: relative; }
-/* tucked up under the hero (which sits above it, z-index 2) so the frosted glass shows below Book Call on first load */
-.cg-splash-run { margin-top: -12svh; }
-.cg-splash-sticky { position: sticky; top: 0; height: 100svh; }
-.cg-splash { position: relative; isolation: isolate; overflow: hidden; height: 100svh; display: grid; place-items: center;
-  padding: 13svh 24px; background: #fafafa; }
-.cg-splash-win { position: relative; z-index: 1; width: min(100%, calc(74svh * 1213 / 857)); will-change: transform, opacity;
-  transform-origin: 50% 60%; visibility: hidden; }
+.cg-splash-sticky { position: sticky; top: 0; height: 100svh; overflow: hidden; background: #fafafa; }
+/* the hero's dot field (hero-dots.tsx), after ramp.com's: it fades in from the top so the header sits on clean
+   paper, and fades back into the page over its last 200px, just above the photo card */
+.cg-hero-dots { position: absolute; top: 0; left: 0; right: 0; height: var(--cg-dots-h, 66svh); z-index: 0; pointer-events: none; }
+.cg-hero-dots canvas { display: block; width: 100%; height: 100%; touch-action: none;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .35) 18%, #000 45%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .35) 18%, #000 45%); }
+.cg-hero-dots::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 200px; pointer-events: none;
+  background: linear-gradient(0deg, #fafafa 10.91%, rgb(250 250 250 / 0) 45%); }
+.cg-splash-hero { position: relative; z-index: 2; will-change: opacity, transform; }
+.cg-splash-hero .cg-hero { padding: 150px 0 0; }
+/* the copy lines up with the photo card's left edge as it starts (52px: splash-window.tsx's 20 + 32px insets) */
+.cg-splash-hero .cg-hero-copy { width: auto; margin-inline: 0; padding-inline: 52px; }
+/* under 720px the card is full width from the start (splash-window.tsx), so the copy keeps the page gutter */
+@media (max-width: 719px) { .cg-splash-hero .cg-hero-copy { padding-inline: 16px; } }
+/* the header lines up on the same 52px edge as the copy and the card: the logo's ink (its image has 5px of
+   transparent margin, so 47px) and the Get Started button's right edge. header.css's row is 32px; the condensed
+   pill slides each half in by --cv-inset from that 32px, so take the extra back off its translate */
+@media (min-width: 768px) {
+  .cg .cv-row { padding-inline: 47px 52px; }
+  .cg .cv-header[data-scrolled="true"] .cv-left { translate: calc(var(--cv-inset) + 4px - 15px) 0; }
+  .cg .cv-header[data-scrolled="true"] .cv-right { translate: calc(-1 * var(--cv-inset) - 4px + 20px) 0; }
+}
+.cg-splash { position: absolute; inset: 0; z-index: 1; overflow: hidden; background: #120d0b;
+  clip-path: var(--cg-card-clip, inset(100% 0 0 0)); }
+/* the photo stays put; only the clip around it moves */
+.cg-splash-photo { position: absolute; inset: 0; transform: scale(1.1);
+  background: url("/crockedglass/splash-night.webp") center / cover no-repeat; }
+.cg-splash-stage { position: relative; height: 100%; display: grid; place-items: center; padding: 13svh 24px; }
+.cg-splash-win { position: relative; width: min(100%, calc(74svh * 16 / 9)); transform-origin: 50% 100%;
+  will-change: transform; }
 
-/* the photo behind glass. The whole stack fades into the page at the top and bottom (a long smoothstep-shaped fade,
-   30% of the height each way), so there's no edge where the glass starts */
-.cg-splash { --cg-fade-y: linear-gradient(to bottom, transparent 0%, rgb(0 0 0 / .03) 3%, rgb(0 0 0 / .1) 6%, rgb(0 0 0 / .22) 9.5%, rgb(0 0 0 / .38) 13%, rgb(0 0 0 / .55) 16.5%, rgb(0 0 0 / .72) 20%, rgb(0 0 0 / .86) 23.5%, rgb(0 0 0 / .95) 27%, #000 30%, #000 70%, rgb(0 0 0 / .95) 73%, rgb(0 0 0 / .86) 76.5%, rgb(0 0 0 / .72) 80%, rgb(0 0 0 / .55) 83.5%, rgb(0 0 0 / .38) 87%, rgb(0 0 0 / .22) 90.5%, rgb(0 0 0 / .1) 94%, rgb(0 0 0 / .03) 97%, transparent 100%); }
-.cg-glass { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
-  -webkit-mask-image: var(--cg-fade-y); mask-image: var(--cg-fade-y); }
-/* every copy is scaled up the same amount, so they line up and the blurred ones' soft edges sit off-screen */
-.cg-glass-photo { position: absolute; inset: 0; transform: scale(1.12);
-  background: url("/crockedglass/splash-street.webp") center / cover no-repeat; }
-/* the blur steps: each blurred once (static, so the browser caches it); only their opacity animates */
-.cg-glass-blur { opacity: 1; will-change: opacity; }
-.cg-glass-blur--0 { filter: blur(8px); }
-.cg-glass-blur--1 { filter: blur(20px) saturate(1.1); }
-.cg-glass-blur--2 { filter: blur(40px) saturate(1.25); }
-/* the milky sheen of the glass, plus a faint grain so it reads as frosted, not just out of focus */
-.cg-glass-tint { position: absolute; inset: 0; will-change: opacity;
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
-    linear-gradient(160deg, rgb(255 255 255 / .75), rgb(250 250 250 / .55) 55%, rgb(255 255 255 / .7)); }
 /* the screenshot: a 12px card like the rest of the page; its content stops mid-card at the bottom, so that edge
    dissolves into the background instead of being cut off */
-.cg-splash-img { display: block; width: 100%; height: auto; border-radius: 12px;
-  -webkit-mask-image: linear-gradient(to bottom, #000 78%, rgb(0 0 0 / .6) 88%, rgb(0 0 0 / .2) 95%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 78%, rgb(0 0 0 / .6) 88%, rgb(0 0 0 / .2) 95%, transparent 100%); }
+/* the app demo video (16:9, app-demo-video.tsx); no player chrome, so nothing on it is clickable */
+.cg-splash-img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; border-radius: 12px;
+  object-fit: cover; background: #f3f1ea; pointer-events: none; }
 
 /* ---------- open web → booked meetings ---------- */
 .cg-feat { margin-top: 98px; }
 .cg-feat-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; }
-.cg-quote { width: 259px; flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 12px; }
-.cg-quote figure { margin: 0; width: 100%; min-height: 118px; padding: 12px; background: #fbfafa; border-radius: 12px; box-shadow: 0 4px 6px rgba(13,13,13,.04), 0 1px 1px rgba(13,13,13,.05); display: flex; flex-direction: column; gap: 10px; }
+/* the testimonials ticker (hero-quote.tsx): the list twice over, moving up by one copy per loop. Each card carries
+   its own bottom margin (not a flex gap) so both copies are exactly the same height and the loop is seamless */
+.cg-quote { width: 259px; height: 220px; flex: none; overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%); }
+.cg-quote-track { animation: cgQuoteUp 36s linear infinite; will-change: transform; }
+/* flow-root keeps the last card's bottom margin inside its copy, so both copies (and the -50% step) match */
+.cg-quote-set { display: flow-root; }
+.cg-quote:hover .cg-quote-track { animation-play-state: paused; }
+@keyframes cgQuoteUp { to { transform: translateY(-50%); } }
+.cg-quote figure { margin: 0 0 12px; width: 100%; min-height: 118px; padding: 12px; background: #fbfafa; border-radius: 12px; box-shadow: 0 4px 6px rgba(13,13,13,.04), 0 1px 1px rgba(13,13,13,.05); display: flex; flex-direction: column; gap: 10px; }
 .cg-quote-who { display: flex; align-items: center; gap: 7px; }
 .cg-quote-av { width: 37px; height: 37px; flex: none; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: #fdf3e1; color: #a16207; font-weight: 600; font-size: 13px; overflow: hidden; }
 .cg-quote-av img { width: 100%; height: 100%; object-fit: cover; }
 .cg-quote-name { font-family: var(--cg-display); font-size: 16px; line-height: 16px; color: var(--cg-ink); }
 .cg-quote-role { margin-top: 7px !important; font-size: 12px; line-height: 16px; color: #888; }
 .cg-quote blockquote { margin: 0; font-size: 12px; line-height: 16px; color: #2b2a26; }
-.cg-quote-nav { display: flex; gap: 10px; }
-.cg-quote-nav button { width: 44px; height: 44px; border-radius: 22px; border: 1px solid #e2e2e8; background: #fcfcfc; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: opacity .2s; }
-.cg-quote-nav button:disabled { opacity: .3; cursor: default; }
 .cg-feat .cg-grid2 { margin-top: 64px; }
 .cg-feat .cg-grid3 { margin-top: 24px; }
 
@@ -497,13 +489,12 @@
 }
 @media (max-width: 900px) {
   .cg-hero { padding-top: 140px; }
-  .cg-hero-glow { opacity: .45; -webkit-mask-image: radial-gradient(ellipse 80% 45% at 80% 15%, #000 30%, transparent 100%); mask-image: radial-gradient(ellipse 80% 45% at 80% 15%, #000 30%, transparent 100%); }
-  .cg-splash { padding: 14svh 12px; }
+  .cg-splash-stage { padding: 14svh 12px; }
+  .cg-splash-hero .cg-hero { padding-top: 120px; }
   .cg-hero h1, .cg-crossed h2 { font-size: 44px; }
   .cg-h2, .cg-head--center .cg-h2 { font-size: 44px; line-height: 1.15; white-space: normal; }
   .cg-orka-hello h2 { font-size: 44px; }
   .cg-feat-top, .cg-buffed-top { flex-direction: column; align-items: flex-start; }
-  .cg-quote { align-items: flex-start; }
   .cg-grid2 { grid-template-columns: 1fr; }
   .cg-ft-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cg-ft-top { flex-direction: column; }
@@ -527,7 +518,6 @@
 @media (prefers-reduced-motion: reduce) {
   .cg-frag, .cg-frag.out, .cg-swap-out, .cg-swap-in, .cg-bar-fill, .cg-type, .cg-fblink, .cg-wiggle, .cg-sweep, .cg-fpop, .cg-ring, .cg-ping, .cg-slot-pick, .cg-draw, .cg-dot-on {
     animation-duration: .01s !important; animation-iteration-count: 1 !important; animation-delay: 0s !important; }
-  .cg-hero-glow span, .cg-us-ping, .cg-tree img, .cg-spin, .cg-st-spin, .cg-pulse, .cg-chdot, .cg-caret { animation: none; }
-  .cg-hero-glow i { transition: none; }
+  .cg-quote-track, .cg-us-ping, .cg-tree img, .cg-spin, .cg-st-spin, .cg-pulse, .cg-chdot, .cg-caret { animation: none; }
   .cg-lw-row, .cg-wf-n, .cg-ag-cursor, .cg-us-bub, .cg-fill-ch { transition: none; }
 }

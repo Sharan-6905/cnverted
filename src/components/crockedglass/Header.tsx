@@ -7,7 +7,7 @@
  * the logo and the nav glide inward and a glass panel fades in behind them,
  * so the header condenses into a centered floating bar.
  *
- * Logo mark: uses the owl file already on cnvrted.com (/figma/redesign/...).
+ * Logo mark: the owl, resized from /figma/redesign/499-651-imgImage93.png.
  * If you move it, update LOGO_MARK below. The "Cnvrted" wordmark is live text in Bricolage Grotesque.
  *
  * Font: Bricolage Grotesque — e.g. in Next.js:
@@ -18,7 +18,9 @@
 import { useEffect, useRef, useState } from "react";
 import "./header.css";
 
-const LOGO_MARK = "/figma/redesign/499-651-imgImage93.png";
+// 132px webp (3x the 44px it renders at). The source PNG it was cut from is 1268px / 942 KB, and this header
+// is on every page.
+const LOGO_MARK = "/crockedglass/logo-mark.webp";
 const CTA_HREF = "https://beta.cnvrted.com";
 
 const RESOURCES = [
@@ -65,7 +67,7 @@ export default function Header({ threshold = 8 }: { threshold?: number }) {
       <nav className="cv-row" aria-label="Main">
         <div className="cv-group cv-left">
           <a href="/" className="cv-brand" aria-label="Cnvrted home">
-            <img src={LOGO_MARK} alt="" className="cv-brand-mark" width={44} height={43} />
+            <img src={LOGO_MARK} alt="" className="cv-brand-mark" width={44} height={43} fetchPriority="high" />
             <span className="cv-brand-word">Cnvrted</span>
           </a>
         </div>

@@ -482,9 +482,8 @@
 .cg-ft-soc a { display: flex; color: #bdbdbd; transition: color .2s; }
 .cg-ft-soc a:hover { color: #fff; }
 .cg-ft-word { position: relative; width: 100%; aspect-ratio: 1440 / 320; margin-top: 24px; overflow: hidden; }
-.cg-ft-word svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-.cg-ft-stroke { transition: stroke .4s; }
-.cg-footer:hover .cg-ft-stroke { stroke: rgba(255,255,255,.7); }
+.cg-ft-word canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.cg-ft-word svg { position: absolute; width: 0; height: 0; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 1100px) {

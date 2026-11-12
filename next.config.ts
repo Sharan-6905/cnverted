@@ -40,6 +40,14 @@ const nextConfig: NextConfig = {
     return [
       { source: "/:path*", headers: SECURITY_HEADERS },
       {
+        // Files in public/ default to max-age=0, so every visit re-checked ~30 images and videos. Their names
+        // aren't hashed, so not immutable: a day fresh, then served stale while it revalidates. Rename a file
+        // if a change must show up sooner.
+        // (skips /_next/, which Next already serves immutable)
+        source: "/:file((?!_next/).*\\.(?:png|jpe?g|webp|avif|gif|svg|ico|mp4|webm|woff2?))",
+        headers: [{ key: "Cache-Control", value: "public, max-age=86400, stale-while-revalidate=604800" }],
+      },
+      {
         source: "/indexnow-key.txt",
         headers: [{ key: "X-Robots-Tag", value: "noindex" }],
       },

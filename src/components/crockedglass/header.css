@@ -5,6 +5,11 @@
    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
 */
 
+/* registered so the glass tint can transition when a side flips light/dark */
+@property --cv-tint-l { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.42); }
+@property --cv-tint-r { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.42); }
+@property --cv-edge   { syntax: "<color>"; inherits: true; initial-value: rgba(255, 255, 255, 0.6); }
+
 .cv-header {
   /* brand tokens (from cnvrted.com) */
   --cv-ink: #0c0c0c;
@@ -13,6 +18,16 @@
   --cv-blue-hover: #4053d6;
   --cv-btn-shadow: #10111a;
   --cv-cream: #fffefb;
+
+  /* glass tint per half: light paper over light sections, smoked glass over dark ones (data-tone-* below) */
+  --cv-tint-light: rgba(255, 255, 255, 0.42);
+  --cv-tint-dark: rgba(14, 14, 18, 0.48);
+  --cv-tint-l: var(--cv-tint-light);
+  --cv-tint-r: var(--cv-tint-light);
+  --cv-edge: rgba(255, 255, 255, 0.6);
+  --cv-left-ink: var(--cv-ink);
+  --cv-right-ink: var(--cv-ink);
+  --cv-link-hover: var(--cv-blue);
 
   --cv-pill-w: 720px; /* width of the condensed glass bar */
   --cv-ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -26,9 +41,12 @@
   z-index: 50;
   font-family: var(--font-bricolage, "Bricolage Grotesque"), system-ui, sans-serif;
   color: var(--cv-ink);
-  transition: transform var(--cv-dur) var(--cv-ease);
+  transition: transform var(--cv-dur) var(--cv-ease), --cv-tint-l 300ms ease, --cv-tint-r 300ms ease, --cv-edge 300ms ease;
 }
 .cv-header[data-scrolled="true"] { transform: translateY(12px); }
+.cv-header[data-tone-left="dark"]  { --cv-tint-l: var(--cv-tint-dark); --cv-left-ink: #fff; }
+.cv-header[data-tone-right="dark"] { --cv-tint-r: var(--cv-tint-dark); --cv-right-ink: rgba(255, 255, 255, 0.92); --cv-link-hover: #aab6ff; }
+.cv-header[data-tone-left="dark"][data-tone-right="dark"] { --cv-edge: rgba(255, 255, 255, 0.14); }
 
 /* glass panel that fades in behind the condensed nav —
    same family as the floating "Orka at work" cards: translucent white, hairline light border, backdrop blur */
@@ -39,11 +57,14 @@
   translate: -50% 0;
   width: min(var(--cv-pill-w), 100% - 2rem);
   border-radius: 14px;
+  /* left-to-right tint (one colour when both halves agree), with a soft top-to-bottom falloff over it */
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.28) 100%);
-  backdrop-filter: blur(18px) saturate(1.8);
-  -webkit-backdrop-filter: blur(18px) saturate(1.8);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%),
+    linear-gradient(90deg, var(--cv-tint-l) 25%, var(--cv-tint-r) 75%);
+  /* standard property only: with both written, the CSS minifier keeps just -webkit-backdrop-filter, which Chrome
+     ignores (the bar had no blur in Chrome); the build adds the Safari prefix itself */
+  backdrop-filter: blur(28px) saturate(1.8);
+  border: 1px solid var(--cv-edge);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.85),
     inset 0 -1px 0 rgba(255, 255, 255, 0.18),
@@ -62,6 +83,8 @@
   pointer-events: none;
 }
 .cv-header[data-scrolled="true"] .cv-pill { opacity: 1; }
+.cv-pill::before { transition: opacity 300ms ease; }
+.cv-header[data-tone-left="dark"][data-tone-right="dark"] .cv-pill::before { opacity: 0.25; }
 
 .cv-row {
   position: relative;
@@ -78,15 +101,20 @@
   flex-shrink: 0;
   transition: translate var(--cv-dur) var(--cv-ease);
 }
-.cv-left { gap: 40px; }
-.cv-right { gap: 32px; }
+.cv-left { gap: 40px; color: var(--cv-left-ink); }
+.cv-right { gap: 32px; color: var(--cv-right-ink); }
 /* small inset so content sits off the glass edge */
 .cv-header[data-scrolled="true"] .cv-left  { translate: calc(var(--cv-inset) + 4px) 0; }
 .cv-header[data-scrolled="true"] .cv-right { translate: calc(-1 * var(--cv-inset) - 4px) 0; }
 
 /* logo */
-.cv-brand { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--cv-ink); }
-.cv-brand-mark { width: 44px; height: auto; display: block; }
+.cv-brand { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: var(--cv-left-ink); transition: color 300ms ease; }
+/* both marks stacked; the tone picks one (colour on light, white on dark) */
+.cv-brand-marks { position: relative; display: block; flex: none; }
+.cv-brand-mark { width: 44px; height: auto; display: block; transition: opacity 300ms ease; }
+.cv-mark-on-dark { position: absolute; inset: 0; opacity: 0; }
+.cv-header[data-tone-left="dark"] .cv-mark-on-light { opacity: 0; }
+.cv-header[data-tone-left="dark"] .cv-mark-on-dark { opacity: 1; }
 .cv-brand-word {
   font-size: 25px;
   font-weight: 500;
@@ -107,13 +135,17 @@
   font: inherit;
   font-size: 16px;
   font-weight: 450;
-  color: var(--cv-ink);
+  color: var(--cv-right-ink);
   text-decoration: none;
   cursor: pointer;
-  transition: color 150ms ease;
+  transition: color 300ms ease;
 }
-.cv-link:hover, .cv-link:focus-visible { color: var(--cv-blue); outline: none; }
-.cv-trigger svg { color: var(--cv-blue); transition: transform 200ms ease; }
+.cv-link:hover, .cv-link:focus-visible { color: var(--cv-link-hover); outline: none; }
+/* home.css's `.cg a { color: inherit }` (0,1,1) outranks the single-class rules above */
+.cv-header .cv-brand { color: var(--cv-left-ink); }
+.cv-header .cv-link { color: var(--cv-right-ink); }
+.cv-header .cv-link:hover, .cv-header .cv-link:focus-visible { color: var(--cv-link-hover); }
+.cv-trigger svg { color: var(--cv-link-hover); transition: transform 200ms ease; }
 .cv-trigger[aria-expanded="true"] svg { transform: rotate(180deg); }
 
 /* Get Started — cnvrted's blue pill with the offset dark shadow */
@@ -169,8 +201,7 @@
   flex-direction: column;
   gap: 2px;
   background: linear-gradient(180deg, rgba(255, 254, 251, 0.82), rgba(255, 254, 251, 0.66));
-  backdrop-filter: blur(18px) saturate(1.8);
-  -webkit-backdrop-filter: blur(18px) saturate(1.8);
+  backdrop-filter: blur(28px) saturate(1.8);
   border: 1px solid rgba(255, 255, 255, 0.7);
   border-radius: 12px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 12px 32px -10px rgba(16, 17, 26, 0.2);
@@ -189,6 +220,15 @@
   transition: background-color 120ms ease, color 120ms ease;
 }
 .cv-menu-item:hover, .cv-menu-item:focus-visible { background: rgba(79, 101, 245, 0.08); color: var(--cv-blue); outline: none; }
+/* over a dark section the menu turns to smoked glass too */
+.cv-header[data-tone-right="dark"] .cv-menu {
+  background: linear-gradient(180deg, rgba(20, 20, 26, 0.78), rgba(20, 20, 26, 0.62));
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), 0 12px 32px -10px rgba(0, 0, 0, 0.5);
+}
+.cv-header[data-tone-right="dark"] .cv-menu-item { color: rgba(255, 255, 255, 0.9); }
+.cv-header[data-tone-right="dark"] .cv-menu-item:hover,
+.cv-header[data-tone-right="dark"] .cv-menu-item:focus-visible { background: rgba(170, 182, 255, 0.12); color: #c7cfff; }
 
 @media (min-width: 768px) {
   .cv-row { padding-inline: 32px; }

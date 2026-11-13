@@ -180,7 +180,7 @@ export function CrockedglassHome() {
         <section className="cg-wrap cg-clients" aria-labelledby="cg-clients-title">
           <div className="cg-head cg-head--center">
             <h2 id="cg-clients-title" className="cg-h2">Cnvrted Collaboration</h2>
-            <p className="cg-lede">The teams we build pipeline with, from first lead to booked meeting.</p>
+            <p className="cg-lede">The teams we build pipelines with, from first lead to booked meeting.</p>
           </div>
           <div className="cg-collab">
             <LogoCarousel columnCount={3} logos={CLIENTS} />

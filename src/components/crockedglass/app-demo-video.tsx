@@ -31,8 +31,8 @@ export function AppDemoVideo() {
     <video
       ref={ref}
       className="cg-splash-img"
-      src="/crockedglass/app-demo.mp4"
-      poster="/crockedglass/app-demo-poster.webp"
+      src="/crockedglass/app-demo-v2.mp4"
+      poster="/crockedglass/app-demo-poster-v2.webp"
       width={1920}
       height={1080}
       muted

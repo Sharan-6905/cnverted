@@ -81,6 +81,18 @@ export default function ProductPage() {
 
       <ProductExampleLink />
 
+      <section className="product-section design-container" aria-labelledby="product-features">
+        <div className="product-section-heading"><span className="marketing-eyebrow">Explore the product</span><h2 id="product-features">Choose your prospecting workflow.</h2><p>These public guides explain each feature before you sign in. Saved leads and research stay in your private workspace.</p></div>
+        <div className="product-steps">
+          <section><h3>Lead research</h3><p>Connect company fit, prospect research and buying signals before deciding who to contact.</p><a className="marketing-text-link" href="https://beta.cnvrted.com/leads">Explore lead research <span aria-hidden="true">↗</span></a></section>
+          <section><h3>Target accounts</h3><p>Organize relevant companies and review the professional contact details available for your research.</p><a className="marketing-text-link" href="https://beta.cnvrted.com/targetlist">Explore target account lists <span aria-hidden="true">↗</span></a></section>
+          <section><h3>Buying intent</h3><p>Review the source, timing and context behind a public buying signal.</p><a className="marketing-text-link" href="https://beta.cnvrted.com/intent">Explore intent leads <span aria-hidden="true">↗</span></a></section>
+          <section><h3>Cold prospects</h3><p>Build an audience-based list and check prospect relevance before preparing outreach.</p><a className="marketing-text-link" href="https://beta.cnvrted.com/coldlist">Explore cold prospect lists <span aria-hidden="true">↗</span></a></section>
+          <section><h3>Business communities</h3><p>Find relevant communities, review audience fit and join conversations on the original platform.</p><a className="marketing-text-link" href="https://beta.cnvrted.com/communities">Explore business communities <span aria-hidden="true">↗</span></a></section>
+          <section><h3>Your dashboard</h3><p>Bring your lead lists, community research and next steps together.</p><a className="marketing-text-link" href="https://beta.cnvrted.com/dashboard">Explore the prospecting dashboard <span aria-hidden="true">↗</span></a></section>
+        </div>
+      </section>
+
       <section className="product-section design-container" aria-labelledby="product-evaluation">
         <div className="product-section-heading"><span className="marketing-eyebrow">Before choosing a platform</span><h2 id="product-evaluation">Evaluate the workflow<br />with your own accounts.</h2><p>When comparing AI GTM platforms or buying-signal software, bring a few accounts from your actual market. Use the same offer and fit criteria throughout the demo so the comparison stays useful.</p></div>
         <div className="product-evidence-grid">

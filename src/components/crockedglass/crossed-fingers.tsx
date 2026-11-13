@@ -52,7 +52,7 @@ export function CrossedFingers() {
       <div ref={sticky} className="cg-crossed-sticky cg-wrap" style={{ top }}>
         {/* Orka's spot over the line: the cat itself is the shared one from <OrkaTravel>, which docks in "Hi! I'm Orka" */}
         <div style={{ position: "relative" }}>
-          <span className="cg-crossed-line" />
+          <span className="cg-crossed-line" style={{ visibility: "hidden" }} /> {/* keeps the spacing; the bar itself travels with Orka */}
           <div ref={catSlot} aria-hidden="true" style={{ position: "absolute", top: 0, left: "50%", width: 184, marginLeft: -92, aspectRatio: "2 / 1", transform: `translateY(-${ORKA_LEDGE_RATIO * 100}%)` }} />
         </div>
         <h2 id="cg-crossed-title" aria-label={LEAD + REST}>

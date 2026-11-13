@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, type ReactNode, type RefObject } from "react";
-import Orka from "./Orka";
+import Orka, { ORKA_LEDGE_RATIO } from "./Orka";
 
 type SlotName = "from" | "to";
 type SlotProps = { mood?: "grumpy" | "curious" | "sleepy" | "surprised"; lookAt?: RefObject<Element>; title?: string };
@@ -73,6 +73,8 @@ export function OrkaTravel({ children }: { children: ReactNode }) {
     <Ctx.Provider value={api}>
       {children}
       <div ref={box} style={{ position: "fixed", left: 0, top: 0, zIndex: 3, visibility: "hidden", willChange: "transform" }}>
+        {/* the bar he peeks over travels with him, sized to him (342 px wide at the line's 184 px cat) */}
+        <span aria-hidden="true" style={{ position: "absolute", left: "50%", top: `${ORKA_LEDGE_RATIO * 100}%`, zIndex: -1, width: `${(342 / 184) * 100}%`, height: 5, transform: "translateX(-50%)", borderRadius: "50%", background: "radial-gradient(closest-side, rgba(0,0,0,.18), rgba(0,0,0,0))", pointerEvents: "none" }} />
         <Orka mood={p.mood ?? "sleepy"} lookAt={p.lookAt} title={p.title ?? "Orka, the Cnvrted cat"} />
       </div>
     </Ctx.Provider>

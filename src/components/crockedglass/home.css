@@ -79,8 +79,11 @@
 .cg-hero { position: relative; z-index: 2; padding: 220px 0 120px; }
 .cg-hero-copy { position: relative; }
 .cg-hero h1 { margin: 0; max-width: 900px; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: normal; color: #000; text-wrap: balance; }
-/* "40+ hot leads": just the accent colour, so it stands out without looking like a button */
+/* hero highlights: colour only, so they stand out without looking like buttons. "hot leads" is a deep orange (yellow
+   is unreadable on white), "24 hours" violet; both clear 3:1 contrast at this size */
 .cg-hl { color: var(--cg-accent); }
+.cg-hl--hot { color: #ea580c; }
+.cg-hl--time { color: #7c3aed; }
 .cg-hero p { margin-top: 24px; max-width: 532px; font-size: 16px; line-height: 1.5; color: #7c7c7c; }
 .cg-hero .cg-btn { margin-top: 32px; }
 /* one screen, pinned; the window is sized to fit inside it (the demo video is 16:9) */

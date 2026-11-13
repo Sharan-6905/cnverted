@@ -107,7 +107,7 @@ export function CrockedglassHome() {
           hero={
             <section className="cg-hero" aria-labelledby="cg-hero-title">
               <div className="cg-wrap cg-hero-copy">
-                <h1 id="cg-hero-title">Get <span className="cg-hl">40+ hot leads</span> in your first month with Cnvrted.</h1>
+                <h1 id="cg-hero-title">Get <span className="cg-hl cg-hl--hot">hot leads</span> within your first <span className="cg-hl cg-hl--time">24 hours</span> on Cnvrted.</h1>
                 <p>Cnvrted finds brands that are launching, rebranding and hiring for growth, and tells you why each one needs a creative partner right now.</p>
                 <a className="cg-btn cg-btn--sm" href={DEMO_PATH}>Book Call</a>
               </div>

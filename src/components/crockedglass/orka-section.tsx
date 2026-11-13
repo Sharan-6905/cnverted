@@ -175,7 +175,7 @@ export function OrkaSection({ appHref }: { appHref: string }) {
   const submit = () => { window.location.href = appHref; };
 
   return (
-    <section ref={sec} className={`cg-orka${focused ? " is-focused" : ""}`} aria-labelledby="cg-orka-title">
+    <section ref={sec} data-header-tone="dark" className={`cg-orka${focused ? " is-focused" : ""}`} aria-labelledby="cg-orka-title">
       <img className="cg-orka-bg" src="/crockedglass/orka-bg.webp" alt="" loading="lazy" decoding="async" />
       <div className="cg-frags" aria-hidden="true">
         {TYPES.map((t) => { const it = items[t]; return it?.on ? <Frag key={`${t}-${it.id}`} type={t} it={it} /> : null; })}

@@ -88,10 +88,11 @@ export function SplashWindow({ hero, children }: { hero: ReactNode; children: Re
       <div ref={panel} className="cg-splash-sticky">
         <HeroDots />
         <div ref={copy} className="cg-splash-hero">{hero}</div>
-        <div ref={card} className="cg-splash">
+        <div ref={card} className="cg-splash" data-header-tone="dark">
           <div className="cg-splash-photo" aria-hidden="true" />
           <div className="cg-splash-stage">
-            <div ref={win} className="cg-splash-win">{children}</div>
+            {/* the app UI in the window is light; without this the header reads the dark photo through it */}
+            <div ref={win} className="cg-splash-win" data-header-tone="light">{children}</div>
           </div>
         </div>
       </div>

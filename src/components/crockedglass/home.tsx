@@ -19,7 +19,7 @@ import { CgFooter } from "./site-footer";
 import { ScaleBox } from "./scale-box";
 import { UserStories } from "./user-stories";
 import { PageDots } from "./page-dots";
-import { ClientPile, type PileClient } from "./client-pile";
+import { LogoCarousel, type Logo } from "@/components/ui/logo-carousel";
 import { CrossedFingers } from "./crossed-fingers";
 import { OrkaTravel } from "./orka-travel";
 import { DEMO_PATH } from "@/lib/booking";
@@ -56,14 +56,15 @@ const CASES = CASE_STUDIES.flatMap((story) => {
   return card ? [{ ...card, slug: story.slug }] : [];
 });
 
-const CLIENTS: PileClient[] = [
-  { n: "FPS", src: "/crockedglass/client-fps.png", h: 30 },
-  { n: "", src: "/crockedglass/client-2.png", h: 48 },
-  { n: "Curato", src: "/crockedglass/client-curato.png", h: 44 },
-  { n: "", src: "/crockedglass/client-4.png", h: 52 },
-  { n: "", src: "/crockedglass/client-5.png", h: 52, r: 12 },
-  { n: "SocialTag", src: "/crockedglass/client-socialtag.png", h: 52, r: 10 },
-  { n: "Bahari Services", src: "/crockedglass/client-bahari.svg", h: 46 },
+// Logo files in /public; unnamed ones are clients whose wordmark is the logo itself.
+const CLIENTS: Logo[] = [
+  { id: 1, name: "FPS", img: "/crockedglass/client-fps.png" },
+  { id: 2, name: "", img: "/crockedglass/client-2.png" },
+  { id: 3, name: "Curato", img: "/crockedglass/client-curato.png" },
+  { id: 4, name: "", img: "/crockedglass/client-4.png" },
+  { id: 5, name: "", img: "/crockedglass/client-5.png" },
+  { id: 6, name: "SocialTag", img: "/crockedglass/client-socialtag.png" },
+  { id: 7, name: "Bahari Services", img: "/crockedglass/client-bahari.svg" },
 ];
 
 function CaseCard({ k }: { k: (typeof CASES)[number] }) {
@@ -177,11 +178,14 @@ export function CrockedglassHome() {
 
         {/* Cnvrted Collaboration */}
         <section className="cg-wrap cg-clients" aria-labelledby="cg-clients-title">
-          <div className="cg-head">
+          <div className="cg-head cg-head--center">
             <h2 id="cg-clients-title" className="cg-h2">Cnvrted Collaboration</h2>
-            <p className="cg-lede">The teams we build pipeline with, from first lead to booked meeting.</p>
+            <p className="cg-lede">The teams we build pipelines with, from first lead to booked meeting.</p>
           </div>
-          <ClientPile clients={CLIENTS} cta={{ label: "Your team next →", href: DEMO_PATH }} />
+          <div className="cg-collab">
+            <LogoCarousel columnCount={3} logos={CLIENTS} />
+            <a className="cg-btn cg-collab-cta" href={DEMO_PATH}>Your team next{ARROW}</a>
+          </div>
         </section>
 
         <CgFaq />

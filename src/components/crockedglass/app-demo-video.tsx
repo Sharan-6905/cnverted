@@ -29,6 +29,7 @@ export function AppDemoVideo() {
 
   return (
     <video
+      id="gtm-demo"
       ref={ref}
       className="cg-splash-img"
       src="/crockedglass/app-demo-v2.mp4"

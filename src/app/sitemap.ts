@@ -27,14 +27,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     {
-      url: SITE_URL,
-      lastModified: "2026-10-11",
+      url: absoluteUrl("/"),
+      // Homepage copy and the shared visible/schema FAQ were revised together.
+      lastModified: "2026-11-13",
       changeFrequency: "weekly",
       priority: 1,
     },
     {
       url: `${SITE_URL}/product`,
-      lastModified: "2026-10-16",
+      lastModified: "2026-11-13",
       changeFrequency: "monthly",
       priority: 0.8,
     },
@@ -44,7 +45,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${SITE_URL}/pricing`, lastModified: "2026-10-11",
+      // Plan links and the current credit-based pricing were updated on 12 November.
+      url: `${SITE_URL}/pricing`, lastModified: "2026-11-12",
       changeFrequency: "monthly",
       priority: 0.9,
     },

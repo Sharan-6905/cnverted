@@ -1,6 +1,7 @@
 """Audit rendered SEO output: python3 scripts/verify-seo.py http://localhost:3020"""
 import concurrent.futures
 import csv
+from datetime import datetime, timezone
 import io
 import json
 import sys
@@ -15,13 +16,19 @@ BASE = (sys.argv[1] if len(sys.argv) > 1 else "http://localhost:3020").rstrip("/
 CANONICAL = "https://www.cnvrted.com"
 
 
-def fetch(path, agent="Mozilla/5.0 SEO verification"):
+def fetch_response(path, agent="Mozilla/5.0 SEO verification"):
     request = urllib.request.Request(BASE + path, headers={"User-Agent": agent})
     try:
         response = urllib.request.urlopen(request, timeout=30)
     except urllib.error.HTTPError as error:
         response = error
-    return response.status, response.read().decode()
+    with response:
+        return response.status, response.read().decode(), response.headers, response.geturl()
+
+
+def fetch(path, agent="Mozilla/5.0 SEO verification"):
+    status, html, _, _ = fetch_response(path, agent)
+    return status, html
 
 
 class Page(HTMLParser):
@@ -29,6 +36,8 @@ class Page(HTMLParser):
         super().__init__()
         self.meta, self.links, self.jsonld = {}, [], []
         self.title, self.canonical, self.h1_count = "", None, 0
+        self.canonical_count = 0
+        self.indexing_directives = []
         self.in_title, self.in_json, self.buffer = False, False, ""
         self.in_script, self.in_style = False, False
         self.text, self.ids, self.images = [], set(), []
@@ -46,7 +55,10 @@ class Page(HTMLParser):
             self.in_style = True
         if tag == "meta":
             self.meta[attrs.get("name", attrs.get("property"))] = attrs.get("content", "")
+            if attrs.get("name", "").lower() in ("robots", "googlebot"):
+                self.indexing_directives.append(attrs.get("content", "").lower())
         if tag == "link" and attrs.get("rel") == "canonical":
+            self.canonical_count += 1
             self.canonical = attrs.get("href")
         if tag == "a":
             self.links.append(attrs.get("href"))
@@ -82,21 +94,37 @@ assert status == 200, "Sitemap unavailable"
 entries = ET.fromstring(xml)
 urls = [entry.find("{*}loc").text for entry in entries]
 assert len(urls) == len(set(urls)), "Duplicate sitemap URLs"
-assert all(url.startswith(CANONICAL) for url in urls), "Non-canonical sitemap host"
+assert urls, "Empty marketing sitemap"
+for url in urls:
+    parsed = urllib.parse.urlparse(url)
+    assert parsed.scheme == "https" and parsed.netloc == urllib.parse.urlparse(CANONICAL).netloc, (url, "Non-canonical sitemap origin")
+    assert not parsed.query and not parsed.fragment, (url, "Sitemap URL has query or fragment")
+for entry in entries:
+    lastmod = entry.find("{*}lastmod")
+    if lastmod is not None:
+        modified = datetime.fromisoformat(lastmod.text.replace("Z", "+00:00"))
+        if modified.tzinfo is None:
+            modified = modified.replace(tzinfo=timezone.utc)
+        assert modified <= datetime.now(timezone.utc), (entry.find("{*}loc").text, "Future sitemap revision")
 paths = [urllib.parse.urlparse(url).path or "/" for url in urls]
 assert "/404" not in paths and "/og-preview" not in paths
 
 
 def audit(path):
-    status, html = fetch(path)
+    status, html, headers, final_url = fetch_response(path)
     assert status == 200, (path, status)
+    assert final_url == BASE + path, (path, "Sitemap target redirects", final_url)
+    assert "text/html" in headers.get("Content-Type", "").lower(), (path, "Not an HTML page")
+    header_directives = ",".join(headers.get_all("X-Robots-Tag", [])).lower()
+    assert not any(token in header_directives for token in ("noindex", "none")), (path, "HTTP indexing restriction", header_directives)
     page = Page(html)
     expected = CANONICAL + path
     assert page.canonical and page.canonical.rstrip("/") == expected.rstrip("/"), (path, "canonical", page.canonical)
+    assert page.canonical_count == 1, (path, "Duplicate canonical tags", page.canonical_count)
     assert page.title and page.meta.get("description"), (path, "missing title/description")
     assert "keywords" not in page.meta, (path, "obsolete keyword-list metadata")
     assert page.h1_count == 1, (path, "heading count", page.h1_count)
-    assert "noindex" not in page.meta.get("robots", ""), (path, "noindex")
+    assert not any(token in directive for directive in page.indexing_directives for token in ("noindex", "none")), (path, "Meta indexing restriction", page.indexing_directives)
     assert page.meta.get("og:url", "").rstrip("/") == expected.rstrip("/"), (path, "wrong social URL")
     assert page.meta.get("og:title") and page.meta.get("twitter:title"), (path, "missing social title")
     assert page.meta.get("og:image", "").startswith(CANONICAL), (path, "missing social image")
@@ -180,7 +208,7 @@ for path, page in pages.items():
         if destination in pages and target.fragment:
             assert urllib.parse.unquote(target.fragment) in pages[destination].ids, (path, "broken anchor", href)
         elif destination not in pages:
-            assert destination.startswith("/images/") or destination in ("/downloads/cnvrted-icp-worksheet.csv", "/downloads/cnvrted-buying-signal-worksheet.csv"), (path, "internal link missing from sitemap", href)
+            assert destination.startswith("/images/") or destination in ("/sitemap.xml", "/robots.txt", "/downloads/cnvrted-icp-worksheet.csv", "/downloads/cnvrted-buying-signal-worksheet.csv"), (path, "internal link missing from sitemap", href)
 for source in ("/", "/learn", "/blogs/apollo-vs-cnvrted", "/blogs/what-is-a-gtm-play"):
     assert "/learn/buying-signals" in pages[source].links, (source, "guide not discoverable")
 for source in ("/", "/learn", "/learn/buying-signals", "/learn/signal-to-outreach"):
@@ -268,7 +296,7 @@ for path in ("/404", "/blogs/seo-audit-missing", "/case-studies/seo-audit-missin
     assert not page.canonical, (path, "404 has unrelated canonical")
 for agent in ("Googlebot", "Bingbot", "OAI-SearchBot", "PerplexityBot", "Claude-SearchBot"):
     status, html = fetch("/pricing", agent)
-    assert status == 200 and "40 free credits" in html, (agent, "content unavailable")
+    assert status == 200 and "400 free credits" in html, (agent, "content unavailable")
 
 class NoRedirect(urllib.request.HTTPRedirectHandler):
     def redirect_request(self, request, response, code, message, headers, new_url):

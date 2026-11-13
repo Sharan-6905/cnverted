@@ -184,7 +184,7 @@ export function OrkaSection({ appHref }: { appHref: string }) {
       <div className="cg-orka-mid">
         <div className="cg-orka-hello">
           {/* the cat that peeked over "You can't build a business…" lands here (see orka-travel) */}
-          <div ref={catSlot} className="cg-orka-cat" style={{ aspectRatio: "2 / 1" }} />
+          <div ref={catSlot} className="cg-orka-cat" style={{ width: 184, marginBottom: -13, aspectRatio: "2 / 1" }} /> {/* same size as over the line */}
           <h2 id="cg-orka-title">Hi! I’m Orka</h2>
           <p>Your GTM operator. Ask me to find leads, build lists, write outreach or check what’s working.</p>
         </div>

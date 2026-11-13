@@ -415,6 +415,7 @@
 
 /* ---------- Cnvrted Collaboration ---------- */
 .cg-clients { margin-top: 120px; display: flex; flex-direction: column; gap: 40px; }
+.cg-clients .cg-head--center { width: min(720px, 100%); }
 /* logo carousel (components/ui/logo-carousel.tsx) straight on the page, the paper-grain CTA (.cg-btn) under it */
 .cg-collab { display: flex; flex-direction: column; align-items: center; gap: 32px; padding: 8px 0; }
 .cg-collab .cg-collab-cta { height: 52px; font-size: 17px; }

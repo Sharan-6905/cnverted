@@ -178,7 +178,7 @@ export function CrockedglassHome() {
 
         {/* Cnvrted Collaboration */}
         <section className="cg-wrap cg-clients" aria-labelledby="cg-clients-title">
-          <div className="cg-head">
+          <div className="cg-head cg-head--center">
             <h2 id="cg-clients-title" className="cg-h2">Cnvrted Collaboration</h2>
             <p className="cg-lede">The teams we build pipeline with, from first lead to booked meeting.</p>
           </div>

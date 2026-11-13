@@ -33,15 +33,10 @@ export function InstagramIcon(props: React.SVGProps<SVGSVGElement>) {
 }
 
 export function TracxnIcon(props: React.SVGProps<SVGSVGElement>) {
-  // Tracxn's mark: a rounded chevron knocked out of a solid circle. A mask keeps it see-through on any background.
-  const mask = `tracxn-cut-${React.useId().replace(/:/g, "")}`;
+  // Tracxn's own mark (from tracxn.com's logo SVG); the wedge is a cut-out, so it's see-through on any background.
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
-      <mask id={mask} maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
-        <rect width="24" height="24" fill="#fff" />
-        <path d="M16.6 8.4 9 7.6l4.6 9.7" fill="none" stroke="#000" strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
-      </mask>
-      <circle cx="12" cy="12" r="12" mask={`url(#${mask})`} />
+    <svg viewBox="-0.2 0 21.2 21.2" fill="currentColor" aria-hidden="true" {...props}>
+      <path d="M0 9.95c.03-.12.06-.23.07-.34.17-1.94.87-3.8 2.02-5.36a10.22 10.22 0 0115.19-1.6 10.71 10.71 0 01.32 15.51 10.32 10.32 0 01-5 2.7c-.46.1-.94.14-1.42.21l-.2.04H9.86l-.2-.04a10.37 10.37 0 01-7.3-3.89 10.64 10.64 0 01-2.28-5.7 2.73 2.73 0 00-.07-.34v-1.2zm10.97-.13l.02.17.27 2.74c.07.72.15 1.44.2 2.16a2.35 2.35 0 00.86 1.71 2.92 2.92 0 003.49.15 2.28 2.28 0 001.03-2.2l-.1-.84A1961.02 1961.02 0 0116 5.93a2.24 2.24 0 00-.57-1.3 6.3 6.3 0 00-.46-.47 2.2 2.2 0 00-2.34-.5l-.42.13-4.84 1.46-3.05.9c-.38.12-.73.32-1.01.6a2.98 2.98 0 00-.09 4.05c.6.62 1.3.88 2.15.71.22-.05.44-.13.66-.2l4.66-1.4.28-.1z" />
     </svg>
   );
 }

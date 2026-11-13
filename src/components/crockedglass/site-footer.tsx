@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { InstagramIcon, TracxnIcon, CrunchbaseIcon, ProductHuntIcon } from "@/components/social-icons";
 
 const COLS: { h: string; links: [string, string][] }[] = [
   { h: "Product", links: [["Product", "/product"], ["Pricing", "/pricing"], ["Book a demo", "/book-demo"], ["Start free", "https://beta.cnvrted.com"]] },
@@ -194,6 +195,10 @@ export function CgFooter() {
           <div className="cg-ft-soc">
             <a href="https://www.linkedin.com/company/cnvrted" aria-label="Cnvrted on LinkedIn" target="_blank" rel="noopener noreferrer"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.06c.53-1 1.83-2.06 3.77-2.06 4.03 0 4.77 2.65 4.77 6.1V21h-4v-5.1c0-1.22-.02-2.78-1.7-2.78-1.7 0-1.96 1.33-1.96 2.7V21h-4z" /></svg></a>
             <a href="https://x.com/cnvrted" aria-label="Cnvrted on X" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.8 2h3.4l-7.4 8.5L22.5 22h-6.8l-5.3-6.9L4.3 22H.9l7.9-9.1L.5 2h7l4.8 6.3zm-1.2 18h1.9L6.5 3.9H4.5z" /></svg></a>
+            <a href="https://www.instagram.com/cnvrtedai/" aria-label="Cnvrted on Instagram" target="_blank" rel="noopener noreferrer"><InstagramIcon width={17} height={17} /></a>
+            <a href="https://platform.tracxn.com/a/d/company/6a0e1d801be61b269ccb48d6/cnvrted.com" aria-label="Cnvrted on Tracxn" target="_blank" rel="noopener noreferrer"><TracxnIcon width={17} height={17} /></a>
+            <a href="https://www.crunchbase.com/organization/cnvrted" aria-label="Cnvrted on Crunchbase" target="_blank" rel="noopener noreferrer"><CrunchbaseIcon width={17} height={17} /></a>
+            <a href="https://www.producthunt.com/products/cnvrted" aria-label="Cnvrted on Product Hunt" target="_blank" rel="noopener noreferrer"><ProductHuntIcon width={17} height={17} /></a>
           </div>
         </div>
       </div>

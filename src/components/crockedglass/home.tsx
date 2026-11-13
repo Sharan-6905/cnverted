@@ -7,6 +7,8 @@ import { HeroQuote } from "./hero-quote";
 import { BrainCard } from "./brain-card";
 import { WorkflowCard } from "./workflow-card";
 import { ChatCard } from "./chat-card";
+import { TrainBrainCard } from "./train-brain-card";
+import { MeetingsCard } from "./meetings-card";
 import { LeadsWheel } from "./leads-wheel";
 import { OrkaSection } from "./orka-section";
 import { CuratedLeads } from "./curated-leads";
@@ -129,10 +131,7 @@ export function CrockedglassHome() {
             <WorkflowCard />
           </div>
           <div className="cg-grid3">
-            <article className="cg-card cg-card--photo">
-              <img src="/crockedglass/train-brain.webp" alt="" loading="lazy" decoding="async" />
-              <h3>Train your cnvrted brain</h3>
-            </article>
+            <TrainBrainCard />
             <ChatCard />
             <LeadsWheel />
           </div>
@@ -170,10 +169,7 @@ export function CrockedglassHome() {
           <div className="cg-grid3">
             <StackSphere />
             <AgentsCard />
-            <article className="cg-card cg-card--photo">
-              <img src="/crockedglass/train-brain.webp" alt="" loading="lazy" decoding="async" />
-              <h3>Meetings booked, CRM updated</h3>
-            </article>
+            <MeetingsCard />
           </div>
         </section>
 

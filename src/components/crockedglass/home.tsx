@@ -184,7 +184,7 @@ export function CrockedglassHome() {
           </div>
           <div className="cg-collab">
             <LogoCarousel columnCount={3} logos={CLIENTS} />
-            <a className="cg-collab-cta" href={DEMO_PATH}>Your team next →</a>
+            <a className="cg-btn cg-collab-cta" href={DEMO_PATH}>Your team next{ARROW}</a>
           </div>
         </section>
 

@@ -59,7 +59,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
 
     return (
       <motion.div
-        className="relative h-14 w-24 overflow-hidden md:h-24 md:w-48"
+        className="relative h-20 w-24 overflow-hidden sm:w-32 md:h-32 md:w-60"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -102,7 +102,7 @@ const LogoColumn: React.FC<LogoColumnProps> = React.memo(
               <img
                 src={CurrentLogo}
                 alt={current.name ? `${current.name} logo` : "Client logo"}
-                className="max-h-[70%] max-w-[85%] object-contain"
+                className="max-h-[80%] max-w-[92%] object-contain"
                 draggable={false}
               />
             ) : (

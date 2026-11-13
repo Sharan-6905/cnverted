@@ -54,6 +54,10 @@ const social = [
     href: "https://discord.gg/xChmhfQx4",
     image: assets.home.imgIcon5,
   },
+  { label: "Instagram", href: "https://www.instagram.com/cnvrtedai/", image: "/figma/footer-icon-instagram.svg" },
+  { label: "Tracxn", href: "https://platform.tracxn.com/a/d/company/6a0e1d801be61b269ccb48d6/cnvrted.com", image: "/figma/footer-icon-tracxn.svg" },
+  { label: "Crunchbase", href: "https://www.crunchbase.com/organization/cnvrted", image: "/figma/footer-icon-crunchbase.svg" },
+  { label: "Product Hunt", href: "https://www.producthunt.com/products/cnvrted", image: "/figma/footer-icon-producthunt.svg" },
 ];
 export function IllustratedFooter({ redesign = false }: { redesign?: boolean }) {
   return (

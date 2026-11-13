@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import Orka from "./Orka";
+import { useOrkaSlot } from "./orka-travel";
 import { useLater } from "./hooks";
 
 type FragType = "leads" | "email" | "social" | "lead" | "community" | "meeting" | "enrich";
@@ -124,6 +124,7 @@ export function OrkaSection({ appHref }: { appHref: string }) {
   itemsRef.current = items;
   const later = useLater();
   const ids = useRef(0);
+  const catSlot = useOrkaSlot("to", { mood: focused ? "curious" : "grumpy", lookAt: focused ? (input as React.RefObject<Element>) : undefined, title: "Orka, the Cnvrted cat" });
 
   const place = useCallback((type: FragType, cur: Partial<Record<FragType, Item>>) => {
     const W = sec.current?.clientWidth ?? 1440;
@@ -182,9 +183,8 @@ export function OrkaSection({ appHref }: { appHref: string }) {
       </div>
       <div className="cg-orka-mid">
         <div className="cg-orka-hello">
-          <div className="cg-orka-cat">
-            <Orka mood={focused ? "curious" : "grumpy"} lookAt={focused ? (input as React.RefObject<Element>) : undefined} title="Orka, the Cnvrted cat" />
-          </div>
+          {/* the cat that peeked over "You can't build a business…" lands here (see orka-travel) */}
+          <div ref={catSlot} className="cg-orka-cat" style={{ aspectRatio: "2 / 1" }} />
           <h2 id="cg-orka-title">Hi! I’m Orka</h2>
           <p>Your GTM operator. Ask me to find leads, build lists, write outreach or check what’s working.</p>
         </div>

@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { OrkaPeek } from "./Orka";
+import { ORKA_LEDGE_RATIO } from "./Orka";
+import { useOrkaSlot } from "./orka-travel";
 import { useEased } from "./hooks";
 
 const PIN = 700;
@@ -18,6 +19,7 @@ export function CrossedFingers() {
   const [top, setTop] = useState(0);
   const [h, setH] = useState(0);
   const [p, setP] = useState(0);
+  const catSlot = useOrkaSlot("from", { mood: p >= 1 ? "curious" : "sleepy", title: "Orka peeking over the line" });
 
   useLayoutEffect(() => {
     const el = sticky.current;
@@ -48,9 +50,11 @@ export function CrossedFingers() {
   return (
     <section ref={runway} className="cg-crossed" aria-labelledby="cg-crossed-title" style={{ height: h ? h + PIN : undefined }}>
       <div ref={sticky} className="cg-crossed-sticky cg-wrap" style={{ top }}>
-        <OrkaPeek width={184} align="center" orkaProps={{ mood: p >= 1 ? "curious" : "sleepy", title: "Orka peeking over the line" }}>
+        {/* Orka's spot over the line: the cat itself is the shared one from <OrkaTravel>, which docks in "Hi! I'm Orka" */}
+        <div style={{ position: "relative" }}>
           <span className="cg-crossed-line" />
-        </OrkaPeek>
+          <div ref={catSlot} aria-hidden="true" style={{ position: "absolute", top: 0, left: "50%", width: 184, marginLeft: -92, aspectRatio: "2 / 1", transform: `translateY(-${ORKA_LEDGE_RATIO * 100}%)` }} />
+        </div>
         <h2 id="cg-crossed-title" aria-label={LEAD + REST}>
           <span aria-hidden="true">{LEAD}</span>
           {REST.split("").map((ch, i) => (

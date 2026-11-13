@@ -19,6 +19,7 @@ import { UserStories } from "./user-stories";
 import { PageDots } from "./page-dots";
 import { ClientPile, type PileClient } from "./client-pile";
 import { CrossedFingers } from "./crossed-fingers";
+import { OrkaTravel } from "./orka-travel";
 import { DEMO_PATH } from "@/lib/booking";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import "./home.css";
@@ -138,9 +139,12 @@ export function CrockedglassHome() {
         </section>
 
         {/* crossed fingers: pins while the grey half fills in black */}
-        <CrossedFingers />
+        {/* one Orka shared by both: he freezes on screen when the line scrolls away and docks above "Hi! I'm Orka" */}
+        <OrkaTravel>
+          <CrossedFingers />
 
-        <OrkaSection appHref={APP} />
+          <OrkaSection appHref={APP} />
+        </OrkaTravel>
 
         {/* case studies */}
         <section className="cg-wrap cg-cases" aria-labelledby="cg-cases-title">

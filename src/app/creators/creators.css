@@ -1,0 +1,58 @@
+/* /creators — built on the homepage's .cg tokens (home.css); everything here is scoped under .cg-creators. */
+.cg-creators main { padding-bottom: 40px; }
+
+.cg-cr-hero { padding: 168px 0 72px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+.cg-cr-hero h1 { margin: 0; max-width: 880px; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: 1.12; color: #000; text-wrap: balance; }
+.cg-cr-hero .cg-lede { max-width: 560px; }
+.cg-cr-eyebrow, .cg-cr-label { font: 500 12px/1 var(--cg-mono); letter-spacing: 1.2px; text-transform: uppercase; color: var(--cg-accent); }
+.cg-cr-eyebrow { height: 28px; padding: 0 12px; display: inline-flex; align-items: center; border: 1px solid rgb(79 101 245 / .35); border-radius: 99px; background: #fff; }
+.cg-cr-label { margin: 0 0 28px; display: flex; align-items: center; gap: 14px; }
+.cg-cr-label::after { content: ""; flex: 1; height: 1px; background: #e7e5df; }
+
+/* reels: three phones, slightly fanned; the hovered one straightens and lifts */
+.cg-cr-reels { padding-bottom: 96px; }
+.cg-cr-reel-row { display: grid; grid-template-columns: repeat(3, minmax(0, 340px)); justify-content: center; gap: 40px; }
+.cg-cr-reel { margin: 0; display: flex; flex-direction: column; gap: 16px; transform: rotate(var(--tilt, 0deg)); transition: transform .45s cubic-bezier(.2,.8,.2,1); }
+.cg-cr-reel:nth-child(2) { transform: translateY(-24px); }
+.cg-cr-reel:hover, .cg-cr-reel:focus-within { transform: translateY(-32px) rotate(0deg); }
+.cg-cr-phone { position: relative; height: 640px; padding: 8px; border-radius: 36px; background: var(--cg-ink);
+  box-shadow: -4px 6px 0 0 #000, 0 30px 60px -20px rgb(13 13 13 / .35); }
+.cg-cr-phone::before { content: ""; position: absolute; top: 14px; left: 50%; z-index: 1; width: 64px; height: 6px; margin-left: -32px; border-radius: 99px; background: #2a2a2a; pointer-events: none; }
+.cg-cr-phone iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 28px; background: #fff; }
+.cg-cr-reel figcaption, .cg-cr-post figcaption { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.cg-cr-reel figcaption { justify-content: space-between; padding: 0 6px; }
+.cg-cr-handle { font-family: var(--cg-display); font-size: 17px; color: var(--cg-ink); }
+.cg-cr-reel figcaption a, .cg-cr-post figcaption a { display: inline-flex; align-items: center; gap: 4px; color: var(--cg-muted); transition: color .2s ease; }
+.cg-cr-reel figcaption a:hover, .cg-cr-post figcaption a:hover { color: var(--cg-accent); }
+
+/* posts: LinkedIn + X side by side in white cards */
+.cg-cr-posts { padding-bottom: 120px; }
+.cg-cr-post-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; align-items: start; }
+.cg-cr-post { margin: 0; padding: 16px; border: 1px solid #e7e5df; border-radius: 20px; background: #fff; box-shadow: 0 20px 40px -28px rgb(13 13 13 / .25); }
+.cg-cr-post figcaption { padding: 4px 6px 14px; }
+.cg-cr-post figcaption a { margin-left: auto; }
+.cg-cr-net { height: 24px; padding: 0 10px; display: inline-flex; align-items: center; border-radius: 99px; background: var(--cg-ink); color: #fff; font: 500 11px/1 var(--cg-mono); letter-spacing: .6px; text-transform: uppercase; }
+.cg-cr-post-frame { border-radius: 12px; overflow: hidden; }
+.cg-cr-post-frame iframe { display: block; width: 100%; border: 0; }
+
+.cg-cr-cta { padding: 40px 0 80px; display: flex; flex-direction: column; align-items: center; gap: 20px; text-align: center; }
+.cg-cr-cta .cg-btn { margin-top: 12px; }
+
+@media (max-width: 1100px) {
+  .cg-cr-reel-row { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+}
+@media (max-width: 900px) {
+  .cg-cr-hero { padding-top: 140px; }
+  .cg-cr-hero h1 { font-size: 44px; }
+  .cg-cr-reel-row { grid-template-columns: minmax(0, 360px); }
+  .cg-cr-reel, .cg-cr-reel:nth-child(2), .cg-cr-reel:hover, .cg-cr-reel:focus-within { transform: none; }
+  .cg-cr-post-row { grid-template-columns: minmax(0, 560px); justify-content: center; }
+}
+@media (max-width: 640px) {
+  .cg-cr-hero { padding: 120px 0 48px; }
+  .cg-cr-hero h1 { font-size: 36px; }
+  .cg-cr-post { padding: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cg-cr-reel { transition: none; }
+}

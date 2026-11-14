@@ -1,5 +1,4 @@
-import { Inter, JetBrains_Mono } from "next/font/google";
-import { bricolage } from "./fonts";
+import { bricolage, inter, mono } from "./fonts";
 import Header from "./Header";
 import { SplashWindow } from "./splash-window";
 import { AppDemoVideo } from "./app-demo-video";
@@ -27,8 +26,6 @@ import { CASE_STUDIES } from "@/lib/case-studies";
 import "./home.css";
 
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-cg-inter", weight: ["400", "500", "600"] });
-const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-cg-mono", weight: ["500", "600"], preload: false });
 
 const APP = "https://beta.cnvrted.com";
 const ARROW = <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>;

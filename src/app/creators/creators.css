@@ -32,13 +32,37 @@
 .cg-cr-reel-foot a, .cg-cr-post-foot a, .cg-cr-text-link { display: inline-flex; align-items: center; gap: 4px; color: var(--cg-accent); font-weight: 500; transition: color .2s ease; }
 .cg-cr-reel-foot a:hover, .cg-cr-post-foot a:hover, .cg-cr-text-link:hover { color: #4053d6; }
 
-/* lightbox: Instagram's player, loaded only when a reel is opened */
-.cg-cr-lightbox { width: min(400px, 100vw - 32px); max-height: none; padding: 0; border: 0; border-radius: 20px; background: transparent; overflow: visible; }
-.cg-cr-lightbox::backdrop { background: rgb(13 13 13 / .72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
-.cg-cr-lightbox-body { position: relative; height: min(720px, 100svh - 48px); border-radius: 20px; overflow: hidden; background: #fff; }
-.cg-cr-lightbox-body iframe { display: block; width: 100%; height: 100%; border: 0; }
-.cg-cr-lightbox-close { position: fixed; top: 20px; right: 20px; width: 44px; height: 44px; display: grid; place-items: center; border: 0; border-radius: 50%; background: #fff; color: var(--cg-ink); cursor: pointer; }
-.cg-cr-lightbox-close:focus-visible { outline: 2px solid var(--cg-accent); outline-offset: 3px; }
+/* lightbox: Instagram's player, loaded only when a reel is opened. Every control is attached to the player column
+   (close in the header, prev/next beside the video), so nothing sits out in a screen corner. */
+.cg-cr-lb { position: fixed; inset: 0; width: 100%; max-width: none; height: 100%; max-height: none; margin: 0; padding: 0; border: 0; background: transparent; color: #fff; overflow: hidden; }
+.cg-cr-lb::backdrop { background: rgb(13 13 13 / .92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.cg-cr-lb[open] { animation: cgCrFade .25s ease; }
+.cg-cr-lb[open] .cg-cr-lb-col { animation: cgCrRise .35s cubic-bezier(.2,.8,.2,1); }
+@keyframes cgCrFade { from { opacity: 0; } }
+@keyframes cgCrRise { from { opacity: 0; transform: translateY(16px) scale(.98); } }
+.cg-cr-lb-stage { height: 100%; display: grid; place-items: center; padding: 24px 16px; }
+/* Instagram's player is a 4:5 video plus ~212px of its own header and footer, so the frame is sized to that
+   (1.25w + 212px) and the width is capped so the whole column fits the screen height */
+.cg-cr-lb-col { --w: min(400px, 100vw - 32px, (100svh - 352px) / 1.25); width: var(--w); display: flex; flex-direction: column; gap: 12px; }
+.cg-cr-lb-head { display: flex; align-items: center; gap: 16px; }
+.cg-cr-lb-head > div { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.cg-cr-lb-head p { font-family: var(--cg-display); font-size: 18px; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cg-cr-lb-head span { font-size: 13px; color: rgb(255 255 255 / .6); }
+.cg-cr-lb-close, .cg-cr-lb-nav { flex: none; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border: 1px solid rgb(255 255 255 / .22); border-radius: 50%;
+  background: rgb(255 255 255 / .12); color: #fff; cursor: pointer; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  transition: background .2s ease, border-color .2s ease, color .2s ease, transform .2s ease; }
+.cg-cr-lb-close:hover, .cg-cr-lb-nav:hover { background: #fff; border-color: #fff; color: var(--cg-ink); }
+.cg-cr-lb-close:active, .cg-cr-lb-nav:active { transform: scale(.94); }
+.cg-cr-lb-close:focus-visible, .cg-cr-lb-nav:focus-visible { outline: 2px solid var(--cg-accent); outline-offset: 3px; }
+.cg-cr-lb-player { position: relative; width: 100%; height: calc(var(--w) * 1.25 + 212px); }
+.cg-cr-lb-player iframe { display: block; width: 100%; height: 100%; border: 0; border-radius: 18px; background: #fff; }
+.cg-cr-lb-nav { position: absolute; top: 50%; margin-top: -22px; }
+.cg-cr-lb-nav--prev { right: calc(100% + 20px); }
+.cg-cr-lb-nav--next { left: calc(100% + 20px); }
+.cg-cr-lb-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 24px; font-size: 14px; }
+.cg-cr-lb-count { font-family: var(--cg-mono); font-size: 12px; letter-spacing: .5px; color: rgb(255 255 255 / .6); }
+.cg-cr-lb-foot a { margin-left: auto; display: inline-flex; align-items: center; gap: 4px; color: #fff; font-weight: 500; opacity: .85; transition: opacity .2s ease; }
+.cg-cr-lb-foot a:hover { opacity: 1; }
 
 /* posts: our own quote cards (indexable text, no third-party iframes) */
 .cg-cr-posts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
@@ -79,6 +103,16 @@
   .cg-cr-reels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cg-cr-posts, .cg-cr-why-grid { grid-template-columns: 1fr; }
 }
+/* no room beside the video: prev/next move under it, either side of the counter, at thumb height */
+@media (max-width: 560px) {
+  .cg-cr-lb-col { --w: min(100vw - 32px, (100svh - 402px) / 1.25); }
+  .cg-cr-lb-stage { padding-block: 16px; }
+  .cg-cr-lb-foot { position: relative; justify-content: center; min-height: 44px; }
+  .cg-cr-lb-nav { top: auto; bottom: -56px; margin: 0; }
+  .cg-cr-lb-nav--prev { right: auto; left: 0; }
+  .cg-cr-lb-nav--next { left: auto; right: 0; }
+  .cg-cr-lb-foot a { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); margin: 0; white-space: nowrap; }
+}
 @media (max-width: 640px) {
   .cg-cr-hero { padding: 120px 0 24px; }
   .cg-cr-hero h1 { font-size: 36px; }
@@ -93,5 +127,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .cg-cr-reel-play, .cg-cr-reel-play img, .cg-cr-reel-btn { transition: none; }
+  .cg-cr-lb[open], .cg-cr-lb[open] .cg-cr-lb-col { animation: none; }
   .cg-cr-reel-play:hover, .cg-cr-reel-play:hover img { transform: none; }
 }

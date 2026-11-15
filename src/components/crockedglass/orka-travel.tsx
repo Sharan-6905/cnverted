@@ -22,9 +22,18 @@ export function useOrkaSlot(name: SlotName, props: SlotProps) {
 
 /** One Orka for "You can't build a business…" and "Hi! I'm Orka". He rides the crossed-fingers line while it's
  *  pinned, stays frozen on screen when the line scrolls away, and docks above "Hi! I'm Orka" once that slot
- *  reaches him, staying the same size. */
+ *  reaches him, staying the same size.
+ *
+ *  The browser does the moving: he is `position: sticky` (top = the line's pinned screen y) inside an absolute
+ *  track that runs from the line slot's resting place down to the "Hi! I'm Orka" slot. So he scrolls with the
+ *  line until it pins, holds at that y, and scrolls on with the second slot once it arrives, all on the
+ *  compositor, in step with the page. (He used to be position: fixed and moved from JS after each scroll, which
+ *  phones draw a frame late: he shook against the page.) JS only measures the track when the layout changes,
+ *  slides him sideways if the two slots aren't lined up, and swaps his mood halfway. */
 export function OrkaTravel({ children }: { children: ReactNode }) {
   const slots = useRef<Record<SlotName, Slot>>({ from: { el: null, props: {} }, to: { el: null, props: {} } });
+  const wrap = useRef<HTMLDivElement>(null);
+  const track = useRef<HTMLDivElement>(null);
   const box = useRef<HTMLDivElement>(null);
   const side = useRef<SlotName>("from");
   const [, rerender] = useReducer((x: number) => x + 1, 0);
@@ -35,66 +44,79 @@ export function OrkaTravel({ children }: { children: ReactNode }) {
   }), []);
 
   useEffect(() => {
-    let raf = 0;
-    let last = "";
+    let geo: { pinY: number; dx: number } | null = null;
+    let lastX = "";
+
+    // layout only: where the track starts and ends, and the y he holds at
+    const measure = () => {
+      const a = slots.current.from.el, b = slots.current.to.el, w = wrap.current, t = track.current, el = box.current;
+      if (!a || !b || !w || !t || !el) return;
+      const sticky = a.closest<HTMLElement>(".cg-crossed-sticky");
+      const runway = sticky?.parentElement;
+      if (!sticky || !runway) return;
+      const A = a.getBoundingClientRect(), B = b.getBoundingClientRect(), W = w.getBoundingClientRect();
+      const S = sticky.getBoundingClientRect(), R = runway.getBoundingClientRect();
+      const inSticky = A.top - S.top; // the slot's offset inside the pinned block
+      const pinY = parseFloat(getComputedStyle(sticky).top) + inSticky;
+      // the slot's resting place: the pinned block sits at the top of its runway until it pins
+      const startY = R.top + inSticky - W.top;
+      const endY = B.top - W.top;
+      t.style.top = `${startY}px`;
+      t.style.height = `${Math.max(0, endY - startY) + A.height}px`; // + his height, so his top can reach endY
+      el.style.top = `${pinY}px`;
+      el.style.width = `${A.width}px`;
+      el.style.marginLeft = `${A.left - W.left}px`; // margin, not left: on a sticky box `left` is a sideways stick threshold
+      t.style.visibility = "visible";
+      geo = { pinY, dx: B.left - A.left };
+      update();
+    };
+
+    // per scroll: no layout writes unless the slots are offset sideways; just the mood switch
     const update = () => {
       const a = slots.current.from.el, b = slots.current.to.el, el = box.current;
-      if (!a || !b || !el) return;
+      if (!a || !b || !el || !geo) return;
       const A = a.getBoundingClientRect(), B = b.getBoundingClientRect();
-      // the screen y the line pins at: its sticky container's `top` plus the slot's offset inside it
-      const sticky = a.closest<HTMLElement>(".cg-crossed-sticky");
-      const pinY = sticky ? parseFloat(getComputedStyle(sticky).top) + (A.top - sticky.getBoundingClientRect().top) : A.top;
-      const gap = B.top - A.top; // fixed distance in the document between the two slots
-      const t = gap > 0 ? clamp((pinY - A.top) / gap) : 1;
-      const y = Math.max(A.top, Math.min(pinY, B.top));
-      const k = smooth(t);
-      const x = A.left + (B.left - A.left) * k;
-      const w = A.width; // same size the whole way; the landing slot is drawn at this width too
-      const off = y > window.innerHeight || y + w < 0;
+      const gap = B.top - A.top; // how far he has to go: 0 → 1 as the line leaves and the second slot comes up
+      const t = gap > 0 ? clamp((geo.pinY - A.top) / gap) : 1;
       const next = t < 0.5 ? "from" : "to";
       if (next !== side.current) { side.current = next; rerender(); }
-      const css = `${x.toFixed(1)},${y.toFixed(1)},${w.toFixed(1)},${off}`;
-      if (css === last) return;
-      last = css;
-      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
-      el.style.width = `${w}px`;
-      el.style.visibility = off ? "hidden" : "visible";
+      const x = Math.abs(geo.dx) < 0.5 ? "" : `translateX(${(geo.dx * smooth(t)).toFixed(1)}px)`;
+      if (x !== lastX) { el.style.transform = x; lastX = x; }
     };
-    // scroll events keep him in step with the page; the frame loop catches layout shifts (fonts, images, resizes).
-    // The loop reads layout every frame, so it only runs while a slot is within a screen of the viewport; out
-    // there he is hidden anyway, and the last scroll update already put him away
-    let near = true;
-    const frame = () => { update(); raf = near ? requestAnimationFrame(frame) : 0; };
-    raf = requestAnimationFrame(frame);
-    const seen = new Map<Element, boolean>();
-    const io = new IntersectionObserver((es) => {
-      for (const e of es) seen.set(e.target, e.isIntersecting);
-      near = [...seen.values()].some(Boolean);
-      if (near && !raf) raf = requestAnimationFrame(frame);
-    }, { rootMargin: "100% 0px" });
-    let observed = false;
+
+    const ro = new ResizeObserver(measure);
+    let watched = false;
     const watch = () => {
       const a = slots.current.from.el, b = slots.current.to.el;
-      if (observed || !a || !b) return;
-      observed = true; io.observe(a); io.observe(b);
+      if (watched || !a || !b) return;
+      watched = true;
+      ro.observe(document.body); // anything above or between the slots changing height moves them
+      const sticky = a.closest(".cg-crossed-sticky");
+      if (sticky) ro.observe(sticky);
+      ro.observe(b);
+      measure();
     };
     watch();
-    const watchRaf = requestAnimationFrame(watch); // slots register in their own effects, maybe after this one
+    const raf = requestAnimationFrame(watch); // slots register in their own effects, maybe after this one
+    document.fonts?.ready.then(measure);
     window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update, { passive: true });
-    return () => { cancelAnimationFrame(raf); cancelAnimationFrame(watchRaf); io.disconnect(); window.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
+    window.addEventListener("resize", measure, { passive: true });
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); window.removeEventListener("scroll", update); window.removeEventListener("resize", measure); };
   }, []);
 
   const p = slots.current[side.current].props;
   return (
     <Ctx.Provider value={api}>
-      {children}
-      <div ref={box} style={{ position: "fixed", left: 0, top: 0, zIndex: 3, visibility: "hidden", willChange: "transform" }}>
-        {/* the bar he peeks over travels with him, sized to him (342 px wide at the line's 184 px cat) */}
-        {/* the surface he peeks over travels with him: a darker bar for the edge, and a soft shade falling away below it */}
-        <span aria-hidden="true" style={{ position: "absolute", left: "50%", top: `${ORKA_LEDGE_RATIO * 100}%`, zIndex: -1, width: `${(342 / 184) * 100}%`, height: "70%", transform: "translateX(-50%)", background: "radial-gradient(ellipse 50% 100% at 50% 0, rgba(0,0,0,.12), rgba(0,0,0,.05) 45%, rgba(0,0,0,0) 100%)", pointerEvents: "none" }} />
-        <span aria-hidden="true" style={{ position: "absolute", left: "50%", top: `${ORKA_LEDGE_RATIO * 100}%`, zIndex: -1, width: `${(342 / 184) * 100}%`, height: 6, transform: "translate(-50%, -1px)", borderRadius: "50%", background: "radial-gradient(closest-side, rgba(0,0,0,.32), rgba(0,0,0,0))", pointerEvents: "none" }} />
-        <Orka mood={p.mood ?? "sleepy"} lookAt={p.lookAt} title={p.title ?? "Orka, the Cnvrted cat"} />
+      <div ref={wrap} style={{ position: "relative" }}>
+        {children}
+        <div ref={track} style={{ position: "absolute", left: 0, right: 0, top: 0, height: 0, zIndex: 3, pointerEvents: "none", visibility: "hidden" }}>
+          <div ref={box} style={{ position: "sticky", top: 0, pointerEvents: "auto" }}>
+            {/* the surface he peeks over travels with him: a darker bar for the edge, and a soft shade falling away below it */}
+            <span aria-hidden="true" style={{ position: "absolute", left: "50%", top: `${ORKA_LEDGE_RATIO * 100}%`, zIndex: -1, width: `${(342 / 184) * 100}%`, height: "70%", transform: "translateX(-50%)", background: "radial-gradient(ellipse 50% 100% at 50% 0, rgba(0,0,0,.12), rgba(0,0,0,.05) 45%, rgba(0,0,0,0) 100%)", pointerEvents: "none" }} />
+            <span aria-hidden="true" style={{ position: "absolute", left: "50%", top: `${ORKA_LEDGE_RATIO * 100}%`, zIndex: -1, width: `${(342 / 184) * 100}%`, height: 6, transform: "translate(-50%, -1px)", borderRadius: "50%", background: "radial-gradient(closest-side, rgba(0,0,0,.32), rgba(0,0,0,0))", pointerEvents: "none" }} />
+            <Orka mood={p.mood ?? "sleepy"} lookAt={p.lookAt} title={p.title ?? "Orka, the Cnvrted cat"} />
+          </div>
+        </div>
       </div>
     </Ctx.Provider>
   );

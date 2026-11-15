@@ -7,6 +7,8 @@ import { useEased } from "./hooks";
 /** Extra scroll distance the section stays pinned for while the story plays from 0 to 1. */
 const PIN = 1700;
 const STORY_W = 1112, STORY_H = 640;
+/** Below this width the cards stack at full size instead of shrinking the 1112px canvas to an unreadable strip. */
+const STACK_MQ = "(max-width: 719px)";
 
 const PROMPT = "Find D2C brands in India switching to eco-friendly packaging, and get me their founders.";
 const KEYWORDS = ["D2C brands", "India", "Eco packaging", "Founders", "Switching now"];
@@ -36,10 +38,19 @@ export function CuratedLeads() {
   const [top, setTop] = useState(0);
   const [h, setH] = useState(0);
   const [ui, setUi] = useState({ hover: -1, sel: -1, sent: false, cal: true });
+  const [stack, setStack] = useState(false);
+
+  useLayoutEffect(() => {
+    const mq = window.matchMedia(STACK_MQ);
+    const on = () => setStack(mq.matches);
+    on();
+    mq.addEventListener("change", on);
+    return () => mq.removeEventListener("change", on);
+  }, []);
 
   useLayoutEffect(() => {
     const el = sticky.current;
-    if (!el) return;
+    if (!el || stack) return;
     const measure = () => {
       const vh = window.innerHeight, H = el.offsetHeight;
       setH(H);
@@ -51,7 +62,7 @@ export function CuratedLeads() {
     ro.observe(el);
     window.addEventListener("resize", measure);
     return () => { ro.disconnect(); window.removeEventListener("resize", measure); };
-  }, []);
+  }, [stack]);
 
   useEffect(() => {
     // scroll events already arrive once per frame; reading here (not in a rAF) keeps the story in step even
@@ -59,6 +70,14 @@ export function CuratedLeads() {
     const read = () => {
       const r = runway.current?.getBoundingClientRect();
       if (!r) return;
+      if (stack) {
+        // stacked (phones): too tall to pin, so the story plays as the stack scrolls by. It starts when the top
+        // card is 85% down the screen and finishes when 70% of the stack (the end of the leads card) is 60% down,
+        // so each card animates while it is in view and the leads are scored before the panel comes up
+        const vh = window.innerHeight;
+        setP(Math.round(clamp((vh * 0.85 - r.top) / (r.height * 0.7 + vh * 0.25), 0, 1) * 1000) / 1000);
+        return;
+      }
       const t = clamp(top - r.top, 0, PIN);
       setP(Math.round((t / PIN) * 1000) / 1000);
     };
@@ -66,7 +85,7 @@ export function CuratedLeads() {
     window.addEventListener("scroll", read, { passive: true });
     window.addEventListener("resize", read, { passive: true });
     return () => { window.removeEventListener("scroll", read); window.removeEventListener("resize", read); };
-  }, [top]);
+  }, [top, stack]);
 
   const seg = (a: number, b: number) => clamp((P - a) / (b - a), 0, 1);
   const tp = seg(0, 0.12);
@@ -102,10 +121,10 @@ export function CuratedLeads() {
         <h2 id="cg-cl-title" className="cg-h2">Curated leads</h2>
         <p className="cg-lede">Every lead we provide is specially selected for your business and your activity on Cnvrted.</p>
       </div>
-      <div ref={runway} className="cg-cl-runway" style={{ height: h ? h + PIN : undefined }}>
-      <div ref={sticky} className="cg-cl-sticky" style={{ top }}>
-        <ScaleBox width={STORY_W} height={STORY_H} style={{ maxWidth: STORY_W, marginInline: "auto" }}>
-          <div className="cg-story">
+      <div ref={runway} className="cg-cl-runway" style={{ height: !stack && h ? h + PIN : undefined }}>
+      <div ref={sticky} className="cg-cl-sticky" style={stack ? { position: "static" } : { top }}>
+        <ScaleBox width={STORY_W} height={STORY_H} disabled={stack} style={{ maxWidth: STORY_W, marginInline: "auto" }}>
+          <div className={`cg-story${stack ? " is-stack" : ""}`}>
             <svg width={STORY_W} height={STORY_H} viewBox={`0 0 ${STORY_W} ${STORY_H}`} fill="none" aria-hidden="true" style={{ position: "absolute", left: 0, top: 0, overflow: "visible" }}>
               {lineD.map((d) => <path key={d} d={d} stroke="#e5e3dd" strokeWidth="1.5" />)}
               {lineD.map((d, i) => <path key={`a${d}`} d={d} stroke={i === 3 ? "#15803d" : "#4f65f5"} strokeWidth="1.5" strokeLinecap="round" pathLength={1} strokeDasharray="1" strokeDashoffset={l[i].toFixed(3)} />)}
@@ -169,7 +188,8 @@ export function CuratedLeads() {
                 const shown = P >= 0.68 + i * 0.02, scored = dt >= i + 0.5 || done, active = done && (hover === i || sel === i);
                 return (
                   <div key={ld.name} className={`cg-st-grid cg-st-row${shown ? " is-shown" : ""}${active ? " is-active" : ""}`}
-                    onMouseEnter={() => { if (done && hover !== i) setUi((u) => ({ ...u, hover: i })); }}>
+                    onMouseEnter={() => { if (done && hover !== i) setUi((u) => ({ ...u, hover: i })); }}
+                    onClick={() => { if (done && hover !== i) setUi((u) => ({ ...u, hover: i })); }}>
                     <span style={{ minWidth: 0, display: "flex", alignItems: "center", gap: 10 }}>
                       <span className="cg-st-ini">{ld.name.split(" ").map((w) => w[0]).join("")}</span>
                       <span style={{ minWidth: 0, display: "flex", flexDirection: "column" }}>
@@ -190,7 +210,7 @@ export function CuratedLeads() {
 
             {/* 6 · detail panel: waiting → why this lead → email → sent */}
             <div className="cg-story-card cg-st-panel" aria-live="polite">
-              {panel === "wait" && <p style={{ margin: "auto 0", fontSize: 14, lineHeight: 1.5, color: "#8a867e", textAlign: "center" }}>{done ? "Hover a lead to see why it is on your list." : "Leads land here once Orka finishes the waterfall."}</p>}
+              {panel === "wait" && <p style={{ margin: "auto 0", fontSize: 14, lineHeight: 1.5, color: "#8a867e", textAlign: "center" }}>{done ? `${stack ? "Tap" : "Hover"} a lead to see why it is on your list.` : "Leads land here once Orka finishes the waterfall."}</p>}
               {panel === "why" && (
                 <div key={`why${ci}`} className="cg-pop" style={{ height: "100%", display: "flex", flexDirection: "column" }}>
                   <p className="cg-story-lbl">Why this lead</p>

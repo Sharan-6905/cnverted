@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { prefersReducedMotion, useLater, usePatch } from "./hooks";
 
 type Mem = { t: string; c: string };
@@ -29,7 +29,8 @@ const INIT = {
 /** "Train your cnvrted brain": signals (click, prompt, rival post, news, rival site) feed the brain and become memories. */
 export function TrainBrainCard() {
   const [t, set, ref] = usePatch(INIT);
-  const later = useLater();
+  const root = useRef<HTMLElement>(null);
+  const later = useLater(root);
 
   useEffect(() => {
     if (prefersReducedMotion()) { set({ sc: 0, ok: true }); return; }
@@ -82,7 +83,7 @@ export function TrainBrainCard() {
   const cur = SCENES[t.sc];
   const fade = (on: boolean, y: number) => ({ opacity: on ? 1 : 0, transform: `translateY(${on ? 0 : y}px)` });
   return (
-    <article className="cg-card cg-card--photo cg-tb">
+    <article ref={root} className="cg-card cg-card--photo cg-tb">
       <img src="/crockedglass/train-brain.webp" alt="" loading="lazy" decoding="async" />
       <div className="cg-tb-layer" aria-hidden="true">
         <div className="cg-tb-card">

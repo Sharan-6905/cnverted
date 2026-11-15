@@ -46,7 +46,7 @@
 .cg-btn--sm { height: 36px; }
 /* paper grain over the blue, the same texture and blend as the header's Get Started (header.css .cv-cta) */
 .cg-btn::before { content: ""; position: absolute; inset: -60px -30px; z-index: -1; pointer-events: none;
-  background: url("/figma/redesign/paper-texture.webp") center / cover; mix-blend-mode: soft-light; opacity: .6; }
+  background: image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")) center / cover; mix-blend-mode: soft-light; opacity: .6; }
 .cg-h2 { margin: 0; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: 75px; color: #000; }
 .cg-lede { font-size: 20px; line-height: 24px; color: var(--cg-muted); }
 .cg-head { width: min(739px, 100%); display: flex; flex-direction: column; gap: 20px; }
@@ -343,6 +343,19 @@
 .cg-st-reach.is-ready:hover { transform: translateY(-1px); }
 .cg-st-reach.is-sel { border-color: #15803d; background: #15803d; color: #fff; box-shadow: -2px 2px 0 0 #000; }
 .cg-st-dot { position: absolute; left: 618px; width: 10px; height: 10px; margin: -5px 0 0 -5px; border-radius: 99px; background: #15803d; box-shadow: 0 0 0 4px rgba(21,128,61,.16); transition: opacity .3s ease; pointer-events: none; }
+/* phones (curated-leads.tsx STACK_MQ): the same cards in one column, full size, no connector lines */
+.cg-story.is-stack { width: auto; height: auto; display: flex; flex-direction: column; gap: 12px; }
+.cg-story.is-stack > svg, .cg-story.is-stack .cg-st-dot { display: none; }
+.cg-story.is-stack .cg-story-card, .cg-story.is-stack .cg-st-wf { position: relative; left: auto; top: auto; width: auto; }
+.cg-story.is-stack .cg-st-prompt { height: auto; gap: 10px; }
+.cg-story.is-stack .cg-st-orka { height: auto; }
+.cg-story.is-stack .cg-st-wf { height: auto; }
+.cg-story.is-stack .cg-st-leads { height: auto; }
+.cg-story.is-stack .cg-st-grid { grid-template-columns: minmax(0, 1fr) 40px 84px; }
+.cg-story.is-stack .cg-st-grid > :nth-child(2) { display: none; } /* "Why now": the panel below says why */
+.cg-story.is-stack .cg-st-lhead, .cg-story.is-stack .cg-st-row { padding: 0 12px; }
+.cg-story.is-stack .cg-st-panel { height: auto; min-height: 300px; }
+.cg-story.is-stack .cg-st-panel > div { min-height: 262px; } /* the panel's 300px less padding: the button stays at the foot */
 .cg-st-panel { left: 730px; top: 320px; width: 382px; height: 320px; padding: 18px; display: flex; flex-direction: column; border-radius: 18px; }
 .cg-green { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 44px; padding: 0 20px; border: none; border-radius: 999px; background: #15803d; color: #fff; font: 500 14px/1 var(--cg-sans); cursor: pointer; box-shadow: -3px 3px 0 0 #000, inset 2.2px 4.4px 10.12px rgba(255,255,255,.25); transition: background .2s ease, box-shadow .15s ease, transform .15s ease; flex: none; }
 .cg-green:hover { background: #137337; }
@@ -504,6 +517,7 @@
   .cg-orka-cat { width: 200px; }
   .cg-chip { font-size: 12px; }
   .cg-faq-q { font-size: 16px; }
+  .cg-faq-side .cg-h2 { line-height: 1.15; } /* the desktop 70px leading left a line's gap between the two lines */
   .cg-faq-a p { padding-right: 16px; }
   .cg-ft-cols { grid-template-columns: 1fr 1fr; }
 }

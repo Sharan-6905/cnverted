@@ -317,12 +317,20 @@ export default function Orka({
         browRefs[i].current?.setAttribute("d", browPath(b, i === 0));
       });
 
-      raf = requestAnimationFrame(frame);
+      raf = visible ? requestAnimationFrame(frame) : 0;
     };
     raf = requestAnimationFrame(frame);
+    // the face only animates while the cat is on screen (it runs every frame otherwise, for the whole visit)
+    let visible = true;
+    const io = typeof IntersectionObserver === "function" ? new IntersectionObserver((es) => {
+      visible = es[es.length - 1].isIntersecting;
+      if (visible && !raf) { last = performance.now(); raf = requestAnimationFrame(frame); }
+    }) : null;
+    io?.observe(svg);
 
     return () => {
       cancelAnimationFrame(raf);
+      io?.disconnect();
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerdown", onMove);
       document.removeEventListener("pointerout", onLeave);

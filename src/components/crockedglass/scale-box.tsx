@@ -6,8 +6,10 @@ import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode }
  * Renders a fixed-size piece of the design (drawn at `width` x `height` px) and scales it down to fit
  * its container on narrow screens. At or above `width` it renders at 1:1.
  */
-export function ScaleBox({ width, height, children, className = "", style }: {
+export function ScaleBox({ width, height, children, className = "", style, disabled = false }: {
   width: number; height: number; children: ReactNode; className?: string; style?: CSSProperties;
+  /** render the children in normal flow instead (for a layout that reflows on narrow screens) */
+  disabled?: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(1);
@@ -20,6 +22,7 @@ export function ScaleBox({ width, height, children, className = "", style }: {
     ro.observe(el);
     return () => ro.disconnect();
   }, [width]);
+  if (disabled) return <div ref={ref} className={className} style={style}>{children}</div>;
   return (
     <div ref={ref} className={`cg-scale ${className}`} style={{ height: height * scale, ...style }}>
       <div className="cg-scale-in" style={{ width, height, transform: scale === 1 ? undefined : `scale(${scale})` }}>

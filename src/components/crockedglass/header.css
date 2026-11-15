@@ -174,7 +174,7 @@
   position: absolute;
   inset: -60px -30px;
   z-index: -1;
-  background: url("/figma/redesign/paper-texture.webp") center / cover;
+  background: image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")) center / cover;
   mix-blend-mode: soft-light;
   opacity: 0.6;
   pointer-events: none;

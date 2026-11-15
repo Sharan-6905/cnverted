@@ -43,7 +43,8 @@ export function UserStories() {
   const hoverRef = useRef(false);
   const iRef = useRef(0);
   iRef.current = i;
-  const later = useLater();
+  const root = useRef<HTMLElement>(null);
+  const later = useLater(root);
   const dots = useMemo<GlowDot[]>(() => { const o: GlowDot[] = []; for (let k = 0; k < WORLD_DOTS.length; k += 2) o.push({ x: WORLD_DOTS[k], y: WORLD_DOTS[k + 1] }); return o; }, []);
 
   const show = (n: number) => {
@@ -84,7 +85,7 @@ export function UserStories() {
     : { left, top: pt.y + off, transform: `translateY(${hide ? -8 : 0}px)` };
 
   return (
-    <section className="cg-wrap cg-us" aria-labelledby="cg-us-title">
+    <section ref={root} className="cg-wrap cg-us" aria-labelledby="cg-us-title">
       <div className="cg-head">
         <h2 id="cg-us-title" className="cg-h2">User stories</h2>
         <p className="cg-lede">What teams say after a few weeks of letting Orka find, reach and book for them.</p>

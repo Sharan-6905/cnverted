@@ -108,6 +108,7 @@ export function LogoCarousel({ columnCount = 2, logos }: LogoCarouselProps) {
   const cols = Math.max(0, Math.min(columnCount, logos.length))
   const [shown, setShown] = useState<Logo[]>([])
   const shownRef = useRef<Logo[]>([])
+  const row = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     // shuffled on the client only, so server and first client render agree (both empty)
@@ -118,8 +119,17 @@ export function LogoCarousel({ columnCount = 2, logos }: LogoCarouselProps) {
     shownRef.current = first
     setShown(first)
 
+    // the clock only runs while the row is on screen, so it isn't swapping logos (and animating them) for the
+    // whole visit; it carries on from the same point when it scrolls back
+    let onScreen = true
+    const io = typeof IntersectionObserver === "function" && row.current
+      ? new IntersectionObserver((es) => { onScreen = es[es.length - 1].isIntersecting }, { rootMargin: "200px 0px" })
+      : null
+    if (io && row.current) io.observe(row.current)
+
     let elapsed = 0
     const id = setInterval(() => {
+      if (!onScreen) return
       elapsed += TICK_MS
       let next: Logo[] | null = null
       for (let i = 0; i < cols; i++) {
@@ -138,11 +148,11 @@ export function LogoCarousel({ columnCount = 2, logos }: LogoCarouselProps) {
         setShown(next)
       }
     }, TICK_MS)
-    return () => clearInterval(id)
+    return () => { clearInterval(id); io?.disconnect() }
   }, [logos, cols])
 
   return (
-    <div className="flex space-x-4">
+    <div ref={row} className="flex space-x-4">
       {shown.map((logo, index) => (
         <LogoColumn key={index} logo={logo} index={index} />
       ))}

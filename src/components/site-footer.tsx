@@ -8,7 +8,7 @@ import { BOOKING_URL } from "@/lib/booking";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Logo } from "@/components/logo";
-import { LinkedInIcon, XIcon, DiscordIcon, InstagramIcon, TracxnIcon, CrunchbaseIcon, ProductHuntIcon } from "@/components/social-icons";
+import { LinkedInIcon, XIcon, DiscordIcon, InstagramIcon, YouTubeIcon, TracxnIcon, CrunchbaseIcon, ProductHuntIcon } from "@/components/social-icons";
 import { supabase } from "@/lib/supabase";
 
 const COLUMNS = [
@@ -49,6 +49,7 @@ const SOCIAL_LINKS = [
     Icon: DiscordIcon,
   },
   { label: "Instagram", href: "https://www.instagram.com/cnvrtedai/", Icon: InstagramIcon },
+  { label: "YouTube", href: "https://www.youtube.com/@cnvrtedai", Icon: YouTubeIcon },
   { label: "Tracxn", href: "https://platform.tracxn.com/a/d/company/6a0e1d801be61b269ccb48d6/cnvrted.com", Icon: TracxnIcon },
   { label: "Crunchbase", href: "https://www.crunchbase.com/organization/cnvrted", Icon: CrunchbaseIcon },
   { label: "Product Hunt", href: "https://www.producthunt.com/products/cnvrted", Icon: ProductHuntIcon },

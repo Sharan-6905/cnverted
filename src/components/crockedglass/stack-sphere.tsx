@@ -2,11 +2,14 @@
 
 import { useEffect, useRef } from "react";
 
+// Only connectors the product actually ships (backend: hubspot/heyreach/instantly/linkedin/whatsapp/google
+// routes + the Composio list in app/connections.py). Add a logo here when a connector goes live, not before.
 const LOGOS: [string, string][] = [
   ["HubSpot", "/crockedglass/logo-hubspot.png"], ["LinkedIn", "/crockedglass/logo-linkedin.png"],
-  ["Google Ads", "/crockedglass/logo-google-ads.png"], ["HeyReach", "/crockedglass/logo-heyreach.png"],
-  ["Salesforce", "/crockedglass/logo-salesforce.png"], ["Google Analytics", "/crockedglass/logo-google-analytics.png"],
-  ["Pipedrive", "/crockedglass/logo-pipedrive.png"],
+  ["Gmail", "/crockedglass/logo-gmail.png"], ["HeyReach", "/crockedglass/logo-heyreach.png"],
+  ["Salesforce", "/crockedglass/logo-salesforce.png"], ["Instantly", "/brands/instantly-optimized.webp"],
+  ["WhatsApp", "/brands/whatsapp.svg"], ["Google Calendar", "/brands/google-calendar.png"],
+  ["Google Analytics", "/crockedglass/logo-google-analytics.png"], ["Calendly", "/brands/calendly.svg"],
 ];
 type P3 = [number, number, number];
 const fib = (n: number): P3[] => {
@@ -14,7 +17,7 @@ const fib = (n: number): P3[] => {
   return Array.from({ length: n }, (_, i) => { const y = 1 - (i + 0.5) * 2 / n, r = Math.sqrt(1 - y * y), th = g * i; return [Math.cos(th) * r, y, Math.sin(th) * r]; });
 };
 const DOTS = fib(300);
-const LOGO_PTS = fib(28).map((p, i) => ({ p, name: LOGOS[i % 7][0], src: LOGOS[i % 7][1] }));
+const LOGO_PTS = fib(LOGOS.length * 3).map((p, i) => ({ p, name: LOGOS[i % LOGOS.length][0], src: LOGOS[i % LOGOS.length][1] }));
 
 // big globe anchored bottom-right, cropped by the card edge
 function project(p: P3, rx: number, ry: number) {
@@ -86,7 +89,7 @@ export function StackSphere() {
         {DOTS.map((_, i) => <span key={`d${i}`} data-i={i} className="cg-sph-pt cg-sph-dot" />)}
         {LOGO_PTS.map((l, i) => (
           <span key={`l${i}`} data-i={i} data-logo="1" className="cg-sph-pt cg-sph-logo">
-            <img src={l.src} alt={i < 7 ? l.name : ""} loading="lazy" decoding="async" draggable={false} />
+            <img src={l.src} alt={i < LOGOS.length ? l.name : ""} loading="lazy" decoding="async" draggable={false} />
           </span>
         ))}
       </div>

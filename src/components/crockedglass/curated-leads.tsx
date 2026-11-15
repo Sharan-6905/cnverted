@@ -2,7 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ScaleBox } from "./scale-box";
-import { useEased } from "./hooks";
+import { stableViewportHeight, useEased } from "./hooks";
 
 /** Extra scroll distance the section stays pinned for while the story plays from 0 to 1. */
 const PIN = 1700;
@@ -52,7 +52,7 @@ export function CuratedLeads() {
     const el = sticky.current;
     if (!el || stack) return;
     const measure = () => {
-      const vh = window.innerHeight, H = el.offsetHeight;
+      const vh = stableViewportHeight(), H = el.offsetHeight;
       setH(H);
       // centred below the fixed header (~96 px) if it fits; otherwise pinned with its bottom 24 px above the fold
       setTop(vh >= H + 120 ? Math.max(96, (vh - H) / 2) : vh - H - 24);
@@ -74,7 +74,7 @@ export function CuratedLeads() {
         // stacked (phones): too tall to pin, so the story plays as the stack scrolls by. It starts when the top
         // card is 85% down the screen and finishes when 70% of the stack (the end of the leads card) is 60% down,
         // so each card animates while it is in view and the leads are scored before the panel comes up
-        const vh = window.innerHeight;
+        const vh = stableViewportHeight();
         setP(Math.round(clamp((vh * 0.85 - r.top) / (r.height * 0.7 + vh * 0.25), 0, 1) * 1000) / 1000);
         return;
       }

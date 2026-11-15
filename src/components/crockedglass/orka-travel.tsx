@@ -100,8 +100,11 @@ export function OrkaTravel({ children }: { children: ReactNode }) {
     const raf = requestAnimationFrame(watch); // slots register in their own effects, maybe after this one
     document.fonts?.ready.then(measure);
     window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", measure, { passive: true });
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); window.removeEventListener("scroll", update); window.removeEventListener("resize", measure); };
+    // on a resize the line's pinned `top` is React state, committed after this event: measure again once it lands
+    let r1 = 0, r2 = 0;
+    const onResize = () => { measure(); cancelAnimationFrame(r1); cancelAnimationFrame(r2); r1 = requestAnimationFrame(() => { r2 = requestAnimationFrame(measure); }); };
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => { cancelAnimationFrame(raf); cancelAnimationFrame(r1); cancelAnimationFrame(r2); ro.disconnect(); window.removeEventListener("scroll", update); window.removeEventListener("resize", onResize); };
   }, []);
 
   const p = slots.current[side.current].props;

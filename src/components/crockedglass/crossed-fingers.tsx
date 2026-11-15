@@ -3,7 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ORKA_LEDGE_RATIO } from "./Orka";
 import { useOrkaSlot } from "./orka-travel";
-import { prefersReducedMotion, useEased } from "./hooks";
+import { prefersReducedMotion, stableViewportHeight, useEased } from "./hooks";
 
 /** Scroll distances (px) while the line is pinned: fill the grey half, hold it under Orka, then snap it to dust. */
 const FILL = 700, HOLD = 420, SNAP = 760;
@@ -83,7 +83,8 @@ export function CrossedFingers() {
   useLayoutEffect(() => {
     const el = sticky.current;
     if (!el) return;
-    const measure = () => { const H = el.offsetHeight; setH(H); setTop(Math.max(80, (window.innerHeight - H) / 2)); };
+    // centred in the svh viewport, not innerHeight: the address bar moving mid-scroll mustn't move the pinned line
+    const measure = () => { const H = el.offsetHeight; setH(H); setTop(Math.max(80, (stableViewportHeight() - H) / 2)); };
     measure();
     const ro = new ResizeObserver(measure);
     ro.observe(el);

@@ -88,6 +88,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.5,
     },
     { url: `${SITE_URL}/careers`, lastModified: "2026-10-11", changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/creators`, lastModified: "2026-11-14", changeFrequency: "monthly", priority: 0.5 },
     ...CAREER_ROLES.map((role) => ({
       url: `${SITE_URL}/careers/${role.slug}`,
       lastModified: "2026-10-11",

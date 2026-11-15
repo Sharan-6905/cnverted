@@ -7,7 +7,7 @@ const COLS: { h: string; links: [string, string][] }[] = [
   { h: "Product", links: [["Product", "/product"], ["Pricing", "/pricing"], ["Book a demo", "/book-demo"], ["Start free", "https://beta.cnvrted.com"]] },
   { h: "Learn", links: [["GTM strategy", "/learn/go-to-market-strategy"], ["Ideal customer profile", "/learn/ideal-customer-profile"], ["Buying signals", "/learn/buying-signals"], ["Signal to outreach", "/learn/signal-to-outreach"], ["All guides", "/learn"]] },
   { h: "Resources", links: [["Blog", "/blogs"], ["Case studies", "/case-studies"], ["Our customers", "/customers"], ["Help center", "/help-center"], ["Join our Slack", "/join-slack"]] },
-  { h: "Company", links: [["About us", "/about"], ["Careers", "/careers"], ["Contact", "/contact"]] },
+  { h: "Company", links: [["About us", "/about"], ["Careers", "/careers"], ["Contact", "/contact"], ["Creators", "/creators"]] },
   { h: "Legal", links: [["Terms & conditions", "/terms"], ["Privacy policy", "/privacy"], ["Refund policy", "/refund-policy"], ["Data deletion", "/data-deletion"], ["Sitemap", "/sitemap.xml"]] },
 ];
 

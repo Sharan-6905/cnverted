@@ -191,13 +191,19 @@ export default function Orka({
       typeof window.matchMedia === "function" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const pointer = { x: 0, y: 0, active: false };
+    // Where he looks is fixed in his own (SVG) space when the mouse moves, not re-read from the screen every
+    // frame: otherwise scrolling slides him past a resting cursor and his face swings up and down with the
+    // page. Touch doesn't count; on a phone a touch is nearly always a scroll, not a place to look at.
+    const pointer = { x: 0, y: 0, active: false, fresh: false, svg: null };
     const onMove = (e) => {
+      if (e.pointerType === "touch") return;
       pointer.x = e.clientX;
       pointer.y = e.clientY;
       pointer.active = true;
+      pointer.fresh = true; // converted to SVG space on the next frame
     };
     const onLeave = (e) => {
+      if (e.pointerType === "touch") return;
       if (!e.relatedTarget) pointer.active = false;
     };
     window.addEventListener("pointermove", onMove, { passive: true });
@@ -240,7 +246,10 @@ export default function Orka({
       let target = REST_TARGET;
       const forced = resolveTarget(L.lookAt);
       if (forced) target = toSvg(forced.x, forced.y) || REST_TARGET;
-      else if (L.track && pointer.active) target = toSvg(pointer.x, pointer.y) || REST_TARGET;
+      else if (L.track && pointer.active) {
+        if (pointer.fresh || !pointer.svg) { pointer.svg = toSvg(pointer.x, pointer.y); pointer.fresh = false; }
+        target = pointer.svg || REST_TARGET;
+      }
 
       // Pupils.
       state.pupilScale = lerp(state.pupilScale, m.pupil, ease(0.2));

@@ -1,16 +1,40 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 
-/** setTimeout that is cleared when the component unmounts. */
-export function useLater() {
+/**
+ * setTimeout that is cleared when the component unmounts.
+ *
+ * Pass the element the timers animate and they also wait for it to be on screen: a timer that comes due while
+ * it is off screen is held and runs when it scrolls back into view. The card demos' scripted loops are chains
+ * of these, so a loop freezes on its current frame instead of re-rendering for the whole visit, and carries on
+ * from there; on screen nothing changes.
+ */
+export function useLater(watch?: RefObject<Element | null>) {
   const timers = useRef(new Set<ReturnType<typeof setTimeout>>());
+  const held = useRef<(() => void)[]>([]);
+  const onScreen = useRef(true);
   useEffect(() => {
     const set = timers.current;
-    return () => { set.forEach(clearTimeout); set.clear(); };
-  }, []);
+    const el = watch?.current;
+    let io: IntersectionObserver | undefined;
+    if (el && typeof IntersectionObserver === "function") {
+      io = new IntersectionObserver((es) => {
+        onScreen.current = es[es.length - 1].isIntersecting;
+        if (!onScreen.current || !held.current.length) return;
+        const due = held.current;
+        held.current = [];
+        due.forEach((fn) => fn());
+      }, { rootMargin: "200px 0px" });
+      io.observe(el);
+    }
+    return () => { io?.disconnect(); set.forEach(clearTimeout); set.clear(); held.current = []; };
+  }, [watch]);
   return useCallback((fn: () => void, ms: number) => {
-    const id = setTimeout(() => { timers.current.delete(id); fn(); }, ms);
+    const id = setTimeout(() => {
+      timers.current.delete(id);
+      if (onScreen.current) fn(); else held.current.push(fn);
+    }, ms);
     timers.current.add(id);
   }, []);
 }

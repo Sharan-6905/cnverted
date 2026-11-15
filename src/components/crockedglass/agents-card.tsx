@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLater, usePatch } from "./hooks";
 
 const AGENTS = [
@@ -26,7 +26,8 @@ const geo = (i: number) => {
  *  agent works and finishes. Loops. */
 export function AgentsCard() {
   const [A, set, ref] = usePatch({ st: [3, 3, 3, 3], pick: [0, 1, 2, 3], menu: -1, hl: -1, cx: 300, cy: 400, press: false, hide: true });
-  const later = useLater();
+  const root = useRef<HTMLElement>(null);
+  const later = useLater(root);
 
   useEffect(() => {
     const setArr = (key: "st" | "pick", i: number, v: number) => { const arr = ref.current[key].slice(); arr[i] = v; set({ [key]: arr }); };
@@ -57,7 +58,7 @@ export function AgentsCard() {
 
   const m = A.menu >= 0 ? A.menu : 0, g = geo(m);
   return (
-    <article className="cg-card cg-card--line">
+    <article ref={root} className="cg-card cg-card--line">
       <h3>Your AI agents, on task</h3>
       <div className="cg-ag-list" aria-hidden="true">
         {AGENTS.map((d, i) => {

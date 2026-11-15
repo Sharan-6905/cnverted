@@ -122,7 +122,7 @@ export function OrkaSection({ appHref }: { appHref: string }) {
   const [items, setItems] = useState<Partial<Record<FragType, Item>>>({});
   const itemsRef = useRef(items);
   itemsRef.current = items;
-  const later = useLater();
+  const later = useLater(sec);
   const ids = useRef(0);
   const catSlot = useOrkaSlot("to", { mood: focused ? "curious" : "grumpy", lookAt: focused ? (input as React.RefObject<Element>) : undefined, title: "Orka, the Cnvrted cat" });
 

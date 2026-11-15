@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLater, usePatch } from "./hooks";
 
 const M1 = "Can you schedule meeting with narasoft?";
@@ -14,7 +14,8 @@ const TAIL_THEM = <svg className="cg-bub-tail" width="8" height="13" viewBox="0 
 /** "Few messages are enough": a WhatsApp-style chat with Orka that types itself out and loops. */
 export function ChatCard() {
   const [c, set] = usePatch({ b1: true, b2: true, b3: true, dots: false, input: "", typing: false, press: false });
-  const later = useLater();
+  const root = useRef<HTMLElement>(null);
+  const later = useLater(root);
 
   useEffect(() => {
     const type = (text: string, done: () => void) => {
@@ -44,7 +45,7 @@ export function ChatCard() {
 
   const has = !!c.input;
   return (
-    <article className="cg-card cg-chat">
+    <article ref={root} className="cg-card cg-chat">
       <h3>Few messages are enough</h3>
       <div className="cg-chat-body" aria-hidden="true">
         <div className="cg-chat-log">

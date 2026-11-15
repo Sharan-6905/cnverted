@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { prefersReducedMotion, useLater, usePatch } from "./hooks";
 
 const STEPS = [
@@ -22,7 +22,8 @@ const DELAYS = ["-0s", "-0.51s", "-0.02s"];
 /** "Meetings booked, CRM updated": three steps tick green in turn while the lines between them light up. */
 export function MeetingsCard() {
   const [m, set] = usePatch({ k: 3, l: 2, reset: false });
-  const later = useLater();
+  const root = useRef<HTMLElement>(null);
+  const later = useLater(root);
 
   useEffect(() => {
     if (prefersReducedMotion()) return;
@@ -40,7 +41,7 @@ export function MeetingsCard() {
   }, [later, set]);
 
   return (
-    <article className="cg-card cg-card--line cg-mt">
+    <article ref={root} className="cg-card cg-card--line cg-mt">
       <div className="cg-mt-layer" aria-hidden="true">
         {LINKS.map((paths, j) => (
           <svg key={j} className="cg-mt-links" style={{ top: 202 + j * 120 }} width="344" height="46" viewBox="0 0 344 46" preserveAspectRatio="none" fill="none">

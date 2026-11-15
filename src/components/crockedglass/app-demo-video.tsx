@@ -9,6 +9,9 @@ import { useEffect, useRef } from "react";
  * HTML, and browsers only autoplay muted video.
  *
  * Plays only while on screen. With reduced motion it stays on the poster frame.
+ *
+ * Phones get a 960x540 encode (1.3 MB, against 4.4 MB for the 1080p one): the window is under 400 CSS px wide
+ * there, so the two look the same. A browser that ignores `media` on <source> takes the first one.
  */
 export function AppDemoVideo() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -31,7 +34,6 @@ export function AppDemoVideo() {
     <video
       ref={ref}
       className="cg-splash-img"
-      src="/crockedglass/app-demo-v2.mp4"
       poster="/crockedglass/app-demo-poster-v2.webp"
       width={1920}
       height={1080}
@@ -44,6 +46,9 @@ export function AppDemoVideo() {
       controlsList="nodownload nofullscreen noremoteplayback noplaybackrate"
       onContextMenu={(e) => e.preventDefault()}
       aria-label="The Cnvrted app: setting up a workspace by giving your AI assistant a quick prompt about your company"
-    />
+    >
+      <source src="/crockedglass/app-demo-v2-540.mp4" type="video/mp4" media="(max-width: 719px)" />
+      <source src="/crockedglass/app-demo-v2.mp4" type="video/mp4" />
+    </video>
   );
 }

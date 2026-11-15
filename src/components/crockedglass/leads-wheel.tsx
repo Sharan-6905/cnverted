@@ -19,7 +19,8 @@ const rel = (i: number, a: number) => { const r = ((i - a) % N + N) % N; return 
  *  a wheel/trackpad scroll over it turns it by hand, and auto-spin resumes 3 s later. */
 export function LeadsWheel() {
   const [s, set, ref] = usePatch({ active: 3, prev: 3 });
-  const later = useLater();
+  const root = useRef<HTMLElement>(null);
+  const later = useLater(root);
   const wheel = useRef<HTMLDivElement>(null);
   const userAt = useRef(0);
 
@@ -42,7 +43,7 @@ export function LeadsWheel() {
   }, [later, set, ref]);
 
   return (
-    <article className="cg-card cg-lw">
+    <article ref={root} className="cg-card cg-lw">
       <h3>Leads with context</h3>
       <div ref={wheel} className="cg-lw-wheel" title="Scroll to spin the wheel">
         <div className="cg-lw-drum">

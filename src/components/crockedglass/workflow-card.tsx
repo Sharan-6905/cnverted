@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useLater, usePatch } from "./hooks";
 import { ScaleBox } from "./scale-box";
 
@@ -27,7 +27,8 @@ const LINES = ["M198 94 C 250 94, 258 84, 311 84", "M479 84 C 540 92, 528 196, 4
 /** "Finding contact to reaching out in one place": the graph builds step by step (find → rank → draft → approve), looping. */
 export function WorkflowCard() {
   const [wf, set] = usePatch({ stage: 9, c: 0, press: false });
-  const later = useLater();
+  const root = useRef<HTMLElement>(null);
+  const later = useLater(root);
 
   useEffect(() => {
     const count = (stage: number, to: number, ms: number, done: () => void) => {
@@ -62,7 +63,7 @@ export function WorkflowCard() {
   const dot = (s: number): React.CSSProperties => ({ offsetDistance: st >= s ? "100%" : "0%", opacity: st === s ? 1 : 0, transition: st < s ? "none" : undefined });
 
   return (
-    <article className="cg-card cg-card--line">
+    <article ref={root} className="cg-card cg-card--line">
       <h3>Finding contact to reaching out in one place</h3>
       <div className="cg-wf-box">
         <ScaleBox width={571} height={402}>

@@ -46,7 +46,7 @@
 .cg-btn--sm { height: 36px; }
 /* paper grain over the blue, the same texture and blend as the header's Get Started (header.css .cv-cta) */
 .cg-btn::before { content: ""; position: absolute; inset: -60px -30px; z-index: -1; pointer-events: none;
-  background: url("/figma/redesign/paper-texture.webp") center / cover; mix-blend-mode: soft-light; opacity: .6; }
+  background: image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")) center / cover; mix-blend-mode: soft-light; opacity: .6; }
 .cg-h2 { margin: 0; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: 75px; color: #000; }
 .cg-lede { font-size: 20px; line-height: 24px; color: var(--cg-muted); }
 .cg-head { width: min(739px, 100%); display: flex; flex-direction: column; gap: 20px; }

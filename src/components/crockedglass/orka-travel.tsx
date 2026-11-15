@@ -60,12 +60,29 @@ export function OrkaTravel({ children }: { children: ReactNode }) {
       el.style.width = `${w}px`;
       el.style.visibility = off ? "hidden" : "visible";
     };
-    // scroll events keep him in step with the page; the frame loop catches layout shifts (fonts, images, resizes)
-    const frame = () => { update(); raf = requestAnimationFrame(frame); };
+    // scroll events keep him in step with the page; the frame loop catches layout shifts (fonts, images, resizes).
+    // The loop reads layout every frame, so it only runs while a slot is within a screen of the viewport; out
+    // there he is hidden anyway, and the last scroll update already put him away
+    let near = true;
+    const frame = () => { update(); raf = near ? requestAnimationFrame(frame) : 0; };
     raf = requestAnimationFrame(frame);
+    const seen = new Map<Element, boolean>();
+    const io = new IntersectionObserver((es) => {
+      for (const e of es) seen.set(e.target, e.isIntersecting);
+      near = [...seen.values()].some(Boolean);
+      if (near && !raf) raf = requestAnimationFrame(frame);
+    }, { rootMargin: "100% 0px" });
+    let observed = false;
+    const watch = () => {
+      const a = slots.current.from.el, b = slots.current.to.el;
+      if (observed || !a || !b) return;
+      observed = true; io.observe(a); io.observe(b);
+    };
+    watch();
+    const watchRaf = requestAnimationFrame(watch); // slots register in their own effects, maybe after this one
     window.addEventListener("scroll", update, { passive: true });
     window.addEventListener("resize", update, { passive: true });
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
+    return () => { cancelAnimationFrame(raf); cancelAnimationFrame(watchRaf); io.disconnect(); window.removeEventListener("scroll", update); window.removeEventListener("resize", update); };
   }, []);
 
   const p = slots.current[side.current].props;

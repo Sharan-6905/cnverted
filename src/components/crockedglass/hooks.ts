@@ -48,6 +48,23 @@ export function usePatch<T extends object>(initial: T) {
   return [state, patch, ref] as const;
 }
 
+/**
+ * The viewport height with the browser's address bar showing (CSS `100svh`). On phones `innerHeight` changes as
+ * the address bar slides in and out while you scroll (it fires `resize` each time), so anything pinned at
+ * `(innerHeight - h) / 2` jumps up and down mid-scroll. This stays put until the screen really changes size.
+ */
+let svhProbe: HTMLDivElement | null = null;
+export function stableViewportHeight() {
+  if (typeof document === "undefined") return 0;
+  if (!svhProbe) {
+    svhProbe = document.createElement("div");
+    svhProbe.setAttribute("aria-hidden", "true");
+    svhProbe.style.cssText = "position:absolute;left:0;top:0;width:0;height:100svh;visibility:hidden;pointer-events:none";
+    document.body.appendChild(svhProbe);
+  }
+  return svhProbe.offsetHeight || window.innerHeight;
+}
+
 export function prefersReducedMotion() {
   return typeof window !== "undefined" && !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 }

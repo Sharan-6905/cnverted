@@ -39,6 +39,7 @@ const organizationSchema = {
     "https://www.linkedin.com/company/cnvrted",
     "https://x.com/cnvrted",
     "https://www.instagram.com/cnvrtedai/",
+    "https://www.youtube.com/@cnvrtedai",
     "https://platform.tracxn.com/a/d/company/6a0e1d801be61b269ccb48d6/cnvrted.com",
     "https://www.crunchbase.com/organization/cnvrted",
     "https://www.producthunt.com/products/cnvrted",

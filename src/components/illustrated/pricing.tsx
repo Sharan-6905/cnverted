@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { DEMO_PATH } from "@/lib/booking";
 import { HeroDots } from "@/components/crockedglass/hero-dots";
+import { PricingCardMotion } from "./pricing-card-motion";
 import type { FAQItem } from "./faq";
 import "./pricing.css";
 
@@ -94,6 +95,7 @@ export function IllustratedPricing() {
         </div>
       </section>
 
+      <PricingCardMotion />
       <section className="pricing-plans design-container" aria-label="Pricing plans">
         {plans.map((plan) => (
           <article

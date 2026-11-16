@@ -200,6 +200,7 @@ export function CgFooter() {
             <a href="https://platform.tracxn.com/a/d/company/6a0e1d801be61b269ccb48d6/cnvrted.com" aria-label="Cnvrted on Tracxn" target="_blank" rel="noopener noreferrer"><TracxnIcon width={17} height={17} /></a>
             <a href="https://www.crunchbase.com/organization/cnvrted" aria-label="Cnvrted on Crunchbase" target="_blank" rel="noopener noreferrer"><CrunchbaseIcon width={17} height={17} /></a>
             <a href="https://www.producthunt.com/products/cnvrted" aria-label="Cnvrted on Product Hunt" target="_blank" rel="noopener noreferrer"><ProductHuntIcon width={17} height={17} /></a>
+            <a href="https://substack.com/@cnvrted" aria-label="Cnvrted on Substack" title="Substack" target="_blank" rel="noopener noreferrer"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 2h18v2H3V2Zm0 5h18v2H3V7Zm0 5h18v10l-9-5-9 5V12Z" /></svg></a>
           </div>
         </div>
       </div>

@@ -535,35 +535,6 @@
 .early-access-form button[type="submit"]:hover {
   background: #526017;
 }
-.figma-site .pricing-credit-guide {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 48px;
-  max-width: 980px;
-  margin: 64px auto 0;
-  padding: 28px 0;
-  border-block: 1px solid #e4e1d7;
-}
-.pricing-credit-guide h2 {
-  font-size: 30px;
-}
-.pricing-credit-guide p {
-  color: #68685e;
-  font-size: 16px;
-  line-height: 1.7;
-}
-.pricing-credit-guide a {
-  color: #5c6b23;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-.pricing-plan-note {
-  min-height: 40px;
-  margin-top: 12px;
-  font-size: 13px;
-  line-height: 1.5;
-  color: #676b53;
-}
 .community-heading h1 {
   max-width: 960px;
   margin-inline: auto;
@@ -713,11 +684,6 @@
   .early-access-intro p {
     max-width: none;
     margin-top: 16px;
-  }
-  .figma-site .pricing-credit-guide {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-    margin-top: 40px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

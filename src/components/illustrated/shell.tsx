@@ -44,12 +44,15 @@ export function IllustratedShell({
   className = "",
   faqItems,
   closingCTA,
+  footer,
   redesign = true,
 }: {
   children: ReactNode;
   className?: string;
   faqItems?: readonly FAQItem[];
   closingCTA?: ReactNode;
+  /** replaces the default footer (e.g. /pricing uses the homepage's footer) */
+  footer?: ReactNode;
   redesign?: boolean;
 }) {
   return (
@@ -63,7 +66,7 @@ export function IllustratedShell({
         {faqItems?.length !== 0 && <FAQ items={faqItems} />}
         {closingCTA}
       </main>
-      <IllustratedFooter redesign={redesign} />
+      {footer ?? <IllustratedFooter redesign={redesign} />}
     </div>
   );
 }

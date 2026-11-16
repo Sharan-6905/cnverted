@@ -62,17 +62,6 @@
 .redesign-site .design-blog-card-meta > span:last-child { color: #4353c8; }
 .redesign-site .design-article-tags span { background: #f5f6ff; border-color: #dce0fa; }
 .redesign-site .design-article-prose a:hover { color: #3545b6; }
-.redesign-site .pricing-plan { --plan-surface: #fff; border: 1px solid #e1e3ec; box-shadow: 0 6px 24px #25254b08; padding-top: 32px; }
-.redesign-site .pricing-plan-art { display: none; }
-.redesign-site .pricing-plan-surge { --plan-surface: #6068fa; border-color: #6068fa; color: #fff; background: var(--plan-surface) image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")) center/cover; background-blend-mode: soft-light; }
-.redesign-site .pricing-plan-surge :is(.pricing-plan-credits,.pricing-plan-price small,.pricing-plan-note) { color: #fff; }
-.redesign-site .pricing-plan-cta { background: #6068fa; box-shadow: -2px 3px 0 #10111a; }
-.redesign-site .pricing-plan-cta:hover { background: #4353d6; }
-.redesign-site .pricing-plan-surge .pricing-plan-cta { background: #fff; color: #3747c0; }
-.redesign-site .pricing-plan-surge .pricing-plan-cta:hover { background: #eff1ff; }
-.redesign-site .pricing-plan-note { margin-top: 16px; font-size: 13px; line-height: 1.6; }
-.redesign-site .pricing-hero { height: 530px; }
-.redesign-site .pricing-plans { margin-top: -80px; }
 .redesign-site .contact-hero { padding-top: 410px; }
 .redesign-site .contact-calendar-fallback { background: #f8f9ff; border-color: #dfe3f9; }
 .redesign-site .contact-calendar-kicker, .redesign-site .contact-calendar-actions button { color: #4353c8; }
@@ -99,11 +88,6 @@
  .redesign-site .design-nav { padding-inline: 32px; }
  .redesign-site .design-hero-about .design-hero-content { padding-top: 210px; }
  .redesign-site .design-hero-about h1 { max-width: 480px; font-size: 62px; }
-}
-@media(max-width:900px) {
- .redesign-site .pricing-hero { height: auto; padding-bottom: 70px; }
- .redesign-site .pricing-plans { margin-top: -28px; }
- .redesign-site .pricing-plan :is(h2,.pricing-plan-credits) { max-width: none; }
 }
 @media(max-width:767px) {
  .redesign-site .illustrated-header { top: 14px; }

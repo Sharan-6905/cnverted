@@ -5,6 +5,9 @@ import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { IllustratedShell } from "@/components/illustrated/shell";
 import { IllustratedPricing, pricingFAQs } from "@/components/illustrated/pricing";
+import { CgFooter } from "@/components/crockedglass/site-footer";
+import { inter, mono } from "@/components/crockedglass/fonts";
+import "@/components/crockedglass/home.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "Cnvrted Pricing | Free GTM Credits & Paid Plans",
@@ -14,7 +17,11 @@ export const metadata: Metadata = pageMetadata({
 
 export default function PricingPage() {
   return (
-    <IllustratedShell className="design-pricing-page" faqItems={pricingFAQs}>
+    <IllustratedShell
+      className="design-pricing-page"
+      faqItems={pricingFAQs}
+      footer={<div className={`cg pricing-cg-footer ${inter.variable} ${mono.variable}`}><CgFooter /></div>}
+    >
       <PageSchema path="/pricing" metadata={metadata} type="WebPage" />
       <BreadcrumbSchema trail={[{ name: "Pricing" }]} />
       <SoftwareSchema />

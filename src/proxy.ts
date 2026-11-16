@@ -1,4 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
+import { devGate } from "@/lib/dev-gate";
+import { API_BASE } from "@/lib/api-base";
 
 /**
  * Per-request nonce CSP.
@@ -27,7 +29,7 @@ function buildCsp(nonce: string, isDev: boolean) {
     `font-src 'self' data:`,
     // next/font self-hosts, so the third parties here are supabase, cal, and the
     // public understand-website endpoint the homepage widget calls from the browser
-    `connect-src 'self' ${supabase} https://cal.com https://app.cal.com https://api.cnvrted.com https://*.clarity.ms${isDev ? " ws: http://localhost:*" : ""}`,
+    `connect-src 'self' ${supabase} https://cal.com https://app.cal.com ${API_BASE} https://*.clarity.ms${isDev ? " ws: http://localhost:*" : ""}`,
     // youtube-nocookie serves the homepage Short; it redirects playback
     // requests to www.youtube.com, so both origins have to be allowed
     // instagram: the reel player /creators opens in a lightbox (iframe only, no script)
@@ -43,6 +45,10 @@ function buildCsp(nonce: string, isDev: boolean) {
 }
 
 export function proxy(request: NextRequest) {
+  // Password gate on the dev deployment only (no-op unless DEV_SITE_PASSWORD is set).
+  const denied = devGate(request);
+  if (denied) return denied;
+
   const nonce = crypto.randomUUID().replace(/-/g, "");
   const csp = buildCsp(nonce, process.env.NODE_ENV === "development");
 

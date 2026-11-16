@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { REVEAL_DURATION, REVEAL_EASE } from "@/components/reveal";
 
-const API_BASE = "https://api.cnvrted.com";
+import { API_BASE } from "@/lib/api-base";
 
 /** Only steps the backend genuinely performs — one page, read, summarised. */
 const STAGES = [

@@ -62,10 +62,12 @@ function toneAt(x: number, y: number, header: HTMLElement): Tone {
   return "light";
 }
 
-export default function Header({ threshold = 8 }: { threshold?: number }) {
+/** `initialTone`: what the server renders before the first measurement. A page whose top is dark (e.g. /careers'
+ *  gradient) passes "dark" so the header doesn't paint light and then fade to dark on load. */
+export default function Header({ threshold = 8, initialTone = "light" }: { threshold?: number; initialTone?: Tone }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const [tone, setTone] = useState<{ left: Tone; right: Tone }>({ left: "light", right: "light" });
+  const [tone, setTone] = useState<{ left: Tone; right: Tone }>({ left: initialTone, right: initialTone });
   const dropRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
 

@@ -5,7 +5,11 @@ import { careerFAQs } from "@/components/illustrated/faq";
 import type { Metadata } from "next";
 import { BreadcrumbSchema } from "@/components/breadcrumb-schema";
 import { IllustratedShell } from "@/components/illustrated/shell";
-import { IllustratedHero, DesignLink } from "@/components/illustrated/hero";
+import { CareersHero } from "@/components/illustrated/careers-hero";
+import { CgFooter } from "@/components/crockedglass/site-footer";
+import { inter, mono } from "@/components/crockedglass/fonts";
+import "@/components/crockedglass/home.css";
+import "@/components/illustrated/careers.css";
 import { RoleList } from "@/components/illustrated/role-list";
 
 export const metadata: Metadata = pageMetadata({
@@ -15,19 +19,18 @@ export const metadata: Metadata = pageMetadata({
 });
 export default function CareersPage() {
   return (
-    <IllustratedShell faqItems={careerFAQs} className="design-careers-page">
+    <IllustratedShell
+      faqItems={careerFAQs}
+      className="design-careers-page"
+      headerTone="dark"
+      footer={<div className={`cg careers-cg-footer ${inter.variable} ${mono.variable}`}><CgFooter /></div>}
+    >
       <PageSchema path="/careers" metadata={metadata} type="CollectionPage" items={CAREER_ROLES.map(role => ({ name: role.title, path: `/careers/${role.slug}` }))} />
       <BreadcrumbSchema trail={[{ name: "Careers" }]} />
-      <IllustratedHero
-        kind="careers"
+      <CareersHero
         title="Join our team"
         description="Help us turn signals across the web into better customer conversations. Join our team across engineering, marketing, go-to-market, and operations."
-      >
-        <DesignLink href="/contact" secondary>
-          Contact
-        </DesignLink>
-        <DesignLink href="#open-roles">Open Roles</DesignLink>
-      </IllustratedHero>
+      />
       <section
         id="open-roles"
         className="design-open-roles design-container"

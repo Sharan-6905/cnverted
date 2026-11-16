@@ -83,7 +83,7 @@ export function RoleList() {
             </div>
             <span className="design-role-card-arrow">
               <Image
-                src={assets.careers.imgArrowRight}
+                src="/figma/careers-arrow-right.svg"
                 alt=""
                 width={32}
                 height={32}

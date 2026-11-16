@@ -45,6 +45,7 @@ export function IllustratedShell({
   faqItems,
   closingCTA,
   footer,
+  headerTone,
   redesign = true,
 }: {
   children: ReactNode;
@@ -53,13 +54,15 @@ export function IllustratedShell({
   closingCTA?: ReactNode;
   /** replaces the default footer (e.g. /pricing uses the homepage's footer) */
   footer?: ReactNode;
+  /** the header's tone before it measures the page; "dark" for pages that open on a dark band (/careers) */
+  headerTone?: "light" | "dark";
   redesign?: boolean;
 }) {
   return (
     <div
       className={`figma-site ${redesign ? "redesign-site" : ""} ${bricolage.variable} ${sans.variable} ${openSans.variable} ${inter.variable} ${spartan.variable} ${className}`}
     >
-      <Header />
+      <Header initialTone={headerTone} />
       <SectionAnchor />
       <main id="main-content">
         {children}

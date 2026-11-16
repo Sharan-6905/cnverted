@@ -1,0 +1,241 @@
+/* Careers page — Figma "Careers" (Cnvrted_Design, node 7662:56946). The blue button reuses the header's .cv-cta,
+   whose tokens live on .cv-header, so they're repeated here (as on pricing). */
+.design-careers-page {
+  --cv-blue: #4f65f5;
+  --cv-blue-hover: #4053d6;
+  --cv-btn-shadow: #10111a;
+  --careers-width: 1112px;
+}
+
+/* Header: same 52px edges as cnvrted.com, including the condensed pill */
+@media (min-width: 768px) {
+  .design-careers-page .cv-row { padding-inline: 47px 52px; }
+  .design-careers-page .cv-header[data-scrolled="true"] .cv-left { translate: calc(var(--cv-inset) + 4px - 15px) 0; }
+  .design-careers-page .cv-header[data-scrolled="true"] .cv-right { translate: calc(-1 * var(--cv-inset) - 4px + 20px) 0; }
+}
+
+/* Hero */
+.careers-hero {
+  position: relative;
+  isolation: isolate;
+  padding: 236px 24px 0;
+}
+/* The band clips the gradient to the hero's width and fades it to white in page space (a static mask), so however
+   the image drifts the dark never reaches the title. The image (1870×841 in a 1440 frame, at -79/-144) is scaled
+   with the viewport so wide screens see the same crop. */
+.careers-hero-band {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 420px;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(180deg, #000 0 20px, rgb(0 0 0 / 0.98) 55px, rgb(0 0 0 / 0.90) 90px, rgb(0 0 0 / 0.79) 125px, rgb(0 0 0 / 0.65) 160px, rgb(0 0 0 / 0.50) 195px, rgb(0 0 0 / 0.35) 230px, rgb(0 0 0 / 0.21) 265px, rgb(0 0 0 / 0.10) 300px, rgb(0 0 0 / 0.02) 335px, transparent 370px);
+  mask-image: linear-gradient(180deg, #000 0 20px, rgb(0 0 0 / 0.98) 55px, rgb(0 0 0 / 0.90) 90px, rgb(0 0 0 / 0.79) 125px, rgb(0 0 0 / 0.65) 160px, rgb(0 0 0 / 0.50) 195px, rgb(0 0 0 / 0.35) 230px, rgb(0 0 0 / 0.21) 265px, rgb(0 0 0 / 0.10) 300px, rgb(0 0 0 / 0.02) 335px, transparent 370px);
+}
+/* Tells the header (Header.tsx toneAt) that the top of the hero is dark, so it switches to the white logo, light
+   links and smoked glass; once the page scrolls past this strip it goes back to light. It has to take hits
+   (elementsFromPoint skips pointer-events: none), and it sits under the copy. */
+.careers-hero-tone {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 150px;
+  z-index: -1;
+}
+.careers-hero-gradient {
+  --w: max(1870px, 129.9vw);
+  position: absolute;
+  left: 50%;
+  top: -144px;
+  width: var(--w);
+  height: calc(var(--w) * 841 / 1870);
+  margin-left: calc(var(--w) / -2 + max(136px, 9.44vw));
+  background: url("/figma/careers-hero-gradient.webp") center / 100% 100% no-repeat;
+  animation: careers-gradient-drift 14s ease-in-out infinite alternate;
+  will-change: translate, scale, filter;
+}
+/* The colours slide, swell and shift hue. Kept within what the oversized image can cover: the left edge never
+   comes on screen (translate-x up to +60px with at least 6% scale). */
+@keyframes careers-gradient-drift {
+  0% { translate: 0 0; scale: 1.06; filter: hue-rotate(0deg) saturate(1) brightness(1); }
+  30% { translate: -120px 30px; scale: 1.14; filter: hue-rotate(-22deg) saturate(1.3) brightness(1.08); }
+  65% { translate: 50px -20px; scale: 1.1; filter: hue-rotate(18deg) saturate(1.2) brightness(0.95); }
+  100% { translate: -60px 40px; scale: 1.18; filter: hue-rotate(28deg) saturate(1.35) brightness(1.05); }
+}
+.careers-hero-copy {
+  max-width: var(--careers-width);
+  margin: 0 auto;
+}
+.figma-site .careers-hero h1 {
+  font-size: clamp(48px, 5.7vw, 82px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #0c0a09;
+}
+.careers-hero-copy > p {
+  max-width: 538px;
+  margin-top: 12px;
+  font-family: var(--font-design-sans), sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: #5f5f5f;
+}
+.careers-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 32px;
+}
+.careers-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 28.8px;
+  border: 1.2px solid #6a7a1d;
+  border-radius: 100px;
+  background: #fff;
+  box-shadow: -2px 3px 0 0 #000;
+  color: #0c0a09;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 16.8px;
+  font-weight: 500;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.careers-btn-outline:hover { transform: translateY(-2px); box-shadow: -2px 5px 0 0 #000; }
+.careers-btn-outline:active { transform: none; box-shadow: -1px 1px 0 0 #000; }
+.careers-btn-outline:focus-visible { outline: 2px solid var(--cv-blue); outline-offset: 3px; }
+.figma-site .careers-btn-solid { height: 44px; gap: 14px; box-shadow: -2px 3px 0 0 var(--cv-btn-shadow); font-family: var(--font-inter), sans-serif; }
+.careers-btn-solid img { width: 46px; height: auto; }
+
+/* Open roles */
+.figma-site.design-careers-page .design-open-roles,
+.design-careers-page .design-open-roles {
+  max-width: var(--careers-width);
+  margin: 128px auto 0;
+  padding: 0;
+}
+.design-careers-page .design-open-roles .design-section-heading { text-align: center; }
+.figma-site.design-careers-page .design-open-roles h2 {
+  font-size: 48px;
+  line-height: 1.2;
+  letter-spacing: -0.96px;
+}
+.design-careers-page .design-open-roles .design-section-heading p {
+  max-width: 771px;
+  margin: 12px auto 0;
+  font-size: 16px;
+  line-height: 24px;
+  color: rgb(0 0 0 / 0.64);
+}
+
+.design-careers-page .design-role-filters {
+  gap: 14px;
+  max-width: none;
+  margin: 48px auto 40px;
+}
+.design-careers-page .design-role-search { flex: 0 1 487px; }
+.design-careers-page .design-role-search > img { left: 36px; top: 14px; }
+.design-careers-page .design-role-search input {
+  height: 64px;
+  padding: 14px 36px 14px 80px;
+  border-color: #dbdbdb;
+  font-family: var(--font-open-sans), sans-serif;
+  font-size: 24px;
+  color: #0c0a09;
+}
+.design-careers-page .design-role-search input::placeholder { color: #b4b4b4; }
+.design-careers-page .design-role-filters > span { font-size: 16px; color: #b4b4b4; }
+.design-careers-page .design-role-filters select {
+  height: 64px;
+  min-width: 212px;
+  padding: 14px 64px 14px 34px;
+  border-color: #dbdbdb;
+  background-position: right 30px center;
+  background-size: 22px;
+  font-family: var(--font-open-sans), sans-serif;
+  font-size: 24px;
+  color: #5f5f5f;
+}
+
+.design-careers-page .design-role-list { gap: 18px; }
+.design-careers-page .design-role-card { grid-template-columns: minmax(0, 1fr) 54px; gap: 10px; }
+.design-careers-page .design-role-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 16px;
+  border-color: #e7e7e7;
+}
+.figma-site.design-careers-page .design-role-card h3 {
+  font-size: 36px;
+  line-height: 1.2;
+  color: #0c0a09;
+}
+.redesign-site.design-careers-page .design-role-tags,
+.design-careers-page .design-role-tags { gap: 20px; margin-top: 0; }
+.redesign-site.design-careers-page .design-role-tags span,
+.design-careers-page .design-role-tags span {
+  padding: 8px 12px;
+  border: 1px solid #e7e7e7;
+  background: #fffbe6;
+  font-size: 12px;
+  line-height: 1;
+  color: #0c0a09;
+}
+.design-careers-page .design-role-card p {
+  max-width: 860px;
+  margin-top: 0;
+  font-size: 20px;
+  line-height: 32px;
+  color: #57534e;
+}
+.design-careers-page .design-role-card-arrow { padding: 10px; border-color: #e7e7e7; transition: background 0.2s, border-color 0.2s; }
+.redesign-site.design-careers-page .design-role-card:is(:hover, :focus-visible) .design-role-card-body {
+  background: #f5f6ff;
+  border-color: #e7e7e7;
+}
+.redesign-site.design-careers-page .design-role-card:is(:hover, :focus-visible) .design-role-card-arrow {
+  background: #5b69f4;
+  border-color: #5b69f4;
+}
+.design-careers-page .design-role-card:focus-visible { outline: 2px solid var(--cv-blue); outline-offset: 4px; border-radius: 12px; }
+
+/* FAQ: shared component, Bricolage heading at normal spacing, as on pricing */
+.design-careers-page .design-faq { margin-top: 0; padding-top: 200px; }
+.figma-site.design-careers-page .design-faq h2 { letter-spacing: normal; line-height: 1.15; }
+@media (min-width: 1101px) {
+  .design-careers-page .design-faq { grid-template-columns: 412px minmax(0, 1fr); gap: 48px; max-width: 1180px; }
+}
+@media (min-width: 768px) { .design-careers-page .design-faq summary { font-size: 18px; } }
+
+/* The homepage footer, outside the homepage's .cg page */
+.careers-cg-footer.cg { min-height: 0; background: transparent; overflow: visible; }
+
+@media (max-width: 1180px) {
+  .careers-hero, .design-careers-page .design-open-roles { padding-inline: 32px; }
+}
+@media (max-width: 767px) {
+  .careers-hero { padding: 168px 20px 0; }
+  .careers-hero-band { height: 360px; -webkit-mask-image: linear-gradient(180deg, #000 0 10px, rgb(0 0 0 / 0.98) 34px, rgb(0 0 0 / 0.90) 58px, rgb(0 0 0 / 0.79) 82px, rgb(0 0 0 / 0.65) 106px, rgb(0 0 0 / 0.50) 130px, rgb(0 0 0 / 0.35) 154px, rgb(0 0 0 / 0.21) 178px, rgb(0 0 0 / 0.10) 202px, rgb(0 0 0 / 0.02) 226px, transparent 250px); mask-image: linear-gradient(180deg, #000 0 10px, rgb(0 0 0 / 0.98) 34px, rgb(0 0 0 / 0.90) 58px, rgb(0 0 0 / 0.79) 82px, rgb(0 0 0 / 0.65) 106px, rgb(0 0 0 / 0.50) 130px, rgb(0 0 0 / 0.35) 154px, rgb(0 0 0 / 0.21) 178px, rgb(0 0 0 / 0.10) 202px, rgb(0 0 0 / 0.02) 226px, transparent 250px); }
+  .careers-hero-tone { height: 100px; }
+  .careers-hero-gradient { --w: 1300px; top: -150px; margin-left: calc(var(--w) / -2 + 120px); }
+  .careers-hero-actions { gap: 14px; margin-top: 26px; }
+  .figma-site.design-careers-page .design-open-roles, .design-careers-page .design-open-roles { margin-top: 88px; padding-inline: 20px; }
+  .figma-site.design-careers-page .design-open-roles h2 { font-size: 36px; }
+  .design-careers-page .design-role-filters { margin: 32px 0; }
+  .design-careers-page .design-role-search { flex: 1 0 100%; }
+  .design-careers-page .design-role-search > img { left: 20px; top: 14px; }
+  .design-careers-page .design-role-search input { height: 52px; padding-left: 56px; font-size: 18px; }
+  .design-careers-page .design-role-filters select { height: 52px; width: 100%; font-size: 18px; background-position: right 22px center; background-size: 18px; }
+  .design-careers-page .design-role-card { grid-template-columns: minmax(0, 1fr) 36px; gap: 6px; }
+  .design-careers-page .design-role-card-arrow { padding: 4px; }
+  .figma-site.design-careers-page .design-role-card h3 { font-size: 27px; }
+  .redesign-site.design-careers-page .design-role-tags, .design-careers-page .design-role-tags { gap: 8px; }
+  .redesign-site.design-careers-page .design-role-tags span, .design-careers-page .design-role-tags span { padding: 6px 9px; font-size: 11px; }
+  .design-careers-page .design-role-card p { font-size: 16px; line-height: 25px; }
+  .design-careers-page .design-faq { padding-top: 72px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .careers-hero-gradient { animation: none; }
+  .careers-btn-outline { transition: none; }
+}

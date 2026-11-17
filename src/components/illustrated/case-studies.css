@@ -1,0 +1,82 @@
+/* Case Studies — Figma "Case Studies" (Cnvrted_Design, node 7686:40982). Hero, header edges and footer come from
+   careers.css (.design-careers-page); this swaps the gradient and lays out the story cards. */
+.case-studies-hero-gradient { background-image: url("/figma/case-studies-hero-gradient.webp"); }
+
+.cs-stories {
+  max-width: 896px;
+  margin: 128px auto 0;
+  padding: 0 24px;
+  box-sizing: content-box;
+}
+.cs-stories-heading { text-align: center; }
+.figma-site .cs-stories-heading h2 { font-size: 48px; line-height: 1; letter-spacing: -0.96px; color: #000; }
+.cs-stories-heading p {
+  margin-top: 24px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 16px;
+  color: rgb(0 0 0 / 0.64);
+}
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 12px;
+  margin-top: 32px;
+}
+.cs-card {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  border: 0.8px solid #cbcbcb;
+  border-radius: 24px;
+  background: rgb(255 255 255 / 0.4);
+  font-family: var(--font-design-sans), sans-serif;
+  transition: border-color 0.2s, background 0.2s, transform 0.2s;
+}
+.cs-card:hover { border-color: #5b69f4; background: #f5f6ff; transform: translateY(-2px); }
+.cs-card:focus-visible { outline: 2px solid var(--cv-blue); outline-offset: 4px; }
+.cs-card-cover { height: 230px; overflow: hidden; border-radius: 12px; }
+.cs-card-cover img { width: 100%; height: 100%; object-fit: cover; }
+.figma-site .cs-card h3 {
+  margin-top: 12px;
+  font-family: var(--font-design-sans), sans-serif;
+  font-size: 24px;
+  line-height: normal;
+  letter-spacing: 0;
+  color: #0a0a0a;
+}
+.cs-card p {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #5f5f5f;
+}
+.cs-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 36px;
+  font-size: 12px;
+  color: #6a6a6a;
+}
+.cs-card-meta span { display: inline-flex; align-items: center; gap: 4px; }
+
+.design-case-studies-page .careers-cg-footer { margin-top: 160px; }
+
+@media (max-width: 767px) {
+  .cs-stories { margin-top: 88px; padding-inline: 20px; }
+  .figma-site .cs-stories-heading h2 { font-size: 36px; }
+  .cs-card { padding: 16px; }
+  .cs-card-cover { height: auto; aspect-ratio: 2 / 1; }
+  .design-case-studies-page .careers-cg-footer { margin-top: 96px; }
+}
+@media (prefers-reduced-motion: reduce) { .cs-card { transition: none; } }
+
+/* Story pages: the band sits behind the article heading */
+.design-case-studies-page .design-article-scene { isolation: isolate; }
+.design-case-studies-page .design-article { padding-top: 236px; }
+@media (max-width: 767px) { .design-case-studies-page .design-article { padding-top: 168px; } }

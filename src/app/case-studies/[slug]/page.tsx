@@ -6,12 +6,15 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { CASE_STUDIES } from "@/lib/case-studies";
 import { IllustratedShell } from "@/components/illustrated/shell";
-import { SupportArtwork } from "@/components/illustrated/support-artwork";
+import { CgFooter } from "@/components/crockedglass/site-footer";
+import { inter, mono } from "@/components/crockedglass/fonts";
 import { CaseStudyResults } from "@/components/illustrated/case-study-results";
-import { ClosingCTA } from "@/components/illustrated/closing-cta";
 import { formatPostDate } from "@/lib/blog-posts";
 import "@/components/illustrated/article.css";
 import "@/components/illustrated/customer-stories.css";
+import "@/components/crockedglass/home.css";
+import "@/components/illustrated/careers.css";
+import "@/components/illustrated/case-studies.css";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -40,7 +43,13 @@ export default async function CaseStudyPage({ params }: Props) {
   if (!story) notFound();
 
   return (
-    <IllustratedShell faqItems={[]} className="design-article-page" closingCTA={<ClosingCTA />}>
+    // Same top as /case-studies (Figma 7686:40982): the drifting blue/orange band, homepage header and footer.
+    <IllustratedShell
+      faqItems={[]}
+      className="design-article-page design-careers-page design-case-studies-page"
+      headerTone="dark"
+      footer={<div className={`cg careers-cg-footer ${inter.variable} ${mono.variable}`}><CgFooter /></div>}
+    >
       <BreadcrumbSchema trail={[{ name: "Case Studies", path: "/case-studies" }, { name: story.title }]} />
       <JsonLd data={{
         "@context": "https://schema.org",
@@ -57,7 +66,10 @@ export default async function CaseStudyPage({ params }: Props) {
         mainEntityOfPage: absoluteUrl(`/case-studies/${story.slug}`),
       }} />
       <div className="design-article-scene">
-        <SupportArtwork variant="case-study" />
+        <div className="careers-hero-band" aria-hidden="true">
+          <div className="careers-hero-gradient case-studies-hero-gradient" />
+        </div>
+        <div className="careers-hero-tone" data-header-tone="dark" aria-hidden="true" />
         <article className="design-article design-container" aria-labelledby="article-title">
           <header className="design-article-heading">
             <a className="design-article-back" href="/case-studies" aria-label="Back to Case Studies">

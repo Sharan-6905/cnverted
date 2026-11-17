@@ -88,7 +88,7 @@
   75% { translate: 70px -45px; scale: 1.28; filter: hue-rotate(55deg) saturate(1.4) brightness(1.06); }
 }
 .pricing-plan-art {
-  animation: pricing-art-drift 7s ease-in-out infinite paused;
+  animation: pricing-art-drift 14s ease-in-out infinite paused;
   will-change: translate, scale, filter;
 }
 .pricing-plan-free .pricing-plan-art {

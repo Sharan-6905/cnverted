@@ -13,7 +13,7 @@ const plans = [
     name: "Free",
     tagline: "Perfect for small teams",
     // no price line: the body is a single prompt above the button
-    pitch: "Get started with building your profile",
+    pitch: "Sign up for free",
     price: "",
     period: "",
     credits: "",

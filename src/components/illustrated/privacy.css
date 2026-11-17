@@ -1,0 +1,42 @@
+/* Privacy Policy — Figma "Privacy Policy" (Cnvrted_Design, node 7662:55794). The hero band, header edges and footer
+   come from careers.css (.design-careers-page); this file swaps the gradient colours and sets the Figma type. */
+.privacy-hero-gradient { background-image: url("/figma/privacy-hero-gradient.webp"); }
+.design-privacy-page .legal-content { isolation: isolate; }
+
+.design-privacy-page .legal-heading,
+.design-privacy-page .legal-layout { max-width: 1092px; }
+.design-privacy-page .legal-back { color: #0c0a09; top: 312px; }
+.figma-site.design-privacy-page .legal-heading h1 { font-size: clamp(44px, 4.3vw, 62px); line-height: 1.2; color: #0c0a09; letter-spacing: 0; }
+.design-privacy-page .legal-updated,
+.design-privacy-page .legal-intro { max-width: 704px; font-family: var(--font-inter), sans-serif; font-size: 20px; line-height: 32px; color: #5f5f5f; }
+.design-privacy-page .legal-updated { margin-top: 12px; }
+.design-privacy-page .legal-intro { margin-top: 10px; }
+
+.design-privacy-page .legal-layout { grid-template-columns: minmax(0, 672px) minmax(220px, 388px); gap: 32px; padding-top: 64px; }
+.design-privacy-page .legal-prose { font-family: var(--font-inter), sans-serif; color: #3a3a3a; font-size: 16px; line-height: 32px; }
+.design-privacy-page .legal-prose > section + section { margin-top: 32px; }
+.figma-site.design-privacy-page .legal-prose h2 { font-size: 32px; line-height: normal; letter-spacing: 0; color: #0a0a0a; }
+.design-privacy-page .legal-prose h2 + div { margin-top: 12px; padding-inline: 16px; }
+.figma-site.design-privacy-page .legal-prose h3 { font-family: var(--font-inter), sans-serif; font-size: 16px; font-weight: 500; color: #0a0a0a; }
+.design-privacy-page .legal-prose h3:not(:first-child) { margin-top: 24px; }
+.design-privacy-page .legal-prose strong { font-weight: 400; color: #0a0a0a; }
+
+.figma-site.design-privacy-page .legal-toc h2 { font-size: 32px; line-height: normal; color: #0c0c0c; margin-bottom: 19px; }
+.design-privacy-page .legal-toc { font-family: var(--font-inter), sans-serif; font-size: 16px; color: #6a6a6a; }
+.design-privacy-page .legal-toc ol { gap: 16px; }
+.design-privacy-page .legal-toc a span { font-size: 16px; min-width: 0; color: #9a9a9a; }
+.design-privacy-page .legal-toc a[aria-current="location"] { color: #0c0c0c; }
+
+.design-privacy-page .careers-cg-footer { margin-top: 160px; }
+
+@media (max-width: 1100px) {
+  .design-privacy-page .legal-layout { grid-template-columns: minmax(0, 1fr); }
+  .design-privacy-page .legal-back { top: auto; }
+}
+@media (max-width: 767px) {
+  .design-privacy-page .legal-heading { padding-top: 168px; }
+  .design-privacy-page .legal-updated, .design-privacy-page .legal-intro { font-size: 16px; line-height: 26px; }
+  .figma-site.design-privacy-page .legal-prose h2 { font-size: 28px; }
+  .design-privacy-page .legal-prose h2 + div { padding-inline: 0; }
+  .design-privacy-page .careers-cg-footer { margin-top: 96px; }
+}

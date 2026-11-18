@@ -290,38 +290,6 @@
   color: #62625b;
   line-height: 1.65;
 }
-.design-about-page .design-hero h1 {
-  max-width: 850px;
-  margin-inline: auto;
-  line-height: 1.06;
-}
-.design-about-page .design-hero-content {
-  padding-top: 204px;
-  padding-bottom: 80px;
-}
-.design-about-page .design-hero-content > p {
-  max-width: 560px;
-  margin-top: 24px;
-  text-wrap: pretty;
-}
-.about-origin {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 72px;
-  padding-block: 20px 64px;
-  border-bottom: 1px solid #e8e5dc;
-}
-.figma-site .about-origin h2 {
-  margin-top: 14px;
-  font-size: clamp(32px, 3.5vw, 48px);
-  line-height: 1.2;
-}
-.about-origin p {
-  margin-bottom: 20px;
-  color: #5d5e57;
-  font-size: 18px;
-  line-height: 1.7;
-}
 .about-principles {
   padding-block: 64px;
   border-bottom: 1px solid #e8e5dc;
@@ -356,17 +324,6 @@
 }
 .about-principles-grid .marketing-text-link {
   margin-top: 12px;
-}
-.design-about-page .contact-founders {
-  padding-top: 64px;
-}
-.design-about-page .contact-founders-heading p {
-  max-width: 580px;
-  margin-inline: auto;
-  text-wrap: pretty;
-}
-.design-about-page #founders-title {
-  scroll-margin-top: 120px;
 }
 .about-neighborhoods {
   padding-block: 96px 72px;
@@ -474,9 +431,6 @@
 .about-neighborhoods-footer > a {
   flex-shrink: 0;
 }
-.design-about-page .contact-founders-glow {
-  display: none;
-}
 .early-access-layout {
   display: grid;
   grid-template-columns: 0.75fr 1.25fr;
@@ -547,9 +501,6 @@
     grid-template-columns: 1fr 1.5fr;
     gap: 28px;
   }
-  .about-origin {
-    gap: 36px;
-  }
 }
 @media (max-width: 767px) {
   .marketing-page-heading {
@@ -618,21 +569,6 @@
   .case-results-compact dt {
     font-size: 11px;
   }
-  .about-origin {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
-    padding-block: 0 40px;
-  }
-  .design-about-page .design-hero-content {
-    padding-top: 164px;
-    padding-bottom: 64px;
-  }
-  .design-about-page .design-hero h1 {
-    font-size: clamp(40px, 8.5vw, 60px);
-  }
-  .design-about-page .design-hero {
-    min-height: 580px;
-  }
   .about-principles {
     padding-block: 40px;
   }
@@ -647,12 +583,6 @@
   }
   .figma-site .about-principles-grid h3 {
     margin-top: 10px;
-  }
-  .about-origin p {
-    font-size: 17px;
-  }
-  .design-about-page .contact-founders {
-    padding-top: 44px;
   }
   .about-neighborhoods {
     padding-block: 56px 44px;

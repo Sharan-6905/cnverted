@@ -27,9 +27,12 @@
   -webkit-mask-image: var(--band-fade);
   mask-image: var(--band-fade);
 }
+/* The whole Figma band (gradient + white fade) sits --lift higher than the frame, so "About Us" lands on the white
+   part instead of the dark green; the band is shortened by the same amount */
+.about-hero-band { --lift: 110px; height: min(calc(468 * var(--u) - var(--lift)), 390px); }
 .about-hero-frame {
   position: absolute;
-  top: 0;
+  top: calc(-1 * var(--lift));
   left: 50%;
   width: calc(1440 * var(--u));
   height: 100%;

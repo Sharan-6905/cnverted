@@ -1,0 +1,263 @@
+/* About Us — Figma "About Us" (Cnvrted_Design, node 7662:56068). Header edges, FAQ and footer come from careers.css
+   (.design-careers-page); this file draws the hero band, Our Story and the founding members. Sizes are the Figma
+   1440 frame's; the hero band scales up with wider screens through --u. */
+.design-about-page {
+  --about-width: 1172px;
+  --u: max(1px, calc(100vw / 1440));
+}
+
+/* Hero band: the gradient (1870×841 at -79/-144) drifts under Figma's blurred white ellipse, clipped at 468px.
+   Same motion as the careers band minus the hue shift, so the colours stay the frame's green and pink. */
+.about-hero {
+  position: relative;
+  isolation: isolate;
+  padding: 227px 24px 0;
+}
+.about-hero-band {
+  position: absolute;
+  inset: 0 0 auto;
+  /* never taller than 500px, so on wide screens the band still ends above Our Story */
+  height: min(calc(468 * var(--u)), 500px);
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  /* Figma clips the band hard at 468px (the pink shows a straight edge on the right); this eases the last 170px
+     out instead so it melts into the page */
+  --band-fade: linear-gradient(180deg, #000 0 calc(100% - 170px), rgb(0 0 0 / 0.92) calc(100% - 140px), rgb(0 0 0 / 0.72) calc(100% - 105px), rgb(0 0 0 / 0.45) calc(100% - 70px), rgb(0 0 0 / 0.18) calc(100% - 35px), transparent);
+  -webkit-mask-image: var(--band-fade);
+  mask-image: var(--band-fade);
+}
+/* The whole Figma band (gradient + white fade) sits --lift higher than the frame, so "About Us" lands on the white
+   part instead of the dark green; the band is shortened by the same amount */
+.about-hero-band { --lift: 110px; height: min(calc(468 * var(--u) - var(--lift)), 390px); }
+.about-hero-frame {
+  position: absolute;
+  top: calc(-1 * var(--lift));
+  left: 50%;
+  width: calc(1440 * var(--u));
+  height: 100%;
+  margin-left: calc(-720 * var(--u));
+}
+.design-about-page .about-hero-gradient {
+  left: calc(-79 * var(--u));
+  top: calc(-144 * var(--u));
+  width: calc(1870 * var(--u));
+  height: calc(841 * var(--u));
+  margin: 0;
+  background-image: url("/figma/privacy-hero-gradient.webp");
+  /* grows from its bottom edge (below the band) and never moves down, so the drift only ever lifts the colours
+     above the Figma position, never pushes them toward the title */
+  transform-origin: 50% 100%;
+  animation: about-gradient-drift 14s ease-in-out infinite alternate;
+  will-change: translate, scale;
+}
+/* 0% is the Figma frame exactly; the +50px step has ≥6% scale so the image's left edge stays off screen */
+@keyframes about-gradient-drift {
+  0% { translate: 0 0; scale: 1; }
+  30% { translate: calc(-120 * var(--u)) calc(-10 * var(--u)); scale: 1.1; }
+  65% { translate: calc(50 * var(--u)) calc(-20 * var(--u)); scale: 1.07; }
+  100% { translate: calc(-60 * var(--u)) calc(-6 * var(--u)); scale: 1.12; }
+}
+/* Ellipse 4078: a 2775×497 white blur, turned 177.89° and flipped, centred in a 2792×599 box at -664/124 */
+.about-hero-fade {
+  position: absolute;
+  left: calc(-663.98 * var(--u));
+  top: calc(123.79 * var(--u));
+  width: calc(2791.636 * var(--u));
+  height: calc(599.015 * var(--u));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* the SVG is the 2775×497 ellipse plus its blur margin (5.6% / 31.25% each side), so 3086×808 on the same centre */
+.about-hero-fade > img {
+  flex: none;
+  width: calc(3085.79 * var(--u));
+  height: calc(807.548 * var(--u));
+  max-width: none;
+  rotate: 177.89deg;
+  scale: 1 -1;
+}
+
+.about-hero-copy,
+.about-story,
+.about-members {
+  max-width: var(--about-width);
+  margin-inline: auto;
+}
+.figma-site .about-hero h1 {
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 62px;
+  line-height: normal;
+  letter-spacing: 0;
+  color: #000;
+}
+.about-hero-copy > p {
+  max-width: 538px;
+  font-family: var(--font-design-sans), sans-serif;
+  font-size: 16px;
+  line-height: normal;
+  color: #5f5f5f;
+}
+.about-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  margin-top: 32px;
+}
+.about-btn-outline {
+  display: inline-flex;
+  align-items: center;
+  padding: 15px 17px;
+  border: 1px solid #d1d5db;
+  border-radius: 360px;
+  background: #fff;
+  color: #111827;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: -0.35px;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.about-btn-outline:hover { border-color: #9ca3af; transform: translateY(-2px); }
+.about-btn-outline:focus-visible { outline: 2px solid var(--cv-blue); outline-offset: 3px; }
+.figma-site .about-btn-solid { gap: 12px; font-weight: 400; box-shadow: -2px 3px 0 0 #000, inset 2px 4px 9.2px 0 rgb(255 255 255 / 0.25); }
+.about-btn-solid img { width: 45px; }
+
+/* Our Story */
+.about-story {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 48px;
+  margin-top: 107px;
+  padding: 0 5px 0 7px; /* Figma: 141 → 1301 inside the 134 → 1306 column */
+  box-sizing: border-box;
+}
+.figma-site .about-story h2 {
+  font-family: var(--font-bricolage), sans-serif;
+  font-size: 52px;
+  line-height: 31.5px;
+  padding-top: 8px;
+  letter-spacing: -0.75px;
+  color: #0c0c0c;
+  white-space: nowrap;
+}
+.about-story p {
+  max-width: 544px;
+  font-family: var(--font-inter), sans-serif;
+  font-size: 16px;
+  line-height: 27.2px;
+  text-align: right;
+  color: #68685e;
+}
+
+/* Founding MEMBERS: the wordmark pins under the header while the cards (102px into it) scroll over */
+.about-members {
+  position: relative;
+  margin-top: 91px;
+  padding: 0 24px 120px;
+  box-sizing: content-box;
+  max-width: 1154px;
+  scroll-margin-top: 0;
+}
+.about-members-pin {
+  position: sticky;
+  top: 112px;
+  z-index: 0;
+}
+.about-members-word { transform-origin: 50% 0; }
+.figma-site .about-members-word h2 {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 32px;
+  line-height: normal;
+  letter-spacing: 0;
+  color: #b3b3b3;
+}
+.about-members-word img {
+  display: block;
+  width: 100%;
+  max-width: 1153px;
+  height: auto;
+  margin-top: 20px;
+}
+.about-members-cards {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 69px;
+  margin-top: -103px;
+}
+.about-members-row { display: flex; justify-content: center; gap: 64px; }
+.about-members-row-2 { gap: 98px; }
+.about-member {
+  position: relative;
+  flex: none;
+  width: 246px;
+  height: 277px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #777;
+}
+.about-member img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-member-label {
+  position: absolute;
+  top: 189px;
+  left: 50%;
+  translate: -50% 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-family: var(--font-inter), sans-serif;
+  color: #0d0d0d;
+  white-space: nowrap;
+}
+.figma-site .about-member-label h3 {
+  font-family: var(--font-inter), sans-serif;
+  font-size: 20px;
+  line-height: normal;
+  letter-spacing: 0;
+  color: inherit;
+}
+.about-member-label p { font-size: 16px; line-height: normal; }
+
+/* FAQ sits 320px under the cards (120 here + careers' 200); footer 128px under the FAQ */
+.design-about-page .careers-cg-footer { margin-top: 128px; }
+
+@media (max-width: 1023px) {
+  .about-members-row, .about-members-row-2 { flex-wrap: wrap; gap: 32px; }
+}
+@media (max-width: 767px) {
+  .about-hero { padding-top: 168px; padding-inline: 20px; }
+  .figma-site .about-hero h1 { font-size: 48px; }
+  .about-story { flex-direction: column; gap: 20px; margin-top: 72px; padding-inline: 20px; }
+  .figma-site .about-story h2 { font-size: 40px; line-height: 1; padding-top: 0; }
+  .about-story p { text-align: left; }
+  .about-members { margin-top: 64px; padding: 0 20px 64px; }
+  .about-members-pin { top: 88px; }
+  .figma-site .about-members-word h2 { font-size: 24px; }
+  .about-members-word img { margin-top: 10px; }
+  .about-members-cards { gap: 16px; margin-top: -24px; }
+  .about-members-row, .about-members-row-2 { gap: 16px; }
+  /* stacked cards would run into each other if they moved at different speeds */
+  .about-member { transform: none !important; }
+  .design-about-page .careers-cg-footer { margin-top: 96px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .design-about-page .about-hero-gradient { animation: none; }
+  .about-btn-outline { transition: none; }
+}

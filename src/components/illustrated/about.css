@@ -21,6 +21,11 @@
   z-index: -1;
   overflow: hidden;
   pointer-events: none;
+  /* Figma clips the band hard at 468px (the pink shows a straight edge on the right); this eases the last 170px
+     out instead so it melts into the page */
+  --band-fade: linear-gradient(180deg, #000 0 calc(100% - 170px), rgb(0 0 0 / 0.92) calc(100% - 140px), rgb(0 0 0 / 0.72) calc(100% - 105px), rgb(0 0 0 / 0.45) calc(100% - 70px), rgb(0 0 0 / 0.18) calc(100% - 35px), transparent);
+  -webkit-mask-image: var(--band-fade);
+  mask-image: var(--band-fade);
 }
 .about-hero-frame {
   position: absolute;
@@ -37,14 +42,18 @@
   height: calc(841 * var(--u));
   margin: 0;
   background-image: url("/figma/privacy-hero-gradient.webp");
+  /* grows from its bottom edge (below the band) and never moves down, so the drift only ever lifts the colours
+     above the Figma position, never pushes them toward the title */
+  transform-origin: 50% 100%;
   animation: about-gradient-drift 14s ease-in-out infinite alternate;
   will-change: translate, scale;
 }
+/* 0% is the Figma frame exactly; the +50px step has ≥6% scale so the image's left edge stays off screen */
 @keyframes about-gradient-drift {
-  0% { translate: 0 0; scale: 1.06; }
-  30% { translate: calc(-120 * var(--u)) calc(30 * var(--u)); scale: 1.14; }
-  65% { translate: calc(50 * var(--u)) calc(-20 * var(--u)); scale: 1.1; }
-  100% { translate: calc(-60 * var(--u)) calc(40 * var(--u)); scale: 1.18; }
+  0% { translate: 0 0; scale: 1; }
+  30% { translate: calc(-120 * var(--u)) calc(-10 * var(--u)); scale: 1.1; }
+  65% { translate: calc(50 * var(--u)) calc(-20 * var(--u)); scale: 1.07; }
+  100% { translate: calc(-60 * var(--u)) calc(-6 * var(--u)); scale: 1.12; }
 }
 /* Ellipse 4078: a 2775×497 white blur, turned 177.89° and flipped, centred in a 2792×599 box at -664/124 */
 .about-hero-fade {

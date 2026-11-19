@@ -47,11 +47,11 @@
 /* paper grain over the blue, the same texture and blend as the header's Get Started (header.css .cv-cta) */
 .cg-btn::before { content: ""; position: absolute; inset: -60px -30px; z-index: -1; pointer-events: none;
   background: image-set(url("/figma/redesign/paper-texture.avif") type("image/avif"), url("/figma/redesign/paper-texture.webp") type("image/webp")) center / cover; mix-blend-mode: soft-light; opacity: .6; }
-.cg-h2 { margin: 0; font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: 75px; color: #000; }
+.cg-h2 { margin: 0; font-family: var(--cg-display); font-weight: 400; font-size: 52px; line-height: 63px; color: #000; }
 .cg-lede { font-size: 20px; line-height: 24px; color: var(--cg-muted); }
 .cg-head { width: min(739px, 100%); display: flex; flex-direction: column; gap: 20px; }
 .cg-head--center { margin-inline: auto; align-items: center; text-align: center; width: min(531px, 100%); }
-.cg-head--center .cg-h2 { font-size: 64px; line-height: normal; white-space: nowrap; }
+.cg-head--center .cg-h2 { font-size: 52px; line-height: normal; white-space: nowrap; }
 .cg-card { position: relative; height: 483px; border-radius: 12px; overflow: hidden; }
 .cg-card h3 { position: relative; margin: 0; padding: 26.5px 24px 0 32px; max-width: 520px; font-weight: 400; font-size: 32px; line-height: normal; color: #1e1e1e; }
 .cg-card--line { border: 1px solid rgba(33,33,33,.1); background: #f6f6f6; }
@@ -223,7 +223,7 @@
 .cg-crossed { position: relative; z-index: 2; margin-top: 120px; }
 .cg-crossed-sticky { position: sticky; padding-top: 90px; }
 .cg-crossed-line { display: block; width: min(342px, 80%); height: 5px; margin: 0 auto; border-radius: 50%; background: radial-gradient(closest-side, rgba(0,0,0,.18), rgba(0,0,0,0)); }
-.cg-crossed h2 { margin: 13px auto 0; width: min(823px, 100%); font-family: var(--cg-display); font-weight: 400; font-size: 62px; line-height: normal; text-align: center; color: #000; text-wrap: balance; }
+.cg-crossed h2 { margin: 13px auto 0; width: min(823px, 100%); font-family: var(--cg-display); font-weight: 400; font-size: 52px; line-height: normal; text-align: center; color: #000; text-wrap: balance; }
 .cg-fill-ch { }
 
 /* ---------- Orka ---------- */
@@ -268,7 +268,7 @@
 .cg-orka-mid { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: min(800px, 100% - 32px); display: flex; flex-direction: column; align-items: center; gap: 52px; }
 .cg-orka-hello { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .cg-orka-cat { width: 260px; margin-bottom: -18px; }
-.cg-orka-hello h2 { margin: 0; font-family: var(--cg-display); font-weight: 500; font-size: 62px; line-height: 1.5; }
+.cg-orka-hello h2 { margin: 0; font-family: var(--cg-display); font-weight: 500; font-size: 52px; line-height: 1.5; }
 .cg-orka-hello p { width: min(480px, 100%); font-size: 16px; line-height: 1.5; text-align: center; }
 .cg-orka-ask { width: 100%; display: flex; flex-direction: column; gap: 10px; }
 .cg-chips { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -437,7 +437,7 @@
 /* ---------- FAQ ---------- */
 .cg-faq { margin-top: 120px; display: flex; justify-content: space-between; align-items: flex-start; gap: 40px; }
 .cg-faq-side { width: 380px; flex: none; display: flex; flex-direction: column; gap: 20px; }
-.cg-faq-side .cg-h2 { line-height: 70px; }
+.cg-faq-side .cg-h2 { line-height: 59px; }
 .cg-faq-side .cg-lede { line-height: 26px; }
 .cg-dark-btn { align-self: flex-start; margin-top: 8px; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 20px; border-radius: 22px; background: var(--cg-ink); color: #fff !important; font-weight: 500; font-size: 14px; }
 .cg-faq-list { width: min(740px, 100%); display: flex; flex-direction: column; border-top: 1px solid #e6e4df; }

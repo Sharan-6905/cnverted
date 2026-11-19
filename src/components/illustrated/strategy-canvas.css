@@ -15,7 +15,7 @@
   margin-bottom: 22px;
 }
 .figma-site .gtm-section-heading h2 {
-  font-size: clamp(36px, 4.8vw, 62px);
+  font-size: clamp(36px, 4.8vw, 52px);
   line-height: 1.08;
   text-wrap: balance;
 }

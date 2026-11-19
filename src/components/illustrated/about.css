@@ -79,6 +79,18 @@
   scale: 1 -1;
 }
 
+/* Header tone strip (see careers.css): it has to end where the band under each half of the header turns light
+   (luminance 0.35, Header.tsx's cut-off). Measured from screenshots: the green left side gets there at ~140px up
+   to 1440 wide, ~222px at 1920 and ~278px (the 390px cap) at 2560, as the band scales with --u; the lighter pink
+   right side at ~108 / 135 / 200px. The shared 150px strip turned the header light over dark green on wide screens
+   (and at 100px on phones). The right half is cut shorter with clip-path, which also limits what it hit-tests. */
+.design-about-page .about-hero .careers-hero-tone {
+  --tone-l: min(calc(140px + (var(--u) - 1px) * 246), 278px);
+  --tone-r: min(calc(108px + (var(--u) - 1px) * 120), 200px);
+  height: var(--tone-l);
+  clip-path: polygon(0 0, 100% 0, 100% var(--tone-r), 50% var(--tone-r), 50% 100%, 0 100%);
+}
+
 .about-hero-copy,
 .about-story,
 .about-members {
@@ -227,7 +239,9 @@
   box-shadow: 0 12px 32px -16px rgb(0 0 0 / 0.3);
   transition: box-shadow 0.4s ease;
 }
-.about-member-card:hover .about-member-face { box-shadow: 0 26px 48px -18px rgb(0 0 0 / 0.45); }
+/* lifted while turned over (set by MemberCard, so it follows the flip, not raw :hover, and touch can't leave it
+   stuck after a tap) */
+.about-member[data-open] .about-member-face { box-shadow: 0 26px 48px -18px rgb(0 0 0 / 0.45); }
 /* front, liquid glass: a pale translucent pane (what shows while the card is still being revealed) with the
    photo under a glass rim */
 .about-member-front {
@@ -363,6 +377,8 @@
 }
 @media (max-width: 767px) {
   .about-hero { padding-top: 168px; padding-inline: 20px; }
+  /* phones see the middle of the 1440 band: both halves turn light at ~135px */
+  .design-about-page .about-hero .careers-hero-tone { height: 135px; clip-path: none; }
   .figma-site .about-hero h1 { font-size: 48px; }
   .about-story { flex-direction: column; gap: 20px; margin-top: 72px; padding-inline: 20px; }
   .figma-site .about-story h2 { font-size: 40px; line-height: 1; padding-top: 0; }
@@ -381,8 +397,4 @@
   .design-about-page .about-hero-gradient { animation: none; }
   .about-btn-outline { transition: none; }
   .about-member-face, .about-member-links a { transition: none; }
-}
-/* touch: no hover shadow to get stuck after a tap */
-@media (hover: none) {
-  .about-member-card:hover .about-member-face { box-shadow: 0 12px 32px -16px rgb(0 0 0 / 0.3); }
 }

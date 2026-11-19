@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type CSSProperties, type FocusEvent, type KeyboardEvent, type PointerEvent } from "react";
+import { useEffect, useRef, useState, type CSSProperties, type FocusEvent, type KeyboardEvent, type PointerEvent } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -155,6 +155,13 @@ const LINKS: { key: keyof Links; label: string; icon: string; href: (v: string) 
   { key: "x", label: "X", icon: `${ART}/x.svg`, href: (v) => v },
 ];
 
+// When the page last scrolled (AboutMembers keeps it current). The cards ride the scroll at different speeds, so
+// while the page moves they slide under a mouse that hasn't moved, and the browser reports that as the pointer
+// entering them: without this, scrolling past the section with the mouse over it flipped cards nobody pointed at.
+let lastScroll = -Infinity;
+const SCROLL_QUIET_MS = 300;
+const scrolling = () => performance.now() - lastScroll < SCROLL_QUIET_MS;
+
 const GLOW = { stiffness: 70, damping: 18, mass: 0.6 };
 const GLOW_TRAIL = { stiffness: 28, damping: 14, mass: 0.9 };
 
@@ -237,7 +244,10 @@ function CardBack({
  *    as it rises into place the photo sharpens, fades up to full and settles from a slight zoom, the frost thins
  *    out and the name tag rises in
  *  - flip: hovering with a mouse turns the card over; touch flips it on tap, keyboard on Enter/Space (the card
- *    is focusable and turns back once focus leaves it)
+ *    is focusable and turns back once focus leaves it). A card that arrives under a still mouse because the page
+ *    scrolled waits for the mouse to actually move.
+ *  The pointer is read on the outer article, which never tilts: read on the tilting card, the card's own lean
+ *  moved its edges (and its measured box) under the cursor, so near an edge it flipped back and forth.
  *  - tilt (mouse only): the card leans toward the cursor while it's turned over, and the back's dark colour
  *    wash (BackGlow) swirls after it
  *  Reduced motion: the finished front, and the flip swaps sides without turning. */
@@ -272,21 +282,27 @@ function MemberCard({ member, y, still }: { member: Member; y: MotionValue<numbe
   const rotateX = useSpring(useTransform(py, [0, 1], [7, -7]), TILT);
   const rotateY = useSpring(useTransform(px, [0, 1], [-9, 9]), TILT);
 
-  function onEnter(e: PointerEvent<HTMLDivElement>) {
-    if (e.pointerType === "mouse") setOpen(true);
+  function onEnter(e: PointerEvent<HTMLElement>) {
+    if (e.pointerType === "mouse" && !scrolling()) setOpen(true);
   }
-  function onMove(e: PointerEvent<HTMLDivElement>) {
-    if (still || e.pointerType !== "mouse") return;
+  function onMove(e: PointerEvent<HTMLElement>) {
+    if (e.pointerType !== "mouse") return;
+    // entered while the page was scrolling: turn over once the mouse itself moves
+    if (!openRef.current) {
+      if (scrolling() || (!e.movementX && !e.movementY)) return;
+      setOpen(true);
+    }
+    if (still) return;
     const r = e.currentTarget.getBoundingClientRect();
     px.set((e.clientX - r.left) / r.width);
     py.set((e.clientY - r.top) / r.height);
   }
-  function onLeave(e: PointerEvent<HTMLDivElement>) {
+  function onLeave(e: PointerEvent<HTMLElement>) {
     px.set(0.5);
     py.set(0.5);
     if (e.pointerType === "mouse") setOpen(false);
   }
-  function onTap(e: PointerEvent<HTMLDivElement>) {
+  function onTap(e: PointerEvent<HTMLElement>) {
     // a tap on one of the back's links should follow the link, not turn the card over
     if (e.pointerType !== "mouse" && !(e.target as HTMLElement).closest("a")) setOpen((o) => !o);
   }
@@ -300,16 +316,22 @@ function MemberCard({ member, y, still }: { member: Member; y: MotionValue<numbe
   }
 
   return (
-    <motion.article ref={ref} className="about-member" style={still ? undefined : { y }}>
+    <motion.article
+      ref={ref}
+      className="about-member"
+      data-open={open || undefined}
+      style={still ? undefined : { y }}
+      onPointerEnter={onEnter}
+      onPointerMove={onMove}
+      onPointerLeave={onLeave}
+      onPointerUp={onTap}
+    >
       <motion.div
         className="about-member-card"
         data-3d={open || returning || undefined}
+        role="button"
         tabIndex={0}
         aria-label={`${member.name}, ${member.role}. Press Enter to ${open ? "show the photo" : "see more"}.`}
-        onPointerEnter={onEnter}
-        onPointerMove={onMove}
-        onPointerLeave={onLeave}
-        onPointerUp={onTap}
         onKeyDown={onKey}
         onBlur={onBlur}
         style={still ? undefined : { rotateX, rotateY }}
@@ -358,6 +380,11 @@ function MemberCard({ member, y, still }: { member: Member; y: MotionValue<numbe
 export function AboutMembers() {
   const ref = useRef<HTMLElement>(null);
   const still = useReducedMotion();
+  useEffect(() => {
+    const onScroll = () => { lastScroll = performance.now(); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   // 0 → 1 while the section's top travels from the bottom of the screen to the top
   const { scrollYProgress: enter } = useScroll({ target: ref, offset: ["start end", "start start"] });
   // 0 → 1 while the rest of the section scrolls past

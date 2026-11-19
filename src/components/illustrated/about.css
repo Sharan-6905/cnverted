@@ -200,9 +200,63 @@
   flex: none;
   width: 246px;
   height: 277px;
+  perspective: 900px;
+}
+/* liquid glass: a frosted, translucent pane (what shows while the card is still being revealed) with the photo
+   behind a glossy glass overlay */
+.about-member-card {
+  position: absolute;
+  inset: 0;
   overflow: hidden;
-  border-radius: 12px;
-  background: #777;
+  border-radius: 16px;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.22), rgb(255 255 255 / 0.04) 60%, rgb(255 255 255 / 0.12));
+  -webkit-backdrop-filter: blur(10px) saturate(170%);
+  backdrop-filter: blur(10px) saturate(170%);
+  box-shadow: 0 12px 32px -16px rgb(0 0 0 / 0.3);
+  transition: box-shadow 0.4s ease;
+}
+.about-member-card:hover { box-shadow: 0 26px 48px -18px rgb(0 0 0 / 0.45); }
+.about-member-photo { position: absolute; inset: 0; }
+/* milky layer that thins out as the card is revealed */
+.about-member-frost {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.28));
+}
+.about-members-defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+/* the photo refracts at its edges like it's under thick glass (filter defined in about-members.tsx) */
+.about-member-photo { filter: url(#member-glass); }
+/* the glass slab's lit edge: light catches the top-left and bottom-right of the bevel, which glows faintly
+   all round where the photo bends */
+.about-member-sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow:
+    inset 2px 2px 1px -1px rgb(255 255 255 / 0.85),
+    inset -2px -2px 1px -1px rgb(255 255 255 / 0.5),
+    inset 0 0 14px 2px rgb(255 255 255 / 0.22),
+    inset 0 0 3px rgb(0 0 0 / 0.18);
+}
+/* hairline rim: bright where the light hits, fading out along the sides */
+.about-member-sheen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgb(255 255 255 / 0.95),
+    rgb(255 255 255 / 0.15) 35%,
+    rgb(255 255 255 / 0.1) 65%,
+    rgb(255 255 255 / 0.7)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
 }
 .about-member img {
   position: absolute;
@@ -210,7 +264,18 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: scale 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
+.about-member-card:hover img { scale: 1.06; }
+.about-member-glare {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: soft-light;
+  transition: opacity 0.35s ease;
+}
+.about-member-card:hover .about-member-glare { opacity: 1; }
 .about-member-label {
   position: absolute;
   top: 189px;
@@ -222,9 +287,18 @@
   gap: 10px;
   padding: 10px 12px;
   border-radius: 12px;
+  border: 1px solid rgb(255 255 255 / 0.55);
+  box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.35);
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
   font-family: var(--font-inter), sans-serif;
   color: #0d0d0d;
   white-space: nowrap;
+  transition: translate 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s ease;
+}
+.about-member-card:hover .about-member-label {
+  translate: -50% -6px;
+  box-shadow: 0 12px 24px -10px rgb(0 0 0 / 0.4);
 }
 .figma-site .about-member-label h3 {
   font-family: var(--font-inter), sans-serif;
@@ -260,4 +334,13 @@
 @media (prefers-reduced-motion: reduce) {
   .design-about-page .about-hero-gradient { animation: none; }
   .about-btn-outline { transition: none; }
+  .about-member-card, .about-member img, .about-member-label { transition: none; }
+  .about-member-card:hover img { scale: none; }
+  .about-member-card:hover .about-member-label { translate: -50% 0; }
+}
+/* touch: no hover effects to get stuck after a tap */
+@media (hover: none) {
+  .about-member-card:hover { box-shadow: 0 12px 32px -16px rgb(0 0 0 / 0.3); }
+  .about-member-card:hover img { scale: none; }
+  .about-member-card:hover .about-member-label { translate: -50% 0; box-shadow: 0 6px 18px -8px rgb(0 0 0 / 0.35); }
 }

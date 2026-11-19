@@ -44,6 +44,10 @@
   transition: transform var(--cv-dur) var(--cv-ease), --cv-tint-l 300ms ease, --cv-tint-r 300ms ease, --cv-edge 300ms ease;
 }
 .cv-header[data-scrolled="true"] { transform: translateY(12px); }
+/* until Header.tsx has measured once, jump straight to the measured tone and scroll state (see `ready` there) */
+.cv-header[data-ready="false"],
+.cv-header[data-ready="false"] *,
+.cv-header[data-ready="false"] *::before { transition: none !important; }
 .cv-header[data-tone-left="dark"]  { --cv-tint-l: var(--cv-tint-dark); --cv-left-ink: #fff; }
 .cv-header[data-tone-right="dark"] { --cv-tint-r: var(--cv-tint-dark); --cv-right-ink: rgba(255, 255, 255, 0.92); --cv-link-hover: #aab6ff; }
 .cv-header[data-tone-left="dark"][data-tone-right="dark"] { --cv-edge: rgba(255, 255, 255, 0.14); }

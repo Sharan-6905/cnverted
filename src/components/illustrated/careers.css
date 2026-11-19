@@ -42,6 +42,11 @@
   height: 150px;
   z-index: -1;
 }
+/* Over this page's band the strip has to reach where the faded gradient actually turns light (luminance 0.35, the
+   header's own cut-off, measured from screenshots): ~195px here, ~130px on phones, about half the 370/250px fade.
+   At 150/100px the header flipped to light glass and dark ink while the gradient under it was still dark (~0.17).
+   Only after this band (careers, case studies, privacy); about and the 404 fade differently and keep theirs. */
+.careers-hero-band:not(.not-found-band) + .careers-hero-tone { height: 195px; }
 .careers-hero-gradient {
   --w: max(1870px, 129.9vw);
   position: absolute;
@@ -218,6 +223,7 @@
   .careers-hero { padding: 168px 20px 0; }
   .careers-hero-band { height: 360px; -webkit-mask-image: linear-gradient(180deg, #000 0 10px, rgb(0 0 0 / 0.98) 34px, rgb(0 0 0 / 0.90) 58px, rgb(0 0 0 / 0.79) 82px, rgb(0 0 0 / 0.65) 106px, rgb(0 0 0 / 0.50) 130px, rgb(0 0 0 / 0.35) 154px, rgb(0 0 0 / 0.21) 178px, rgb(0 0 0 / 0.10) 202px, rgb(0 0 0 / 0.02) 226px, transparent 250px); mask-image: linear-gradient(180deg, #000 0 10px, rgb(0 0 0 / 0.98) 34px, rgb(0 0 0 / 0.90) 58px, rgb(0 0 0 / 0.79) 82px, rgb(0 0 0 / 0.65) 106px, rgb(0 0 0 / 0.50) 130px, rgb(0 0 0 / 0.35) 154px, rgb(0 0 0 / 0.21) 178px, rgb(0 0 0 / 0.10) 202px, rgb(0 0 0 / 0.02) 226px, transparent 250px); }
   .careers-hero-tone { height: 100px; }
+  .careers-hero-band:not(.not-found-band) + .careers-hero-tone { height: 130px; }
   .careers-hero-gradient { --w: 1300px; top: -150px; margin-left: calc(var(--w) / -2 + 120px); }
   .careers-hero-actions { gap: 14px; margin-top: 26px; }
   .figma-site.design-careers-page .design-open-roles, .design-careers-page .design-open-roles { margin-top: 88px; padding-inline: 20px; }

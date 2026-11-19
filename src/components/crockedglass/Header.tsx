@@ -68,6 +68,10 @@ export default function Header({ threshold = 8, initialTone = "light" }: { thres
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [tone, setTone] = useState<{ left: Tone; right: Tone }>({ left: initialTone, right: initialTone });
+  // false until the first measurement has painted. The server can't know the scroll position, so a reload or
+  // back/forward that lands mid-page would otherwise animate from the server's guess (on /careers: white ink, bar
+  // expanded) into the real state, a visible flip every time someone returns to the page.
+  const [ready, setReady] = useState(false);
   const dropRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
 
@@ -90,10 +94,13 @@ export default function Header({ threshold = 8, initialTone = "light" }: { thres
     };
     const schedule = () => { if (!timer) timer = window.setTimeout(update, 50); };
     update();
+    // two frames: the first paints the measured state with transitions off, the second turns them back on
+    let raf = requestAnimationFrame(() => { raf = requestAnimationFrame(() => setReady(true)); });
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule);
     return () => {
       window.clearTimeout(timer);
+      cancelAnimationFrame(raf);
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
     };
@@ -114,7 +121,7 @@ export default function Header({ threshold = 8, initialTone = "light" }: { thres
   }, [open]);
 
   return (
-    <header ref={headerRef} className="cv-header" data-scrolled={scrolled} data-tone-left={tone.left} data-tone-right={tone.right}>
+    <header ref={headerRef} className="cv-header" data-ready={ready} data-scrolled={scrolled} data-tone-left={tone.left} data-tone-right={tone.right}>
       {/* every page using this header has <main id="main-content"> */}
       <a href="#main-content" className="cv-skip">Skip to content</a>
       <div className="cv-pill" aria-hidden="true" />

@@ -20,7 +20,7 @@ const ROWS: Member[][] = [
   [
     { name: "Anupam Bagchi", role: "Designer", photo: "/figma/about/anupam.webp", label: 0.7 },
     { name: "Praanesh", role: "Developer", photo: "/figma/about/praanesh.webp", label: 0.67 },
-    { name: "Pavana H", role: "Media Manager", label: 0.67 },
+    { name: "Pavana H", role: "Media Manager", photo: "/figma/about/pavana-h.webp", label: 0.67 },
   ],
 ];
 

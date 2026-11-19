@@ -243,7 +243,19 @@ function CardBack({
  *  Reduced motion: the finished front, and the flip swaps sides without turning. */
 function MemberCard({ member, y, still }: { member: Member; y: MotionValue<number>; still: boolean }) {
   const ref = useRef<HTMLElement>(null);
-  const [open, setOpen] = useState(false);
+  const [open, setOpenState] = useState(false);
+  // A resting, unflipped card is drawn flat with no back at all: 3D (and the back) only switch on while the card
+  // is turned over or turning back. Drawing the resting card in 3D left a hairline along its edge on some
+  // pixel positions. The front is never hidden: hiding it made the card vanish while turning back.
+  const [returning, setReturning] = useState(false);
+  const openRef = useRef(false);
+  function setOpen(next: boolean | ((o: boolean) => boolean)) {
+    const n = typeof next === "function" ? next(openRef.current) : next;
+    if (n === openRef.current) return;
+    openRef.current = n;
+    if (!n) setReturning(true);
+    setOpenState(n);
+  }
   // 0 → 1 while the card's top travels from the bottom of the screen to 70% of the way down it
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 0.7"] });
   const p = useSpring(scrollYProgress, REVEAL);
@@ -291,6 +303,7 @@ function MemberCard({ member, y, still }: { member: Member; y: MotionValue<numbe
     <motion.article ref={ref} className="about-member" style={still ? undefined : { y }}>
       <motion.div
         className="about-member-card"
+        data-3d={open || returning || undefined}
         tabIndex={0}
         aria-label={`${member.name}, ${member.role}. Press Enter to ${open ? "show the photo" : "see more"}.`}
         onPointerEnter={onEnter}
@@ -303,6 +316,12 @@ function MemberCard({ member, y, still }: { member: Member; y: MotionValue<numbe
       >
         <motion.div
           className="about-member-flip"
+          onAnimationComplete={(done) => {
+            // a turn that's cut short also reports as complete, with its own target: only the turn back to the
+            // front (rotateY 0) ends the 3D phase
+            const target = (done as { rotateY?: number } | undefined)?.rotateY;
+            if (target === 0 && !openRef.current) setReturning(false);
+          }}
           initial={false}
           animate={{ rotateY: open ? 180 : 0 }}
           transition={still ? { duration: 0 } : FLIP}

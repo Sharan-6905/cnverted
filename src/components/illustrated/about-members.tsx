@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type PointerEvent } from "react";
+import { useRef, useState, type CSSProperties, type FocusEvent, type KeyboardEvent, type PointerEvent } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -17,19 +17,122 @@ import {
  *  The wordmark is sticky: it pins under the header while the cards rise over it, each at its own speed, and lets
  *  go once the last row has passed. The cards land exactly on the Figma layout as the section reaches the top of
  *  the screen. Photos are 3x renders of the Figma cards (crop and greyscale included). Reduced motion: no
- *  movement, the wordmark still pins. */
+ *  movement, the wordmark still pins.
+ *  Each card flips to a back from the "Commercial 0.3" page (frames "Dhruv", "Kailash", "Anupam", "Praanesh",
+ *  "Pavana", 7668:38009-38029): a one-liner, contact buttons and an illustration. */
+
+/** An illustration on a card back. box: where it sits on the 246×277 card (Figma), img: how the picture fills
+ *  that box (Figma's crop), mirror: Figma flips these art layers horizontally. */
+type Art = { src: string; w: number; h: number; box: CSSProperties; img?: CSSProperties; mirror?: boolean };
+type Links = { email?: string; linkedin?: string; x?: string };
+type Back = { quote: string; quoteBox: CSSProperties; art: Art[]; links: Links };
 /** label: the name tag's white alpha in Figma */
-type Member = { name: string; role: string; photo?: string; label: number };
+type Member = { name: string; role: string; photo?: string; label: number; back: Back };
+
+const ART = "/figma/about/backs";
+// quote: Bricolage 28px, vertically centred on `top` like Figma's text boxes
+const quote = (left: number, top: number, width: number): CSSProperties => ({ left, top, width });
 
 const ROWS: Member[][] = [
   [
-    { name: "Dhruv Pradeep", role: "Founder & CEO", photo: "/figma/about/dhruv.webp", label: 0.44 },
-    { name: "Kailas S", role: "Founder & CTO", photo: "/figma/about/kailas.webp", label: 0.67 },
+    {
+      name: "Dhruv Pradeep",
+      role: "Founder & CEO",
+      photo: "/figma/about/dhruv.webp",
+      label: 0.44,
+      back: {
+        quote: "I run the orchestra",
+        quoteBox: quote(20, 66, 166),
+        art: [
+          {
+            src: `${ART}/dhruv.png`,
+            w: 1024,
+            h: 1024,
+            box: { right: 58, bottom: 0.25, width: 150, height: 124 },
+            img: { left: "0.26%", top: 0, width: "97.1%", height: "116.8%" },
+          },
+        ],
+        links: { linkedin: "https://www.linkedin.com/in/dhruvprad/", x: "https://x.com/dhruvprad" },
+      },
+    },
+    {
+      name: "Kailas S",
+      role: "Founder & CTO",
+      photo: "/figma/about/kailas.webp",
+      label: 0.67,
+      back: {
+        quote: "I took space over space",
+        quoteBox: quote(20, 66, 216),
+        art: [
+          {
+            src: `${ART}/kailas-wall.png`,
+            w: 1024,
+            h: 1024,
+            box: { inset: "59.73% 0.1% -8.64% 45.12%" },
+            img: { left: "0.95%", top: "4.82%", width: "95.45%", height: "95.18%" },
+            mirror: true,
+          },
+          {
+            src: `${ART}/kailas-toys.png`,
+            w: 771,
+            h: 492,
+            box: { inset: "82.05% 16.11% -1.34% 49.98%" },
+            img: { left: "0.74%", top: "0.57%", width: "98.88%", height: "98.74%" },
+            mirror: true,
+          },
+        ],
+        links: { linkedin: "https://www.linkedin.com/in/kailas-krsna-s-a7855334a/", x: "https://x.com/kailaskrsna" },
+      },
+    },
   ],
   [
-    { name: "Anupam Bagchi", role: "Designer", photo: "/figma/about/anupam.webp", label: 0.7 },
-    { name: "Praanesh", role: "Developer", photo: "/figma/about/praanesh.webp", label: 0.67 },
-    { name: "Pavana H", role: "Media Manager", photo: "/figma/about/pavana-h.webp", label: 0.67 },
+    {
+      name: "Anupam Bagchi",
+      role: "Designer",
+      photo: "/figma/about/anupam.webp",
+      label: 0.7,
+      back: {
+        quote: "Talk shit and design",
+        quoteBox: quote(20, 66, 166),
+        art: [{ src: `${ART}/anupam.png`, w: 1024, h: 1024, box: { left: 52, top: 141.75, width: 142, height: 142 }, mirror: true }],
+        links: {},
+      },
+    },
+    {
+      name: "Praanesh",
+      role: "Developer",
+      photo: "/figma/about/praanesh.webp",
+      label: 0.67,
+      back: {
+        quote: "More than\na vibe coder",
+        quoteBox: quote(22, 56.75, 192),
+        art: [
+          { src: `${ART}/praanesh.png`, w: 1024, h: 1024, box: { left: 58, top: 154.75, width: 129, height: 130 }, mirror: true },
+        ],
+        links: {},
+      },
+    },
+    {
+      name: "Pavana H",
+      role: "Media Manager",
+      photo: "/figma/about/pavana-h.webp",
+      label: 0.67,
+      back: {
+        quote: "Reel scrolling is my work",
+        quoteBox: quote(19, 66, 181),
+        art: [
+          {
+            src: `${ART}/pavana.png`,
+            w: 1024,
+            h: 1280,
+            box: { left: "calc(50% + 0.5px)", top: 151.75, width: 113, height: 125, translate: "-50% 0" },
+            img: { left: 0, top: "-0.5%", width: "100%", height: "113%" },
+            mirror: true,
+          },
+        ],
+        links: {},
+      },
+    },
   ],
 ];
 
@@ -44,17 +147,103 @@ function useCardY(enter: MotionValue<number>, leave: MotionValue<number>, from: 
 
 const TILT = { stiffness: 220, damping: 20, mass: 0.5 };
 const REVEAL = { stiffness: 90, damping: 22, mass: 0.6 };
+const FLIP = { type: "spring", stiffness: 120, damping: 17, mass: 0.9 } as const;
 
-/** One face card, styled as liquid glass: the photo refracts at the edges (the #member-glass filter) under a
- *  lit glass rim. The outer article carries the scroll parallax; the inner card does the rest:
- *  - reveal (tied to scroll, so it reverses on the way back up): the card starts as a heavily frosted, see-through
- *    pane, and as it rises into place the photo sharpens, fades up to full and settles from a slight zoom, the
- *    frost thins out and the name tag rises in
- *  - hover (mouse only): the card tilts toward the cursor, a soft light follows it, the photo zooms a touch and
- *    the name tag lifts
- *  Touch screens get the reveal only; reduced motion gets the finished card with no movement. */
+const LINKS: { key: keyof Links; label: string; icon: string; href: (v: string) => string }[] = [
+  { key: "email", label: "Email", icon: `${ART}/envelope.svg`, href: (v) => `mailto:${v}` },
+  { key: "linkedin", label: "LinkedIn", icon: `${ART}/linkedin.svg`, href: (v) => v },
+  { key: "x", label: "X", icon: `${ART}/x.svg`, href: (v) => v },
+];
+
+const GLOW = { stiffness: 70, damping: 18, mass: 0.6 };
+const GLOW_TRAIL = { stiffness: 28, damping: 14, mass: 0.9 };
+
+/** Dark colour wash behind the back's content, steered by the cursor (px/py: 0-1 across the card): deep indigo
+ *  follows it, teal sits opposite, and magenta trails behind on a slower spring, so the colours swirl as the mouse
+ *  moves. Without a mouse it rests in its starting layout. */
+function BackGlow({ px, py }: { px: MotionValue<number>; py: MotionValue<number> }) {
+  const sx = useSpring(px, GLOW);
+  const sy = useSpring(py, GLOW);
+  const tx = useSpring(px, GLOW_TRAIL);
+  const ty = useSpring(py, GLOW_TRAIL);
+  const ix = useTransform(sx, (v) => 15 + v * 70);
+  const iy = useTransform(sy, (v) => 10 + v * 80);
+  const cx = useTransform(sx, (v) => 85 - v * 70);
+  const cy = useTransform(sy, (v) => 95 - v * 70);
+  const mx = useTransform(tx, (v) => 30 + v * 50);
+  const my = useTransform(ty, (v) => 60 + v * 40);
+  const background = useMotionTemplate`
+    radial-gradient(70% 60% at ${ix}% ${iy}%, rgb(79 70 229 / 0.55), transparent 70%),
+    radial-gradient(65% 55% at ${cx}% ${cy}%, rgb(13 148 136 / 0.35), transparent 70%),
+    radial-gradient(60% 50% at ${mx}% ${my}%, rgb(190 24 93 / 0.3), transparent 70%)`;
+  return <motion.div className="about-member-glow" style={{ background }} aria-hidden="true" />;
+}
+
+function CardBack({
+  member,
+  open,
+  px,
+  py,
+}: {
+  member: Member;
+  open: boolean;
+  px: MotionValue<number>;
+  py: MotionValue<number>;
+}) {
+  const { quote, quoteBox, art, links } = member.back;
+  const first = member.name.split(" ")[0];
+  const buttons = LINKS.filter((l) => links[l.key]);
+  return (
+    <div className="about-member-face about-member-back" aria-hidden={!open}>
+      <BackGlow px={px} py={py} />
+      {art.map((a) => (
+        <div className="about-member-art" key={a.src} style={{ ...a.box, ...(a.mirror ? { scale: "-1 1" } : null) }}>
+          <Image
+            src={a.src}
+            alt=""
+            width={a.w}
+            height={a.h}
+            sizes="160px"
+            style={a.img ?? { inset: 0, width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        </div>
+      ))}
+      <p className="about-member-quote" style={quoteBox}>
+        {quote}
+      </p>
+      {buttons.length > 0 && (
+        <div className="about-member-links">
+          {buttons.map((l) => (
+            <a
+              key={l.key}
+              href={l.href(links[l.key]!)}
+              aria-label={`${first} on ${l.label}`}
+              tabIndex={open ? 0 : -1}
+              {...(l.key === "email" ? {} : { target: "_blank", rel: "noopener noreferrer" })}
+            >
+              <Image src={l.icon} alt="" width={24} height={24} unoptimized />
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** One face card, two-sided. The front is liquid glass: the photo refracts at the edges (the #member-glass
+ *  filter) under a lit glass rim. The back is the dark Figma card. The outer article carries the scroll parallax;
+ *  the inner card does the rest:
+ *  - reveal (tied to scroll, so it reverses on the way back up): the front starts as a heavily frosted pane, and
+ *    as it rises into place the photo sharpens, fades up to full and settles from a slight zoom, the frost thins
+ *    out and the name tag rises in
+ *  - flip: hovering with a mouse turns the card over; touch flips it on tap, keyboard on Enter/Space (the card
+ *    is focusable and turns back once focus leaves it)
+ *  - tilt (mouse only): the card leans toward the cursor while it's turned over, and the back's dark colour
+ *    wash (BackGlow) swirls after it
+ *  Reduced motion: the finished front, and the flip swaps sides without turning. */
 function MemberCard({ member, y, still }: { member: Member; y: MotionValue<number>; still: boolean }) {
   const ref = useRef<HTMLElement>(null);
+  const [open, setOpen] = useState(false);
   // 0 → 1 while the card's top travels from the bottom of the screen to 70% of the way down it
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 0.7"] });
   const p = useSpring(scrollYProgress, REVEAL);
@@ -70,49 +259,77 @@ function MemberCard({ member, y, still }: { member: Member; y: MotionValue<numbe
   const py = useMotionValue(0.5);
   const rotateX = useSpring(useTransform(py, [0, 1], [7, -7]), TILT);
   const rotateY = useSpring(useTransform(px, [0, 1], [-9, 9]), TILT);
-  const gx = useTransform(px, (v) => v * 100);
-  const gy = useTransform(py, (v) => v * 100);
-  const glare = useMotionTemplate`radial-gradient(circle at ${gx}% ${gy}%, rgb(255 255 255 / 0.3), transparent 60%)`;
 
+  function onEnter(e: PointerEvent<HTMLDivElement>) {
+    if (e.pointerType === "mouse") setOpen(true);
+  }
   function onMove(e: PointerEvent<HTMLDivElement>) {
-    if (e.pointerType !== "mouse") return;
+    if (still || e.pointerType !== "mouse") return;
     const r = e.currentTarget.getBoundingClientRect();
     px.set((e.clientX - r.left) / r.width);
     py.set((e.clientY - r.top) / r.height);
   }
-  function onLeave() {
+  function onLeave(e: PointerEvent<HTMLDivElement>) {
     px.set(0.5);
     py.set(0.5);
+    if (e.pointerType === "mouse") setOpen(false);
+  }
+  function onTap(e: PointerEvent<HTMLDivElement>) {
+    // a tap on one of the back's links should follow the link, not turn the card over
+    if (e.pointerType !== "mouse" && !(e.target as HTMLElement).closest("a")) setOpen((o) => !o);
+  }
+  function onKey(e: KeyboardEvent<HTMLDivElement>) {
+    if (e.target !== e.currentTarget || (e.key !== "Enter" && e.key !== " ")) return;
+    e.preventDefault();
+    setOpen((o) => !o);
+  }
+  function onBlur(e: FocusEvent<HTMLDivElement>) {
+    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setOpen(false);
   }
 
   return (
     <motion.article ref={ref} className="about-member" style={still ? undefined : { y }}>
       <motion.div
         className="about-member-card"
-        onPointerMove={still ? undefined : onMove}
-        onPointerLeave={still ? undefined : onLeave}
+        tabIndex={0}
+        aria-label={`${member.name}, ${member.role}. Press Enter to ${open ? "show the photo" : "see more"}.`}
+        onPointerEnter={onEnter}
+        onPointerMove={onMove}
+        onPointerLeave={onLeave}
+        onPointerUp={onTap}
+        onKeyDown={onKey}
+        onBlur={onBlur}
         style={still ? undefined : { rotateX, rotateY }}
       >
-        {member.photo && (
-          <motion.div
-            className="about-member-photo"
-            style={still ? undefined : { filter: photoFilter, opacity: photoOpacity, scale: photoScale }}
-          >
-            <Image src={member.photo} alt="" width={738} height={829} sizes="246px" quality={95} />
-          </motion.div>
-        )}
-        {!still && <motion.div className="about-member-frost" style={{ opacity: frost }} aria-hidden="true" />}
-        <div className="about-member-sheen" aria-hidden="true" />
-        {!still && <motion.div className="about-member-glare" style={{ backgroundImage: glare }} aria-hidden="true" />}
         <motion.div
-          className="about-member-label"
-          style={{
-            backgroundColor: `rgb(255 255 255 / ${member.label})`,
-            ...(still ? {} : { opacity: labelOpacity, y: labelY }),
-          }}
+          className="about-member-flip"
+          initial={false}
+          animate={{ rotateY: open ? 180 : 0 }}
+          transition={still ? { duration: 0 } : FLIP}
         >
-          <h3>{member.name}</h3>
-          <p>{member.role}</p>
+          <div className="about-member-face about-member-front" aria-hidden={open}>
+            {member.photo && (
+              <motion.div
+                className="about-member-photo"
+                style={still ? undefined : { filter: photoFilter, opacity: photoOpacity, scale: photoScale }}
+              >
+                <Image src={member.photo} alt="" width={738} height={829} sizes="246px" quality={95} />
+              </motion.div>
+            )}
+            {!still && <motion.div className="about-member-frost" style={{ opacity: frost }} aria-hidden="true" />}
+            <div className="about-member-sheen" aria-hidden="true" />
+            <motion.div
+              className="about-member-label"
+              style={{
+                backgroundColor: `rgb(255 255 255 / ${member.label})`,
+                ...(still ? {} : { opacity: labelOpacity, y: labelY }),
+              }}
+            >
+              <h3>{member.name}</h3>
+              <p>{member.role}</p>
+            </motion.div>
+          </div>
+          <CardBack member={member} open={open} px={px} py={py} />
         </motion.div>
       </motion.div>
     </motion.article>

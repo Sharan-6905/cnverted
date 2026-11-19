@@ -49,6 +49,24 @@ export const REELS: readonly Reel[] = [
     poster: "/creators/vishai-ai-tool-quality-leads.webp",
     date: "2026-08-22",
   },
+  {
+    id: "Df7GDPazkAZ",
+    handle: "startkabir",
+    title: "I got replies from 10 YC companies",
+    summary: "Define your ideal customer profile, read your buyers’ buying signals and start the right conversation with Cnvrted.",
+    alt: "Creator @startkabir talking to camera, with the caption “I got replies from 10 YC companies”.",
+    poster: "/creators/startkabir-yc-replies.webp",
+    date: "2026-11-19",
+  },
+  {
+    id: "DfzaWWICcIA",
+    handle: "cnvrtedai",
+    title: "Haven’t you tried Cnvrted yet?",
+    summary: "Traditional outreach next to lead generation with Cnvrted, for B2B sales and GTM teams.",
+    alt: "A man at a laptop in front of a dot grid labelled “Traditional outreach”, from the @cnvrtedai reel “Haven’t you tried Cnvrted yet?”.",
+    poster: "/creators/cnvrtedai-tried-cnvrted-yet.webp",
+    date: "2026-11-16",
+  },
 ];
 
 export const POSTS: readonly Post[] = [

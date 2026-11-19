@@ -213,6 +213,10 @@
 }
 .about-member-card:focus-visible { outline: 2px solid #4f46e5; outline-offset: 4px; }
 .about-member-flip { position: absolute; inset: 0; transform-style: preserve-3d; }
+/* at rest (front up, not turning) the card is flat and its back isn't drawn; see MemberCard */
+.about-member-card:not([data-3d]),
+.about-member-card:not([data-3d]) .about-member-flip { transform-style: flat; }
+.about-member-card:not([data-3d]) .about-member-back { visibility: hidden; }
 .about-member-face {
   position: absolute;
   inset: 0;
@@ -227,7 +231,6 @@
 /* front, liquid glass: a pale translucent pane (what shows while the card is still being revealed) with the
    photo under a glass rim */
 .about-member-front {
-  transform: translateZ(0.5px);
   background: linear-gradient(160deg, rgb(255 255 255 / 0.5), rgb(255 255 255 / 0.2) 60%, rgb(255 255 255 / 0.35));
 }
 .about-member-photo { position: absolute; inset: 0; }
@@ -281,8 +284,7 @@
 }
 /* back (Figma "Dhruv", "Kailash", ...): dark card, one-liner, contact buttons, illustration */
 .about-member-back {
-  /* a hair apart from the front so the two never share a plane */
-  transform: rotateY(180deg) translateZ(0.5px);
+  transform: rotateY(180deg);
   background: #0a0a0a;
 }
 /* cursor-steered colour wash (BackGlow in about-members.tsx), under everything else on the back */

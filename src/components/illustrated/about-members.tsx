@@ -1,8 +1,17 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type PointerEvent } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform, type MotionValue } from "framer-motion";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+  type MotionValue,
+} from "framer-motion";
 
 /** Figma "About Us" (Cnvrted_Design, node 7662:56068): "Founding MEMBERS" with the team cards over the wordmark.
  *  The wordmark is sticky: it pins under the header while the cards rise over it, each at its own speed, and lets
@@ -33,6 +42,83 @@ function useCardY(enter: MotionValue<number>, leave: MotionValue<number>, from: 
   return useSpring(y, { stiffness: 140, damping: 26, mass: 0.4 });
 }
 
+const TILT = { stiffness: 220, damping: 20, mass: 0.5 };
+const REVEAL = { stiffness: 90, damping: 22, mass: 0.6 };
+
+/** One face card, styled as liquid glass: the photo refracts at the edges (the #member-glass filter) under a
+ *  lit glass rim. The outer article carries the scroll parallax; the inner card does the rest:
+ *  - reveal (tied to scroll, so it reverses on the way back up): the card starts as a heavily frosted, see-through
+ *    pane, and as it rises into place the photo sharpens, fades up to full and settles from a slight zoom, the
+ *    frost thins out and the name tag rises in
+ *  - hover (mouse only): the card tilts toward the cursor, a soft light follows it, the photo zooms a touch and
+ *    the name tag lifts
+ *  Touch screens get the reveal only; reduced motion gets the finished card with no movement. */
+function MemberCard({ member, y, still }: { member: Member; y: MotionValue<number>; still: boolean }) {
+  const ref = useRef<HTMLElement>(null);
+  // 0 → 1 while the card's top travels from the bottom of the screen to 70% of the way down it
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "start 0.7"] });
+  const p = useSpring(scrollYProgress, REVEAL);
+  const blur = useTransform(p, [0, 1], [18, 0]);
+  const photoFilter = useMotionTemplate`url(#member-glass) blur(${blur}px) saturate(0.9)`;
+  const photoOpacity = useTransform(p, [0, 1], [0.2, 1]);
+  const photoScale = useTransform(p, [0, 1], [1.12, 1]);
+  const frost = useTransform(p, [0, 1], [1, 0]);
+  const labelOpacity = useTransform(p, [0.55, 1], [0, 1]);
+  const labelY = useTransform(p, [0.55, 1], [12, 0]);
+
+  const px = useMotionValue(0.5);
+  const py = useMotionValue(0.5);
+  const rotateX = useSpring(useTransform(py, [0, 1], [7, -7]), TILT);
+  const rotateY = useSpring(useTransform(px, [0, 1], [-9, 9]), TILT);
+  const gx = useTransform(px, (v) => v * 100);
+  const gy = useTransform(py, (v) => v * 100);
+  const glare = useMotionTemplate`radial-gradient(circle at ${gx}% ${gy}%, rgb(255 255 255 / 0.3), transparent 60%)`;
+
+  function onMove(e: PointerEvent<HTMLDivElement>) {
+    if (e.pointerType !== "mouse") return;
+    const r = e.currentTarget.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width);
+    py.set((e.clientY - r.top) / r.height);
+  }
+  function onLeave() {
+    px.set(0.5);
+    py.set(0.5);
+  }
+
+  return (
+    <motion.article ref={ref} className="about-member" style={still ? undefined : { y }}>
+      <motion.div
+        className="about-member-card"
+        onPointerMove={still ? undefined : onMove}
+        onPointerLeave={still ? undefined : onLeave}
+        style={still ? undefined : { rotateX, rotateY }}
+      >
+        {member.photo && (
+          <motion.div
+            className="about-member-photo"
+            style={still ? undefined : { filter: photoFilter, opacity: photoOpacity, scale: photoScale }}
+          >
+            <Image src={member.photo} alt="" width={738} height={829} sizes="246px" quality={95} />
+          </motion.div>
+        )}
+        {!still && <motion.div className="about-member-frost" style={{ opacity: frost }} aria-hidden="true" />}
+        <div className="about-member-sheen" aria-hidden="true" />
+        {!still && <motion.div className="about-member-glare" style={{ backgroundImage: glare }} aria-hidden="true" />}
+        <motion.div
+          className="about-member-label"
+          style={{
+            backgroundColor: `rgb(255 255 255 / ${member.label})`,
+            ...(still ? {} : { opacity: labelOpacity, y: labelY }),
+          }}
+        >
+          <h3>{member.name}</h3>
+          <p>{member.role}</p>
+        </motion.div>
+      </motion.div>
+    </motion.article>
+  );
+}
+
 export function AboutMembers() {
   const ref = useRef<HTMLElement>(null);
   const still = useReducedMotion();
@@ -55,6 +141,23 @@ export function AboutMembers() {
 
   return (
     <section ref={ref} id="team" className="about-members" aria-labelledby="members-title">
+      {/* Liquid glass refraction for the card photos: glass-map.png (card-sized) is neutral in the middle and,
+          over the outer 32px of each edge, shifts the photo inward on a bevel-shaped curve, so the picture bends
+          at the rim like it's seen through a thick slab of glass. R = x shift, G = y shift. */}
+      <svg className="about-members-defs" width="0" height="0" aria-hidden="true" focusable="false">
+        <filter
+          id="member-glass"
+          x="0"
+          y="0"
+          width="1"
+          height="1"
+          primitiveUnits="objectBoundingBox"
+          colorInterpolationFilters="sRGB"
+        >
+          <feImage href="/figma/about/glass-map.png" x="0" y="0" width="1" height="1" preserveAspectRatio="none" result="map" />
+          <feDisplacementMap in="SourceGraphic" in2="map" scale="0.1" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
       <div className="about-members-pin">
         <motion.div className="about-members-word" style={still ? undefined : { scale: wordScale, opacity: wordOpacity }}>
           <h2 id="members-title">
@@ -67,15 +170,7 @@ export function AboutMembers() {
         {ROWS.map((row, r) => (
           <div className={`about-members-row about-members-row-${r + 1}`} key={r}>
             {row.map((member, i) => (
-              <motion.article className="about-member" key={member.name} style={still ? undefined : { y: y[r][i] }}>
-                {member.photo && (
-                  <Image src={member.photo} alt="" width={738} height={829} sizes="246px" quality={95} />
-                )}
-                <div className="about-member-label" style={{ backgroundColor: `rgb(255 255 255 / ${member.label})` }}>
-                  <h3>{member.name}</h3>
-                  <p>{member.role}</p>
-                </div>
-              </motion.article>
+              <MemberCard key={member.name} member={member} y={y[r][i]} still={!!still} />
             ))}
           </div>
         ))}

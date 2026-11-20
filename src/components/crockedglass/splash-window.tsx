@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { HeroDots } from "./hero-dots";
 
 /** Scroll (in screen heights) over which the photo card opens to full-bleed and the window rises into place. */
@@ -12,10 +12,21 @@ const PANEL_RATE = 1.2;
 
 const clamp = (v: number) => Math.max(0, Math.min(1, v));
 
+/** The sky behind the app window follows the visitor's local hour (7 images from Figma, node 7662:55545). */
+type Daypart = "dawn" | "sunrise" | "morning" | "midday" | "afternoon" | "sunset" | "night";
+const daypartAt = (h: number): Daypart =>
+  h >= 5 && h < 6 ? "dawn"
+  : h >= 6 && h < 8 ? "sunrise"
+  : h >= 8 && h < 11 ? "morning"
+  : h >= 11 && h < 14 ? "midday"
+  : h >= 14 && h < 17 ? "afternoon"
+  : h >= 17 && h < 20 ? "sunset"
+  : "night";
+
 /**
  * The hero and the app window share one pinned screen, the same scroll-linked reveal as save.design:
  *
- * - the hero copy sits on top; the night-street photo is clipped to a rounded card just under it
+ * - the hero copy sits on top; the time-of-day sky photo is clipped to a rounded card just under it
  *   (`inset(top side 0 side round r)`)
  * - as you scroll, the clip opens linearly to full-bleed. The photo itself never moves; the opening clip is what
  *   carries it up the screen
@@ -32,6 +43,20 @@ export function SplashWindow({ hero, children }: { hero: ReactNode; children: Re
   const copy = useRef<HTMLDivElement>(null);
   const card = useRef<HTMLDivElement>(null);
   const win = useRef<HTMLDivElement>(null);
+  // undefined on the server and the first client render, so hydration matches; set from the local clock after
+  const [daypart, setDaypart] = useState<Daypart>();
+
+  useEffect(() => {
+    const update = () => setDaypart(daypartAt(new Date().getHours()));
+    update();
+    // a tab left open across a boundary (or woken the next morning) catches up
+    const timer = window.setInterval(update, 5 * 60_000);
+    document.addEventListener("visibilitychange", update);
+    return () => {
+      clearInterval(timer);
+      document.removeEventListener("visibilitychange", update);
+    };
+  }, []);
 
   useEffect(() => {
     const el = run.current, pn = panel.current, cp = copy.current, cd = card.current, w = win.current;
@@ -89,7 +114,7 @@ export function SplashWindow({ hero, children }: { hero: ReactNode; children: Re
         <HeroDots />
         <div ref={copy} className="cg-splash-hero">{hero}</div>
         <div ref={card} className="cg-splash" data-header-tone="dark">
-          <div className="cg-splash-photo" aria-hidden="true" />
+          <div className="cg-splash-photo" data-daypart={daypart} aria-hidden="true" />
           <div className="cg-splash-stage">
             {/* the app UI in the window is light; without this the header reads the dark photo through it */}
             <div ref={win} className="cg-splash-win" data-header-tone="light">{children}</div>

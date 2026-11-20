@@ -115,9 +115,20 @@
 }
 .cg-splash { position: absolute; inset: 0; z-index: 1; overflow: hidden; background: #120d0b;
   clip-path: var(--cg-card-clip, inset(100% 0 0 0)); }
-/* the photo stays put; only the clip around it moves */
-.cg-splash-photo { position: absolute; inset: 0; transform: scale(1.1);
-  background: url("/crockedglass/splash-night.webp") center / cover no-repeat; }
+/* the photo stays put; only the clip around it moves. Which sky it shows follows the visitor's local clock
+   (splash-window.tsx sets data-daypart after mount; the server can't know their time). Until then it's the dark
+   card colour, and only the matching image is downloaded */
+.cg-splash-photo { position: absolute; inset: 0; transform: scale(1.1); opacity: 0; transition: opacity .4s ease;
+  background: center / cover no-repeat; }
+.cg-splash-photo[data-daypart] { opacity: 1; }
+.cg-splash-photo[data-daypart="dawn"] { background-image: url("/crockedglass/sky-dawn.webp"); }
+.cg-splash-photo[data-daypart="sunrise"] { background-image: url("/crockedglass/sky-sunrise.webp"); }
+.cg-splash-photo[data-daypart="morning"] { background-image: url("/crockedglass/sky-morning.webp"); }
+.cg-splash-photo[data-daypart="midday"] { background-image: url("/crockedglass/sky-midday.webp"); }
+.cg-splash-photo[data-daypart="afternoon"] { background-image: url("/crockedglass/sky-afternoon.webp"); }
+.cg-splash-photo[data-daypart="sunset"] { background-image: url("/crockedglass/sky-sunset.webp"); }
+.cg-splash-photo[data-daypart="night"] { background-image: url("/crockedglass/sky-night.webp"); }
+@media (prefers-reduced-motion: reduce) { .cg-splash-photo { transition: none; } }
 .cg-splash-stage { position: relative; height: 100%; display: grid; place-items: center; padding: 13svh 24px; }
 .cg-splash-win { position: relative; width: min(100%, calc(74svh * 16 / 9)); transform-origin: 50% 100%;
   will-change: transform; }

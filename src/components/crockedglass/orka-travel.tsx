@@ -34,6 +34,7 @@ export function OrkaTravel({ children }: { children: ReactNode }) {
   const slots = useRef<Record<SlotName, Slot>>({ from: { el: null, props: {} }, to: { el: null, props: {} } });
   const wrap = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
+  const hold = useRef<HTMLDivElement>(null);
   const box = useRef<HTMLDivElement>(null);
   const side = useRef<SlotName>("from");
   const [, rerender] = useReducer((x: number) => x + 1, 0);
@@ -49,8 +50,8 @@ export function OrkaTravel({ children }: { children: ReactNode }) {
 
     // layout only: where the track starts and ends, and the y he holds at
     const measure = () => {
-      const a = slots.current.from.el, b = slots.current.to.el, w = wrap.current, t = track.current, el = box.current;
-      if (!a || !b || !w || !t || !el) return;
+      const a = slots.current.from.el, b = slots.current.to.el, w = wrap.current, t = track.current, q = hold.current, el = box.current;
+      if (!a || !b || !w || !t || !q || !el) return;
       const sticky = a.closest<HTMLElement>(".cg-crossed-sticky");
       const runway = sticky?.parentElement;
       if (!sticky || !runway) return;
@@ -60,9 +61,26 @@ export function OrkaTravel({ children }: { children: ReactNode }) {
       const pinY = parseFloat(getComputedStyle(sticky).top) + inSticky;
       // the slot's resting place: the pinned block sits at the top of its runway until it pins
       const startY = R.top + inSticky - W.top;
-      const endY = B.top - W.top;
+      // the landing slot may sit in a pinned block too (the Orka section holds at the top for a while): measure its
+      // resting place the same way, and how long it holds
+      const pin = b.closest<HTMLElement>(".cg-orka");
+      const pinned = !!pin && getComputedStyle(pin).position === "sticky" && !!pin.parentElement;
+      let endY = B.top - W.top, holdPx = 0, holdY = 0;
+      if (pin && pinned) {
+        const P = pin.getBoundingClientRect(), PR = pin.parentElement!.getBoundingClientRect();
+        const inPin = B.top - P.top;
+        endY = PR.top + inPin - W.top;
+        holdPx = Math.max(0, PR.height - P.height);
+        holdY = parseFloat(getComputedStyle(pin).top) + inPin; // where the slot sits on screen while pinned
+      }
+      // Two stickies: the box holds at pinY inside `hold` until it reaches the bottom of `hold` (he's landed), so he
+      // then rides with the slot; `hold` itself is sticky at a top that puts its bottom at holdY, so once the slot
+      // pins, `hold` (and he) stay put with it for holdPx, then the track ends and they scroll away together.
+      const span = Math.max(0, endY - startY) + A.height; // + his height, so his top can reach endY
       t.style.top = `${startY}px`;
-      t.style.height = `${Math.max(0, endY - startY) + A.height}px`; // + his height, so his top can reach endY
+      t.style.height = `${span + holdPx}px`;
+      q.style.height = `${span}px`;
+      q.style.top = `${holdY - span + A.height}px`;
       el.style.top = `${pinY}px`;
       el.style.width = `${A.width}px`;
       el.style.marginLeft = `${A.left - W.left}px`; // margin, not left: on a sticky box `left` is a sideways stick threshold
@@ -113,11 +131,13 @@ export function OrkaTravel({ children }: { children: ReactNode }) {
       <div ref={wrap} style={{ position: "relative" }}>
         {children}
         <div ref={track} style={{ position: "absolute", left: 0, right: 0, top: 0, height: 0, zIndex: 3, pointerEvents: "none", visibility: "hidden" }}>
+          <div ref={hold} style={{ position: "sticky", top: 0 }}>
           <div ref={box} style={{ position: "sticky", top: 0, pointerEvents: "auto" }}>
             {/* the surface he peeks over travels with him: a darker bar for the edge, and a soft shade falling away below it */}
             <span aria-hidden="true" style={{ position: "absolute", left: "50%", top: `${ORKA_LEDGE_RATIO * 100}%`, zIndex: -1, width: `${(342 / 184) * 100}%`, height: "70%", transform: "translateX(-50%)", background: "radial-gradient(ellipse 50% 100% at 50% 0, rgba(0,0,0,.12), rgba(0,0,0,.05) 45%, rgba(0,0,0,0) 100%)", pointerEvents: "none" }} />
             <span aria-hidden="true" style={{ position: "absolute", left: "50%", top: `${ORKA_LEDGE_RATIO * 100}%`, zIndex: -1, width: `${(342 / 184) * 100}%`, height: 6, transform: "translate(-50%, -1px)", borderRadius: "50%", background: "radial-gradient(closest-side, rgba(0,0,0,.32), rgba(0,0,0,0))", pointerEvents: "none" }} />
             <Orka mood={p.mood ?? "sleepy"} lookAt={p.lookAt} title={p.title ?? "Orka, the Cnvrted cat"} />
+          </div>
           </div>
         </div>
       </div>

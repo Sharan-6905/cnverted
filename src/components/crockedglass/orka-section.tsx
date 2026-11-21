@@ -119,8 +119,8 @@ const BG_PANEL_RATE = 1.2; // the corners and outer inset close a little sooner,
 /** Once it's full-bleed the section pins for this much extra scroll (screen heights), like the splash's hold. The
  *  heading and subtitle fade up HELLO_AT of the way into it, a beat after Orka has landed. Desktop only: under
  *  900px the section can be taller than the screen, so it scrolls normally. */
-const HOLD = 0.6;
-const HELLO_AT = 0.3;
+const HOLD = 1.1;
+const HELLO_AT = 0.15; // ~0.16 screens in, leaving most of the hold to read it before the section moves on
 const clamp = (v: number) => Math.max(0, Math.min(1, v));
 
 /** "Hi! I'm Orka": Orka at work in the background (status cards drift in and out at random, never over the

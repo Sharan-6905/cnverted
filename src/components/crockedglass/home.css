@@ -282,6 +282,11 @@
 .cg-orka-hello { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .cg-orka-cat { width: 260px; margin-bottom: -18px; }
 .cg-orka-hello h2 { margin: 0; font-family: var(--cg-display); font-weight: 500; font-size: 52px; line-height: 1.5; }
+/* the heading waits for the cat: it fades up once Orka lands on his slot above it (orka-travel.tsx sets data-docked)
+   and fades back out if he leaves again on the way up */
+.cg-orka-hello h2 { transition: opacity .6s ease, transform .6s cubic-bezier(.16,1,.3,1); }
+.cg-orka-cat[data-docked="false"] + h2 { opacity: 0; transform: translateY(8px); transition-duration: .25s; }
+@media (prefers-reduced-motion: reduce) { .cg-orka-hello h2 { transition: opacity .3s ease; } .cg-orka-cat[data-docked="false"] + h2 { transform: none; } }
 .cg-orka-hello p { width: min(480px, 100%); font-size: 16px; line-height: 1.5; text-align: center; }
 .cg-orka-ask { width: 100%; display: flex; flex-direction: column; gap: 10px; }
 .cg-chips { display: flex; gap: 8px; flex-wrap: wrap; }

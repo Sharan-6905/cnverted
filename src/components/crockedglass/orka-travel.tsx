@@ -80,6 +80,10 @@ export function OrkaTravel({ children }: { children: ReactNode }) {
       const t = gap > 0 ? clamp((geo.pinY - A.top) / gap) : 1;
       const next = t < 0.5 ? "from" : "to";
       if (next !== side.current) { side.current = next; rerender(); }
+      // tell the landing slot when he's on it, so "Hi! I'm Orka" can wait for him. Only set once measured: if the
+      // travel can't run, the attribute never appears and the heading just shows
+      const docked = t >= 0.999 ? "true" : "false";
+      if (b.dataset.docked !== docked) b.dataset.docked = docked;
       const x = Math.abs(geo.dx) < 0.5 ? "" : `translateX(${(geo.dx * smooth(t)).toFixed(1)}px)`;
       if (x !== lastX) { el.style.transform = x; lastX = x; }
     };

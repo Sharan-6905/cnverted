@@ -236,7 +236,9 @@
 .cg-fill-ch { }
 
 /* ---------- Orka ---------- */
-.cg-orka { position: relative; z-index: 1; height: max(100svh, 720px); margin-top: 180px; color: #fff; } /* clear of the crossed-fingers line */
+/* the section pins at the top for --cg-orka-hold of extra scroll once its photo is full-bleed (orka-section.tsx) */
+.cg-orka-run { position: relative; z-index: 1; margin-top: 180px; height: calc(max(100svh, 720px) + var(--cg-orka-hold, 0px)); } /* clear of the crossed-fingers line */
+.cg-orka { position: sticky; top: 0; height: max(100svh, 720px); color: #fff; }
 /* the night-street backdrop opens like the splash's sky (orka-section.tsx sets the clip from scroll): a rounded card
    that widens to full-bleed while the photo stays put */
 .cg-orka-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; background: #120d0b;
@@ -282,14 +284,15 @@
 .cg-orka-hello { display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .cg-orka-cat { width: 260px; margin-bottom: -18px; }
 .cg-orka-hello h2 { margin: 0; font-family: var(--cg-display); font-weight: 500; font-size: 52px; line-height: 1.5; }
-/* the heading and subtitle wait for the cat: they fade up once Orka lands on his slot above them (orka-travel.tsx
-   sets data-docked), the subtitle a beat after the heading, and fade back out together if he leaves on the way up */
+/* the heading and subtitle wait for the cat: they fade up a little way into the section's hold, after Orka has
+   landed (orka-section.tsx sets data-hello), the subtitle a beat after the heading; they fade back out together on
+   the way up. No data-hello (script not run) means they just show */
 .cg-orka-hello h2, .cg-orka-hello p { transition: opacity .6s ease, transform .6s cubic-bezier(.16,1,.3,1); }
 .cg-orka-hello p { transition-delay: .15s; }
-.cg-orka-cat[data-docked="false"] ~ :is(h2, p) { opacity: 0; transform: translateY(8px); transition-duration: .25s; transition-delay: 0s; }
+.cg-orka[data-hello="hidden"] .cg-orka-hello :is(h2, p) { opacity: 0; transform: translateY(8px); transition-duration: .25s; transition-delay: 0s; }
 @media (prefers-reduced-motion: reduce) {
   .cg-orka-hello h2, .cg-orka-hello p { transition: opacity .3s ease; }
-  .cg-orka-cat[data-docked="false"] ~ :is(h2, p) { transform: none; }
+  .cg-orka[data-hello="hidden"] .cg-orka-hello :is(h2, p) { transform: none; }
 }
 .cg-orka-hello p { width: min(480px, 100%); font-size: 16px; line-height: 1.5; text-align: center; }
 .cg-orka-ask { width: 100%; display: flex; flex-direction: column; gap: 10px; }
@@ -525,7 +528,8 @@
   .cg-grid2 { grid-template-columns: 1fr; }
   .cg-ft-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cg-ft-top { flex-direction: column; }
-  .cg-orka { height: auto; min-height: 100svh; padding: 80px 0; }
+  .cg-orka-run { height: auto; }
+  .cg-orka { position: relative; height: auto; min-height: 100svh; padding: 80px 0; }
   .cg-orka-mid { position: relative; left: auto; top: auto; transform: none; margin: 0 auto; }
   .cg-frags { display: none; }
 }

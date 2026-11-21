@@ -115,8 +115,12 @@ const CHIPS: [string, React.ReactNode][] = [
 /** Scroll (in screen heights) over which the backdrop opens to full-bleed: the same reveal as the splash's sky
  *  (splash-window.tsx). It starts as a rounded card inset from the sides and well down the section, and the clip
  *  opens as the section rises; the photo itself never moves. A pure function of scroll, so scrolling back reverses it. */
-const BG_OPEN = 0.96;
 const BG_PANEL_RATE = 1.2; // the corners and outer inset close a little sooner, as in the splash
+/** Once it's full-bleed the section pins for this much extra scroll (screen heights), like the splash's hold. The
+ *  heading and subtitle fade up HELLO_AT of the way into it, a beat after Orka has landed. Desktop only: under
+ *  900px the section can be taller than the screen, so it scrolls normally. */
+const HOLD = 0.6;
+const HELLO_AT = 0.3;
 const clamp = (v: number) => Math.max(0, Math.min(1, v));
 
 /** "Hi! I'm Orka": Orka at work in the background (status cards drift in and out at random, never over the
@@ -148,8 +152,8 @@ export function OrkaSection({ appHref }: { appHref: string }) {
   }, []);
 
   useEffect(() => {
-    const el = sec.current;
-    if (!el) return;
+    const el = sec.current, run = el?.parentElement;
+    if (!el || !run) return;
     let top0 = 300, side0 = 20, panelSide0 = 32, raf = 0;
     const measure = () => {
       const narrow = window.innerWidth < 720;
@@ -159,13 +163,18 @@ export function OrkaSection({ appHref }: { appHref: string }) {
     };
     const paint = () => {
       raf = 0;
-      const vh = window.innerHeight;
-      // 0 as the section's top enters at the bottom of the screen, 1 once it has risen BG_OPEN screens
-      const p = clamp((vh - el.getBoundingClientRect().top) / (vh * BG_OPEN));
+      const vh = window.innerHeight, R = run.getBoundingClientRect();
+      // 0 as the section's top enters at the bottom of the screen, 1 as it reaches the top and pins
+      const p = clamp((vh - R.top) / vh);
       const q = 1 - p, qp = 1 - clamp(p * BG_PANEL_RATE);
       const side = (side0 * q + panelSide0 * qp).toFixed(2);
       // set on the section: the backdrop and the floating status cards share it, so no card sits half on the white page
       el.style.setProperty("--cg-orka-clip", `inset(${(top0 * q).toFixed(2)}px ${side}px ${side}px ${side}px round ${(12 * qp).toFixed(2)}px)`);
+      // how far into the hold (0 → 1); without a hold (small screens) the text shows once the photo is open
+      const holdPx = R.height - el.offsetHeight;
+      const shown = holdPx > 1 ? -R.top >= holdPx * HELLO_AT : p >= 1;
+      const hello = shown ? "shown" : "hidden";
+      if (el.dataset.hello !== hello) el.dataset.hello = hello;
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(paint); };
     const onResize = () => { measure(); onScroll(); };
@@ -216,6 +225,7 @@ export function OrkaSection({ appHref }: { appHref: string }) {
   const submit = () => { window.location.href = appHref; };
 
   return (
+    <div className="cg-orka-run" style={{ "--cg-orka-hold": `${HOLD * 100}svh` } as React.CSSProperties}>
     <section ref={sec} data-header-tone="dark" className={`cg-orka${focused ? " is-focused" : ""}`} aria-labelledby="cg-orka-title">
       <div className="cg-orka-bg" aria-hidden="true"><div className="cg-orka-photo" /></div>
       <div className="cg-frags" aria-hidden="true">
@@ -251,5 +261,6 @@ export function OrkaSection({ appHref }: { appHref: string }) {
         </div>
       </div>
     </section>
+    </div>
   );
 }

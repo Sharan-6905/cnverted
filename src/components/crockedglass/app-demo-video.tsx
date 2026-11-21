@@ -32,6 +32,7 @@ export function AppDemoVideo() {
 
   return (
     <video
+      id="gtm-demo"
       ref={ref}
       className="cg-splash-img"
       poster="/crockedglass/app-demo-poster-v2.webp"

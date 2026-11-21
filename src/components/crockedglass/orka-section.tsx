@@ -112,6 +112,13 @@ const CHIPS: [string, React.ReactNode][] = [
   ["Last cold list results", <svg key="d" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#818cf8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M3 3v18h18" /><path d="M7 15l4-4 3 3 6-6" /></svg>],
 ];
 
+/** Scroll (in screen heights) over which the backdrop opens to full-bleed: the same reveal as the splash's sky
+ *  (splash-window.tsx). It starts as a rounded card inset from the sides and well down the section, and the clip
+ *  opens as the section rises; the photo itself never moves. A pure function of scroll, so scrolling back reverses it. */
+const BG_OPEN = 0.96;
+const BG_PANEL_RATE = 1.2; // the corners and outer inset close a little sooner, as in the splash
+const clamp = (v: number) => Math.max(0, Math.min(1, v));
+
 /** "Hi! I'm Orka": Orka at work in the background (status cards drift in and out at random, never over the
  *  middle), and an ask box. Focusing the box hushes the cards and Orka looks at what you type. */
 export function OrkaSection({ appHref }: { appHref: string }) {
@@ -138,6 +145,39 @@ export function OrkaSection({ appHref }: { appHref: string }) {
       if (!rects.some((r) => x < r[0] + r[2] && x + w > r[0] && y < r[1] + r[3] && y + h > r[1])) return { x: Math.round(x), y: Math.round(y) };
     }
     return null;
+  }, []);
+
+  useEffect(() => {
+    const el = sec.current;
+    if (!el) return;
+    let top0 = 300, side0 = 20, panelSide0 = 32, raf = 0;
+    const measure = () => {
+      const narrow = window.innerWidth < 720;
+      top0 = Math.round(Math.min(window.innerHeight * 0.66, el.clientHeight * 0.5));
+      side0 = narrow ? 0 : 20;
+      panelSide0 = narrow ? 0 : 32;
+    };
+    const paint = () => {
+      raf = 0;
+      const vh = window.innerHeight;
+      // 0 as the section's top enters at the bottom of the screen, 1 once it has risen BG_OPEN screens
+      const p = clamp((vh - el.getBoundingClientRect().top) / (vh * BG_OPEN));
+      const q = 1 - p, qp = 1 - clamp(p * BG_PANEL_RATE);
+      const side = (side0 * q + panelSide0 * qp).toFixed(2);
+      // set on the section: the backdrop and the floating status cards share it, so no card sits half on the white page
+      el.style.setProperty("--cg-orka-clip", `inset(${(top0 * q).toFixed(2)}px ${side}px ${side}px ${side}px round ${(12 * qp).toFixed(2)}px)`);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(paint); };
+    const onResize = () => { measure(); onScroll(); };
+    measure();
+    paint();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
 
   useEffect(() => {
@@ -177,7 +217,7 @@ export function OrkaSection({ appHref }: { appHref: string }) {
 
   return (
     <section ref={sec} data-header-tone="dark" className={`cg-orka${focused ? " is-focused" : ""}`} aria-labelledby="cg-orka-title">
-      <img className="cg-orka-bg" src="/crockedglass/orka-bg.webp" alt="" loading="lazy" decoding="async" />
+      <div className="cg-orka-bg" aria-hidden="true"><div className="cg-orka-photo" /></div>
       <div className="cg-frags" aria-hidden="true">
         {TYPES.map((t) => { const it = items[t]; return it?.on ? <Frag key={`${t}-${it.id}`} type={t} it={it} /> : null; })}
       </div>

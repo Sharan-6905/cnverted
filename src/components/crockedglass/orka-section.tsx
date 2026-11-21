@@ -175,6 +175,9 @@ export function OrkaSection({ appHref }: { appHref: string }) {
       const shown = holdPx > 1 ? -R.top >= holdPx * HELLO_AT : p >= 1;
       const hello = shown ? "shown" : "hidden";
       if (el.dataset.hello !== hello) el.dataset.hello = hello;
+      // so the hold doesn't feel stuck, the photo pushes in slowly as you scroll through it (110% → 120%)
+      const held = holdPx > 1 ? clamp(-R.top / holdPx) : 0;
+      el.style.setProperty("--cg-orka-zoom", (1.1 + 0.1 * held).toFixed(4));
     };
     const onScroll = () => { if (!raf) raf = requestAnimationFrame(paint); };
     const onResize = () => { measure(); onScroll(); };

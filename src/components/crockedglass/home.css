@@ -243,7 +243,7 @@
    that widens to full-bleed while the photo stays put */
 .cg-orka-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; background: #120d0b;
   clip-path: var(--cg-orka-clip, inset(50% 52px 52px 52px round 12px)); }
-.cg-orka-photo { position: absolute; inset: 0; transform: scale(1.1); background: url("/crockedglass/orka-street.webp") center / cover no-repeat; }
+.cg-orka-photo { position: absolute; inset: 0; transform: scale(var(--cg-orka-zoom, 1.1)); will-change: transform; background: url("/crockedglass/orka-street.webp") center / cover no-repeat; }
 .cg-frags { position: absolute; inset: 0; pointer-events: none; transition: opacity .5s ease-in-out; clip-path: var(--cg-orka-clip, none); }
 .cg-orka.is-focused .cg-frags { opacity: 0; }
 .cg-frag { position: absolute; zoom: 1.2; white-space: nowrap; padding: 10px 12px; color: #fff; font-size: 12px; line-height: 1.35; border-radius: 12px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.24); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
